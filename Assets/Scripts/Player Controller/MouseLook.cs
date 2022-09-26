@@ -2,7 +2,9 @@ using UnityEngine;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
-/// </summary>
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>s
 namespace NecroPanda.Player
 {
     public class MouseLook : MonoBehaviour

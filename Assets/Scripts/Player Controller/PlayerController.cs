@@ -2,31 +2,43 @@ using UnityEngine;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
 namespace NecroPanda.Player
 {
+    /// <summary>
+    /// PlayerController class
+    /// 
+    /// This class is what drives the player, using unitys default horizontal and vertical input methods
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
-        public CharacterController controller;
+        public CharacterController controller; // Ref to the Character Controller Component.
 
-        public float speed = 12f;
-        public float gravity = -9.81f;
-        public float jumpHeight = 3f;
+        public float speed = 12f; // The speed at which the player moves.
+        public float gravity = -9.81f; // The amount of gravity that the is applied.
 
-        public Transform groundCheck;
-        public float groundDistance = 0.4f;
-        public LayerMask groundMask;
-        public bool paused;
+        public Transform groundCheck; // Transform for checking whether the player is grounded.
+        public float groundDistance = 0.4f; // The distance of the player to the ground.
+        public LayerMask groundMask; // Used for telling the controller what ground is.
+        public bool paused; // Defines whether the game is paused, this might not be needed.
 
-        Vector3 velocity;
-        bool isGrounded;
+        Vector3 velocity; // The velocity(speed) of the player.
+        bool isGrounded; // Tells us whether the player is grounded.
 
-        // Update is called once per frame
+        /// <summary>
+        /// Update here, ran each frome. Here we call for the inputs.
+        /// </summary>
         void Update()
         {
             GetInput();   
         }
 
+        /// <summary>
+        /// This function gets all of the KEYBOARD updates and converts those inputs into movement within
+        /// the world space.
+        /// </summary>
         void GetInput()
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -42,11 +54,6 @@ namespace NecroPanda.Player
             Vector3 move = transform.right * x + transform.forward * z;
 
             controller.Move(move * speed * Time.deltaTime);
-
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-            }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
