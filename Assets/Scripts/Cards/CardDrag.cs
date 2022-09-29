@@ -7,6 +7,8 @@ public class CardDrag : MonoBehaviour
     Vector3 mousePos;
     Camera cam;
 
+    CardHighlight currentCard;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +28,30 @@ public class CardDrag : MonoBehaviour
                 mousePos = hit.point;
 
                 //Highlight Cards
+                CardHighlight hitHighlight = hit.collider.gameObject.GetComponent<CardHighlight>();
+
+                if (hitHighlight != null)
+                {
+                    if (currentCard != null)
+                    {
+                        currentCard.HighlightCard(false);
+                    }
+
+                    currentCard = hitHighlight;
+                    currentCard.HighlightCard(true);
+                }
             }
-            else
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Background"))
             {
                 Debug.DrawLine(ray.origin, ray.origin + hit.point);
                 mousePos = hit.point;
+
+                if (currentCard != null)
+                {
+                    currentCard.HighlightCard(false);
+                }
+
+                currentCard = null;
             }
         }
     }
