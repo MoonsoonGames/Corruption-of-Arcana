@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CardHighlight : MonoBehaviour
 {
-    public Material cardMaterial;
+    Material cardMaterial;
+
+    private void Start()
+    {
+        cardMaterial = GetComponent<Renderer>().material;
+    }
 
     public void HighlightCard(bool highlight)
     {
-        cardMaterial.SetInteger("_Selected", highlight ? 1 : 0);
+        cardMaterial.SetFloat("_Selected", highlight ? 1 : 0);
     }
 }
