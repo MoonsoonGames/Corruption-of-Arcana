@@ -41,6 +41,7 @@ namespace NecroPanda.Player
         /// </summary>
         void GetInput()
         {
+            // Check to see if the player is grounded
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
@@ -48,13 +49,17 @@ namespace NecroPanda.Player
                 velocity.y = -2f;
             }
 
+            // Get the movement axis
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
+            // Combine into one variable which gets used later
             Vector3 move = transform.right * x + transform.forward * z;
 
+            // Move using the controller
             controller.Move(move * speed * Time.deltaTime);
 
+            // Input checks
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 speed = speed * 2f;
@@ -64,6 +69,7 @@ namespace NecroPanda.Player
                 speed = speed / 2f;
             }
 
+            // Calculate and apply gravity
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
         }
