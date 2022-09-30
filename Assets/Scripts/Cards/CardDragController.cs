@@ -27,6 +27,7 @@ public class CardDragController : MonoBehaviour
 
     Vector3 mousePos;
     Camera cam;
+    public LayerMask boundingBoxes;
 
     DraggableCard currentCard;
     DraggableCard heldCard;
@@ -99,6 +100,7 @@ public class CardDragController : MonoBehaviour
             if (heldCard != null)
             {
                 heldCard.Dropped();
+                heldCard.ResetHeight();
                 heldCard = null;
             }
         }

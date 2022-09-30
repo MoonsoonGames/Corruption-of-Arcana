@@ -9,6 +9,8 @@ public class DraggableCard : MonoBehaviour
     Material cardMaterial;
     bool selected = false;
 
+    public Vector2 baseLockY = new Vector3(-5.6f, -5);
+    //[HideInInspector]
     public Vector2 lockY;
     public float dropForce = 3;
 
@@ -17,6 +19,8 @@ public class DraggableCard : MonoBehaviour
         controller = CardDragController.instance;
         rb = GetComponent<Rigidbody>();
         cardMaterial = GetComponent<Renderer>().material;
+
+        lockY = baseLockY;
     }
 
     public void HighlightCard(bool highlight)
@@ -51,12 +55,19 @@ public class DraggableCard : MonoBehaviour
 
     public void MouseMovement(Vector3 mousePos)
     {
-        Vector3 newPos = new Vector3(mousePos.x, mousePos.y + 1, mousePos.z);
+        Vector3 newPos = new Vector3(mousePos.x, transform.localPosition.y + 1f, mousePos.z);
 
         Vector3 difference = newPos - transform.position;
+
+        //difference = new Vector3(difference.x, Mathf.Clamp(difference.y, lockY.x, lockY.y), difference.z);
 
         rb.velocity = 10 * difference;
 
         transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(transform.localPosition.y, lockY.x, lockY.y), transform.localPosition.z);
+    }
+
+    public void ResetHeight()
+    {
+        lockY = baseLockY;
     }
 }
