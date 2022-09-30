@@ -6,7 +6,7 @@ public class CardDragController : MonoBehaviour
 {
     #region Singleton
     //Code from last year
-
+    
     public static CardDragController instance = null;
 
     void Singleton()
@@ -15,7 +15,7 @@ public class CardDragController : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
         else if (instance != this)
         {

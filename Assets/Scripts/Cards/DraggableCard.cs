@@ -9,6 +9,9 @@ public class DraggableCard : MonoBehaviour
     Material cardMaterial;
     bool selected = false;
 
+    public Vector2 lockY;
+    public float dropForce = 3;
+
     private void Start()
     {
         controller = CardDragController.instance;
@@ -36,6 +39,14 @@ public class DraggableCard : MonoBehaviour
     {
         selected = false;
         Debug.Log(name + " dropped");
+
+        Vector3 newPos = new Vector3(transform.position.x, transform.position.y - dropForce, transform.position.z);
+
+        Vector3 difference = newPos - transform.position;
+
+        rb.velocity = 10 * difference;
+
+        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(transform.localPosition.y, lockY.x, lockY.y), transform.localPosition.z);
     }
 
     public void MouseMovement(Vector3 mousePos)
@@ -45,5 +56,7 @@ public class DraggableCard : MonoBehaviour
         Vector3 difference = newPos - transform.position;
 
         rb.velocity = 10 * difference;
+
+        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(transform.localPosition.y, lockY.x, lockY.y), transform.localPosition.z);
     }
 }
