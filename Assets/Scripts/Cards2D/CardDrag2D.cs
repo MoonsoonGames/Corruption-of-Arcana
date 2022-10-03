@@ -100,6 +100,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         deck.RemoveCard(this);
 
         dragManager.draggedCard = this;
+        SetRayCastTargetAll(false);
     }
 
     /// <summary>
@@ -131,6 +132,19 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         else
         {
             newDeck.AddCard(this);
+        }
+
+        SetRayCastTargetAll(true);
+    }
+
+    void SetRayCastTargetAll(bool targettable)
+    {
+        CardDrag2D[] cards = GameObject.FindObjectsOfType<CardDrag2D>();
+
+        foreach(CardDrag2D card in cards)
+        {
+            card.cardBackground.raycastTarget = targettable;
+            card.cardBackground.maskable = targettable;
         }
     }
 
