@@ -69,7 +69,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     }
 
     /// <summary>
-    /// Called when mouse stops hoverring over card
+    /// Called when mouse stops hovering over card
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
