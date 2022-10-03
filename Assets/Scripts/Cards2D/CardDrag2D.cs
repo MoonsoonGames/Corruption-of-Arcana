@@ -128,6 +128,10 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             lastDeck.AddCard(this);
         }
+        else
+        {
+            newDeck.AddCard(this);
+        }
     }
 
     #endregion

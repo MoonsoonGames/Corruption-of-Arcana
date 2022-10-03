@@ -29,6 +29,8 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Debug.Log("Pointer enter");
         if (eventData.dragging == true)
         {
+            Debug.Log(dragManager.name);
+            Debug.Log(dragManager.draggedCard.name);
             Debug.Log("Pointer enter, dragging");
             dragManager.draggedCard.newDeck = this;
         }
