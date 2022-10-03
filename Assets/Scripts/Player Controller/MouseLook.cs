@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
