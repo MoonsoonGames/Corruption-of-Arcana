@@ -8,13 +8,17 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     #region Setup
 
+    HorizontalLayoutGroup layout;
+
     CardDrag2D[] cards;
+    public int maxCards = 3;
     public int CurrentCardsLength()
     {
         return cards.Length;
     }
 
-    public int maxCards = 3;
+    public float deckScale = 1;
+
     GeneralDragArea dragArea;
     DragManager dragManager;
 
@@ -36,6 +40,8 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         deckBackground = GetComponent<Image>();
         baseColor = deckBackground.color;
         desiredColor = baseColor;
+
+        layout = GetComponent<HorizontalLayoutGroup>();
     }
 
     #endregion
@@ -75,8 +81,6 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     #endregion
-
-    #region Visual Feedback
 
     #region Adding/Removing Cards
 
@@ -123,6 +127,8 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     #endregion
+
+    #region Visual Feedback
 
     /// <summary>
     /// Turns the highlight colour on or off

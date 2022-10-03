@@ -63,7 +63,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (eventData.dragging == false)
         {
             Debug.Log("Pointer Enter");
-            ScaleCard(hoverScale);
+            ScaleCard(hoverScale, false);
             Highlight(true);
         }
     }
@@ -77,7 +77,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (eventData.dragging == false)
         {
             Debug.Log("Pointer Exit");
-            ScaleCard(1);
+            ScaleCard(1, false);
             Highlight(false);
         }
     }
@@ -91,7 +91,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Debug.Log("Drag Start");
 
         Highlight(false);
-        ScaleCard(pickupScale);
+        ScaleCard(pickupScale, true);
 
         //Drags from where the player clicks instead of snapping center of card to the mouse
         offset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
@@ -122,8 +122,6 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("Drag End");
-        ScaleCard(hoverScale);
-        Highlight(true);
 
         if (newDeck == null)
         {
@@ -135,6 +133,9 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
 
         SetRayCastTargetAll(true);
+
+        ScaleCard(hoverScale, false);
+        Highlight(true);
     }
 
     void SetRayCastTargetAll(bool targettable)
@@ -173,10 +174,17 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// Determines the scale multiplier for the card
     /// </summary>
     /// <param name="scaleFactor">Multiplies the base scale by the scale factor</param>
-    void ScaleCard(float scaleFactor)
+    void ScaleCard(float scaleFactor, bool ignoreDeck)
     {
         //Desired scale is set so that the scale change can be smoothed in update
-        desiredScale = baseScale * scaleFactor;
+        if (deck == null || ignoreDeck)
+        {
+            desiredScale = baseScale * scaleFactor;
+        }
+        else
+        {
+            desiredScale = baseScale * scaleFactor * deck.deckScale;
+        }
     }
 
     private void Update()
