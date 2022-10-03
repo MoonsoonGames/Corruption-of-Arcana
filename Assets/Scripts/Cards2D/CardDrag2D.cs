@@ -10,16 +10,21 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public float hoverScale = 1.2f;
     public float pickupScale = 2;
+    public float scaleSpeed = 0.1f;
     Vector3 baseScale;
+    Vector3 desiredScale;
 
     public Image cardBackground;
     Color baseColor;
     public Color highlightColor;
+    Color desiredColor;
 
     private void Start()
     {
         baseScale = transform.localScale;
+        desiredScale = baseScale;
         baseColor = cardBackground.color;
+        desiredColor = baseColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -66,16 +71,40 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (on)
         {
-            cardBackground.color = baseColor * highlightColor;
+            desiredColor = baseColor * highlightColor;
         }
         else
         {
-            cardBackground.color = baseColor;
+            desiredColor = baseColor;
         }
     }
 
     void ScaleCard(float scaleFactor)
     {
-        transform.localScale = baseScale * scaleFactor;
+        desiredScale = baseScale * scaleFactor;
+    }
+
+    private void Update()
+    {
+        //Lerps scale and color
+
+        if (transform.localScale != desiredScale)
+        {
+            float lerpX = Mathf.Lerp(transform.localScale.x, desiredScale.x, scaleSpeed);
+            float lerpY = Mathf.Lerp(transform.localScale.y, desiredScale.y, scaleSpeed);
+            float lerpZ = Mathf.Lerp(transform.localScale.z, desiredScale.z, scaleSpeed);
+
+            transform.localScale = new Vector3(lerpX, lerpY, lerpZ);
+        }
+
+        if (cardBackground.color != desiredColor)
+        {
+            float lerpR = Mathf.Lerp(cardBackground.color.r, desiredColor.r, scaleSpeed);
+            float lerpG = Mathf.Lerp(cardBackground.color.g, desiredColor.g, scaleSpeed);
+            float lerpB = Mathf.Lerp(cardBackground.color.b, desiredColor.b, scaleSpeed);
+            float lerpA = Mathf.Lerp(cardBackground.color.a, desiredColor.a, scaleSpeed);
+
+            cardBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
+        }
     }
 }
