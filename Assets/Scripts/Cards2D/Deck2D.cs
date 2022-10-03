@@ -6,19 +6,13 @@ using UnityEngine.EventSystems;
 public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     CardDrag2D[] cards;
+    public int maxCards = 3;
     GeneralDragArea dragArea;
     DragManager dragManager;
 
     private void Start()
     {
-        cards = GetComponentsInChildren<CardDrag2D>();
-
-        foreach (CardDrag2D card in cards)
-        {
-            card.deck = this;
-
-            card.gameObject.transform.SetParent(transform);
-        }
+        ResetArrays();
 
         dragArea = GameObject.FindObjectOfType<GeneralDragArea>();
         dragManager = DragManager.instance;
@@ -26,17 +20,13 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer enter");
         if (eventData.dragging == true)
         {
-            Debug.Log(dragManager.name);
-            Debug.Log(dragManager.draggedCard.name);
-            Debug.Log("Pointer enter, dragging");
-            dragManager.draggedCard.newDeck = this;
-        }
-        else
-        {
-            Debug.Log("Pointer enter, not dragging");
+            if (cards.Length < maxCards)
+            {
+                Debug.Log(cards.Length + " / " + maxCards);
+                dragManager.draggedCard.newDeck = this;
+            }
         }
     }
 
@@ -52,11 +42,32 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         card.gameObject.transform.SetParent(dragArea.transform);
         card.deck = null;
+
+        ResetArrays();
     }
 
     public void AddCard(CardDrag2D card)
     {
         card.gameObject.transform.SetParent(transform);
         card.deck = this;
+
+        ResetArrays();
+    }
+
+    void ResetArrays()
+    {
+        cards = GetComponentsInChildren<CardDrag2D>();
+
+        foreach (CardDrag2D card in cards)
+        {
+            card.deck = this;
+
+            card.gameObject.transform.SetParent(transform);
+        }
+    }
+
+    public int CurrentCardsLength()
+    {
+        return cards.Length;
     }
 }
