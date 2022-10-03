@@ -134,8 +134,8 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         SetRayCastTargetAll(true);
 
-        ScaleCard(hoverScale, false);
-        Highlight(true);
+        ScaleCard(1, false);
+        Highlight(false);
     }
 
     void SetRayCastTargetAll(bool targettable)
