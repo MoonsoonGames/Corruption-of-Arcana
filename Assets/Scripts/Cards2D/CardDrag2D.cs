@@ -10,6 +10,15 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     #region Variables
 
+    //[HideInInspector]
+    public Deck2D deck;
+    //[HideInInspector]
+    public Deck2D lastDeck;
+    //[HideInInspector]
+    public Deck2D newDeck;
+
+    DragManager dragManager;
+
     Vector2 offset;
 
     #region Scale Values
@@ -32,6 +41,8 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     private void Start()
     {
+        dragManager = DragManager.instance;
+
         //Sets base scales and colours
         baseScale = transform.localScale;
         desiredScale = baseScale;
@@ -84,6 +95,11 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         //Drags from where the player clicks instead of snapping center of card to the mouse
         offset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
+
+        lastDeck = deck;
+        deck.RemoveCard(this);
+
+        dragManager.draggedCard = this;
     }
 
     /// <summary>
@@ -107,6 +123,11 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Debug.Log("Drag End");
         ScaleCard(hoverScale);
         Highlight(true);
+
+        if (newDeck == null)
+        {
+            lastDeck.AddCard(this);
+        }
     }
 
     #endregion
