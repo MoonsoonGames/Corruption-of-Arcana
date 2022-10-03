@@ -6,27 +6,47 @@ using UnityEngine.UI;
 
 public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    #region Setup
+
+    #region Variables
+
     Vector2 offset;
 
+    #region Scale Values
     public float hoverScale = 1.2f;
     public float pickupScale = 2;
     public float scaleSpeed = 0.1f;
     Vector3 baseScale;
     Vector3 desiredScale;
+    #endregion
 
+    #region Highlight Values
     public Image cardBackground;
     Color baseColor;
     public Color highlightColor;
+    public float highlightSpeed = 0.2f;
     Color desiredColor;
+    #endregion
+
+    #endregion
 
     private void Start()
     {
+        //Sets base scales and colours
         baseScale = transform.localScale;
         desiredScale = baseScale;
         baseColor = cardBackground.color;
         desiredColor = baseColor;
     }
 
+    #endregion
+
+    #region Pointer Events
+
+    /// <summary>
+    /// Called when mouse hovers over card
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Pointer Enter");
@@ -34,6 +54,10 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Highlight(true);
     }
 
+    /// <summary>
+    /// Called when mouse stops hoverring over card
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Pointer Exit");
@@ -41,6 +65,10 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Highlight(false);
     }
 
+    /// <summary>
+    /// Called when starting to drag card
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Drag Start");
@@ -53,13 +81,22 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         ScaleCard(pickupScale);
     }
 
+    /// <summary>
+    /// Called when card is being dragged
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("Dragging");
 
+        //TODO: Could lerp?
         transform.position = eventData.position + offset;
     }
 
+    /// <summary>
+    /// Called when card stops being dragged
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("Drag End");
@@ -67,8 +104,17 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Highlight(true);
     }
 
+    #endregion
+
+    #region Visual Feedback
+
+    /// <summary>
+    /// Turns the highlight colour on or off
+    /// </summary>
+    /// <param name="on">True for highlight color, False for base color</param>
     void Highlight(bool on)
     {
+        //Desired color is set so that the color change can be smoothed in update
         if (on)
         {
             desiredColor = baseColor * highlightColor;
@@ -79,14 +125,19 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
     }
 
+    /// <summary>
+    /// Determines the scale multiplier for the card
+    /// </summary>
+    /// <param name="scaleFactor">Multiplies the base scale by the scale factor</param>
     void ScaleCard(float scaleFactor)
     {
+        //Desired scale is set so that the scale change can be smoothed in update
         desiredScale = baseScale * scaleFactor;
     }
 
     private void Update()
     {
-        //Lerps scale and color
+        //Lerps scale and color to smoothen transitions
 
         if (transform.localScale != desiredScale)
         {
@@ -99,12 +150,14 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (cardBackground.color != desiredColor)
         {
-            float lerpR = Mathf.Lerp(cardBackground.color.r, desiredColor.r, scaleSpeed);
-            float lerpG = Mathf.Lerp(cardBackground.color.g, desiredColor.g, scaleSpeed);
-            float lerpB = Mathf.Lerp(cardBackground.color.b, desiredColor.b, scaleSpeed);
-            float lerpA = Mathf.Lerp(cardBackground.color.a, desiredColor.a, scaleSpeed);
+            float lerpR = Mathf.Lerp(cardBackground.color.r, desiredColor.r, highlightSpeed);
+            float lerpG = Mathf.Lerp(cardBackground.color.g, desiredColor.g, highlightSpeed);
+            float lerpB = Mathf.Lerp(cardBackground.color.b, desiredColor.b, highlightSpeed);
+            float lerpA = Mathf.Lerp(cardBackground.color.a, desiredColor.a, highlightSpeed);
 
             cardBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
         }
     }
+
+    #endregion
 }
