@@ -49,9 +49,12 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer Enter");
-        ScaleCard(hoverScale);
-        Highlight(true);
+        if (eventData.dragging == false)
+        {
+            Debug.Log("Pointer Enter");
+            ScaleCard(hoverScale);
+            Highlight(true);
+        }
     }
 
     /// <summary>
@@ -60,9 +63,12 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer Exit");
-        ScaleCard(1);
-        Highlight(false);
+        if (eventData.dragging == false)
+        {
+            Debug.Log("Pointer Exit");
+            ScaleCard(1);
+            Highlight(false);
+        }
     }
 
     /// <summary>
@@ -74,11 +80,10 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Debug.Log("Drag Start");
 
         Highlight(false);
+        ScaleCard(pickupScale);
 
         //Drags from where the player clicks instead of snapping center of card to the mouse
         offset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
-
-        ScaleCard(pickupScale);
     }
 
     /// <summary>
