@@ -10,11 +10,11 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     #region Variables
 
-    //[HideInInspector]
+    [HideInInspector]
     public Deck2D deck;
-    //[HideInInspector]
+    [HideInInspector]
     public Deck2D lastDeck;
-    //[HideInInspector]
+    [HideInInspector]
     public Deck2D newDeck;
 
     DragManager dragManager;
