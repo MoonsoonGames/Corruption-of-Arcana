@@ -37,6 +37,8 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     Color desiredColor;
     #endregion
 
+    public float rotationScale = 0.1f; 
+
     #endregion
 
     private void Start()
@@ -111,7 +113,30 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         Debug.Log("Dragging");
 
-        //TODO: Could lerp?
+        /*
+        //Determines the difference in the x movement to tell which direction it is being dragged in
+        float dragSpeedX = transform.position.x - eventData.position.x;
+
+        if (dragSpeedX > 0)
+        {
+            Debug.Log("Left");
+            //Lean card left
+            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z + (rotationScale), transform.rotation.w);
+        }
+        else if (dragSpeedX < 0)
+        {
+            Debug.Log("Right");
+            //Lean card right
+            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z + (rotationScale), transform.rotation.w);
+        }
+        else
+        {
+            Debug.Log("Not moving");
+            //Reset to center
+            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        }
+        */
+
         transform.position = eventData.position + offset;
     }
 

@@ -149,11 +149,9 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Update()
     {
-        Debug.Log("Update");
         //Lerps color to smoothen transitions
         if (deckBackground.color != desiredColor)
         {
-            Debug.Log("Update highlight");
             float lerpR = Mathf.Lerp(deckBackground.color.r, desiredColor.r, highlightSpeed);
             float lerpG = Mathf.Lerp(deckBackground.color.g, desiredColor.g, highlightSpeed);
             float lerpB = Mathf.Lerp(deckBackground.color.b, desiredColor.b, highlightSpeed);
