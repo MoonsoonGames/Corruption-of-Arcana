@@ -27,12 +27,16 @@ namespace NecroPanda.Player
         Vector3 velocity; // The velocity(speed) of the player.
         bool isGrounded; // Tells us whether the player is grounded.
 
+        // Animator vairables
+        public Animator animator;
+
         /// <summary>
         /// Update here, ran each frome. Here we call for the inputs.
         /// </summary>
         void Update()
         {
-            GetInput();   
+            GetInput();
+            HandleAnimations(); 
         }
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace NecroPanda.Player
             // Combine into one variable which gets used later
             Vector3 move = transform.right * x + transform.forward * z;
 
-            // Move using the controller
+            // Move using the controller component
             controller.Move(move * speed * Time.deltaTime);
 
             // Input checks
@@ -72,6 +76,16 @@ namespace NecroPanda.Player
             // Calculate and apply gravity
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
+        }
+
+        /// <summary>
+        /// This function handles the sprite animations of taro. Interacts with the animator component.
+        /// </summary>
+        void HandleAnimations()
+        {
+            //Check to see player direction
+
+            //Apply animation based on direction
         }
     }
 }
