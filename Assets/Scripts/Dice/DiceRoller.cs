@@ -7,9 +7,12 @@ public class DiceRoller : MonoBehaviour
 {
     Dice[] diceArray;
 
+    TextChanger textChanger;
+
     private void Start()
     {
         diceArray = GameObject.FindObjectsOfType<Dice>();
+        textChanger = GameObject.FindObjectOfType<TextChanger>();
     }
 
     public void RollDiceButton()
@@ -22,6 +25,18 @@ public class DiceRoller : MonoBehaviour
             totalValue += die.RollDice();
         }
 
-        Debug.Log(totalValue);
+        textChanger.AdjustTotal(totalValue);
+    }
+
+    public Vector2 GetDiceRange()
+    {
+        Vector2 totalRange = new Vector2(0, 0);
+
+        foreach (Dice die in diceArray)
+        {
+            totalRange += die.diceValues;
+        }
+
+        return totalRange;
     }
 }
