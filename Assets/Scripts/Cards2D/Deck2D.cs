@@ -59,7 +59,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             if (cards.Length < maxCards)
             {
-                Debug.Log(cards.Length + " / " + maxCards);
+                //Debug.Log(cards.Length + " / " + maxCards);
                 dragManager.draggedCard.newDeck = this;
                 Highlight(true);
             }
@@ -124,6 +124,22 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             card.gameObject.transform.SetParent(transform);
         }
+    }
+
+    #endregion
+
+    #region Playing Card Effects
+
+    public void PlayCards()
+    {
+        foreach(CardDrag2D card in cards)
+        {
+            Debug.Log("Played " + card.gameObject.name + " on " + name);
+
+            Destroy(card.gameObject);
+        }
+
+        cards = new CardDrag2D[0];
     }
 
     #endregion

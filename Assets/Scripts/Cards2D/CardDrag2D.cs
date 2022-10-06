@@ -64,7 +64,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (eventData.dragging == false)
         {
-            Debug.Log("Pointer Enter");
+            //Debug.Log("Pointer Enter");
             ScaleCard(hoverScale, false);
             Highlight(true);
         }
@@ -78,7 +78,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (eventData.dragging == false)
         {
-            Debug.Log("Pointer Exit");
+            //Debug.Log("Pointer Exit");
             ScaleCard(1, false);
             Highlight(false);
         }
@@ -90,7 +90,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag Start");
+        //Debug.Log("Drag Start");
 
         Highlight(false);
         ScaleCard(pickupScale, true);
@@ -111,7 +111,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
+        //Debug.Log("Dragging");
 
         /*
         //Determines the difference in the x movement to tell which direction it is being dragged in
@@ -146,7 +146,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag End");
+        //Debug.Log("Drag End");
 
         if (newDeck == null)
         {
