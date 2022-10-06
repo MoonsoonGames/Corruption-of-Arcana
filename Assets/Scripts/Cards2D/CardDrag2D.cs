@@ -37,7 +37,9 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     Color desiredColor;
     #endregion
 
-    public float rotationScale = 0.1f; 
+    Vector3 baseRot;
+    public float rotationScale = 0.1f;
+    public float rotateDeadZone = 5;
 
     #endregion
 
@@ -50,6 +52,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         desiredScale = baseScale;
         baseColor = cardBackground.color;
         desiredColor = baseColor;
+        baseRot = transform.rotation.eulerAngles;
     }
 
     #endregion
@@ -113,31 +116,14 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         //Debug.Log("Dragging");
 
-        /*
         //Determines the difference in the x movement to tell which direction it is being dragged in
-        float dragSpeedX = transform.position.x - eventData.position.x;
-
-        if (dragSpeedX > 0)
-        {
-            Debug.Log("Left");
-            //Lean card left
-            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z + (rotationScale), transform.rotation.w);
-        }
-        else if (dragSpeedX < 0)
-        {
-            Debug.Log("Right");
-            //Lean card right
-            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z + (rotationScale), transform.rotation.w);
-        }
-        else
-        {
-            Debug.Log("Not moving");
-            //Reset to center
-            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
-        }
-        */
+        float dragSpeedX = transform.position.x - (eventData.position.x + offset.x);
 
         transform.position = eventData.position + offset;
+
+        Vector3 newRot = new Vector3(baseRot.x, baseRot.y, baseRot.z);
+        newRot.z = dragSpeedX * rotationScale;
+        transform.eulerAngles = newRot;
     }
 
     /// <summary>
@@ -161,6 +147,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         ScaleCard(1, false);
         Highlight(false);
+        transform.eulerAngles = baseRot;
     }
 
     void SetRayCastTargetAll(bool targettable)
