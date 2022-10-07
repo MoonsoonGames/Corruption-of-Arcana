@@ -80,7 +80,7 @@ public class Timeline : MonoBehaviour
             //Insert delay for each card
             Debug.Log("Played " + item.Key.spellName + " on " + item.Value.characterName + " at time " + item.Key.speed);
 
-            item.Key.CastSpell(item.Value, null);
+            item.Key.CastSpell(item.Value);
         }
         spells.Clear();
         CalculateTimeline();

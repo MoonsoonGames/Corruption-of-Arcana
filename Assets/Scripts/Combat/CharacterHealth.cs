@@ -153,6 +153,6 @@ public class CharacterHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        GetComponent<Character>().Die();
     }
 }

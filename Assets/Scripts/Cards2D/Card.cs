@@ -21,6 +21,6 @@ public class Card : MonoBehaviour
 
     public void CastSpell(Character target)
     {
-        spell.CastSpell(target, null);
+        spell.CastSpell(target);
     }
 }

@@ -20,8 +20,15 @@ public class Spell : ScriptableObject
     public int value;
     public float speed;
 
-    public void CastSpell(Character target, Character caster)
+    public void CastSpell(Character target)
     {
-        target.GetHealth().ChangeHealth(effectType ,value);
+        if (target != null)
+        {
+            Debug.Log(target.characterName);
+            Debug.Log(target.GetHealth().name);
+            Debug.Log(effectType.ToString());
+            Debug.Log(value);
+            target.GetHealth().ChangeHealth(effectType, value);
+        }
     }
 }

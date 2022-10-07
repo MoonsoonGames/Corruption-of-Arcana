@@ -8,11 +8,13 @@ public class EndTurn : MonoBehaviour
     Deck2D[] decks;
     public GameObject cardPrefab; //Prefab of the parent card type
     Timeline timeline;
+    EnemyManager enemyManager;
 
     private void Start()
     {
         decks = GameObject.FindObjectsOfType<Deck2D>();
         timeline = GameObject.FindObjectOfType<Timeline>();
+        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
     }
 
     public void EndTurnButton()
@@ -45,5 +47,6 @@ public class EndTurn : MonoBehaviour
             }
         }
 
+        enemyManager.StartTurn();
     }
 }

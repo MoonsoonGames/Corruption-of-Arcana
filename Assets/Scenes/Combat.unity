@@ -240,6 +240,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: characterName
+      value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655,
+        type: 2}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1226d845f5121e847b6ca96368bf619f, type: 3}
 --- !u!224 &89444176 stripped
@@ -701,6 +723,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3702093926366071937}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &946320890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3702093925428361595, guid: 0c3481154242f6e4292f3d084dc1e06a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3702093926366071937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b1c5a14c8fb5649886f5198ecfd5ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1039533807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1144,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: characterName
+      value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655,
+        type: 2}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1226d845f5121e847b6ca96368bf619f, type: 3}
 --- !u!224 &1276887635 stripped
@@ -1522,6 +1578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1729430395}
+  - component: {fileID: 1729430396}
   m_Layer: 5
   m_Name: Enemies
   m_TagString: Untagged
@@ -1552,6 +1609,20 @@ RectTransform:
   m_AnchoredPosition: {x: -270, y: -108}
   m_SizeDelta: {x: 431.323, y: 209.78531}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1729430396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729430394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07f6d8b804e8944ca12e17c940c63bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies: []
+  player: {fileID: 946320890}
 --- !u!1 &1798144275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,6 +2042,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: characterName
+      value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276,
+        type: 2}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: cc2663eb98b04d64aba93bf9d8421fd7,
+        type: 2}
+    - target: {fileID: 2576412177615523916, guid: 1226d845f5121e847b6ca96368bf619f,
+        type: 3}
+      propertyPath: spells.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: eee1c554563d8114091ba9b77553b299,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1226d845f5121e847b6ca96368bf619f, type: 3}
 --- !u!1001 &3702093926366071937
