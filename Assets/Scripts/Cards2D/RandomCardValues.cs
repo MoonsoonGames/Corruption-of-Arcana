@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class RandomCardValues : MonoBehaviour
 {
-    public int[] cardNumber;
-    public Suit[] cardSuit;
+    public Spell[] spells;
 
     // Start is called before the first frame update
     void Start()
     {
-        MinorArcana minorArcana = GetComponent<MinorArcana>();
+        Spell spell = spells[Random.Range(0, spells.Length)];
 
-        minorArcana.cardSuit = cardSuit[Random.Range(0, cardSuit.Length)];
-        minorArcana.cardNumber = cardNumber[Random.Range(0, cardNumber.Length)];
-        minorArcana.Setup();
+        Card card = GetComponent<Card>();
+        card.spell = spell;
+        card.Setup();
     }
 }

@@ -78,6 +78,11 @@ public class CharacterHealth : MonoBehaviour
             health -= damageOverShield;
         }
 
+        if (health <= 0)
+        {
+            Die();
+        }
+
         UpdateHealthUI();
         return trueValue;
     }
@@ -121,14 +126,14 @@ public class CharacterHealth : MonoBehaviour
 
             if (healthText != null)
             {
-                healthText.text = health.ToString() + " + " + shield.ToString();
+                healthText.text = health.ToString() + "/" + maxHealth.ToString() + " + " + shield.ToString();
             }
         }
         else
         {
             if (healthIcon != null)
             {
-                Debug.Log((float)((float)health / (float)maxHealth));
+                //Debug.Log((float)((float)health / (float)maxHealth));
                 if ((float)((float)health / (float)maxHealth) < lowHealthThresholdPercentage)
                 {
                     healthIcon.color = lowHealthColor;
@@ -141,8 +146,13 @@ public class CharacterHealth : MonoBehaviour
 
             if (healthText != null)
             {
-                healthText.text = health.ToString();
+                healthText.text = health.ToString() + "/" + maxHealth.ToString();
             }
         }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

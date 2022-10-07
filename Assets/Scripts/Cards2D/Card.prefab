@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 8893594556894244928}
   - component: {fileID: 2979427778139166342}
   - component: {fileID: 361993096627053677}
-  - component: {fileID: 6298782852946547919}
+  - component: {fileID: 2095538901845448915}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -347,12 +347,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412b4eb970fb96841abc21c24d8bf2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardNumber: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
-  cardSuit:
-  - {fileID: 11400000, guid: 9537fc4e007260b45b739536ed06c0a3, type: 2}
-  - {fileID: 11400000, guid: 7b16282124eacbf46859bfbc1eeed190, type: 2}
-  - {fileID: 11400000, guid: b575d227037098546b41f09eb5d17a80, type: 2}
-  - {fileID: 11400000, guid: e9395c9e7143aa34bb98bd67e01b8c55, type: 2}
+  spells:
+  - {fileID: 11400000, guid: f1d5ff832fb527343a3a28f226dba3d3, type: 2}
+  - {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
+  - {fileID: 11400000, guid: ac8b3580619e02c4dbd18fde48d18c10, type: 2}
+  - {fileID: 11400000, guid: 74f0daba23fa5034f9276d76fc10e12c, type: 2}
+  - {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
+  - {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
+  - {fileID: 11400000, guid: cc2663eb98b04d64aba93bf9d8421fd7, type: 2}
+  - {fileID: 11400000, guid: aadf83d7d909c444380b61e2434c617c, type: 2}
+  - {fileID: 11400000, guid: 184e7e742dde759419e21c21fd3241c0, type: 2}
+  - {fileID: 11400000, guid: eee1c554563d8114091ba9b77553b299, type: 2}
+  - {fileID: 11400000, guid: 6f306ebebf9dea844a28f0faf7c1736d, type: 2}
+  - {fileID: 11400000, guid: 62f9a936ef0ac8e4eb33c455128f270e, type: 2}
 --- !u!114 &361993096627053677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +380,7 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
---- !u!114 &6298782852946547919
+--- !u!114 &2095538901845448915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,10 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b86ed504ba91444d85bf2b425b9465f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: 
-  cardSuit: {fileID: 0}
-  cardNumber: 0
-  cardDescription: 
+  spell: {fileID: 0}
   nameText: {fileID: 8893594556725792377}
   descriptionText: {fileID: 8893594556885050112}
 --- !u!1 &8893594557432852459

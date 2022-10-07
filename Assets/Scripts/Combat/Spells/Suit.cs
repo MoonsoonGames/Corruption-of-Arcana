@@ -15,6 +15,7 @@ public class Suit : ScriptableObject
     public bool affectPlayer;
 
     public E_DamageTypes effectType;
+    public float speedMultiplier;
 
     public void CastSpell(Character target, int value)
     {

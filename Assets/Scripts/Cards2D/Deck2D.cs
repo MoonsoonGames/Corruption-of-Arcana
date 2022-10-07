@@ -9,6 +9,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     #region Setup
 
     Character character;
+    Timeline timeline;
 
     HorizontalLayoutGroup layout;
 
@@ -46,6 +47,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         layout = GetComponent<HorizontalLayoutGroup>();
 
         character = GetComponentInParent<Character>();
+        timeline = GameObject.FindObjectOfType<Timeline>();
     }
 
     #endregion
@@ -98,6 +100,18 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         card.deck = null;
 
         ResetArrays();
+
+        timeline.RemoveCard(card.GetComponent<Card>().spell, character);
+    }
+
+    public void RemoveAllCards()
+    {
+        foreach (CardDrag2D card in cards)
+        {
+            Destroy(card.gameObject);
+        }
+
+        cards = new CardDrag2D[0];
     }
 
     /// <summary>
@@ -110,6 +124,11 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         card.deck = this;
 
         ResetArrays();
+
+        if (character != null)
+        {
+            timeline.AddCard(card.GetComponent<Card>().spell, character);
+        }
     }
 
     /// <summary>
@@ -128,28 +147,6 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             card.gameObject.transform.SetParent(transform);
         }
-    }
-
-    #endregion
-
-    #region Playing Card Effects
-
-    public void PlayCards()
-    {
-        foreach(CardDrag2D card in cards)
-        {
-            Debug.Log("Played " + card.gameObject.name + " on " + name);
-            MinorArcana minorArcana = card.gameObject.GetComponent<MinorArcana>();
-
-            if (minorArcana != null)
-            {
-                minorArcana.CastSpell(character);
-            }
-
-            Destroy(card.gameObject);
-        }
-
-        cards = new CardDrag2D[0];
     }
 
     #endregion

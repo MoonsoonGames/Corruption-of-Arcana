@@ -7,10 +7,12 @@ public class EndTurn : MonoBehaviour
     public Deck2D playerHandDeck; //Hand that player cards are drawn into
     Deck2D[] decks;
     public GameObject cardPrefab; //Prefab of the parent card type
+    Timeline timeline;
 
     private void Start()
     {
         decks = GameObject.FindObjectsOfType<Deck2D>();
+        timeline = GameObject.FindObjectOfType<Timeline>();
     }
 
     public void EndTurnButton()
@@ -38,7 +40,8 @@ public class EndTurn : MonoBehaviour
             }
             else
             {
-                deck.PlayCards();
+                deck.RemoveAllCards();
+                timeline.CastSpells();
             }
         }
 
