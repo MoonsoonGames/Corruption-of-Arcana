@@ -19,7 +19,26 @@ public class EndTurn : MonoBehaviour
 
     public void EndTurnButton()
     {
-        foreach(Deck2D deck in decks)
+        float delay = 0.5f;
+
+        foreach (Deck2D deck in decks)
+        {
+            if (deck != playerHandDeck)
+            {
+                deck.RemoveAllCards();
+                delay = timeline.CastSpells() + 0.5f;
+            }
+        }
+
+        Debug.Log(delay.ToString());
+
+        Invoke("StartNextTurn", delay);
+    }
+
+    public void StartNextTurn()
+    {
+        Debug.Log("New Turn");
+        foreach (Deck2D deck in decks)
         {
             if (deck == playerHandDeck)
             {
@@ -39,11 +58,6 @@ public class EndTurn : MonoBehaviour
                         deck.AddCard(cardDrag);
                     }
                 }
-            }
-            else
-            {
-                deck.RemoveAllCards();
-                timeline.CastSpells();
             }
         }
 

@@ -72,17 +72,34 @@ public class Timeline : MonoBehaviour
         return c1.Key.speed.CompareTo(c2.Key.speed);
     }
 
-    public void CastSpells()
+    public float CastSpells()
     {
+        float delay = 0;
+
+        if (spells.Count > 0)
+        {
+            delay = spells[spells.Count - 1].Key.speed;
+        }
+
         //Loop through list and cast spell;
         foreach (var item in spells)
         {
             //Insert delay for each card
             Debug.Log("Played " + item.Key.spellName + " on " + item.Value.characterName + " at time " + item.Key.speed);
 
-            item.Key.CastSpell(item.Value);
+            StartCoroutine(IDelaySpell(item.Key.speed, item.Key, item.Value));
         }
-        spells.Clear();
+
+        return delay;
+    }
+
+    IEnumerator IDelaySpell(float delay, Spell spell, Character target)
+    {
+        yield return new WaitForSeconds(delay);
+
+        spell.CastSpell(target);
+
+        RemoveCard(spell, target);
         CalculateTimeline();
     }
 }

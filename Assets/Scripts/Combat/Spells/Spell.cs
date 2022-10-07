@@ -24,10 +24,6 @@ public class Spell : ScriptableObject
     {
         if (target != null)
         {
-            Debug.Log(target.characterName);
-            Debug.Log(target.GetHealth().name);
-            Debug.Log(effectType.ToString());
-            Debug.Log(value);
             target.GetHealth().ChangeHealth(effectType, value);
         }
     }
