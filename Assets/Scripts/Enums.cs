@@ -12,5 +12,5 @@ DO NOT ADD ANY ENUMS AT THE START OF THE LIST!!!
 
 public enum E_DamageTypes
 {
-    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Arcana
+    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Arcana, Shield
 }

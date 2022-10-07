@@ -8,6 +8,8 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     #region Setup
 
+    Character character;
+
     HorizontalLayoutGroup layout;
 
     CardDrag2D[] cards;
@@ -42,6 +44,8 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         desiredColor = baseColor;
 
         layout = GetComponent<HorizontalLayoutGroup>();
+
+        character = GetComponentInParent<Character>();
     }
 
     #endregion
@@ -135,6 +139,12 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         foreach(CardDrag2D card in cards)
         {
             Debug.Log("Played " + card.gameObject.name + " on " + name);
+            MinorArcana minorArcana = card.gameObject.GetComponent<MinorArcana>();
+
+            if (minorArcana != null)
+            {
+                minorArcana.CastSpell(character);
+            }
 
             Destroy(card.gameObject);
         }
