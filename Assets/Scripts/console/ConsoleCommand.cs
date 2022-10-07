@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// Base console command class
 /// </summary>
@@ -13,6 +14,6 @@ namespace necropanda.utils.console.commands
 
         public string CommandWord => commandWord;
 
-        public  abstract bool process(string[] args);
+        public  abstract bool Process(string[] args);
     }
 }
