@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Character))]
 public class CharacterHealth : MonoBehaviour
@@ -16,6 +18,13 @@ public class CharacterHealth : MonoBehaviour
     public float[] baseDamageResistancesModifier;
     Dictionary<E_DamageTypes, float> currentDamageResistances;
 
+    public Image healthIcon;
+    public TextMeshProUGUI healthText;
+    public Color shieldColor;
+    public Color healthColor;
+    public Color lowHealthColor;
+    public float lowHealthThresholdPercentage;
+
     private void Start()
     {
         SetupHealth();
@@ -25,6 +34,7 @@ public class CharacterHealth : MonoBehaviour
     protected virtual void SetupHealth()
     {
         health = maxHealth;
+        UpdateHealthUI();
     }
 
     protected virtual void SetupResistances()
@@ -51,7 +61,7 @@ public class CharacterHealth : MonoBehaviour
 
         if (type == E_DamageTypes.Healing)
         {
-            health = Mathf.Clamp(trueValue + trueValue, 0, maxHealth);
+            health = Mathf.Clamp(health + trueValue, 0, maxHealth);
         }
         else if (type == E_DamageTypes.Shield)
         {
@@ -68,6 +78,7 @@ public class CharacterHealth : MonoBehaviour
             health -= damageOverShield;
         }
 
+        UpdateHealthUI();
         return trueValue;
     }
 
@@ -96,6 +107,42 @@ public class CharacterHealth : MonoBehaviour
         {
             //No resistance modifier, return 1
             return 1;
+        }
+    }
+
+    void UpdateHealthUI()
+    {
+        if (shield > 0)
+        {
+            if (healthIcon != null)
+            {
+                healthIcon.color = shieldColor;
+            }
+
+            if (healthText != null)
+            {
+                healthText.text = health.ToString() + " + " + shield.ToString();
+            }
+        }
+        else
+        {
+            if (healthIcon != null)
+            {
+                Debug.Log((float)((float)health / (float)maxHealth));
+                if ((float)((float)health / (float)maxHealth) < lowHealthThresholdPercentage)
+                {
+                    healthIcon.color = lowHealthColor;
+                }
+                else
+                {
+                    healthIcon.color = healthColor;
+                }
+            }
+
+            if (healthText != null)
+            {
+                healthText.text = health.ToString();
+            }
         }
     }
 }
