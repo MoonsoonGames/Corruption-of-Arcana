@@ -78,7 +78,7 @@ public class Timeline : MonoBehaviour
         foreach (var item in spells)
         {
             //Insert delay for each card
-            Debug.Log("Played " + item.Key.spellName + " on " + item.Value.characterName + " at " + item.Key.speed);
+            Debug.Log("Played " + item.Key.spellName + " on " + item.Value.characterName + " at time " + item.Key.speed);
 
             item.Key.CastSpell(item.Value, null);
         }
