@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
 
     public virtual void Die()
     {
+        CombatManager.instance.CharacterDied(this);
         Destroy(gameObject);
     }
 }
