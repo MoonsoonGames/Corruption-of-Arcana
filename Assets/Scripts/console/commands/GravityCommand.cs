@@ -5,7 +5,7 @@ using UnityEngine;
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace necropanda.utils.console.commands
+namespace Necropanda.Utils.Console.Commmands
 {
     [CreateAssetMenu(fileName = "New Gravity Command", menuName = "Utilities/DeveloperConsole/Commands/Gravity Command")]
     /// <summary>

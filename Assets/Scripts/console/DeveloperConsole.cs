@@ -2,14 +2,14 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using necropanda.utils.console.commands;
+using Necropanda.Utils.Console.Commmands;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace necropanda.utils.console
+namespace Necropanda.Utils.Console
 {
     public class DeveloperConsole
     {

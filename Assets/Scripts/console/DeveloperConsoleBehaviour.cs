@@ -1,13 +1,13 @@
 using UnityEngine;
 using TMPro;
-using necropanda.utils.console.commands;
+using Necropanda.Utils.Console.Commmands;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace necropanda.utils.console
+namespace Necropanda.Utils.Console
 {
     /// <summary>
     /// This is the Developer Console Behaviour, it allows the console to interact with the UI and handles any/all processing of commands
