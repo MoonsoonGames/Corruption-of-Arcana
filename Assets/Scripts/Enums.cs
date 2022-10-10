@@ -14,3 +14,10 @@ public enum E_DamageTypes
 {
     Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Arcana, Shield
 }
+
+public enum E_Scenes
+{
+    [InspectorName("Dev Room")]
+    DevRoom,
+    Combat
+}

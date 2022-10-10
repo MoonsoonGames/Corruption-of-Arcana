@@ -199,7 +199,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Lerps scale and color to smoothen transitions
 

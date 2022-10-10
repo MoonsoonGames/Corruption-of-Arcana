@@ -15,3 +15,8 @@ public struct SpellInstance
         caster = newCaster;
     }
 }
+
+public interface IInteractable
+{
+    void Interacted(GameObject player);
+}
