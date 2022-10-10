@@ -7,15 +7,35 @@ public class EndTurn : MonoBehaviour
     public Deck2D playerHandDeck; //Hand that player cards are drawn into
     Deck2D[] decks;
     public GameObject cardPrefab; //Prefab of the parent card type
+    Timeline timeline;
+    EnemyManager enemyManager;
 
     private void Start()
     {
         decks = GameObject.FindObjectsOfType<Deck2D>();
+        timeline = GameObject.FindObjectOfType<Timeline>();
+        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
     }
 
     public void EndTurnButton()
     {
-        foreach(Deck2D deck in decks)
+        foreach (Deck2D deck in decks)
+        {
+            if (deck != playerHandDeck)
+            {
+                deck.RemoveAllCards();
+            }
+        }
+
+        float delay = timeline.CastSpells() + 0.5f;
+
+        Invoke("StartNextTurn", delay);
+    }
+
+    public void StartNextTurn()
+    {
+        Debug.Log("New Turn");
+        foreach (Deck2D deck in decks)
         {
             if (deck == playerHandDeck)
             {
@@ -28,19 +48,18 @@ public class EndTurn : MonoBehaviour
                     for (int i = 0; i < difference; i++)
                     {
                         GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
-
                         CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
 
                         //Add the card to the array
                         deck.AddCard(cardDrag);
+
+                        //Reset card scales
+                        cardDrag.ScaleCard(1, false);
                     }
                 }
             }
-            else
-            {
-                deck.PlayCards();
-            }
         }
 
+        enemyManager.StartTurn();
     }
 }

@@ -8,7 +8,20 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     #region Setup
 
+    #region References
+
+    Character player;
+    Character character;
+    Timeline timeline;
+
     HorizontalLayoutGroup layout;
+
+    GeneralDragArea dragArea;
+    DragManager dragManager;
+
+    #endregion
+
+    #region Cards
 
     CardDrag2D[] cards;
     public int maxCards = 3;
@@ -19,8 +32,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public float deckScale = 1;
 
-    GeneralDragArea dragArea;
-    DragManager dragManager;
+    #endregion
 
     #region Highlight Values
     Image deckBackground;
@@ -32,6 +44,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Start()
     {
+        //Sets up base values
         ResetArrays();
 
         dragArea = GameObject.FindObjectOfType<GeneralDragArea>();
@@ -42,6 +55,10 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         desiredColor = baseColor;
 
         layout = GetComponent<HorizontalLayoutGroup>();
+
+        player = GameObject.Find("Player").GetComponent<Character>();
+        character = GetComponentInParent<Character>();
+        timeline = GameObject.FindObjectOfType<Timeline>();
     }
 
     #endregion
@@ -94,6 +111,24 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         card.deck = null;
 
         ResetArrays();
+
+        SpellInstance newSpellInstance = new SpellInstance();
+        newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
+
+        timeline.RemoveSpellInstance(newSpellInstance);
+    }
+
+    /// <summary>
+    /// Removes all cards from the deck without taking them from the timeline
+    /// </summary>
+    public void RemoveAllCards()
+    {
+        foreach (CardDrag2D card in cards)
+        {
+            Destroy(card.gameObject);
+        }
+
+        cards = new CardDrag2D[0];
     }
 
     /// <summary>
@@ -106,6 +141,14 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         card.deck = this;
 
         ResetArrays();
+
+        if (character != null)
+        {
+            SpellInstance newSpellInstance = new SpellInstance();
+            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
+
+            timeline.AddSpellInstance(newSpellInstance);
+        }
     }
 
     /// <summary>
@@ -124,22 +167,6 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             card.gameObject.transform.SetParent(transform);
         }
-    }
-
-    #endregion
-
-    #region Playing Card Effects
-
-    public void PlayCards()
-    {
-        foreach(CardDrag2D card in cards)
-        {
-            Debug.Log("Played " + card.gameObject.name + " on " + name);
-
-            Destroy(card.gameObject);
-        }
-
-        cards = new CardDrag2D[0];
     }
 
     #endregion

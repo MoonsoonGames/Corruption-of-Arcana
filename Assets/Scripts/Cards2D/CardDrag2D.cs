@@ -169,7 +169,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// Turns the highlight colour on or off
     /// </summary>
     /// <param name="on">True for highlight color, False for base color</param>
-    void Highlight(bool on)
+    public void Highlight(bool on)
     {
         //Desired color is set so that the color change can be smoothed in update
         if (on)
@@ -186,7 +186,7 @@ public class CardDrag2D : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// Determines the scale multiplier for the card
     /// </summary>
     /// <param name="scaleFactor">Multiplies the base scale by the scale factor</param>
-    void ScaleCard(float scaleFactor, bool ignoreDeck)
+    public void ScaleCard(float scaleFactor, bool ignoreDeck)
     {
         //Desired scale is set so that the scale change can be smoothed in update
         if (deck == null || ignoreDeck)

@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class RandomCardValues : MonoBehaviour
 {
-    public string[] cardNumber;
-    public string[] cardSuit;
-
-    public TextMeshProUGUI text;
+    public Spell[] spells;
 
     // Start is called before the first frame update
     void Start()
     {
-        string cardName = (cardNumber[Random.Range(0, cardNumber.Length)] + " of " + cardSuit[Random.Range(0, cardSuit.Length)]);
-        text.text = cardName;
+        Spell spell = spells[Random.Range(0, spells.Length)];
 
-        gameObject.name = cardName;
+        Card card = GetComponent<Card>();
+        card.spell = spell;
+        card.Setup();
     }
 }
