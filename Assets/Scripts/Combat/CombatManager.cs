@@ -16,6 +16,8 @@ public class CombatManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void CharacterDied(Character character)
