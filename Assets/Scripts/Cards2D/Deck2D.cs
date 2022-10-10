@@ -8,6 +8,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     #region Setup
 
+    Character player;
     Character character;
     Timeline timeline;
 
@@ -46,6 +47,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         layout = GetComponent<HorizontalLayoutGroup>();
 
+        player = GameObject.Find("Player").GetComponent<Character>();
         character = GetComponentInParent<Character>();
         timeline = GameObject.FindObjectOfType<Timeline>();
     }
@@ -101,7 +103,10 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         ResetArrays();
 
-        timeline.RemoveCard(card.GetComponent<Card>().spell, character);
+        SpellInstance newSpellInstance = new SpellInstance();
+        newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
+
+        timeline.RemoveCard(newSpellInstance);
     }
 
     public void RemoveAllCards()
@@ -127,7 +132,10 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         if (character != null)
         {
-            timeline.AddCard(card.GetComponent<Card>().spell, character);
+            SpellInstance newSpellInstance = new SpellInstance();
+            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
+
+            timeline.AddCard(newSpellInstance);
         }
     }
 

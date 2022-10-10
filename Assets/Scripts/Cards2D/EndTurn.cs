@@ -26,9 +26,10 @@ public class EndTurn : MonoBehaviour
             if (deck != playerHandDeck)
             {
                 deck.RemoveAllCards();
-                delay = timeline.CastSpells() + 0.5f;
             }
         }
+
+        delay = timeline.CastSpells() + 0.5f;
 
         Debug.Log(delay.ToString());
 

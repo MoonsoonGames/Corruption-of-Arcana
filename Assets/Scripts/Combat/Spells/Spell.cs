@@ -20,7 +20,7 @@ public class Spell : ScriptableObject
     public int value;
     public float speed;
 
-    public void CastSpell(Character target)
+    public void CastSpell(Character target, Character caster)
     {
         if (target != null)
         {

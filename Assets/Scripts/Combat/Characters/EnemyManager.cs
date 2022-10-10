@@ -28,7 +28,10 @@ public class EnemyManager : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             //In future, determine target depending on spell so it can cast support spells on allies/self
-            timeline.AddCard(enemy.PrepareSpell(), player);
+            SpellInstance newSpellInstance = new SpellInstance();
+            newSpellInstance.SetSpellInstance(enemy.PrepareSpell(), player, enemy);
+
+            timeline.AddCard(newSpellInstance);
         }
     }
 }
