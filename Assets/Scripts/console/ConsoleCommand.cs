@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
 /// <summary>
-/// Base console command class
+/// Authored & Written by @mrobertscgd
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
 namespace necropanda.utils.console.commands
 {
+    /// <summary>
+    /// Base console command class, derrives from a scriptable object and interfaces with IConsoleCommand.
+    /// </summary>
     public abstract class ConsoleCommand : ScriptableObject, IConsoleCommand
     {
-        [SerializeField] private string commandWord = string.Empty;
+        [SerializeField] private string commandWord = string.Empty; // Empty string for the command word.
 
-        public string CommandWord => commandWord;
+        public string CommandWord => commandWord;   // Set the command word using the getter.
 
-        public  abstract bool Process(string[] args);
+        public  abstract bool Process(string[] args);   // This is the base class, it does nothing on its own.
     }
 }
