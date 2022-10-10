@@ -52,6 +52,9 @@ public class EndTurn : MonoBehaviour
 
                         //Add the card to the array
                         deck.AddCard(cardDrag);
+
+                        //Reset card scales
+                        cardDrag.ScaleCard(1, false);
                     }
                 }
             }
