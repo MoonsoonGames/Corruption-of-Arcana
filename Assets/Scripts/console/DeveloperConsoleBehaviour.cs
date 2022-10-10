@@ -9,7 +9,7 @@ namespace necropanda.utils.console
     public class DeveloperConsoleBehaviour : MonoBehaviour
     {
         [SerializeField] private string prefix = string.Empty;
-        [SerializeField] private ConsoleCommand[] commands = new ConsoleCommand[0];
+        public ConsoleCommand[] commands = new ConsoleCommand[0];
         
         [Header("UI")]
         [SerializeField] private GameObject uiCanvas = null;
