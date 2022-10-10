@@ -3,7 +3,7 @@
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace Necropanda.Utils.Console.Commmands
+namespace Necropanda.Utils.Console.Commands
 {
     /// <summary>
     /// Interface for console commands.

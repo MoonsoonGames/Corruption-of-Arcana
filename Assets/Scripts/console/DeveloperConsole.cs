@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using Necropanda.Utils.Console.Commmands;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd

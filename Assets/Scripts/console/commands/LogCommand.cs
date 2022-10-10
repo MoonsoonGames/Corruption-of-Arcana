@@ -5,7 +5,7 @@ using UnityEngine;
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace Necropanda.Utils.Console.Commmands
+namespace Necropanda.Utils.Console.Commands
 {
     [CreateAssetMenu(fileName = "New Log Command", menuName = "Utilities/DeveloperConsole/Commands/Log Command")]
     /// <summary>

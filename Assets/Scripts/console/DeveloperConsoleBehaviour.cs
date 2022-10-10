@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using Necropanda.Utils.Console.Commmands;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
