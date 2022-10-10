@@ -8,11 +8,20 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     #region Setup
 
+    #region References
+
     Character player;
     Character character;
     Timeline timeline;
 
     HorizontalLayoutGroup layout;
+
+    GeneralDragArea dragArea;
+    DragManager dragManager;
+
+    #endregion
+
+    #region Cards
 
     CardDrag2D[] cards;
     public int maxCards = 3;
@@ -23,8 +32,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public float deckScale = 1;
 
-    GeneralDragArea dragArea;
-    DragManager dragManager;
+    #endregion
 
     #region Highlight Values
     Image deckBackground;
@@ -36,6 +44,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Start()
     {
+        //Sets up base values
         ResetArrays();
 
         dragArea = GameObject.FindObjectOfType<GeneralDragArea>();
@@ -106,9 +115,12 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         SpellInstance newSpellInstance = new SpellInstance();
         newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
 
-        timeline.RemoveCard(newSpellInstance);
+        timeline.RemoveSpellInstance(newSpellInstance);
     }
 
+    /// <summary>
+    /// Removes all cards from the deck without taking them from the timeline
+    /// </summary>
     public void RemoveAllCards()
     {
         foreach (CardDrag2D card in cards)
@@ -135,7 +147,7 @@ public class Deck2D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             SpellInstance newSpellInstance = new SpellInstance();
             newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
 
-            timeline.AddCard(newSpellInstance);
+            timeline.AddSpellInstance(newSpellInstance);
         }
     }
 

@@ -4,27 +4,50 @@ using UnityEngine;
 
 public class Timeline : MonoBehaviour
 {
+    #region Setup
+
     List<SpellInstance> spells = new List<SpellInstance>();
     List<SpellBlock> spellBlocks = new List<SpellBlock>();
     public Object spellBlockPrefab;
 
-    public void AddCard(SpellInstance newSpellInstance)
+    #endregion
+
+    #region Changing Timeline
+
+    #region Adding/Removing Spell Instances
+
+    /// <summary>
+    /// Adds spell instance to the timeline
+    /// </summary>
+    /// <param name="newSpellInstance"></param>
+    public void AddSpellInstance(SpellInstance newSpellInstance)
     {
         spells.Add(newSpellInstance);
-        SortCards();
         CalculateTimeline();
     }
 
-    public void RemoveCard(SpellInstance newSpellInstance)
+    /// <summary>
+    /// Removes spell instance to the timeline
+    /// </summary>
+    /// <param name="newSpellInstance"></param>
+    public void RemoveSpellInstance(SpellInstance newSpellInstance)
     {
         spells.Remove(newSpellInstance);
-        SortCards();
         CalculateTimeline();
     }
 
+    #endregion
+
+    #region Sorting
+
+    /// <summary>
+    /// Sorts the list of spells by their speed and spawns UI blocks on the timeline
+    /// </summary>
     void CalculateTimeline()
     {
-        //Clear old blocks
+        spells.Sort(SortBySpeed);
+
+        //Clear old blocks that are no longer being cast
         foreach (var item in spellBlocks)
         {
             Destroy(item.gameObject);
@@ -37,39 +60,17 @@ public class Timeline : MonoBehaviour
         {
             string text = item.caster.characterName + " is casting " + item.spell.spellName + " on " + item.target.characterName + " (" + item.spell.speed + ")";
 
+            //Creates spell block game object
             GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
             spellBlockObject.transform.SetParent(transform, false);
 
+            //Sets spell block values
             SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
             spellBlock.text.text = text;
             spellBlock.image.color = item.spell.timelineColor;
+
+            //Adds spell block to layout group
             spellBlocks.Add(spellBlock);
-        }
-    }
-
-    public void SortCards()
-    {
-        List<SpellInstance> orderedList = new List<SpellInstance>();
-
-        foreach (var item in spells)
-        {
-            SpellInstance newSpellInstance = new SpellInstance();
-            newSpellInstance.SetSpellInstance(item.spell, item.target, item.caster);
-
-            orderedList.Add(newSpellInstance);
-        }
-
-        orderedList.Sort(SortBySpeed);
-
-        spells.Clear();
-
-        foreach (var item in orderedList)
-        {
-            SpellInstance newSpellInstance = new SpellInstance();
-            newSpellInstance.SetSpellInstance(item.spell, item.target, item.caster);
-
-            spells.Add(newSpellInstance);
-            //Debug.Log(item.Key.spellName + item.Key.speed);
         }
     }
 
@@ -78,9 +79,19 @@ public class Timeline : MonoBehaviour
         return c1.spell.speed.CompareTo(c2.spell.speed);
     }
 
+    #endregion
+
+    #endregion
+
+    #region Spellcasting
+
+    /// <summary>
+    /// Casts every spell on the timeline and then removes them
+    /// </summary>
+    /// <returns></returns>
     public float CastSpells()
     {
-        Debug.Log("Casting spells");
+        //Generates a delay for the entire set of spells being cast
         float delay = 0;
 
         if (spells.Count > 0)
@@ -91,15 +102,18 @@ public class Timeline : MonoBehaviour
         //Loop through list and cast spell;
         foreach (var item in spells)
         {
-            SpellInstance newSpellInstance = new SpellInstance();
-            newSpellInstance.SetSpellInstance(item.spell, item.target, item.caster);
-
-            StartCoroutine(IDelaySpell(newSpellInstance));
+            //Use a coroutine to stagger spellcasting
+            StartCoroutine(IDelaySpell(item));
         }
 
         return delay;
     }
 
+    /// <summary>
+    /// Delays the casting of a spell by its speed
+    /// </summary>
+    /// <param name="spellInstance"></param>
+    /// <returns></returns>
     IEnumerator IDelaySpell(SpellInstance spellInstance)
     {
         yield return new WaitForSeconds(spellInstance.spell.speed);
@@ -108,7 +122,9 @@ public class Timeline : MonoBehaviour
 
         spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster);
 
-        RemoveCard(spellInstance);
+        RemoveSpellInstance(spellInstance);
         CalculateTimeline();
     }
+
+    #endregion
 }

@@ -19,8 +19,6 @@ public class EndTurn : MonoBehaviour
 
     public void EndTurnButton()
     {
-        float delay = 0.5f;
-
         foreach (Deck2D deck in decks)
         {
             if (deck != playerHandDeck)
@@ -29,9 +27,7 @@ public class EndTurn : MonoBehaviour
             }
         }
 
-        delay = timeline.CastSpells() + 0.5f;
-
-        Debug.Log(delay.ToString());
+        float delay = timeline.CastSpells() + 0.5f;
 
         Invoke("StartNextTurn", delay);
     }
@@ -52,7 +48,6 @@ public class EndTurn : MonoBehaviour
                     for (int i = 0; i < difference; i++)
                     {
                         GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
-
                         CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
 
                         //Add the card to the array

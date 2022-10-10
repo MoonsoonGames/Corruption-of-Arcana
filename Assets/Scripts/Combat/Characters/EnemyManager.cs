@@ -31,7 +31,7 @@ public class EnemyManager : MonoBehaviour
             SpellInstance newSpellInstance = new SpellInstance();
             newSpellInstance.SetSpellInstance(enemy.PrepareSpell(), player, enemy);
 
-            timeline.AddCard(newSpellInstance);
+            timeline.AddSpellInstance(newSpellInstance);
         }
     }
 }

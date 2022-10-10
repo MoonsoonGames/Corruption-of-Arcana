@@ -14,7 +14,6 @@ public class Card : MonoBehaviour
 
     public void Setup()
     {
-        
         nameText.text = spell.spellName;
         speedText.text = spell.speed.ToString();
         descriptionText.text = spell.spellDescription;
