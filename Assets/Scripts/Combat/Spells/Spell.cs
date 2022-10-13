@@ -13,31 +13,34 @@ namespace Necropanda
     [CreateAssetMenu(fileName = "NewSpell", menuName = "Combat/Spells", order = 0)]
     public class Spell : ScriptableObject
     {
+        [Header("Basic Info")]
         public string spellName;
         public bool overrideColor;
         public Color timelineColor;
         [TextArea(3, 10)]
         public string spellDescription; // Basic desciption of spell effect
+        public float speed;
+        public int arcanaCost;
 
+        [Header("Caster Effects")]
         public E_DamageTypes effectTypeCaster;
         public int valueCaster;
         //Caster status effects here
 
+        [Header("Target Effects")]
         public E_DamageTypes effectTypeTarget;
         public int valueTarget;
         public int hitCount = 1;
+        public float executeThreshold;
         public E_MultihitType multihitType;
         public int multihitValue;
         //Target status effects here
-
-        public float speed;
-        public int arcanaCost;
 
         public void CastSpell(Character target, Character caster)
         {
             if (caster != null)
             {
-                caster.GetHealth().ChangeHealth(effectTypeCaster, valueCaster);
+                AffectCaster(caster, effectTypeCaster, valueCaster);
             }
             if (target != null)
             {
@@ -47,58 +50,71 @@ namespace Necropanda
 
                 for (int i = 0; i < hitCount; i++)
                 {
-                    if (multihitType != E_MultihitType.Single)
+                    switch (multihitType)
                     {
-                        switch (multihitType)
-                        {
-                            case E_MultihitType.Single:
-                                target.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
-                                break;
-                            case E_MultihitType.Chain:
-                                foreach(Character character in targetTeamManager.team)
+                        case E_MultihitType.Single:
+                            AffectTarget(target, effectTypeTarget, valueTarget);
+                            break;
+                        case E_MultihitType.Chain:
+                            foreach (Character character in targetTeamManager.team)
+                            {
+                                if (character != target)
                                 {
-                                    if (character != target)
-                                    {
-                                        character.GetHealth().ChangeHealth(effectTypeTarget, multihitValue);
-                                    }
-                                    else
-                                    {
-                                        character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
-                                    }
+                                    AffectTarget(target, effectTypeTarget, multihitValue);
                                 }
-                                break;
-                            case E_MultihitType.Cleave:
-                                foreach (Character character in targetTeamManager.team)
-                                {
-                                    if (character != target)
-                                    {
-                                        character.GetHealth().ChangeHealth(effectTypeTarget, multihitValue);
-                                    }
-                                    else
-                                    {
-                                        character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
-                                    }
-                                }
-                                break;
-                            case E_MultihitType.RandomTeam:
-                                targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)].GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
-                                break;
-                            case E_MultihitType.RandomAll:
-                                allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
-                                allCharacters[Random.Range(0, allCharacters.Count)].GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
-                                break;
-                            case E_MultihitType.All:
-                                allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
-                                foreach (Character character in allCharacters)
+                                else
                                 {
                                     character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
                                 }
-                                break;
-
-
-                        }
+                            }
+                            break;
+                        case E_MultihitType.Cleave:
+                            foreach (Character character in targetTeamManager.team)
+                            {
+                                if (character != target)
+                                {
+                                    AffectTarget(target, effectTypeTarget, multihitValue);
+                                }
+                                else
+                                {
+                                    character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                }
+                            }
+                            break;
+                        case E_MultihitType.RandomTeam:
+                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], effectTypeTarget, valueTarget);
+                            break;
+                        case E_MultihitType.RandomAll:
+                            allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
+                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count)], effectTypeTarget, valueTarget);
+                            break;
+                        case E_MultihitType.All:
+                            allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
+                            foreach (Character character in allCharacters)
+                            {
+                                AffectTarget(character, effectTypeTarget, valueTarget);
+                            }
+                            break;
                     }
                 }
+            }
+        }
+
+        void AffectCaster(Character target, E_DamageTypes effectType, int value)
+        {
+            //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+            target.GetHealth().ChangeHealth(effectType, value);
+        }
+
+        void AffectTarget(Character target, E_DamageTypes effectType, int value)
+        {
+            //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+            target.GetHealth().ChangeHealth(effectType, value);
+
+            if (target.GetHealth().GetHealthPercentage() < executeThreshold)
+            {
+                Debug.Log("Kill " + target.characterName + " with " + name);
+                target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999);
             }
         }
 

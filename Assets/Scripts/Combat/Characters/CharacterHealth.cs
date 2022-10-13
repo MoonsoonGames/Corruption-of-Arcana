@@ -14,6 +14,8 @@ namespace Necropanda
     [RequireComponent(typeof(Character))]
     public class CharacterHealth : MonoBehaviour
     {
+        #region Setup
+
         //Health Values
         public int maxHealth;
         protected int health;
@@ -61,6 +63,10 @@ namespace Necropanda
             }
         }
 
+        #endregion
+
+        #region Health
+
         public int ChangeHealth(E_DamageTypes type, int value)
         {
             //Resistance check
@@ -93,33 +99,7 @@ namespace Necropanda
             return trueValue;
         }
 
-        public bool ModifyResistanceModifier(E_DamageTypes damageType, float newValue)
-        {
-            if (currentDamageResistances.ContainsKey(damageType))
-            {
-                currentDamageResistances[damageType] += newValue;
-                return true;
-            }
-            else
-            {
-                currentDamageResistances.Add(damageType, newValue);
-                return false;
-            }
-        }
-
-        public float CheckResistances(E_DamageTypes type)
-        {
-            //needs to check resistances
-            if (currentDamageResistances.ContainsKey(type))
-            {
-                return currentDamageResistances[type];
-            }
-            else
-            {
-                //No resistance modifier, return 1
-                return 1;
-            }
-        }
+        public float GetHealthPercentage() { return health / maxHealth; }
 
         void UpdateHealthUI()
         {
@@ -161,5 +141,39 @@ namespace Necropanda
         {
             GetComponent<Character>().Die();
         }
+
+        #endregion
+
+        #region Resistances
+
+        public bool ModifyResistanceModifier(E_DamageTypes damageType, float newValue)
+        {
+            if (currentDamageResistances.ContainsKey(damageType))
+            {
+                currentDamageResistances[damageType] += newValue;
+                return true;
+            }
+            else
+            {
+                currentDamageResistances.Add(damageType, newValue);
+                return false;
+            }
+        }
+
+        public float CheckResistances(E_DamageTypes type)
+        {
+            //needs to check resistances
+            if (currentDamageResistances.ContainsKey(type))
+            {
+                return currentDamageResistances[type];
+            }
+            else
+            {
+                //No resistance modifier, return 1
+                return 1;
+            }
+        }
+
+        #endregion
     }
 }

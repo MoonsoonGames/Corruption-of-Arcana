@@ -145,7 +145,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(spellInstance.spell.speed);
 
-            Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
+            //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
 
             spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster);
 

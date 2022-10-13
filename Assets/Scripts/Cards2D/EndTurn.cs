@@ -41,7 +41,7 @@ namespace Necropanda
 
         public void StartNextTurn()
         {
-            Debug.Log("New Turn");
+            //Debug.Log("New Turn");
             foreach (Deck2D deck in decks)
             {
                 if (deck == playerHandDeck)

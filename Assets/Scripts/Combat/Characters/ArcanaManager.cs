@@ -26,7 +26,7 @@ namespace Necropanda
         {
             if (arcana <= arcanaMax)
             {
-                Debug.Log("Can cast");
+                //Debug.Log("Can cast");
                 //Can cast, disable message and enable end turn
                 endTurnButton.enabled = true;
                 arcanaText.text = arcanaMax - arcana + "/" + arcanaMax;
@@ -34,7 +34,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log("Can't cast");
+                //Debug.Log("Can't cast");
                 //Can't cast, enable message and disable end turn
                 endTurnButton.enabled = false;
                 arcanaText.text = arcanaMax - arcana + "/" + arcanaMax;
