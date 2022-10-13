@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     Timeline timeline;
 
-    public List<Enemy> enemies = new List<Enemy>();
+    public List<Character> enemies = new List<Character>();
     public Character player;
 
     private void Start()
