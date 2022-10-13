@@ -48,9 +48,22 @@ namespace Necropanda
                         switch (multihitType)
                         {
                             case (E_MultihitType.Chain):
-
+                                foreach(Character character in targets)
+                                {
+                                    if (character != target)
+                                    {
+                                        character.GetHealth().ChangeHealth(effectTypeTarget, multihitValue);
+                                    }
+                                }
                                 break;
                             case (E_MultihitType.Cleave):
+                                foreach (Character character in targets)
+                                {
+                                    if (character != target)
+                                    {
+                                        character.GetHealth().ChangeHealth(effectTypeTarget, multihitValue);
+                                    }
+                                }
                                 break;
 
                         }
