@@ -902,6 +902,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870227617}
   m_CullTransparentMesh: 1
+--- !u!1 &922119376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 922119377}
+  - component: {fileID: 922119378}
+  m_Layer: 5
+  m_Name: PlayerTeam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &922119377
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922119376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 946320888}
+  m_Father: {fileID: 1454539424}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -711.00006, y: -294.8375}
+  m_SizeDelta: {x: 164.50952, y: 77.951706}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &922119378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922119376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6876466cb1eba479fb7fdd564c4067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: []
 --- !u!224 &946320888 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
@@ -1696,7 +1747,7 @@ RectTransform:
   - {fileID: 1361148466}
   - {fileID: 1729430395}
   - {fileID: 1695361929}
-  - {fileID: 946320888}
+  - {fileID: 922119377}
   - {fileID: 1039533808}
   - {fileID: 1488577367}
   - {fileID: 1271783328}
@@ -2185,7 +2236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f6d8b804e8944ca12e17c940c63bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  team: []
   player: {fileID: 946320890}
 --- !u!1 &1795003047
 GameObject:
@@ -2720,7 +2771,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1454539424}
+    m_TransformParent: {fileID: 922119377}
     m_Modifications:
     - target: {fileID: 3702093925428361590, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
@@ -2750,7 +2801,7 @@ PrefabInstance:
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
@@ -2805,27 +2856,27 @@ PrefabInstance:
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 89
+      value: 82.25474
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 155
+      value: 38.975883
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361593, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}

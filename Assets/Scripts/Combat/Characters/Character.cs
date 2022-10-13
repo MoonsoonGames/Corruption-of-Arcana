@@ -19,7 +19,7 @@ namespace Necropanda
         {
             health = GetComponent<CharacterHealth>();
 
-            teamManager = GameObject.FindObjectOfType<EnemyManager>();
+            teamManager = GetComponentInParent<TeamManager>();
             teamManager.Add(this);
         }
 
@@ -28,6 +28,11 @@ namespace Necropanda
             CombatManager.instance.CharacterDied(this);
             teamManager.Remove(this);
             Destroy(gameObject);
+        }
+
+        public virtual Spell PrepareSpell()
+        {
+            return null;
         }
     }
 }

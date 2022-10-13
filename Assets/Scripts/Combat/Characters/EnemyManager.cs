@@ -15,11 +15,11 @@ namespace Necropanda
 
         public void StartTurn()
         {
-            foreach (Enemy enemy in team)
+            foreach (Character character in team)
             {
                 //In future, determine target depending on spell so it can cast support spells on allies/self
                 SpellInstance newSpellInstance = new SpellInstance();
-                newSpellInstance.SetSpellInstance(enemy.PrepareSpell(), player, enemy);
+                newSpellInstance.SetSpellInstance(character.PrepareSpell(), player, character);
 
                 timeline.AddSpellInstance(newSpellInstance);
             }

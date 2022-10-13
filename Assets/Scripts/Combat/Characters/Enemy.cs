@@ -13,7 +13,7 @@ namespace Necropanda
     {
         public List<Spell> spells = new List<Spell>();
 
-        public Spell PrepareSpell()
+        public override Spell PrepareSpell()
         {
             return spells[Random.Range(0, spells.Count)];
         }
