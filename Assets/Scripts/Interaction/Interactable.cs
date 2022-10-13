@@ -30,6 +30,22 @@ namespace Necropanda.Interactable
             }
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (!forceInteract)
+                {
+                    Debug.Log("Can interact");
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        Debug.Log("Button pressed");
+                        Interact(other.gameObject);
+                    }
+                }
+            }
+        }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -40,11 +56,11 @@ namespace Necropanda.Interactable
             }
         }
 
-        void Interact(GameObject player)
+        void Interact(GameObject playerRef)
         {
             //Call interface function
             Debug.Log("Interact");
-            GetComponent<IInteractable>().Interacted(player);
+            GetComponent<IInteractable>().Interacted(playerRef);
         }
     }
 }
