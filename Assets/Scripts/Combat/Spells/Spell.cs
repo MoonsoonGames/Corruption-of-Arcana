@@ -14,6 +14,7 @@ namespace Necropanda
     public class Spell : ScriptableObject
     {
         public string spellName;
+        public bool overrideColor;
         public Color timelineColor;
         [TextArea(3, 10)]
         public string spellDescription; // Basic desciption of spell effect

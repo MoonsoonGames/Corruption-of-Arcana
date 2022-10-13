@@ -17,6 +17,15 @@ namespace Necropanda
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
 
+        public Character player;
+        ArcanaManager arcanaManager;
+        int arcanaCount = 0;
+
+        private void Start()
+        {
+            arcanaManager = player.GetComponent<ArcanaManager>();
+        }
+
         #endregion
 
         #region Changing Timeline
@@ -53,6 +62,7 @@ namespace Necropanda
         void CalculateTimeline()
         {
             spells.Sort(SortBySpeed);
+            arcanaCount = 0;
 
             //Clear old blocks that are no longer being cast
             foreach (var item in spellBlocks)
@@ -74,11 +84,21 @@ namespace Necropanda
                 //Sets spell block values
                 SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
                 spellBlock.text.text = text;
-                spellBlock.image.color = item.spell.timelineColor;
+                if (item.spell.overrideColor)
+                    spellBlock.image.color = item.spell.timelineColor;
+                else
+                    spellBlock.image.color = item.caster.timelineColor;
 
                 //Adds spell block to layout group
                 spellBlocks.Add(spellBlock);
+
+                if (item.caster == player)
+                {
+                    arcanaCount += item.spell.arcanaCost;
+                }
             }
+
+            arcanaManager.CheckArcana(arcanaCount);
         }
 
         static int SortBySpeed(SpellInstance c1, SpellInstance c2)

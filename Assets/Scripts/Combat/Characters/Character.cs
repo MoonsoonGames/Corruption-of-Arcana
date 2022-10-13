@@ -12,6 +12,7 @@ namespace Necropanda
     public class Character : MonoBehaviour
     {
         public string characterName;
+        public Color timelineColor = new Color(0, 0, 0, 255); //Sets up alpha
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 
@@ -32,6 +33,7 @@ namespace Necropanda
 
         public virtual Spell PrepareSpell()
         {
+            //Overwritten by children
             return null;
         }
     }
