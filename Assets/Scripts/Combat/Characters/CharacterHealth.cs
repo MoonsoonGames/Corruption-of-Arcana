@@ -66,23 +66,22 @@ namespace Necropanda
             //Resistance check
             int trueValue = (int)(value * CheckResistances(type));
 
-            if (type == E_DamageTypes.Healing)
+            switch (type)
             {
-                health = Mathf.Clamp(health + trueValue, 0, maxHealth);
-            }
-            else if (type == E_DamageTypes.Shield)
-            {
-                shield += trueValue;
-            }
-            else if (type == E_DamageTypes.Arcana)
-            {
-                //Increase arcana
-            }
-            else
-            {
-                int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
-                shield = (int)Mathf.Clamp(shield - trueValue, 0, Mathf.Infinity);
-                health -= damageOverShield;
+                case (E_DamageTypes.Healing):
+                    health = Mathf.Clamp(health + trueValue, 0, maxHealth);
+                    break;
+                case (E_DamageTypes.Shield):
+                    shield += trueValue;
+                    break;
+                case (E_DamageTypes.Arcana):
+                    //Increase arcana
+                    break;
+                default:
+                    int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
+                    shield = (int)Mathf.Clamp(shield - trueValue, 0, Mathf.Infinity);
+                    health -= damageOverShield;
+                    break;
             }
 
             if (health <= 0)

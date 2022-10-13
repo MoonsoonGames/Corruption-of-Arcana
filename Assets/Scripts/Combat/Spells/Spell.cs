@@ -34,42 +34,87 @@ namespace Necropanda
 
         public void CastSpell(Character target, Character caster)
         {
+            if (caster != null)
+            {
+                caster.GetHealth().ChangeHealth(effectTypeCaster, valueCaster);
+            }
             if (target != null)
             {
-                TeamManager teamManager = target.GetManager();
+                TeamManager targetTeamManager = target.GetManager();
+                TeamManager casterTeamManager = caster.GetManager();
+                List<Character> allCharacters = new List<Character>();
+
                 for (int i = 0; i < hitCount; i++)
                 {
-                    target.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
-
                     if (multihitType != E_MultihitType.Single)
                     {
-                        List<Character> targets = teamManager.team;
-
                         switch (multihitType)
                         {
-                            case (E_MultihitType.Chain):
-                                foreach(Character character in targets)
+                            case E_MultihitType.Single:
+                                target.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                break;
+                            case E_MultihitType.Chain:
+                                foreach(Character character in targetTeamManager.team)
                                 {
                                     if (character != target)
                                     {
                                         character.GetHealth().ChangeHealth(effectTypeTarget, multihitValue);
                                     }
+                                    else
+                                    {
+                                        character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                    }
                                 }
                                 break;
-                            case (E_MultihitType.Cleave):
-                                foreach (Character character in targets)
+                            case E_MultihitType.Cleave:
+                                foreach (Character character in targetTeamManager.team)
                                 {
                                     if (character != target)
                                     {
                                         character.GetHealth().ChangeHealth(effectTypeTarget, multihitValue);
                                     }
+                                    else
+                                    {
+                                        character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                    }
                                 }
                                 break;
+                            case E_MultihitType.RandomTeam:
+                                targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)].GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                break;
+                            case E_MultihitType.RandomAll:
+                                allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
+                                allCharacters[Random.Range(0, allCharacters.Count)].GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                break;
+                            case E_MultihitType.All:
+                                allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
+                                foreach (Character character in allCharacters)
+                                {
+                                    character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                }
+                                break;
+
 
                         }
                     }
                 }
             }
+        }
+
+        public List<Character> CombineLists(List<Character> list1, List<Character> list2)
+        {
+            List<Character> outputList = new List<Character>();
+
+            foreach (Character character in list1)
+            {
+                outputList.Add(character);
+            }
+            foreach (Character character in list2)
+            {
+                outputList.Add(character);
+            }
+
+            return outputList;
         }
     }
 }

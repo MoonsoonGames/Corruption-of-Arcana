@@ -17,7 +17,7 @@ public enum E_DamageTypes
 
 public enum E_MultihitType
 {
-    Single, Cleave, Chain, RandomEnemy, RandomAll, All
+    Single, Cleave, Chain, RandomTeam, RandomAll, All
 }
 
 public enum E_Scenes
