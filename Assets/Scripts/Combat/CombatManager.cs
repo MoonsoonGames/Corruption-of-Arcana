@@ -2,42 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
+namespace Necropanda
 {
-    public Character player;
-
-    public EnemyManager enemyManager;
-
-    public GameObject victoryScreen;
-    public GameObject defeatScreen;
-
-    public static CombatManager instance;
-
-    private void Start()
+    public class CombatManager : MonoBehaviour
     {
-        instance = this;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
-    }
+        public Character player;
 
-    public void CharacterDied(Character character)
-    {
-        if (character == player)
+        public EnemyManager enemyManager;
+
+        public GameObject victoryScreen;
+        public GameObject defeatScreen;
+
+        public static CombatManager instance;
+
+        private void Start()
         {
-            ShowEndScreen(false);
+            instance = this;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
-        else
+
+        public void CharacterDied(Character character)
         {
-            if (enemyManager.enemies.Count == 0)
+            if (character == player)
             {
-                ShowEndScreen(true);
+                ShowEndScreen(false);
+            }
+            else
+            {
+                if (enemyManager.team.Count == 0)
+                {
+                    ShowEndScreen(true);
+                }
             }
         }
-    }
 
-    void ShowEndScreen(bool victory)
-    {
-        victoryScreen.SetActive(victory);
-        defeatScreen.SetActive(!victory);
+        void ShowEndScreen(bool victory)
+        {
+            victoryScreen.SetActive(victory);
+            defeatScreen.SetActive(!victory);
+        }
     }
 }

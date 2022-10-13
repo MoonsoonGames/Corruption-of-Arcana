@@ -3,26 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Card : MonoBehaviour
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
+namespace Necropanda
 {
-    [HideInInspector]
-    public Spell spell;
-
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI speedText;
-    public TextMeshProUGUI descriptionText;
-
-    public void Setup()
+    public class Card : MonoBehaviour
     {
-        nameText.text = spell.spellName;
-        speedText.text = spell.speed.ToString();
-        descriptionText.text = spell.spellDescription;
+        [HideInInspector]
+        public Spell spell;
 
-        gameObject.name = spell.spellName;
-    }
+        public TextMeshProUGUI nameText;
+        public TextMeshProUGUI speedText;
+        public TextMeshProUGUI descriptionText;
 
-    public void CastSpell(Character target, Character caster)
-    {
-        spell.CastSpell(target, caster);
+        public void Setup()
+        {
+            nameText.text = spell.spellName;
+            speedText.text = spell.speed.ToString();
+            descriptionText.text = spell.spellDescription;
+
+            gameObject.name = spell.spellName;
+        }
+
+        public void CastSpell(Character target, Character caster)
+        {
+            spell.CastSpell(target, caster);
+        }
     }
 }

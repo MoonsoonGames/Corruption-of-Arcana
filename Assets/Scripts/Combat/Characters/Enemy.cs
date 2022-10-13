@@ -2,31 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Character
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
+namespace Necropanda
 {
-    EnemyManager enemyManager;
-
-    public List<Spell> spells = new List<Spell>();
-
-    // Start is called before the first frame update
-    void Start()
+    public class Enemy : Character
     {
-        health = GetComponent<CharacterHealth>();
+        public List<Spell> spells = new List<Spell>();
 
-        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
-        enemyManager.Add(this);
-    }
-
-    public override void Die()
-    {
-        //Clear self from enemy manager;
-        enemyManager.Remove(this);
-
-        base.Die();
-    }
-
-    public Spell PrepareSpell()
-    {
-        return spells[Random.Range(0, spells.Count)];
+        public Spell PrepareSpell()
+        {
+            return spells[Random.Range(0, spells.Count)];
+        }
     }
 }

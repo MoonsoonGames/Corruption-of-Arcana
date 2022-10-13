@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomCardValues : MonoBehaviour
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
+namespace Necropanda
 {
-    public Spell[] spells;
-
-    // Start is called before the first frame update
-    void Start()
+    public class RandomCardValues : MonoBehaviour
     {
-        Spell spell = spells[Random.Range(0, spells.Length)];
+        public Spell[] spells;
 
-        Card card = GetComponent<Card>();
-        card.spell = spell;
-        card.Setup();
+        // Start is called before the first frame update
+        void Start()
+        {
+            Spell spell = spells[Random.Range(0, spells.Length)];
+
+            Card card = GetComponent<Card>();
+            card.spell = spell;
+            card.Setup();
+        }
     }
+
 }
