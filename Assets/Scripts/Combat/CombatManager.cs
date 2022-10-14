@@ -11,9 +11,8 @@ namespace Necropanda
 {
     public class CombatManager : MonoBehaviour
     {
-        public Character player;
-
-        public EnemyManager enemyManager;
+        public TeamManager playerTeamManager;
+        public TeamManager enemyTeamManager;
 
         public GameObject victoryScreen;
         public GameObject defeatScreen;
@@ -29,13 +28,21 @@ namespace Necropanda
 
         public void CharacterDied(Character character)
         {
-            if (character == player)
+            Debug.Log("Character Killed");
+            if (playerTeamManager.team.Contains(character))
             {
-                ShowEndScreen(false);
+                Debug.Log("Character Killed on player team");
+                playerTeamManager.Remove(character);
+                if (playerTeamManager.team.Count == 0)
+                {
+                    ShowEndScreen(false);
+                }
             }
             else
             {
-                if (enemyManager.team.Count == 0)
+                Debug.Log("Character Killed on enemy team");
+                enemyTeamManager.Remove(character);
+                if (enemyTeamManager.team.Count == 0)
                 {
                     ShowEndScreen(true);
                 }

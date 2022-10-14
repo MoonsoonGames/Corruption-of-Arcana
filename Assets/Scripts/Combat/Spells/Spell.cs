@@ -82,11 +82,11 @@ namespace Necropanda
                             }
                             break;
                         case E_MultihitType.RandomTeam:
-                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], effectTypeTarget, valueTarget);
+                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count - 1)], effectTypeTarget, valueTarget);
                             break;
                         case E_MultihitType.RandomAll:
                             allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
-                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count)], effectTypeTarget, valueTarget);
+                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count - 1)], effectTypeTarget, valueTarget);
                             break;
                         case E_MultihitType.All:
                             allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
@@ -111,11 +111,13 @@ namespace Necropanda
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             target.GetHealth().ChangeHealth(effectType, value);
 
-            if (target.GetHealth().GetHealthPercentage() < executeThreshold)
+            if (target.GetHealth().GetHealthPercentage() <= executeThreshold)
             {
-                Debug.Log("Kill " + target.characterName + " with " + name);
+                Debug.Log("Kill " + target.characterName + " with " + name + " at: " + (target.GetHealth().GetHealthPercentage()));
                 target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999);
             }
+
+            //Sound effects here
         }
 
         public List<Character> CombineLists(List<Character> list1, List<Character> list2)

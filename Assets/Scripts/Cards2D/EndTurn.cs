@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -17,15 +18,25 @@ namespace Necropanda
         Timeline timeline;
         EnemyManager enemyManager;
 
+        Button endTurnButton;
+        public Color buttonAvailable = new Color(0, 0, 0, 255);
+        public Color buttonUnavailable = new Color(0, 0, 0, 255);
+
+        bool waitingForStartTurn = false;
+
         private void Start()
         {
             decks = GameObject.FindObjectsOfType<Deck2D>();
             timeline = GameObject.FindObjectOfType<Timeline>();
             enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+            endTurnButton = GetComponent<Button>();
+            endTurnButton.image.color = buttonAvailable;
         }
 
         public void EndTurnButton()
         {
+            DisableButton();
+
             foreach (Deck2D deck in decks)
             {
                 if (deck != playerHandDeck)
@@ -68,6 +79,26 @@ namespace Necropanda
             }
 
             enemyManager.StartTurn();
+            DisableButton();
+            waitingForStartTurn = true;
+            Invoke("EnableButton", 2f);
+        }
+
+        void DisableButton()
+        {
+            waitingForStartTurn = false;
+            endTurnButton.image.color = buttonUnavailable;
+            endTurnButton.interactable = false;
+        }
+
+        void EnableButton()
+        {
+            if (waitingForStartTurn)
+            {
+                endTurnButton.interactable = true;
+                endTurnButton.image.color = buttonAvailable;
+                waitingForStartTurn = false;
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Necropanda
         public virtual void Die()
         {
             CombatManager.instance.CharacterDied(this);
-            teamManager.Remove(this);
+            //teamManager.Remove(this);
             Destroy(gameObject);
         }
 

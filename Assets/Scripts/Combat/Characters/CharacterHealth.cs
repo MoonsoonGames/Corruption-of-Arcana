@@ -99,7 +99,7 @@ namespace Necropanda
             return trueValue;
         }
 
-        public float GetHealthPercentage() { return health / maxHealth; }
+        public float GetHealthPercentage() { return (float)health / (float)maxHealth; }
 
         void UpdateHealthUI()
         {

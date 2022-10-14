@@ -38,7 +38,7 @@ namespace Necropanda
                 //Can't cast, enable message and disable end turn
                 endTurnButton.enabled = false;
                 arcanaText.text = arcanaMax - arcana + "/" + arcanaMax;
-                arcanaImage.color = enableColor;
+                arcanaImage.color = disableColor;
             }
         }
     }
