@@ -50,7 +50,7 @@ namespace Necropanda
 
         #endregion
 
-        private void Start()
+        public void Setup()
         {
             dragManager = DragManager.instance;
 
