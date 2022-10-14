@@ -112,7 +112,7 @@ namespace Necropanda
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             target.GetHealth().ChangeHealth(effectType, value);
 
-            if (target.GetHealth().GetHealthPercentage() <= executeThreshold)
+            if (target.GetHealth().GetHealthPercentage() < executeThreshold)
             {
                 Debug.Log("Kill " + target.characterName + " with " + name + " at: " + (target.GetHealth().GetHealthPercentage()));
                 target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999);

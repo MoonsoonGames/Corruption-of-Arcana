@@ -85,7 +85,9 @@ namespace Necropanda
                 if (cards.Length < maxCards)
                 {
                     //Debug.Log(cards.Length + " / " + maxCards);
-                    dragManager.draggedCard.newDeck = this;
+                    CardDrag2D currentCard = dragManager.draggedCard;
+                    currentCard.newDeck = this;
+                    currentCard.ScaleCard(currentCard.hoverScale, true);
                     Highlight(true);
                 }
             }
@@ -100,7 +102,9 @@ namespace Necropanda
             //Only fires logic when player is dragging a card off the deck
             if (eventData.dragging == true)
             {
-                dragManager.draggedCard.newDeck = null;
+                CardDrag2D currentCard = dragManager.draggedCard;
+                currentCard.newDeck = null;
+                currentCard.ScaleCard(currentCard.pickupScale, true);
                 Highlight(false);
             }
         }
