@@ -13,6 +13,8 @@ namespace Necropanda
     {
         #region Setup
 
+        public static Timeline instance = new Timeline();
+
         List<SpellInstance> spells = new List<SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;

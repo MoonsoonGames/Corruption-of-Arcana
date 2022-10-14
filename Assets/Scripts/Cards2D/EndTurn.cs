@@ -16,7 +16,7 @@ namespace Necropanda
         Deck2D[] decks;
         public GameObject cardPrefab; //Prefab of the parent card type
         Timeline timeline;
-        EnemyManager enemyManager;
+        TeamManager[] teamManagers;
 
         Button endTurnButton;
         public Color buttonAvailable = new Color(0, 0, 0, 255);
@@ -28,7 +28,7 @@ namespace Necropanda
         {
             decks = GameObject.FindObjectsOfType<Deck2D>();
             timeline = GameObject.FindObjectOfType<Timeline>();
-            enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+            teamManagers = GameObject.FindObjectsOfType<TeamManager>();
             endTurnButton = GetComponent<Button>();
             endTurnButton.image.color = buttonAvailable;
         }
@@ -78,7 +78,10 @@ namespace Necropanda
                 }
             }
 
-            enemyManager.StartTurn();
+            foreach (TeamManager manager in teamManagers)
+            {
+                manager.StartTurn();
+            }
             DisableButton();
             waitingForStartTurn = true;
             Invoke("EnableButton", 2f);

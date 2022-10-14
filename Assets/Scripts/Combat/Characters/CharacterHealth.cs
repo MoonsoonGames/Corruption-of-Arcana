@@ -81,7 +81,10 @@ namespace Necropanda
                     shield += trueValue;
                     break;
                 case (E_DamageTypes.Arcana):
-                    //Increase arcana
+                    //Increase arcana, might be obsolete
+                    break;
+                case (E_DamageTypes.Perforation):
+                    health = Mathf.Clamp(health - trueValue, 0, maxHealth);
                     break;
                 default:
                     int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);

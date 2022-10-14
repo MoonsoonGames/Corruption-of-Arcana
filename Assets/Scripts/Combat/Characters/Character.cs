@@ -16,6 +16,8 @@ namespace Necropanda
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 
+        bool dying = false;
+
         private void Start()
         {
             health = GetComponent<CharacterHealth>();
@@ -26,15 +28,25 @@ namespace Necropanda
 
         public virtual void Die()
         {
-            CombatManager.instance.CharacterDied(this);
+            dying = true;
             //teamManager.Remove(this);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         public virtual Spell PrepareSpell()
         {
             //Overwritten by children
             return null;
+        }
+
+        public void StartTurn()
+        {
+            if (dying)
+            {
+                CombatManager.instance.CharacterDied(this);
+                teamManager.team.Remove(this);
+                Destroy(gameObject);
+            }
         }
     }
 }

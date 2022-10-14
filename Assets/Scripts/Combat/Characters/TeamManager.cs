@@ -28,5 +28,13 @@ namespace Necropanda
         {
             team.Remove(character);
         }
+
+        public virtual void StartTurn()
+        {
+            for (int i = 0; i < team.Count; i++)
+            {
+                team[i].StartTurn();
+            }
+        }
     }
 }

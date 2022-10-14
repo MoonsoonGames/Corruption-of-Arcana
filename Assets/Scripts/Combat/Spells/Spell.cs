@@ -16,7 +16,7 @@ namespace Necropanda
         [Header("Basic Info")]
         public string spellName;
         public bool overrideColor;
-        public Color timelineColor;
+        public Color timelineColor = new Color(0, 0, 0, 255);
         [TextArea(3, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public float speed;
@@ -50,6 +50,7 @@ namespace Necropanda
 
                 for (int i = 0; i < hitCount; i++)
                 {
+                    //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
                     switch (multihitType)
                     {
                         case E_MultihitType.Single:

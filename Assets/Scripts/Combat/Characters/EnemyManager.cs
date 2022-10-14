@@ -13,8 +13,9 @@ namespace Necropanda
     {
         public Character player;
 
-        public void StartTurn()
+        public override void StartTurn()
         {
+            base.StartTurn();
             foreach (Character character in team)
             {
                 //In future, determine target depending on spell so it can cast support spells on allies/self
