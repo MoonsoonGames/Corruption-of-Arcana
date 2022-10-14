@@ -13,7 +13,15 @@ namespace Necropanda
     public class StatusEffects : ScriptableObject
     {
         //Effect info here
+        //name, description
+        //type, value, resistances to self
+        //type, value, resistances to allies
+        //type, value, resistances to opponents
+        //type, value, resistances to reflect
+        //burrow, banish, charm, stun
         //Priority determines speed
+
+        public StatusModule[] effectModules;
 
         public void Apply()
         {

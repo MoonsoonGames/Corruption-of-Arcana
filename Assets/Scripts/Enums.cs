@@ -12,12 +12,22 @@ DO NOT ADD ANY ENUMS AT THE START OF THE LIST!!!
 
 public enum E_DamageTypes
 {
-    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Arcana, Shield
+    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield
 }
 
-public enum E_MultihitType
+public enum E_SpellTargetType
 {
-    Single, Cleave, Chain, RandomTeam, RandomAll, All
+    Caster, Target, Cleave, Chain, RandomTargetTeam, RandomAll, All
+}
+
+public enum E_StatusTargetType
+{
+    Self, Team, OpponentTeam, Reflect
+}
+
+public enum E_Statuses
+{
+    Burrow, Banish, Charm, Stun
 }
 
 public enum E_Scenes

@@ -80,9 +80,6 @@ namespace Necropanda
                 case (E_DamageTypes.Shield):
                     shield += trueValue;
                     break;
-                case (E_DamageTypes.Arcana):
-                    //Increase arcana, might be obsolete
-                    break;
                 case (E_DamageTypes.Perforation):
                     health = Mathf.Clamp(health - trueValue, 0, maxHealth);
                     break;

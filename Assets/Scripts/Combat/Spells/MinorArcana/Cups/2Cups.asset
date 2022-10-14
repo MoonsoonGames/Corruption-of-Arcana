@@ -18,11 +18,10 @@ MonoBehaviour:
   spellDescription: Provide 2 shield to target
   speed: 0.05
   arcanaCost: 0
-  effectTypeCaster: 0
-  valueCaster: 0
-  effectTypeTarget: 9
-  valueTarget: 2
-  hitCount: 1
-  executeThreshold: 0
-  multihitType: 0
-  multihitValue: 0
+  spellModules:
+  - target: 1
+    effectType: 8
+    value: 2
+    multihitValue: 0
+    hitCount: 1
+    executeThreshold: 0

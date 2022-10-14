@@ -22,78 +22,65 @@ namespace Necropanda
         public float speed;
         public int arcanaCost;
 
-        [Header("Caster Effects")]
-        public E_DamageTypes effectTypeCaster;
-        public int valueCaster;
-        //Caster status effects here
-
-        [Header("Target Effects")]
-        public E_DamageTypes effectTypeTarget;
-        public int valueTarget;
-        public int hitCount = 1;
-        public float executeThreshold;
-        public E_MultihitType multihitType;
-        public int multihitValue;
-        //Target status effects here
+        public SpellModule[] spellModules;
 
         public void CastSpell(Character target, Character caster)
         {
-            if (caster != null)
-            {
-                AffectCaster(caster, effectTypeCaster, valueCaster);
-            }
-            if (target != null)
+            foreach (SpellModule module in spellModules)
             {
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
                 List<Character> allCharacters = new List<Character>();
 
-                for (int i = 0; i < hitCount; i++)
+                for (int i = 0; i < module.hitCount; i++)
                 {
                     //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
-                    switch (multihitType)
+                    switch (module.target)
                     {
-                        case E_MultihitType.Single:
-                            AffectTarget(target, effectTypeTarget, valueTarget);
+                        case E_SpellTargetType.Caster:
+                            AffectCaster(caster, module.effectType, module.value);
                             break;
-                        case E_MultihitType.Chain:
+                        case E_SpellTargetType.Target:
+                            AffectTarget(target, module.effectType, module.value, module.executeThreshold);
+                            break;
+                        case E_SpellTargetType.Chain:
                             foreach (Character character in targetTeamManager.team)
                             {
                                 if (character != target)
                                 {
-                                    AffectTarget(target, effectTypeTarget, multihitValue);
+                                    AffectTarget(target, module.effectType, module.multihitValue, module.executeThreshold);
                                 }
                                 else
                                 {
-                                    character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                    AffectTarget(target, module.effectType, module.value, module.executeThreshold);
                                 }
                             }
                             break;
-                        case E_MultihitType.Cleave:
+                        case E_SpellTargetType.Cleave:
                             foreach (Character character in targetTeamManager.team)
                             {
                                 if (character != target)
                                 {
-                                    AffectTarget(target, effectTypeTarget, multihitValue);
+                                    AffectTarget(target, module.effectType, module.multihitValue, module.executeThreshold);
                                 }
                                 else
                                 {
-                                    character.GetHealth().ChangeHealth(effectTypeTarget, valueTarget);
+                                    AffectTarget(target, module.effectType, module.value, module.executeThreshold);
                                 }
                             }
                             break;
-                        case E_MultihitType.RandomTeam:
-                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count - 1)], effectTypeTarget, valueTarget);
+                        case E_SpellTargetType.RandomTargetTeam:
+                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count - 1)], module.effectType, module.value, module.executeThreshold);
                             break;
-                        case E_MultihitType.RandomAll:
+                        case E_SpellTargetType.RandomAll:
                             allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
-                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count - 1)], effectTypeTarget, valueTarget);
+                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count - 1)], module.effectType, module.value, module.executeThreshold);
                             break;
-                        case E_MultihitType.All:
+                        case E_SpellTargetType.All:
                             allCharacters = CombineLists(targetTeamManager.team, casterTeamManager.team);
                             foreach (Character character in allCharacters)
                             {
-                                AffectTarget(character, effectTypeTarget, valueTarget);
+                                AffectTarget(character, module.effectType, module.value, module.executeThreshold);
                             }
                             break;
                     }
@@ -107,10 +94,11 @@ namespace Necropanda
             target.GetHealth().ChangeHealth(effectType, value);
         }
 
-        void AffectTarget(Character target, E_DamageTypes effectType, int value)
+        void AffectTarget(Character target, E_DamageTypes effectType, int value, float executeThreshold)
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-            target.GetHealth().ChangeHealth(effectType, value);
+            E_DamageTypes realEffectType = ReplaceRandom(effectType);
+            target.GetHealth().ChangeHealth(realEffectType, value);
 
             if (target.GetHealth().GetHealthPercentage() < executeThreshold)
             {
@@ -135,6 +123,24 @@ namespace Necropanda
             }
 
             return outputList;
+        }
+
+        E_DamageTypes ReplaceRandom(E_DamageTypes effectType)
+        {
+            if (effectType == E_DamageTypes.Random)
+            {
+                int randomInt = Random.Range(0, 4);
+                switch (randomInt)
+                {
+                    case 0: return E_DamageTypes.Physical;
+                    case 1: return E_DamageTypes.Ember;
+                    case 2: return E_DamageTypes.Static;
+                    case 3: return E_DamageTypes.Bleak;
+                    case 4: return E_DamageTypes.Septic;
+                }
+            }
+
+            return effectType;
         }
     }
 }

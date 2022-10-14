@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The High Priestess
   overrideColor: 1
-  timelineColor: {r: 0, g: 1, b: 0.108009815, a: 255}
+  timelineColor: {r: 0.29636884, g: 0.5660378, b: 0.32597953, a: 255}
   spellDescription: Restore 6 health to target
   speed: 0.4
   arcanaCost: 1
-  effectTypeCaster: 0
-  valueCaster: 0
-  effectTypeTarget: 7
-  valueTarget: 6
-  hitCount: 1
-  executeThreshold: 0
-  multihitType: 0
-  multihitValue: 0
+  spellModules:
+  - target: 1
+    effectType: 7
+    value: 6
+    multihitValue: 0
+    hitCount: 1
+    executeThreshold: 0

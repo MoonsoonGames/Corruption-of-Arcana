@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Wheel of Fortune
   overrideColor: 1
-  timelineColor: {r: 1, g: 0.63676953, b: 0, a: 1}
+  timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   spellDescription: Hit random targets on target team with 1 random damage 16 times
   speed: 1
   arcanaCost: 2
-  effectTypeCaster: 0
-  valueCaster: 0
-  effectTypeTarget: 0
-  valueTarget: 1
-  hitCount: 16
-  executeThreshold: 0
-  multihitType: 3
-  multihitValue: 0
+  spellModules:
+  - target: 4
+    effectType: 5
+    value: 1
+    multihitValue: 0
+    hitCount: 16
+    executeThreshold: 0

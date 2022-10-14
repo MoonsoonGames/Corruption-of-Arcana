@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Hierophant
   overrideColor: 1
-  timelineColor: {r: 1, g: 0.6736357, b: 0, a: 255}
+  timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   spellDescription: Hit target with 4 Static damage 3 times
   speed: 0.45
   arcanaCost: 2
-  effectTypeCaster: 0
-  valueCaster: 0
-  effectTypeTarget: 2
-  valueTarget: 4
-  hitCount: 3
-  executeThreshold: 0
-  multihitType: 0
-  multihitValue: 0
+  spellModules:
+  - target: 1
+    effectType: 2
+    value: 4
+    multihitValue: 0
+    hitCount: 3
+    executeThreshold: 0

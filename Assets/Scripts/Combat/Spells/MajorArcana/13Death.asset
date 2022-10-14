@@ -14,16 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Death
   overrideColor: 1
-  timelineColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+  timelineColor: {r: 0.35599858, g: 0.6037736, b: 0.4764126, a: 1}
   spellDescription: Deal 5 Perforation damage and instantly kill target if their
     health percentage is less than 30%
   speed: 1.5
   arcanaCost: 2
-  effectTypeCaster: 0
-  valueCaster: 0
-  effectTypeTarget: 6
-  valueTarget: 5
-  hitCount: 1
-  executeThreshold: 0.3
-  multihitType: 0
-  multihitValue: 0
+  spellModules:
+  - target: 1
+    effectType: 6
+    value: 5
+    multihitValue: 0
+    hitCount: 1
+    executeThreshold: 0.3

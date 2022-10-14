@@ -18,11 +18,10 @@ MonoBehaviour:
   spellDescription: Provide 3 shield to target
   speed: 0.1
   arcanaCost: 0
-  effectTypeCaster: 0
-  valueCaster: 0
-  effectTypeTarget: 9
-  valueTarget: 3
-  hitCount: 1
-  executeThreshold: 0
-  multihitType: 0
-  multihitValue: 0
+  spellModules:
+  - target: 1
+    effectType: 8
+    value: 3
+    multihitValue: 0
+    hitCount: 1
+    executeThreshold: 0
