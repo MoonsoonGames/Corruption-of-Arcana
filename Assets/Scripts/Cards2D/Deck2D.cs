@@ -21,6 +21,7 @@ namespace Necropanda
         Character character;
         Timeline timeline;
 
+        public GameObject group;
         HorizontalLayoutGroup layout;
 
         GeneralDragArea dragArea;
@@ -57,7 +58,7 @@ namespace Necropanda
             dragArea = GameObject.FindObjectOfType<GeneralDragArea>();
             dragManager = DragManager.instance;
 
-            deckBackground = GetComponent<Image>();
+            deckBackground = group.GetComponent<Image>();
             baseColor = deckBackground.color;
             desiredColor = baseColor;
 
@@ -144,7 +145,7 @@ namespace Necropanda
         /// <param name="card"></param>
         public void AddCard(CardDrag2D card)
         {
-            card.gameObject.transform.SetParent(transform);
+            card.gameObject.transform.SetParent(group.transform);
             card.deck = this;
 
             ResetArrays();
@@ -172,7 +173,7 @@ namespace Necropanda
             {
                 card.deck = this;
 
-                card.gameObject.transform.SetParent(transform);
+                card.gameObject.transform.SetParent(group.transform);
             }
         }
 
