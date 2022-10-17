@@ -54,5 +54,15 @@ namespace Necropanda
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
         }
+
+        public TeamManager GetOpposingTeam(TeamManager teamManager)
+        {
+            TeamManager outTeam = null;
+            if (teamManager == playerTeamManager)
+                outTeam = enemyTeamManager;
+            else if (teamManager == enemyTeamManager)
+                outTeam = playerTeamManager;
+            return outTeam;
+        }
     }
 }

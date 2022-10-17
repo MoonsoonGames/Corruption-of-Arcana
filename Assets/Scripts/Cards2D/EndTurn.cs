@@ -45,7 +45,7 @@ namespace Necropanda
                 }
             }
 
-            float delay = timeline.CastSpells() + 0.5f;
+            float delay = timeline.PlayTimeline() + 0.5f;
 
             Invoke("StartNextTurn", delay);
         }

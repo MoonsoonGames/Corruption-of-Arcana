@@ -19,7 +19,7 @@ namespace Necropanda
             foreach (Character character in team)
             {
                 //In future, determine target depending on spell so it can cast support spells on allies/self
-                SpellInstance newSpellInstance = new SpellInstance();
+                GeneralCombat.SpellInstance newSpellInstance = new GeneralCombat.SpellInstance();
                 newSpellInstance.SetSpellInstance(character.PrepareSpell(), player, character);
 
                 timeline.AddSpellInstance(newSpellInstance);

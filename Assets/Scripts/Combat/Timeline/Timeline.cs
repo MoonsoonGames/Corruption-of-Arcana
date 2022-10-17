@@ -15,9 +15,12 @@ namespace Necropanda
 
         public static Timeline instance = new Timeline();
 
-        List<SpellInstance> spells = new List<SpellInstance>();
+        List<GeneralCombat.SpellInstance> spells = new List<GeneralCombat.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
+
+        List<GeneralCombat.StatusInstance> statuses = new List<GeneralCombat.StatusInstance>();
+        public float statusOffset = 0.3f;
 
         public Character player;
         ArcanaManager arcanaManager;
@@ -38,7 +41,7 @@ namespace Necropanda
         /// Adds spell instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public void AddSpellInstance(SpellInstance newSpellInstance)
+        public void AddSpellInstance(GeneralCombat.SpellInstance newSpellInstance)
         {
             spells.Add(newSpellInstance);
             CalculateTimeline();
@@ -48,9 +51,29 @@ namespace Necropanda
         /// Removes spell instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public void RemoveSpellInstance(SpellInstance newSpellInstance)
+        public void RemoveSpellInstance(GeneralCombat.SpellInstance newSpellInstance)
         {
             spells.Remove(newSpellInstance);
+            CalculateTimeline();
+        }
+
+        /// <summary>
+        /// Adds status instance to the timeline
+        /// </summary>
+        /// <param name="newSpellInstance"></param>
+        public void AddStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
+        {
+            statuses.Add(newStatusInstance);
+            CalculateTimeline();
+        }
+
+        /// <summary>
+        /// Removes status instance to the timeline
+        /// </summary>
+        /// <param name="newSpellInstance"></param>
+        public void RemoveStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
+        {
+            statuses.Remove(newStatusInstance);
             CalculateTimeline();
         }
 
@@ -103,7 +126,7 @@ namespace Necropanda
             arcanaManager.CheckArcana(arcanaCount);
         }
 
-        static int SortBySpeed(SpellInstance c1, SpellInstance c2)
+        static int SortBySpeed(GeneralCombat.SpellInstance c1, GeneralCombat.SpellInstance c2)
         {
             return c1.spell.speed.CompareTo(c2.spell.speed);
         }
@@ -112,13 +135,20 @@ namespace Necropanda
 
         #endregion
 
-        #region Spellcasting
+        #region Playing Timeline
 
         /// <summary>
         /// Casts every spell on the timeline and then removes them
         /// </summary>
         /// <returns></returns>
-        public float CastSpells()
+        public float PlayTimeline()
+        {
+            float delay = CastSpells();
+
+            return delay;
+        }
+
+        float CastSpells()
         {
             //Generates a delay for the entire set of spells being cast
             float delay = 0;
@@ -138,12 +168,25 @@ namespace Necropanda
             return delay;
         }
 
+        float ActivateStatuses()
+        {
+            //Generates a delay for the entire set of spells being cast
+            float delay = 0;
+
+            for (int i = 0; i < spells.Count; i++)
+            {
+                StartCoroutine(IDelayStatus(statuses[i], i * statusOffset));
+            }
+
+            return delay;
+        }
+
         /// <summary>
         /// Delays the casting of a spell by its speed
         /// </summary>
         /// <param name="spellInstance"></param>
         /// <returns></returns>
-        IEnumerator IDelaySpell(SpellInstance spellInstance)
+        IEnumerator IDelaySpell(GeneralCombat.SpellInstance spellInstance)
         {
             yield return new WaitForSeconds(spellInstance.spell.speed);
 
@@ -152,6 +195,18 @@ namespace Necropanda
             spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster);
 
             RemoveSpellInstance(spellInstance);
+            CalculateTimeline();
+        }
+
+        IEnumerator IDelayStatus(GeneralCombat.StatusInstance statusInstance, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
+
+            statusInstance.status.ActivateEffect(statusInstance.target, null);
+
+            RemoveStatusInstance(statusInstance);
             CalculateTimeline();
         }
 
