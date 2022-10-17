@@ -10,21 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 1Swords
+  m_Name: 15Devil
   m_EditorClassIdentifier: 
-  spellName: 1 of Swords
-  overrideColor: 0
-  timelineColor: {r: 0.509434, g: 0, b: 0, a: 1}
-  spellDescription: Deal 1 physical damage to a target
-  speed: 0.3
+  spellName: The Devil
+  overrideColor: 1
+  timelineColor: {r: 0.026210386, g: 0.2924528, b: 0.06792458, a: 255}
+  spellDescription: Apply Shroud of Flies for 3 turns
+  speed: 0
   arcanaCost: 0
   spellModules:
-  - target: 1
+  - target: 0
     effectType: 0
-    value: 1
+    value: 0
     multihitValue: 0
     hitCount: 1
     executeThreshold: 0
-    statusEffect: []
-    duration: 
-    chance: []
+    statusEffect:
+    - {fileID: 11400000, guid: e7f993ed1163d134da7db65d19ecdf31, type: 2}
+    duration: 03000000
+    chance:
+    - 1

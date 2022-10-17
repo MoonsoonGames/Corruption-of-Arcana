@@ -62,7 +62,13 @@ namespace Necropanda
 
             if (roll <= chance)
             {
+                Debug.Log("Apply success");
                 apply = true;
+            }
+            else
+            {
+
+                Debug.Log("Apply failed");
             }
 
             return apply;
@@ -90,16 +96,14 @@ namespace Necropanda
             public E_DamageTypes effectType;
             public int value;
             public float resistanceModifier;
-            public int duration;
 
-            public void SetSpellInstance(E_StatusTargetType newTarget, E_Statuses newStatus, E_DamageTypes newEffectType, int newValue, float newResistanceModifier, int newDuration)
+            public void SetSpellInstance(E_StatusTargetType newTarget, E_Statuses newStatus, E_DamageTypes newEffectType, int newValue, float newResistanceModifier)
             {
                 target = newTarget;
                 status = newStatus;
                 effectType = newEffectType;
                 value = newValue;
                 resistanceModifier = newResistanceModifier;
-                duration = newDuration;
             }
         }
 
