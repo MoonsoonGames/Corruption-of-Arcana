@@ -19,11 +19,11 @@ namespace Necropanda
 
         public GeneralCombat.StatusModule[] effectModules;
 
-        public void Apply(Character target)
+        public void Apply(Character target, int duration)
         {
             //Apply status effect on target, add to character list
             GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
-            instance.SetStatusInstance(this, target);
+            instance.SetStatusInstance(this, target, duration);
             Timeline.instance.AddStatusInstance(instance);
 
             foreach(GeneralCombat.StatusModule module in effectModules)
@@ -59,7 +59,7 @@ namespace Necropanda
             //Remove status effect on target, remove from character list
             //Apply status effect on target, add to character list
             GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
-            instance.SetStatusInstance(this, target);
+            instance.SetStatusInstance(this, target, 0);
             Timeline.instance.RemoveStatusInstance(instance);
 
             foreach (GeneralCombat.StatusModule module in effectModules)
@@ -142,7 +142,7 @@ namespace Necropanda
 
         void AffectTarget(Character target, E_DamageTypes effectType, int value)
         {
-            Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+            //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             E_DamageTypes realEffectType = GeneralCombat.ReplaceRandom(effectType);
             target.GetHealth().ChangeHealth(realEffectType, value);
 

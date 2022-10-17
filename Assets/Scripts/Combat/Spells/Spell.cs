@@ -41,18 +41,18 @@ namespace Necropanda
                             AffectCaster(caster, module);
                             break;
                         case E_SpellTargetType.Target:
-                            AffectTarget(target, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.chance);
+                            AffectTarget(target, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             break;
                         case E_SpellTargetType.Chain:
                             foreach (Character character in targetTeamManager.team)
                             {
                                 if (character != target)
                                 {
-                                    AffectTarget(character, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.chance);
+                                    AffectTarget(character, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                                 else
                                 {
-                                    AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.chance);
+                                    AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                             }
                             break;
@@ -61,26 +61,26 @@ namespace Necropanda
                             {
                                 if (character != target)
                                 {
-                                    AffectTarget(character, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.chance);
+                                    AffectTarget(character, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                                 else
                                 {
-                                    AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.chance);
+                                    AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
-                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module.effectType, module.value, module.executeThreshold, module.statusEffect, module.chance);
+                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             break;
                         case E_SpellTargetType.RandomAll:
                             allCharacters = GeneralScripts.CombineLists(targetTeamManager.team, casterTeamManager.team);
-                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count)], module.effectType, module.value, module.executeThreshold, module.statusEffect, module.chance);
+                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count)], module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             break;
                         case E_SpellTargetType.All:
                             allCharacters = GeneralScripts.CombineLists(targetTeamManager.team, casterTeamManager.team);
                             foreach (Character character in allCharacters)
                             {
-                                AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.chance);
+                                AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             }
                             break;
                     }
@@ -98,12 +98,12 @@ namespace Necropanda
                 if (GeneralCombat.ApplyChance(spell.chance[i]))
                 {
                     //apply status i on target
-                    spell.statusEffect[i].Apply(target);
+                    spell.statusEffect[i].Apply(target, spell.duration[i]);
                 }
             }
         }
 
-        void AffectTarget(Character target, E_DamageTypes effectType, int value, float executeThreshold, StatusEffects[] statuses, float[] chances)
+        void AffectTarget(Character target, E_DamageTypes effectType, int value, float executeThreshold, StatusEffects[] statuses, int[] durations, float[] chances)
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             E_DamageTypes realEffectType = GeneralCombat.ReplaceRandom(effectType);
@@ -114,7 +114,7 @@ namespace Necropanda
                 if (GeneralCombat.ApplyChance(chances[i]))
                 {
                     //apply status i on target
-                    statuses[i].Apply(target);
+                    statuses[i].Apply(target, durations[i]);
                 }
             }
 

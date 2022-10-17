@@ -39,6 +39,7 @@ namespace Necropanda
             public int hitCount;
             public float executeThreshold;
             public StatusEffects[] statusEffect;
+            public int[] duration;
             public float[] chance;
 
             public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newMultihitValue, int newHitCount, float newExecuteThreshold, StatusEffects[] newStatusEffect, float[] newChance)
@@ -71,11 +72,13 @@ namespace Necropanda
         {
             public StatusEffects status;
             public Character target;
+            public int duration;
 
-            public void SetStatusInstance(StatusEffects newStatus, Character newTarget)
+            public void SetStatusInstance(StatusEffects newStatus, Character newTarget, int newDuration)
             {
                 status = newStatus;
                 target = newTarget;
+                duration = newDuration;
             }
         }
 

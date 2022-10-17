@@ -64,8 +64,31 @@ namespace Necropanda
         /// <param name="newSpellInstance"></param>
         public void AddStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
         {
-            Debug.Log(newStatusInstance.status.effectName + " has been added");
-            statuses.Add(newStatusInstance);
+            bool apply = true;
+            GeneralCombat.StatusInstance duplicate = new GeneralCombat.StatusInstance();
+            foreach (GeneralCombat.StatusInstance status in statuses)
+            {
+                if (status.status == newStatusInstance.status && status.target == newStatusInstance.target)
+                {
+                    apply = false;
+                    duplicate = status;
+
+                    if (status.duration < newStatusInstance.duration)
+                    {
+                        duplicate = status;
+                    }
+                }
+            }
+
+            if (apply)
+            {
+                Debug.Log(newStatusInstance.status.effectName + " has been added");
+                statuses.Add(newStatusInstance);
+            }
+            else if (duplicate.duration < newStatusInstance.duration)
+            {
+                duplicate.duration = newStatusInstance.duration;
+            }
         }
 
         /// <summary>
@@ -74,8 +97,31 @@ namespace Necropanda
         /// <param name="newSpellInstance"></param>
         public void RemoveStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
         {
-            Debug.Log(newStatusInstance.status.effectName + " has been removed");
-            statuses.Remove(newStatusInstance);
+            GeneralCombat.StatusInstance remove = new GeneralCombat.StatusInstance();
+            foreach (GeneralCombat.StatusInstance status in statuses)
+            {
+                if (status.status == newStatusInstance.status && status.target == newStatusInstance.target)
+                {
+                    remove = status;
+                }
+            }
+
+            Debug.Log(remove.status.effectName + " has been removed");
+            statuses.Remove(remove);
+        }
+
+        public void UpdateStatusDurations()
+        {
+            List<GeneralCombat.StatusInstance> newStatusList = new List<GeneralCombat.StatusInstance>(0);
+
+            foreach (GeneralCombat.StatusInstance status in statuses)
+            {
+                GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
+                instance.SetStatusInstance(status.status, status.target, status.duration - 1);
+                newStatusList.Add(instance);
+            }
+
+            statuses = newStatusList;
         }
 
         #endregion
@@ -174,6 +220,7 @@ namespace Necropanda
         void ActivateStatuses()
         {
             Debug.Log("Activate statuses: " + statuses.Count);
+            UpdateStatusDurations();
 
             //Generates a delay for the entire set of spells being cast
             float delay = 0;
@@ -208,6 +255,14 @@ namespace Necropanda
             yield return new WaitForSeconds(delay);
 
             statusInstance.status.ActivateEffect(statusInstance.target, null);
+
+            Debug.Log("Activated " + statusInstance.status + " on " + statusInstance.target + " with " + statusInstance.duration + " turns remaining");
+
+            if (statusInstance.duration <= 0)
+            {
+                Debug.Log("Expired");
+                statuses.Remove(statusInstance);
+            }
 
             //RemoveStatusInstance(statusInstance);
             CalculateTimeline();
