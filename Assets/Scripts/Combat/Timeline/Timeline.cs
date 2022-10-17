@@ -13,7 +13,7 @@ namespace Necropanda
     {
         #region Setup
 
-        public static Timeline instance = new Timeline();
+        public static Timeline instance;
 
         List<GeneralCombat.SpellInstance> spells = new List<GeneralCombat.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
@@ -28,6 +28,7 @@ namespace Necropanda
 
         private void Start()
         {
+            instance = this;
             arcanaManager = player.GetComponent<ArcanaManager>();
         }
 
@@ -63,8 +64,8 @@ namespace Necropanda
         /// <param name="newSpellInstance"></param>
         public void AddStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
         {
+            Debug.Log(newStatusInstance.status.effectName + " has been added");
             statuses.Add(newStatusInstance);
-            CalculateTimeline();
         }
 
         /// <summary>
@@ -73,8 +74,8 @@ namespace Necropanda
         /// <param name="newSpellInstance"></param>
         public void RemoveStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
         {
+            Debug.Log(newStatusInstance.status.effectName + " has been removed");
             statuses.Remove(newStatusInstance);
-            CalculateTimeline();
         }
 
         #endregion
@@ -144,6 +145,8 @@ namespace Necropanda
         public float PlayTimeline()
         {
             float delay = CastSpells();
+            Invoke("ActivateStatuses", delay);
+            delay += statuses.Count * statusOffset;
 
             return delay;
         }
@@ -168,17 +171,19 @@ namespace Necropanda
             return delay;
         }
 
-        float ActivateStatuses()
+        void ActivateStatuses()
         {
+            Debug.Log("Activate statuses: " + statuses.Count);
+
             //Generates a delay for the entire set of spells being cast
             float delay = 0;
 
-            for (int i = 0; i < spells.Count; i++)
+            foreach (GeneralCombat.StatusInstance item in statuses)
             {
-                StartCoroutine(IDelayStatus(statuses[i], i * statusOffset));
-            }
+                StartCoroutine(IDelayStatus(item, delay));
 
-            return delay;
+                delay += statusOffset;
+            }
         }
 
         /// <summary>
@@ -202,11 +207,9 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
 
-            //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-
             statusInstance.status.ActivateEffect(statusInstance.target, null);
 
-            RemoveStatusInstance(statusInstance);
+            //RemoveStatusInstance(statusInstance);
             CalculateTimeline();
         }
 

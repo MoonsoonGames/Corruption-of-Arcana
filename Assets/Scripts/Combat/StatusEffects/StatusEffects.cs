@@ -12,16 +12,82 @@ namespace Necropanda
     [CreateAssetMenu(fileName = "NewStatusEffects", menuName = "Combat/Status Effects", order = 1)]
     public class StatusEffects : ScriptableObject
     {
+        [Header("Basic Info")]
+        public string effectName;
+        [TextArea(3, 10)]
+        public string effectDescription; // Basic desciption of spell effect
+
         public GeneralCombat.StatusModule[] effectModules;
 
-        public void Apply()
+        public void Apply(Character target)
         {
             //Apply status effect on target, add to character list
+            GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
+            instance.SetStatusInstance(this, target);
+            Timeline.instance.AddStatusInstance(instance);
+
+            foreach(GeneralCombat.StatusModule module in effectModules)
+            {
+                switch (module.target)
+                {
+                    case E_StatusTargetType.Self:
+                        ModifyResistances(true, target, module.effectType, module.resistanceModifier);
+                        break;
+                    case E_StatusTargetType.Team:
+                        TeamManager targetTeamManager = target.GetManager();
+                        foreach (Character character in targetTeamManager.team)
+                        {
+                            ModifyResistances(true, character, module.effectType, module.resistanceModifier);
+                        }
+                        break;
+                    case E_StatusTargetType.OpponentTeam:
+                        TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(target.GetManager());
+                        foreach (Character character in opponentTeamManager.team)
+                        {
+                            ModifyResistances(true, character, module.effectType, module.resistanceModifier);
+                        }
+                        break;
+                    default:
+                        //do nothing
+                        break;
+                }
+            }
         }
 
-        public void Remove()
+        public void Remove(Character target)
         {
             //Remove status effect on target, remove from character list
+            //Apply status effect on target, add to character list
+            GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
+            instance.SetStatusInstance(this, target);
+            Timeline.instance.RemoveStatusInstance(instance);
+
+            foreach (GeneralCombat.StatusModule module in effectModules)
+            {
+                switch (module.target)
+                {
+                    case E_StatusTargetType.Self:
+                        ModifyResistances(false, target, module.effectType, module.resistanceModifier);
+                        break;
+                    case E_StatusTargetType.Team:
+                        TeamManager targetTeamManager = target.GetManager();
+                        foreach (Character character in targetTeamManager.team)
+                        {
+                            ModifyResistances(false, character, module.effectType, module.resistanceModifier);
+                        }
+                        break;
+                    case E_StatusTargetType.OpponentTeam:
+                        TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(target.GetManager());
+                        foreach (Character character in opponentTeamManager.team)
+                        {
+                            ModifyResistances(false, character, module.effectType, module.resistanceModifier);
+                        }
+                        break;
+                    default:
+                        //do nothing
+                        break;
+                }
+            }
         }
 
         public void ActivateEffect(Character target, Character attacker)
@@ -62,9 +128,21 @@ namespace Necropanda
             }
         }
 
+        void ModifyResistances(bool apply, Character target, E_DamageTypes damageType, float value)
+        {
+            if (apply)
+            {
+                target.GetHealth().ModifyResistanceModifier(damageType, value);
+            }
+            else
+            {
+                target.GetHealth().ModifyResistanceModifier(damageType, -value);
+            }
+        }
+
         void AffectTarget(Character target, E_DamageTypes effectType, int value)
         {
-            //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+            Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             E_DamageTypes realEffectType = GeneralCombat.ReplaceRandom(effectType);
             target.GetHealth().ChangeHealth(realEffectType, value);
 

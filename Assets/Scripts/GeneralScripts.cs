@@ -38,9 +38,10 @@ namespace Necropanda
             public int multihitValue;
             public int hitCount;
             public float executeThreshold;
-            //Status effects and chances here
+            public StatusEffects[] statusEffect;
+            public float[] chance;
 
-            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newMultihitValue, int newHitCount, float newExecuteThreshold)
+            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newMultihitValue, int newHitCount, float newExecuteThreshold, StatusEffects[] newStatusEffect, float[] newChance)
             {
                 target = newTarget;
                 effectType = newEffectType;
@@ -48,7 +49,22 @@ namespace Necropanda
                 multihitValue = newMultihitValue;
                 hitCount = newHitCount;
                 executeThreshold = newExecuteThreshold;
+                statusEffect = newStatusEffect;
+                chance = newChance;
             }
+        }
+
+        public static bool ApplyChance(float chance)
+        {
+            bool apply = false;
+            float roll = Random.Range(0f, 1f);
+
+            if (roll <= chance)
+            {
+                apply = true;
+            }
+
+            return apply;
         }
 
         public struct StatusInstance
@@ -56,7 +72,7 @@ namespace Necropanda
             public StatusEffects status;
             public Character target;
 
-            public void SetSpellInstance(StatusEffects newStatus, Character newTarget)
+            public void SetStatusInstance(StatusEffects newStatus, Character newTarget)
             {
                 status = newStatus;
                 target = newTarget;
@@ -71,14 +87,16 @@ namespace Necropanda
             public E_DamageTypes effectType;
             public int value;
             public float resistanceModifier;
+            public int duration;
 
-            public void SetSpellInstance(E_StatusTargetType newTarget, E_Statuses newStatus, E_DamageTypes newEffectType, int newValue, float newResistanceModifier)
+            public void SetSpellInstance(E_StatusTargetType newTarget, E_Statuses newStatus, E_DamageTypes newEffectType, int newValue, float newResistanceModifier, int newDuration)
             {
                 target = newTarget;
                 status = newStatus;
                 effectType = newEffectType;
                 value = newValue;
                 resistanceModifier = newResistanceModifier;
+                duration = newDuration;
             }
         }
 

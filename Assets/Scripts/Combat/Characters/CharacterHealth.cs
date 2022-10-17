@@ -155,7 +155,7 @@ namespace Necropanda
             }
             else
             {
-                currentDamageResistances.Add(damageType, newValue);
+                currentDamageResistances.Add(damageType, 1f + newValue);
                 return false;
             }
         }
