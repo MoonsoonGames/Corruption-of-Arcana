@@ -29,6 +29,13 @@ namespace NecroPanda.Player
 
         // Animator vairables
         public Animator animator;
+        
+        // Movement variables
+        float x;
+        float z;
+        bool sprinting;
+
+        Vector3 moveVector;   // Combined input for all movement
 
         /// <summary>
         /// Update here, ran each frome. Here we call for the inputs.
@@ -54,22 +61,24 @@ namespace NecroPanda.Player
             }
 
             // Get the movement axis
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
+            x = Input.GetAxis("Horizontal");
+            z = Input.GetAxis("Vertical");
 
             // Combine into one variable which gets used later
-            Vector3 move = transform.right * x + transform.forward * z;
+            moveVector = transform.right * x + transform.forward * z;
 
             // Move using the controller component
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(moveVector * speed * Time.deltaTime);
 
             // Input checks
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                sprinting = true;
                 speed = speed * 2f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
+                sprinting = false;
                 speed = speed / 2f;
             }
 
@@ -84,8 +93,46 @@ namespace NecroPanda.Player
         void HandleAnimations()
         {
             //Check to see player direction
+            if (controller.isGrounded)
+            {
+                Vector3 moveDirection = transform.TransformDirection(moveVector);
 
-            //Apply animation based on direction
+                //Apply animation based on direction
+                moveDirection *= speed;
+
+                animator.SetBool("Move", moveDirection != new Vector3(0, 0, 0));
+                
+                // Setup the switch for forward and backwards.
+                switch (moveVector.x)
+                {
+                    // Forwards
+                    case > 0:
+                        animator.SetInteger("Direction", 1);
+                    break; 
+
+                    // Backwards
+                    case < 0:
+                        animator.SetInteger("Direction", 2);
+                    break; 
+                }
+
+                // Setup the switch for left and right.
+                switch (moveVector.z)
+                {
+                    // Left
+                    case > 0:
+                        animator.SetInteger("Direction", 3);
+                    break;
+
+                    // Right
+                    case < 0:
+                        animator.SetInteger("Direction", 4);
+                    break;
+                }
+
+                // Set up the sprinting variable. Based on input.
+                animator.SetBool("Sprinting", sprinting);
+            }
         }
     }
 }
