@@ -95,7 +95,7 @@ namespace Necropanda
             public E_Statuses status;
             public E_DamageTypes effectType;
             public int value;
-            public float resistanceModifier;
+            public float statModifier;
 
             public void SetSpellInstance(E_StatusTargetType newTarget, E_Statuses newStatus, E_DamageTypes newEffectType, int newValue, float newResistanceModifier)
             {
@@ -103,7 +103,7 @@ namespace Necropanda
                 status = newStatus;
                 effectType = newEffectType;
                 value = newValue;
-                resistanceModifier = newResistanceModifier;
+                statModifier = newResistanceModifier;
             }
         }
 

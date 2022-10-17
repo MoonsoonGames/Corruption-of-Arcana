@@ -62,7 +62,7 @@ namespace Necropanda
         /// Adds status instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public void AddStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
+        public bool AddStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
         {
             bool apply = true;
             GeneralCombat.StatusInstance duplicate = new GeneralCombat.StatusInstance();
@@ -89,6 +89,8 @@ namespace Necropanda
             {
                 duplicate.duration = newStatusInstance.duration;
             }
+
+            return apply;
         }
 
         /// <summary>
@@ -219,7 +221,7 @@ namespace Necropanda
 
         void ActivateStatuses()
         {
-            Debug.Log("Activate statuses: " + statuses.Count);
+            //Debug.Log("Activate statuses: " + statuses.Count);
             UpdateStatusDurations();
 
             //Generates a delay for the entire set of spells being cast
@@ -230,6 +232,17 @@ namespace Necropanda
                 StartCoroutine(IDelayStatus(item, delay));
 
                 delay += statusOffset;
+            }
+        }
+
+        public void HitStatuses(Character target, Character attacker)
+        {
+            foreach (GeneralCombat.StatusInstance item in statuses)
+            {
+                if (item.target == target)
+                {
+                    item.status.HitEffect(target, attacker);
+                }
             }
         }
 
@@ -254,7 +267,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
 
-            statusInstance.status.ActivateEffect(statusInstance.target, null);
+            statusInstance.status.ActivateEffect(statusInstance.target);
 
             Debug.Log("Activated " + statusInstance.status + " on " + statusInstance.target + " with " + statusInstance.duration + " turns remaining");
 

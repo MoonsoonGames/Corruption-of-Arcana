@@ -15,7 +15,8 @@ MonoBehaviour:
   spellName: The Hierophant
   overrideColor: 1
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
-  spellDescription: Hit target with 4 Static damage 3 times
+  spellDescription: Hit target with 4 Static damage 3 times, each hit has a chance
+    to apply Conductive for 3 turns
   speed: 0.45
   arcanaCost: 2
   spellModules:
@@ -25,3 +26,8 @@ MonoBehaviour:
     multihitValue: 0
     hitCount: 3
     executeThreshold: 0
+    statusEffect:
+    - {fileID: 11400000, guid: 1a66da312d3e2ab4ab4effe9ada7a53c, type: 2}
+    duration: 03000000
+    chance:
+    - 0.6

@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 4Emperor
+  m_Name: 16Tower
   m_EditorClassIdentifier: 
-  spellName: The Emperor
+  spellName: The Tower
   overrideColor: 1
-  timelineColor: {r: 0.7924528, g: 0.5494838, b: 0.5494838, a: 255}
-  spellDescription: Provide 10 shield and apply Barbed Guard to target
-  speed: 0.2
-  arcanaCost: 1
+  timelineColor: {r: 0.6886792, g: 0.30117348, b: 0.1786668, a: 255}
+  spellDescription: Hit all targets on target team with 5 Ember damage and chance
+    to apply Wildfire to all targets hit
+  speed: 0.8
+  arcanaCost: 3
   spellModules:
-  - target: 1
-    effectType: 8
-    value: 10
-    multihitValue: 0
+  - target: 3
+    effectType: 1
+    value: 5
+    multihitValue: 3
     hitCount: 1
     executeThreshold: 0
     statusEffect:
-    - {fileID: 11400000, guid: 72af2937fdae48340b79c8edfd79d1c8, type: 2}
+    - {fileID: 11400000, guid: 51c1de7e460ae03468e8becf5e9741f0, type: 2}
     duration: 03000000
     chance:
-    - 1
+    - 0.6

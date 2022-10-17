@@ -11,6 +11,7 @@ namespace Necropanda
 {
     public class CombatManager : MonoBehaviour
     {
+        public Character player;
         public TeamManager playerTeamManager;
         public TeamManager enemyTeamManager;
 

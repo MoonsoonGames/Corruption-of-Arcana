@@ -41,18 +41,18 @@ namespace Necropanda
                             AffectCaster(caster, module);
                             break;
                         case E_SpellTargetType.Target:
-                            AffectTarget(target, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                            AffectTarget(target, caster, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             break;
                         case E_SpellTargetType.Chain:
                             foreach (Character character in targetTeamManager.team)
                             {
                                 if (character != target)
                                 {
-                                    AffectTarget(character, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                                    AffectTarget(character, caster, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                                 else
                                 {
-                                    AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                                    AffectTarget(character, caster, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                             }
                             break;
@@ -61,26 +61,26 @@ namespace Necropanda
                             {
                                 if (character != target)
                                 {
-                                    AffectTarget(character, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                                    AffectTarget(character, caster, module.effectType, module.multihitValue, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                                 else
                                 {
-                                    AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                                    AffectTarget(character, caster, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                                 }
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
-                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                            AffectTarget(targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], caster, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             break;
                         case E_SpellTargetType.RandomAll:
                             allCharacters = GeneralScripts.CombineLists(targetTeamManager.team, casterTeamManager.team);
-                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count)], module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                            AffectTarget(allCharacters[Random.Range(0, allCharacters.Count)], caster, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             break;
                         case E_SpellTargetType.All:
                             allCharacters = GeneralScripts.CombineLists(targetTeamManager.team, casterTeamManager.team);
                             foreach (Character character in allCharacters)
                             {
-                                AffectTarget(character, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
+                                AffectTarget(character, caster, module.effectType, module.value, module.executeThreshold, module.statusEffect, module.duration, module.chance);
                             }
                             break;
                     }
@@ -91,7 +91,7 @@ namespace Necropanda
         void AffectCaster(Character target, GeneralCombat.SpellModule spell)
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-            target.GetHealth().ChangeHealth(spell.effectType, spell.value);
+            target.GetHealth().ChangeHealth(spell.effectType, spell.value, target);
 
             for (int i = 0; i < spell.statusEffect.Length; i++)
             {
@@ -103,11 +103,11 @@ namespace Necropanda
             }
         }
 
-        void AffectTarget(Character target, E_DamageTypes effectType, int value, float executeThreshold, StatusEffects[] statuses, int[] durations, float[] chances)
+        void AffectTarget(Character target, Character caster, E_DamageTypes effectType, int value, float executeThreshold, StatusEffects[] statuses, int[] durations, float[] chances)
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             E_DamageTypes realEffectType = GeneralCombat.ReplaceRandom(effectType);
-            target.GetHealth().ChangeHealth(realEffectType, value);
+            target.GetHealth().ChangeHealth(realEffectType, value, caster);
 
             for (int i = 0; i < statuses.Length; i++)
             {
@@ -121,7 +121,7 @@ namespace Necropanda
             if (target.GetHealth().GetHealthPercentage() < executeThreshold)
             {
                 Debug.Log("Kill " + target.characterName + " with " + name + " at: " + (target.GetHealth().GetHealthPercentage()));
-                target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999);
+                target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999, caster);
             }
 
             //Sound effects here

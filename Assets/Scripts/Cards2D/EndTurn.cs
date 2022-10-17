@@ -24,6 +24,8 @@ namespace Necropanda
 
         bool waitingForStartTurn = false;
 
+        public float endTurndelay = 2f;
+
         private void Start()
         {
             decks = GameObject.FindObjectsOfType<Deck2D>();
@@ -31,6 +33,8 @@ namespace Necropanda
             teamManagers = GameObject.FindObjectsOfType<TeamManager>();
             endTurnButton = GetComponent<Button>();
             endTurnButton.image.color = buttonAvailable;
+
+            Invoke("EndTurnButton", 0.1f);
         }
 
         public void EndTurnButton()
@@ -45,7 +49,7 @@ namespace Necropanda
                 }
             }
 
-            float delay = timeline.PlayTimeline() + 0.5f;
+            float delay = timeline.PlayTimeline() + endTurndelay;
 
             Invoke("StartNextTurn", delay);
         }

@@ -16,9 +16,11 @@ namespace Necropanda
     {
         #region Setup
 
+        Character character;
+
         //Health Values
         public int maxHealth;
-        protected int health;
+        protected int health; public int GetHealth() { return health; }
         protected int shield;
 
         //Damage Resistances
@@ -34,8 +36,9 @@ namespace Necropanda
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
 
-        private void Start()
+        protected virtual void Start()
         {
+            character = GetComponent<Character>();
             SetupHealth();
             SetupResistances();
         }
@@ -67,7 +70,7 @@ namespace Necropanda
 
         #region Health
 
-        public int ChangeHealth(E_DamageTypes type, int value)
+        public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
             //Resistance check
             int trueValue = (int)(value * CheckResistances(type));
@@ -86,13 +89,15 @@ namespace Necropanda
                 default:
                     int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
                     shield = (int)Mathf.Clamp(shield - trueValue, 0, Mathf.Infinity);
-                    health -= damageOverShield;
+                    health = Mathf.Clamp(health - damageOverShield, 0, maxHealth);
+                    if (attacker != null)
+                        Timeline.instance.HitStatuses(character, attacker);
                     break;
             }
 
             if (health <= 0)
             {
-                Die();
+                Debug.Log(health);
             }
 
             UpdateHealthUI();
@@ -135,11 +140,6 @@ namespace Necropanda
                     healthText.text = health.ToString() + "/" + maxHealth.ToString();
                 }
             }
-        }
-
-        void Die()
-        {
-            GetComponent<Character>().Die();
         }
 
         #endregion

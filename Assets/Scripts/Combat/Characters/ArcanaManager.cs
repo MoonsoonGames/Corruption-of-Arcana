@@ -22,6 +22,14 @@ namespace Necropanda
         public Color enableColor;
         public Color disableColor;
 
+        public void AdjustArcanaMax(int change)
+        {
+            arcanaMax += change;
+
+            //arcanaText.text = arcanaMax - arcanaMax + "/" + arcanaMax;
+            //arcanaImage.color = enableColor;
+        }
+
         public void CheckArcana(int arcana)
         {
             if (arcana <= arcanaMax)

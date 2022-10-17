@@ -24,32 +24,35 @@ namespace Necropanda
             //Apply status effect on target, add to character list
             GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
             instance.SetStatusInstance(this, target, duration);
-            Timeline.instance.AddStatusInstance(instance);
+            bool applied = Timeline.instance.AddStatusInstance(instance);
 
-            foreach(GeneralCombat.StatusModule module in effectModules)
+            if (applied)
             {
-                switch (module.target)
+                foreach (GeneralCombat.StatusModule module in effectModules)
                 {
-                    case E_StatusTargetType.Self:
-                        ModifyResistances(true, target, module.effectType, module.resistanceModifier);
-                        break;
-                    case E_StatusTargetType.Team:
-                        TeamManager targetTeamManager = target.GetManager();
-                        foreach (Character character in targetTeamManager.team)
-                        {
-                            ModifyResistances(true, character, module.effectType, module.resistanceModifier);
-                        }
-                        break;
-                    case E_StatusTargetType.OpponentTeam:
-                        TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(target.GetManager());
-                        foreach (Character character in opponentTeamManager.team)
-                        {
-                            ModifyResistances(true, character, module.effectType, module.resistanceModifier);
-                        }
-                        break;
-                    default:
-                        //do nothing
-                        break;
+                    switch (module.target)
+                    {
+                        case E_StatusTargetType.Self:
+                            ModifyStats(true, target, module.effectType, module.statModifier);
+                            break;
+                        case E_StatusTargetType.Team:
+                            TeamManager targetTeamManager = target.GetManager();
+                            foreach (Character character in targetTeamManager.team)
+                            {
+                                ModifyStats(true, character, module.effectType, module.statModifier);
+                            }
+                            break;
+                        case E_StatusTargetType.OpponentTeam:
+                            TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(target.GetManager());
+                            foreach (Character character in opponentTeamManager.team)
+                            {
+                                ModifyStats(true, character, module.effectType, module.statModifier);
+                            }
+                            break;
+                        default:
+                            //do nothing
+                            break;
+                    }
                 }
             }
         }
@@ -67,20 +70,20 @@ namespace Necropanda
                 switch (module.target)
                 {
                     case E_StatusTargetType.Self:
-                        ModifyResistances(false, target, module.effectType, module.resistanceModifier);
+                        ModifyStats(false, target, module.effectType, module.statModifier);
                         break;
                     case E_StatusTargetType.Team:
                         TeamManager targetTeamManager = target.GetManager();
                         foreach (Character character in targetTeamManager.team)
                         {
-                            ModifyResistances(false, character, module.effectType, module.resistanceModifier);
+                            ModifyStats(false, character, module.effectType, module.statModifier);
                         }
                         break;
                     case E_StatusTargetType.OpponentTeam:
                         TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(target.GetManager());
                         foreach (Character character in opponentTeamManager.team)
                         {
-                            ModifyResistances(false, character, module.effectType, module.resistanceModifier);
+                            ModifyStats(false, character, module.effectType, module.statModifier);
                         }
                         break;
                     default:
@@ -90,7 +93,7 @@ namespace Necropanda
             }
         }
 
-        public void ActivateEffect(Character target, Character attacker)
+        public void ActivateEffect(Character target)
         {
             //Apply effects when timeline ends
             foreach (GeneralCombat.StatusModule module in effectModules)
@@ -115,6 +118,27 @@ namespace Necropanda
                             AffectTarget(character, module.effectType, module.value);
                         }
                         break;
+                    default:
+                        //do nothing
+                        break;
+                }
+            }
+        }
+
+        public void HitEffect(Character target, Character attacker)
+        {
+            //Apply effects when timeline ends
+            foreach (GeneralCombat.StatusModule module in effectModules)
+            {
+                //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
+                switch (module.target)
+                {
+                    case E_StatusTargetType.SelfHit:
+                        if (attacker != null)
+                        {
+                            AffectTarget(target, module.effectType, module.value);
+                        }
+                        break;
                     case E_StatusTargetType.Reflect:
                         if (attacker != null)
                         {
@@ -128,15 +152,34 @@ namespace Necropanda
             }
         }
 
-        void ModifyResistances(bool apply, Character target, E_DamageTypes damageType, float value)
+        void ModifyStats(bool apply, Character target, E_DamageTypes damageType, float value)
         {
             if (apply)
             {
                 target.GetHealth().ModifyResistanceModifier(damageType, value);
+                if (damageType == E_DamageTypes.Arcana)
+                {
+                    ArcanaManager manager = target.GetComponent<ArcanaManager>();
+                    if (manager != null)
+                    {
+                        //Debug.Log("Haste");
+                        int arcanaValue = (int)value;
+                        manager.AdjustArcanaMax(arcanaValue);
+                    }
+                }
             }
             else
             {
                 target.GetHealth().ModifyResistanceModifier(damageType, -value);
+                if (damageType == E_DamageTypes.Arcana)
+                {
+                    ArcanaManager manager = target.GetComponent<ArcanaManager>();
+                    if (manager != null)
+                    {
+                        int arcanaValue = (int)value;
+                        manager.AdjustArcanaMax(-arcanaValue);
+                    }
+                }
             }
         }
 
@@ -144,7 +187,7 @@ namespace Necropanda
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             E_DamageTypes realEffectType = GeneralCombat.ReplaceRandom(effectType);
-            target.GetHealth().ChangeHealth(realEffectType, value);
+            target.GetHealth().ChangeHealth(realEffectType, value, null);
 
             //Sound effects here
         }

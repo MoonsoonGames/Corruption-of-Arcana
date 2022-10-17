@@ -12,7 +12,7 @@ DO NOT ADD ANY ENUMS AT THE START OF THE LIST!!!
 
 public enum E_DamageTypes
 {
-    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield
+    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana
 }
 
 public enum E_SpellTargetType
@@ -22,7 +22,7 @@ public enum E_SpellTargetType
 
 public enum E_StatusTargetType
 {
-    Self, Team, OpponentTeam, Reflect
+    Self, Team, OpponentTeam, Reflect, SelfHit
 }
 
 public enum E_Statuses

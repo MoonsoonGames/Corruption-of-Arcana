@@ -15,7 +15,7 @@ MonoBehaviour:
   spellName: The Chariot
   overrideColor: 1
   timelineColor: {r: 0.5502006, g: 0.7921569, b: 0.54901963, a: 255}
-  spellDescription: Provide 10 shield to target
+  spellDescription: Provide 10 shield and apply Haste to target for 3 turns
   speed: 0.2
   arcanaCost: 1
   spellModules:
@@ -25,3 +25,8 @@ MonoBehaviour:
     multihitValue: 0
     hitCount: 1
     executeThreshold: 0
+    statusEffect:
+    - {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
+    duration: 03000000
+    chance:
+    - 1

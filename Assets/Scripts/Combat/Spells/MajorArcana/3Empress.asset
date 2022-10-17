@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Empress
   overrideColor: 1
-  timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
-  spellDescription: Hit target with 5 Static damage and hit all target's allies with
-    3 Static damage
-  speed: 0.6
-  arcanaCost: 2
+  timelineColor: {r: 0.29636884, g: 0.5660378, b: 0.32597953, a: 255}
+  spellDescription: Restore 6 health and apply Cycle of Life to target for 3 turns
+  speed: 0.4
+  arcanaCost: 1
   spellModules:
-  - target: 3
-    effectType: 2
-    value: 5
-    multihitValue: 3
+  - target: 1
+    effectType: 7
+    value: 6
+    multihitValue: 0
     hitCount: 1
     executeThreshold: 0
+    statusEffect:
+    - {fileID: 11400000, guid: ba0b975f08f81f146b239484799de96a, type: 2}
+    duration: 03000000
+    chance:
+    - 1
