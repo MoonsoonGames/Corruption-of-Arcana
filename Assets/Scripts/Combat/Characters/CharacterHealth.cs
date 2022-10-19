@@ -103,7 +103,7 @@ namespace Necropanda
                 //Debug.Log(health);
             }
 
-            PlaySound(type);
+            PlaySound(type, trueValue);
             UpdateHealthUI();
             return trueValue;
         }
@@ -183,16 +183,18 @@ namespace Necropanda
         #region Sound Effects
 
         public EventReference defualtSoundEffect;
+        public Vector2Int damageScaling;
         public SoundEffects.SoundModule[] soundEffects;
         //FMOD.Studio.EventInstance fmodInstance;
 
-        public void PlaySound(E_DamageTypes type)
+        public void PlaySound(E_DamageTypes type, int value)
         {
             foreach(var item in soundEffects)
             {
                 if (item.effectType == type)
                 {
-                    RuntimeManager.PlayOneShot(item.sounds[0].sound);
+                    float remapValue = HelperFunctions.Remap(value, 0, 5, 0, 1);
+                    RuntimeManager.PlayOneShot(item.GetSound(remapValue));
                 }
             }
 

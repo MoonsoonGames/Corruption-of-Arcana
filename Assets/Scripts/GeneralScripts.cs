@@ -217,12 +217,12 @@ namespace Necropanda
             {
                 foreach(var sound in sounds)
                 {
-                    if (sound.intensityThreshold > intensity)
+                    if (sound.intensityThreshold >= intensity)
                     {
                         return sound.sound;
                     }
                 }
-                return new EventReference();
+                return sounds[sounds.Length - 1].sound;
             }
         }
 
