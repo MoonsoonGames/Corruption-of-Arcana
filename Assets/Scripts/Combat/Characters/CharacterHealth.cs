@@ -21,7 +21,9 @@ namespace Necropanda
         //Health Values
         public int maxHealth;
         protected int health; public int GetHealth() { return health; }
+        //Hit sound modifier for health
         protected int shield;
+        //Hit sound modifier for shield
 
         //Damage Resistances
         Dictionary<E_DamageTypes, float> baseDamageResistances;
@@ -100,6 +102,7 @@ namespace Necropanda
                 //Debug.Log(health);
             }
 
+            PlaySound(type);
             UpdateHealthUI();
             return trueValue;
         }
@@ -172,6 +175,29 @@ namespace Necropanda
                 //No resistance modifier, return 1
                 return 1;
             }
+        }
+
+        #endregion
+
+        #region Sound Effects
+
+        public void PlaySound(E_DamageTypes type)
+        {
+            //Play sound based on damage type
+            //Modify sound based on whether target has shields or not (put sound modifiers in lines 24 and 26)
+            if (shield > 0)
+            {
+                //Target took damage to shield, dull sound
+            }
+            else
+            {
+                //Target took direct damage to health, intense sound
+            }
+        }
+
+        public void PlayDeathSound()
+        {
+            //Play death sound
         }
 
         #endregion

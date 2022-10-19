@@ -35,6 +35,7 @@ namespace Necropanda
             if (health.GetHealth() < 1)
             {
                 Debug.Log(characterName + " Should be killed");
+                health.PlayDeathSound();
                 CombatManager.instance.CharacterDied(this);
                 teamManager.team.Remove(this);
                 Destroy(gameObject);
