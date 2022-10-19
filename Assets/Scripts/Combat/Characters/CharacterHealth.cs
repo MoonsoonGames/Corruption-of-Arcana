@@ -182,7 +182,7 @@ namespace Necropanda
 
         #region Sound Effects
 
-        public SoundEffects.SoundModule defualtSoundEffect;
+        public EventReference defualtSoundEffect;
         public SoundEffects.SoundModule[] soundEffects;
         //FMOD.Studio.EventInstance fmodInstance;
 
@@ -192,7 +192,7 @@ namespace Necropanda
             {
                 if (item.effectType == type)
                 {
-                    RuntimeManager.PlayOneShot(item.sound);
+                    RuntimeManager.PlayOneShot(item.sounds[0].sound);
                 }
             }
 
