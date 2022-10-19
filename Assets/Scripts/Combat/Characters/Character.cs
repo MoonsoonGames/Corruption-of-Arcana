@@ -32,11 +32,16 @@ namespace Necropanda
 
         public void StartTurn()
         {
-            if (health.GetHealth() <= 0)
+            if (health.GetHealth() < 1)
             {
+                Debug.Log(characterName + " Should be killed");
                 CombatManager.instance.CharacterDied(this);
                 teamManager.team.Remove(this);
                 Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log(characterName + " has " + health.GetHealth() + " health left");
             }
         }
     }

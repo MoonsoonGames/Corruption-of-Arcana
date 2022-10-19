@@ -97,7 +97,7 @@ namespace Necropanda
 
             if (health <= 0)
             {
-                Debug.Log(health);
+                //Debug.Log(health);
             }
 
             UpdateHealthUI();

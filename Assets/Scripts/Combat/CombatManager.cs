@@ -29,10 +29,10 @@ namespace Necropanda
 
         public void CharacterDied(Character character)
         {
-            Debug.Log("Character Killed");
+            //Debug.Log("Character Killed");
             if (playerTeamManager.team.Contains(character))
             {
-                Debug.Log("Character Killed on player team");
+                //Debug.Log("Character Killed on player team");
                 playerTeamManager.Remove(character);
                 if (playerTeamManager.team.Count == 0)
                 {
@@ -41,7 +41,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log("Character Killed on enemy team");
+                //Debug.Log("Character Killed on enemy team");
                 enemyTeamManager.Remove(character);
                 if (enemyTeamManager.team.Count == 0)
                 {

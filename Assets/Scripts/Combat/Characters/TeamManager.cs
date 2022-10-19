@@ -33,7 +33,7 @@ namespace Necropanda
         {
             for (int i = 0; i < team.Count; i++)
             {
-                team[i].StartTurn();
+                team[i].Invoke("StartTurn", 0.1f);
             }
         }
     }

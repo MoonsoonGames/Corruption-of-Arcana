@@ -1293,6 +1293,7 @@ MonoBehaviour:
     type: 3}
   buttonAvailable: {r: 0, g: 0.30689335, b: 1, a: 255}
   buttonUnavailable: {r: 1, g: 0, b: 0.08627451, a: 1}
+  endTurndelay: 2
 --- !u!1 &1183303929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,6 +2776,7 @@ GameObject:
   - component: {fileID: 1886404820}
   - component: {fileID: 1886404819}
   - component: {fileID: 1886404821}
+  - component: {fileID: 1886404822}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -2822,10 +2824,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d3420ef63b99545b21efb2d2fef341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   playerTeamManager: {fileID: 922119378}
   enemyTeamManager: {fileID: 1729430396}
   victoryScreen: {fileID: 1191858132}
   defeatScreen: {fileID: 1368257370}
+--- !u!114 &1886404822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886404818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f89a65d1cce8d34fa3d3fbd17895b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spells:
+  - {fileID: 11400000, guid: f1d5ff832fb527343a3a28f226dba3d3, type: 2}
+  - {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
+  - {fileID: 11400000, guid: ac8b3580619e02c4dbd18fde48d18c10, type: 2}
+  - {fileID: 11400000, guid: 74f0daba23fa5034f9276d76fc10e12c, type: 2}
+  - {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
+  - {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
+  - {fileID: 11400000, guid: cc2663eb98b04d64aba93bf9d8421fd7, type: 2}
+  - {fileID: 11400000, guid: aadf83d7d909c444380b61e2434c617c, type: 2}
+  - {fileID: 11400000, guid: 184e7e742dde759419e21c21fd3241c0, type: 2}
+  - {fileID: 11400000, guid: eee1c554563d8114091ba9b77553b299, type: 2}
+  - {fileID: 11400000, guid: 6f306ebebf9dea844a28f0faf7c1736d, type: 2}
+  - {fileID: 11400000, guid: 62f9a936ef0ac8e4eb33c455128f270e, type: 2}
+  - {fileID: 11400000, guid: ea75387dc0433654c86159bb1208755a, type: 2}
+  - {fileID: 11400000, guid: 74e3432551c06dd42b2051d424aea844, type: 2}
+  - {fileID: 11400000, guid: 4e76b3a90c6dd4946bbdb9d6f6b03804, type: 2}
+  - {fileID: 11400000, guid: 26d47edcccefdd643abac0b6823b49d8, type: 2}
+  - {fileID: 11400000, guid: 39c886e3104ac7441b667a904776b425, type: 2}
+  - {fileID: 11400000, guid: 594bc66fde32cb5489963e8f37103493, type: 2}
+  - {fileID: 11400000, guid: c7fe9f63cc635bf418415b98dc580231, type: 2}
+  - {fileID: 11400000, guid: 10916ce0408c6a749b1c2fd96d2b35f6, type: 2}
+  - {fileID: 11400000, guid: 860051d5dc0fd434b83f134688e82d3b, type: 2}
+  - {fileID: 11400000, guid: b13e6638ae502df439901f60ea3ecde1, type: 2}
 --- !u!1 &2013838645
 GameObject:
   m_ObjectHideFlags: 0

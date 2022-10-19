@@ -20,6 +20,7 @@ namespace Necropanda
         Character player;
         Character character;
         Timeline timeline;
+        DeckManager manager;
 
         public GameObject group;
         HorizontalLayoutGroup layout;
@@ -137,6 +138,7 @@ namespace Necropanda
         {
             foreach (CardDrag2D card in cards)
             {
+                card.GetComponent<DrawCard>().ReturnToDeck();
                 Destroy(card.gameObject);
             }
 

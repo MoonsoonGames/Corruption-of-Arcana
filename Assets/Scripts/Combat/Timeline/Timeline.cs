@@ -269,11 +269,11 @@ namespace Necropanda
 
             statusInstance.status.ActivateEffect(statusInstance.target);
 
-            Debug.Log("Activated " + statusInstance.status + " on " + statusInstance.target + " with " + statusInstance.duration + " turns remaining");
+            //Debug.Log("Activated " + statusInstance.status + " on " + statusInstance.target + " with " + statusInstance.duration + " turns remaining");
 
             if (statusInstance.duration <= 0)
             {
-                Debug.Log("Expired");
+                //Debug.Log("Expired");
                 statuses.Remove(statusInstance);
             }
 
