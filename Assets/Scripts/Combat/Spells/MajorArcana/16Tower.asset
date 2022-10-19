@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: 16Tower
   m_EditorClassIdentifier: 
   spellName: The Tower
+  flavourText: 
+  spellDescription: Hit all targets on target team with 5 Ember damage and chance
+    to apply Wildfire to all targets hit for 2 turns
+  cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.6886792, g: 0.30117348, b: 0.1786668, a: 255}
-  spellDescription: Hit all targets on target team with 5 Ember damage and chance
-    to apply Wildfire to all targets hit
   speed: 0.8
   arcanaCost: 3
   spellModules:
   - target: 3
     effectType: 1
     value: 5
-    multihitValue: 3
     hitCount: 1
     executeThreshold: 0
-    statusEffect:
-    - {fileID: 11400000, guid: 51c1de7e460ae03468e8becf5e9741f0, type: 2}
-    duration: 03000000
-    chance:
-    - 0.6
+    statuses:
+    - status: {fileID: 11400000, guid: 51c1de7e460ae03468e8becf5e9741f0, type: 2}
+      duration: 2
+      chance: 1

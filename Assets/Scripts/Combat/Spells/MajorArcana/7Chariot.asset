@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: 7Chariot
   m_EditorClassIdentifier: 
   spellName: The Chariot
+  flavourText: 
+  spellDescription: Provide 10 shield and apply Haste to target for 2 turns
+  cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.5502006, g: 0.7921569, b: 0.54901963, a: 255}
-  spellDescription: Provide 10 shield and apply Haste to target for 3 turns
   speed: 0.2
   arcanaCost: 1
   spellModules:
   - target: 1
     effectType: 8
     value: 10
-    multihitValue: 0
     hitCount: 1
     executeThreshold: 0
-    statusEffect:
-    - {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
-    duration: 03000000
-    chance:
-    - 1
+    statuses:
+    - status: {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
+      duration: 2
+      chance: 1

@@ -17,18 +17,18 @@ namespace Necropanda
         [TextArea(3, 10)]
         public string effectDescription; // Basic desciption of spell effect
 
-        public GeneralCombat.StatusModule[] effectModules;
+        public CombatHelperFunctions.StatusModule[] effectModules;
 
         public void Apply(Character target, int duration)
         {
             //Apply status effect on target, add to character list
-            GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
+            CombatHelperFunctions.StatusInstance instance = new CombatHelperFunctions.StatusInstance();
             instance.SetStatusInstance(this, target, duration);
             bool applied = Timeline.instance.AddStatusInstance(instance);
 
             if (applied)
             {
-                foreach (GeneralCombat.StatusModule module in effectModules)
+                foreach (CombatHelperFunctions.StatusModule module in effectModules)
                 {
                     switch (module.target)
                     {
@@ -61,11 +61,11 @@ namespace Necropanda
         {
             //Remove status effect on target, remove from character list
             //Apply status effect on target, add to character list
-            GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
+            CombatHelperFunctions.StatusInstance instance = new CombatHelperFunctions.StatusInstance();
             instance.SetStatusInstance(this, target, 0);
             Timeline.instance.RemoveStatusInstance(instance);
 
-            foreach (GeneralCombat.StatusModule module in effectModules)
+            foreach (CombatHelperFunctions.StatusModule module in effectModules)
             {
                 switch (module.target)
                 {
@@ -96,7 +96,7 @@ namespace Necropanda
         public void ActivateEffect(Character target)
         {
             //Apply effects when timeline ends
-            foreach (GeneralCombat.StatusModule module in effectModules)
+            foreach (CombatHelperFunctions.StatusModule module in effectModules)
             {
                 //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
                 switch (module.target)
@@ -128,7 +128,7 @@ namespace Necropanda
         public void HitEffect(Character target, Character attacker)
         {
             //Apply effects when timeline ends
-            foreach (GeneralCombat.StatusModule module in effectModules)
+            foreach (CombatHelperFunctions.StatusModule module in effectModules)
             {
                 //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
                 switch (module.target)
@@ -186,7 +186,7 @@ namespace Necropanda
         void AffectTarget(Character target, E_DamageTypes effectType, int value)
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-            E_DamageTypes realEffectType = GeneralCombat.ReplaceRandom(effectType);
+            E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(effectType);
             target.GetHealth().ChangeHealth(realEffectType, value, null);
 
             //Sound effects here

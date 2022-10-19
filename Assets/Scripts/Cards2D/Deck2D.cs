@@ -125,7 +125,7 @@ namespace Necropanda
 
             ResetArrays();
 
-            GeneralCombat.SpellInstance newSpellInstance = new GeneralCombat.SpellInstance();
+            CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
             newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
 
             timeline.RemoveSpellInstance(newSpellInstance);
@@ -158,7 +158,7 @@ namespace Necropanda
 
             if (character != null)
             {
-                GeneralCombat.SpellInstance newSpellInstance = new GeneralCombat.SpellInstance();
+                CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
                 newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
 
                 timeline.AddSpellInstance(newSpellInstance);

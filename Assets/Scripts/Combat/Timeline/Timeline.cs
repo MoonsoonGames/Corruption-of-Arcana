@@ -15,11 +15,11 @@ namespace Necropanda
 
         public static Timeline instance;
 
-        List<GeneralCombat.SpellInstance> spells = new List<GeneralCombat.SpellInstance>();
+        List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
 
-        List<GeneralCombat.StatusInstance> statuses = new List<GeneralCombat.StatusInstance>();
+        List<CombatHelperFunctions.StatusInstance> statuses = new List<CombatHelperFunctions.StatusInstance>();
         public float statusOffset = 0.3f;
 
         public Character player;
@@ -42,7 +42,7 @@ namespace Necropanda
         /// Adds spell instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public void AddSpellInstance(GeneralCombat.SpellInstance newSpellInstance)
+        public void AddSpellInstance(CombatHelperFunctions.SpellInstance newSpellInstance)
         {
             spells.Add(newSpellInstance);
             CalculateTimeline();
@@ -52,7 +52,7 @@ namespace Necropanda
         /// Removes spell instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public void RemoveSpellInstance(GeneralCombat.SpellInstance newSpellInstance)
+        public void RemoveSpellInstance(CombatHelperFunctions.SpellInstance newSpellInstance)
         {
             spells.Remove(newSpellInstance);
             CalculateTimeline();
@@ -62,11 +62,11 @@ namespace Necropanda
         /// Adds status instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public bool AddStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
+        public bool AddStatusInstance(CombatHelperFunctions.StatusInstance newStatusInstance)
         {
             bool apply = true;
-            GeneralCombat.StatusInstance duplicate = new GeneralCombat.StatusInstance();
-            foreach (GeneralCombat.StatusInstance status in statuses)
+            CombatHelperFunctions.StatusInstance duplicate = new CombatHelperFunctions.StatusInstance();
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
             {
                 if (status.status == newStatusInstance.status && status.target == newStatusInstance.target)
                 {
@@ -97,10 +97,10 @@ namespace Necropanda
         /// Removes status instance to the timeline
         /// </summary>
         /// <param name="newSpellInstance"></param>
-        public void RemoveStatusInstance(GeneralCombat.StatusInstance newStatusInstance)
+        public void RemoveStatusInstance(CombatHelperFunctions.StatusInstance newStatusInstance)
         {
-            GeneralCombat.StatusInstance remove = new GeneralCombat.StatusInstance();
-            foreach (GeneralCombat.StatusInstance status in statuses)
+            CombatHelperFunctions.StatusInstance remove = new CombatHelperFunctions.StatusInstance();
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
             {
                 if (status.status == newStatusInstance.status && status.target == newStatusInstance.target)
                 {
@@ -114,11 +114,11 @@ namespace Necropanda
 
         public void UpdateStatusDurations()
         {
-            List<GeneralCombat.StatusInstance> newStatusList = new List<GeneralCombat.StatusInstance>(0);
+            List<CombatHelperFunctions.StatusInstance> newStatusList = new List<CombatHelperFunctions.StatusInstance>(0);
 
-            foreach (GeneralCombat.StatusInstance status in statuses)
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
             {
-                GeneralCombat.StatusInstance instance = new GeneralCombat.StatusInstance();
+                CombatHelperFunctions.StatusInstance instance = new CombatHelperFunctions.StatusInstance();
                 instance.SetStatusInstance(status.status, status.target, status.duration - 1);
                 newStatusList.Add(instance);
             }
@@ -175,7 +175,7 @@ namespace Necropanda
             arcanaManager.CheckArcana(arcanaCount);
         }
 
-        static int SortBySpeed(GeneralCombat.SpellInstance c1, GeneralCombat.SpellInstance c2)
+        static int SortBySpeed(CombatHelperFunctions.SpellInstance c1, CombatHelperFunctions.SpellInstance c2)
         {
             return c1.spell.speed.CompareTo(c2.spell.speed);
         }
@@ -227,7 +227,7 @@ namespace Necropanda
             //Generates a delay for the entire set of spells being cast
             float delay = 0;
 
-            foreach (GeneralCombat.StatusInstance item in statuses)
+            foreach (CombatHelperFunctions.StatusInstance item in statuses)
             {
                 StartCoroutine(IDelayStatus(item, delay));
 
@@ -237,7 +237,7 @@ namespace Necropanda
 
         public void HitStatuses(Character target, Character attacker)
         {
-            foreach (GeneralCombat.StatusInstance item in statuses)
+            foreach (CombatHelperFunctions.StatusInstance item in statuses)
             {
                 if (item.target == target)
                 {
@@ -251,7 +251,7 @@ namespace Necropanda
         /// </summary>
         /// <param name="spellInstance"></param>
         /// <returns></returns>
-        IEnumerator IDelaySpell(GeneralCombat.SpellInstance spellInstance)
+        IEnumerator IDelaySpell(CombatHelperFunctions.SpellInstance spellInstance)
         {
             yield return new WaitForSeconds(spellInstance.spell.speed);
 
@@ -263,7 +263,7 @@ namespace Necropanda
             CalculateTimeline();
         }
 
-        IEnumerator IDelayStatus(GeneralCombat.StatusInstance statusInstance, float delay)
+        IEnumerator IDelayStatus(CombatHelperFunctions.StatusInstance statusInstance, float delay)
         {
             yield return new WaitForSeconds(delay);
 

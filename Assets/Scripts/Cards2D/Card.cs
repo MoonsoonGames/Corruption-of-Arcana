@@ -21,6 +21,7 @@ namespace Necropanda
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI descriptionText;
         public Image cardBackground;
+        public Image cardFace;
 
         public void Setup()
         {
@@ -30,6 +31,11 @@ namespace Necropanda
             descriptionText.text = spell.spellDescription;
             if (spell.overrideColor)
                 cardBackground.color = spell.timelineColor;
+            if (spell.cardImage != null)
+            {
+                cardFace.sprite = spell.cardImage;
+                cardFace.color = Color.white;
+            }
 
             gameObject.name = spell.spellName;
 

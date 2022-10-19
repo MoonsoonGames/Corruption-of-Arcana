@@ -34,7 +34,7 @@ namespace Necropanda
         {
             if (health.GetHealth() < 1)
             {
-                Debug.Log(characterName + " Should be killed");
+                //Debug.Log(characterName + " Should be killed");
                 health.PlayDeathSound();
                 CombatManager.instance.CharacterDied(this);
                 teamManager.team.Remove(this);
@@ -42,7 +42,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log(characterName + " has " + health.GetHealth() + " health left");
+                //Debug.Log(characterName + " has " + health.GetHealth() + " health left");
             }
         }
     }

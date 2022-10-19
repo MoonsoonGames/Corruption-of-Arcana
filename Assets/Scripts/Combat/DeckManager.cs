@@ -11,22 +11,25 @@ namespace Necropanda
 {
     public class DeckManager : MonoBehaviour
     {
-        public List<Spell> spells;
-        public List<Spell> discard;
+        public List<Spell> playerDeck;
+        public List<Spell> discardPile;
 
-        // Start is called before the first frame update
+        /// <summary>
+        /// Draws a card from the player deck and returns it, if the player deck is empty, shuffle cards from the discard pile into the player deck and then draw a card
+        /// </summary>
+        /// <returns>The spell drawn from the player deck</returns>
         public Spell GetSpell()
         {
-            if (spells.Count == 0)
+            if (playerDeck.Count == 0)
             {
                 DrawFromDiscard();
             }
 
-            if (spells.Count != 0)
+            if (playerDeck.Count != 0)
             {
-                Spell spell = spells[Random.Range(0, spells.Count)];
+                Spell spell = playerDeck[Random.Range(0, playerDeck.Count)];
 
-                spells.Remove(spell);
+                playerDeck.Remove(spell);
 
                 return spell;
             }
@@ -36,32 +39,31 @@ namespace Necropanda
 
         private void Start()
         {
-            spells.Sort(ShuffleDeck);
+            playerDeck.Sort(HelperFunctions.RandomSort);
         }
 
+        /// <summary>
+        /// Adds card to the discard pile
+        /// </summary>
+        /// <param name="spell"></param>
         public void ReturnCard(Spell spell)
         {
-            discard.Add(spell);
+            discardPile.Add(spell);
         }
 
+        /// <summary>
+        /// Shuffled cards in the discard pile and then adds them to the player deck
+        /// </summary>
         void DrawFromDiscard()
         {
-            discard.Sort(ShuffleDeck);
+            discardPile.Sort(HelperFunctions.RandomSort);
 
-            foreach (Spell spell in discard)
+            foreach (Spell spell in discardPile)
             {
-                spells.Add(spell);
+                playerDeck.Add(spell);
             }
 
-            discard.Clear();
-        }
-
-        static int ShuffleDeck(Spell s1, Spell s2)
-        {
-            float random1 = Random.Range(0f, 1f);
-            float random2 = Random.Range(0f, 1f);
-
-            return random1.CompareTo(random2);
+            discardPile.Clear();
         }
     }
 }

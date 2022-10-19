@@ -8,13 +8,65 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
+    #region Interfaces
+
     public interface IInteractable
     {
         void Interacted(GameObject player);
     }
 
-    public static class GeneralCombat
+    #endregion
+
+    #region General Helper Functions
+
+    public static class HelperFunctions
     {
+        /// <summary>
+        /// Combines 2 lists together, even if they are of different types
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list1"></param>
+        /// <param name="list2"></param>
+        /// <returns>The combined list</returns>
+        public static List<T> CombineLists<T>(List<T> list1, List<T> list2)
+        {
+            List<T> outputList = new List<T>();
+
+            foreach (T item in list1)
+            {
+                outputList.Add(item);
+            }
+            foreach (T item in list2)
+            {
+                outputList.Add(item);
+            }
+
+            return outputList;
+        }
+
+        /// <summary>
+        /// Randomly sorts a list
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static int RandomSort<T>(T s1, T s2)
+        {
+            float random1 = Random.Range(0f, 1f);
+            float random2 = Random.Range(0f, 1f);
+
+            return random1.CompareTo(random2);
+        }
+    }
+
+    public static class CombatHelperFunctions
+    {
+        // Struct Issues: https://forum.unity.com/threads/serializable-class-struct-array-incorrectly-displayed-in-inspector.1286267/
+        // Current version is 2021.3.4f1 || Struct issue fixed in 2021.3.5f1
+        // Could try to fix with custom inspectors https://www.youtube.com/watch?v=RInUu1_8aGw
+
+        #region Spells
+
         public struct SpellInstance
         {
             public Spell spell;
@@ -35,25 +87,24 @@ namespace Necropanda
             public E_SpellTargetType target;
             public E_DamageTypes effectType;
             public int value;
-            public int multihitValue;
             public int hitCount;
             public float executeThreshold;
-            public StatusEffects[] statusEffect;
-            public int[] duration;
-            public float[] chance;
+            public StatusStruct[] statuses;
 
-            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newMultihitValue, int newHitCount, float newExecuteThreshold, StatusEffects[] newStatusEffect, float[] newChance)
+            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, StatusStruct[] newStatusStructs)
             {
                 target = newTarget;
                 effectType = newEffectType;
                 value = newValue;
-                multihitValue = newMultihitValue;
                 hitCount = newHitCount;
                 executeThreshold = newExecuteThreshold;
-                statusEffect = newStatusEffect;
-                chance = newChance;
+                statuses = newStatusStructs;
             }
         }
+
+        #endregion
+
+        #region Status Effects
 
         public static bool ApplyChance(float chance)
         {
@@ -72,6 +123,14 @@ namespace Necropanda
             }
 
             return apply;
+        }
+
+        [System.Serializable]
+        public struct StatusStruct
+        {
+            public StatusEffects status;
+            public int duration;
+            public float chance;
         }
 
         public struct StatusInstance
@@ -107,6 +166,8 @@ namespace Necropanda
             }
         }
 
+        #endregion
+
         public static E_DamageTypes ReplaceRandom(E_DamageTypes effectType)
         {
             if (effectType == E_DamageTypes.Random)
@@ -126,22 +187,5 @@ namespace Necropanda
         }
     }
 
-    public static class GeneralScripts
-    {
-        public static List<T> CombineLists<T>(List<T> list1, List<T> list2)
-        {
-            List<T> outputList = new List<T>();
-
-            foreach (T item in list1)
-            {
-                outputList.Add(item);
-            }
-            foreach (T item in list2)
-            {
-                outputList.Add(item);
-            }
-
-            return outputList;
-        }
-    }
+    #endregion
 }
