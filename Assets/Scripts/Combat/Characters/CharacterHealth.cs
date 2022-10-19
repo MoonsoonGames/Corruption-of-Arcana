@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -181,8 +182,20 @@ namespace Necropanda
 
         #region Sound Effects
 
+        public SoundEffects.SoundModule defualtSoundEffect;
+        public SoundEffects.SoundModule[] soundEffects;
+        //FMOD.Studio.EventInstance fmodInstance;
+
         public void PlaySound(E_DamageTypes type)
         {
+            foreach(var item in soundEffects)
+            {
+                if (item.effectType == type)
+                {
+                    RuntimeManager.PlayOneShot(item.sound);
+                }
+            }
+
             //Play sound based on damage type
             //Modify sound based on whether target has shields or not (put sound modifiers in lines 24 and 26)
             if (shield > 0)

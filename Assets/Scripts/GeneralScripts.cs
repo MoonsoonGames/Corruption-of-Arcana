@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -184,6 +185,16 @@ namespace Necropanda
             }
 
             return effectType;
+        }
+    }
+
+    public static class SoundEffects
+    {
+        [System.Serializable]
+        public struct SoundModule
+        {
+            public E_DamageTypes effectType;
+            public EventReference sound;
         }
     }
 
