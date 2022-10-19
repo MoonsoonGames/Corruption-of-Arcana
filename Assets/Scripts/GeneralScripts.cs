@@ -69,7 +69,7 @@ namespace Necropanda
         /// <param name="toMin">what you want to remap the raw minimum value to. e.g. "-1"</param>
         /// <param name="toMax">what you want to remap the raw maximum value to. e.g. "1"</param>
         /// <returns>The remapped, calculated value.</returns>
-        float Remap(float inputValue, float fromMin, float fromMax, float toMin, float toMax)
+        public static float Remap(float inputValue, float fromMin, float fromMax, float toMin, float toMax)
         {
             float i = (((inputValue - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin);
             i = Mathf.Clamp(i, toMin, toMax);
