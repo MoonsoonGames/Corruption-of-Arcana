@@ -3,7 +3,7 @@ using UnityEngine;
 using FMODUnity;
 
 /// <summary>
-/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// Authored & Written by Andrew Scott andrewscott@icloud.com / @mattordev (remap func)
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
@@ -60,6 +60,21 @@ namespace Necropanda
         }
 
         //remap function
+        /// <summary>
+        /// Remaps the passed in variables based on min and max. Written by @mattordev
+        /// </summary>
+        /// <param name="inputValue">The value to be remapped</param>
+        /// <param name="fromMin">The raw minimum value, e.g. sensor output min</param>
+        /// <param name="fromMax">The raw maximum value, e.g. sensor output max</param>
+        /// <param name="toMin">what you want to remap the raw minimum value to. e.g. "-1"</param>
+        /// <param name="toMax">what you want to remap the raw maximum value to. e.g. "1"</param>
+        /// <returns>The remapped, calculated value.</returns>
+        float Remap(float inputValue, float fromMin, float fromMax, float toMin, float toMax)
+        {
+            float i = (((inputValue - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin);
+            i = Mathf.Clamp(i, toMin, toMax);
+            return i;
+        }
     }
 
     public static class CombatHelperFunctions
