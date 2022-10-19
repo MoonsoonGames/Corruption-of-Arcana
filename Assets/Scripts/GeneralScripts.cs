@@ -58,6 +58,8 @@ namespace Necropanda
 
             return random1.CompareTo(random2);
         }
+
+        //remap function
     }
 
     public static class CombatHelperFunctions
@@ -194,7 +196,26 @@ namespace Necropanda
         public struct SoundModule
         {
             public E_DamageTypes effectType;
+            public Sound[] sounds; //Start with lowest intensity first
+
+            public EventReference GetSound(float intensity)
+            {
+                foreach(var sound in sounds)
+                {
+                    if (sound.intensityThreshold > intensity)
+                    {
+                        return sound.sound;
+                    }
+                }
+                return new EventReference();
+            }
+        }
+
+        [System.Serializable]
+        public struct Sound
+        {
             public EventReference sound;
+            public float intensityThreshold;
         }
     }
 
