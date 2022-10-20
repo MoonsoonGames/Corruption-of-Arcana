@@ -18,11 +18,14 @@ namespace Necropanda
             base.StartTurn();
             foreach (Character character in team)
             {
-                //In future, determine target depending on spell so it can cast support spells on allies/self
-                CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                newSpellInstance.SetSpellInstance(character.PrepareSpell(), player, character);
+                if (character.GetHealth().GetHealth() > 0)
+                {
+                    //In future, determine target depending on spell so it can cast support spells on allies/self
+                    CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
+                    newSpellInstance.SetSpellInstance(character.PrepareSpell(), player, character);
 
-                timeline.AddSpellInstance(newSpellInstance);
+                    timeline.AddSpellInstance(newSpellInstance);
+                }
             }
         }
     }

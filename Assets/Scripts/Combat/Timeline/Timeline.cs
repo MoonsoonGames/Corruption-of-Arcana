@@ -83,7 +83,7 @@ namespace Necropanda
 
             if (apply)
             {
-                Debug.Log(newStatusInstance.status.effectName + " has been added");
+                //Debug.Log(newStatusInstance.status.effectName + " has been added");
                 statuses.Add(newStatusInstance);
             }
             else if (duplicate.duration < newStatusInstance.duration)
@@ -260,6 +260,8 @@ namespace Necropanda
             Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
 
             spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition);
+
+            yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
             RemoveSpellInstance(spellInstance);
             CalculateTimeline();

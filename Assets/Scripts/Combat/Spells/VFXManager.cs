@@ -28,9 +28,10 @@ namespace Necropanda
 
         IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay)
         {
+            yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, caster.transform.position);
             VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject);
-            yield return new WaitForSeconds(effectDelay + delay);
+            yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell);
         }
 
@@ -41,9 +42,10 @@ namespace Necropanda
 
         IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay)
         {
+            yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, target.transform.position);
             VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject);
-            yield return new WaitForSeconds(effectDelay + delay);
+            yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell);
         }
 
@@ -100,7 +102,7 @@ namespace Necropanda
             }
 
             float time = distance / (projectileSpeed * speedCalculationMultiplier);
-            Debug.Log(time);
+            //Debug.Log(time);
             return time;
         }
     }

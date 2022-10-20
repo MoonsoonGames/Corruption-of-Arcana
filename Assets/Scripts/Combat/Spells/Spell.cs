@@ -41,6 +41,7 @@ namespace Necropanda
         public float speed;
         public int arcanaCost;
         public float multihitDelay = 0.1f;
+        public float moduleDelay = 0f;
 
         public CombatHelperFunctions.SpellModule[] spellModules;
 
@@ -73,41 +74,20 @@ namespace Necropanda
                 TeamManager casterTeamManager = caster.GetManager();
                 List<Character> allCharacters = HelperFunctions.CombineLists(targetTeamManager.team, casterTeamManager.team);
 
-                for (int i = 0; i < module.hitCount; i++)
+                float hitDelay = module.hitCount * multihitDelay;
+                float moduleTime = 0;
+                //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
+                switch (module.target)
                 {
-                    float moduleTime = 0;
-                    float x = 0;
-                    //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
-                    switch (module.target)
-                    {
-                        case E_SpellTargetType.Caster:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
-                            break;
-                        case E_SpellTargetType.Target:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            break;
-                        case E_SpellTargetType.Chain:
-                            x = targetTeamManager.team.Count * multihitDelay;
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
-                            break;
-                        case E_SpellTargetType.Cleave:
-                            x = targetTeamManager.team.Count * multihitDelay;
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
-                            break;
-                        case E_SpellTargetType.RandomTargetTeam:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            break;
-                        case E_SpellTargetType.RandomAll:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            break;
-                        case E_SpellTargetType.All:
-                            x = allCharacters.Count * multihitDelay;
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
-                            break;
-                    }
-
-                    time += moduleTime;
+                    case E_SpellTargetType.Caster:
+                        moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position) + hitDelay + time;
+                        break;
+                    default:
+                        moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + hitDelay + time;
+                        break;
                 }
+
+                time += moduleTime;
             }
 
             return time;
@@ -125,6 +105,7 @@ namespace Necropanda
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
+                    float hitDelay = i * multihitDelay;
                     float moduleTime = 0;
                     float x = 0;
                     //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
@@ -132,11 +113,11 @@ namespace Necropanda
                     {
                         case E_SpellTargetType.Caster:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
-                            VFXManager.instance.AffectSelfDelay(this, caster, module, spawnPosition, moduleTime + time);
+                            VFXManager.instance.AffectSelfDelay(this, caster, module, spawnPosition, moduleTime + hitDelay + time);
                             break;
                         case E_SpellTargetType.Target:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, spawnPosition, moduleTime + time);
+                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, spawnPosition, moduleTime + hitDelay);
                             AffectTarget(caster, target, module);
                             break;
                         case E_SpellTargetType.Chain:
@@ -144,7 +125,7 @@ namespace Necropanda
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + time);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time);
                             }
                             break;
                         case E_SpellTargetType.Cleave:
@@ -152,28 +133,28 @@ namespace Necropanda
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + time);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time);
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, spawnPosition, moduleTime + time);
+                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, spawnPosition, moduleTime + hitDelay + time);
                             break;
                         case E_SpellTargetType.RandomAll:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, spawnPosition, moduleTime + time);
+                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, spawnPosition, moduleTime + hitDelay + time);
                             break;
                         case E_SpellTargetType.All:
                             x = targetTeamManager.team.Count * multihitDelay;
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in allCharacters)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + time);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time);
                             }
                             break;
                     }
 
-                    time += moduleTime;
+                    time += moduleDelay;
                 }
             }
         }
