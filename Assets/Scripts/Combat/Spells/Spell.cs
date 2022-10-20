@@ -40,8 +40,22 @@ namespace Necropanda
         [Header("Spell Logic")]
         public float speed;
         public int arcanaCost;
+        public float multihitDelay = 0.1f;
 
         public CombatHelperFunctions.SpellModule[] spellModules;
+
+        #endregion
+
+        #region FX
+
+        [Header("FX")]
+        //Visual effects for projectile
+        public Object projectileObject;
+
+
+        //Visual effects for hit effect
+
+        //Sound effects for preparing the spell
 
         #endregion
 
@@ -49,8 +63,10 @@ namespace Necropanda
 
         #region Spellcasting
 
-        public void CastSpell(Character target, Character caster)
+        public float QuerySpellCastTime(Character target, Character caster, Vector2 spawnPosition)
         {
+            float time = 0;
+
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
                 TeamManager targetTeamManager = target.GetManager();
@@ -59,47 +75,112 @@ namespace Necropanda
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
+                    float moduleTime = 0;
+                    float x = 0;
                     //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
                     switch (module.target)
                     {
                         case E_SpellTargetType.Caster:
-                            AffectSelf(caster, module);
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
                             break;
                         case E_SpellTargetType.Target:
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
+                            break;
+                        case E_SpellTargetType.Chain:
+                            x = targetTeamManager.team.Count * multihitDelay;
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
+                            break;
+                        case E_SpellTargetType.Cleave:
+                            x = targetTeamManager.team.Count * multihitDelay;
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
+                            break;
+                        case E_SpellTargetType.RandomTargetTeam:
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
+                            break;
+                        case E_SpellTargetType.RandomAll:
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
+                            break;
+                        case E_SpellTargetType.All:
+                            x = allCharacters.Count * multihitDelay;
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
+                            break;
+                    }
+
+                    time += moduleTime;
+                }
+            }
+
+            return time;
+        }
+
+        public void CastSpell(Character target, Character caster, Vector2 spawnPosition)
+        {
+            float time = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                TeamManager targetTeamManager = target.GetManager();
+                TeamManager casterTeamManager = caster.GetManager();
+                List<Character> allCharacters = HelperFunctions.CombineLists(targetTeamManager.team, casterTeamManager.team);
+
+                for (int i = 0; i < module.hitCount; i++)
+                {
+                    float moduleTime = 0;
+                    float x = 0;
+                    //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
+                    switch (module.target)
+                    {
+                        case E_SpellTargetType.Caster:
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
+                            VFXManager.instance.AffectSelfDelay(this, caster, module, spawnPosition, moduleTime + time);
+                            break;
+                        case E_SpellTargetType.Target:
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
+                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, spawnPosition, moduleTime + time);
                             AffectTarget(caster, target, module);
                             break;
                         case E_SpellTargetType.Chain:
+                            x = targetTeamManager.team.Count * multihitDelay;
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                AffectTarget(caster, character, module);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + time);
                             }
                             break;
                         case E_SpellTargetType.Cleave:
+                            x = targetTeamManager.team.Count * multihitDelay;
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                AffectTarget(caster, character, module);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + time);
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
-                            AffectTarget(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module);
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
+                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, spawnPosition, moduleTime + time);
                             break;
                         case E_SpellTargetType.RandomAll:
-                            AffectTarget(caster, allCharacters[Random.Range(0, allCharacters.Count)], module);
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
+                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, spawnPosition, moduleTime + time);
                             break;
                         case E_SpellTargetType.All:
+                            x = targetTeamManager.team.Count * multihitDelay;
+                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in allCharacters)
                             {
-                                AffectTarget(caster, character, module);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + time);
                             }
                             break;
                     }
+
+                    time += moduleTime;
                 }
             }
         }
 
         #region Affect Characters
 
-        void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell)
+        public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell)
         {
             if (caster == null)
             {
@@ -117,7 +198,7 @@ namespace Necropanda
             }
         }
 
-        void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell)
+        public void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell)
         {
             if (target != null)
             {

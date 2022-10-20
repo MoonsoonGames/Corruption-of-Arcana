@@ -18,6 +18,7 @@ namespace Necropanda
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
+        public float spellDelayOffset = 0.5f;
 
         List<CombatHelperFunctions.StatusInstance> statuses = new List<CombatHelperFunctions.StatusInstance>();
         public float statusOffset = 0.3f;
@@ -202,21 +203,19 @@ namespace Necropanda
         float CastSpells()
         {
             //Generates a delay for the entire set of spells being cast
-            float delay = 0;
-
-            if (spells.Count > 0)
-            {
-                delay = spells[spells.Count - 1].spell.speed;
-            }
-
+            float i = 0;
             //Loop through list and cast spell;
             foreach (var item in spells)
             {
                 //Use a coroutine to stagger spellcasting
-                StartCoroutine(IDelaySpell(item));
+                StartCoroutine(IDelaySpell(item, i));
+                Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
+                i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition);
+
+                Debug.Log("Spell " + item.spell.spellName + " has a delay of " + i);
             }
 
-            return delay;
+            return i;
         }
 
         void ActivateStatuses()
@@ -251,13 +250,16 @@ namespace Necropanda
         /// </summary>
         /// <param name="spellInstance"></param>
         /// <returns></returns>
-        IEnumerator IDelaySpell(CombatHelperFunctions.SpellInstance spellInstance)
+        IEnumerator IDelaySpell(CombatHelperFunctions.SpellInstance spellInstance, float delay)
         {
-            yield return new WaitForSeconds(spellInstance.spell.speed);
+            yield return new WaitForSeconds(delay);
 
             //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
 
-            spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster);
+            //Get location of first spell block
+            Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
+
+            spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition);
 
             RemoveSpellInstance(spellInstance);
             CalculateTimeline();

@@ -44,7 +44,7 @@ namespace Necropanda
 
         public void CastSpell(Character target, Character caster)
         {
-            spell.CastSpell(target, caster);
+            //spell.CastSpell(target, caster);
         }
     }
 }
