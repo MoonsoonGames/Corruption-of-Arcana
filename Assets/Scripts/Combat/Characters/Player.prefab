@@ -269,6 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3702093927457906038}
   - component: {fileID: 3702093927457906040}
+  - component: {fileID: 777648669318083062}
   - component: {fileID: 3702093927457906041}
   m_Layer: 5
   m_Name: Taro
@@ -305,6 +306,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3702093927457906039}
   m_CullTransparentMesh: 1
+--- !u!114 &777648669318083062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702093927457906039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22021802ab006b441a026713fe22a0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  utilityModules:
+  - type: 0
+    axes: {x: 0, y: 1, z: 0}
+    speed: 0.01
+    time: 1
+    currentTime: 0
+    forward: 0
+  - type: 2
+    axes: {x: 0.5, y: 0.5, z: 0.5}
+    speed: 0.01
+    time: 1
+    currentTime: 0
+    forward: 0
+  offset: {x: 0, y: 2}
 --- !u!114 &3702093927457906041
 MonoBehaviour:
   m_ObjectHideFlags: 0
