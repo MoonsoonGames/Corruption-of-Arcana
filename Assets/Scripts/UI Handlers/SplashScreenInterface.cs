@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SplashScreenInterface : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SplashScreenInterface : MonoBehaviour
     public void NewGame()
     {
         //Reset loadsettings/progress
+        SceneManager.LoadScene("DevRoom");
         //load game
     }
 
