@@ -83,9 +83,9 @@ namespace Necropanda
             public Vector3 axes;
             public float speed;
             public float time;
-            //[HideInInspector]
+            [HideInInspector]
             public float currentTime;
-            //[HideInInspector]
+            [HideInInspector]
             public bool forward;
         }
     }
