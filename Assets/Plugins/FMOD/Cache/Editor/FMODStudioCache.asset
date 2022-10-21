@@ -215,7 +215,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 630
+  Length: 360
 --- !u!114 &-5941605679509409469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,33 +243,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3274
---- !u!114 &-5490863382564187328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 1
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 1
-  Guid:
-    Data1: -573268067
-    Data2: 1219841203
-    Data3: -107470449
-    Data4: -179748631
-  Banks:
-  - {fileID: 3930431035061447629}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-5132103910347389604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +486,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2375
+--- !u!114 &-3462726934629170386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Healing/Heal level 1 (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Healing/Heal level 1 (PH)
+  Guid:
+    Data1: -573268067
+    Data2: 1219841203
+    Data3: -107470449
+    Data4: -179748631
+  Banks:
+  - {fileID: 3930431035061447629}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-3098038104365513481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,10 +879,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638019450864173936
+  lastModified: 638019460354659655
   FileSizes:
   - Name: 
-    Value: 2378
+    Value: 2384
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -920,18 +920,18 @@ MonoBehaviour:
   - {fileID: -5132103910347389604}
   - {fileID: -2089825020503676980}
   - {fileID: -4804180499812804196}
-  - {fileID: -5490863382564187328}
   - {fileID: 5147000214674028810}
   - {fileID: -1601295554535106802}
   - {fileID: 8996651747345581512}
   - {fileID: 8668915627605847499}
   - {fileID: -1989654241651777365}
+  - {fileID: -3462726934629170386}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3930431035061447629}
   StringsBanks:
   - {fileID: -412331834206945440}
-  cacheTime: 638019450864173936
+  cacheTime: 638019460354659655
   cacheVersion: 131591
 --- !u!114 &609677920330908324
 MonoBehaviour:
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638019450864153684
+  lastModified: 638019460354649685
   FileSizes: []
   Exists: 1
 --- !u!114 &5147000214674028810
