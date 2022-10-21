@@ -36,3 +36,8 @@ public enum E_Scenes
     DevRoom,
     Combat
 }
+
+public enum E_UtilityScripts
+{
+    Position, Rotation, Scale
+}
