@@ -621,7 +621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121.94, y: -0.0006}
+  m_AnchoredPosition: {x: 0, y: -0.0006}
   m_SizeDelta: {x: 129.5774, y: 129.5774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &436944655
@@ -1974,6 +1974,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: enemies.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 2076760838207709071, guid: 3290d8b1d33d0e541be943471f3b4b29,
+        type: 3}
+    - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 2611122861618082293, guid: 9f914f7fb1f65bf4e8434eff275d7075,
+        type: 3}
+    - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 8579202517209450935, guid: e3370fbe153e0d1459cfb95069e66ee4,
+        type: 3}
+    - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 2611122861618082293, guid: 1c339c0dbdc88d0499d5f72bcb5f93f5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b95e2084a81d8944866456a1dfead65, type: 3}
 --- !u!1 &1183303929
@@ -2837,9 +2866,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3301,9 +3330,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0.8638129, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

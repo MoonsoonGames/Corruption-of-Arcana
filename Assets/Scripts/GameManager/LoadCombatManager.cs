@@ -41,7 +41,7 @@ namespace Necropanda
         public E_Scenes combatScene;
         public float combatRadius = 15f;
 
-        public List<string> enemies;
+        public List<Object> enemies;
 
         public void LoadCombat(GameObject player)
         {
@@ -55,11 +55,11 @@ namespace Necropanda
                 {
                     if (enemy.boss)
                     {
-                        enemies.Insert(0, enemy.enemyName);
+                        enemies.Insert(0, enemy.enemyObject);
                     }
                     else
                     {
-                        enemies.Insert(enemies.Count, enemy.enemyName);
+                        enemies.Insert(enemies.Count, enemy.enemyObject);
                     }
                 }
             }

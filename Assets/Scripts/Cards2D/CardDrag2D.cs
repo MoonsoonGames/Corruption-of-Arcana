@@ -72,7 +72,7 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.dragging == false)
+            if (dragManager.canDrag)
             {
                 //Debug.Log("Pointer Enter");
                 ScaleCard(hoverScale, false);
@@ -86,7 +86,7 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.dragging == false)
+            if (dragManager.canDrag)
             {
                 //Debug.Log("Pointer Exit");
                 ScaleCard(1, false);
@@ -100,19 +100,24 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnBeginDrag(PointerEventData eventData)
         {
-            //Debug.Log("Drag Start");
+            if (dragManager.canDrag)
+            {
+                //Debug.Log("Drag Start");
 
-            Highlight(false);
-            ScaleCard(pickupScale, true);
+                Highlight(false);
+                ScaleCard(pickupScale, true);
 
-            //Drags from where the player clicks instead of snapping center of card to the mouse
-            offset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
+                //Drags from where the player clicks instead of snapping center of card to the mouse
+                offset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
 
-            lastDeck = deck;
-            deck.RemoveCard(this);
+                lastDeck = deck;
+                deck.RemoveCard(this);
 
-            dragManager.draggedCard = this;
-            SetRayCastTargetAll(false);
+                dragManager.draggedCard = this;
+                SetRayCastTargetAll(false);
+
+                dragManager.canDrag = false;
+            }
         }
 
         /// <summary>
@@ -121,16 +126,19 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnDrag(PointerEventData eventData)
         {
-            //Debug.Log("Dragging");
+            if (dragManager.draggedCard != null)
+            {
+                //Debug.Log("Dragging");
 
-            //Determines the difference in the x movement to tell which direction it is being dragged in
-            float dragSpeedX = transform.position.x - (eventData.position.x + offset.x);
+                //Determines the difference in the x movement to tell which direction it is being dragged in
+                float dragSpeedX = transform.position.x - (eventData.position.x + offset.x);
 
-            transform.position = eventData.position + offset;
+                transform.position = eventData.position + offset;
 
-            Vector3 newRot = new Vector3(baseRot.x, baseRot.y, baseRot.z);
-            newRot.z = dragSpeedX * rotationScale;
-            transform.eulerAngles = newRot;
+                Vector3 newRot = new Vector3(baseRot.x, baseRot.y, baseRot.z);
+                newRot.z = dragSpeedX * rotationScale;
+                transform.eulerAngles = newRot;
+            }
         }
 
         /// <summary>
@@ -139,22 +147,27 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnEndDrag(PointerEventData eventData)
         {
-            //Debug.Log("Drag End");
-
-            if (newDeck == null)
+            if (dragManager.draggedCard != null)
             {
-                lastDeck.AddCard(this);
-            }
-            else
-            {
-                newDeck.AddCard(this);
-            }
+                //Debug.Log("Drag End");
 
-            SetRayCastTargetAll(true);
+                if (newDeck == null)
+                {
+                    lastDeck.AddCard(this);
+                }
+                else
+                {
+                    newDeck.AddCard(this);
+                }
 
-            ScaleCard(1, false);
-            Highlight(false);
-            transform.eulerAngles = baseRot;
+                SetRayCastTargetAll(true);
+
+                ScaleCard(1, false);
+                Highlight(false);
+                transform.eulerAngles = baseRot;
+
+                dragManager.canDrag = true;
+            }
         }
 
         void SetRayCastTargetAll(bool targettable)

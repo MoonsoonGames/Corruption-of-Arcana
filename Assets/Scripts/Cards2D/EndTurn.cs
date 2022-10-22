@@ -28,7 +28,6 @@ namespace Necropanda
 
         private void Start()
         {
-            decks = GameObject.FindObjectsOfType<Deck2D>();
             timeline = GameObject.FindObjectOfType<Timeline>();
             teamManagers = GameObject.FindObjectsOfType<TeamManager>();
             endTurnButton = GetComponent<Button>();
@@ -40,7 +39,9 @@ namespace Necropanda
         public void EndTurnButton()
         {
             DisableButton();
+            DragManager.instance.canDrag = false;
 
+            decks = GameObject.FindObjectsOfType<Deck2D>();
             foreach (Deck2D deck in decks)
             {
                 if (deck != playerHandDeck)
@@ -56,6 +57,7 @@ namespace Necropanda
 
         public void StartNextTurn()
         {
+            DragManager.instance.canDrag = true;
             //Debug.Log("New Turn");
             foreach (Deck2D deck in decks)
             {

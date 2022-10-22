@@ -12,6 +12,7 @@ namespace Necropanda
     public class EnemySpawner : MonoBehaviour
     {
         public int order = 0;
+        public bool filled = false;
 
         public void SpawnEnemy(Object enemyRef)
         {

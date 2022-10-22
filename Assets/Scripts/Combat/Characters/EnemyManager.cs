@@ -16,7 +16,10 @@ namespace Necropanda
 
         public override void StartTurn()
         {
-            base.StartTurn();
+            CheckKilled();
+            SpawnEnemies();
+            ActivateTurns();
+            
             foreach (Character character in team)
             {
                 if (character.GetHealth().GetHealth() > 0)
@@ -50,11 +53,35 @@ namespace Necropanda
             {
                 spawners[i] = spawnerList[i];
             }
+
+            SpawnEnemies();
         }
 
         void SpawnEnemies()
         {
+            for (int i = 0; i < spawners.Length; i++)
+            {
+                if (spawners[i].filled == false)
+                {
+                    if (LoadCombatManager.instance.enemies.Count != 0)
+                    {
+                        Object enemyObject = LoadCombatManager.instance.enemies[0];
+                        LoadCombatManager.instance.enemies.RemoveAt(0);
 
+                        if (enemyObject != null)
+                        {
+                            GameObject enemyRef = Instantiate(enemyObject, spawners[i].gameObject.transform) as GameObject;
+
+                            Character enemyCharacter = enemyRef.GetComponent<Character>();
+
+                            Debug.Log("Spawned " + enemyCharacter.characterName + " at spawner " + i);
+                            //team.Add(enemyCharacter);
+                            spawners[i].filled = true;
+                            enemyCharacter.spawner = spawners[i];
+                        }
+                    }
+                }
+            }
         }
 
         static int SortByOrder(EnemySpawner s1, EnemySpawner s2)

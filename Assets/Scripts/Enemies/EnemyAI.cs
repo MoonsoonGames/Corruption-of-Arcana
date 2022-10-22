@@ -17,7 +17,7 @@ namespace Necropanda
         NavMeshAgent agent;
         Vector3 startPos;
 
-        public string enemyName;
+        public Object enemyObject;
         public bool boss;
 
         private void Start()

@@ -16,6 +16,8 @@ namespace Necropanda
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 
+        public EnemySpawner spawner;
+
         private void Start()
         {
             health = GetComponent<CharacterHealth>();
@@ -30,7 +32,12 @@ namespace Necropanda
             return null;
         }
 
-        public void StartTurn()
+        public virtual void StartTurn()
+        {
+            
+        }
+
+        public void CheckHealth()
         {
             if (health.GetHealth() < 1)
             {
@@ -38,6 +45,10 @@ namespace Necropanda
                 health.PlayDeathSound();
                 CombatManager.instance.CharacterDied(this);
                 teamManager.team.Remove(this);
+                if (spawner != null)
+                {
+                    spawner.filled = false;
+                }
                 Destroy(gameObject);
             }
             else

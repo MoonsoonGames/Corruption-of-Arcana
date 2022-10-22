@@ -17,5 +17,14 @@ namespace Necropanda
         {
             return spells[Random.Range(0, spells.Count)];
         }
+
+        public override void StartTurn()
+        {
+            //In future, determine target depending on spell so it can cast support spells on allies/self
+            //CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
+            //newSpellInstance.SetSpellInstance(PrepareSpell(), player, this);
+
+            //.AddSpellInstance(newSpellInstance);
+        }
     }
 }
