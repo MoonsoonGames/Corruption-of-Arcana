@@ -15,13 +15,27 @@ namespace Necropanda
         bool active = false;
         GameObject player;
         NavMeshAgent agent;
+        Vector3 startPos;
+
+        private void Start()
+        {
+            agent = GetComponent<NavMeshAgent>();
+            startPos = transform.position;
+        }
 
         public void ActivateAI(GameObject playerRef)
         {
-            agent = GetComponent<NavMeshAgent>();
             player = playerRef;
             active = true;
             Debug.Log("Activate AI");
+        }
+
+        public void DeactivateAI()
+        {
+            player = null;
+            active = false;
+            Debug.Log("Deactivate AI");
+            agent.SetDestination(startPos);
         }
 
         // Update is called once per frame

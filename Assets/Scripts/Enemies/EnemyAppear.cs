@@ -33,9 +33,37 @@ namespace Necropanda
                 if (fx != null)
                 {
                     Instantiate(fx, this.gameObject.transform);
+                    fx = null;
                 }
 
                 active = true;
+            }
+            else
+            {
+                //Already active
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log(other.name + " has left collision");
+
+                Deactivate();
+            }
+        }
+
+        void Deactivate()
+        {
+            if (active)
+            {
+                Debug.Log("Deactivate AI");
+                //Unearth and activate AI
+                //art.SetActive(true);
+                aiScript.DeactivateAI();
+
+                active = false;
             }
             else
             {
