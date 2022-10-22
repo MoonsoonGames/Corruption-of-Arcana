@@ -12,6 +12,7 @@ namespace Necropanda
     public class EnemyManager : TeamManager
     {
         public Character player;
+        EnemySpawner[] spawners;
 
         public override void StartTurn()
         {
@@ -27,6 +28,38 @@ namespace Necropanda
                     timeline.AddSpellInstance(newSpellInstance);
                 }
             }
+        }
+
+        protected override void Setup()
+        {
+            base.Setup();
+
+            //spawn enemies from load settings
+            spawners = GameObject.FindObjectsOfType<EnemySpawner>();
+
+            List<EnemySpawner> spawnerList = new List<EnemySpawner>();
+
+            foreach (EnemySpawner spawner in spawners)
+            {
+                spawnerList.Add(spawner);
+            }
+
+            spawnerList.Sort(SortByOrder);
+
+            for (int i = 0; i < spawnerList.Count; i++)
+            {
+                spawners[i] = spawnerList[i];
+            }
+        }
+
+        void SpawnEnemies()
+        {
+
+        }
+
+        static int SortByOrder(EnemySpawner s1, EnemySpawner s2)
+        {
+            return s1.order.CompareTo(s2.order);
         }
     }
 }

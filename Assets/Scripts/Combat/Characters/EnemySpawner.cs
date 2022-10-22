@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// Authored & Written by <NAME/TAG/SOCIAL LINK>
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
 namespace Necropanda
 {
-    public class LoadCombat : MonoBehaviour, IInteractable
+    public class EnemySpawner : MonoBehaviour
     {
-        public void Interacted(GameObject player)
+        public int order = 0;
+
+        public void SpawnEnemy(Object enemyRef)
         {
-            LoadCombatManager.instance.LoadCombat(player);
+            Instantiate(enemyRef, transform);
         }
     }
 }

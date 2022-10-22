@@ -18,6 +18,12 @@ namespace Necropanda
         private void Start()
         {
             timeline = GameObject.FindObjectOfType<Timeline>();
+            Setup();
+        }
+
+        protected virtual void Setup()
+        {
+
         }
 
         public void Add(Character character)

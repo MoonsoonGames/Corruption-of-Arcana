@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Authored & Written by <NAME/TAG/SOCIAL LINK>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
@@ -12,10 +12,13 @@ namespace Necropanda
 {
     public class EnemyAI : MonoBehaviour
     {
-        bool active = false;
+        bool active = false; public bool GetActive() { return active; }
         GameObject player;
         NavMeshAgent agent;
         Vector3 startPos;
+
+        public string enemyName;
+        public bool boss;
 
         private void Start()
         {
