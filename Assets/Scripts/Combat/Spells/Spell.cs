@@ -87,7 +87,7 @@ namespace Necropanda
                         break;
                 }
 
-                time += moduleTime;
+                time += moduleDelay + moduleTime;
             }
 
             return time;

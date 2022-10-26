@@ -12,9 +12,12 @@ namespace Necropanda
     public class Character : MonoBehaviour
     {
         public string characterName;
+        public Sprite characterSprite;
         public Color timelineColor = new Color(0, 0, 0, 255); //Sets up alpha
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
+
+        public EnemySpawner spawner;
 
         private void Start()
         {
@@ -30,14 +33,29 @@ namespace Necropanda
             return null;
         }
 
-        public void StartTurn()
+        public virtual void StartTurn()
         {
+            
+        }
+
+        public void CheckHealth()
+        {
+            StartCoroutine(IDelayCheckHealth(0.1f));
+        }
+
+        public IEnumerator IDelayCheckHealth(float delay)
+        {
+            yield return new WaitForSeconds(delay);
             if (health.GetHealth() < 1)
             {
                 //Debug.Log(characterName + " Should be killed");
                 health.PlayDeathSound();
                 CombatManager.instance.CharacterDied(this);
                 teamManager.team.Remove(this);
+                if (spawner != null)
+                {
+                    spawner.filled = false;
+                }
                 Destroy(gameObject);
             }
             else

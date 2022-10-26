@@ -75,6 +75,19 @@ namespace Necropanda
             i = Mathf.Clamp(i, toMin, toMax);
             return i;
         }
+
+        [System.Serializable]
+        public struct UtilityModule
+        {
+            public E_UtilityScripts type;
+            public Vector3 axes;
+            public float speed;
+            public float time;
+            [HideInInspector]
+            public float currentTime;
+            [HideInInspector]
+            public bool forward;
+        }
     }
 
     public static class CombatHelperFunctions

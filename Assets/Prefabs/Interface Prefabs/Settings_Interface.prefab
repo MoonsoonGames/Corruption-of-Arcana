@@ -760,12 +760,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4914680407602974981}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8006369205921178335}
+        m_TargetAssemblyTypeName: Necropanda.Audio.VcaController, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2964488741339823473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,12 +1089,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8775543129577368134}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6581730621618055187}
+        m_TargetAssemblyTypeName: Necropanda.Audio.VcaController, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3438892422291400186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,12 +1545,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1685900005394956330}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5894783919538547339}
+        m_TargetAssemblyTypeName: Necropanda.Audio.VcaController, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4815853720211969330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1104310249562434332}
+  - component: {fileID: 8006369205921178335}
   m_Layer: 5
   m_Name: Master Slider
   m_TagString: Untagged
@@ -1824,6 +1861,19 @@ RectTransform:
   m_AnchoredPosition: {x: -439.1, y: 66}
   m_SizeDelta: {x: 338.2, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8006369205921178335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6145432472496637727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18e6e68daf0f4048a0debbb47d52606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VcaName: Master
 --- !u!1 &6249085971907057060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,6 +1996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4760007015674430642}
+  - component: {fileID: 339552864032039612}
   m_Layer: 5
   m_Name: Music Slider
   m_TagString: Untagged
@@ -1975,6 +2026,19 @@ RectTransform:
   m_AnchoredPosition: {x: -439.1, y: 0}
   m_SizeDelta: {x: 338.2, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &339552864032039612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358527853835169972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18e6e68daf0f4048a0debbb47d52606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VcaName: Music
 --- !u!1 &6712127186858517086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,12 +2477,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 520903677161103565}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 339552864032039612}
+        m_TargetAssemblyTypeName: Necropanda.Audio.VcaController, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7941082445396542726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,6 +2777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6894971472283632896}
+  - component: {fileID: 5894783919538547339}
   m_Layer: 5
   m_Name: Sound Effects Slider
   m_TagString: Untagged
@@ -2730,6 +2807,19 @@ RectTransform:
   m_AnchoredPosition: {x: -439.1, y: -66}
   m_SizeDelta: {x: 338.2, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5894783919538547339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8326552675811411097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18e6e68daf0f4048a0debbb47d52606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VcaName: SFX
 --- !u!1 &8405147427342911954
 GameObject:
   m_ObjectHideFlags: 0
@@ -2739,6 +2829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5994112718756530973}
+  - component: {fileID: 6581730621618055187}
   m_Layer: 5
   m_Name: Dialogue Slider
   m_TagString: Untagged
@@ -2768,6 +2859,19 @@ RectTransform:
   m_AnchoredPosition: {x: -439.1, y: -132}
   m_SizeDelta: {x: 338.2, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6581730621618055187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405147427342911954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18e6e68daf0f4048a0debbb47d52606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VcaName: Dialogue
 --- !u!1 &8681055482082538539
 GameObject:
   m_ObjectHideFlags: 0
