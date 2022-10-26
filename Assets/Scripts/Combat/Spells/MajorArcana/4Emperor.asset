@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
+  m_Name: 4Emperor
+  m_EditorClassIdentifier: 
+  spellName: The Emperor
+  flavourText: 
+  spellDescription: Provide 10 shield and apply Barbed Guard to target for 3 turns
+  cardImage: {fileID: 0}
+  overrideColor: 1
+  timelineColor: {r: 0.7924528, g: 0.5494838, b: 0.5494838, a: 255}
+  speed: 0.2
+  arcanaCost: 1
+  spellModules:
+  - target: 1
+    effectType: 8
+    value: 10
+    hitCount: 1
+    executeThreshold: 0
+    statuses:
+    - status: {fileID: 11400000, guid: 72af2937fdae48340b79c8edfd79d1c8, type: 2}
+      duration: 3
+      chance: 1
+  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}
