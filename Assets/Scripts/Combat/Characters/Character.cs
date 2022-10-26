@@ -40,28 +40,28 @@ namespace Necropanda
 
         public void CheckHealth()
         {
-            StartCoroutine(IDelayCheckHealth(0.1f));
-        }
-
-        public IEnumerator IDelayCheckHealth(float delay)
-        {
-            yield return new WaitForSeconds(delay);
             if (health.GetHealth() < 1)
             {
-                //Debug.Log(characterName + " Should be killed");
-                health.PlayDeathSound();
-                CombatManager.instance.CharacterDied(this);
-                teamManager.team.Remove(this);
-                if (spawner != null)
-                {
-                    spawner.filled = false;
-                }
-                Destroy(gameObject);
+                StartCoroutine(IDelayDeath(0.01f));
             }
             else
             {
                 //Debug.Log(characterName + " has " + health.GetHealth() + " health left");
             }
+        }
+
+        public IEnumerator IDelayDeath(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            //Debug.Log(characterName + " Should be killed");
+            health.PlayDeathSound();
+            CombatManager.instance.CharacterDied(this);
+            teamManager.team.Remove(this);
+            if (spawner != null)
+            {
+                spawner.filled = false;
+            }
+            Destroy(gameObject);
         }
     }
 }

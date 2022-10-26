@@ -33,11 +33,17 @@ namespace Necropanda
                 Character character = objectRef.GetComponent<Character>();
                 Sprite newSprite = character.characterSprite;
                 enemyImage.sprite = newSprite;
+                Color color = enemyImage.color;
+                color.a = 255;
+                enemyImage.color = color;
                 Destroy(objectRef);
             }
             else
             {
                 enemyImage.sprite = null;
+                Color color = enemyImage.color;
+                color.a = 0;
+                enemyImage.color = color;
             }
         }
     }
