@@ -13,12 +13,19 @@ MonoBehaviour:
   m_Name: 2Cups
   m_EditorClassIdentifier: 
   spellName: 2 of Cups
-  timelineColor: {r: 0, g: 0.3788753, b: 0.46226418, a: 1}
+  flavourText: 
   spellDescription: Provide 2 shield to target
-  overrideTarget: 0
-  cleaveTargets: 0
-  chainTargets: 0
-  affectPlayer: 0
-  effectType: 9
-  value: 2
-  speed: 0.8
+  cardImage: {fileID: 21300000, guid: 705907dfdd01a664a8ff5fb62756c12b, type: 3}
+  overrideColor: 0
+  timelineColor: {r: 0.5896226, g: 0.96791756, b: 1, a: 1}
+  speed: 0.05
+  arcanaCost: 0
+  spellModules:
+  - target: 1
+    effectType: 8
+    value: 2
+    hitCount: 1
+    executeThreshold: 0
+    statuses: []
+  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}
