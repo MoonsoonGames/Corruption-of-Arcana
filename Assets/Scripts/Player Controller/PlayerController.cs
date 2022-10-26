@@ -29,13 +29,6 @@ namespace NecroPanda.Player
 
         // Animator vairables
         public Animator animator;
-        
-        // Movement variables
-        float x;
-        float z;
-        bool sprinting;
-
-        Vector3 moveVector;   // Combined input for all movement
 
         /// <summary>
         /// Update here, ran each frome. Here we call for the inputs.
@@ -43,7 +36,6 @@ namespace NecroPanda.Player
         void Update()
         {
             GetInput();
-            HandleAnimations(); 
         }
 
         /// <summary>
@@ -61,11 +53,11 @@ namespace NecroPanda.Player
             }
 
             // Get the movement axis
-            x = Input.GetAxis("Horizontal");
-            z = Input.GetAxis("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
             // Combine into one variable which gets used later
-            moveVector = transform.right * x + transform.forward * z;
+            Vector3 moveVector = transform.right * x + transform.forward * z;
 
             // Move using the controller component
             controller.Move(moveVector * speed * Time.deltaTime);
@@ -73,66 +65,53 @@ namespace NecroPanda.Player
             // Input checks
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                sprinting = true;
                 speed = speed * 2f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                sprinting = false;
                 speed = speed / 2f;
             }
 
             // Calculate and apply gravity
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
+
+            HandleAnimations(moveVector, true);
         }
 
         /// <summary>
         /// This function handles the sprite animations of taro. Interacts with the animator component.
         /// </summary>
-        void HandleAnimations()
+        void HandleAnimations(Vector3 move, bool moving)
         {
-            //Check to see player direction
-            if (controller.isGrounded)
+            switch (move.x)
             {
-                Vector3 moveDirection = transform.TransformDirection(moveVector);
-
-                //Apply animation based on direction
-                moveDirection *= speed;
-
-                animator.SetBool("Move", moveDirection != new Vector3(0, 0, 0));
-                
-                // Setup the switch for forward and backwards.
-                switch (moveVector.x)
-                {
-                    // Forwards
-                    case > 0:
-                        animator.SetInteger("Direction", 1);
-                    break; 
-
-                    // Backwards
-                    case < 0:
-                        animator.SetInteger("Direction", 2);
-                    break; 
-                }
-
-                // Setup the switch for left and right.
-                switch (moveVector.z)
-                {
-                    // Left
-                    case > 0:
-                        animator.SetInteger("Direction", 3);
+                case > 0:
+                    //anim code for right? direction
                     break;
-
-                    // Right
-                    case < 0:
-                        animator.SetInteger("Direction", 4);
+                case < 0:
+                    //anim code for left? direction
                     break;
-                }
-
-                // Set up the sprinting variable. Based on input.
-                animator.SetBool("Sprinting", sprinting);
             }
+
+            switch (move.z)
+            {
+                case > 0:
+                    //anim code for forward? direction
+                    break;
+                case < 0:
+                    //anim code for backward? direction
+                    break;
+            }
+
+            if (moving)
+            {
+                //anim code set to move
+            }
+
+            //Check to see player direction
+
+            //Apply animation based on direction
         }
     }
 }
