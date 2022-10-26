@@ -103,6 +103,8 @@ namespace Necropanda
 
             float time = distance / (projectileSpeed * speedCalculationMultiplier);
             //Debug.Log(time);
+            time = Time.fixedDeltaTime / projectileSpeed; //Instead of 1, use the time between frames
+            //float fixedFrameTime = Time.fixedDeltaTime;
             return time;
         }
     }
