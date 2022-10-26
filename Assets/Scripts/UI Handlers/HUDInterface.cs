@@ -3,28 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsInterface : MonoBehaviour
+public class HUDInterface : MonoBehaviour
 {
-    public GameObject SettingsScreen;
-    public Slider MasterVolume;
-    public Slider MusicVolume;
-    public Slider SEVolume;
-    public Slider DialogueVolume; //This might be scraped due to timeframe
+    public GameObject SettingsMenu;
     public bool SettingsOpen = false;
 
-    public void Settings()
-    {
-        //open settings screen
-        SettingsScreen.SetActive(true);
-        SettingsOpen = true;
-    }
-
+    // Start is called before the first frame update
     void Start()
     {
-        SettingsOpen = false;
-        SettingsScreen.SetActive(false);
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -32,15 +22,21 @@ public class SettingsInterface : MonoBehaviour
             if(SettingsOpen == false)
             {
                 Debug.Log("Open Settings");
-                SettingsScreen.SetActive(true);
+                SettingsMenu.SetActive(true);
                 SettingsOpen = true;
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }        
 
             else if (SettingsOpen == true)
             {
                 Debug.Log("Close Settings");
-                SettingsScreen.SetActive(false);
+                SettingsMenu.SetActive(false);
                 SettingsOpen = false;
+
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
     }
