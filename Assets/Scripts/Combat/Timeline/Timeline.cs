@@ -196,7 +196,7 @@ namespace Necropanda
             float delay = CastSpells();
             Invoke("ActivateStatuses", delay);
             delay += statuses.Count * statusOffset;
-
+            delay += 0.5f;
             return delay;
         }
 

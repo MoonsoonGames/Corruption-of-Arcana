@@ -38,5 +38,7 @@ namespace Necropanda
         {
             Singleton();
         }
+
+        public bool canDrag;
     }
 }

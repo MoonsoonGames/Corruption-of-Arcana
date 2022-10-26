@@ -11,12 +11,9 @@ namespace Necropanda
 {
     public class LoadCombat : MonoBehaviour, IInteractable
     {
-        public E_Scenes combatScene;
-
         public void Interacted(GameObject player)
         {
-            Debug.Log("Interacted - Load Combat");
-            LoadingScene.instance.LoadScene(combatScene);
+            LoadCombatManager.instance.LoadCombat(player);
         }
     }
 }

@@ -15,9 +15,15 @@ namespace Necropanda
 
         public List<Character> team = new List<Character>();
 
-        private void Start()
+        protected virtual void Start()
         {
             timeline = GameObject.FindObjectOfType<Timeline>();
+            Setup();
+        }
+
+        protected virtual void Setup()
+        {
+
         }
 
         public void Add(Character character)
@@ -31,9 +37,23 @@ namespace Necropanda
 
         public virtual void StartTurn()
         {
+            CheckKilled();
+            ActivateTurns();
+        }
+
+        public void CheckKilled()
+        {
             for (int i = 0; i < team.Count; i++)
             {
-                team[i].Invoke("StartTurn", 0.1f);
+                team[i].CheckHealth();
+            }
+        }
+        
+        public void ActivateTurns()
+        {
+            for (int i = 0; i < team.Count; i++)
+            {
+                team[i].StartTurn();
             }
         }
     }
