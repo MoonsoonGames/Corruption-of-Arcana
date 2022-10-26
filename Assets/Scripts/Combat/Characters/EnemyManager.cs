@@ -13,6 +13,14 @@ namespace Necropanda
     {
         public Character player;
         EnemySpawner[] spawners;
+        EnemyQueue enemyQueue;
+
+        protected override void Start()
+        {
+            enemyQueue = GetComponentInChildren<EnemyQueue>();
+            enemyQueue.Setup();
+            base.Start();
+        }
 
         public override void StartTurn()
         {
@@ -82,6 +90,9 @@ namespace Necropanda
                     }
                 }
             }
+
+            if (enemyQueue != null)
+                enemyQueue.UpdateUI();
         }
 
         static int SortByOrder(EnemySpawner s1, EnemySpawner s2)

@@ -15,7 +15,7 @@ namespace Necropanda
 
         public List<Character> team = new List<Character>();
 
-        private void Start()
+        protected virtual void Start()
         {
             timeline = GameObject.FindObjectOfType<Timeline>();
             Setup();
