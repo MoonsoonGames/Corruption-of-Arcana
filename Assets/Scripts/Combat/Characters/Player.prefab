@@ -78,92 +78,99 @@ MonoBehaviour:
   healthColor: {r: 0.018116832, g: 1, b: 0, a: 1}
   lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
   lowHealthThresholdPercentage: 0.4
-  defualtSoundEffect:
+  defaultSoundEffectHealth:
     Guid:
-      Data1: 173915668
-      Data2: 1256608992
-      Data3: -749856847
-      Data4: 2031926762
-    Path: event:/Combat/Damage Type/Physical/Physical - Flesh
+      Data1: 1993795648
+      Data2: 1131469179
+      Data3: -885849706
+      Data4: 2082907646
+    Path: event:/Combat/Taro/Take Damage (PH)
+  defaultSoundEffectShield:
+    Guid:
+      Data1: 174370161
+      Data2: 1325307161
+      Data3: -1080130168
+      Data4: -2023253719
+    Path: event:/Combat/Taro/Shield Down
   damageScaling: {x: 0, y: 0}
   soundEffects:
   - effectType: 0
     sounds:
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 173915668
+          Data2: 1256608992
+          Data3: -749856847
+          Data4: 2031926762
+        Path: event:/Combat/Damage Type/Physical/Physical - Flesh
       intensityThreshold: 0
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 173915668
+          Data2: 1256608992
+          Data3: -749856847
+          Data4: 2031926762
+        Path: event:/Combat/Damage Type/Physical/Physical - Flesh
       intensityThreshold: 0.3
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 173915668
+          Data2: 1256608992
+          Data3: -749856847
+          Data4: 2031926762
+        Path: event:/Combat/Damage Type/Physical/Physical - Flesh
       intensityThreshold: 0.6
   - effectType: 1
     sounds:
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 283102272
+          Data2: 1332008121
+          Data3: -817453161
+          Data4: 1517093209
+        Path: event:/Combat/Damage Type/Ember
       intensityThreshold: 0
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 283102272
+          Data2: 1332008121
+          Data3: -817453161
+          Data4: 1517093209
+        Path: event:/Combat/Damage Type/Ember
       intensityThreshold: 0.3
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 283102272
+          Data2: 1332008121
+          Data3: -817453161
+          Data4: 1517093209
+        Path: event:/Combat/Damage Type/Ember
       intensityThreshold: 0.6
   - effectType: 2
     sounds:
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 1196759936
+          Data2: 1315050620
+          Data3: -285352050
+          Data4: 1996717534
+        Path: event:/Combat/Damage Type/Static
       intensityThreshold: 0
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 1196759936
+          Data2: 1315050620
+          Data3: -285352050
+          Data4: 1996717534
+        Path: event:/Combat/Damage Type/Static
       intensityThreshold: 0.3
     - sound:
         Guid:
-          Data1: 1993795648
-          Data2: 1131469179
-          Data3: -885849706
-          Data4: 2082907646
-        Path: event:/Combat/Taro/Take Damage (PH)
+          Data1: 1196759936
+          Data2: 1315050620
+          Data3: -285352050
+          Data4: 1996717534
+        Path: event:/Combat/Damage Type/Static
       intensityThreshold: 0.6
   - effectType: 3
     sounds:
@@ -242,6 +249,58 @@ MonoBehaviour:
           Data3: 1637996417
           Data4: 1451605003
         Path: event:/Combat/Damage Type/Perforation
+      intensityThreshold: 0.6
+  - effectType: 7
+    sounds:
+    - sound:
+        Guid:
+          Data1: -573268067
+          Data2: 1219841203
+          Data3: -107470449
+          Data4: -179748631
+        Path: event:/Combat/Healing/Heal level 1 (PH)
+      intensityThreshold: 0
+    - sound:
+        Guid:
+          Data1: -1201431630
+          Data2: 1321216654
+          Data3: -1915640672
+          Data4: 1526296554
+        Path: event:/Combat/Healing/Heal level 2
+      intensityThreshold: 0.3
+    - sound:
+        Guid:
+          Data1: -1021220890
+          Data2: 1120440723
+          Data3: 705257095
+          Data4: 1843508093
+        Path: event:/Combat/Healing/Heal level 3
+      intensityThreshold: 0.6
+  - effectType: 8
+    sounds:
+    - sound:
+        Guid:
+          Data1: -1692745119
+          Data2: 1253261577
+          Data3: -1752632413
+          Data4: -1123925768
+        Path: event:/Combat/Shields/Shield level 1
+      intensityThreshold: 0
+    - sound:
+        Guid:
+          Data1: -1083547268
+          Data2: 1230458430
+          Data3: -1794470743
+          Data4: -883226374
+        Path: event:/Combat/Shields/Shield level 2
+      intensityThreshold: 0.3
+    - sound:
+        Guid:
+          Data1: -1248918156
+          Data2: 1196484605
+          Data3: -44034127
+          Data4: -1998702692
+        Path: event:/Combat/Shields/Shield level 3
       intensityThreshold: 0.6
 --- !u!114 &4211181404541985285
 MonoBehaviour:
