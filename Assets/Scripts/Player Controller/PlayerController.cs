@@ -16,8 +16,10 @@ namespace NecroPanda.Player
     {
         public CharacterController controller; // Ref to the Character Controller Component.
 
+        bool sprinting = false;
         public float speed = 12f; // The speed at which the player moves.
         public float gravity = -9.81f; // The amount of gravity that the is applied.
+        public float moveDeadzone = 0.6f;
 
         public Transform groundCheck; // Transform for checking whether the player is grounded.
         public float groundDistance = 0.4f; // The distance of the player to the ground.
@@ -65,10 +67,12 @@ namespace NecroPanda.Player
             // Input checks
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                sprinting = true;
                 speed = speed * 2f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
+                sprinting = false;
                 speed = speed / 2f;
             }
 
@@ -76,7 +80,11 @@ namespace NecroPanda.Player
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
 
-            HandleAnimations(moveVector, true);
+            bool moving = moveVector != new Vector3(0, 0, 0);
+
+            Vector3 inputVector = new Vector3(x, 0, z);
+
+            HandleAnimations(inputVector, moving);
         }
 
         /// <summary>
@@ -84,30 +92,33 @@ namespace NecroPanda.Player
         /// </summary>
         void HandleAnimations(Vector3 move, bool moving)
         {
-            switch (move.x)
-            {
-                case > 0:
-                    //anim code for right? direction
-                    break;
-                case < 0:
-                    //anim code for left? direction
-                    break;
-            }
-
-            switch (move.z)
-            {
-                case > 0:
-                    //anim code for forward? direction
-                    break;
-                case < 0:
-                    //anim code for backward? direction
-                    break;
-            }
-
+            //Debug.Log("Moving: " + move);
             if (moving)
             {
-                //anim code set to move
+                if (move.z > moveDeadzone)
+                {
+                    Debug.Log("Moving forward");
+                    animator.SetInteger("Direction", 1);
+                }
+                else if (move.z < -moveDeadzone)
+                {
+                    Debug.Log("Moving back");
+                    animator.SetInteger("Direction", 2);
+                }
+                else if (move.x < -moveDeadzone)
+                {
+                    Debug.Log("Moving left");
+                    animator.SetInteger("Direction", 3);
+                }
+                else if (move.x > moveDeadzone)
+                {
+                    Debug.Log("Moving right");
+                    animator.SetInteger("Direction", 4);
+                }
             }
+
+            animator.SetBool("Moving", moving);
+            animator.SetBool("Sprinting", sprinting);
 
             //Check to see player direction
 
