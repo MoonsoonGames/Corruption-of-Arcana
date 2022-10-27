@@ -29,12 +29,19 @@ public class SettingsInterface : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(SettingsOpen == true)
+            if(SettingsOpen == false)
+            {
+                Debug.Log("Open Settings");
+                SettingsScreen.SetActive(true);
+                SettingsOpen = true;
+            }        
+
+            else if (SettingsOpen == true)
             {
                 Debug.Log("Close Settings");
                 SettingsScreen.SetActive(false);
                 SettingsOpen = false;
-            }    
+            }
         }
     }
 }
