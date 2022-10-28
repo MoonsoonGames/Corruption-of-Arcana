@@ -16,6 +16,11 @@ namespace Necropanda
         void Interacted(GameObject player);
     }
 
+    public interface ICancelInteractable
+    {
+        void CancelInteraction(GameObject player);
+    }
+
     #endregion
 
     #region General Helper Functions
