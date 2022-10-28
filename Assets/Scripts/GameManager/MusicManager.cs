@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -11,16 +12,36 @@ namespace Necropanda
 {
     public class MusicManager : MonoBehaviour
     {
+        #region Singleton
+        //Code from last year
+
+        public static MusicManager instance = null;
+
+        void Singleton()
+        {
+            if (instance == null)
+            {
+                instance = this;
+
+                DontDestroyOnLoad(this);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+
         // Start is called before the first frame update
         void Start()
         {
-            
+            Singleton();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void PlayMusic()
         {
-            
+
         }
     }
 }
