@@ -11,11 +11,12 @@ namespace Necropanda.Interactable
 {
     public class LightSwitch : MonoBehaviour, IInteractable
     {
-        public GameObject light;
+        public GameObject[] thingsToSwitch;
         public void Interacted(GameObject player)
         {
-            // Toggles the light
-            light.SetActive(!light.activeInHierarchy);
+            foreach (GameObject GO in thingsToSwitch){
+                GO.SetActive(!GO.activeInHierarchy);
+            }
         }
     }
 }
