@@ -27,6 +27,7 @@ public class HUDInterface : MonoBehaviour
 
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
             }        
 
             else if (SettingsOpen == true)
@@ -37,6 +38,7 @@ public class HUDInterface : MonoBehaviour
 
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 1;
             }
         }
     }
