@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 6415384419620348150}
   - component: {fileID: 6611967239967125590}
   - component: {fileID: 4646851015473541259}
+  - component: {fileID: -6369506473341814810}
   m_Layer: 8
   m_Name: Third Person Player
   m_TagString: Player
@@ -419,6 +420,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-6369506473341814810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940659339934191094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+      type: 3}
+    Params:
+    - Name: Combat Switch
+      Value: 0
+  TriggerEvent: 7
 --- !u!1 &1940659340735814500
 GameObject:
   m_ObjectHideFlags: 0
