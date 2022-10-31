@@ -19,7 +19,7 @@ namespace Necropanda
 
         public EnemySpawner spawner;
 
-        private void Start()
+        protected virtual void Start()
         {
             health = GetComponent<CharacterHealth>();
 

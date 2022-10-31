@@ -56,5 +56,10 @@ namespace Necropanda
                 team[i].StartTurn();
             }
         }
+
+        public void AddSpellInstance(CombatHelperFunctions.SpellInstance newSpellInstance)
+        {
+            timeline.AddSpellInstance(newSpellInstance);
+        }
     }
 }

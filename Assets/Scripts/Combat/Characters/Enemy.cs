@@ -13,6 +13,14 @@ namespace Necropanda
     {
         public List<Spell> spells = new List<Spell>();
 
+        EnemyManager enemyManager;
+
+        protected override void Start()
+        {
+            base.Start();
+            enemyManager = (EnemyManager)teamManager;
+        }
+
         public override Spell PrepareSpell()
         {
             return spells[Random.Range(0, spells.Count)];
@@ -21,10 +29,10 @@ namespace Necropanda
         public override void StartTurn()
         {
             //In future, determine target depending on spell so it can cast support spells on allies/self
-            //CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-            //newSpellInstance.SetSpellInstance(PrepareSpell(), player, this);
+            CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
+            newSpellInstance.SetSpellInstance(PrepareSpell(), enemyManager.player, this);
 
-            //.AddSpellInstance(newSpellInstance);
+            enemyManager.AddSpellInstance(newSpellInstance);
         }
     }
 }
