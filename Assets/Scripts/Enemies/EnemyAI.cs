@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// Authored & Written by Andrew Scott andrewscott@icloud.com and @mattordev
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace Necropanda
+namespace Necropanda.AI
 {
     public class EnemyAI : MonoBehaviour
     {
@@ -19,6 +19,12 @@ namespace Necropanda
 
         public Object enemyObject;
         public bool boss;
+
+        //state variables
+        public AIState currentState; // The current state of the AI. Wandering, Fleeing etc.
+        public int avoidancePriority = 15; // The level of avoidance priority for the agent. lower = more important. Might be worth setting this based on the type of the enemy
+        public float timer = 0f; // Internal timer used for state changes and tracking.
+
 
         private void Start()
         {
@@ -46,8 +52,38 @@ namespace Necropanda
         {
             if (active)
             {
+                HFSM();
+                Timer();
                 agent.SetDestination(player.transform.position);
             }
         }
+
+        /// <summary>
+        /// This is the brain of the AI and controls its states.
+        /// Main AI Logic. Incorporates AI HFSM (Hierarchical Finite State Machine) flow.
+        /// State Explanations:
+        ///         - Nothing: AI does nothing, will be static and not process anything. Currently will switch out of this state
+        ///                    after 10 seconds.
+        ///         - Wandering: AI will wander within a radius.
+        ///         - Chasing: Chases the target or player.
+        ///         - Patrolling: AI Drops points around it and patrols them for a set period.
+        /// /// </summary>
+        void HFSM()
+        {
+            switch (currentState)
+            {
+                default:
+                    currentState = AIState.Nothing;
+                    break;
+            }
+        }
+
+        #region util
+        public void Timer()
+        {
+            // Start the timer
+            timer += Time.deltaTime;
+        }
+        #endregion
     }
 }
