@@ -54,7 +54,7 @@ namespace Necropanda.AI
             {
                 HFSM();
                 Timer();
-                agent.SetDestination(player.transform.position);
+                
             }
         }
 
@@ -74,6 +74,18 @@ namespace Necropanda.AI
             {
                 default:
                     currentState = AIState.Nothing;
+                    break;
+
+                case AIState.Chasing:
+                    agent.SetDestination(player.transform.position);
+                    break;
+
+                case AIState.Wandering:
+
+                    break;
+
+                case AIState.Patrolling:
+
                     break;
             }
         }
