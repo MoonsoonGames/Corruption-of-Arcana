@@ -11,7 +11,9 @@ namespace Necropanda
 {
     public class Enemy : Character
     {
+        public SpellCastingAI SpellCastingAI;
         public List<Spell> spells = new List<Spell>();
+        public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
 
         EnemyManager enemyManager;
 
@@ -21,16 +23,17 @@ namespace Necropanda
             enemyManager = (EnemyManager)teamManager;
         }
 
-        public override Spell PrepareSpell()
+        public override CombatHelperFunctions.SpellUtility PrepareSpell()
         {
-            return spells[Random.Range(0, spells.Count)];
+            return SpellCastingAI.GetSpell(spells, enemyManager.team, enemyManager.opposingTeam);
         }
 
         public override void StartTurn()
         {
             //In future, determine target depending on spell so it can cast support spells on allies/self
             CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-            newSpellInstance.SetSpellInstance(PrepareSpell(), enemyManager.player, this);
+            CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
+            newSpellInstance.SetSpellInstance(spellUtility.spell, spellUtility.target, this);
 
             enemyManager.AddSpellInstance(newSpellInstance);
         }

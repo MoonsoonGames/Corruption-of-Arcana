@@ -27,10 +27,10 @@ namespace Necropanda
             teamManager.Add(this);
         }
 
-        public virtual Spell PrepareSpell()
+        public virtual CombatHelperFunctions.SpellUtility PrepareSpell()
         {
             //Overwritten by children
-            return null;
+            return new CombatHelperFunctions.SpellUtility();
         }
 
         public virtual void StartTurn()
