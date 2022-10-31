@@ -12,12 +12,13 @@ namespace Necropanda.Interactable
     public class Interactable : MonoBehaviour
     {
         public bool forceInteract;
+        GameObject interactingCharacter;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log(other.name + " has entered collision");
+                //Debug.Log(other.name + " has entered collision");
 
                 if (forceInteract)
                 {
@@ -26,22 +27,20 @@ namespace Necropanda.Interactable
                 else
                 {
                     //Open interact message
+                    interactingCharacter = other.gameObject;
                 }
             }
         }
 
-        private void OnTriggerStay(Collider other)
+        private void Update()
         {
-            if (other.CompareTag("Player"))
+            if (interactingCharacter != null && forceInteract == false)
             {
-                if (!forceInteract)
+                //Debug.Log("Can interact");
+                if (Input.GetButtonDown("Interact"))
                 {
-                    Debug.Log("Can interact");
-                    if (Input.GetButtonDown("Interact"))
-                    {
-                        Debug.Log("Button pressed");
-                        Interact(other.gameObject);
-                    }
+                    //Debug.Log("Button pressed");
+                    Interact(interactingCharacter);
                 }
             }
         }
@@ -50,9 +49,17 @@ namespace Necropanda.Interactable
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log(other.name + " has left collision");
+                //Debug.Log(other.name + " has left collision");
 
-                //Close interact message
+                if (forceInteract)
+                {
+                    CancelInteract(other.gameObject);
+                }
+                else
+                {
+                    //Close interact message
+                    interactingCharacter = null;
+                }
             }
         }
 
@@ -61,6 +68,13 @@ namespace Necropanda.Interactable
             //Call interface function
             Debug.Log("Interact");
             GetComponent<IInteractable>().Interacted(playerRef);
+        }
+
+        void CancelInteract(GameObject playerRef)
+        {
+            //Call interface function
+            Debug.Log("Interact");
+            GetComponent<ICancelInteractable>().CancelInteraction(playerRef);
         }
     }
 }
