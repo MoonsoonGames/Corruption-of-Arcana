@@ -14,6 +14,8 @@ namespace Necropanda
         protected Timeline timeline;
 
         public List<Character> team = new List<Character>();
+        [HideInInspector]
+        public List<Character> opposingTeam = new List<Character>();
 
         protected virtual void Start()
         {
@@ -29,10 +31,33 @@ namespace Necropanda
         public void Add(Character character)
         {
             team.Add(character);
+            RecalculateAllTeams();
         }
         public void Remove(Character character)
         {
             team.Remove(character);
+            RecalculateAllTeams();
+        }
+
+        void RecalculateAllTeams()
+        {
+            foreach (TeamManager teamManager in GameObject.FindObjectsOfType<TeamManager>())
+            {
+                teamManager.RecalculateTeams();
+            }
+        }
+
+        public void RecalculateTeams()
+        {
+            opposingTeam = new List<Character>();
+
+            foreach (Character character in GameObject.FindObjectsOfType<Character>())
+            {
+                if (team.Contains(character) == false)
+                {
+                    opposingTeam.Add(character);
+                }
+            }
         }
 
         public virtual void StartTurn()
@@ -55,6 +80,11 @@ namespace Necropanda
             {
                 team[i].StartTurn();
             }
+        }
+
+        public void AddSpellInstance(CombatHelperFunctions.SpellInstance newSpellInstance)
+        {
+            timeline.AddSpellInstance(newSpellInstance);
         }
     }
 }

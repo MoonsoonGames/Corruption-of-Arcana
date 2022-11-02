@@ -138,6 +138,29 @@ namespace Necropanda
             }
         }
 
+        #region AI
+
+        public struct SpellUtility
+        {
+            public AISpell spell;
+            public Character target;
+            public float utility;
+        }
+
+        [System.Serializable]
+        public struct AISpell
+        {
+            public Spell spell;
+            public bool targetSelf;
+            public bool targetAllies;
+            public bool targetEnemies;
+            public int timeCooldown;
+            //[HideInInspector]
+            public int lastUsed;
+        }
+
+        #endregion
+
         #endregion
 
         #region Status Effects

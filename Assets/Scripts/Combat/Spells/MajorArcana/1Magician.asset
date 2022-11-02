@@ -14,23 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Magician
   flavourText: 
-  spellDescription: Hit target with 5 Static damage and hit all target's allies with
-    3 Static damage
+  spellDescription: Hit target with 8 Static damage and hit all target's allies with
+    4 Static damage
   cardImage: {fileID: 21300000, guid: c4b6205a7a7659e4cb9d1dafad788c50, type: 3}
   overrideColor: 1
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   speed: 0.6
   arcanaCost: 2
+  multihitDelay: 0.1
+  moduleDelay: 0
   spellModules:
   - target: 3
     effectType: 2
-    value: 3
+    value: 8
     hitCount: 1
     executeThreshold: 0
     statuses: []
   - target: 1
     effectType: 2
-    value: 2
+    value: 4
     hitCount: 1
     executeThreshold: 0
     statuses: []

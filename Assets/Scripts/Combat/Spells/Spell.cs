@@ -72,7 +72,7 @@ namespace Necropanda
             {
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
-                List<Character> allCharacters = HelperFunctions.CombineLists(targetTeamManager.team, casterTeamManager.team);
+                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
                 float hitDelay = module.hitCount * multihitDelay;
                 float moduleTime = 0;
@@ -101,7 +101,7 @@ namespace Necropanda
             {
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
-                List<Character> allCharacters = HelperFunctions.CombineLists(targetTeamManager.team, casterTeamManager.team);
+                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
@@ -165,7 +165,7 @@ namespace Necropanda
             if (caster == null)
             {
 
-                Debug.Log("Spell cast: " + spellName + " at " + caster.characterName);
+                Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 caster.GetHealth().ChangeHealth(spell.effectType, spell.value, caster);
 
@@ -185,7 +185,7 @@ namespace Necropanda
             if (target != null)
             {
 
-                Debug.Log("Spell cast: " + spellName + " at " + target.characterName);
+                Debug.Log("Spell cast: " + spellName + " at " + target.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
                 target.GetHealth().ChangeHealth(realEffectType, spell.value, caster);

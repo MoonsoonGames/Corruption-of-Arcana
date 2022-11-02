@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e306a5ff4f2a5e4a899426faa5a526a, type: 3}
+  m_Name: LichStats
+  m_EditorClassIdentifier: 
+  characterName: Lich
+  characterSprite: {fileID: 21300000, guid: 2b96b0ebb8ee9374689bd2541c55a9d8, type: 3}
+  characterDescription: 
+  location: 
+  maxHealth: 50
+  baseDamageResistancesType: 
+  baseDamageResistancesModifier: []
+  timelineColor: {r: 0.31181023, g: 0.8584906, b: 0.50465035, a: 255}
+  ai: {fileID: 11400000, guid: 466cbe13dcc7d4040961d58049454057, type: 2}
+  aISpells:
+  - spell: {fileID: 11400000, guid: 6f306ebebf9dea844a28f0faf7c1736d, type: 2}
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 0
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 62f9a936ef0ac8e4eb33c455128f270e, type: 2}
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 2
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 74f0daba23fa5034f9276d76fc10e12c, type: 2}
+    targetSelf: 0
+    targetAllies: 1
+    targetEnemies: 0
+    timeCooldown: 1
+    lastUsed: 0

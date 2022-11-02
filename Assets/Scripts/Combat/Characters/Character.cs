@@ -11,15 +11,13 @@ namespace Necropanda
 {
     public class Character : MonoBehaviour
     {
-        public string characterName;
-        public Sprite characterSprite;
-        public Color timelineColor = new Color(0, 0, 0, 255); //Sets up alpha
+        public CharacterStats stats;
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 
         public EnemySpawner spawner;
 
-        private void Start()
+        protected virtual void Start()
         {
             health = GetComponent<CharacterHealth>();
 
@@ -27,10 +25,10 @@ namespace Necropanda
             teamManager.Add(this);
         }
 
-        public virtual Spell PrepareSpell()
+        public virtual CombatHelperFunctions.SpellUtility PrepareSpell()
         {
             //Overwritten by children
-            return null;
+            return new CombatHelperFunctions.SpellUtility();
         }
 
         public virtual void StartTurn()
