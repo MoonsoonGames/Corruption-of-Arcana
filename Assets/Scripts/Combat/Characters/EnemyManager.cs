@@ -25,9 +25,13 @@ namespace Necropanda
         public override void StartTurn()
         {
             CheckKilled();
-            SpawnEnemies();
-            ActivateTurns();
-            
+            Invoke("SpawnEnemies", 0.02f);
+            Invoke("ActivateTurns", 0.03f);
+        }
+
+        //Delete once AI has been implemented
+        public override void ActivateTurns()
+        {
             foreach (Character character in team)
             {
                 if (character.GetHealth().GetHealth() > 0)

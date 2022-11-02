@@ -49,7 +49,7 @@ namespace Necropanda
             }
         }
         
-        public void ActivateTurns()
+        public virtual void ActivateTurns()
         {
             for (int i = 0; i < team.Count; i++)
             {

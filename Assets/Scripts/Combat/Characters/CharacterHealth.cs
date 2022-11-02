@@ -182,7 +182,8 @@ namespace Necropanda
 
         #region Sound Effects
 
-        public EventReference defualtSoundEffect;
+        public EventReference defaultSoundEffectHealth;
+        public EventReference defaultSoundEffectShield;
         public Vector2Int damageScaling;
         public SoundEffects.SoundModule[] soundEffects;
         //FMOD.Studio.EventInstance fmodInstance;
@@ -198,16 +199,32 @@ namespace Necropanda
                 }
             }
 
-            //Play sound based on damage type
-            //Modify sound based on whether target has shields or not (put sound modifiers in lines 24 and 26)
-            if (shield > 0)
+            if (CheckDamage(type))
             {
-                //Target took damage to shield, dull sound
+                //Play sound based on damage type
+                //Modify sound based on whether target has shields or not (put sound modifiers in lines 24 and 26)
+                if (shield > 0)
+                {
+                    //Target took damage to shield, dull sound
+                    //Target took direct damage to health, intense sound
+                    RuntimeManager.PlayOneShot(defaultSoundEffectShield);
+                }
+                else
+                {
+                    //Target took direct damage to health, intense sound
+                    RuntimeManager.PlayOneShot(defaultSoundEffectHealth);
+                }
             }
-            else
+        }
+
+        bool CheckDamage(E_DamageTypes type)
+        {
+            if (type == E_DamageTypes.Healing || type == E_DamageTypes.Shield)
             {
-                //Target took direct damage to health, intense sound
+                return false;
             }
+
+            return true;
         }
 
         public void PlayDeathSound()

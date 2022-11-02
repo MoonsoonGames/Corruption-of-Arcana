@@ -43,7 +43,7 @@ namespace Necropanda
             {
                 //Debug.Log("Character Killed on enemy team");
                 enemyTeamManager.Remove(character);
-                if (enemyTeamManager.team.Count == 0)
+                if (enemyTeamManager.team.Count + LoadCombatManager.instance.enemies.Count == 0)
                 {
                     ShowEndScreen(true);
                 }

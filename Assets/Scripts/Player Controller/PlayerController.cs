@@ -16,8 +16,10 @@ namespace NecroPanda.Player
     {
         public CharacterController controller; // Ref to the Character Controller Component.
 
+        bool sprinting = false;
         public float speed = 12f; // The speed at which the player moves.
         public float gravity = -9.81f; // The amount of gravity that the is applied.
+        public float moveDeadzone = 0.6f;
 
         public Transform groundCheck; // Transform for checking whether the player is grounded.
         public float groundDistance = 0.4f; // The distance of the player to the ground.
@@ -36,7 +38,6 @@ namespace NecroPanda.Player
         void Update()
         {
             GetInput();
-            HandleAnimations(); 
         }
 
         /// <summary>
@@ -58,31 +59,67 @@ namespace NecroPanda.Player
             float z = Input.GetAxis("Vertical");
 
             // Combine into one variable which gets used later
-            Vector3 move = transform.right * x + transform.forward * z;
+            Vector3 moveVector = transform.right * x + transform.forward * z;
 
             // Move using the controller component
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(moveVector * speed * Time.deltaTime);
 
             // Input checks
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                sprinting = true;
                 speed = speed * 2f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
+                sprinting = false;
                 speed = speed / 2f;
             }
 
             // Calculate and apply gravity
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
+
+            bool moving = moveVector != new Vector3(0, 0, 0);
+
+            Vector3 inputVector = new Vector3(x, 0, z);
+
+            HandleAnimations(inputVector, moving);
         }
 
         /// <summary>
         /// This function handles the sprite animations of taro. Interacts with the animator component.
         /// </summary>
-        void HandleAnimations()
+        void HandleAnimations(Vector3 move, bool moving)
         {
+            //Debug.Log("Moving: " + move);
+            if (moving)
+            {
+                if (move.z > moveDeadzone)
+                {
+                    Debug.Log("Moving forward");
+                    animator.SetInteger("Direction", 1);
+                }
+                else if (move.z < -moveDeadzone)
+                {
+                    Debug.Log("Moving back");
+                    animator.SetInteger("Direction", 2);
+                }
+                else if (move.x < -moveDeadzone)
+                {
+                    Debug.Log("Moving left");
+                    animator.SetInteger("Direction", 3);
+                }
+                else if (move.x > moveDeadzone)
+                {
+                    Debug.Log("Moving right");
+                    animator.SetInteger("Direction", 4);
+                }
+            }
+
+            animator.SetBool("Moving", moving);
+            animator.SetBool("Sprinting", sprinting);
+
             //Check to see player direction
 
             //Apply animation based on direction

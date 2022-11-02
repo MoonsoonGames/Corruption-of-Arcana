@@ -210,7 +210,7 @@ namespace Necropanda
                 //Use a coroutine to stagger spellcasting
                 StartCoroutine(IDelaySpell(item, i));
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
-                i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition);
+                i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition) + spellDelayOffset;
 
                 Debug.Log("Spell " + item.spell.spellName + " has a delay of " + i);
             }

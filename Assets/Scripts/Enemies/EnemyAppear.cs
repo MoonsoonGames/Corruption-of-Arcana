@@ -9,12 +9,15 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class EnemyAppear : MonoBehaviour, IInteractable
+    public class EnemyAppear : MonoBehaviour, IInteractable, ICancelInteractable
     {
         public GameObject art;
         public Object fx;
+        public LayerMask layerMask;
         bool active = false;
         EnemyAI aiScript;
+
+        GameObject player;
 
         private void Start()
         {
@@ -22,35 +25,63 @@ namespace Necropanda
             aiScript = GetComponent<EnemyAI>();
         }
 
-        public void Interacted(GameObject player)
+        public void Interacted(GameObject playerRef)
         {
-            if (!active)
-            {
-                Debug.Log("Interacted - Unearth and activate AI");
-                //Unearth and activate AI
-                art.SetActive(true);
-                aiScript.ActivateAI(player);
-                if (fx != null)
-                {
-                    Instantiate(fx, this.gameObject.transform);
-                    fx = null;
-                }
+            player = playerRef;
+        }
 
-                active = true;
-            }
-            else
+        public void CancelInteraction(GameObject playerRef)
+        {
+            if (playerRef == player)
             {
-                //Already active
+                Debug.Log("Cancel interaction");
+
+                player = null;
+                Deactivate();
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void Update()
         {
-            if (other.CompareTag("Player"))
+            if (player != null)
             {
-                Debug.Log(other.name + " has left collision");
+                Vector3 targetDirection = player.transform.position - transform.position;
+                Debug.Log(player.name);
+                RaycastHit hit;
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, layerMask))
+                {
+                    Debug.Log("Collided with: " + hit.collider.gameObject);
+                    if (hit.collider.gameObject == player)
+                    {
+                        if (!active)
+                        {
+                            Debug.Log("Interacted - Unearth and activate AI");
+                            //Unearth and activate AI
+                            art.SetActive(true);
+                            aiScript.ActivateAI(player);
+                            if (fx != null)
+                            {
+                                Instantiate(fx, this.gameObject.transform);
+                                fx = null;
+                            }
 
-                Deactivate();
+                            active = true;
+                        }
+                        else
+                        {
+                            //Already active
+                        }
+                    }
+
+                    Debug.DrawRay(transform.position, targetDirection, Color.yellow);
+                    Debug.Log("Did Hit");
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, targetDirection, Color.white);
+                    Debug.Log("Did not Hit " + targetDirection);
+                }
             }
         }
 
