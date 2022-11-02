@@ -151,6 +151,9 @@ namespace Necropanda
         public struct AISpell
         {
             public Spell spell;
+            public bool targetSelf;
+            public bool targetAllies;
+            public bool targetEnemies;
             public int timeCooldown;
             [HideInInspector]
             public int lastUsed;

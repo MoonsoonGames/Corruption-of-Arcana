@@ -14,11 +14,15 @@ namespace Necropanda
     {
         public bool random = false;
 
-        public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, List<Character> allyTeam, List<Character> enemyTeam)
+        public float damageUtility;
+        public float controlUtility;
+        public float supportUtility;
+
+        public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility spellUtility = new CombatHelperFunctions.SpellUtility();
             List<Character> allTargets = new List<Character>();
-            allTargets = HelperFunctions.CombineLists(allyTeam, enemyTeam);
+            allTargets = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
             if (spellList.Count == 0)
                 return spellUtility;
@@ -31,30 +35,91 @@ namespace Necropanda
             }
             else
             {
-                foreach (CombatHelperFunctions.AISpell spell in spellList)
-                {
-
-                }
+                spellUtility = UtilityCalculation(spellList, self, allyTeam, enemyTeam);
             }
+
+            Debug.Log(self.stats.characterName + " is planning to cast " + spellUtility.spell.spell.spellName + " on " + spellUtility.target + " with a utility: " + spellUtility.utility);
 
             return spellUtility;
         }
 
-        CombatHelperFunctions.SpellUtility UtilityCalculation(List<CombatHelperFunctions.AISpell> spellList, List<Character> allyTeam, List<Character> enemyTeam)
+        CombatHelperFunctions.SpellUtility UtilityCalculation(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility bestSpell = new CombatHelperFunctions.SpellUtility();
+            List<Character> allTargets = new List<Character>();
+            allTargets = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
-            foreach (Character character in allyTeam)
+            foreach (Character target in allTargets)
             {
+                foreach (CombatHelperFunctions.AISpell spell in spellList)
+                {
+                    if (spell.lastUsed >= spell.timeCooldown)
+                    {
+                        float utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
 
-            }
-
-            foreach (Character character in enemyTeam)
-            {
-
+                        if (utility > bestSpell.utility)
+                        {
+                            bestSpell.spell = spell;
+                            bestSpell.target = target;
+                            bestSpell.utility = utility;
+                        }
+                    }
+                }
             }
 
             return bestSpell;
+        }
+
+        float SpellUtility(CombatHelperFunctions.AISpell spell, Character self, Character target, List<Character> allyTeam, List<Character> enemyTeam)
+        {
+            float spellUtility = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spell.spell.spellModules)
+            {
+                float moduleUtility = 0;
+
+                if (spell.targetSelf && target == self)
+                {
+                    float targetUtility = 0;
+
+                    if (module.effectType == E_DamageTypes.Healing)
+                    {
+                        int targetHealth = target.GetHealth().GetHealth();
+                        int targetMaxHealth = target.GetHealth().GetMaxHealth();
+                        targetUtility = targetMaxHealth - targetHealth;
+                    }
+
+                    moduleUtility += (module.value + targetUtility) * supportUtility;
+                }
+
+                if (spell.targetAllies && target != self)
+                {
+                    float targetUtility = 0;
+
+                    if (module.effectType == E_DamageTypes.Healing)
+                    {
+                        int targetHealth = target.GetHealth().GetHealth();
+                        int targetMaxHealth = target.GetHealth().GetMaxHealth();
+                        targetUtility = targetMaxHealth - targetHealth;
+                    }
+
+                    moduleUtility += (module.value + targetUtility) * supportUtility;
+                }
+
+                if (spell.targetEnemies && enemyTeam.Contains(target))
+                {
+                    int targetHealth = target.GetHealth().GetHealth();
+                    int targetMaxHealth = target.GetHealth().GetMaxHealth();
+                    float targetUtility = targetMaxHealth - targetHealth;
+
+                    moduleUtility += module.value * damageUtility;
+                }
+
+                spellUtility += moduleUtility;
+            }
+
+            Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+            return spellUtility;
         }
     }
 }

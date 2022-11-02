@@ -23,6 +23,7 @@ namespace Necropanda
 
         public Color timelineColor = new Color(0, 0, 0, 255);
 
+        public SpellCastingAI ai;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
     }
 }

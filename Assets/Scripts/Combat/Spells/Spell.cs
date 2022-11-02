@@ -72,7 +72,7 @@ namespace Necropanda
             {
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
-                List<Character> allCharacters = HelperFunctions.CombineLists(targetTeamManager.team, casterTeamManager.team);
+                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
                 float hitDelay = module.hitCount * multihitDelay;
                 float moduleTime = 0;
@@ -101,7 +101,7 @@ namespace Necropanda
             {
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
-                List<Character> allCharacters = HelperFunctions.CombineLists(targetTeamManager.team, casterTeamManager.team);
+                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
