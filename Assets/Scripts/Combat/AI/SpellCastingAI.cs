@@ -92,7 +92,7 @@ namespace Necropanda
                     moduleUtility += (module.value + targetUtility) * supportUtility;
                 }
 
-                if (spell.targetAllies && target != self)
+                if (spell.targetAllies && allyTeam.Contains(target) && target != self)
                 {
                     float targetUtility = 0;
 

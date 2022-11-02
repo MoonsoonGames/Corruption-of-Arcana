@@ -40,7 +40,43 @@ namespace Necropanda
 
         public override CombatHelperFunctions.SpellUtility PrepareSpell()
         {
-            return SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
+            CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
+
+            int index = 999;
+            for (int i = 0; i < aISpells.Count; i++)
+            {
+                if (aISpells[i].spell == spell.spell.spell)
+                {
+                    Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
+                    index = i;
+                }
+                else
+                {
+                    Debug.Log("different spell, set cooldown");
+                }
+            }
+
+            if (aISpells.Count > index)
+            {
+                Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
+                CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
+
+                newSpell.spell = aISpells[index].spell;
+                newSpell.targetSelf = aISpells[index].targetSelf;
+                newSpell.targetAllies = aISpells[index].targetAllies;
+                newSpell.targetEnemies = aISpells[index].targetEnemies;
+                newSpell.timeCooldown = aISpells[index].timeCooldown;
+                newSpell.lastUsed = 0;
+
+                aISpells.RemoveAt(index);
+                aISpells.Add(newSpell);
+            }
+            else
+            {
+                Debug.Log(index + " index");
+            }
+
+            return spell;
         }
 
         public override void StartTurn()

@@ -155,7 +155,7 @@ namespace Necropanda
             public bool targetAllies;
             public bool targetEnemies;
             public int timeCooldown;
-            [HideInInspector]
+            //[HideInInspector]
             public int lastUsed;
         }
 
