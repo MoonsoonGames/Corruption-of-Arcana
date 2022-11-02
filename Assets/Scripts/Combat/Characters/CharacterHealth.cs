@@ -20,16 +20,13 @@ namespace Necropanda
         Character character;
 
         //Health Values
-        public int maxHealth;
+        protected int maxHealth; public int GetMaxHealth() { return maxHealth; }
         protected int health; public int GetHealth() { return health; }
         //Hit sound modifier for health
         protected int shield;
         //Hit sound modifier for shield
 
         //Damage Resistances
-        Dictionary<E_DamageTypes, float> baseDamageResistances;
-        public E_DamageTypes[] baseDamageResistancesType;
-        public float[] baseDamageResistancesModifier;
         Dictionary<E_DamageTypes, float> currentDamageResistances;
 
         public Image healthIcon;
@@ -48,24 +45,18 @@ namespace Necropanda
 
         protected virtual void SetupHealth()
         {
+            maxHealth = character.stats.maxHealth;
             health = maxHealth;
             UpdateHealthUI();
         }
 
         protected virtual void SetupResistances()
         {
-            baseDamageResistances = new Dictionary<E_DamageTypes, float>();
-
-            for (int i = 0; i < baseDamageResistancesType.Length; i++)
-            {
-                baseDamageResistances.Add(baseDamageResistancesType[i], baseDamageResistancesModifier[i]);
-            }
-
             currentDamageResistances = new Dictionary<E_DamageTypes, float>();
 
-            foreach (E_DamageTypes type in baseDamageResistances.Keys)
+            for (int i = 0; i < character.stats.baseDamageResistancesModifier.Length; i++)
             {
-                currentDamageResistances.Add(type, baseDamageResistances[type]);
+                currentDamageResistances.Add(character.stats.baseDamageResistancesType[i], character.stats.baseDamageResistancesModifier[i]);
             }
         }
 

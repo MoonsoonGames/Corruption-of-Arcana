@@ -9,12 +9,12 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    [CreateAssetMenu(fileName = "NewSpellcastingAI", menuName = "Combat/Spell-casting AI", order = 2)]
+    [CreateAssetMenu(fileName = "NewSpellcastingAI", menuName = "Combat/Spell-casting AI", order = 3)]
     public class SpellCastingAI : ScriptableObject
     {
         public bool random = false;
 
-        public CombatHelperFunctions.SpellUtility GetSpell(List<Spell> spellList, List<Character> allyTeam, List<Character> enemyTeam)
+        public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility spellUtility = new CombatHelperFunctions.SpellUtility();
             List<Character> allTargets = new List<Character>();
@@ -31,7 +31,7 @@ namespace Necropanda
             }
             else
             {
-                foreach (Spell spell in spellList)
+                foreach (CombatHelperFunctions.AISpell spell in spellList)
                 {
 
                 }
@@ -40,7 +40,7 @@ namespace Necropanda
             return spellUtility;
         }
 
-        CombatHelperFunctions.SpellUtility UtilityCalculation(List<Spell> spellList, List<Character> allyTeam, List<Character> enemyTeam)
+        CombatHelperFunctions.SpellUtility UtilityCalculation(List<CombatHelperFunctions.AISpell> spellList, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility bestSpell = new CombatHelperFunctions.SpellUtility();
 

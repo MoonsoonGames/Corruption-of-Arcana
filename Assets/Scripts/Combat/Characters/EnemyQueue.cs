@@ -31,7 +31,7 @@ namespace Necropanda
                 Object nextEnemy = loadCombatManager.enemies[0];
                 GameObject objectRef = Instantiate(nextEnemy, gameObject.transform) as GameObject;
                 Character character = objectRef.GetComponent<Character>();
-                Sprite newSprite = character.characterSprite;
+                Sprite newSprite = character.stats.characterSprite;
                 enemyImage.sprite = newSprite;
                 Color color = enemyImage.color;
                 color.a = 255;

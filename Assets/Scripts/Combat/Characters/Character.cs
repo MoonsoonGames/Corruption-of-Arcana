@@ -11,9 +11,7 @@ namespace Necropanda
 {
     public class Character : MonoBehaviour
     {
-        public string characterName;
-        public Sprite characterSprite;
-        public Color timelineColor = new Color(0, 0, 0, 255); //Sets up alpha
+        public CharacterStats stats;
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 

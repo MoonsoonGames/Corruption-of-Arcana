@@ -82,7 +82,7 @@ namespace Necropanda
 
                             Character enemyCharacter = enemyRef.GetComponent<Character>();
 
-                            Debug.Log("Spawned " + enemyCharacter.characterName + " at spawner " + i);
+                            Debug.Log("Spawned " + enemyCharacter.stats.characterName + " at spawner " + i);
                             //team.Add(enemyCharacter);
                             spawners[i].filled = true;
                             enemyCharacter.spawner = spawners[i];

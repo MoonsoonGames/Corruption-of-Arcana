@@ -142,7 +142,7 @@ namespace Necropanda
 
         public struct SpellUtility
         {
-            public Spell spell;
+            public AISpell spell;
             public Character target;
             public float utility;
         }

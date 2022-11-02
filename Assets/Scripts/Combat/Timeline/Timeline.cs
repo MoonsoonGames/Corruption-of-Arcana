@@ -150,7 +150,7 @@ namespace Necropanda
             //Spawn UI for cards
             foreach (var item in spells)
             {
-                string text = item.caster.characterName + " is casting " + item.spell.spellName + " on " + item.target.characterName + " (" + item.spell.speed + ")";
+                string text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
 
                 //Creates spell block game object
                 GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
@@ -162,7 +162,7 @@ namespace Necropanda
                 if (item.spell.overrideColor)
                     spellBlock.image.color = item.spell.timelineColor;
                 else
-                    spellBlock.image.color = item.caster.timelineColor;
+                    spellBlock.image.color = item.caster.stats.timelineColor;
 
                 //Adds spell block to layout group
                 spellBlocks.Add(spellBlock);
