@@ -84,6 +84,8 @@ namespace Necropanda
                 }
             }
 
+            timeline.ActivateTurnModifiers();
+
             foreach (TeamManager manager in teamManagers)
             {
                 manager.StartTurn();

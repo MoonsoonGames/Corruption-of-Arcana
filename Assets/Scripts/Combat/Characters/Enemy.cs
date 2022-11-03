@@ -47,18 +47,18 @@ namespace Necropanda
             {
                 if (aISpells[i].spell == spell.spell.spell)
                 {
-                    Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
+                    //Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
                     index = i;
                 }
                 else
                 {
-                    Debug.Log("different spell, set cooldown");
+                    //Debug.Log("different spell, set cooldown");
                 }
             }
 
             if (aISpells.Count > index)
             {
-                Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
+                //Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
 
                 newSpell.spell = aISpells[index].spell;
@@ -73,7 +73,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log(index + " index");
+                //Debug.Log(index + " index");
             }
 
             return spell;
@@ -81,12 +81,19 @@ namespace Necropanda
 
         public override void StartTurn()
         {
-            //In future, determine target depending on spell so it can cast support spells on allies/self
-            CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-            CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
-            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
+            if (!stun)
+            {
+                //In future, determine target depending on spell so it can cast support spells on allies/self
+                CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
+                CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
+                newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
 
-            enemyManager.AddSpellInstance(newSpellInstance);
+                enemyManager.AddSpellInstance(newSpellInstance);
+            }
+            else
+            {
+                Debug.Log(stats.characterName + " has been stunned, skipping turn");
+            }
         }
     }
 }

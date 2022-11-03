@@ -16,7 +16,8 @@ namespace Necropanda
 
         public float damageUtility;
         public float controlUtility;
-        public float supportUtility;
+        public float supportSelfUtility;
+        public float supportAllyUtility;
 
         public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
@@ -38,7 +39,7 @@ namespace Necropanda
                 spellUtility = UtilityCalculation(spellList, self, allyTeam, enemyTeam);
             }
 
-            Debug.Log(self.stats.characterName + " is planning to cast " + spellUtility.spell.spell.spellName + " on " + spellUtility.target + " with a utility: " + spellUtility.utility);
+            //Debug.Log(self.stats.characterName + " is planning to cast " + spellUtility.spell.spell.spellName + " on " + spellUtility.target + " with a utility: " + spellUtility.utility);
 
             return spellUtility;
         }
@@ -89,7 +90,7 @@ namespace Necropanda
                         targetUtility = targetMaxHealth - targetHealth;
                     }
 
-                    moduleUtility += (module.value + targetUtility) * supportUtility;
+                    moduleUtility += (module.value + targetUtility) * supportSelfUtility;
                 }
 
                 if (spell.targetAllies && allyTeam.Contains(target) && target != self)
@@ -103,7 +104,7 @@ namespace Necropanda
                         targetUtility = targetMaxHealth - targetHealth;
                     }
 
-                    moduleUtility += (module.value + targetUtility) * supportUtility;
+                    moduleUtility += (module.value + targetUtility) * supportAllyUtility;
                 }
 
                 if (spell.targetEnemies && enemyTeam.Contains(target))
@@ -118,7 +119,7 @@ namespace Necropanda
                 spellUtility += moduleUtility;
             }
 
-            Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+            //Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
             return spellUtility;
         }
     }

@@ -197,6 +197,7 @@ namespace Necropanda
             Invoke("ActivateStatuses", delay);
             delay += statuses.Count * statusOffset;
             delay += 0.5f;
+
             return delay;
         }
 
@@ -212,7 +213,7 @@ namespace Necropanda
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
                 i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition) + spellDelayOffset;
 
-                Debug.Log("Spell " + item.spell.spellName + " has a delay of " + i);
+                //Debug.Log("Spell " + item.spell.spellName + " has a delay of " + i);
             }
 
             return i;
@@ -278,11 +279,19 @@ namespace Necropanda
             if (statusInstance.duration <= 0)
             {
                 //Debug.Log("Expired");
-                statuses.Remove(statusInstance);
+                statusInstance.status.Remove(statusInstance.target);
             }
 
             //RemoveStatusInstance(statusInstance);
             CalculateTimeline();
+        }
+
+        public void ActivateTurnModifiers()
+        {
+            foreach(CombatHelperFunctions.StatusInstance status in statuses)
+            {
+                status.status.ActivateTurnModifiers(status.target);
+            }
         }
 
         #endregion

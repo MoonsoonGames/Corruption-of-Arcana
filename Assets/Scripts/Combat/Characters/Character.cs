@@ -11,6 +11,8 @@ namespace Necropanda
 {
     public class Character : MonoBehaviour
     {
+        #region Setup
+
         public CharacterStats stats;
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
@@ -25,6 +27,10 @@ namespace Necropanda
             teamManager.Add(this);
         }
 
+        #endregion
+
+        #region Taking Turn
+
         public virtual CombatHelperFunctions.SpellUtility PrepareSpell()
         {
             //Overwritten by children
@@ -35,6 +41,10 @@ namespace Necropanda
         {
             
         }
+
+        #endregion
+
+        #region Health Checks
 
         public void CheckHealth()
         {
@@ -61,5 +71,39 @@ namespace Necropanda
             }
             Destroy(gameObject);
         }
+
+        #endregion
+
+        #region Statuses
+
+        //Negative Statuses
+        protected bool banish, charm, silence, stun, curse;
+
+        public void ApplyStatus(bool apply, E_Statuses status)
+        {
+            switch (status)
+            {
+                //Negative Effects
+                case E_Statuses.Banish:
+                    banish = apply;
+                    break;
+                case E_Statuses.Charm:
+                    charm = apply;
+                    break;
+                case E_Statuses.Silence:
+                    silence = apply;
+                    break;
+                case E_Statuses.Stun:
+                    stun = apply;
+                    break;
+                case E_Statuses.Curse:
+                    curse = apply;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion
     }
 }
