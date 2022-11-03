@@ -16,6 +16,8 @@ namespace Necropanda
 
         EnemyManager enemyManager;
 
+        public Object cardPrefab;
+
         protected override void Start()
         {
             base.Start();
@@ -41,6 +43,7 @@ namespace Necropanda
         public override CombatHelperFunctions.SpellUtility PrepareSpell()
         {
             CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
+            Character target = spell.target;
 
             int index = 999;
             for (int i = 0; i < aISpells.Count; i++)
@@ -74,6 +77,27 @@ namespace Necropanda
             else
             {
                 //Debug.Log(index + " index");
+            }
+
+            if (stats.aiSpawnsCards)
+            {
+                Debug.Log("Spawn Enemy Card");
+                Deck2D deck = target.GetComponentInChildren<Deck2D>();
+
+                GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
+                EnemyCard cardLogic = card.GetComponent<EnemyCard>();
+                cardLogic.Setup(spell.spell.spell);
+                CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+
+                //Add the card to the array
+                deck.AddCard(cardDrag);
+
+                //Reset card scales
+                cardDrag.ScaleCard(1, false);
+            }
+            else
+            {
+                Debug.Log("Don't Spawn Enemy Card");
             }
 
             return spell;
