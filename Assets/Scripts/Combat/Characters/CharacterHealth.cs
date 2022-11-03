@@ -62,6 +62,16 @@ namespace Necropanda
 
         #endregion
 
+        #region Start Turn
+
+        public void StartTurn()
+        {
+            //Decay shield
+            shield = shield / 2;
+        }
+
+        #endregion
+
         #region Health
 
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)

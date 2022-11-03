@@ -42,6 +42,7 @@ namespace Necropanda
         public virtual void StartTurn()
         {
             CheckOverlay();
+            health.StartTurn();
         }
 
         public void CheckOverlay()
