@@ -6,14 +6,15 @@ using Necropanda.Player;
 
 public class HUDInterface : MonoBehaviour
 {
-    public GameObject SettingsMenu;
-    public bool SettingsOpen = false;
+    public GameObject Pausemenu;
     public PlayerController player;
+    public GameObject HUD;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        HUD.SetActive(true);
+        Pausemenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,26 +22,20 @@ public class HUDInterface : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(SettingsOpen == false)
+            //open pause menu
+            if(player.paused == false)
             {
-                Debug.Log("Open Settings");
-                SettingsMenu.SetActive(true);
-                SettingsOpen = true;
-
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                Pausemenu.SetActive(true);
+                HUD.SetActive(false);
                 player.paused = true;
                 Time.timeScale = 0;
             }        
 
-            else if (SettingsOpen == true)
+            //close pause menu
+            else if (player.paused == true)
             {
-                Debug.Log("Close Settings");
-                SettingsMenu.SetActive(false);
-                SettingsOpen = false;
-
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.None;
+                Pausemenu.SetActive(false);
+                HUD.SetActive(true);
                 player.paused = false;
                 Time.timeScale = 1;
             }
