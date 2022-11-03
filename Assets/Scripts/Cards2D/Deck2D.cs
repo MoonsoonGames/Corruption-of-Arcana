@@ -28,6 +28,9 @@ namespace Necropanda
         GeneralDragArea dragArea;
         DragManager dragManager;
 
+        bool open = true;
+        public GameObject untargettableOverlay;
+
         #endregion
 
         #region Cards
@@ -65,9 +68,11 @@ namespace Necropanda
 
             layout = GetComponent<HorizontalLayoutGroup>();
 
-            player = GameObject.Find("Player").GetComponent<Character>();
             character = GetComponentInParent<Character>();
             timeline = GameObject.FindObjectOfType<Timeline>();
+            player = timeline.player;
+
+            SetOverlay(false);
         }
 
         #endregion
@@ -81,7 +86,7 @@ namespace Necropanda
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card into the deck
-            if (eventData.dragging == true)
+            if (eventData.dragging == true && open)
             {
                 if (cards.Length < maxCards)
                 {
@@ -101,7 +106,7 @@ namespace Necropanda
         public void OnPointerExit(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card off the deck
-            if (eventData.dragging == true)
+            if (eventData.dragging == true && open)
             {
                 CardDrag2D currentCard = dragManager.draggedCard;
                 currentCard.newDeck = null;
@@ -216,6 +221,22 @@ namespace Necropanda
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
             }
+        }
+
+        public void CheckOverlay()
+        {
+            //Player Stun Check
+            if (player.stun)
+            {
+                SetOverlay(true);
+            }
+        }
+
+        void SetOverlay(bool active)
+        {
+            open = !active;
+            if (untargettableOverlay != null)
+                untargettableOverlay.SetActive(active);
         }
 
         #endregion

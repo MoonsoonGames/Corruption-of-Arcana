@@ -94,6 +94,8 @@ namespace Necropanda
             {
                 Debug.Log(stats.characterName + " has been stunned, skipping turn");
             }
+
+            base.StartTurn();
         }
     }
 }

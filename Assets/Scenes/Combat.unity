@@ -1519,6 +1519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 870227617}
+  untargettableOverlay: {fileID: 0}
   maxCards: 6
   deckScale: 1
   highlightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3668,7 +3669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d3420ef63b99545b21efb2d2fef341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 946320890}
   playerTeamManager: {fileID: 922119378}
   enemyTeamManager: {fileID: 1729430396}
   victoryScreen: {fileID: 1191858132}
@@ -3712,6 +3713,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26d47edcccefdd643abac0b6823b49d8, type: 2}
   - {fileID: 11400000, guid: 860051d5dc0fd434b83f134688e82d3b, type: 2}
   - {fileID: 11400000, guid: b13e6638ae502df439901f60ea3ecde1, type: 2}
+  - {fileID: 11400000, guid: 0d52bca105e517a46a7f1120f28c6e63, type: 2}
   discardPile: []
 --- !u!1 &1947865880
 GameObject:
@@ -3891,6 +3893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: utilityModules.Array.data[1].speed
       value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712941371361355717, guid: 0c3481154242f6e4292f3d084dc1e06a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.9960022
       objectReference: {fileID: 0}
     - target: {fileID: 3702093925428361590, guid: 0c3481154242f6e4292f3d084dc1e06a,
         type: 3}
@@ -4111,6 +4118,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.0007171631
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253211738718647060, guid: 0c3481154242f6e4292f3d084dc1e06a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c3481154242f6e4292f3d084dc1e06a, type: 3}

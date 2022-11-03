@@ -19,10 +19,12 @@ namespace Necropanda
 
         public EnemySpawner spawner;
 
+        Deck2D deck;
+
         protected virtual void Start()
         {
             health = GetComponent<CharacterHealth>();
-
+            deck = GetComponentInChildren<Deck2D>();
             teamManager = GetComponentInParent<TeamManager>();
             teamManager.Add(this);
         }
@@ -39,7 +41,7 @@ namespace Necropanda
 
         public virtual void StartTurn()
         {
-            
+            deck.CheckOverlay();
         }
 
         #endregion
@@ -77,7 +79,8 @@ namespace Necropanda
         #region Statuses
 
         //Negative Statuses
-        protected bool banish, charm, silence, stun, curse;
+        [HideInInspector]
+        public bool banish, charm, silence, stun, curse;
 
         public void ApplyStatus(bool apply, E_Statuses status)
         {
