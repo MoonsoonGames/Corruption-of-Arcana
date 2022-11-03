@@ -5,19 +5,13 @@ using UnityEngine.UI;
 
 public class SettingsInterface : MonoBehaviour
 {
+    public GameObject Pausemenu;
     public GameObject SettingsScreen;
     public Slider MasterVolume;
     public Slider MusicVolume;
     public Slider SEVolume;
     public Slider DialogueVolume; //This might be scraped due to timeframe
     public bool SettingsOpen = false;
-
-    public void Settings()
-    {
-        //open settings screen
-        SettingsScreen.SetActive(true);
-        SettingsOpen = true;
-    }
 
     void Start()
     {
@@ -27,21 +21,27 @@ public class SettingsInterface : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        //opening settings
+        if(SettingsOpen == false)
         {
-            if(SettingsOpen == false)
-            {
-                Debug.Log("Open Settings");
-                SettingsScreen.SetActive(true);
-                SettingsOpen = true;
-            }        
-
-            else if (SettingsOpen == true)
-            {
-                Debug.Log("Close Settings");
-                SettingsScreen.SetActive(false);
-                SettingsOpen = false;
-            }
+            Debug.Log("Open Settings");
+            SettingsScreen.SetActive(true);
+            SettingsOpen = true;
+            Pausemenu.SetActive(false);
         }
+
+        //closing settings
+        else if (SettingsOpen == true)
+        {
+            Close();
+        }
+    }
+
+    public void Close()
+    {
+        Debug.Log("Close Settings");
+        SettingsScreen.SetActive(false);
+        SettingsOpen = false;
+        Pausemenu.SetActive(true);
     }
 }

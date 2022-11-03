@@ -8,12 +8,6 @@ public class SplashScreenInterface : MonoBehaviour
 {
     public GameObject SettingsMenu;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void NewGame()
     {
         //Reset loadsettings/progress
@@ -26,6 +20,11 @@ public class SplashScreenInterface : MonoBehaviour
         //locate save file
         //set load settings/progress
         //load game
+    }
+
+    public void Settings()
+    {
+        SettingsMenu.SetActive(true);
     }
 
     public void QuitGame()
