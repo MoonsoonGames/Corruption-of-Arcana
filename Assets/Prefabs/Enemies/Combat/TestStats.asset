@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e306a5ff4f2a5e4a899426faa5a526a, type: 3}
-  m_Name: SlasherStats
+  m_Name: TestStats
   m_EditorClassIdentifier: 
-  characterName: Slasher
-  characterSprite: {fileID: 21300000, guid: 96be4bd65026838408fd13986c3739c8, type: 3}
-  characterDescription: 
+  characterName: Enemy
+  characterSprite: {fileID: 21300000, guid: bde4489e7d97c3242abb419c87c646ea, type: 3}
+  characterDescription: Base enemy
   location: 
-  maxHealth: 30
+  maxHealth: 50
   baseDamageResistancesType: 
   baseDamageResistancesModifier: []
-  timelineColor: {r: 0.8773585, g: 0.3517711, b: 0.81624365, a: 255}
-  ai: {fileID: 11400000, guid: 42fee354ff546e3448b00d40523c6c36, type: 2}
+  timelineColor: {r: 0.5943396, g: 0.22178254, b: 0.19904771, a: 255}
+  ai: {fileID: 11400000, guid: 466cbe13dcc7d4040961d58049454057, type: 2}
   aISpells:
   - spell: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
     targetSelf: 0
@@ -28,9 +28,9 @@ MonoBehaviour:
     targetEnemies: 1
     timeCooldown: 0
     lastUsed: 0
-  - spell: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
-    targetSelf: 0
+  - spell: {fileID: 11400000, guid: d42b3d40d97f4514db546db8f3bf82a2, type: 2}
+    targetSelf: 1
     targetAllies: 0
-    targetEnemies: 1
-    timeCooldown: 1
+    targetEnemies: 0
+    timeCooldown: 4
     lastUsed: 0

@@ -165,7 +165,7 @@ namespace Necropanda
             if (caster == null)
             {
 
-                Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
+                //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 caster.GetHealth().ChangeHealth(spell.effectType, spell.value, caster);
 
@@ -185,7 +185,7 @@ namespace Necropanda
             if (target != null)
             {
 
-                Debug.Log("Spell cast: " + spellName + " at " + target.stats.characterName);
+                //Debug.Log("Spell cast: " + spellName + " at " + target.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
                 target.GetHealth().ChangeHealth(realEffectType, spell.value, caster);

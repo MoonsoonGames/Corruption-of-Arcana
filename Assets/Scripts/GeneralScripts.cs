@@ -103,6 +103,7 @@ namespace Necropanda
 
         #region Spells
 
+        [System.Serializable]
         public struct SpellInstance
         {
             public Spell spell;
@@ -192,6 +193,7 @@ namespace Necropanda
             public float chance;
         }
 
+        [System.Serializable]
         public struct StatusInstance
         {
             public StatusEffects status;

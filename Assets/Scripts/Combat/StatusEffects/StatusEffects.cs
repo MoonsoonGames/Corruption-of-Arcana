@@ -170,6 +170,7 @@ namespace Necropanda
             }
             else
             {
+                Debug.Log("Reverse stat adjustment");
                 target.GetHealth().ModifyResistanceModifier(damageType, -value);
                 if (damageType == E_DamageTypes.Arcana)
                 {

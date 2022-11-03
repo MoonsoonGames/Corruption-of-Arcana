@@ -47,18 +47,18 @@ namespace Necropanda
             {
                 if (aISpells[i].spell == spell.spell.spell)
                 {
-                    Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
+                    //Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
                     index = i;
                 }
                 else
                 {
-                    Debug.Log("different spell, set cooldown");
+                    //Debug.Log("different spell, set cooldown");
                 }
             }
 
             if (aISpells.Count > index)
             {
-                Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
+                //Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
 
                 newSpell.spell = aISpells[index].spell;
@@ -73,7 +73,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log(index + " index");
+                //Debug.Log(index + " index");
             }
 
             return spell;
