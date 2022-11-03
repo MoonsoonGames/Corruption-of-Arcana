@@ -166,7 +166,7 @@ namespace Necropanda
 
             ResetArrays();
 
-            if (character != null)
+            if (character != null && card.playerCard)
             {
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
                 newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);

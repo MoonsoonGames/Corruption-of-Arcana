@@ -24,6 +24,8 @@ namespace Necropanda
         [HideInInspector]
         public Deck2D newDeck;
 
+        public bool playerCard = true;
+
         DragManager dragManager;
 
         Vector2 offset;
