@@ -30,6 +30,7 @@ namespace Necropanda
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
 
                 newSpell.spell = spell.spell;
+                newSpell.spawnAsCard = spell.spawnAsCard;
                 newSpell.targetSelf = spell.targetSelf;
                 newSpell.targetAllies = spell.targetAllies;
                 newSpell.targetEnemies = spell.targetEnemies;
@@ -44,7 +45,8 @@ namespace Necropanda
         {
             CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
             Character target = spell.target;
-
+            bool spawnCard = spell.spell.spawnAsCard;
+            Debug.Log(spawnCard + " 1");
             int index = 999;
             for (int i = 0; i < aISpells.Count; i++)
             {
@@ -65,6 +67,7 @@ namespace Necropanda
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
 
                 newSpell.spell = aISpells[index].spell;
+                newSpell.spawnAsCard = aISpells[index].spawnAsCard;
                 newSpell.targetSelf = aISpells[index].targetSelf;
                 newSpell.targetAllies = aISpells[index].targetAllies;
                 newSpell.targetEnemies = aISpells[index].targetEnemies;
@@ -73,13 +76,16 @@ namespace Necropanda
 
                 aISpells.RemoveAt(index);
                 aISpells.Add(newSpell);
+
+                spawnCard = newSpell.spawnAsCard;
+                Debug.Log(spawnCard + " 2");
             }
             else
             {
                 //Debug.Log(index + " index");
             }
 
-            if (stats.aiSpawnsCards)
+            if (spawnCard)
             {
                 Debug.Log("Spawn Enemy Card");
                 Deck2D deck = target.GetComponentInChildren<Deck2D>();

@@ -152,6 +152,7 @@ namespace Necropanda
         public struct AISpell
         {
             public Spell spell;
+            public bool spawnAsCard;
             public bool targetSelf;
             public bool targetAllies;
             public bool targetEnemies;
