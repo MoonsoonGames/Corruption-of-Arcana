@@ -205,6 +205,11 @@ namespace Necropanda
                     target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999, caster);
                 }
 
+                if (target.GetHealth().GetHealth() < 1)
+                {
+                    target.CheckOverlay();
+                }
+
                 //Sound effects here
             }
         }

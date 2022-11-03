@@ -29,7 +29,7 @@ namespace Necropanda
         DragManager dragManager;
 
         bool open = true;
-        public GameObject untargettableOverlay;
+        UntargettableOverlay untargettableOverlay;
 
         #endregion
 
@@ -72,7 +72,8 @@ namespace Necropanda
             timeline = GameObject.FindObjectOfType<Timeline>();
             player = timeline.player;
 
-            SetOverlay(false);
+            untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
+            SetOverlay(false, " ");
         }
 
         #endregion
@@ -228,15 +229,26 @@ namespace Necropanda
             //Player Stun Check
             if (player.stun)
             {
-                SetOverlay(true);
+                Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Player Stunned");
+            }
+            else if (character.GetHealth().GetHealth() < 1)
+            {
+                Debug.Log("Target killed, apply overlay");
+                SetOverlay(true, "Cannot Target - Target Killed");
+            }
+            else
+            {
+                Debug.Log("Target ok, remove overlay");
+                SetOverlay(false, " ");
             }
         }
 
-        void SetOverlay(bool active)
+        void SetOverlay(bool active, string message)
         {
             open = !active;
             if (untargettableOverlay != null)
-                untargettableOverlay.SetActive(active);
+                untargettableOverlay.SetOverlay(active, message);
         }
 
         #endregion

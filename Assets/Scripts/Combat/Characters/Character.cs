@@ -41,6 +41,11 @@ namespace Necropanda
 
         public virtual void StartTurn()
         {
+            CheckOverlay();
+        }
+
+        public void CheckOverlay()
+        {
             deck.CheckOverlay();
         }
 

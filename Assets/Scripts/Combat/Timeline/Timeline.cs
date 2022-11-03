@@ -253,14 +253,28 @@ namespace Necropanda
         /// <returns></returns>
         IEnumerator IDelaySpell(CombatHelperFunctions.SpellInstance spellInstance, float delay)
         {
-            yield return new WaitForSeconds(delay);
-
-            //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-
             //Get location of first spell block
             Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
 
-            spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition);
+            yield return new WaitForSeconds(delay);
+
+            Character caster = spellInstance.caster;
+
+            if (caster.stun)
+            {
+                Debug.Log("Stunned, skip spell");
+                //Effect for fumbling spell
+            }
+            else if (caster.GetHealth().GetHealth() < 1)
+            {
+                Debug.Log("Dead, skip spell");
+                //Effect for fumbling spell
+            }
+            else
+            {
+                //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition);
+            }
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
