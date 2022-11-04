@@ -176,6 +176,8 @@ namespace Necropanda
             }
 
             arcanaManager.CheckArcana(arcanaCount);
+
+            SimulateSpellEffects();
         }
 
         int SortBySpeed(CombatHelperFunctions.SpellInstance c1, CombatHelperFunctions.SpellInstance c2)
@@ -191,6 +193,30 @@ namespace Necropanda
             }
 
             return result;
+        }
+
+        #endregion
+
+        #region Simulating Spell Effects
+
+        void SimulateSpellEffects()
+        {
+            List<TeamManager> teamManagers = new List<TeamManager>();
+            teamManagers.Add(CombatManager.instance.playerTeamManager);
+            teamManagers.Add(CombatManager.instance.enemyTeamManager);
+
+            foreach (TeamManager manager in teamManagers)
+            {
+                foreach (Character item in manager.team)
+                {
+                    item.ResetValues();
+                }
+            }
+
+            foreach (CombatHelperFunctions.SpellInstance item in spells)
+            {
+                item.spell.SimulateSpellValues(item.target, item.caster, item.empowered, item.weakened, hand);
+            }
         }
 
         #endregion
@@ -218,7 +244,7 @@ namespace Necropanda
             //Generates a delay for the entire set of spells being cast
             float i = 0;
             //Loop through list and cast spell;
-            foreach (var item in spells)
+            foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
                 //Use a coroutine to stagger spellcasting
                 StartCoroutine(IDelaySpell(item, i));

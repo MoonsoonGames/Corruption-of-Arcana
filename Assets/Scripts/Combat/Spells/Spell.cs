@@ -172,7 +172,7 @@ namespace Necropanda
 
         public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
         {
-            if (caster == null)
+            if (caster != null)
             {
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
                 value = EmpowerWeakenValue(value, empowered, weakened);
@@ -242,6 +242,92 @@ namespace Necropanda
                 value = (int)(value * 0.5f);
             }
             return value;
+        }
+
+        #endregion
+
+        #region Simulate Spell
+
+        public void SimulateSpellValues(Character target, Character caster, bool empowered, bool weakened, Deck2D hand)
+        {
+            int cardsInHand = hand.CurrentCardsLength();
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                TeamManager targetTeamManager = target.GetManager();
+                TeamManager casterTeamManager = caster.GetManager();
+                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
+
+                for (int i = 0; i < module.hitCount; i++)
+                {
+                    float x = 0;
+                    //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
+                    switch (module.target)
+                    {
+                        case E_SpellTargetType.Caster:
+                            Simulate(caster, caster, module, cardsInHand, empowered, weakened);
+                            break;
+                        case E_SpellTargetType.Target:
+                            Simulate(caster, target, module, cardsInHand, empowered, weakened);
+                            break;
+                        case E_SpellTargetType.Chain:
+                            foreach (Character character in targetTeamManager.team)
+                            {
+                                Simulate(caster, character, module, cardsInHand, empowered, weakened);
+                            }
+                            break;
+                        case E_SpellTargetType.Cleave:
+                            foreach (Character character in targetTeamManager.team)
+                            {
+                                Simulate(caster, character, module, cardsInHand, empowered, weakened);
+                            }
+                            break;
+                        case E_SpellTargetType.RandomTargetTeam:
+                            Simulate(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, empowered, weakened);
+                            break;
+                        case E_SpellTargetType.RandomAll:
+                            Simulate(caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, empowered, weakened);
+                            break;
+                        case E_SpellTargetType.All:
+                            foreach (Character character in allCharacters)
+                            {
+                                Simulate(caster, character, module, cardsInHand, empowered, weakened);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void Simulate(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
+        {
+            int damage = 0, healing = 0, shield = 0;
+
+            if (target != null)
+            {
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
+                value = EmpowerWeakenValue(value, empowered, weakened);
+
+                //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
+                //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+
+                switch (spell.effectType)
+                {
+                    case E_DamageTypes.Healing:
+                        healing += value;
+                        break;
+                    case E_DamageTypes.Shield:
+                        shield += value;
+                        break;
+                    case E_DamageTypes.Arcana:
+                        break;
+                    default:
+                        damage += value;
+                        break;
+                }
+            }
+
+            target.SimulateValues(damage, healing, shield);
         }
 
         #endregion

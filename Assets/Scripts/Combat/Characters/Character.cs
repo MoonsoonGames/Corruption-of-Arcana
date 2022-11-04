@@ -27,6 +27,7 @@ namespace Necropanda
             deck = GetComponentInChildren<Deck2D>();
             teamManager = GetComponentInParent<TeamManager>();
             teamManager.Add(this);
+            simulateValues = GetComponentInChildren<SimulateValues>();
         }
 
         #endregion
@@ -158,6 +159,34 @@ namespace Necropanda
                 arcanaManager.silenced = false;
                 Timeline.instance.GetArcanaManager().AdjustArcanaMax(2);
             }
+        }
+
+        #endregion
+
+        #region Simulating Turn
+
+        int damage = 0, healing = 0, shield = 0;
+        SimulateValues simulateValues;
+
+        public void SimulateValues(int newDamage, int newHealing, int newShield)
+        {
+            damage += newDamage;
+            healing += newHealing;
+            shield += newShield;
+
+            PreviewValues();
+        }
+
+        void PreviewValues()
+        {
+            Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
+            simulateValues.DisplayValues(damage, healing, shield);
+        }
+
+        public void ResetValues()
+        {
+            damage = 0; healing = 0; shield = 0;
+            PreviewValues();
         }
 
         #endregion
