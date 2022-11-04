@@ -136,7 +136,8 @@ namespace Necropanda
         /// </summary>
         void CalculateTimeline()
         {
-            spells.Sort(SortBySpeed);
+            if (spells.Count > 1)
+                spells.Sort(SortBySpeed);
             arcanaCount = 0;
 
             //Clear old blocks that are no longer being cast
@@ -176,9 +177,16 @@ namespace Necropanda
             arcanaManager.CheckArcana(arcanaCount);
         }
 
-        static int SortBySpeed(CombatHelperFunctions.SpellInstance c1, CombatHelperFunctions.SpellInstance c2)
+        int SortBySpeed(CombatHelperFunctions.SpellInstance c1, CombatHelperFunctions.SpellInstance c2)
         {
-            return c1.spell.speed.CompareTo(c2.spell.speed);
+            int result = c1.spell.speed.CompareTo(c2.spell.speed);
+            if (result == 0)
+            {
+                //Sorting tied, prioritize the player
+                result = (c1.caster == player ? -1 : 1);
+            }
+
+            return result;
         }
 
         #endregion
