@@ -10,26 +10,40 @@ using UnityEngine.AI;
 /// </summary>
 namespace Necropanda.AI
 {
+    [RequireComponent(typeof(ModuleManager))]
     public class EnemyAI : MonoBehaviour
     {
         bool active = false; public bool GetActive() { return active; }
         GameObject player;
-        NavMeshAgent agent;
+        public NavMeshAgent agent;
         Vector3 startPos;
 
         public Object enemyObject;
         public bool boss;
 
         //state variables
+        [Header("AI State Variables")]
+        public ModuleManager moduleManager;
         public AIState currentState; // The current state of the AI. Wandering, Fleeing etc.
         public int avoidancePriority = 15; // The level of avoidance priority for the agent. lower = more important. Might be worth setting this based on the type of the enemy
         public float timer = 0f; // Internal timer used for state changes and tracking.
 
+        [Header("Wandering Variables")]
+        public float wanderingCoolDown;
+        public float wanderRadius;
+        private NavMeshHit hit; // Used for determining where the AI moves to.
+        private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
+        
 
         private void Start()
         {
+            moduleManager = gameObject.GetComponent<ModuleManager>();
+
             agent = GetComponent<NavMeshAgent>();
             startPos = transform.position;
+
+            wanderRadius = gameObject.GetComponent<SphereCollider>().radius;
+
         }
 
         public void ActivateAI(GameObject playerRef)
@@ -44,17 +58,17 @@ namespace Necropanda.AI
             player = null;
             active = false;
             Debug.Log("Deactivate AI");
+            Debug.Log("test");
             agent.SetDestination(startPos);
         }
 
         // Update is called once per frame
         void Update()
         {
+            Timer();
             if (active)
             {
                 HFSM();
-                Timer();
-                
             }
         }
 
@@ -74,6 +88,9 @@ namespace Necropanda.AI
             {
                 default:
                     currentState = AIState.Nothing;
+                    if(timer > 10){
+                        currentState = AIState.Wandering;
+                    }
                     break;
 
                 case AIState.Chasing:
@@ -81,7 +98,9 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
-
+                    moduleManager.wander.enabled = true;
+                    moduleManager.wander.WanderInRadius(blocked, hit);
+                    Debug.Log("Added Wandering module to Enemy AI " + gameObject.name);
                     break;
 
                 case AIState.Patrolling:
