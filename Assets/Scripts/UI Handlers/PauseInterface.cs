@@ -3,70 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using NecroPanda.Player;
 
-public class PauseInterface : MonoBehaviour
+namespace Necropanda.Interfaces
 {
-    public PlayerController player;
-    public GameObject ConfirmationScreen;
-    public GameObject SettingsScreen;
-    public GameObject Pausemenu;
-
-    void Start()
+    public class PauseInterface : MonoBehaviour
     {
-        Pausemenu.SetActive(false);
-    }
+        public PlayerController player;
+        public GameObject ConfirmationScreen;
+        public GameObject SettingsScreen;
+        public GameObject Pausemenu;
+        public GameObject AchievementScreen;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        void Start()
         {
-            //open pause menu
-            if(Pausemenu.activeSelf == true)
-            {
-                player.paused = true;
-                
-                //unlock cursor, unpause timescale
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }        
-
-            //close pause menu
-            else
-            {
-                player.paused = false;
-                //lock cursor to centre, pause timescale
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+            Pausemenu.SetActive(false);
         }
-    }
 
-    public void Resume()
-    {
-        Pausemenu.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
-    }
+        // Update is called once per frame
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                //open pause menu
+                if(Pausemenu.activeSelf == true)
+                {
+                    player.paused = true;
+                    //unlock cursor, unpause timescale
 
-    public void Settings()
-    {
-        Pausemenu.SetActive(false);
-        SettingsScreen.SetActive(true);
-    }
+                }        
 
-    public void Help()
-    {
+                //close pause menu
+                else if (Pausemenu.activeSelf == false)
+                {
+                    player.paused = false;
+                    //lock cursor to centre, pause timescale
 
-    }
+                }
+            }
 
-    public void SaveGame()
-    {
+        }
 
-    }
+        public void Resume()
+        {
+            Debug.Log("resuming");
+            Pausemenu.SetActive(false);
+            // Cursor.visible = false;
+            // Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
 
-    public void QuitGame()
-    {
-        ConfirmationScreen.SetActive(true);
+        public void Settings()
+        {
+            Pausemenu.SetActive(false);
+            SettingsScreen.SetActive(true);
+        }
+
+        public void Help()
+        {
+
+        }
+
+        public void Achievements()
+        {
+            AchievementScreen.SetActive(true);
+            Pausemenu.SetActive(false);
+        }
+
+        public void SaveGame()
+        {
+
+        }
+
+        public void QuitGame()
+        {
+            ConfirmationScreen.SetActive(true);
+        }
     }
 }

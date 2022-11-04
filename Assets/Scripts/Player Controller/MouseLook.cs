@@ -20,13 +20,6 @@ namespace NecroPanda.Player
 
         float xRotation = 0f;
 
-        private void Start()
-        {
-            // Lock and disable the cursor
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
         // Update is called once per frame
         void Update()
         {

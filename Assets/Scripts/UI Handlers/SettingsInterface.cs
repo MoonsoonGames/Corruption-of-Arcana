@@ -3,45 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsInterface : MonoBehaviour
+namespace Necropanda.Interfaces
 {
-    public GameObject Pausemenu;
-    public GameObject SettingsScreen;
-    public Slider MasterVolume;
-    public Slider MusicVolume;
-    public Slider SEVolume;
-    public Slider DialogueVolume; //This might be scraped due to timeframe
-    public bool SettingsOpen = false;
-
-    void Start()
+    public class SettingsInterface : MonoBehaviour
     {
-        SettingsOpen = false;
-        SettingsScreen.SetActive(false);
-    }
+        public GameObject Pausemenu;
+        public GameObject SettingsScreen;
+        public Slider MasterVolume;
+        public Slider MusicVolume;
+        public Slider SEVolume;
+        public Slider DialogueVolume; //This might be scraped due to timeframe
+        public bool SettingsOpen = false;
 
-    void Update()
-    {
-        //opening settings
-        if(SettingsOpen == false)
+        void Start()
         {
-            Debug.Log("Open Settings");
-            SettingsScreen.SetActive(true);
-            SettingsOpen = true;
-            Pausemenu.SetActive(false);
+            SettingsOpen = false;
+            SettingsScreen.SetActive(false);
         }
 
-        //closing settings
-        else if (SettingsOpen == true)
+        void Update()
         {
-            Close();
-        }
-    }
+            //opening settings
+            if(SettingsOpen == false)
+            {
+                Debug.Log("Open Settings");
+                SettingsScreen.SetActive(true);
+                SettingsOpen = true;
+                Pausemenu.SetActive(false);
+            }
 
-    public void Close()
-    {
-        Debug.Log("Close Settings");
-        SettingsScreen.SetActive(false);
-        SettingsOpen = false;
-        Pausemenu.SetActive(true);
+            //closing settings
+            else if (SettingsOpen == true)
+            {
+                Close();
+            }
+        }
+
+        public void Close()
+        {
+            Debug.Log("Close Settings");
+            SettingsScreen.SetActive(false);
+            SettingsOpen = false;
+            Pausemenu.SetActive(true);
+        }
     }
 }
