@@ -226,6 +226,11 @@ namespace Necropanda
             E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(effectType);
             target.GetHealth().ChangeHealth(realEffectType, value, null);
 
+            if (target.GetHealth().GetHealth() < 1)
+            {
+                target.CheckOverlay();
+            }
+
             //Sound effects here
         }
 

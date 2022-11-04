@@ -213,9 +213,11 @@ namespace Necropanda
                 }
             }
 
+            int cardsDiscarded = hand.CurrentCardsLength();
+
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
-                item.spell.SimulateSpellValues(item.target, item.caster, item.empowered, item.weakened, hand);
+                item.spell.SimulateSpellValues(item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
             }
         }
 
@@ -294,6 +296,9 @@ namespace Necropanda
             //Get location of first spell block
             Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
 
+            //Get initial cards count
+            int cardsDiscarded = hand.CurrentCardsLength();
+
             yield return new WaitForSeconds(delay);
 
             Character caster = spellInstance.caster;
@@ -311,7 +316,7 @@ namespace Necropanda
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
             }
             SimulateSpellEffects();
 

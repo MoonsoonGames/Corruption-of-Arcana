@@ -53,7 +53,6 @@ namespace Necropanda
         //Visual effects for projectile
         public Object projectileObject;
 
-
         //Visual effects for hit effect
 
         //Sound effects for preparing the spell
@@ -64,16 +63,19 @@ namespace Necropanda
 
         #region Spellcasting
 
+        /// <summary>
+        /// Checks the delay between casting the spell and the visual projectile(s) hitting the target
+        /// </summary>
+        /// <param name="target">The initial target the spell was cast on</param>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="spawnPosition">The spawn position of the projectile</param>
+        /// <returns>Time taken for the last projectile to hit the target</returns>
         public float QuerySpellCastTime(Character target, Character caster, Vector2 spawnPosition)
         {
             float time = 0;
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
-                TeamManager targetTeamManager = target.GetManager();
-                TeamManager casterTeamManager = caster.GetManager();
-                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
-
                 float hitDelay = module.hitCount * multihitDelay;
                 float moduleTime = 0;
                 //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
@@ -93,20 +95,29 @@ namespace Necropanda
             return time;
         }
 
-        public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand)
+        #region Casting Spell
+
+        /// <summary>
+        /// Applies the effects of the spell on the caster and targets
+        /// </summary>
+        /// <param name="target">The initial target the spell was cast on</param>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="spawnPosition">The spawn position of the projectile</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
+        /// <param name="hand">The hand from which this spell was cast</param>
+        public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
             bool discardCards = false;
-            int cardsInHand = hand.CurrentCardsLength();
             float time = 0;
+
+            TeamManager targetTeamManager = target.GetManager();
+            List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
                 if (module.discardCards)
                     discardCards = true;
-
-                TeamManager targetTeamManager = target.GetManager();
-                TeamManager casterTeamManager = caster.GetManager();
-                List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
@@ -170,10 +181,19 @@ namespace Necropanda
 
         #region Affect Characters
 
+        /// <summary>
+        /// Applies the effect of an individual spell module on the caster
+        /// </summary>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="spell">The individual spell module being applied</param>
+        /// <param name="cardsDiscarded">The number of cards discarded</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
         public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
         {
             if (caster != null)
             {
+                //Modifies the value if the spell is empowered or scales with how many cards are discarded
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
@@ -189,18 +209,31 @@ namespace Necropanda
                         spell.statuses[i].status.Apply(caster, spell.statuses[i].duration);
                     }
                 }
+
+                if (caster.GetHealth().GetHealth() < 1)
+                {
+                    caster.CheckOverlay();
+                }
             }
         }
 
+        /// <summary>
+        /// Applies the effect of an individual spell module on the caster
+        /// </summary>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="target">The character that the module is affecting</param>
+        /// <param name="spell">The individual spell module being applied</param>
+        /// <param name="cardsDiscarded">The number of cards discarded</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
         public void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
         {
             if (target != null)
             {
+                //Modifies the value if the spell is empowered or scales with how many cards are discarded
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
-                //Debug.Log("Spell cast: " + spellName + " at " + target.stats.characterName);
-                //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
                 target.GetHealth().ChangeHealth(realEffectType, value, caster);
 
@@ -215,7 +248,7 @@ namespace Necropanda
 
                 if (target.GetHealth().GetHealthPercentage() < spell.executeThreshold)
                 {
-                    //Debug.Log("Kill " + target.characterName + " with " + name + " at: " + (target.GetHealth().GetHealthPercentage()));
+                    //Kill target if they are below the execute threshold
                     target.GetHealth().ChangeHealth(E_DamageTypes.Perforation, 9999999, caster);
                 }
 
@@ -224,10 +257,17 @@ namespace Necropanda
                     target.CheckOverlay();
                 }
 
-                //Sound effects here
+                //Hit effects here
             }
         }
 
+        /// <summary>
+        /// Takes a value and modifies it depending on if the spell is empowered or weakened
+        /// </summary>
+        /// <param name="originalValue">The original value of the spell</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
+        /// <returns>The empowered or weakened value</returns>
         int EmpowerWeakenValue(int originalValue, bool empowered, bool weakened)
         {
             int value = originalValue;
@@ -246,12 +286,20 @@ namespace Necropanda
 
         #endregion
 
+        #endregion
+
         #region Simulate Spell
 
-        public void SimulateSpellValues(Character target, Character caster, bool empowered, bool weakened, Deck2D hand)
+        /// <summary>
+        /// Simulates the effects of the spell on the caster and targets without applying them
+        /// </summary>
+        /// <param name="target">The initial target the spell was cast on</param>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
+        /// <param name="hand">The hand from which this spell was cast</param>
+        public void SimulateSpellValues(Character target, Character caster, bool empowered, bool weakened, int cardsInHand)
         {
-            int cardsInHand = hand.CurrentCardsLength();
-
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
                 TeamManager targetTeamManager = target.GetManager();
@@ -299,6 +347,15 @@ namespace Necropanda
             }
         }
 
+        /// <summary>
+        /// Checks the effect of an individual spell module
+        /// </summary>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="target">The initial target the spell was cast on</param>
+        /// <param name="spell">The individual spell module being checked</param>
+        /// <param name="cardsDiscarded">The number of cards discarded</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
         public void Simulate(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
         {
             int damage = 0, healing = 0, shield = 0;
