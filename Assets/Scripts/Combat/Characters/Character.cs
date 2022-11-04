@@ -84,6 +84,9 @@ namespace Necropanda
 
         #region Statuses
 
+        //Neutral Statuses
+        [HideInInspector]
+        public bool empowerDeck, weakenDeck;
         //Negative Statuses
         [HideInInspector]
         public bool banish, charm, silence, stun, curse;
@@ -92,6 +95,15 @@ namespace Necropanda
         {
             switch (status)
             {
+                //Neutral Effects
+                case E_Statuses.EmpowerDeck:
+                    empowerDeck = apply;
+                    deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
+                    break;
+                case E_Statuses.WeakenDeck:
+                    weakenDeck = apply;
+                    deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
+                    break;
                 //Negative Effects
                 case E_Statuses.Banish:
                     banish = apply;

@@ -93,7 +93,7 @@ namespace Necropanda
             return time;
         }
 
-        public void CastSpell(Character target, Character caster, Vector2 spawnPosition)
+        public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened)
         {
             float time = 0;
 
@@ -113,18 +113,18 @@ namespace Necropanda
                     {
                         case E_SpellTargetType.Caster:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
-                            VFXManager.instance.AffectSelfDelay(this, caster, module, spawnPosition, moduleTime + hitDelay + time);
+                            VFXManager.instance.AffectSelfDelay(this, caster, module, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             break;
                         case E_SpellTargetType.Target:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, spawnPosition, moduleTime + hitDelay);
+                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, spawnPosition, moduleTime + hitDelay, empowered, weakened);
                             break;
                         case E_SpellTargetType.Chain:
                             x = targetTeamManager.team.Count * multihitDelay;
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.Cleave:
@@ -132,23 +132,23 @@ namespace Necropanda
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, spawnPosition, moduleTime + hitDelay + time);
+                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             break;
                         case E_SpellTargetType.RandomAll:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, spawnPosition, moduleTime + hitDelay + time);
+                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             break;
                         case E_SpellTargetType.All:
                             x = targetTeamManager.team.Count * multihitDelay;
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in allCharacters)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             }
                             break;
                     }
@@ -160,14 +160,15 @@ namespace Necropanda
 
         #region Affect Characters
 
-        public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell)
+        public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell, bool empowered, bool weakened)
         {
             if (caster == null)
             {
+                int value = EmpowerWeakenValue(spell.value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-                caster.GetHealth().ChangeHealth(spell.effectType, spell.value, caster);
+                caster.GetHealth().ChangeHealth(spell.effectType, value, caster);
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
@@ -180,15 +181,16 @@ namespace Necropanda
             }
         }
 
-        public void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell)
+        public void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell, bool empowered, bool weakened)
         {
             if (target != null)
             {
+                int value = EmpowerWeakenValue(spell.value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + target.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
-                target.GetHealth().ChangeHealth(realEffectType, spell.value, caster);
+                target.GetHealth().ChangeHealth(realEffectType, value, caster);
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
@@ -212,6 +214,22 @@ namespace Necropanda
 
                 //Sound effects here
             }
+        }
+
+        int EmpowerWeakenValue(int originalValue, bool empowered, bool weakened)
+        {
+            int value = originalValue;
+            if (empowered && !weakened)
+            {
+                Debug.Log(spellName + " is empowered " + value + " to " + (int)(value * 1.5f));
+                value = (int)(value * 1.5f);
+            }
+            else if (weakened && !empowered)
+            {
+                Debug.Log(spellName + " is weakened " + value + " to " + (int)(value * 0.5f));
+                value = (int)(value * 0.5f);
+            }
+            return value;
         }
 
         #endregion

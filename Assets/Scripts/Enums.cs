@@ -27,7 +27,7 @@ public enum E_StatusTargetType
 
 public enum E_Statuses
 {
-    None, Banish, Charm, Silence, Stun, Curse
+    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck
 }
 
 public enum E_Scenes

@@ -21,32 +21,32 @@ namespace Necropanda
             instance = this;
         }
 
-        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay)
+        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
-            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, spawnPosition, delay));
+            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, spawnPosition, delay, empowered, weakened));
         }
 
-        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay)
+        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, caster.transform.position);
             VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject);
             yield return new WaitForSeconds(effectDelay);
-            spellRef.AffectSelf(caster, spell);
+            spellRef.AffectSelf(caster, spell, empowered, weakened);
         }
 
-        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay)
+        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
-            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, spawnPosition, delay));
+            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, spawnPosition, delay, empowered, weakened));
         }
 
-        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay)
+        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, target.transform.position);
             VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject);
             yield return new WaitForSeconds(effectDelay);
-            spellRef.AffectTarget(caster, target, spell);
+            spellRef.AffectTarget(caster, target, spell, empowered, weakened);
         }
 
         public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef)

@@ -183,7 +183,10 @@ namespace Necropanda
             if (result == 0)
             {
                 //Sorting tied, prioritize the player
-                result = (c1.caster == player ? -1 : 1);
+                if (c1.caster == player || c2.caster == player)
+                {
+                    result = (c1.caster == player ? -1 : 1);
+                }
             }
 
             return result;
@@ -281,7 +284,7 @@ namespace Necropanda
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened);
             }
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));

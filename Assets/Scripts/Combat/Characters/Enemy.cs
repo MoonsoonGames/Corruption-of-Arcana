@@ -116,7 +116,14 @@ namespace Necropanda
                 //In future, determine target depending on spell so it can cast support spells on allies/self
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
                 CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
-                newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
+                if (spellUtility.spell.spawnAsCard)
+                {
+                    newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                }
+                else
+                {
+                    newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                }
 
                 enemyManager.AddSpellInstance(newSpellInstance);
             }
