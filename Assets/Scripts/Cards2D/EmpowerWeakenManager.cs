@@ -13,6 +13,7 @@ namespace Necropanda
     {
         public GameObject empowerOverlay;
         public GameObject weakenOverlay;
+        public GameObject reflectOverlay;
 
         public void DisplayEmpower(bool active)
         {
@@ -22,6 +23,12 @@ namespace Necropanda
         public void DisplayWeaken(bool active)
         {
             weakenOverlay.SetActive(active);
+        }
+
+        public void DisplayReflect(bool active)
+        {
+            Debug.Log("Set reflect overlay to " + active);
+            reflectOverlay.SetActive(active);
         }
     }
 }

@@ -84,6 +84,9 @@ namespace Necropanda
 
         #region Statuses
 
+        //Positive Statuses
+        //[HideInInspector]
+        //Placeholder
         //Neutral Statuses
         [HideInInspector]
         public bool empowerDeck, weakenDeck;
@@ -96,13 +99,27 @@ namespace Necropanda
             switch (status)
             {
                 //Neutral Effects
+                case E_Statuses.Reflect:
+                    if (deck != null)
+                    {
+                        Debug.Log("Set reflect overlay to " + apply);
+                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
+                    }
+                    break;
+                //Neutral Effects
                 case E_Statuses.EmpowerDeck:
                     empowerDeck = apply;
-                    deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
+                    if (deck != null)
+                    {
+                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
+                    }
                     break;
                 case E_Statuses.WeakenDeck:
                     weakenDeck = apply;
-                    deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
+                    if (deck != null)
+                    {
+                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
+                    }
                     break;
                 //Negative Effects
                 case E_Statuses.Banish:

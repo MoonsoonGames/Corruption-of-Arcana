@@ -126,13 +126,22 @@ namespace Necropanda
         /// <param name="card"></param>
         public void RemoveCard(CardDrag2D card)
         {
+            bool empower = false;
+            bool weaken = false;
+
+            if (character != null)
+            {
+                empower = character.empowerDeck;
+                weaken = character.weakenDeck;
+            }
+
             card.gameObject.transform.SetParent(dragArea.transform);
             card.deck = null;
 
             ResetArrays();
 
             CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, false, false, character, player);
+            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, empower, weaken, character, player);
 
             timeline.RemoveSpellInstance(newSpellInstance);
         }
