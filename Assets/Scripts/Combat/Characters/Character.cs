@@ -180,7 +180,14 @@ namespace Necropanda
         void PreviewValues()
         {
             Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            simulateValues.DisplayValues(damage, healing, shield);
+            bool kills = damage >= health.GetHealth();
+            int damagePreview = damage;
+
+            if (kills)
+            {
+                damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
+            }
+            simulateValues.DisplayValues(damagePreview, healing, shield, kills);
         }
 
         public void ResetValues()

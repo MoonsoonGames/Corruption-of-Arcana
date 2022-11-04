@@ -283,10 +283,10 @@ namespace Necropanda
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
-                            Simulate(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, empowered, weakened);
+                            //Simulate(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, empowered, weakened);
                             break;
                         case E_SpellTargetType.RandomAll:
-                            Simulate(caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, empowered, weakened);
+                            //Simulate(caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, empowered, weakened);
                             break;
                         case E_SpellTargetType.All:
                             foreach (Character character in allCharacters)
@@ -324,6 +324,12 @@ namespace Necropanda
                     default:
                         damage += value;
                         break;
+                }
+
+                if (target.GetHealth().GetHealthPercentage() < spell.executeThreshold)
+                {
+                    //Debug.Log("Kill " + target.characterName + " with " + name + " at: " + (target.GetHealth().GetHealthPercentage()));
+                    damage += 999999999;
                 }
             }
 

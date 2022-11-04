@@ -13,8 +13,9 @@ namespace Necropanda
     public class SimulateValues : MonoBehaviour
     {
         public TextMeshProUGUI dmg, heal, shield;
+        public GameObject deathIcon;
 
-        public void DisplayValues(int damage, int healing, int shd)
+        public void DisplayValues(int damage, int healing, int shd, bool willKill)
         {
             dmg.gameObject.SetActive(damage > 0);
             dmg.text = damage.ToString();
@@ -24,6 +25,8 @@ namespace Necropanda
 
             shield.gameObject.SetActive(shd > 0);
             shield.text = shd.ToString();
+
+            deathIcon.SetActive(willKill);
         }
     }
 }

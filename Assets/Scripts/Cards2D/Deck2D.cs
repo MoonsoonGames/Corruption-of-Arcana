@@ -144,6 +144,7 @@ namespace Necropanda
             newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, empower, weaken, character, player);
 
             timeline.RemoveSpellInstance(newSpellInstance);
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>
@@ -162,6 +163,7 @@ namespace Necropanda
             }
 
             cards = new CardDrag2D[0];
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>
@@ -182,6 +184,7 @@ namespace Necropanda
 
                 timeline.AddSpellInstance(newSpellInstance);
             }
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>

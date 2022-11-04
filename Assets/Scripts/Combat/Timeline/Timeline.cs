@@ -199,7 +199,7 @@ namespace Necropanda
 
         #region Simulating Spell Effects
 
-        void SimulateSpellEffects()
+        public void SimulateSpellEffects()
         {
             List<TeamManager> teamManagers = new List<TeamManager>();
             teamManagers.Add(CombatManager.instance.playerTeamManager);
@@ -313,6 +313,7 @@ namespace Necropanda
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
                 spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand);
             }
+            SimulateSpellEffects();
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
