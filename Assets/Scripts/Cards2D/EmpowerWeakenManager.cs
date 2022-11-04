@@ -27,7 +27,6 @@ namespace Necropanda
 
         public void DisplayReflect(bool active)
         {
-            Debug.Log("Set reflect overlay to " + active);
             reflectOverlay.SetActive(active);
         }
     }

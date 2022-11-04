@@ -102,7 +102,6 @@ namespace Necropanda
                 case E_Statuses.Reflect:
                     if (deck != null)
                     {
-                        Debug.Log("Set reflect overlay to " + apply);
                         deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
                     }
                     break;
@@ -130,6 +129,7 @@ namespace Necropanda
                     break;
                 case E_Statuses.Silence:
                     silence = apply;
+                    Silence();
                     break;
                 case E_Statuses.Stun:
                     stun = apply;
@@ -139,6 +139,24 @@ namespace Necropanda
                     break;
                 default:
                     break;
+            }
+        }
+
+        protected virtual void Silence()
+        {
+            ArcanaManager arcanaManager = Timeline.instance.GetArcanaManager();
+            if (silence)
+            {
+                if (arcanaManager.silenced == false)
+                {
+                    arcanaManager.silenced = true;
+                    arcanaManager.AdjustArcanaMax(-2);
+                }
+            }
+            else
+            {
+                arcanaManager.silenced = false;
+                Timeline.instance.GetArcanaManager().AdjustArcanaMax(2);
             }
         }
 

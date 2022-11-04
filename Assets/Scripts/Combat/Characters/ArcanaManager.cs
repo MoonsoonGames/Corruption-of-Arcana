@@ -13,7 +13,8 @@ namespace Necropanda
 {
     public class ArcanaManager : MonoBehaviour
     {
-        public int arcanaMax = 3;
+        public int arcanaMaxBase = 3;
+        int arcanaMax = 3; public int GetMaxArcana() { return arcanaMax; }
 
         //public GameObject message;
         public Button endTurnButton;
@@ -21,6 +22,8 @@ namespace Necropanda
         public Image arcanaImage;
         public Color enableColor;
         public Color disableColor;
+
+        public bool silenced = false;
 
         public void AdjustArcanaMax(int change)
         {

@@ -10,29 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 15Devil
+  m_Name: 12HangedMan
   m_EditorClassIdentifier: 
-  spellName: The Devil
+  spellName: The Hung Man
   flavourText: 
-  spellDescription: Apply Shroud of Flies for 3 turns
-  cardImage: {fileID: 21300000, guid: 4d515e7b93068a549b6e2cc9b508d236, type: 3}
+  spellDescription: Discard all cards in your hand, provide 6 shield to target and
+    an additional 4 shield per card discarded
+  cardImage: {fileID: 0}
   overrideColor: 1
-  timelineColor: {r: 0.026210386, g: 0.2924528, b: 0.06792458, a: 255}
-  speed: 0
-  arcanaCost: 2
+  timelineColor: {r: 0.26099145, g: 0.7170188, b: 0.8018868, a: 255}
+  speed: 0.1
+  arcanaCost: 1
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
-  - target: 0
-    effectType: 0
-    value: 0
+  - target: 1
+    effectType: 8
+    value: 6
     hitCount: 1
     executeThreshold: 0
-    discardCards: 0
-    valueScalingPerDiscard: 0
-    statuses:
-    - status: {fileID: 11400000, guid: e7f993ed1163d134da7db65d19ecdf31, type: 2}
-      duration: 3
-      chance: 1
+    discardCards: 1
+    valueScalingPerDiscard: 4
+    statuses: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}

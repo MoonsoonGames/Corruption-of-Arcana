@@ -134,5 +134,10 @@ namespace Necropanda
 
             base.StartTurn();
         }
+
+        protected override void Silence()
+        {
+            //prevent AI from casting spells
+        }
     }
 }

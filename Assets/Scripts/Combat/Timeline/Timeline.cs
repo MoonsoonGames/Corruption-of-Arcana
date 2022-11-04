@@ -24,7 +24,8 @@ namespace Necropanda
         public float statusOffset = 0.3f;
 
         public Character player;
-        ArcanaManager arcanaManager;
+        public Deck2D hand;
+        ArcanaManager arcanaManager; public ArcanaManager GetArcanaManager() { return arcanaManager; }
         int arcanaCount = 0;
 
         private void Start()
@@ -284,7 +285,7 @@ namespace Necropanda
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand);
             }
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));

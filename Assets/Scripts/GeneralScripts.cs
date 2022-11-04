@@ -130,15 +130,19 @@ namespace Necropanda
             public int value;
             public int hitCount;
             public float executeThreshold;
+            public bool discardCards;
+            public int valueScalingPerDiscard;
             public StatusStruct[] statuses;
 
-            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, StatusStruct[] newStatusStructs)
+            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, bool newDiscardCards, int newValueScalingPerDiscard, StatusStruct[] newStatusStructs)
             {
                 target = newTarget;
                 effectType = newEffectType;
                 value = newValue;
                 hitCount = newHitCount;
                 executeThreshold = newExecuteThreshold;
+                discardCards = newDiscardCards;
+                valueScalingPerDiscard = newValueScalingPerDiscard;
                 statuses = newStatusStructs;
             }
         }
