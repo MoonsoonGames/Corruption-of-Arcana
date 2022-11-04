@@ -1,8 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Necropanda.AI;
 
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com and @mattordev
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
 namespace Necropanda.AI.Movement
 {
     /// <summary>

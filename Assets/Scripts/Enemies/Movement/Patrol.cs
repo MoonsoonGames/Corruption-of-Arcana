@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com and @mattordev
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
 namespace Necropanda.AI.Movement
 {
     /// <summary>
     /// <para>Simple Patrol module that can be added to the AI.</para>
     /// Will drop points around the origin, and make the AI move to them. Most values are exposed for editing.
+    /// 
+    /// TODO: rewrite to avoid the use of gameobjects for points, consider using navmesh hits in 4 places.
     /// </summary>
     public class Patrol : MonoBehaviour
     {
