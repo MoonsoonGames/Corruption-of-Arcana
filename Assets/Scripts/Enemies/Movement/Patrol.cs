@@ -41,6 +41,16 @@ namespace Necropanda.AI.Movement
             // }
             // CPatrolPoint.transform.SetParent(null);
 
+            //Get the original position, i.e the center.
+            originalPos = gameObject.transform.position;
+
+            foreach (Vector3 point in patrolPoints)
+            {
+                // Check to see if point is valid
+                // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
+                // if not get the closest thing to it.
+            }
+
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).
@@ -79,6 +89,8 @@ namespace Necropanda.AI.Movement
 
         void GotoNextPoint()
         {
+            // OLD CODE
+            /*
             // Returns if no points have been set up
             if (pointsList.Count == 0)
                 return;
@@ -89,6 +101,18 @@ namespace Necropanda.AI.Movement
             // Choose the next point in the array as the destination,
             // cycling to the start if necessary.
             destPoint = (destPoint + 1) % pointsList.Count;
+            */
+
+            // Returns if no points have been set up.
+            if (patrolPoints.Length == 0)
+                return;
+
+            // Set the agent to go to the currently selected point.
+            agent.destination = patrolPoints[destPoint];
+
+            // Choose the next point in the array as the destination
+            // cyling to the start if necessary.
+            destPoint = (destPoint + 1) % patrolPoints.Length;
         }
 
         public void StopPatrol()
@@ -107,6 +131,11 @@ namespace Necropanda.AI.Movement
             //     Debug.Log("Disabled the patrol movement module on " + this.name);
             //     this.enabled = false;
             // }
+
+            agent.SetDestination(originalPos);
+            agent.autoBraking = true;
+
+            this.enabled = false;
         }
 
 
