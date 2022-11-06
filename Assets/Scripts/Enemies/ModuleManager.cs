@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Necropanda.AI;
 using Necropanda.AI.Movement;
 
 /// <summary>
@@ -20,11 +19,15 @@ namespace Necropanda.AI
         private void Awake()
         {
             aiController = GetComponent<EnemyAI>();
+        }
+
+        private void OnEnable() {
             CheckScripts();
         }
 
         public void CheckScripts()
         {
+            Debug.Log("Checking Enemy AI scripts on " + gameObject.name);
             try
             {
                 wander = gameObject.GetComponent<Wander>();
