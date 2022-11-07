@@ -109,6 +109,8 @@ namespace Necropanda
         public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
             bool discardCards = false;
+            bool removeStatuses = false;
+            int removedStatusCount = Timeline.instance.StatusCount(target);
             float time = 0;
 
             TeamManager targetTeamManager = target.GetManager();
@@ -118,6 +120,9 @@ namespace Necropanda
             {
                 if (module.discardCards)
                     discardCards = true;
+
+                if (module.removeStatuses)
+                    removeStatuses = true;
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
@@ -129,18 +134,18 @@ namespace Necropanda
                     {
                         case E_SpellTargetType.Caster:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
-                            VFXManager.instance.AffectSelfDelay(this, caster, module, cardsInHand, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
+                            VFXManager.instance.AffectSelfDelay(this, caster, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             break;
                         case E_SpellTargetType.Target:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, cardsInHand, spawnPosition, moduleTime + hitDelay, empowered, weakened);
+                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay, empowered, weakened);
                             break;
                         case E_SpellTargetType.Chain:
                             x = targetTeamManager.team.Count * multihitDelay;
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.Cleave:
@@ -148,23 +153,23 @@ namespace Necropanda
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in targetTeamManager.team)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
+                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             break;
                         case E_SpellTargetType.RandomAll:
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
+                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             break;
                         case E_SpellTargetType.All:
                             x = targetTeamManager.team.Count * multihitDelay;
                             moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
                             foreach (Character character in allCharacters)
                             {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
+                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
                             }
                             break;
                     }
@@ -176,6 +181,11 @@ namespace Necropanda
             if (discardCards)
             {
                 hand.RemoveAllCards();
+            }
+
+            if (removeStatuses)
+            {
+                Timeline.instance.RemoveStatusesOnCharacter(target);
             }
         }
 
@@ -189,12 +199,12 @@ namespace Necropanda
         /// <param name="cardsDiscarded">The number of cards discarded</param>
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
-        public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
+        public void AffectSelf(Character caster, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, int removedStatusCount, bool empowered, bool weakened)
         {
             if (caster != null)
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount);
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
@@ -226,12 +236,12 @@ namespace Necropanda
         /// <param name="cardsDiscarded">The number of cards discarded</param>
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
-        public void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
+        public void AffectTarget(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, int removedStatusCount, bool empowered, bool weakened)
         {
             if (target != null)
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount);
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
@@ -300,6 +310,9 @@ namespace Necropanda
         /// <param name="hand">The hand from which this spell was cast</param>
         public void SimulateSpellValues(Character target, Character caster, bool empowered, bool weakened, int cardsInHand)
         {
+            int removedStatusCount = Timeline.instance.StatusCount(target);
+            Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
+
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
                 TeamManager targetTeamManager = target.GetManager();
@@ -313,21 +326,21 @@ namespace Necropanda
                     switch (module.target)
                     {
                         case E_SpellTargetType.Caster:
-                            Simulate(caster, caster, module, cardsInHand, empowered, weakened);
+                            Simulate(caster, caster, module, cardsInHand, removedStatusCount, empowered, weakened);
                             break;
                         case E_SpellTargetType.Target:
-                            Simulate(caster, target, module, cardsInHand, empowered, weakened);
+                            Simulate(caster, target, module, cardsInHand, removedStatusCount, empowered, weakened);
                             break;
                         case E_SpellTargetType.Chain:
                             foreach (Character character in targetTeamManager.team)
                             {
-                                Simulate(caster, character, module, cardsInHand, empowered, weakened);
+                                Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.Cleave:
                             foreach (Character character in targetTeamManager.team)
                             {
-                                Simulate(caster, character, module, cardsInHand, empowered, weakened);
+                                Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.RandomTargetTeam:
@@ -339,7 +352,7 @@ namespace Necropanda
                         case E_SpellTargetType.All:
                             foreach (Character character in allCharacters)
                             {
-                                Simulate(caster, character, module, cardsInHand, empowered, weakened);
+                                Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
                     }
@@ -356,13 +369,13 @@ namespace Necropanda
         /// <param name="cardsDiscarded">The number of cards discarded</param>
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
-        public void Simulate(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, bool empowered, bool weakened)
+        public void Simulate(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, int statusesCleared, bool empowered, bool weakened)
         {
             int damage = 0, healing = 0, shield = 0;
 
             if (target != null)
             {
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded);
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * statusesCleared);
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);

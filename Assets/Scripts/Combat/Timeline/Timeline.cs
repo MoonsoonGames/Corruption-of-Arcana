@@ -15,7 +15,7 @@ namespace Necropanda
 
         public static Timeline instance;
 
-        public List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
+        List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
         public float spellDelayOffset = 0.5f;
@@ -160,6 +160,7 @@ namespace Necropanda
                     GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
                     spellBlockObject.transform.SetParent(transform, false);
 
+                    //Sets spell block values
                     //Sets spell block values
                     SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
                     spellBlock.text.text = text;
@@ -365,5 +366,41 @@ namespace Necropanda
         }
 
         #endregion
+
+        public void RemoveStatusesOnCharacter(Character target)
+        {
+            List<CombatHelperFunctions.StatusInstance> statusesToRemove = new List<CombatHelperFunctions.StatusInstance>();
+
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
+            {
+                if (status.target == target)
+                {
+                    statusesToRemove.Add(status);
+                }
+            }
+
+            foreach (CombatHelperFunctions.StatusInstance status in statusesToRemove)
+            {
+                if (status.target == target)
+                {
+                    statuses.Remove(status);
+                }
+            }
+        }
+
+        public int StatusCount(Character target)
+        {
+            int statusCount = 0;
+
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
+            {
+                if (status.target == target)
+                {
+                    statusCount++;
+                }
+            }
+
+            return statusCount;
+        }
     }
 }

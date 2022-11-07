@@ -132,6 +132,8 @@ namespace Necropanda
             public float executeThreshold;
             public bool discardCards;
             public int valueScalingPerDiscard;
+            public bool removeStatuses;
+            public int valueScalingPerStatus;
             public StatusStruct[] statuses;
 
             public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, bool newDiscardCards, int newValueScalingPerDiscard, StatusStruct[] newStatusStructs)
