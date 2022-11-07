@@ -54,6 +54,8 @@ namespace Necropanda.AI.Movement
 
             foreach (Vector3 point in patrolPoints)
             {
+                
+
                 // Check to see if point is valid
                 // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
                 // if not get the closest thing to it.
@@ -70,7 +72,7 @@ namespace Necropanda.AI.Movement
         /// <summary>
         /// Gets points in the 4 cardinal directions. Creates a diamond patrol pattern.
         /// 
-        /// I hate how I've wrote this.. don't read it.
+        /// Rewrote this.. Still feels like there's a better way to do it
         /// </summary>
         /// <param name="offset">The offset amount to add to each direction.</param>
         Vector3[] GetPatrolPointsDiamond(float offset)
