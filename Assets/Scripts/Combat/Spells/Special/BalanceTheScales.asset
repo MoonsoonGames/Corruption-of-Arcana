@@ -10,39 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 1Magician
+  m_Name: BalanceTheScales
   m_EditorClassIdentifier: 
-  spellName: The Magician
+  spellName: Balance the Scales
   flavourText: 
-  spellDescription: Hit target with 8 Static damage and hit all target's allies with
-    4 Static damage
-  cardImage: {fileID: 21300000, guid: c4b6205a7a7659e4cb9d1dafad788c50, type: 3}
+  spellDescription: Deal 5 Physical damage to target plus additional damage equal
+    to half the damage you took last turn
+  cardImage: {fileID: 0}
   overrideColor: 1
-  timelineColor: {r: 0.29067284, g: 0.5288418, b: 0.8679245, a: 255}
-  discardAfterCasting: 0
+  timelineColor: {r: 0.8, g: 0.37470466, b: 0.23137255, a: 255}
+  discardAfterCasting: 1
   drawCard: {fileID: 0}
-  speed: 0.6
-  arcanaCost: 2
+  speed: 0.2
+  arcanaCost: 0
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
-  - target: 3
-    effectType: 2
-    value: 8
-    hitCount: 1
-    executeThreshold: 0
-    valueScalingDamageTaken: 0
-    discardCards: 0
-    valueScalingPerDiscard: 0
-    removeStatuses: 0
-    valueScalingPerStatus: 0
-    statuses: []
   - target: 1
-    effectType: 2
-    value: 4
+    effectType: 0
+    value: 5
     hitCount: 1
     executeThreshold: 0
-    valueScalingDamageTaken: 0
+    valueScalingDamageTaken: 0.5
     discardCards: 0
     valueScalingPerDiscard: 0
     removeStatuses: 0

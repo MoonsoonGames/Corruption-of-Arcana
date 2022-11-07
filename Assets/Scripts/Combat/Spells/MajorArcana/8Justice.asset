@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Justice
   flavourText: 
-  spellDescription: Discard all cards in your hand, deal 8 Physical damage to your
-    target and an additional 4 per card discarded
+  spellDescription: Next turn, draw the Balance the Scales card
   cardImage: {fileID: 0}
   overrideColor: 1
-  timelineColor: {r: 0.8396226, g: 0.4691309, b: 0.08317016, a: 255}
+  timelineColor: {r: 0.8, g: 0.37470466, b: 0.23137255, a: 255}
+  discardAfterCasting: 0
+  drawCard: {fileID: 11400000, guid: 281e127ea2baa5f4bb4dcc1aef863ce2, type: 2}
   speed: 0.5
   arcanaCost: 1
   multihitDelay: 0.1
@@ -29,8 +30,11 @@ MonoBehaviour:
     value: 8
     hitCount: 1
     executeThreshold: 0
+    valueScalingDamageTaken: 0
     discardCards: 1
     valueScalingPerDiscard: 4
+    removeStatuses: 0
+    valueScalingPerStatus: 0
     statuses: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}

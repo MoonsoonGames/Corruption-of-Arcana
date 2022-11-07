@@ -38,6 +38,8 @@ namespace Necropanda
         #region Spell Logic
 
         [Header("Spell Logic")]
+        public bool discardAfterCasting;
+        public Spell drawCard;
         public float speed;
         public int arcanaCost;
         public float multihitDelay = 0.1f;
@@ -204,7 +206,7 @@ namespace Necropanda
             if (caster != null)
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount);
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
@@ -241,7 +243,7 @@ namespace Necropanda
             if (target != null)
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount);
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingDamageTaken * target.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
@@ -375,7 +377,7 @@ namespace Necropanda
 
             if (target != null)
             {
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * statusesCleared);
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * statusesCleared) + (int)(spell.valueScalingDamageTaken * target.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);

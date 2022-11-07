@@ -76,6 +76,8 @@ namespace Necropanda
 
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
+            int damageTaken = 0;
+
             //Resistance check
             int trueValue = (int)(value * CheckResistances(type));
 
@@ -89,6 +91,7 @@ namespace Necropanda
                     break;
                 case (E_DamageTypes.Perforation):
                     health = Mathf.Clamp(health - trueValue, 0, maxHealth);
+                    damageTaken = trueValue;
                     break;
                 default:
                     int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
@@ -96,6 +99,7 @@ namespace Necropanda
                     health = Mathf.Clamp(health - damageOverShield, 0, maxHealth);
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
+                    damageTaken = trueValue;
                     break;
             }
 
@@ -106,6 +110,7 @@ namespace Necropanda
 
             PlaySound(type, trueValue);
             UpdateHealthUI();
+            character.damageTakenThisTurn += damageTaken;
             return trueValue;
         }
 

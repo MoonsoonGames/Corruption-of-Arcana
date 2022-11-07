@@ -40,8 +40,13 @@ namespace Necropanda
             return new CombatHelperFunctions.SpellUtility();
         }
 
+        public int damageTakenThisTurn;
+        int damageTakenLastTurn; public int GetDamageTakenThisTurn() { return damageTakenLastTurn; }
+
         public virtual void StartTurn()
         {
+            damageTakenLastTurn = damageTakenThisTurn;
+            damageTakenThisTurn = 0;
             CheckOverlay();
             health.StartTurn();
         }

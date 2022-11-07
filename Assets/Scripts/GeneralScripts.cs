@@ -130,6 +130,7 @@ namespace Necropanda
             public int value;
             public int hitCount;
             public float executeThreshold;
+            public float valueScalingDamageTaken;
             public bool discardCards;
             public int valueScalingPerDiscard;
             public bool removeStatuses;

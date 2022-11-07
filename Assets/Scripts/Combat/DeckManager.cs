@@ -42,13 +42,21 @@ namespace Necropanda
             playerDeck.Sort(HelperFunctions.RandomSort);
         }
 
+        public void AddToStart(Spell spell)
+        {
+            playerDeck.Insert(0, spell);
+        }
+
         /// <summary>
         /// Adds card to the discard pile
         /// </summary>
         /// <param name="spell"></param>
         public void ReturnCard(Spell spell)
         {
-            discardPile.Add(spell);
+            if (spell.discardAfterCasting == false)
+            {
+                discardPile.Add(spell);
+            }
         }
 
         /// <summary>

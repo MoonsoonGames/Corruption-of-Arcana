@@ -17,7 +17,9 @@ MonoBehaviour:
   spellDescription: Charm target for 2 turns
   cardImage: {fileID: 0}
   overrideColor: 1
-  timelineColor: {r: 1, g: 0.8912121, b: 0.18396229, a: 255}
+  timelineColor: {r: 0.745283, g: 0.6564597, b: 0.21444462, a: 255}
+  discardAfterCasting: 0
+  drawCard: {fileID: 0}
   speed: 0.4
   arcanaCost: 2
   multihitDelay: 0.1
@@ -28,8 +30,11 @@ MonoBehaviour:
     value: 0
     hitCount: 1
     executeThreshold: 0
+    valueScalingDamageTaken: 0
     discardCards: 0
     valueScalingPerDiscard: 0
+    removeStatuses: 0
+    valueScalingPerStatus: 0
     statuses:
     - status: {fileID: 11400000, guid: 3243fa674bc14a14185f0f5b593a7409, type: 2}
       duration: 3
