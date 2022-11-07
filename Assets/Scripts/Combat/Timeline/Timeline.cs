@@ -15,7 +15,7 @@ namespace Necropanda
 
         public static Timeline instance;
 
-        List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
+        public List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
         public float spellDelayOffset = 0.5f;
@@ -149,35 +149,38 @@ namespace Necropanda
 
             spellBlocks.Clear();
 
-            //Spawn UI for cards
-            foreach (var item in spells)
+            if (spells.Count > 0)
             {
-                string text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
-
-                //Creates spell block game object
-                GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
-                spellBlockObject.transform.SetParent(transform, false);
-
-                //Sets spell block values
-                SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
-                spellBlock.text.text = text;
-                if (item.spell.overrideColor)
-                    spellBlock.image.color = item.spell.timelineColor;
-                else
-                    spellBlock.image.color = item.caster.stats.timelineColor;
-
-                //Adds spell block to layout group
-                spellBlocks.Add(spellBlock);
-
-                if (item.caster == player)
+                //Spawn UI for cards
+                foreach (var item in spells)
                 {
-                    arcanaCount += item.spell.arcanaCost;
+                    string text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+
+                    //Creates spell block game object
+                    GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
+                    spellBlockObject.transform.SetParent(transform, false);
+
+                    //Sets spell block values
+                    SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
+                    spellBlock.text.text = text;
+                    if (item.spell.overrideColor)
+                        spellBlock.image.color = item.spell.timelineColor;
+                    else
+                        spellBlock.image.color = item.caster.stats.timelineColor;
+
+                    //Adds spell block to layout group
+                    spellBlocks.Add(spellBlock);
+
+                    if (item.caster == player)
+                    {
+                        arcanaCount += item.spell.arcanaCost;
+                    }
                 }
+
+                arcanaManager.CheckArcana(arcanaCount);
+
+                SimulateSpellEffects();
             }
-
-            arcanaManager.CheckArcana(arcanaCount);
-
-            SimulateSpellEffects();
         }
 
         int SortBySpeed(CombatHelperFunctions.SpellInstance c1, CombatHelperFunctions.SpellInstance c2)
@@ -302,6 +305,7 @@ namespace Necropanda
             yield return new WaitForSeconds(delay);
 
             Character caster = spellInstance.caster;
+            Character target = spellInstance.target;
 
             if (caster.stun)
             {
@@ -312,6 +316,14 @@ namespace Necropanda
             {
                 Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell
+            }
+            else if (caster.banish && caster != target)
+            {
+                Debug.Log("Caster is banished, skip spell");
+            }
+            else if (target.banish && caster != target)
+            {
+                Debug.Log("Target is banished, skip spell");
             }
             else
             {

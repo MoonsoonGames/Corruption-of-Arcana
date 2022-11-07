@@ -17,7 +17,7 @@ namespace Necropanda
 
         public void SetOverlay(bool active, string message)
         {
-            Debug.Log(message);
+            //Debug.Log(message);
             mask.SetActive(active);
             text.text = message;
         }

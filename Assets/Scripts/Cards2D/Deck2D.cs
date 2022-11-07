@@ -245,17 +245,27 @@ namespace Necropanda
             //Player Stun Check
             if (player.stun)
             {
-                Debug.Log("Target stunned, apply overlay");
+                //Debug.Log("Target stunned, apply overlay");
                 SetOverlay(true, "Cannot Target - Player Stunned");
+            }
+            else if (player.banish && player != character)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Player Banished");
+            }
+            else if (character.banish && player != character)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Target Banished");
             }
             else if (character.GetHealth().GetHealth() < 1)
             {
-                Debug.Log("Target killed, apply overlay");
+                //Debug.Log("Target killed, apply overlay");
                 SetOverlay(true, "Cannot Target - Target Killed");
             }
             else
             {
-                Debug.Log("Target ok, remove overlay");
+                //Debug.Log("Target ok, remove overlay");
                 SetOverlay(false, " ");
             }
         }

@@ -44,66 +44,70 @@ namespace Necropanda
         public override CombatHelperFunctions.SpellUtility PrepareSpell()
         {
             CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
-            Character target = spell.target;
-            bool spawnCard = spell.spell.spawnAsCard;
-            Debug.Log(spawnCard + " 1");
-            int index = 999;
-            for (int i = 0; i < aISpells.Count; i++)
+
+            if (spell.utility > 0)
             {
-                if (aISpells[i].spell == spell.spell.spell)
+                Character target = spell.target;
+                bool spawnCard = spell.spell.spawnAsCard;
+                //Debug.Log(spawnCard + " 1");
+                int index = 999;
+                for (int i = 0; i < aISpells.Count; i++)
                 {
-                    //Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
-                    index = i;
+                    if (aISpells[i].spell == spell.spell.spell)
+                    {
+                        //Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
+                        index = i;
+                    }
+                    else
+                    {
+                        //Debug.Log("different spell, set cooldown");
+                    }
+                }
+
+                if (aISpells.Count > index)
+                {
+                    //Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
+                    CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
+
+                    newSpell.spell = aISpells[index].spell;
+                    newSpell.spawnAsCard = aISpells[index].spawnAsCard;
+                    newSpell.targetSelf = aISpells[index].targetSelf;
+                    newSpell.targetAllies = aISpells[index].targetAllies;
+                    newSpell.targetEnemies = aISpells[index].targetEnemies;
+                    newSpell.timeCooldown = aISpells[index].timeCooldown;
+                    newSpell.lastUsed = 0;
+
+                    aISpells.RemoveAt(index);
+                    aISpells.Add(newSpell);
+
+                    spawnCard = newSpell.spawnAsCard;
+                    Debug.Log(spawnCard + " 2");
                 }
                 else
                 {
-                    //Debug.Log("different spell, set cooldown");
+                    //Debug.Log(index + " index");
                 }
-            }
 
-            if (aISpells.Count > index)
-            {
-                //Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
-                CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
+                if (spawnCard)
+                {
+                    //Debug.Log("Spawn Enemy Card");
+                    Deck2D deck = target.GetComponentInChildren<Deck2D>();
 
-                newSpell.spell = aISpells[index].spell;
-                newSpell.spawnAsCard = aISpells[index].spawnAsCard;
-                newSpell.targetSelf = aISpells[index].targetSelf;
-                newSpell.targetAllies = aISpells[index].targetAllies;
-                newSpell.targetEnemies = aISpells[index].targetEnemies;
-                newSpell.timeCooldown = aISpells[index].timeCooldown;
-                newSpell.lastUsed = 0;
+                    GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
+                    EnemyCard cardLogic = card.GetComponent<EnemyCard>();
+                    cardLogic.Setup(spell.spell.spell);
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
 
-                aISpells.RemoveAt(index);
-                aISpells.Add(newSpell);
+                    //Add the card to the array
+                    deck.AddCard(cardDrag);
 
-                spawnCard = newSpell.spawnAsCard;
-                Debug.Log(spawnCard + " 2");
-            }
-            else
-            {
-                //Debug.Log(index + " index");
-            }
-
-            if (spawnCard)
-            {
-                Debug.Log("Spawn Enemy Card");
-                Deck2D deck = target.GetComponentInChildren<Deck2D>();
-
-                GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
-                EnemyCard cardLogic = card.GetComponent<EnemyCard>();
-                cardLogic.Setup(spell.spell.spell);
-                CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
-
-                //Add the card to the array
-                deck.AddCard(cardDrag);
-
-                //Reset card scales
-                cardDrag.ScaleCard(1, false);
-            }
-            else
-            {
-                Debug.Log("Don't Spawn Enemy Card");
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
+                }
+                else
+                {
+                    //Debug.Log("Don't Spawn Enemy Card");
+                }
             }
 
             return spell;
@@ -116,16 +120,24 @@ namespace Necropanda
                 //In future, determine target depending on spell so it can cast support spells on allies/self
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
                 CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
-                if (spellUtility.spell.spawnAsCard)
+
+                if (spellUtility.utility > 0)
                 {
-                    newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                    if (spellUtility.spell.spawnAsCard)
+                    {
+                        newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                    }
+                    else
+                    {
+                        newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                    }
+
+                    enemyManager.AddSpellInstance(newSpellInstance);
                 }
                 else
                 {
-                    newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                    Debug.Log(stats.characterName + " is skipping their turn");
                 }
-
-                enemyManager.AddSpellInstance(newSpellInstance);
             }
             else
             {
