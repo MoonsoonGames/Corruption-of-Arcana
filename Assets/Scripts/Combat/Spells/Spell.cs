@@ -38,8 +38,10 @@ namespace Necropanda
         #region Spell Logic
 
         [Header("Spell Logic")]
-        public bool discardAfterCasting;
+        public bool discardAfterCasting = false;
         public Spell drawCard;
+        public bool discardCards = false;
+        public bool removeStatuses = false;
         public float speed;
         public int arcanaCost;
         public float multihitDelay = 0.1f;
@@ -110,8 +112,6 @@ namespace Necropanda
         /// <param name="hand">The hand from which this spell was cast</param>
         public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
-            bool discardCards = false;
-            bool removeStatuses = false;
             int removedStatusCount = Timeline.instance.StatusCount(target);
             float time = 0;
 
@@ -120,11 +120,6 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
-                if (module.discardCards)
-                    discardCards = true;
-
-                if (module.removeStatuses)
-                    removeStatuses = true;
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
@@ -182,12 +177,12 @@ namespace Necropanda
 
             if (discardCards)
             {
-                hand.RemoveAllCards();
+                Timeline.instance.discardCards = true;
             }
 
             if (removeStatuses)
             {
-                Timeline.instance.RemoveStatusesOnCharacter(target);
+                Timeline.instance.clearStatusChars.Add(target);
             }
         }
 

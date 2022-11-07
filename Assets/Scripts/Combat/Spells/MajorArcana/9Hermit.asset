@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Hermit
   flavourText: 
-  spellDescription: Apply banish to yourself for 2 turns, preventing other characters
-    from casting spell on you, but you cannot cast spells on other characters
+  spellDescription: Apply banish to yourself for your next turn, preventing other
+    characters from casting spell on you, but you cannot cast spells on other characters
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.43676576, g: 0.5881653, b: 0.6132076, a: 1}
+  discardAfterCasting: 0
+  drawCard: {fileID: 0}
+  discardCards: 0
+  removeStatuses: 0
   speed: 0.4
   arcanaCost: 1
   multihitDelay: 0
@@ -29,11 +33,12 @@ MonoBehaviour:
     value: 0
     hitCount: 1
     executeThreshold: 0
-    discardCards: 0
+    valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
     statuses:
     - status: {fileID: 11400000, guid: 72827d3bbdfb6fc4e856070f43222d98, type: 2}
-      duration: 3
+      duration: 2
       chance: 1
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}

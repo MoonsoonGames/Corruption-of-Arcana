@@ -242,7 +242,26 @@ namespace Necropanda
             delay += statuses.Count * statusOffset;
             delay += 0.5f;
 
+            Invoke("EndTimeline", delay);
+
             return delay;
+        }
+
+        public bool discardCards = false;
+        public List<Character> clearStatusChars = new List<Character>();
+
+        void EndTimeline()
+        {
+            if (discardCards)
+            {
+                hand.RemoveAllCards();
+                discardCards = false;
+            }
+
+            foreach (Character character in clearStatusChars)
+            {
+                Timeline.instance.RemoveStatusesOnCharacter(character);
+            }
         }
 
         float CastSpells()
