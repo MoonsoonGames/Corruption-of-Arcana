@@ -19,6 +19,6 @@ namespace Necropanda
         public int count;
         public int total;
 
-        public int stepCompleted;
+        public bool stepCompleted;
     }
 }

@@ -11,6 +11,8 @@ namespace Necropanda
 {
     public class AchievementInterface : MonoBehaviour
     {
+        public GameObject AchievementScreen;
+        public GameObject PauseMenu;
         void Update()
         {
             if(Input.GetKeyDown(KeyCode.Escape))
