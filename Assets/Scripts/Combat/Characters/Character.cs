@@ -186,7 +186,8 @@ namespace Necropanda
         void PreviewValues()
         {
             //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            bool kills = damage >= health.GetHealth();
+            bool kills = damage >= health.GetHealth() + healing;
+            //Save execute threshold to apply here
             int damagePreview = damage;
 
             if (kills)
