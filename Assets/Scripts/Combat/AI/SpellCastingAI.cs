@@ -58,6 +58,11 @@ namespace Necropanda
                     {
                         float utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
 
+                        if (self.charm)
+                        {
+                            utility = SpellUtility(spell, self, target, enemyTeam, allyTeam);
+                        }
+
                         if (utility > bestSpell.utility)
                         {
                             bestSpell.spell = spell;
