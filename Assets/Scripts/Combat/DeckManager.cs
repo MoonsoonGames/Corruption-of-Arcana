@@ -11,6 +11,27 @@ namespace Necropanda
 {
     public class DeckManager : MonoBehaviour
     {
+        #region Singleton
+        //Code from last year
+
+        public static DeckManager instance = null;
+
+        void Singleton()
+        {
+            if (instance == null)
+            {
+                instance = this;
+
+                //DontDestroyOnLoad(this);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+
         public List<Spell> playerDeck;
         public List<Spell> discardPile;
 
@@ -27,7 +48,7 @@ namespace Necropanda
 
             if (playerDeck.Count != 0)
             {
-                Spell spell = playerDeck[Random.Range(0, playerDeck.Count)];
+                Spell spell = playerDeck[0];
 
                 playerDeck.Remove(spell);
 
@@ -39,6 +60,7 @@ namespace Necropanda
 
         private void Start()
         {
+            Singleton();
             playerDeck.Sort(HelperFunctions.RandomSort);
         }
 

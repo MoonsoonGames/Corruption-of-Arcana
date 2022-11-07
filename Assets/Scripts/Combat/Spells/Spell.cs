@@ -243,7 +243,7 @@ namespace Necropanda
             if (target != null)
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingDamageTaken * target.GetDamageTakenThisTurn());
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
@@ -377,7 +377,7 @@ namespace Necropanda
 
             if (target != null)
             {
-                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * statusesCleared) + (int)(spell.valueScalingDamageTaken * target.GetDamageTakenThisTurn());
+                int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * statusesCleared) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);

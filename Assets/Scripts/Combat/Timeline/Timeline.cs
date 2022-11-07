@@ -333,6 +333,11 @@ namespace Necropanda
             }
             SimulateSpellEffects();
 
+            if (spellInstance.spell.drawCard != null)
+            {
+                DeckManager.instance.AddToStart(spellInstance.spell.drawCard);
+            }
+
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
             RemoveSpellInstance(spellInstance);
