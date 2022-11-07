@@ -84,6 +84,23 @@ namespace Necropanda
             discardPile.Add(spell);
         }
 
+        public void DiscardPileToDeck(bool start)
+        {
+            foreach(Spell spell in discardPile)
+            {
+                if (start)
+                {
+                    playerDeck.Insert(0, spell);
+                }
+                else
+                {
+                    playerDeck.Add(spell);
+                }
+            }
+
+            discardPile.Clear();
+        }
+
         /// <summary>
         /// Shuffled cards in the discard pile and then adds them to the player deck
         /// </summary>

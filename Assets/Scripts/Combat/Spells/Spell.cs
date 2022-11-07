@@ -38,15 +38,19 @@ namespace Necropanda
         #region Spell Logic
 
         [Header("Spell Logic")]
+        public float speed;
+        public int arcanaCost;
+
+        [Header("Advanced Logic")]
         public bool discardAfterCasting = false;
         public Spell drawCard;
         public bool discardCards = false;
+        public bool returnDiscardPile = false;
         public bool removeStatuses = false;
-        public float speed;
-        public int arcanaCost;
+
+        [Header("Module Logic")]
         public float multihitDelay = 0.1f;
         public float moduleDelay = 0f;
-
         public CombatHelperFunctions.SpellModule[] spellModules;
 
         #endregion
@@ -183,6 +187,11 @@ namespace Necropanda
             if (removeStatuses)
             {
                 Timeline.instance.clearStatusChars.Add(target);
+            }
+
+            if (returnDiscardPile)
+            {
+                DeckManager.instance.DiscardPileToDeck(true);
             }
         }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -111,5 +112,23 @@ namespace Necropanda
                 waitingForStartTurn = false;
             }
         }
+
+        #region Sound Effects
+
+        public EventReference click;
+        public EventReference hover;
+        //FMOD.Studio.EventInstance fmodInstance;
+
+        public void PlayClickSound()
+        {
+            RuntimeManager.PlayOneShot(click);
+        }
+
+        public void PlayHoverSound()
+        {
+            RuntimeManager.PlayOneShot(hover);
+        }
+
+        #endregion
     }
 }
