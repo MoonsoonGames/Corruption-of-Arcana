@@ -94,10 +94,10 @@ namespace Necropanda
         //[HideInInspector]
         //Placeholder
         //Neutral Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool banish, charm, silence, stun, curse;
 
         public void ApplyStatus(bool apply, E_Statuses status)
@@ -142,6 +142,7 @@ namespace Necropanda
                     break;
                 case E_Statuses.Curse:
                     curse = apply;
+                    health.CheckCurseHealth();
                     break;
                 default:
                     break;

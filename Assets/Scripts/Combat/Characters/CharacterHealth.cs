@@ -21,6 +21,7 @@ namespace Necropanda
 
         //Health Values
         protected int maxHealth; public int GetMaxHealth() { return maxHealth; }
+        protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
         //Hit sound modifier for health
         protected int shield;
@@ -35,6 +36,7 @@ namespace Necropanda
         public Color healthColor;
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
+        public GameObject curseOverlay;
 
         protected virtual void Start()
         {
@@ -46,7 +48,9 @@ namespace Necropanda
         protected virtual void SetupHealth()
         {
             maxHealth = character.stats.maxHealth;
+            tempMaxHealth = maxHealth;
             health = maxHealth;
+            CheckCurseHealth();
             UpdateHealthUI();
         }
 
@@ -68,6 +72,7 @@ namespace Necropanda
         {
             //Decay shield
             shield = shield / 2;
+            CheckCurseHealth();
         }
 
         #endregion
@@ -84,19 +89,19 @@ namespace Necropanda
             switch (type)
             {
                 case (E_DamageTypes.Healing):
-                    health = Mathf.Clamp(health + trueValue, 0, maxHealth);
+                    health = Mathf.Clamp(health + trueValue, 0, tempMaxHealth);
                     break;
                 case (E_DamageTypes.Shield):
                     shield += trueValue;
                     break;
                 case (E_DamageTypes.Perforation):
-                    health = Mathf.Clamp(health - trueValue, 0, maxHealth);
+                    health = Mathf.Clamp(health - trueValue, 0, tempMaxHealth);
                     damageTaken = trueValue;
                     break;
                 default:
                     int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
                     shield = (int)Mathf.Clamp(shield - trueValue, 0, Mathf.Infinity);
-                    health = Mathf.Clamp(health - damageOverShield, 0, maxHealth);
+                    health = Mathf.Clamp(health - damageOverShield, 0, tempMaxHealth);
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
                     damageTaken = trueValue;
@@ -127,7 +132,7 @@ namespace Necropanda
 
                 if (healthText != null)
                 {
-                    healthText.text = health.ToString() + "/" + maxHealth.ToString() + " + " + shield.ToString();
+                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString() + " + " + shield.ToString();
                 }
             }
             else
@@ -135,7 +140,7 @@ namespace Necropanda
                 if (healthIcon != null)
                 {
                     //Debug.Log((float)((float)health / (float)maxHealth));
-                    if ((float)((float)health / (float)maxHealth) < lowHealthThresholdPercentage)
+                    if ((float)((float)health / (float)tempMaxHealth) < lowHealthThresholdPercentage)
                     {
                         healthIcon.color = lowHealthColor;
                     }
@@ -147,8 +152,22 @@ namespace Necropanda
 
                 if (healthText != null)
                 {
-                    healthText.text = health.ToString() + "/" + maxHealth.ToString();
+                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString();
                 }
+            }
+        }
+
+        public void CheckCurseHealth()
+        {
+            if (character.curse)
+            {
+                tempMaxHealth = (int)(maxHealth * 0.8);
+                curseOverlay.SetActive(true);
+            }
+            else
+            {
+                tempMaxHealth = maxHealth;
+                curseOverlay.SetActive(false);
             }
         }
 
