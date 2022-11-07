@@ -18,18 +18,26 @@ namespace Necropanda.AI.Movement
     /// </summary>
     public class Patrol : MonoBehaviour
     {
-        public List<GameObject> pointsList = new List<GameObject>();
+        //public List<GameObject> pointsList = new List<GameObject>();
         private int destPoint = 0;
         private NavMeshAgent agent;
         public float timeToPatrol = 30f;
         public bool patrol = true;
-        public GameObject CPatrolPoint;
+        //public GameObject CPatrolPoint;
         
         public Vector3 originalPos;
         public Vector3[] patrolPoints;
 
+        private enum Direction {
+            North,
+            East,
+            South,
+            West
+        }
+
         void Start()
         {
+            patrolPoints = GetPatrolPointsDiamond(1f);
             agent = GetComponent<NavMeshAgent>();
 
             // OLD CODE
@@ -65,27 +73,27 @@ namespace Necropanda.AI.Movement
         /// I hate how I've wrote this.. don't read it.
         /// </summary>
         /// <param name="offset">The offset amount to add to each direction.</param>
-        void GetNavHitPointsDiamond(float offset){
+        Vector3[] GetPatrolPointsDiamond(float offset)
+        {
             // Check to make sure offset isn't 0
-            if (offset == 0){
+            if (offset == 0)
+            {
                 Debug.LogError("No offset added to patrol pattern, returning to avoid weird behaviour..");
-                return;
+                return null;
             }
 
-            // Get the 4 points in the cardinal directions by adding the offset.
-            Vector3 north = new Vector3(transform.position.x + offset, transform.position.z);
-            Vector3 east = new Vector3(transform.position.x, transform.position.z - offset);
-            Vector3 south = new Vector3(transform.position.x - offset, transform.position.z);
-            Vector3 west = new Vector3(transform.position.x, transform.position.z + offset);
+            float x = transform.position.x;
+            float z = transform.position.z;
 
+            Vector3[] patrolPoints = new Vector3[4];
 
-            patrolPoints = new Vector3[4];
-            patrolPoints[0] = north;
-            patrolPoints[1] = east;
-            patrolPoints[2] = south;
-            patrolPoints[3] = west;
+            patrolPoints[(int)Direction.North] = new Vector3(x + offset, z);
+            patrolPoints[(int)Direction.East] = new Vector3(x, z - offset);
+            patrolPoints[(int)Direction.South] = new Vector3(x - offset, z);
+            patrolPoints[(int)Direction.West] = new Vector3(x, z + offset);
+
+            return patrolPoints;
         }
-
 
         void GotoNextPoint()
         {
