@@ -45,7 +45,7 @@ namespace Necropanda
         {
             CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
 
-            if (spell.utility > 0)
+            if (spell.utility >= 0)
             {
                 Character target = spell.target;
                 bool spawnCard = spell.spell.spawnAsCard;
@@ -121,7 +121,7 @@ namespace Necropanda
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
                 CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
 
-                if (spellUtility.utility > 0)
+                if (spellUtility.utility >= 0)
                 {
                     if (spellUtility.spell.spawnAsCard)
                     {

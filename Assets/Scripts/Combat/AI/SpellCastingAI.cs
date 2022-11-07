@@ -47,6 +47,7 @@ namespace Necropanda
         CombatHelperFunctions.SpellUtility UtilityCalculation(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility bestSpell = new CombatHelperFunctions.SpellUtility();
+            bestSpell.utility = -5;
             List<Character> allTargets = new List<Character>();
             allTargets = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
@@ -54,7 +55,7 @@ namespace Necropanda
             {
                 foreach (CombatHelperFunctions.AISpell spell in spellList)
                 {
-                    if (spell.lastUsed >= spell.timeCooldown)
+                    if (CanCastSpell(spell, self, target, allyTeam, enemyTeam))
                     {
                         float utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
 
@@ -78,9 +79,7 @@ namespace Necropanda
 
         float SpellUtility(CombatHelperFunctions.AISpell spell, Character self, Character target, List<Character> allyTeam, List<Character> enemyTeam)
         {
-            bool canCast = CanCastSpell(spell, self, target, allyTeam, enemyTeam);
-
-            float spellUtility = canCast ?  2 : 0;
+            float spellUtility = 0;
 
             foreach (CombatHelperFunctions.SpellModule module in spell.spell.spellModules)
             {
@@ -116,7 +115,7 @@ namespace Necropanda
                         moduleUtility += (module.value + targetUtility) * supportAllyUtility;
                     }
 
-                    if (spell.targetEnemies && enemyTeam.Contains(target))
+                    if (spell.targetEnemies)
                     {
                         int targetHealth = target.GetHealth().GetHealth();
                         int targetMaxHealth = target.GetHealth().GetMaxHealth();
@@ -124,24 +123,34 @@ namespace Necropanda
 
                         moduleUtility += module.value * damageUtility;
                     }
-                }
 
-                spellUtility += moduleUtility;
+                    spellUtility += moduleUtility;
+                }
             }
 
-            if (spellUtility > 0)
-                Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+            Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+
             return spellUtility;
         }
 
         bool CanCastSpell(CombatHelperFunctions.AISpell spell, Character self, Character target, List<Character> allyTeam, List<Character> enemyTeam)
         {
+            if (spell.lastUsed < spell.timeCooldown)
+            {
+                return false;
+            }
+
+            if (self.silence && spell.timeCooldown > 0)
+            {
+                return false;
+            }
+
             if (spell.targetSelf && target == self)
             {
                 return true;
             }
 
-            if (self.banish == false && target.banish == false && target != self)
+            if ((self.banish == false && target.banish == false) || target == self)
             {
                 if (spell.targetAllies && allyTeam.Contains(target))
                 {
