@@ -21,6 +21,7 @@ namespace Necropanda
 
         //Health Values
         protected int maxHealth; public int GetMaxHealth() { return maxHealth; }
+        protected int cursedMaxHealth;
         protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
         //Hit sound modifier for health
@@ -50,6 +51,7 @@ namespace Necropanda
             maxHealth = character.stats.maxHealth;
             tempMaxHealth = maxHealth;
             health = maxHealth;
+            cursedMaxHealth = (int)(maxHealth * 0.8);
             CheckCurseHealth();
             UpdateHealthUI();
         }
@@ -161,7 +163,8 @@ namespace Necropanda
         {
             if (character.curse)
             {
-                tempMaxHealth = (int)(maxHealth * 0.8);
+                tempMaxHealth = cursedMaxHealth;
+                health = Mathf.Clamp(health, 0, tempMaxHealth);
                 curseOverlay.SetActive(true);
             }
             else

@@ -254,7 +254,7 @@ namespace Necropanda
         {
             if (discardCards)
             {
-                hand.RemoveAllCards();
+                hand.RemoveAllCards(true);
                 discardCards = false;
             }
 

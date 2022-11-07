@@ -33,6 +33,7 @@ namespace Necropanda
         #endregion
 
         public List<Spell> playerDeck;
+        public List<Spell> playedCards;
         public List<Spell> discardPile;
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Necropanda
         {
             if (playerDeck.Count == 0)
             {
-                DrawFromDiscard();
+                DrawFromPlayed();
             }
 
             if (playerDeck.Count != 0)
@@ -75,25 +76,27 @@ namespace Necropanda
         /// <param name="spell"></param>
         public void ReturnCard(Spell spell)
         {
-            if (spell.discardAfterCasting == false)
-            {
-                discardPile.Add(spell);
-            }
+            playedCards.Add(spell);
+        }
+
+        public void DiscardCard(Spell spell)
+        {
+            discardPile.Add(spell);
         }
 
         /// <summary>
         /// Shuffled cards in the discard pile and then adds them to the player deck
         /// </summary>
-        void DrawFromDiscard()
+        void DrawFromPlayed()
         {
-            discardPile.Sort(HelperFunctions.RandomSort);
+            playedCards.Sort(HelperFunctions.RandomSort);
 
-            foreach (Spell spell in discardPile)
+            foreach (Spell spell in playedCards)
             {
                 playerDeck.Add(spell);
             }
 
-            discardPile.Clear();
+            playedCards.Clear();
         }
     }
 }

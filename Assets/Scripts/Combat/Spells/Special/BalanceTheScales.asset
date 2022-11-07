@@ -14,13 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Balance the Scales
   flavourText: 
-  spellDescription: Deal 5 Physical damage to target plus additional damage equal
+  spellDescription: 'Deal 5 Physical damage to target plus additional damage equal
     to half the damage you took last turn
+
+
+    This card gets discarded after use'
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.8, g: 0.37470466, b: 0.23137255, a: 255}
   discardAfterCasting: 1
   drawCard: {fileID: 0}
+  discardCards: 0
+  removeStatuses: 0
   speed: 0.2
   arcanaCost: 0
   multihitDelay: 0.1
@@ -32,9 +37,7 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0.5
-    discardCards: 0
     valueScalingPerDiscard: 0
-    removeStatuses: 0
     valueScalingPerStatus: 0
     statuses: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,

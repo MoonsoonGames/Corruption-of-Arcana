@@ -46,7 +46,7 @@ namespace Necropanda
             {
                 if (deck != playerHandDeck)
                 {
-                    deck.RemoveAllCards();
+                    deck.RemoveAllCards(false);
                 }
             }
 

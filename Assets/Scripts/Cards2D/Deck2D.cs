@@ -150,14 +150,21 @@ namespace Necropanda
         /// <summary>
         /// Removes all cards from the deck without taking them from the timeline
         /// </summary>
-        public void RemoveAllCards()
+        public void RemoveAllCards(bool discard)
         {
             foreach (CardDrag2D card in cards)
             {
                 DrawCard drawCard = card.GetComponent<DrawCard>();
                 if (drawCard != null)
                 {
-                    drawCard.ReturnToDeck();
+                    if (discard)
+                    {
+                        drawCard.DiscardCard();
+                    }
+                    else
+                    {
+                        drawCard.ReturnToDeck();
+                    }
                 }
                 Destroy(card.gameObject);
             }
