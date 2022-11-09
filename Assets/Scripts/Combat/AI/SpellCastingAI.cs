@@ -57,11 +57,15 @@ namespace Necropanda
                 {
                     if (CanCastSpell(spell, self, target, allyTeam, enemyTeam))
                     {
-                        float utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
+                        float utility = 0;
 
                         if (self.charm)
                         {
                             utility = SpellUtility(spell, self, target, enemyTeam, allyTeam);
+                        }
+                        else
+                        {
+                            utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
                         }
 
                         if (utility > bestSpell.utility)
@@ -115,7 +119,7 @@ namespace Necropanda
                         moduleUtility += (module.value + targetUtility) * supportAllyUtility;
                     }
 
-                    if (spell.targetEnemies)
+                    if (spell.targetEnemies && enemyTeam.Contains(target))
                     {
                         int targetHealth = target.GetHealth().GetHealth();
                         int targetMaxHealth = target.GetHealth().GetMaxHealth();

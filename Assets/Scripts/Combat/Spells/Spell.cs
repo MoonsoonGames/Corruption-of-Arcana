@@ -43,6 +43,7 @@ namespace Necropanda
 
         [Header("Advanced Logic")]
         public bool discardAfterCasting = false;
+        public bool discardAfterTurn = false;
         public Spell drawCard;
         public bool discardCards = false;
         public bool returnDiscardPile = false;
@@ -116,11 +117,15 @@ namespace Necropanda
         /// <param name="hand">The hand from which this spell was cast</param>
         public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
+            List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
+            if (caster.confuse)
+            {
+                target = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
+            }
             int removedStatusCount = Timeline.instance.StatusCount(target);
             float time = 0;
 
             TeamManager targetTeamManager = target.GetManager();
-            List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {

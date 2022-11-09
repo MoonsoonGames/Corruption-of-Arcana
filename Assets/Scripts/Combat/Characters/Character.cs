@@ -98,7 +98,7 @@ namespace Necropanda
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
         //[HideInInspector]
-        public bool banish, charm, silence, stun, curse;
+        public bool banish, charm, silence, stun, curse, confuse;
 
         public void ApplyStatus(bool apply, E_Statuses status)
         {
@@ -143,6 +143,15 @@ namespace Necropanda
                 case E_Statuses.Curse:
                     curse = apply;
                     health.CheckCurseHealth();
+                    break;
+                case E_Statuses.Redirect:
+                    if (apply)
+                        CombatManager.instance.redirectedCharacter = this;
+                    else
+                        CombatManager.instance.redirectedCharacter = null;
+                    break;
+                case E_Statuses.Confuse:
+                    confuse = apply;
                     break;
                 default:
                     break;
@@ -205,14 +214,9 @@ namespace Necropanda
 
         void PreviewValues()
         {
-            if (health.GetHealthPercentageFromDamage(damage) < highestExecute)
-            {
-                //Kill target if they are below the execute threshold
-                damage += 9999999;
-            }
-
             //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            bool kills = damage >= health.GetHealth() + healing;
+            bool kills = damage >= health.GetHealth() + healing ||
+                        health.GetHealthPercentageFromDamage(damage) < highestExecute;
             //Save execute threshold to apply here
             int damagePreview = damage;
 

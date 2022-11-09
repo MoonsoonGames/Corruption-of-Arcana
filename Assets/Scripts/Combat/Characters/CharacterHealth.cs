@@ -54,7 +54,6 @@ namespace Necropanda
             cursedMaxHealth = (int)(maxHealth * 0.8);
 
             CheckCurseHealth();
-            UpdateHealthUI();
         }
 
         protected virtual void SetupResistances()
@@ -77,7 +76,6 @@ namespace Necropanda
             //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
             shield = shield / 2;
             CheckCurseHealth();
-            UpdateHealthUI();
         }
 
         #endregion
@@ -177,6 +175,8 @@ namespace Necropanda
                 tempMaxHealth = maxHealth;
                 curseOverlay.SetActive(false);
             }
+
+            UpdateHealthUI();
         }
 
         #endregion

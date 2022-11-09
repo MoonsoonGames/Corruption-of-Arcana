@@ -242,6 +242,12 @@ namespace Necropanda
 
         public static Character ReplaceRandomTarget(List<Character> characters)
         {
+            if (CombatManager.instance.redirectedCharacter != null)
+            {
+                if (CombatManager.instance.redirectedCharacter.GetHealth().GetHealth() > 0)
+                    return CombatManager.instance.redirectedCharacter;
+            }
+
             if (characters.Count > 0)
             {
                 List<Character> targets = new List<Character>();

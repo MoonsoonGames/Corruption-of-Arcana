@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 1Cups
+  m_Name: 21World
   m_EditorClassIdentifier: 
-  spellName: 1 of Cups
+  spellName: The World
   flavourText: 
-  spellDescription: Deal 1 bleak damage to all targets
+  spellDescription: For the next 2 turns, spells with random targets will be redirected
+    to the target character
   cardImage: {fileID: 0}
-  overrideColor: 0
-  timelineColor: {r: 0, g: 0.42002833, b: 0.50980395, a: 1}
-  speed: 0.4
-  arcanaCost: 0
+  overrideColor: 1
+  timelineColor: {r: 0.54901963, g: 0.7921569, b: 0.7590447, a: 255}
+  speed: 0
+  arcanaCost: 1
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -29,14 +30,17 @@ MonoBehaviour:
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
-  - target: 2
-    effectType: 3
-    value: 1
+  - target: 1
+    effectType: 0
+    value: 0
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
-    statuses: []
+    statuses:
+    - status: {fileID: 11400000, guid: 927fbcbfbd224d944ae4435269312b4e, type: 2}
+      duration: 2
+      chance: 1
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
