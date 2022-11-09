@@ -15,6 +15,8 @@ namespace Necropanda
 
         public static Timeline instance;
 
+        public float initialDelay = 2f;
+
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
@@ -237,7 +239,7 @@ namespace Necropanda
         /// <returns></returns>
         public float PlayTimeline()
         {
-            float delay = CastSpells();
+            float delay = CastSpells() + initialDelay;
             Invoke("ActivateStatuses", delay);
             delay += statuses.Count * statusOffset;
             delay += 0.5f;
@@ -272,7 +274,7 @@ namespace Necropanda
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
                 //Use a coroutine to stagger spellcasting
-                StartCoroutine(IDelaySpell(item, i));
+                StartCoroutine(IDelaySpell(item, i + initialDelay));
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
                 i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition) + spellDelayOffset;
 
@@ -292,7 +294,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.StatusInstance item in statuses)
             {
-                StartCoroutine(IDelayStatus(item, delay));
+                StartCoroutine(IDelayStatus(item, delay + initialDelay));
 
                 delay += statusOffset;
             }
