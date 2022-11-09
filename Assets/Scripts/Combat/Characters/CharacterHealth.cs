@@ -52,6 +52,7 @@ namespace Necropanda
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
+
             CheckCurseHealth();
             UpdateHealthUI();
         }
@@ -73,8 +74,10 @@ namespace Necropanda
         public void StartTurn()
         {
             //Decay shield
+            //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
             shield = shield / 2;
             CheckCurseHealth();
+            UpdateHealthUI();
         }
 
         #endregion
