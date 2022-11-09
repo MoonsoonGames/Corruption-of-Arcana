@@ -124,15 +124,13 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
-
                 for (int i = 0; i < module.hitCount; i++)
                 {
                     float hitDelay = i * this.multihitDelay;
-                    float moduleTime = 0;
                     //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
 
                     Timeline.instance.StartSpellCoroutine(this, target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
-                    module, moduleTime, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters);
+                    module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters);
 
                     time += moduleDelay;
                 }
@@ -155,10 +153,10 @@ namespace Necropanda
         }
 
         public IEnumerator IDetermineTarget(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
-            CombatHelperFunctions.SpellModule module, float moduleTime, int removedStatusCount, float time, float hitDelay,
+            CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
             TeamManager targetTeamManager, List<Character> allCharacters)
         {
-            yield return new WaitForSeconds(moduleTime + hitDelay + time);
+            yield return new WaitForSeconds(hitDelay + time);
 
             Character randTarget;
 
