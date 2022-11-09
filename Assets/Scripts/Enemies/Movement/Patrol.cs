@@ -18,15 +18,17 @@ namespace Necropanda.AI.Movement
     /// </summary>
     public class Patrol : MonoBehaviour
     {
-        //public List<GameObject> pointsList = new List<GameObject>();
         private int destPoint = 0;
         private NavMeshAgent agent;
         public float timeToPatrol = 30f;
         public bool patrol = true;
-        //public GameObject CPatrolPoint;
         
         public Vector3 originalPos;
         public Vector3[] patrolPoints;
+
+        [Space]
+        [Header("Temp Offset")]
+        float patrolPointOffset;
 
         private enum Direction {
             North,
@@ -37,36 +39,41 @@ namespace Necropanda.AI.Movement
 
         void Start()
         {
+            Setup();
+
             patrolPoints = GetPatrolPointsDiamond(1f);
             agent = GetComponent<NavMeshAgent>();
-
-            // OLD CODE
-            // CPatrolPoint = GameObject.FindGameObjectWithTag("CenterPatrolPoint");
-            // pointsList.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
-            // foreach (GameObject point in pointsList)
-            // {
-            //     point.transform.SetParent(null);
-            // }
-            // CPatrolPoint.transform.SetParent(null);
 
             //Get the original position, i.e the center.
             originalPos = gameObject.transform.position;
 
+            
+            StartCoroutine(Cooldown(timeToPatrol));
+            GotoNextPoint();
+        }
+
+        private void Setup(){
             foreach (Vector3 point in patrolPoints)
             {
-                
-
                 // Check to see if point is valid
+                bool isPathValid = agent.CalculatePath(point, agent.path);
+                if (!isPathValid)
+                {
+                    // This should set the destination to the closest thing on the navmesh
+                    if (agent.path.status == NavMeshPathStatus.PathComplete || 
+                    agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
+                    {
+                        agent.SetDestination(point);
+                        Debug.LogWarning($"Point was off navmesh, point moved to: {agent.destination}");
+                    }
+                }
                 // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
-                // if not get the closest thing to it.
             }
 
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).
             agent.autoBraking = false;
-            StartCoroutine(Cooldown(timeToPatrol));
-            GotoNextPoint();
         }
 
         /// <summary>
@@ -99,20 +106,6 @@ namespace Necropanda.AI.Movement
 
         void GotoNextPoint()
         {
-            // OLD CODE
-            /*
-            // Returns if no points have been set up
-            if (pointsList.Count == 0)
-                return;
-
-            // Set the agent to go to the currently selected destination.
-            agent.destination = pointsList[destPoint].transform.position;
-
-            // Choose the next point in the array as the destination,
-            // cycling to the start if necessary.
-            destPoint = (destPoint + 1) % pointsList.Count;
-            */
-
             // Returns if no points have been set up.
             if (patrolPoints.Length == 0)
                 return;
@@ -127,21 +120,6 @@ namespace Necropanda.AI.Movement
 
         public void StopPatrol()
         {
-            // OLD CODE
-            // agent.SetDestination(CPatrolPoint.transform.position);
-            // agent.autoBraking = true;
-            // if (agent.transform.position == CPatrolPoint.transform.position)
-            // {
-            //     foreach (GameObject point in pointsList)
-            //     {
-            //         point.transform.SetParent(this.gameObject.transform);
-            //     }
-            //     CPatrolPoint.transform.SetParent(this.gameObject.transform);
-
-            //     Debug.Log("Disabled the patrol movement module on " + this.name);
-            //     this.enabled = false;
-            // }
-
             agent.SetDestination(originalPos);
             agent.autoBraking = true;
 
