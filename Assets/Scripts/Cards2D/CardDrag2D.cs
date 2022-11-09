@@ -102,7 +102,7 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (dragManager.canDrag)
+            if (dragManager.canDrag && playerCard)
             {
                 //Debug.Log("Drag Start");
 
@@ -128,7 +128,7 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnDrag(PointerEventData eventData)
         {
-            if (dragManager.draggedCard != null)
+            if (dragManager.draggedCard != null && playerCard)
             {
                 //Debug.Log("Dragging");
 
@@ -149,7 +149,7 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (dragManager.draggedCard != null)
+            if (dragManager.draggedCard != null && playerCard)
             {
                 //Debug.Log("Drag End");
 
@@ -169,6 +169,7 @@ namespace Necropanda
                 transform.eulerAngles = baseRot;
 
                 dragManager.canDrag = true;
+                dragManager.draggedCard = null;
             }
         }
 

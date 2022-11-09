@@ -127,53 +127,12 @@ namespace Necropanda
 
                 for (int i = 0; i < module.hitCount; i++)
                 {
-                    float hitDelay = i * multihitDelay;
+                    float hitDelay = i * this.multihitDelay;
                     float moduleTime = 0;
-                    float x = 0;
                     //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
-                    switch (module.target)
-                    {
-                        case E_SpellTargetType.Caster:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position);
-                            VFXManager.instance.AffectSelfDelay(this, caster, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
-                            break;
-                        case E_SpellTargetType.Target:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, target, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay, empowered, weakened);
-                            break;
-                        case E_SpellTargetType.Chain:
-                            x = targetTeamManager.team.Count * multihitDelay;
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
-                            foreach (Character character in targetTeamManager.team)
-                            {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
-                            }
-                            break;
-                        case E_SpellTargetType.Cleave:
-                            x = targetTeamManager.team.Count * multihitDelay;
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
-                            foreach (Character character in targetTeamManager.team)
-                            {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
-                            }
-                            break;
-                        case E_SpellTargetType.RandomTargetTeam:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
-                            break;
-                        case E_SpellTargetType.RandomAll:
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position);
-                            VFXManager.instance.AffectTargetDelay(this, caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
-                            break;
-                        case E_SpellTargetType.All:
-                            x = targetTeamManager.team.Count * multihitDelay;
-                            moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + x;
-                            foreach (Character character in allCharacters)
-                            {
-                                VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, moduleTime + hitDelay + time, empowered, weakened);
-                            }
-                            break;
-                    }
+
+                    Timeline.instance.StartSpellCoroutine(this, target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
+                    module, moduleTime, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters);
 
                     time += moduleDelay;
                 }
@@ -192,6 +151,56 @@ namespace Necropanda
             if (returnDiscardPile)
             {
                 DeckManager.instance.DiscardPileToDeck(true);
+            }
+        }
+
+        public IEnumerator IDetermineTarget(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
+            CombatHelperFunctions.SpellModule module, float moduleTime, int removedStatusCount, float time, float hitDelay,
+            TeamManager targetTeamManager, List<Character> allCharacters)
+        {
+            yield return new WaitForSeconds(moduleTime + hitDelay + time);
+
+            Character randTarget;
+
+            switch (module.target)
+            {
+                case E_SpellTargetType.Caster:
+                    VFXManager.instance.AffectSelfDelay(this, caster, module, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                    break;
+                case E_SpellTargetType.Target:
+                    VFXManager.instance.AffectTargetDelay(this, caster, target, module, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                    break;
+                case E_SpellTargetType.Chain:
+                    multihitDelay = targetTeamManager.team.Count * this.multihitDelay;
+                    foreach (Character character in targetTeamManager.team)
+                    {
+                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, multihitDelay, empowered, weakened);
+                    }
+                    break;
+                case E_SpellTargetType.Cleave:
+                    multihitDelay = targetTeamManager.team.Count * this.multihitDelay;
+                    foreach (Character character in targetTeamManager.team)
+                    {
+                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, multihitDelay, empowered, weakened);
+                    }
+                    break;
+                case E_SpellTargetType.RandomTargetTeam:
+                    randTarget = CombatHelperFunctions.ReplaceRandomTarget(targetTeamManager.team);
+                    if (randTarget != null)
+                        VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                    break;
+                case E_SpellTargetType.RandomAll:
+                    randTarget = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
+                    if (randTarget != null)
+                        VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                    break;
+                case E_SpellTargetType.All:
+                    multihitDelay = targetTeamManager.team.Count * this.multihitDelay;
+                    foreach (Character character in allCharacters)
+                    {
+                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, cardsInHand, removedStatusCount, spawnPosition, multihitDelay, empowered, weakened);
+                    }
+                    break;
             }
         }
 
@@ -250,7 +259,7 @@ namespace Necropanda
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
-                E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(spell.effectType);
+                E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(spell.effectType);
                 target.GetHealth().ChangeHealth(realEffectType, value, caster);
 
                 for (int i = 0; i < spell.statuses.Length; i++)
@@ -401,15 +410,9 @@ namespace Necropanda
                         damage += value;
                         break;
                 }
-
-                if (target.GetHealth().GetHealthPercentage() < spell.executeThreshold)
-                {
-                    //Debug.Log("Kill " + target.characterName + " with " + name + " at: " + (target.GetHealth().GetHealthPercentage()));
-                    damage += 999999999;
-                }
             }
 
-            target.SimulateValues(damage, healing, shield);
+            target.SimulateValues(damage, healing, shield, spell.executeThreshold);
         }
 
         #endregion

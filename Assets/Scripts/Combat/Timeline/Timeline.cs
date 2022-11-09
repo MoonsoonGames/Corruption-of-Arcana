@@ -284,6 +284,14 @@ namespace Necropanda
             return i;
         }
 
+        public void StartSpellCoroutine(Spell spell, Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
+            CombatHelperFunctions.SpellModule module, float moduleTime, int removedStatusCount, float time, float hitDelay,
+            TeamManager targetTeamManager, List<Character> allCharacters)
+        {
+            StartCoroutine(spell.IDetermineTarget(target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
+                module, moduleTime, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters));
+        }
+
         void ActivateStatuses()
         {
             //Debug.Log("Activate statuses: " + statuses.Count);

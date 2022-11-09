@@ -238,7 +238,34 @@ namespace Necropanda
 
         #endregion
 
-        public static E_DamageTypes ReplaceRandom(E_DamageTypes effectType)
+        #region Replacing Random
+
+        public static Character ReplaceRandomTarget(List<Character> characters)
+        {
+            if (characters.Count > 0)
+            {
+                List<Character> targets = new List<Character>();
+
+                foreach (Character character in characters)
+                {
+                    if (character.CanBeTargetted())
+                    {
+                        targets.Add(character);
+                    }
+                }
+
+                if (targets.Count > 0)
+                {
+                    int randomInt = Random.Range(0, targets.Count);
+
+                    return targets[randomInt];
+                } 
+            }
+
+            return null;
+        }
+
+        public static E_DamageTypes ReplaceRandomDamageType(E_DamageTypes effectType)
         {
             if (effectType == E_DamageTypes.Random)
             {
@@ -255,6 +282,8 @@ namespace Necropanda
 
             return effectType;
         }
+
+        #endregion
     }
 
     public static class SoundEffects

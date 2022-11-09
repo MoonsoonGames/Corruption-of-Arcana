@@ -147,6 +147,8 @@ namespace Necropanda
                 default:
                     break;
             }
+
+            CheckOverlay();
         }
 
         protected virtual void Silence()
@@ -167,24 +169,48 @@ namespace Necropanda
             }
         }
 
+        public bool CanBeTargetted()
+        {
+            bool canTarget = true;
+
+            if (banish || health.GetHealth() < 1)
+            {
+                canTarget = false;
+            }
+
+            return canTarget;
+        }
+
         #endregion
 
         #region Simulating Turn
 
         int damage = 0, healing = 0, shield = 0;
+        float highestExecute;
         SimulateValues simulateValues;
 
-        public void SimulateValues(int newDamage, int newHealing, int newShield)
+        public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
         {
             damage += newDamage;
             healing += newHealing;
             shield += newShield;
 
+            if (newExecute > highestExecute)
+            {
+                highestExecute = newExecute;
+            }
+            
             PreviewValues();
         }
 
         void PreviewValues()
         {
+            if (health.GetHealthPercentageFromDamage(damage) < highestExecute)
+            {
+                //Kill target if they are below the execute threshold
+                damage += 9999999;
+            }
+
             //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
             bool kills = damage >= health.GetHealth() + healing;
             //Save execute threshold to apply here
@@ -194,6 +220,7 @@ namespace Necropanda
             {
                 damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
             }
+
             simulateValues.DisplayValues(damagePreview, healing, shield, kills);
         }
 

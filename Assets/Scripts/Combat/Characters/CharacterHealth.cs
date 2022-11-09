@@ -123,6 +123,8 @@ namespace Necropanda
 
         public float GetHealthPercentage() { return (float)health / (float)maxHealth; }
 
+        public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
+
         void UpdateHealthUI()
         {
             if (shield > 0)
