@@ -244,8 +244,12 @@ namespace Necropanda
         {
             if (CombatManager.instance.redirectedCharacter != null)
             {
-                if (CombatManager.instance.redirectedCharacter.GetHealth().GetHealth() > 0)
+                if (CombatManager.instance.redirectedCharacter.GetHealth().dying == false)
+                {
+                    Debug.Log("Redirect to target");
                     return CombatManager.instance.redirectedCharacter;
+                }
+                    
             }
 
             if (characters.Count > 0)

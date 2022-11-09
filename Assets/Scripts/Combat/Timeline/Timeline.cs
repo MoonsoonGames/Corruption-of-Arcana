@@ -342,7 +342,7 @@ namespace Necropanda
                 Debug.Log("Stunned, skip spell");
                 //Effect for fumbling spell
             }
-            else if (caster.GetHealth().GetHealth() < 1)
+            else if (caster.GetHealth().dying)
             {
                 Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell

@@ -62,7 +62,7 @@ namespace Necropanda
 
         public void CheckHealth()
         {
-            if (health.GetHealth() < 1)
+            if (health.dying)
             {
                 StartCoroutine(IDelayDeath(0.01f));
             }

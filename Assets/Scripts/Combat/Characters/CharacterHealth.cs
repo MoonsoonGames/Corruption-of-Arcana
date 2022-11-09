@@ -20,6 +20,7 @@ namespace Necropanda
         Character character;
 
         //Health Values
+        public bool dying = false;
         protected int maxHealth; public int GetMaxHealth() { return maxHealth; }
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
@@ -114,6 +115,7 @@ namespace Necropanda
             if (health <= 0)
             {
                 //Debug.Log(health);
+                dying = true;
             }
 
             PlaySound(type, trueValue);
