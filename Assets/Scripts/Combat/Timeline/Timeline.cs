@@ -360,7 +360,6 @@ namespace Necropanda
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
                 spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
             }
-            SimulateSpellEffects();
 
             if (spellInstance.spell.drawCard != null)
             {
@@ -369,8 +368,13 @@ namespace Necropanda
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
+            SimulateSpellEffects();
             RemoveSpellInstance(spellInstance);
             CalculateTimeline();
+
+            yield return new WaitForSeconds(1f);
+
+            SimulateSpellEffects();
         }
 
         IEnumerator IDelayStatus(CombatHelperFunctions.StatusInstance statusInstance, float delay)
@@ -388,6 +392,7 @@ namespace Necropanda
             }
 
             //RemoveStatusInstance(statusInstance);
+            SimulateSpellEffects();
             CalculateTimeline();
         }
 
