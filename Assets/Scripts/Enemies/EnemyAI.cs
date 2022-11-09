@@ -43,7 +43,6 @@ namespace Necropanda.AI
             startPos = transform.position;
 
             wanderRadius = gameObject.GetComponent<SphereCollider>().radius;
-
         }
 
         public void ActivateAI(GameObject playerRef)
@@ -88,12 +87,14 @@ namespace Necropanda.AI
             {
                 default:
                     currentState = AIState.Nothing;
-                    if(timer > 10){
+                    if(timer > 5){
                         currentState = AIState.Wandering;
                     }
                     break;
 
                 case AIState.Chasing:
+                    moduleManager.wander.enabled = false;
+                    moduleManager.patrol.enabled = false;
                     agent.SetDestination(player.transform.position);
                     break;
 
@@ -114,6 +115,17 @@ namespace Necropanda.AI
         {
             // Start the timer
             timer += Time.deltaTime;
+        }
+
+        private void OnTriggerStay(Collider other) {
+            if (other.tag == "Player")
+            {
+                currentState = AIState.Chasing;
+            }
+        }
+
+        private void OnTriggerExit(Collider other) {
+            currentState = AIState.Nothing;
         }
         #endregion
     }

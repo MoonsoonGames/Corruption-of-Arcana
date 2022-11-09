@@ -41,9 +41,6 @@ namespace Necropanda.AI.Movement
         {
             Setup();
 
-            patrolPoints = GetPatrolPointsDiamond(1f);
-            agent = GetComponent<NavMeshAgent>();
-
             //Get the original position, i.e the center.
             originalPos = gameObject.transform.position;
 
@@ -53,6 +50,9 @@ namespace Necropanda.AI.Movement
         }
 
         private void Setup(){
+            patrolPoints = GetPatrolPointsDiamond(1f);
+            agent = GetComponent<NavMeshAgent>();
+
             foreach (Vector3 point in patrolPoints)
             {
                 // Check to see if point is valid
