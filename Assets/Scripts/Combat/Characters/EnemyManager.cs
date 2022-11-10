@@ -36,11 +36,7 @@ namespace Necropanda
             {
                 if (character.GetHealth().GetHealth() > 0)
                 {
-                    //In future, determine target depending on spell so it can cast support spells on allies/self
-                    CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                    newSpellInstance.SetSpellInstance(character.PrepareSpell(), player, character);
-
-                    timeline.AddSpellInstance(newSpellInstance);
+                    character.StartTurn();
                 }
             }
         }
@@ -86,7 +82,7 @@ namespace Necropanda
 
                             Character enemyCharacter = enemyRef.GetComponent<Character>();
 
-                            Debug.Log("Spawned " + enemyCharacter.characterName + " at spawner " + i);
+                            //Debug.Log("Spawned " + enemyCharacter.stats.characterName + " at spawner " + i);
                             //team.Add(enemyCharacter);
                             spawners[i].filled = true;
                             enemyCharacter.spawner = spawners[i];

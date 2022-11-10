@@ -31,7 +31,19 @@ namespace Necropanda
 
         public void ReturnToDeck()
         {
-            deckManager.ReturnCard(card.spell);
+            if (card.spell.discardAfterCasting)
+            {
+                deckManager.DiscardCard(card.spell);
+            }
+            else
+            {
+                deckManager.ReturnCard(card.spell);
+            }
+        }
+
+        public void DiscardCard()
+        {
+            deckManager.DiscardCard(card.spell);
         }
     }
 }

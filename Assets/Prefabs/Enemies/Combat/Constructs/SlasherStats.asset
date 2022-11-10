@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e306a5ff4f2a5e4a899426faa5a526a, type: 3}
+  m_Name: SlasherStats
+  m_EditorClassIdentifier: 
+  characterName: Slasher
+  characterSprite: {fileID: 21300000, guid: 96be4bd65026838408fd13986c3739c8, type: 3}
+  characterDescription: 
+  location: 
+  maxHealth: 30
+  baseDamageResistancesType: 
+  baseDamageResistancesModifier: []
+  timelineColor: {r: 0.8773585, g: 0.3517711, b: 0.81624365, a: 255}
+  ai: {fileID: 11400000, guid: 42fee354ff546e3448b00d40523c6c36, type: 2}
+  aISpells:
+  - spell: {fileID: 11400000, guid: 45ab0d714d1a0b24b9b87c3dcd17f24d, type: 2}
+    spawnAsCard: 1
+    targetSelf: 1
+    targetAllies: 0
+    targetEnemies: 0
+    timeCooldown: 3
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 0
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 1
+    lastUsed: 0
