@@ -14,12 +14,14 @@ namespace Necropanda.AI.Movement
     /// <para>Simple Patrol module that can be added to the AI.</para>
     /// Will drop points around the origin, and make the AI move to them. Most values are exposed for editing.
     /// 
-    /// TODO: rewrite to avoid the use of gameobjects for points, consider using navmesh hits in 4 places.
+    /// TODO: rewrite to avoid the use of gameobjects for points, consider using navmesh hits in 4 places. DONE
+    /// TODO: fix state change when stopping patrol
     /// </summary>
     public class Patrol : MonoBehaviour
     {
         private int destPoint = 0;
         private NavMeshAgent agent;
+        private EnemyAI ai;
         public float timeToPatrol = 30f;
         public bool patrol = true;
         
@@ -28,7 +30,7 @@ namespace Necropanda.AI.Movement
 
         [Space]
         [Header("Temp Offset")]
-        float patrolPointOffset;
+        public float patrolPointOffset;
 
         private enum Direction {
             North,
@@ -50,11 +52,12 @@ namespace Necropanda.AI.Movement
         }
 
         private void Setup(){
-            patrolPoints = GetPatrolPointsDiamond(1f);
+            patrolPoints = GetPatrolPointsDiamond(patrolPointOffset);
             agent = GetComponent<NavMeshAgent>();
 
-            foreach (Vector3 point in patrolPoints)
-            {
+            for (int i = 0; i < patrolPoints.Length; i++) {
+                Vector3 point = patrolPoints[i];
+
                 // Check to see if point is valid
                 bool isPathValid = agent.CalculatePath(point, agent.path);
                 if (!isPathValid)
@@ -65,10 +68,12 @@ namespace Necropanda.AI.Movement
                     {
                         agent.SetDestination(point);
                         Debug.LogWarning($"Point was off navmesh, point moved to: {agent.destination}");
+                        
+                        patrolPoints[i] = agent.destination;
                     }
                 }
-                // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
             }
+            // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
 
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
@@ -96,10 +101,10 @@ namespace Necropanda.AI.Movement
 
             Vector3[] patrolPoints = new Vector3[4];
 
-            patrolPoints[(int)Direction.North] = new Vector3(x + offset, z);
-            patrolPoints[(int)Direction.East] = new Vector3(x, z - offset);
-            patrolPoints[(int)Direction.South] = new Vector3(x - offset, z);
-            patrolPoints[(int)Direction.West] = new Vector3(x, z + offset);
+            patrolPoints[(int)Direction.North] = new Vector3(x + offset, 0, z);
+            patrolPoints[(int)Direction.East] = new Vector3(x, 0, z - offset);
+            patrolPoints[(int)Direction.South] = new Vector3(x - offset, 0, z);
+            patrolPoints[(int)Direction.West] = new Vector3(x, 0, z + offset);
 
             return patrolPoints;
         }
@@ -146,5 +151,17 @@ namespace Necropanda.AI.Movement
             Debug.Log("Running patrol cooldown");
             patrol = false;
         }
+        /// <summary>
+        /// Callback to draw gizmos only if the object is selected.
+        /// </summary>
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            foreach(Vector3 point in patrolPoints)
+            {
+                Gizmos.DrawSphere(point, 1);
+            }
+        }
     }
+
 }

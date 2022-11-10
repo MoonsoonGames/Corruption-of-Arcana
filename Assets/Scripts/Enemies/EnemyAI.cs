@@ -86,8 +86,15 @@ namespace Necropanda.AI
             switch (currentState)
             {
                 default:
+                    // Disable the other modules when the AI is doing nothing.
+                    moduleManager.wander.enabled = false;
+                    moduleManager.patrol.enabled = false;
+                    // Set the state to nothing.
                     currentState = AIState.Nothing;
-                    if(timer > 5){
+                    // Check if the AI has been running for long enough for a state switch.
+                    // probably also need to reset the timer here too.
+                    if(timer > 5)
+                    {
                         currentState = AIState.Wandering;
                     }
                     break;
@@ -96,16 +103,24 @@ namespace Necropanda.AI
                     moduleManager.wander.enabled = false;
                     moduleManager.patrol.enabled = false;
                     agent.SetDestination(player.transform.position);
+                    
+                    // Check to make sure the AI doesn't run into the player.
+                    if (agent.remainingDistance <= .5f)
+                    {
+                        agent.SetDestination(agent.transform.position);
+                    }
                     break;
 
                 case AIState.Wandering:
                     moduleManager.wander.enabled = true;
                     moduleManager.wander.WanderInRadius(blocked, hit);
-                    Debug.Log("Added Wandering module to Enemy AI " + gameObject.name);
+                    Debug.Log("Enabled Wandering module on Enemy AI " + gameObject.name);
                     break;
 
                 case AIState.Patrolling:
-
+                    moduleManager.patrol.enabled = true;
+                    moduleManager.wander.enabled = false;
+                    Debug.Log("Enabled Patrolling module on Enemy AI " + gameObject.name);
                     break;
             }
         }
