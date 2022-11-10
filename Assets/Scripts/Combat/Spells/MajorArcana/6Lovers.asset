@@ -18,22 +18,24 @@ MonoBehaviour:
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.745283, g: 0.6564597, b: 0.21444462, a: 255}
-  discardAfterCasting: 0
-  drawCard: {fileID: 0}
   speed: 0.4
   arcanaCost: 2
+  discardAfterCasting: 0
+  discardAfterTurn: 0
+  drawCard: {fileID: 0}
+  discardCards: 0
+  returnDiscardPile: 0
+  removeStatuses: 0
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 8
+    effectType: 2
     value: 0
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
-    discardCards: 0
     valueScalingPerDiscard: 0
-    removeStatuses: 0
     valueScalingPerStatus: 0
     statuses:
     - status: {fileID: 11400000, guid: 3243fa674bc14a14185f0f5b593a7409, type: 2}
@@ -41,3 +43,4 @@ MonoBehaviour:
       chance: 1
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
+  impactObject: {fileID: 0}
