@@ -166,6 +166,7 @@ namespace Necropanda
 
             Character randTarget;
             E_DamageTypes trueEffectType = CombatHelperFunctions.ReplaceRandomDamageType(module.effectType);
+            float delay;
 
             switch (module.target)
             {
@@ -176,17 +177,17 @@ namespace Necropanda
                     VFXManager.instance.AffectTargetDelay(this, caster, target, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.Chain:
-                    multihitDelay = targetTeamManager.team.Count * this.multihitDelay;
+                    delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in targetTeamManager.team)
                     {
-                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, multihitDelay, empowered, weakened);
+                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
                 case E_SpellTargetType.Cleave:
-                    multihitDelay = targetTeamManager.team.Count * this.multihitDelay;
+                    delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in targetTeamManager.team)
                     {
-                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, multihitDelay, empowered, weakened);
+                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
                 case E_SpellTargetType.RandomTargetTeam:
@@ -200,10 +201,10 @@ namespace Necropanda
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.All:
-                    multihitDelay = targetTeamManager.team.Count * this.multihitDelay;
+                    delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in allCharacters)
                     {
-                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, multihitDelay, empowered, weakened);
+                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
             }
