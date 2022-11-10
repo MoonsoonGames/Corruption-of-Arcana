@@ -77,7 +77,7 @@ namespace Necropanda
             projectileObject.transform.position = spawnPosition;
 
             ProjectileMovement projectileMovement = projectileObject.GetComponent<ProjectileMovement>();
-            projectileMovement.Setup(ColourFromDamageType(damageType), impactRef);
+            projectileMovement.Setup(ColourFromDamageType(damageType), ImpactObjectFromDamageType(damageType));
 
             List<Vector2> movementPositions = new List<Vector2>();
             movementPositions.Add(spawnPosition);
@@ -108,6 +108,8 @@ namespace Necropanda
             //float fixedFrameTime = Time.fixedDeltaTime;
             return time;
         }
+
+        #region VFX
 
         #region Colour
 
@@ -151,6 +153,53 @@ namespace Necropanda
                     return defaultColour;
             }
         }
+
+        #endregion
+
+        #region Impact Effect
+
+        public Object physicalObject;
+        public Object perforationObject;
+        public Object septicObject;
+        public Object bleakObject;
+        public Object staticObject;
+        public Object emberObject;
+
+        public Object healObject;
+        public Object shieldObject;
+        public Object arcanaObject;
+
+        public Object defaultObject;
+
+        Object ImpactObjectFromDamageType(E_DamageTypes damageType)
+        {
+            switch (damageType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalObject;
+                case E_DamageTypes.Perforation:
+                    return perforationObject;
+                case E_DamageTypes.Septic:
+                    return septicObject;
+                case E_DamageTypes.Bleak:
+                    return bleakObject;
+                case E_DamageTypes.Static:
+                    return staticObject;
+                case E_DamageTypes.Ember:
+                    return emberObject;
+
+                case E_DamageTypes.Healing:
+                    return healObject;
+                case E_DamageTypes.Shield:
+                    return shieldObject;
+                case E_DamageTypes.Arcana:
+                    return arcanaObject;
+                default:
+                    return defaultObject;
+            }
+        }
+
+        #endregion
 
         #endregion
     }
