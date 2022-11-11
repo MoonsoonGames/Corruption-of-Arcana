@@ -393,7 +393,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 250
+  orthographic size: 100
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -485,6 +485,12 @@ GameObject:
 --- !u!1 &1454539420 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3731661797901933072, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731661797055633548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1454539424 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 3731661797901933075, guid: 93fcb1b03dd625240b642e42f4a5e61b,
     type: 3}
   m_PrefabInstance: {fileID: 3731661797055633548}
   m_PrefabAsset: {fileID: 0}
@@ -858,6 +864,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CombatManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4589516989826584665, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1454539424}
     - target: {fileID: 4589516989826584668, guid: 82a2ec8d3a1d483459d6629f6edbec52,
         type: 3}
       propertyPath: playerDeck.Array.size

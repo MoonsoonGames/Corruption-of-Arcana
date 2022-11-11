@@ -109,9 +109,6 @@ namespace Necropanda
                 Highlight(false);
                 ScaleCard(pickupScale, true);
 
-                //Drags from where the player clicks instead of snapping center of card to the mouse
-                offset = new Vector2(transform.position.x - eventData.position.x, transform.position.y - eventData.position.y);
-
                 lastDeck = deck;
                 deck.RemoveCard(this);
 
@@ -122,6 +119,8 @@ namespace Necropanda
             }
         }
 
+        Vector2 lastPos = new Vector2(0, 0);
+
         /// <summary>
         /// Called when card is being dragged
         /// </summary>
@@ -131,15 +130,29 @@ namespace Necropanda
             if (dragManager.draggedCard != null && playerCard)
             {
                 //Debug.Log("Dragging");
+                Vector2 newPos;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(dragManager.canvas.transform as RectTransform, Input.mousePosition, dragManager.canvas.worldCamera, out newPos);
 
                 //Determines the difference in the x movement to tell which direction it is being dragged in
-                float dragSpeedX = transform.position.x - (eventData.position.x + offset.x);
-
-                transform.position = eventData.position + offset;
+                float dragSpeedX = lastPos.x - newPos.x;
 
                 Vector3 newRot = new Vector3(baseRot.x, baseRot.y, baseRot.z);
                 newRot.z = dragSpeedX * rotationScale;
-                transform.eulerAngles = newRot;
+
+                if (newRot.z > -rotateDeadZone && newRot.z < rotateDeadZone)
+                {
+                    Debug.Log("Not rotating");
+                    transform.eulerAngles = baseRot;
+                }
+                else
+                {
+                    Debug.Log("Rotate");
+                    transform.eulerAngles = newRot;
+                }
+
+                transform.position = dragManager.canvas.transform.TransformPoint(newPos);
+
+                lastPos = newPos;
             }
         }
 
