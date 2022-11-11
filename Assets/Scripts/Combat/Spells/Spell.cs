@@ -45,6 +45,7 @@ namespace Necropanda
         public bool discardAfterCasting = false;
         public bool discardAfterTurn = false;
         public Spell drawCard;
+        public Object[] spawnEnemies;
         public bool discardCards = false;
         public bool returnDiscardPile = false;
         public bool removeStatuses = false;
@@ -140,6 +141,12 @@ namespace Necropanda
 
                     time += moduleDelay;
                 }
+            }
+
+            if (spawnEnemies.Length > 0)
+            {
+                foreach (var item in spawnEnemies)
+                    LoadCombatManager.instance.enemies.Add(item);
             }
 
             if (discardCards)
