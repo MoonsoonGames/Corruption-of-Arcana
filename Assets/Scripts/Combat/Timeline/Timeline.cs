@@ -69,16 +69,17 @@ namespace Necropanda
         public bool AddStatusInstance(CombatHelperFunctions.StatusInstance newStatusInstance)
         {
             bool apply = true;
+            bool replace = false;
             CombatHelperFunctions.StatusInstance duplicate = new CombatHelperFunctions.StatusInstance();
             foreach (CombatHelperFunctions.StatusInstance status in statuses)
             {
                 if (status.status == newStatusInstance.status && status.target == newStatusInstance.target)
                 {
                     apply = false;
-                    duplicate = status;
 
                     if (status.duration < newStatusInstance.duration)
                     {
+                        replace = true;
                         duplicate = status;
                     }
                 }
@@ -89,9 +90,14 @@ namespace Necropanda
                 //Debug.Log(newStatusInstance.status.effectName + " has been added");
                 statuses.Add(newStatusInstance);
             }
-            else if (duplicate.duration < newStatusInstance.duration)
+            else if (replace)
             {
-                duplicate.duration = newStatusInstance.duration;
+                if (duplicate.duration < newStatusInstance.duration)
+                {
+                    Debug.Log("Should remove element: " + duplicate.status.effectName);
+                    statuses.Remove(duplicate);
+                    statuses.Add(newStatusInstance);
+                }
             }
 
             return apply;
@@ -156,7 +162,16 @@ namespace Necropanda
                 //Spawn UI for cards
                 foreach (var item in spells)
                 {
-                    string text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+                    string text;
+
+                    if (player != item.caster && player.enlightened == false)
+                    {
+                        text = "Enemy Spell";
+                    }
+                    else
+                    {
+                        text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+                    }
 
                     //Creates spell block game object
                     GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
@@ -223,7 +238,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
-                item.spell.SimulateSpellValues(item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
+                item.spell.SimulateSpellValues(player, item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
             }
         }
 
@@ -420,10 +435,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.StatusInstance status in statusesToRemove)
             {
-                if (status.target == target)
-                {
-                    statuses.Remove(status);
-                }
+                status.status.Remove(status.target);
             }
         }
 

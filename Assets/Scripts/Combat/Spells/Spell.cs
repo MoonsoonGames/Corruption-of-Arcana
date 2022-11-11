@@ -328,8 +328,13 @@ namespace Necropanda
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
         /// <param name="hand">The hand from which this spell was cast</param>
-        public void SimulateSpellValues(Character target, Character caster, bool empowered, bool weakened, int cardsInHand)
+        public void SimulateSpellValues(Character player, Character target, Character caster, bool empowered, bool weakened, int cardsInHand)
         {
+            if (player != caster && player.enlightened == false)
+            {
+                return;
+            }
+
             int removedStatusCount = Timeline.instance.StatusCount(target);
             Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
 

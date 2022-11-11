@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 9Hermit
+  m_Name: 18Moon
   m_EditorClassIdentifier: 
-  spellName: The Hermit
+  spellName: Moon
   flavourText: 
-  spellDescription: Banish the target, target cannot cast spells on other characters
-    and cannot be targeted by other characters
+  spellDescription: Empowers the target deck and you become Enlightened for 3 turns,
+    granting you the ability to see enemy actions
   cardImage: {fileID: 0}
   overrideColor: 1
-  timelineColor: {r: 0.43676576, g: 0.5881653, b: 0.6132076, a: 1}
+  timelineColor: {r: 0.9868059, g: 1, b: 0.7877358, a: 1}
   speed: 0
   arcanaCost: 1
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
   discardCards: 0
-  returnDiscardPile: 0
+  returnDiscardPile: 1
   removeStatuses: 0
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 5
+    effectType: 9
     value: 0
     hitCount: 1
     executeThreshold: 0
@@ -39,8 +39,20 @@ MonoBehaviour:
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     statuses:
-    - status: {fileID: 11400000, guid: 72827d3bbdfb6fc4e856070f43222d98, type: 2}
-      duration: 2
+    - status: {fileID: 11400000, guid: 27ca1b3af8b88bf4fad48ae900b853fd, type: 2}
+      duration: 3
+      chance: 1
+  - target: 0
+    effectType: 9
+    value: 0
+    hitCount: 1
+    executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
+    statuses:
+    - status: {fileID: 11400000, guid: cf6e87928c90a47448866400f24fb723, type: 2}
+      duration: 3
       chance: 1
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
