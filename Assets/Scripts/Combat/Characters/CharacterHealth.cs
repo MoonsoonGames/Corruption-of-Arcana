@@ -20,6 +20,7 @@ namespace Necropanda
         Character character;
 
         //Health Values
+        public bool dying = false;
         protected int maxHealth; public int GetMaxHealth() { return maxHealth; }
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
@@ -52,8 +53,8 @@ namespace Necropanda
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
+
             CheckCurseHealth();
-            UpdateHealthUI();
         }
 
         protected virtual void SetupResistances()
@@ -73,6 +74,7 @@ namespace Necropanda
         public void StartTurn()
         {
             //Decay shield
+            //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
             shield = shield / 2;
             CheckCurseHealth();
         }
@@ -113,6 +115,7 @@ namespace Necropanda
             if (health <= 0)
             {
                 //Debug.Log(health);
+                dying = true;
             }
 
             PlaySound(type, trueValue);
@@ -122,6 +125,8 @@ namespace Necropanda
         }
 
         public float GetHealthPercentage() { return (float)health / (float)maxHealth; }
+
+        public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
 
         void UpdateHealthUI()
         {
@@ -172,6 +177,8 @@ namespace Necropanda
                 tempMaxHealth = maxHealth;
                 curseOverlay.SetActive(false);
             }
+
+            UpdateHealthUI();
         }
 
         #endregion

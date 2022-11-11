@@ -223,7 +223,7 @@ namespace Necropanda
         void AffectTarget(Character target, E_DamageTypes effectType, int value)
         {
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-            E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandom(effectType);
+            E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(effectType);
             target.GetHealth().ChangeHealth(realEffectType, value, null);
 
             if (target.GetHealth().GetHealth() < 1)

@@ -17,6 +17,7 @@ namespace Necropanda
 
         public void DisplayValues(int damage, int healing, int shd, bool willKill)
         {
+            Debug.Log("will kill? " + willKill);
             dmg.gameObject.SetActive(damage > 0);
             dmg.text = damage.ToString();
 

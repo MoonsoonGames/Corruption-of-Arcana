@@ -62,7 +62,7 @@ namespace Necropanda
 
         public void CheckHealth()
         {
-            if (health.GetHealth() < 1)
+            if (health.dying)
             {
                 StartCoroutine(IDelayDeath(0.01f));
             }
@@ -98,7 +98,7 @@ namespace Necropanda
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
         //[HideInInspector]
-        public bool banish, charm, silence, stun, curse;
+        public bool banish, charm, silence, stun, curse, confuse;
 
         public void ApplyStatus(bool apply, E_Statuses status)
         {
@@ -144,9 +144,20 @@ namespace Necropanda
                     curse = apply;
                     health.CheckCurseHealth();
                     break;
+                case E_Statuses.Redirect:
+                    if (apply)
+                        CombatManager.instance.redirectedCharacter = this;
+                    else
+                        CombatManager.instance.redirectedCharacter = null;
+                    break;
+                case E_Statuses.Confuse:
+                    confuse = apply;
+                    break;
                 default:
                     break;
             }
+
+            CheckOverlay();
         }
 
         protected virtual void Silence()
@@ -167,26 +178,45 @@ namespace Necropanda
             }
         }
 
+        public bool CanBeTargetted()
+        {
+            bool canTarget = true;
+
+            if (banish || health.GetHealth() < 1)
+            {
+                canTarget = false;
+            }
+
+            return canTarget;
+        }
+
         #endregion
 
         #region Simulating Turn
 
         int damage = 0, healing = 0, shield = 0;
+        float highestExecute;
         SimulateValues simulateValues;
 
-        public void SimulateValues(int newDamage, int newHealing, int newShield)
+        public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
         {
             damage += newDamage;
             healing += newHealing;
             shield += newShield;
 
+            if (newExecute > highestExecute)
+            {
+                highestExecute = newExecute;
+            }
+            
             PreviewValues();
         }
 
         void PreviewValues()
         {
             //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            bool kills = damage >= health.GetHealth() + healing;
+            bool kills = damage >= health.GetHealth() + healing ||
+                        health.GetHealthPercentageFromDamage(damage) < highestExecute;
             //Save execute threshold to apply here
             int damagePreview = damage;
 
@@ -194,6 +224,7 @@ namespace Necropanda
             {
                 damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
             }
+
             simulateValues.DisplayValues(damagePreview, healing, shield, kills);
         }
 

@@ -15,6 +15,8 @@ namespace Necropanda
 
         public static Timeline instance;
 
+        public float initialDelay = 2f;
+
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
@@ -237,7 +239,7 @@ namespace Necropanda
         /// <returns></returns>
         public float PlayTimeline()
         {
-            float delay = CastSpells();
+            float delay = CastSpells() + initialDelay;
             Invoke("ActivateStatuses", delay);
             delay += statuses.Count * statusOffset;
             delay += 0.5f;
@@ -272,7 +274,7 @@ namespace Necropanda
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
                 //Use a coroutine to stagger spellcasting
-                StartCoroutine(IDelaySpell(item, i));
+                StartCoroutine(IDelaySpell(item, i + initialDelay));
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
                 i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition) + spellDelayOffset;
 
@@ -280,6 +282,14 @@ namespace Necropanda
             }
 
             return i;
+        }
+
+        public void StartSpellCoroutine(Spell spell, Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
+            CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
+            TeamManager targetTeamManager, List<Character> allCharacters)
+        {
+            StartCoroutine(spell.IDetermineTarget(target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
+                module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters));
         }
 
         void ActivateStatuses()
@@ -292,7 +302,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.StatusInstance item in statuses)
             {
-                StartCoroutine(IDelayStatus(item, delay));
+                StartCoroutine(IDelayStatus(item, delay + initialDelay));
 
                 delay += statusOffset;
             }
@@ -332,7 +342,7 @@ namespace Necropanda
                 Debug.Log("Stunned, skip spell");
                 //Effect for fumbling spell
             }
-            else if (caster.GetHealth().GetHealth() < 1)
+            else if (caster.GetHealth().dying)
             {
                 Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell
@@ -350,7 +360,6 @@ namespace Necropanda
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
                 spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
             }
-            SimulateSpellEffects();
 
             if (spellInstance.spell.drawCard != null)
             {
@@ -359,8 +368,13 @@ namespace Necropanda
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
+            SimulateSpellEffects();
             RemoveSpellInstance(spellInstance);
             CalculateTimeline();
+
+            yield return new WaitForSeconds(1f);
+
+            SimulateSpellEffects();
         }
 
         IEnumerator IDelayStatus(CombatHelperFunctions.StatusInstance statusInstance, float delay)
@@ -378,6 +392,7 @@ namespace Necropanda
             }
 
             //RemoveStatusInstance(statusInstance);
+            SimulateSpellEffects();
             CalculateTimeline();
         }
 

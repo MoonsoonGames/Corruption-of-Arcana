@@ -87,7 +87,7 @@ namespace Necropanda
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card into the deck
-            if (eventData.dragging == true && open)
+            if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
                 if (cards.Length < maxCards)
                 {
@@ -107,7 +107,7 @@ namespace Necropanda
         public void OnPointerExit(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card off the deck
-            if (eventData.dragging == true && open)
+            if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
                 CardDrag2D currentCard = dragManager.draggedCard;
                 currentCard.newDeck = null;
