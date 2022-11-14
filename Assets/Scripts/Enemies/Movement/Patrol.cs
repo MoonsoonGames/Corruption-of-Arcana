@@ -54,6 +54,7 @@ namespace Necropanda.AI.Movement
         private void Setup(){
             patrolPoints = GetPatrolPointsDiamond(patrolPointOffset);
             agent = GetComponent<NavMeshAgent>();
+            ai = GetComponent<EnemyAI>();
 
             for (int i = 0; i < patrolPoints.Length; i++) {
                 Vector3 point = patrolPoints[i];
@@ -127,7 +128,9 @@ namespace Necropanda.AI.Movement
         {
             agent.SetDestination(originalPos);
             agent.autoBraking = true;
-
+            // Reset the state back to nothing
+            ai.currentState = AIState.Nothing;
+            
             this.enabled = false;
         }
 
