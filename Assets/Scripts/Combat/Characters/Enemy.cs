@@ -115,7 +115,11 @@ namespace Necropanda
 
         public override void StartTurn()
         {
-            if (!stun)
+            if (stun || banish)
+            {
+                Debug.Log(stats.characterName + " has been stunned/banished, skipping turn");
+            }
+            else
             {
                 //In future, determine target depending on spell so it can cast support spells on allies/self
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
@@ -138,10 +142,6 @@ namespace Necropanda
                 {
                     Debug.Log(stats.characterName + " is skipping their turn");
                 }
-            }
-            else
-            {
-                Debug.Log(stats.characterName + " has been stunned, skipping turn");
             }
 
             ResetCooldowns();

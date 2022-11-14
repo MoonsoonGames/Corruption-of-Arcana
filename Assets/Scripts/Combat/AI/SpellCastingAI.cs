@@ -161,19 +161,6 @@ namespace Necropanda
                 return true;
             }
 
-            if ((self.banish == false && target.banish == false) || target == self)
-            {
-                if (spell.targetAllies && allyTeam.Contains(target))
-                {
-                    return true;
-                }
-
-                if (spell.targetEnemies && enemyTeam.Contains(target))
-                {
-                    return true;
-                }
-            }
-
             return false;
         }
     }
