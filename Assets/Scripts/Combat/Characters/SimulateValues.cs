@@ -16,13 +16,17 @@ namespace Necropanda
         public Color dmgColor, healColor;
         public GameObject deathIcon;
 
+
+        int dmgRef, healRef, shfRef;
         int totalShield;
         int damageThroughShield;
         int totalDmg;
 
-
         public void DisplayValues(int dmg, int heal, int shd, bool willKill)
         {
+            dmgRef = dmg;
+            healRef = heal;
+            shfRef = shd;
             totalShield = shd - dmg;
             damageThroughShield = 0;
 

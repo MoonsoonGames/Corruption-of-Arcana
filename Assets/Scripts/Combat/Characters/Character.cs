@@ -219,13 +219,17 @@ namespace Necropanda
         {
             //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
             bool kills = damage >= health.GetHealth() + healing + shield ||
-                        health.GetHealthPercentageFromDamage(damage) < highestExecute;
+                        health.GetHealthPercentageFromDamage(damage - shield) < highestExecute;
             //Save execute threshold to apply here
             int damagePreview = damage;
+            int healingPreview = healing;
+            int shieldPreview = shield;
 
             if (kills)
             {
-                damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
+                damagePreview = Mathf.Abs(Mathf.Clamp(damage, 0, health.GetHealth() - damage));
+                healingPreview = 0;
+                shieldPreview = 0;
             }
 
             simulateValues.DisplayValues(damagePreview, healing, shield, kills);
