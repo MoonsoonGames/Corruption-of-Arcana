@@ -92,7 +92,7 @@ namespace Necropanda
 
         //Positive Statuses
         //[HideInInspector]
-        //Placeholder
+        public bool enlightened;
         //Neutral Statuses
         //[HideInInspector]
         public bool empowerDeck, weakenDeck;
@@ -104,12 +104,15 @@ namespace Necropanda
         {
             switch (status)
             {
-                //Neutral Effects
+                //Positive Effects
                 case E_Statuses.Reflect:
                     if (deck != null)
                     {
                         deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
                     }
+                    break;
+                case E_Statuses.Enlightened:
+                    enlightened = apply;
                     break;
                 //Neutral Effects
                 case E_Statuses.EmpowerDeck:

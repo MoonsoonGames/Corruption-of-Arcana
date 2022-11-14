@@ -22,16 +22,17 @@ MonoBehaviour:
   speed: 0.6
   arcanaCost: 2
   discardAfterCasting: 0
+  discardAfterTurn: 0
   drawCard: {fileID: 0}
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
-  multihitDelay: 0.1
+  multihitDelay: 0.15
   moduleDelay: 0
   spellModules:
   - target: 3
     effectType: 2
-    value: 8
+    value: 4
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
@@ -48,4 +49,6 @@ MonoBehaviour:
     valueScalingPerStatus: 0
     statuses: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}
+  impactObject: {fileID: 8926484042661614526, guid: 74c46e331a495184eb7adabe1d62386f,
     type: 3}
