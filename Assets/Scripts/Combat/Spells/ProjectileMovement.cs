@@ -65,19 +65,9 @@ namespace Necropanda
         {
             if (impactEffect != null)
             {
-                Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-                GameObject impactRef;
-                impactRef = Instantiate(impactEffect, VFXManager.instance.transform) as GameObject;
-
-                if (impactRef != null)
-                {
-                    impactRef.transform.position = newPos;
-                }
-                else
-                {
-                    Debug.LogWarning("No reference");
-                }
+                VFXManager.instance.SpawnImpact(impactEffect, spawnPos);
             }
 
             Destroy(this.gameObject);

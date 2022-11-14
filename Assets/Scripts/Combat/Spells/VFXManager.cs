@@ -11,6 +11,8 @@ namespace Necropanda
 {
     public class VFXManager : MonoBehaviour
     {
+        #region Setup
+
         public static VFXManager instance;
         public Vector2 middlePositionOffset;
         public float projectileSpeed = 0.4f;
@@ -20,6 +22,10 @@ namespace Necropanda
         {
             instance = this;
         }
+
+        #endregion
+
+        #region Spell Logic
 
         public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
@@ -48,6 +54,32 @@ namespace Necropanda
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
+
+        public float QueryTime(Vector2 spawnPosition, Vector2 targetPosition)
+        {
+            List<Vector2> movementPositions = new List<Vector2>();
+            movementPositions.Add(spawnPosition);
+            movementPositions.Add(spawnPosition + middlePositionOffset);
+            movementPositions.Add(targetPosition);
+
+            //Calculate and return delay (T=D/S)
+            float distance = 0;
+
+            for (int i = 0; i < movementPositions.Count - 1; i++)
+            {
+                distance += Vector2.Distance(movementPositions[i], movementPositions[i + 1]);
+            }
+
+            float time = distance / (projectileSpeed * speedCalculationMultiplier);
+            //Debug.Log(time);
+            time = Time.fixedDeltaTime / projectileSpeed; //Instead of 1, use the time between frames
+            //float fixedFrameTime = Time.fixedDeltaTime;
+            return time;
+        }
+
+        #endregion
+
+        #region VFX
 
         public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef, Object impactRef, E_DamageTypes damageType)
         {
@@ -87,29 +119,23 @@ namespace Necropanda
             projectileMovement.MoveToPositions(projectileSpeed, movementPositions);
         }
 
-        public float QueryTime(Vector2 spawnPosition, Vector2 targetPosition)
+        public void SpawnImpact(Object impactEffect, Vector3 spawnPos)
         {
-            List<Vector2> movementPositions = new List<Vector2>();
-            movementPositions.Add(spawnPosition);
-            movementPositions.Add(spawnPosition + middlePositionOffset);
-            movementPositions.Add(targetPosition);
-
-            //Calculate and return delay (T=D/S)
-            float distance = 0;
-
-            for (int i = 0; i < movementPositions.Count - 1; i++)
+            if (impactEffect != null)
             {
-                distance += Vector2.Distance(movementPositions[i], movementPositions[i + 1]);
+                GameObject impactRef;
+                impactRef = Instantiate(impactEffect, transform) as GameObject;
+
+                if (impactRef != null)
+                {
+                    impactRef.transform.position = spawnPos;
+                }
+                else
+                {
+                    Debug.LogWarning("No reference");
+                }
             }
-
-            float time = distance / (projectileSpeed * speedCalculationMultiplier);
-            //Debug.Log(time);
-            time = Time.fixedDeltaTime / projectileSpeed; //Instead of 1, use the time between frames
-            //float fixedFrameTime = Time.fixedDeltaTime;
-            return time;
         }
-
-        #region VFX
 
         #region Colour
 

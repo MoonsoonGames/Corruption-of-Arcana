@@ -171,7 +171,7 @@ namespace Necropanda
                     }
                     else
                     {
-                        text = "Enemy Spell";
+                        text = item.caster.stats.characterName + " is casting a spell";
                     }
 
                     //Creates spell block game object
