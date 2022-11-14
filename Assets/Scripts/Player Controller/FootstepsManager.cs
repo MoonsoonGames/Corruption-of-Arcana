@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -14,7 +15,7 @@ namespace Necropanda
     /// </summary>
     public class FootstepsManager : MonoBehaviour
     {
-        private enum CURRENT_TERRAIN { Grass, Gravel, Wooden, Water}
+        private enum CURRENT_TERRAIN { Grass, Dirt,Stone, Wood,Crystal, Water }
 
         [SerializeField]
         private CURRENT_TERRAIN currentTerrain;
@@ -36,13 +37,13 @@ namespace Necropanda
             foreach (RaycastHit rayHit in hit)
             {
                 // Can probably be converted to a switch statement, I hate how this reads...
-                if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Gravel"))
+                if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Dirt"))
                 {
-                    currentTerrain = CURRENT_TERRAIN.Gravel;
+                    currentTerrain = CURRENT_TERRAIN.Dirt;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Wooden"))
+                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Wood"))
                 {
-                    currentTerrain = CURRENT_TERRAIN.Wooden;
+                    currentTerrain = CURRENT_TERRAIN.Wood;
                 }
                 else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Grass"))
                 {
@@ -51,6 +52,14 @@ namespace Necropanda
                 else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Water;
+                }
+                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Crystal"))
+                {
+                    currentTerrain = CURRENT_TERRAIN.Crystal;
+                }
+                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Stone"))
+                {
+                    currentTerrain = CURRENT_TERRAIN.Stone;
                 }
             }
         }
@@ -62,7 +71,7 @@ namespace Necropanda
         /// Each type has a number in FMOD</param>
         private void PlayFootstep (int terrainType)
         {
-            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Footsteps");
+            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps/Footsteps");
             footsteps.setParameterByName("Terrain", terrainType);
             footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             footsteps.start();
@@ -73,7 +82,7 @@ namespace Necropanda
         {
             switch (currentTerrain)
             {
-                case CURRENT_TERRAIN.Gravel:
+                case CURRENT_TERRAIN.Dirt:
                     PlayFootstep(1);
                     break;
 
@@ -81,12 +90,20 @@ namespace Necropanda
                     PlayFootstep(0);
                     break;
 
-                case CURRENT_TERRAIN.Wooden:
+                case CURRENT_TERRAIN.Wood:
                     PlayFootstep(2);                
                     break;
 
                 case CURRENT_TERRAIN.Water:
                     PlayFootstep(3);                
+                    break;
+
+                case CURRENT_TERRAIN.Crystal:
+                    PlayFootstep(4);                
+                    break;
+
+                case CURRENT_TERRAIN.Stone:
+                    PlayFootstep(5);                
                     break;
 
                 default:
