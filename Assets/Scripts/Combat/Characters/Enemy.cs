@@ -12,7 +12,7 @@ namespace Necropanda
     public class Enemy : Character
     {
         SpellCastingAI SpellCastingAI;
-        List<CombatHelperFunctions.AISpell> aISpells;
+        public List<CombatHelperFunctions.AISpell> aISpells;
 
         EnemyManager enemyManager;
 
@@ -144,7 +144,33 @@ namespace Necropanda
                 Debug.Log(stats.characterName + " has been stunned, skipping turn");
             }
 
+            ResetCooldowns();
+
             base.StartTurn();
+        }
+
+        void ResetCooldowns()
+        {
+            List<CombatHelperFunctions.AISpell> newList = new List<CombatHelperFunctions.AISpell>();
+
+            foreach (CombatHelperFunctions.AISpell spell in aISpells)
+            {
+                CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
+
+                newSpell.spell = spell.spell;
+                newSpell.spawnAsCard = spell.spawnAsCard;
+                newSpell.targetSelf = spell.targetSelf;
+                newSpell.targetAllies = spell.targetAllies;
+                newSpell.targetEnemies = spell.targetEnemies;
+                newSpell.timeCooldown = spell.timeCooldown;
+                newSpell.lastUsed = spell.lastUsed + 1;
+
+                newList.Add(newSpell);
+            }
+
+            aISpells.Clear();
+
+            aISpells = newList;
         }
 
         protected override void Silence()

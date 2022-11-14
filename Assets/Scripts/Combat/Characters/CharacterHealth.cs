@@ -166,6 +166,9 @@ namespace Necropanda
 
         public void CheckCurseHealth()
         {
+            if (character == null)
+                return;
+
             if (character.curse)
             {
                 tempMaxHealth = cursedMaxHealth;

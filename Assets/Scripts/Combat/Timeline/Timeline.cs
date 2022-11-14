@@ -15,6 +15,7 @@ namespace Necropanda
 
         public static Timeline instance;
 
+        public bool showAllspells = false;
         public float initialDelay = 2f;
 
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
@@ -164,13 +165,13 @@ namespace Necropanda
                 {
                     string text;
 
-                    if (player != item.caster && player.enlightened == false)
+                    if (player == item.caster || player.enlightened || showAllspells)
                     {
-                        text = "Enemy Spell";
+                        text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
                     }
                     else
                     {
-                        text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+                        text = "Enemy Spell";
                     }
 
                     //Creates spell block game object

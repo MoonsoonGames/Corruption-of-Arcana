@@ -143,10 +143,13 @@ namespace Necropanda
                 }
             }
 
-            if (spawnEnemies.Length > 0)
+            if (spawnEnemies != null)
             {
-                foreach (var item in spawnEnemies)
-                    LoadCombatManager.instance.enemies.Add(item);
+                if (spawnEnemies.Length > 0)
+                {
+                    foreach (var item in spawnEnemies)
+                        LoadCombatManager.instance.enemies.Add(item);
+                }
             }
 
             if (discardCards)

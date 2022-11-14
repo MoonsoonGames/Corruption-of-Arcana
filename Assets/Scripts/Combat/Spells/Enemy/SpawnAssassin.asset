@@ -10,38 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 17Star
+  m_Name: SpawnAssassin
   m_EditorClassIdentifier: 
-  spellName: The Star
+  spellName: Summon Undead Assassin
   flavourText: 
-  spellDescription: Lull target to Sleep for 2 turns
+  spellDescription: Spawns an undead assassin on the enemy team
   cardImage: {fileID: 0}
   overrideColor: 1
-  timelineColor: {r: 0.7917997, g: 0.6552599, b: 0.8962264, a: 255}
+  timelineColor: {r: 0.31181023, g: 0.8584906, b: 0.50465035, a: 255}
   speed: 0.4
-  arcanaCost: 2
+  arcanaCost: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
-  spawnEnemies: []
+  spawnEnemies:
+  - {fileID: 8579202517209450935, guid: 5a4dd832a90302d49a61c14aa30f5ed8, type: 3}
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
   multihitDelay: 0.1
   moduleDelay: 0
-  spellModules:
-  - target: 1
-    effectType: 6
-    value: 0
-    hitCount: 1
-    executeThreshold: 0
-    valueScalingDamageTaken: 0
-    valueScalingPerDiscard: 0
-    valueScalingPerStatus: 0
-    statuses:
-    - status: {fileID: 11400000, guid: 5d8bd9cbe47f8fc46849a83176e79d69, type: 2}
-      duration: 2
-      chance: 1
+  spellModules: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   impactObject: {fileID: 0}
