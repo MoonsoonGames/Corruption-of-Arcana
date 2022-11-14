@@ -22,6 +22,10 @@ namespace Necropanda
 
         private FMOD.Studio.EventInstance footsteps;
 
+        private void Update() {
+            DetermineTerrainType();
+        }
+
         /// <summary>
         /// This determines what type of terrain the player is on. 
         /// There might be a more performant way to do this using groundsphere
@@ -107,6 +111,7 @@ namespace Necropanda
                     break;
 
                 default:
+                    Debug.LogWarning("No valid terrain type was found, reverting to default case");
                     PlayFootstep(0);
                     break;
             }
