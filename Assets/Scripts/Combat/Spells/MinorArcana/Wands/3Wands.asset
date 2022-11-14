@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: 3Wands
   m_EditorClassIdentifier: 
   spellName: 3 of Wands
-  timelineColor: {r: 0.6792453, g: 0.46614873, b: 0, a: 1}
-  spellDescription: Deal 3 static damage to a target
-  overrideTarget: 0
-  cleaveTargets: 0
-  chainTargets: 0
-  affectPlayer: 0
-  effectType: 2
-  value: 3
-  speed: 1.1
+  flavourText: 
+  spellDescription: Send out 3 projectiles to your target that deal 2 ember damage
+    each
+  cardImage: {fileID: 0}
+  overrideColor: 0
+  timelineColor: {r: 0.7924528, g: 0.30670238, b: 0.018689923, a: 1}
+  speed: 0.5
+  arcanaCost: 0
+  multihitDelay: 0.15
+  moduleDelay: 0
+  spellModules:
+  - target: 1
+    effectType: 1
+    value: 2
+    hitCount: 3
+    executeThreshold: 0
+    statuses: []
+  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}

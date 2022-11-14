@@ -1,34 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class DragManager : MonoBehaviour
+/// <summary>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
+/// 
+/// Use by NPS is allowed as a collective, for external use, please contact me directly
+/// </summary>
+namespace Necropanda
 {
-    #region Singleton
-    //Code from last year
-
-    public static DragManager instance = null;
-
-    void Singleton()
+    public class DragManager : MonoBehaviour
     {
-        if (instance == null)
+        #region Singleton
+        //Code from last year
+
+        public static DragManager instance = null;
+
+        void Singleton()
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
 
-            //DontDestroyOnLoad(this);
+                //DontDestroyOnLoad(this);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
-        else if (instance != this)
+
+        #endregion
+
+        public Canvas canvas;
+        public CardDrag2D draggedCard;
+
+        private void Awake()
         {
-            Destroy(gameObject);
+            Singleton();
         }
-    }
 
-    #endregion
-
-    public CardDrag2D draggedCard;
-
-    private void Awake()
-    {
-        Singleton();
+        public bool canDrag;
     }
 }

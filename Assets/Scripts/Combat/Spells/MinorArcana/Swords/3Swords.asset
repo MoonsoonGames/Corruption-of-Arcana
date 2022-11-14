@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: 3Swords
   m_EditorClassIdentifier: 
   spellName: 3 of Swords
+  flavourText: 
+  spellDescription: Deal 9 physical damage to your target
+  cardImage: {fileID: 0}
+  overrideColor: 0
   timelineColor: {r: 0.509434, g: 0, b: 0, a: 1}
-  spellDescription: Deal 3 physical damage to a target
-  overrideTarget: 0
-  cleaveTargets: 0
-  chainTargets: 0
-  affectPlayer: 0
-  effectType: 0
-  value: 3
-  speed: 0.7
+  speed: 0.3
+  arcanaCost: 0
+  multihitDelay: 0.1
+  moduleDelay: 0
+  spellModules:
+  - target: 1
+    effectType: 0
+    value: 9
+    hitCount: 1
+    executeThreshold: 0
+    statuses: []
+  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}

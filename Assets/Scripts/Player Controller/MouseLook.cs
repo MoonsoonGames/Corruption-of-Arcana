@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
@@ -46,8 +47,8 @@ namespace NecroPanda.Player
         void DoLook()
         {
             // Get in input axis
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedDeltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
 
             xRotation -= mouseY;
             // Clamp the up and down rotation.
