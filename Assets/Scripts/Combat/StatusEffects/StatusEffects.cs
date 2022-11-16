@@ -18,6 +18,8 @@ namespace Necropanda
         public string effectName;
         [TextArea(3, 10)]
         public string effectDescription; // Basic desciption of spell effect
+        public Object applyEffect;
+        public Object effect;
 
         public CombatHelperFunctions.StatusModule[] effectModules;
 
@@ -34,6 +36,8 @@ namespace Necropanda
 
             if (applied)
             {
+                VFXManager.instance.SpawnImpact(effect, target.transform.position);
+
                 foreach (CombatHelperFunctions.StatusModule module in effectModules)
                 {
                     switch (module.target)
@@ -222,6 +226,8 @@ namespace Necropanda
 
         void AffectTarget(Character target, E_DamageTypes effectType, int value)
         {
+            VFXManager.instance.SpawnImpact(effect, target.transform.position);
+
             //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
             E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(effectType);
             target.GetHealth().ChangeHealth(realEffectType, value, null);

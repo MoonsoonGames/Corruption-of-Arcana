@@ -18,6 +18,7 @@ namespace Necropanda
         public float controlUtility;
         public float supportSelfUtility;
         public float supportAllyUtility;
+        public float spawnAllyUtility;
 
         public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
@@ -102,8 +103,7 @@ namespace Necropanda
 
                     moduleUtility += (module.value + targetUtility) * supportSelfUtility;
                 }
-
-                if (self.banish == false && target.banish == false && target != self)
+                else if (self.banish == false && target.banish == false && target != self)
                 {
                     if (spell.targetAllies && allyTeam.Contains(target))
                     {
@@ -118,8 +118,7 @@ namespace Necropanda
 
                         moduleUtility += (module.value + targetUtility) * supportAllyUtility;
                     }
-
-                    if (spell.targetEnemies && enemyTeam.Contains(target))
+                    else if (spell.targetEnemies && enemyTeam.Contains(target))
                     {
                         int targetHealth = target.GetHealth().GetHealth();
                         int targetMaxHealth = target.GetHealth().GetMaxHealth();
@@ -130,6 +129,14 @@ namespace Necropanda
 
                     spellUtility += moduleUtility;
                 }
+            }
+
+            if (spell.spell.spawnEnemies != null)
+            {
+                Debug.Log("Spell spawns allies, increase priority");
+
+                float spawnUtility = spawnAllyUtility * spell.spell.spawnEnemies.Length;
+                spellUtility += spawnUtility;
             }
 
             Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
@@ -154,17 +161,14 @@ namespace Necropanda
                 return true;
             }
 
-            if ((self.banish == false && target.banish == false) || target == self)
+            if (spell.targetAllies && target != self && allyTeam.Contains(target))
             {
-                if (spell.targetAllies && allyTeam.Contains(target))
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                if (spell.targetEnemies && enemyTeam.Contains(target))
-                {
-                    return true;
-                }
+            if (spell.targetEnemies && target != self && enemyTeam.Contains(target))
+            {
+                return true;
             }
 
             return false;

@@ -255,7 +255,7 @@ namespace Necropanda
                 //Debug.Log("Target stunned, apply overlay");
                 SetOverlay(true, "Cannot Target - Player Stunned");
             }
-            else if (player.banish && player != character)
+            else if (player.banish)
             {
                 //Debug.Log("Target stunned, apply overlay");
                 SetOverlay(true, "Cannot Target - Player Banished");

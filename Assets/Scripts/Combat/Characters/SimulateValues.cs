@@ -12,20 +12,50 @@ namespace Necropanda
 {
     public class SimulateValues : MonoBehaviour
     {
-        public TextMeshProUGUI dmg, heal, shield;
+        public TextMeshProUGUI dmgText, shieldText;
+        public Color dmgColor, healColor;
         public GameObject deathIcon;
 
-        public void DisplayValues(int damage, int healing, int shd, bool willKill)
+
+        int dmgRef, healRef, shfRef;
+        int totalShield;
+        int damageThroughShield;
+        int totalDmg;
+
+        public void DisplayValues(int dmg, int heal, int shd, bool willKill)
         {
+            dmgRef = dmg;
+            healRef = heal;
+            shfRef = shd;
+            totalShield = shd - dmg;
+            damageThroughShield = 0;
+
+            if (totalShield < 0)
+                damageThroughShield = Mathf.Abs(totalShield);
+
+            shieldText.gameObject.SetActive(totalShield > 0);
+            shieldText.text = "+" + totalShield;
+
+            totalDmg = heal - damageThroughShield;
+
+            if (totalDmg < 0)
+            {
+                dmgText.gameObject.SetActive(true);
+                dmgText.color = dmgColor;
+                dmgText.text = totalDmg.ToString();
+            }
+            else if (totalDmg > 0)
+            {
+                dmgText.gameObject.SetActive(true);
+                dmgText.color = healColor;
+                dmgText.text = "+" + totalDmg;
+            }
+            else
+            {
+                dmgText.gameObject.SetActive(false);
+            }
+
             Debug.Log("will kill? " + willKill);
-            dmg.gameObject.SetActive(damage > 0);
-            dmg.text = damage.ToString();
-
-            heal.gameObject.SetActive(healing > 0);
-            heal.text = healing.ToString();
-
-            shield.gameObject.SetActive(shd > 0);
-            shield.text = shd.ToString();
 
             deathIcon.SetActive(willKill);
         }
