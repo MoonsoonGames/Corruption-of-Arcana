@@ -28,6 +28,9 @@ namespace Necropanda
         GeneralDragArea dragArea;
         DragManager dragManager;
 
+        bool open = true;
+        UntargettableOverlay untargettableOverlay;
+
         #endregion
 
         #region Cards
@@ -65,9 +68,12 @@ namespace Necropanda
 
             layout = GetComponent<HorizontalLayoutGroup>();
 
-            player = GameObject.Find("Player").GetComponent<Character>();
             character = GetComponentInParent<Character>();
             timeline = GameObject.FindObjectOfType<Timeline>();
+            player = timeline.player;
+
+            untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
+            SetOverlay(false, " ");
         }
 
         #endregion
@@ -81,7 +87,7 @@ namespace Necropanda
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card into the deck
-            if (eventData.dragging == true)
+            if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
                 if (cards.Length < maxCards)
                 {
@@ -101,7 +107,7 @@ namespace Necropanda
         public void OnPointerExit(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card off the deck
-            if (eventData.dragging == true)
+            if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
                 CardDrag2D currentCard = dragManager.draggedCard;
                 currentCard.newDeck = null;
@@ -120,29 +126,51 @@ namespace Necropanda
         /// <param name="card"></param>
         public void RemoveCard(CardDrag2D card)
         {
+            bool empower = false;
+            bool weaken = false;
+
+            if (character != null)
+            {
+                empower = character.empowerDeck;
+                weaken = character.weakenDeck;
+            }
+
             card.gameObject.transform.SetParent(dragArea.transform);
             card.deck = null;
 
             ResetArrays();
 
             CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
+            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, empower, weaken, character, player);
 
             timeline.RemoveSpellInstance(newSpellInstance);
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>
         /// Removes all cards from the deck without taking them from the timeline
         /// </summary>
-        public void RemoveAllCards()
+        public void RemoveAllCards(bool discard)
         {
             foreach (CardDrag2D card in cards)
             {
-                card.GetComponent<DrawCard>().ReturnToDeck();
+                DrawCard drawCard = card.GetComponent<DrawCard>();
+                if (drawCard != null)
+                {
+                    if (discard)
+                    {
+                        drawCard.DiscardCard();
+                    }
+                    else
+                    {
+                        drawCard.ReturnToDeck();
+                    }
+                }
                 Destroy(card.gameObject);
             }
 
             cards = new CardDrag2D[0];
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>
@@ -156,13 +184,14 @@ namespace Necropanda
 
             ResetArrays();
 
-            if (character != null)
+            if (character != null && card.playerCard)
             {
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character, player);
+                newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character.empowerDeck, character.weakenDeck, character, player);
 
                 timeline.AddSpellInstance(newSpellInstance);
             }
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>
@@ -216,6 +245,43 @@ namespace Necropanda
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
             }
+        }
+
+        public void CheckOverlay()
+        {
+            //Player Stun Check
+            if (player.stun)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Player Stunned");
+            }
+            else if (player.banish)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Player Banished");
+            }
+            else if (character.banish && player != character)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Target Banished");
+            }
+            else if (character.GetHealth().GetHealth() < 1)
+            {
+                //Debug.Log("Target killed, apply overlay");
+                SetOverlay(true, "Cannot Target - Target Killed");
+            }
+            else
+            {
+                //Debug.Log("Target ok, remove overlay");
+                SetOverlay(false, " ");
+            }
+        }
+
+        void SetOverlay(bool active, string message)
+        {
+            open = !active;
+            if (untargettableOverlay != null)
+                untargettableOverlay.SetOverlay(active, message);
         }
 
         #endregion

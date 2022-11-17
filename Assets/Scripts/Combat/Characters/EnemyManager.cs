@@ -12,7 +12,7 @@ namespace Necropanda
     public class EnemyManager : TeamManager
     {
         public Character player;
-        EnemySpawner[] spawners;
+        public EnemySpawner[] spawners;
         EnemyQueue enemyQueue;
 
         protected override void Start()
@@ -36,11 +36,7 @@ namespace Necropanda
             {
                 if (character.GetHealth().GetHealth() > 0)
                 {
-                    //In future, determine target depending on spell so it can cast support spells on allies/self
-                    CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                    newSpellInstance.SetSpellInstance(character.PrepareSpell(), player, character);
-
-                    timeline.AddSpellInstance(newSpellInstance);
+                    character.StartTurn();
                 }
             }
         }
@@ -48,24 +44,6 @@ namespace Necropanda
         protected override void Setup()
         {
             base.Setup();
-
-            //spawn enemies from load settings
-            spawners = GameObject.FindObjectsOfType<EnemySpawner>();
-
-            List<EnemySpawner> spawnerList = new List<EnemySpawner>();
-
-            foreach (EnemySpawner spawner in spawners)
-            {
-                spawnerList.Add(spawner);
-            }
-
-            spawnerList.Sort(SortByOrder);
-
-            for (int i = 0; i < spawnerList.Count; i++)
-            {
-                spawners[i] = spawnerList[i];
-            }
-
             SpawnEnemies();
         }
 
@@ -86,10 +64,9 @@ namespace Necropanda
 
                             Character enemyCharacter = enemyRef.GetComponent<Character>();
 
-                            Debug.Log("Spawned " + enemyCharacter.characterName + " at spawner " + i);
+                            //Debug.Log("Spawned " + enemyCharacter.stats.characterName + " at spawner " + i);
                             //team.Add(enemyCharacter);
-                            spawners[i].filled = true;
-                            enemyCharacter.spawner = spawners[i];
+                            spawners[i].SpawnEnemy(enemyCharacter);
                         }
                     }
                 }

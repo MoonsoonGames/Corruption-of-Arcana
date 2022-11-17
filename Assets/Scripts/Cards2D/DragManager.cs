@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -32,6 +33,7 @@ namespace Necropanda
 
         #endregion
 
+        public Canvas canvas;
         public CardDrag2D draggedCard;
 
         private void Awake()

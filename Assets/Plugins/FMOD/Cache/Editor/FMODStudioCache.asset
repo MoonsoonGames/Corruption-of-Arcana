@@ -108,6 +108,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2274
+--- !u!114 &-8256036517302510092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Shields/Shield level 1 (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Shields/Shield level 1 (PH)
+  Guid:
+    Data1: -1692745119
+    Data2: 1253261577
+    Data3: -1752632413
+    Data4: -1123925768
+  Banks:
+  - {fileID: 3930431035061447629}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1281
 --- !u!114 &-8189381088810281045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +216,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6825953985016175922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Menu Music/50 health
+  m_EditorClassIdentifier: 
+  Name: 50 health
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3597231001
+    data2: 1681809175
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6657684804837830131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,6 +1017,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-472810587909060741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/End Turn Button/End Turn Press
+  m_EditorClassIdentifier: 
+  Name: End Turn Press
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2345476614
+    data2: 728321606
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-449516649905618839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,10 +1110,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638028288499883699
+  lastModified: 638040445785851162
   FileSizes:
   - Name: 
-    Value: 2622
+    Value: 2830
   Exists: 1
 --- !u!114 &-368098523346078555
 MonoBehaviour:
@@ -1063,7 +1138,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 1407952446162451303}
   MinDistance: 1
   MaxDistance: 20
   Length: 101439
@@ -1093,7 +1169,6 @@ MonoBehaviour:
   - {fileID: -6136519218621998275}
   - {fileID: 6973889471878225977}
   - {fileID: 6182808349985239479}
-  - {fileID: 6346687720729792260}
   - {fileID: 3575618126325694632}
   - {fileID: -6958476149423434254}
   - {fileID: 7091403817285096343}
@@ -1112,13 +1187,43 @@ MonoBehaviour:
   - {fileID: -2298488890420184349}
   - {fileID: -368098523346078555}
   - {fileID: -445302894333381659}
+  - {fileID: -8256036517302510092}
+  - {fileID: 261568529271131633}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3930431035061447629}
   StringsBanks:
   - {fileID: -412331834206945440}
-  cacheTime: 638028288499883699
+  cacheTime: 638040445785851162
   cacheVersion: 131591
+--- !u!114 &261568529271131633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/End Turn Button
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/End Turn Button
+  Guid:
+    Data1: 1611679294
+    Data2: 1219409533
+    Data3: 1005470087
+    Data4: 412830684
+  Banks:
+  - {fileID: 3930431035061447629}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -472810587909060741}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2600
 --- !u!114 &609677920330908324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,9 +1276,34 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: -5585723412252766480}
+  - {fileID: -6825953985016175922}
   MinDistance: 1
   MaxDistance: 20
   Length: 166000
+--- !u!114 &1407952446162451303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Near Enemy (PH)/Near Enemy
+  m_EditorClassIdentifier: 
+  Name: Near Enemy
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3393875969
+    data2: 737529970
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &2779904650945718204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,7 +1330,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 3274
+  Length: 2000
 --- !u!114 &3539152717852637237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,7 +1427,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638028288499857358
+  lastModified: 638040445785841150
   FileSizes: []
   Exists: 1
 --- !u!114 &5147000214674028810
@@ -1435,33 +1565,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1120
---- !u!114 &6346687720729792260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Shields/Shield level 1
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Shields/Shield level 1
-  Guid:
-    Data1: -1692745119
-    Data2: 1253261577
-    Data3: -1752632413
-    Data4: -1123925768
-  Banks:
-  - {fileID: 3930431035061447629}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &6552007041787260933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1704,4 +1807,4 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 1506

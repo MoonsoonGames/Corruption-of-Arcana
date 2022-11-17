@@ -14,25 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Magician
   flavourText: 
-  spellDescription: Hit target with 5 Static damage and hit all target's allies with
-    3 Static damage
+  spellDescription: Hit target with 8 Static damage and hit all target's allies with
+    4 Static damage
   cardImage: {fileID: 21300000, guid: c4b6205a7a7659e4cb9d1dafad788c50, type: 3}
   overrideColor: 1
-  timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
+  timelineColor: {r: 0.29067284, g: 0.5288418, b: 0.8679245, a: 255}
   speed: 0.6
   arcanaCost: 2
+  discardAfterCasting: 0
+  discardAfterTurn: 0
+  drawCard: {fileID: 0}
+  spawnEnemies: []
+  discardCards: 0
+  returnDiscardPile: 0
+  removeStatuses: 0
+  multihitDelay: 0.15
+  moduleDelay: 0
   spellModules:
   - target: 3
     effectType: 2
-    value: 3
+    value: 4
     hitCount: 1
     executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
     statuses: []
   - target: 1
     effectType: 2
-    value: 2
+    value: 4
     hitCount: 1
     executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
     statuses: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
+  impactObject: {fileID: 6441297445223667176, guid: c3de2173c0f41884da1878ebdb1eb46e,
+    type: 3}
+  trailColor: {r: 0, g: 0, b: 0, a: 0}
