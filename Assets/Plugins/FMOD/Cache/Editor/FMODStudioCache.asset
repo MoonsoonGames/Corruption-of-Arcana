@@ -936,6 +936,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-884573210827680961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/End Turn Button/End Turn Press
+  m_EditorClassIdentifier: 
+  Name: End Turn Press
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2345476614
+    data2: 728321606
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-850160979430418025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,10 +1110,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638034380443993045
+  lastModified: 638042815443563583
   FileSizes:
   - Name: 
-    Value: 2720
+    Value: 2830
   Exists: 1
 --- !u!114 &-368098523346078555
 MonoBehaviour:
@@ -1164,12 +1188,13 @@ MonoBehaviour:
   - {fileID: -368098523346078555}
   - {fileID: -445302894333381659}
   - {fileID: -8256036517302510092}
+  - {fileID: 5360247467674909575}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3930431035061447629}
   StringsBanks:
   - {fileID: -412331834206945440}
-  cacheTime: 638034380443993045
+  cacheTime: 638042815443563583
   cacheVersion: 131591
 --- !u!114 &609677920330908324
 MonoBehaviour:
@@ -1374,7 +1399,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638034380443983483
+  lastModified: 638042815443392848
   FileSizes: []
   Exists: 1
 --- !u!114 &5147000214674028810
@@ -1458,6 +1483,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1920
+--- !u!114 &5360247467674909575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/End Turn Button
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/End Turn Button
+  Guid:
+    Data1: 1611679294
+    Data2: 1219409533
+    Data3: 1005470087
+    Data4: 412830684
+  Banks:
+  - {fileID: 3930431035061447629}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -884573210827680961}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2600
 --- !u!114 &6055054340930976710
 MonoBehaviour:
   m_ObjectHideFlags: 0
