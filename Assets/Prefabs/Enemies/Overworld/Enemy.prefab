@@ -304,6 +304,9 @@ GameObject:
   - component: {fileID: 7114917235580297854}
   - component: {fileID: 4983053923874958858}
   - component: {fileID: 3872063757365783237}
+  - component: {fileID: 5873795582209272868}
+  - component: {fileID: 8048376360966747922}
+  - component: {fileID: 7279085905103998437}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -397,9 +400,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc34678c5ace08949ba2991bd15ae2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   enemyObject: {fileID: 2611122861618082293, guid: 1c339c0dbdc88d0499d5f72bcb5f93f5,
     type: 3}
   boss: 0
+  moduleManager: {fileID: 0}
+  currentState: 0
+  avoidancePriority: 15
+  timer: 0
+  wanderingCoolDown: 0
+  wanderRadius: 0
 --- !u!195 &3872063757365783237
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -422,6 +432,50 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5873795582209272868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bd2785c4f94dc448d82640b1c77614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wander: {fileID: 8048376360966747922}
+  patrol: {fileID: 7279085905103998437}
+--- !u!114 &8048376360966747922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233ba9b9f892ba247ac52297b5e13422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxWanderDuration: 30
+  timeLeftTillScriptCleanup: 0
+--- !u!114 &7279085905103998437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d352368085911b948ab1f97ca8e655d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToPatrol: 30
+  patrol: 1
+  originalPos: {x: 0, y: 0, z: 0}
+  patrolPoints: []
 --- !u!1001 &3332651844201392422
 PrefabInstance:
   m_ObjectHideFlags: 0

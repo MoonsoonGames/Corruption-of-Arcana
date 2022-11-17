@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.AI;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -51,12 +52,10 @@ namespace Necropanda
             if (player != null)
             {
                 Vector3 targetDirection = player.transform.position - transform.position;
-                Debug.Log(player.name);
                 RaycastHit hit;
                 // Does the ray intersect any objects excluding the player layer
                 if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, layerMask))
                 {
-                    Debug.Log("Collided with: " + hit.collider.gameObject);
                     if (hit.collider.gameObject == player)
                     {
                         if (!active)
@@ -80,7 +79,6 @@ namespace Necropanda
                     }
 
                     Debug.DrawRay(transform.position, targetDirection, Color.yellow);
-                    Debug.Log("Did Hit");
                 }
                 else
                 {
@@ -97,8 +95,8 @@ namespace Necropanda
                 Debug.Log("Deactivate AI");
                 //Unearth and activate AI
                 //art.SetActive(true);
+                aiScript.moduleManager.CheckScripts();
                 aiScript.DeactivateAI();
-
                 active = false;
             }
             else
