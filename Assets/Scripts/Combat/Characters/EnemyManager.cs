@@ -12,7 +12,7 @@ namespace Necropanda
     public class EnemyManager : TeamManager
     {
         public Character player;
-        EnemySpawner[] spawners;
+        public EnemySpawner[] spawners;
         EnemyQueue enemyQueue;
 
         protected override void Start()
@@ -44,24 +44,6 @@ namespace Necropanda
         protected override void Setup()
         {
             base.Setup();
-
-            //spawn enemies from load settings
-            spawners = GameObject.FindObjectsOfType<EnemySpawner>();
-
-            List<EnemySpawner> spawnerList = new List<EnemySpawner>();
-
-            foreach (EnemySpawner spawner in spawners)
-            {
-                spawnerList.Add(spawner);
-            }
-
-            spawnerList.Sort(SortByOrder);
-
-            for (int i = 0; i < spawnerList.Count; i++)
-            {
-                spawners[i] = spawnerList[i];
-            }
-
             SpawnEnemies();
         }
 

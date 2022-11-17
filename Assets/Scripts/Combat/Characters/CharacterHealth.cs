@@ -41,6 +41,7 @@ namespace Necropanda
         public GameObject curseOverlay;
         UShake shake;
         UColorFlash colorFlash;
+        public UColorFlash screenFlash;
 
         protected virtual void Start()
         {
@@ -320,6 +321,11 @@ namespace Necropanda
             if (colorFlash != null)
             {
                 colorFlash.Flash(type);
+            }
+
+            if (screenFlash != null)
+            {
+                screenFlash.Flash(type);
             }
         }
 
