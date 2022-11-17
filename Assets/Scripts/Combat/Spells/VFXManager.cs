@@ -116,14 +116,12 @@ namespace Necropanda
             if (impactRef != null)
             {
                 impactFX = impactRef;
-
-                Debug.Log("VFX: " + impactFX);
             }
             else
             {
                 impactFX = ImpactObjectFromDamageType(damageType);
             }
-            Debug.Log("VFX: " + impactFX + "2");
+
             Color color;
             Color testColor = new Color(0, 0, 0, 0);
             if (trailColor != testColor)

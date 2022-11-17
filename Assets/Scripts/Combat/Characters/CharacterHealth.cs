@@ -39,12 +39,16 @@ namespace Necropanda
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
         public GameObject curseOverlay;
+        UShake shake;
+        UColorFlash colorFlash;
 
         protected virtual void Start()
         {
             character = GetComponent<Character>();
             SetupHealth();
             SetupResistances();
+            shake = GetComponentInChildren<UShake>();
+            colorFlash = GetComponentInChildren<UColorFlash>();
         }
 
         protected virtual void SetupHealth()
@@ -121,6 +125,8 @@ namespace Necropanda
             }
 
             PlaySound(type, trueValue);
+            ShakeCharacter(damageTaken);
+            ColorFlash(type);
             UpdateHealthUI();
             character.damageTakenThisTurn += damageTaken;
             return trueValue;
@@ -242,6 +248,8 @@ namespace Necropanda
 
         #endregion
 
+        #region Feedback
+
         #region Sound Effects
 
         public EventReference defaultSoundEffectHealth;
@@ -293,6 +301,29 @@ namespace Necropanda
         {
             //Play death sound
         }
+
+        #endregion
+
+        #region Visual Effects
+
+        void ShakeCharacter(int damage)
+        {
+            if (shake != null && damage > 0)
+            {
+                float intensity = HelperFunctions.Remap(damage, 0, 20, 15, 30);
+                shake.CharacterShake(shake.baseDuration, intensity);
+            }
+        }
+
+        void ColorFlash(E_DamageTypes type)
+        {
+            if (colorFlash != null)
+            {
+                colorFlash.Flash(type);
+            }
+        }
+
+        #endregion
 
         #endregion
     }
