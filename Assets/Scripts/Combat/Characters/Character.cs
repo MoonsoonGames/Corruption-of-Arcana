@@ -198,7 +198,7 @@ namespace Necropanda
         #region Simulating Turn
 
         int damage = 0, healing = 0, shield = 0;
-        float highestExecute;
+        float highestExecute = 0;
         SimulateValues simulateValues;
 
         public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
@@ -218,14 +218,18 @@ namespace Necropanda
         void PreviewValues()
         {
             //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            bool kills = damage >= health.GetHealth() + healing ||
-                        health.GetHealthPercentageFromDamage(damage) < highestExecute;
+            bool kills = damage >= health.GetHealth() + healing + shield ||
+                        health.GetHealthPercentageFromDamage(damage - shield) < highestExecute;
             //Save execute threshold to apply here
             int damagePreview = damage;
+            int healingPreview = healing;
+            int shieldPreview = shield;
 
             if (kills)
             {
-                damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
+                damagePreview = Mathf.Abs(Mathf.Clamp(damage, 0, health.GetHealth() - damage));
+                healingPreview = 0;
+                shieldPreview = 0;
             }
 
             simulateValues.DisplayValues(damagePreview, healing, shield, kills);
@@ -233,7 +237,7 @@ namespace Necropanda
 
         public void ResetValues()
         {
-            damage = 0; healing = 0; shield = 0;
+            damage = 0; healing = 0; shield = 0; highestExecute = 0;
             PreviewValues();
         }
 
