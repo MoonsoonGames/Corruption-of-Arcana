@@ -6,7 +6,7 @@ using Cinemachine;
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace NecroPanda.Player
+namespace Necropanda.Player
 {
     /// <summary>
     /// This handles rotating the player based on the mouse input.
