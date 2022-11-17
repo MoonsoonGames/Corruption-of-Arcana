@@ -63,6 +63,7 @@ namespace Necropanda
         //Visual effects for projectile
         public Object projectileObject;
         public Object impactObject;
+        public Color trailColor;
 
         //Visual effects for hit effect
 
@@ -148,7 +149,7 @@ namespace Necropanda
                 if (spawnEnemies.Length > 0)
                 {
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.enemies.Add(item);
+                        LoadCombatManager.instance.AddEnemy(item, spawnPosition, projectileObject, impactObject, trailColor);
                 }
             }
 

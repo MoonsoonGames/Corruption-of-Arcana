@@ -36,7 +36,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, caster.transform.position);
-            VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -50,7 +50,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, target.transform.position);
-            VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -81,7 +81,7 @@ namespace Necropanda
 
         #region VFX
 
-        public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef, Object impactRef, E_DamageTypes damageType)
+        public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef, Color trailColor, Object impactRef, E_DamageTypes damageType)
         {
             if (projectileRef == null)
             {
@@ -109,7 +109,33 @@ namespace Necropanda
             projectileObject.transform.position = spawnPosition;
 
             ProjectileMovement projectileMovement = projectileObject.GetComponent<ProjectileMovement>();
-            projectileMovement.Setup(ColourFromDamageType(damageType), ImpactObjectFromDamageType(damageType));
+
+            #region Get Color and Impact
+
+            Object impactFX;
+            if (impactRef != null)
+            {
+                impactFX = impactRef;
+            }
+            else
+            {
+                impactFX = ImpactObjectFromDamageType(damageType);
+            }
+
+            Color color;
+            Color testColor = new Color(0, 0, 0, 0);
+            if (trailColor != testColor)
+            {
+                color = trailColor;
+            }
+            else
+            {
+                color = ColourFromDamageType(damageType);
+            }
+
+            #endregion
+
+            projectileMovement.Setup(color, impactFX);
 
             List<Vector2> movementPositions = new List<Vector2>();
             movementPositions.Add(spawnPosition);
