@@ -36,7 +36,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, caster.transform.position);
-            VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(caster.transform.position, spawnPosition, caster.transform.position, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -50,7 +50,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, target.transform.position);
-            VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(caster.transform.position, spawnPosition, target.transform.position, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -81,7 +81,7 @@ namespace Necropanda
 
         #region VFX
 
-        public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef, Color trailColor, Object impactRef, E_DamageTypes damageType)
+        public void SpawnProjectile(Vector2 spawnPosition, Vector2 midPosition, Vector2 targetPosition, Object projectileRef, Color trailColor, Object impactRef, E_DamageTypes damageType)
         {
             if (projectileRef == null)
             {
@@ -139,7 +139,7 @@ namespace Necropanda
 
             List<Vector2> movementPositions = new List<Vector2>();
             movementPositions.Add(spawnPosition);
-            movementPositions.Add(spawnPosition + middlePositionOffset);
+            movementPositions.Add(midPosition);
             movementPositions.Add(targetPosition);
 
             projectileMovement.MoveToPositions(projectileSpeed, movementPositions);

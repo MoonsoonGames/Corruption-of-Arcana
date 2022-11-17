@@ -124,10 +124,13 @@ namespace Necropanda
                 //Debug.Log(health);
                 Kill();
             }
+            else
+            {
+                ShakeCharacter(damageTaken);
+                ColorFlash(type);
+            }
 
             PlaySound(type, trueValue);
-            ShakeCharacter(damageTaken);
-            ColorFlash(type);
             UpdateHealthUI();
             character.damageTakenThisTurn += damageTaken;
             return trueValue;

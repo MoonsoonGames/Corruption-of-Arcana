@@ -72,10 +72,10 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(combatScene);
         }
 
-        public void AddEnemy(Object enemy, Vector3 spawnPos, Object projectileObject, Object impactObject, Color trailColor)
+        public void AddEnemy(Object enemy, Vector3 spawnPos, Vector3 midPos, Object projectileObject, Object impactObject, Color trailColor)
         {
             //Spawn effects here
-            VFXManager.instance.SpawnProjectile(spawnPos, queue.transform.position, projectileObject, trailColor, impactObject, E_DamageTypes.Physical);
+            VFXManager.instance.SpawnProjectile(spawnPos, midPos, queue.transform.position, projectileObject, trailColor, impactObject, E_DamageTypes.Physical);
             enemies.Add(enemy);
             queue.UpdateUI();
         }

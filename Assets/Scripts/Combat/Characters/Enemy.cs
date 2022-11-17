@@ -115,7 +115,7 @@ namespace Necropanda
 
         public override void StartTurn()
         {
-            if (stun || banish)
+            if (stun || banish || health.dying)
             {
                 Debug.Log(stats.characterName + " has been stunned/banished, skipping turn");
             }

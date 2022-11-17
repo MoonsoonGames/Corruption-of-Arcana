@@ -149,7 +149,7 @@ namespace Necropanda
                 if (spawnEnemies.Length > 0)
                 {
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.AddEnemy(item, spawnPosition, projectileObject, impactObject, trailColor);
+                        LoadCombatManager.instance.AddEnemy(item, caster.transform.position, spawnPosition, projectileObject, impactObject, trailColor);
                 }
             }
 
