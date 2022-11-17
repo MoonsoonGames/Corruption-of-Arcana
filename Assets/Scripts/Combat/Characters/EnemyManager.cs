@@ -84,8 +84,7 @@ namespace Necropanda
 
                             //Debug.Log("Spawned " + enemyCharacter.stats.characterName + " at spawner " + i);
                             //team.Add(enemyCharacter);
-                            spawners[i].filled = true;
-                            enemyCharacter.spawner = spawners[i];
+                            spawners[i].SpawnEnemy(enemyCharacter);
                         }
                     }
                 }

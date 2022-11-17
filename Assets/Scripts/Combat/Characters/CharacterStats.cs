@@ -22,6 +22,7 @@ namespace Necropanda
         public float[] baseDamageResistancesModifier;
 
         public Color timelineColor = new Color(0, 0, 0, 255);
+        public Object spawnObject;
 
         public SpellCastingAI ai;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();

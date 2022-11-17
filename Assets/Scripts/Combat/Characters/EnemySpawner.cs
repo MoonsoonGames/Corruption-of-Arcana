@@ -14,9 +14,16 @@ namespace Necropanda
         public int order = 0;
         public bool filled = false;
 
-        public void SpawnEnemy(Object enemyRef)
+        public void SpawnEnemy(Character enemy)
         {
-            Instantiate(enemyRef, transform);
+            filled = true;
+            enemy.spawner = this;
+
+            Object spawnObject = enemy.stats.spawnObject;
+
+            Debug.Log("spawned enemy, spawn effect");
+            if (spawnObject != null)
+                Instantiate(spawnObject, enemy.transform);
         }
     }
 }
