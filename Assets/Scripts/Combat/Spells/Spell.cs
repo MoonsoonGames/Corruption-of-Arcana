@@ -63,6 +63,7 @@ namespace Necropanda
         //Visual effects for projectile
         public Object projectileObject;
         public Object impactObject;
+        public Color trailColor;
 
         //Visual effects for hit effect
 
@@ -148,7 +149,7 @@ namespace Necropanda
                 if (spawnEnemies.Length > 0)
                 {
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.enemies.Add(item);
+                        LoadCombatManager.instance.AddEnemy(item, spawnPosition, projectileObject, impactObject, trailColor);
                 }
             }
 
@@ -181,40 +182,45 @@ namespace Necropanda
             switch (module.target)
             {
                 case E_SpellTargetType.Caster:
-                    VFXManager.instance.AffectSelfDelay(this, caster, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                    if (caster.GetHealth().dying == false)
+                        VFXManager.instance.AffectSelfDelay(this, caster, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.Target:
-                    VFXManager.instance.AffectTargetDelay(this, caster, target, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                    if (target.GetHealth().dying == false)
+                        VFXManager.instance.AffectTargetDelay(this, caster, target, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.Chain:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in targetTeamManager.team)
                     {
-                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
+                        if (character.GetHealth().dying == false)
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
                 case E_SpellTargetType.Cleave:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in targetTeamManager.team)
                     {
-                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
+                        if (character.GetHealth().dying == false)
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
                 case E_SpellTargetType.RandomTargetTeam:
                     randTarget = CombatHelperFunctions.ReplaceRandomTarget(targetTeamManager.team);
-                    if (randTarget != null)
+                    if (randTarget != null && randTarget.GetHealth().dying == false)
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.RandomAll:
                     randTarget = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
-                    if (randTarget != null)
+                    if (randTarget != null && randTarget.GetHealth().dying == false)
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.All:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in allCharacters)
                     {
-                        VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
+                        if (character.GetHealth().dying == false)
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
             }

@@ -42,11 +42,12 @@ namespace Necropanda
         public E_Scenes combatScene;
         public float combatRadius = 15f;
 
+        public EnemyQueue queue;
         public List<Object> enemies;
 
         public void LoadCombat(GameObject player)
         {
-            //Get enemies within radius of player
+            //Get enemies within radius of player and save them in a list
             enemies.Clear();
             EnemyAI[] enemyAI = GameObject.FindObjectsOfType<EnemyAI>();
 
@@ -56,21 +57,27 @@ namespace Necropanda
                 {
                     if (enemy.boss)
                     {
+                        //If enemy is a boss, save them in the first space
                         enemies.Insert(0, enemy.enemyObject);
                     }
                     else
                     {
+                        //Else append them at the end of the list
                         enemies.Insert(enemies.Count, enemy.enemyObject);
                     }
                 }
             }
 
-            //save them in a list
-            //If enemy is a boss, save them in the first space
-            //Else append them at the end of the list
-
             Debug.Log("Interacted - Load Combat");
             LoadingScene.instance.LoadScene(combatScene);
+        }
+
+        public void AddEnemy(Object enemy, Vector3 spawnPos, Object projectileObject, Object impactObject, Color trailColor)
+        {
+            //Spawn effects here
+            VFXManager.instance.SpawnProjectile(spawnPos, queue.transform.position, projectileObject, trailColor, impactObject, E_DamageTypes.Physical);
+            enemies.Add(enemy);
+            queue.UpdateUI();
         }
 
         private void OnDrawGizmosSelected()
