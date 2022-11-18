@@ -42,6 +42,7 @@ namespace Necropanda
             targetPositions.Add(caster.transform.position);
 
             VFXManager.instance.SpawnProjectile(caster.transform.position, targetPositions, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
+            SpawnCastEffect(caster.transform.position, caster.transform.position, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -61,6 +62,7 @@ namespace Necropanda
             targetPositions.Add(target.transform.position);
 
             VFXManager.instance.SpawnProjectile(caster.transform.position, targetPositions, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
+            SpawnCastEffect(caster.transform.position, target.transform.position, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -90,6 +92,27 @@ namespace Necropanda
         #endregion
 
         #region VFX
+
+        public void SpawnCastEffect(Vector2 spawnPosition, Vector2 targetPosition, Object effectRef)
+        {
+            if (effectRef == null)
+            {
+                Debug.Log("No reference to projectile");
+                return;
+            }
+
+            //Spawn projectile at spawn position
+            GameObject effectObject;
+            effectObject = Instantiate(effectRef, this.gameObject.transform) as GameObject;
+
+            if (effectObject == null)
+            {
+                Debug.Log("No game object spawned, returning");
+                return;
+            }
+            effectObject.transform.position = spawnPosition;
+            effectObject.transform.rotation = Quaternion.FromToRotation(spawnPosition, targetPosition);
+        }
 
         /// <summary>
         /// Spawn a projectile at a specified position, which will then move towards each point in 

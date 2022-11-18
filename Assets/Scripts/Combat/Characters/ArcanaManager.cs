@@ -17,7 +17,7 @@ namespace Necropanda
         int arcanaMax = 3; public int GetMaxArcana() { return arcanaMax; }
 
         //public GameObject message;
-        public Button endTurnButton;
+        public GameObject buttonOverlay;
         public TextMeshProUGUI arcanaText;
         public Image arcanaImage;
         public Color enableColor;
@@ -35,20 +35,20 @@ namespace Necropanda
 
         public void CheckArcana(int arcana)
         {
+            arcanaText.text = arcanaMax - arcana + "/" + arcanaMax;
+
             if (arcana <= arcanaMax)
             {
                 //Debug.Log("Can cast");
                 //Can cast, disable message and enable end turn
-                endTurnButton.enabled = true;
-                arcanaText.text = arcanaMax - arcana + "/" + arcanaMax;
+                buttonOverlay.SetActive(false);
                 arcanaImage.color = enableColor;
             }
             else
             {
                 //Debug.Log("Can't cast");
                 //Can't cast, enable message and disable end turn
-                endTurnButton.enabled = false;
-                arcanaText.text = arcanaMax - arcana + "/" + arcanaMax;
+                buttonOverlay.SetActive(true);
                 arcanaImage.color = disableColor;
             }
         }

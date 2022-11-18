@@ -61,6 +61,7 @@ namespace Necropanda
 
         [Header("FX")]
         //Visual effects for projectile
+        public Object castObject;
         public Object projectileObject;
         public Object impactObject;
         public Color trailColor;
