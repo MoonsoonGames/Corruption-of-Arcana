@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96ace34c91a729c40aa73b820939121c, type: 3}
-  m_Name: Sleep
+  m_Name: Banish
   m_EditorClassIdentifier: 
-  effectName: Stun
-  effectDescription: Target can no longer take turns
-  applyEffect: {fileID: 6441297445223667176, guid: d5df6c669791dc048bdd83028ac63f26,
+  effectName: Banish
+  effectDescription: Target cannot take their turn or be targeted by other characters
+  applyEffect: {fileID: 6441297445223667176, guid: 9f25dcbc33212004293bce049ba289df,
     type: 3}
   effect: {fileID: 0}
   effectModules:
   - target: 0
-    status: 4
+    status: 1
     effectType: 0
     value: 0
     statModifier: 0
