@@ -18,6 +18,7 @@ namespace Necropanda
         public float controlUtility;
         public float supportSelfUtility;
         public float supportAllyUtility;
+        public float spawnAllyUtility;
 
         public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
@@ -47,6 +48,7 @@ namespace Necropanda
         CombatHelperFunctions.SpellUtility UtilityCalculation(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility bestSpell = new CombatHelperFunctions.SpellUtility();
+            bestSpell.utility = -5;
             List<Character> allTargets = new List<Character>();
             allTargets = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
 
@@ -54,9 +56,18 @@ namespace Necropanda
             {
                 foreach (CombatHelperFunctions.AISpell spell in spellList)
                 {
-                    if (spell.lastUsed >= spell.timeCooldown)
+                    if (CanCastSpell(spell, self, target, allyTeam, enemyTeam))
                     {
-                        float utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
+                        float utility = 0;
+
+                        if (self.charm)
+                        {
+                            utility = SpellUtility(spell, self, target, enemyTeam, allyTeam);
+                        }
+                        else
+                        {
+                            utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
+                        }
 
                         if (utility > bestSpell.utility)
                         {
@@ -92,35 +103,65 @@ namespace Necropanda
 
                     moduleUtility += (module.value + targetUtility) * supportSelfUtility;
                 }
-
-                if (spell.targetAllies && allyTeam.Contains(target) && target != self)
+                else if (self.banish == false && target.banish == false && target != self)
                 {
-                    float targetUtility = 0;
+                    if (spell.targetAllies && allyTeam.Contains(target))
+                    {
+                        float targetUtility = 0;
 
-                    if (module.effectType == E_DamageTypes.Healing)
+                        if (module.effectType == E_DamageTypes.Healing)
+                        {
+                            int targetHealth = target.GetHealth().GetHealth();
+                            int targetMaxHealth = target.GetHealth().GetMaxHealth();
+                            targetUtility = targetMaxHealth - targetHealth;
+                        }
+
+                        moduleUtility += (module.value + targetUtility) * supportAllyUtility;
+                    }
+                    else if (spell.targetEnemies && enemyTeam.Contains(target))
                     {
                         int targetHealth = target.GetHealth().GetHealth();
                         int targetMaxHealth = target.GetHealth().GetMaxHealth();
-                        targetUtility = targetMaxHealth - targetHealth;
+                        float targetUtility = targetMaxHealth - targetHealth;
+
+                        moduleUtility += module.value * damageUtility;
                     }
 
-                    moduleUtility += (module.value + targetUtility) * supportAllyUtility;
+                    spellUtility += moduleUtility;
                 }
-
-                if (spell.targetEnemies && enemyTeam.Contains(target))
-                {
-                    int targetHealth = target.GetHealth().GetHealth();
-                    int targetMaxHealth = target.GetHealth().GetMaxHealth();
-                    float targetUtility = targetMaxHealth - targetHealth;
-
-                    moduleUtility += module.value * damageUtility;
-                }
-
-                spellUtility += moduleUtility;
             }
 
-            //Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+            if (spell.spell.spawnEnemies != null)
+            {
+                Debug.Log("Spell spawns allies, increase priority");
+
+                float spawnUtility = spawnAllyUtility * spell.spell.spawnEnemies.Length;
+                spellUtility += spawnUtility;
+            }
+
+            Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+
             return spellUtility;
+        }
+
+        bool CanCastSpell(CombatHelperFunctions.AISpell spell, Character self, Character target, List<Character> allyTeam, List<Character> enemyTeam)
+        {
+            if (spell.lastUsed < spell.timeCooldown)
+            {
+                return false;
+            }
+
+            if (self.silence && spell.timeCooldown > 0)
+            {
+                return false;
+            }
+
+            if (spell.targetSelf && target == self)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -21,6 +21,13 @@ MonoBehaviour:
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   speed: 0.45
   arcanaCost: 2
+  discardAfterCasting: 0
+  discardAfterTurn: 0
+  drawCard: {fileID: 0}
+  spawnEnemies: []
+  discardCards: 0
+  returnDiscardPile: 0
+  removeStatuses: 0
   multihitDelay: 0.3
   moduleDelay: 0
   spellModules:
@@ -29,9 +36,14 @@ MonoBehaviour:
     value: 5
     hitCount: 3
     executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
     statuses:
     - status: {fileID: 11400000, guid: 1a66da312d3e2ab4ab4effe9ada7a53c, type: 2}
       duration: 3
       chance: 0.6
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}
+  impactObject: {fileID: 8926484042661614526, guid: 74c46e331a495184eb7adabe1d62386f,
     type: 3}

@@ -21,35 +21,35 @@ namespace Necropanda
             instance = this;
         }
 
-        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
-            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, cardsDiscarded, spawnPosition, delay, empowered, weakened));
+            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, effectType, cardsDiscarded, removedStatuses, spawnPosition, delay, empowered, weakened));
         }
 
-        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, caster.transform.position);
-            VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject);
+            VFXManager.instance.SpawnProjectile(spawnPosition, caster.transform.position, spellRef.projectileObject, spellRef.impactObject, effectType);
             yield return new WaitForSeconds(effectDelay);
-            spellRef.AffectSelf(caster, spell, cardsDiscarded, empowered, weakened);
+            spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
 
-        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
-            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, cardsDiscarded, spawnPosition, delay, empowered, weakened));
+            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, effectType, cardsDiscarded, removedStatuses, spawnPosition, delay, empowered, weakened));
         }
 
-        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
         {
             yield return new WaitForSeconds(delay);
             float effectDelay = QueryTime(spawnPosition, target.transform.position);
-            VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject);
+            VFXManager.instance.SpawnProjectile(spawnPosition, target.transform.position, spellRef.projectileObject, spellRef.impactObject, effectType);
             yield return new WaitForSeconds(effectDelay);
-            spellRef.AffectTarget(caster, target, spell, cardsDiscarded, empowered, weakened);
+            spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
 
-        public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef)
+        public void SpawnProjectile(Vector2 spawnPosition, Vector2 targetPosition, Object projectileRef, Object impactRef, E_DamageTypes damageType)
         {
             if (projectileRef == null)
             {
@@ -77,6 +77,7 @@ namespace Necropanda
             projectileObject.transform.position = spawnPosition;
 
             ProjectileMovement projectileMovement = projectileObject.GetComponent<ProjectileMovement>();
+            projectileMovement.Setup(ColourFromDamageType(damageType), ImpactObjectFromDamageType(damageType));
 
             List<Vector2> movementPositions = new List<Vector2>();
             movementPositions.Add(spawnPosition);
@@ -107,5 +108,99 @@ namespace Necropanda
             //float fixedFrameTime = Time.fixedDeltaTime;
             return time;
         }
+
+        #region VFX
+
+        #region Colour
+
+        public Color physicalColour;
+        public Color perforationColour;
+        public Color septicColour;
+        public Color bleakColour;
+        public Color staticColour;
+        public Color emberColour;
+
+        public Color healColour;
+        public Color shieldColour;
+        public Color arcanaColour;
+
+        public Color defaultColour;
+
+        Color ColourFromDamageType(E_DamageTypes damageType)
+        {
+            switch (damageType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalColour;
+                case E_DamageTypes.Perforation:
+                    return perforationColour;
+                case E_DamageTypes.Septic:
+                    return septicColour;
+                case E_DamageTypes.Bleak:
+                    return bleakColour;
+                case E_DamageTypes.Static:
+                    return staticColour;
+                case E_DamageTypes.Ember:
+                    return emberColour;
+
+                case E_DamageTypes.Healing:
+                    return healColour;
+                case E_DamageTypes.Shield:
+                    return shieldColour;
+                case E_DamageTypes.Arcana:
+                    return arcanaColour;
+                default:
+                    return defaultColour;
+            }
+        }
+
+        #endregion
+
+        #region Impact Effect
+
+        public Object physicalObject;
+        public Object perforationObject;
+        public Object septicObject;
+        public Object bleakObject;
+        public Object staticObject;
+        public Object emberObject;
+
+        public Object healObject;
+        public Object shieldObject;
+        public Object arcanaObject;
+
+        public Object defaultObject;
+
+        Object ImpactObjectFromDamageType(E_DamageTypes damageType)
+        {
+            switch (damageType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalObject;
+                case E_DamageTypes.Perforation:
+                    return perforationObject;
+                case E_DamageTypes.Septic:
+                    return septicObject;
+                case E_DamageTypes.Bleak:
+                    return bleakObject;
+                case E_DamageTypes.Static:
+                    return staticObject;
+                case E_DamageTypes.Ember:
+                    return emberObject;
+
+                case E_DamageTypes.Healing:
+                    return healObject;
+                case E_DamageTypes.Shield:
+                    return shieldObject;
+                case E_DamageTypes.Arcana:
+                    return arcanaObject;
+                default:
+                    return defaultObject;
+            }
+        }
+
+        #endregion
+
+        #endregion
     }
 }

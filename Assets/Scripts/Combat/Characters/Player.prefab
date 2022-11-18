@@ -56,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: f86170c03c8dddc408e666bf1976c774, type: 2}
   spawner: {fileID: 0}
+  damageTakenThisTurn: 0
   empowerDeck: 0
   weakenDeck: 0
   banish: 0
@@ -80,7 +81,8 @@ MonoBehaviour:
   shieldColor: {r: 0, g: 0.8627451, b: 1, a: 1}
   healthColor: {r: 0.018116832, g: 1, b: 0, a: 1}
   lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  lowHealthThresholdPercentage: 0.4
+  lowHealthThresholdPercentage: 0.3
+  curseOverlay: {fileID: 0}
   defaultSoundEffectHealth:
     Guid:
       Data1: 1993795648
@@ -360,8 +362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076294, y: 104}
-  m_SizeDelta: {x: 377.3368, y: 595.3042}
+  m_AnchoredPosition: {x: -0.0008544922, y: 104}
+  m_SizeDelta: {x: 1022.4343, y: 595.3042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3702093927457906040
 CanvasRenderer:
@@ -411,13 +413,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6068ea2d7dcd395469719729694dccdb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b42261035000634b8899937338a6016, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

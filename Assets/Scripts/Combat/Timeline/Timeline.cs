@@ -15,6 +15,9 @@ namespace Necropanda
 
         public static Timeline instance;
 
+        public bool showAllspells = false;
+        public float initialDelay = 2f;
+
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
         List<SpellBlock> spellBlocks = new List<SpellBlock>();
         public Object spellBlockPrefab;
@@ -67,16 +70,17 @@ namespace Necropanda
         public bool AddStatusInstance(CombatHelperFunctions.StatusInstance newStatusInstance)
         {
             bool apply = true;
+            bool replace = false;
             CombatHelperFunctions.StatusInstance duplicate = new CombatHelperFunctions.StatusInstance();
             foreach (CombatHelperFunctions.StatusInstance status in statuses)
             {
                 if (status.status == newStatusInstance.status && status.target == newStatusInstance.target)
                 {
                     apply = false;
-                    duplicate = status;
 
                     if (status.duration < newStatusInstance.duration)
                     {
+                        replace = true;
                         duplicate = status;
                     }
                 }
@@ -87,9 +91,14 @@ namespace Necropanda
                 //Debug.Log(newStatusInstance.status.effectName + " has been added");
                 statuses.Add(newStatusInstance);
             }
-            else if (duplicate.duration < newStatusInstance.duration)
+            else if (replace)
             {
-                duplicate.duration = newStatusInstance.duration;
+                if (duplicate.duration < newStatusInstance.duration)
+                {
+                    Debug.Log("Should remove element: " + duplicate.status.effectName);
+                    statuses.Remove(duplicate);
+                    statuses.Add(newStatusInstance);
+                }
             }
 
             return apply;
@@ -149,35 +158,48 @@ namespace Necropanda
 
             spellBlocks.Clear();
 
-            //Spawn UI for cards
-            foreach (var item in spells)
+            if (spells.Count > 0)
             {
-                string text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
-
-                //Creates spell block game object
-                GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
-                spellBlockObject.transform.SetParent(transform, false);
-
-                //Sets spell block values
-                SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
-                spellBlock.text.text = text;
-                if (item.spell.overrideColor)
-                    spellBlock.image.color = item.spell.timelineColor;
-                else
-                    spellBlock.image.color = item.caster.stats.timelineColor;
-
-                //Adds spell block to layout group
-                spellBlocks.Add(spellBlock);
-
-                if (item.caster == player)
+                //Spawn UI for cards
+                foreach (var item in spells)
                 {
-                    arcanaCount += item.spell.arcanaCost;
+                    string text;
+
+                    if (player == item.caster || player.enlightened || showAllspells)
+                    {
+                        text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+                    }
+                    else
+                    {
+                        text = "Enemy Spell";
+                    }
+
+                    //Creates spell block game object
+                    GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
+                    spellBlockObject.transform.SetParent(transform, false);
+
+                    //Sets spell block values
+                    //Sets spell block values
+                    SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
+                    spellBlock.text.text = text;
+                    if (item.spell.overrideColor)
+                        spellBlock.image.color = item.spell.timelineColor;
+                    else
+                        spellBlock.image.color = item.caster.stats.timelineColor;
+
+                    //Adds spell block to layout group
+                    spellBlocks.Add(spellBlock);
+
+                    if (item.caster == player)
+                    {
+                        arcanaCount += item.spell.arcanaCost;
+                    }
                 }
+
+                arcanaManager.CheckArcana(arcanaCount);
+
+                SimulateSpellEffects();
             }
-
-            arcanaManager.CheckArcana(arcanaCount);
-
-            SimulateSpellEffects();
         }
 
         int SortBySpeed(CombatHelperFunctions.SpellInstance c1, CombatHelperFunctions.SpellInstance c2)
@@ -217,7 +239,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
-                item.spell.SimulateSpellValues(item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
+                item.spell.SimulateSpellValues(player, item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
             }
         }
 
@@ -233,12 +255,31 @@ namespace Necropanda
         /// <returns></returns>
         public float PlayTimeline()
         {
-            float delay = CastSpells();
+            float delay = CastSpells() + initialDelay;
             Invoke("ActivateStatuses", delay);
             delay += statuses.Count * statusOffset;
             delay += 0.5f;
 
+            Invoke("EndTimeline", delay);
+
             return delay;
+        }
+
+        public bool discardCards = false;
+        public List<Character> clearStatusChars = new List<Character>();
+
+        void EndTimeline()
+        {
+            if (discardCards)
+            {
+                hand.RemoveAllCards(true);
+                discardCards = false;
+            }
+
+            foreach (Character character in clearStatusChars)
+            {
+                Timeline.instance.RemoveStatusesOnCharacter(character);
+            }
         }
 
         float CastSpells()
@@ -249,7 +290,7 @@ namespace Necropanda
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
                 //Use a coroutine to stagger spellcasting
-                StartCoroutine(IDelaySpell(item, i));
+                StartCoroutine(IDelaySpell(item, i + initialDelay));
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
                 i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition) + spellDelayOffset;
 
@@ -257,6 +298,14 @@ namespace Necropanda
             }
 
             return i;
+        }
+
+        public void StartSpellCoroutine(Spell spell, Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
+            CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
+            TeamManager targetTeamManager, List<Character> allCharacters)
+        {
+            StartCoroutine(spell.IDetermineTarget(target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
+                module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters));
         }
 
         void ActivateStatuses()
@@ -269,7 +318,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.StatusInstance item in statuses)
             {
-                StartCoroutine(IDelayStatus(item, delay));
+                StartCoroutine(IDelayStatus(item, delay + initialDelay));
 
                 delay += statusOffset;
             }
@@ -302,28 +351,46 @@ namespace Necropanda
             yield return new WaitForSeconds(delay);
 
             Character caster = spellInstance.caster;
+            Character target = spellInstance.target;
 
             if (caster.stun)
             {
                 Debug.Log("Stunned, skip spell");
                 //Effect for fumbling spell
             }
-            else if (caster.GetHealth().GetHealth() < 1)
+            else if (caster.GetHealth().dying)
             {
                 Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell
+            }
+            else if (caster.banish && caster != target)
+            {
+                Debug.Log("Caster is banished, skip spell");
+            }
+            else if (target.banish && caster != target)
+            {
+                Debug.Log("Target is banished, skip spell");
             }
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
                 spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
             }
-            SimulateSpellEffects();
+
+            if (spellInstance.spell.drawCard != null)
+            {
+                DeckManager.instance.AddToStart(spellInstance.spell.drawCard);
+            }
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
 
+            SimulateSpellEffects();
             RemoveSpellInstance(spellInstance);
             CalculateTimeline();
+
+            yield return new WaitForSeconds(1f);
+
+            SimulateSpellEffects();
         }
 
         IEnumerator IDelayStatus(CombatHelperFunctions.StatusInstance statusInstance, float delay)
@@ -341,6 +408,7 @@ namespace Necropanda
             }
 
             //RemoveStatusInstance(statusInstance);
+            SimulateSpellEffects();
             CalculateTimeline();
         }
 
@@ -353,5 +421,38 @@ namespace Necropanda
         }
 
         #endregion
+
+        public void RemoveStatusesOnCharacter(Character target)
+        {
+            List<CombatHelperFunctions.StatusInstance> statusesToRemove = new List<CombatHelperFunctions.StatusInstance>();
+
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
+            {
+                if (status.target == target)
+                {
+                    statusesToRemove.Add(status);
+                }
+            }
+
+            foreach (CombatHelperFunctions.StatusInstance status in statusesToRemove)
+            {
+                status.status.Remove(status.target);
+            }
+        }
+
+        public int StatusCount(Character target)
+        {
+            int statusCount = 0;
+
+            foreach (CombatHelperFunctions.StatusInstance status in statuses)
+            {
+                if (status.target == target)
+                {
+                    statusCount++;
+                }
+            }
+
+            return statusCount;
+        }
     }
 }

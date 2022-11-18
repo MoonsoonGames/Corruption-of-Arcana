@@ -11,7 +11,29 @@ namespace Necropanda
 {
     public class DeckManager : MonoBehaviour
     {
+        #region Singleton
+        //Code from last year
+
+        public static DeckManager instance = null;
+
+        void Singleton()
+        {
+            if (instance == null)
+            {
+                instance = this;
+
+                //DontDestroyOnLoad(this);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+
         public List<Spell> playerDeck;
+        public List<Spell> playedCards;
         public List<Spell> discardPile;
 
         /// <summary>
@@ -22,12 +44,12 @@ namespace Necropanda
         {
             if (playerDeck.Count == 0)
             {
-                DrawFromDiscard();
+                DrawFromPlayed();
             }
 
             if (playerDeck.Count != 0)
             {
-                Spell spell = playerDeck[Random.Range(0, playerDeck.Count)];
+                Spell spell = playerDeck[0];
 
                 playerDeck.Remove(spell);
 
@@ -39,7 +61,13 @@ namespace Necropanda
 
         private void Start()
         {
+            Singleton();
             playerDeck.Sort(HelperFunctions.RandomSort);
+        }
+
+        public void AddToStart(Spell spell)
+        {
+            playerDeck.Insert(0, spell);
         }
 
         /// <summary>
@@ -48,22 +76,44 @@ namespace Necropanda
         /// <param name="spell"></param>
         public void ReturnCard(Spell spell)
         {
+            playedCards.Add(spell);
+        }
+
+        public void DiscardCard(Spell spell)
+        {
             discardPile.Add(spell);
+        }
+
+        public void DiscardPileToDeck(bool start)
+        {
+            foreach(Spell spell in discardPile)
+            {
+                if (start)
+                {
+                    playerDeck.Insert(0, spell);
+                }
+                else
+                {
+                    playerDeck.Add(spell);
+                }
+            }
+
+            discardPile.Clear();
         }
 
         /// <summary>
         /// Shuffled cards in the discard pile and then adds them to the player deck
         /// </summary>
-        void DrawFromDiscard()
+        void DrawFromPlayed()
         {
-            discardPile.Sort(HelperFunctions.RandomSort);
+            playedCards.Sort(HelperFunctions.RandomSort);
 
-            foreach (Spell spell in discardPile)
+            foreach (Spell spell in playedCards)
             {
                 playerDeck.Add(spell);
             }
 
-            discardPile.Clear();
+            playedCards.Clear();
         }
     }
 }

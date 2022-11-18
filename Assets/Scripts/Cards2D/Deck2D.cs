@@ -87,7 +87,7 @@ namespace Necropanda
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card into the deck
-            if (eventData.dragging == true && open)
+            if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
                 if (cards.Length < maxCards)
                 {
@@ -107,7 +107,7 @@ namespace Necropanda
         public void OnPointerExit(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card off the deck
-            if (eventData.dragging == true && open)
+            if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
                 CardDrag2D currentCard = dragManager.draggedCard;
                 currentCard.newDeck = null;
@@ -150,14 +150,21 @@ namespace Necropanda
         /// <summary>
         /// Removes all cards from the deck without taking them from the timeline
         /// </summary>
-        public void RemoveAllCards()
+        public void RemoveAllCards(bool discard)
         {
             foreach (CardDrag2D card in cards)
             {
                 DrawCard drawCard = card.GetComponent<DrawCard>();
                 if (drawCard != null)
                 {
-                    drawCard.ReturnToDeck();
+                    if (discard)
+                    {
+                        drawCard.DiscardCard();
+                    }
+                    else
+                    {
+                        drawCard.ReturnToDeck();
+                    }
                 }
                 Destroy(card.gameObject);
             }
@@ -245,17 +252,27 @@ namespace Necropanda
             //Player Stun Check
             if (player.stun)
             {
-                Debug.Log("Target stunned, apply overlay");
+                //Debug.Log("Target stunned, apply overlay");
                 SetOverlay(true, "Cannot Target - Player Stunned");
+            }
+            else if (player.banish)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Player Banished");
+            }
+            else if (character.banish && player != character)
+            {
+                //Debug.Log("Target stunned, apply overlay");
+                SetOverlay(true, "Cannot Target - Target Banished");
             }
             else if (character.GetHealth().GetHealth() < 1)
             {
-                Debug.Log("Target killed, apply overlay");
+                //Debug.Log("Target killed, apply overlay");
                 SetOverlay(true, "Cannot Target - Target Killed");
             }
             else
             {
-                Debug.Log("Target ok, remove overlay");
+                //Debug.Log("Target ok, remove overlay");
                 SetOverlay(false, " ");
             }
         }

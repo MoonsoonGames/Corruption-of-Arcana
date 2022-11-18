@@ -17,9 +17,16 @@ MonoBehaviour:
   spellDescription: Hit random targets on target team with 2 random damage 10 times
   cardImage: {fileID: 21300000, guid: 12f1801d4d142cd4bbc4072389f1394e, type: 3}
   overrideColor: 1
-  timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
+  timelineColor: {r: 0.47833228, g: 0.7169812, b: 0.23335709, a: 255}
   speed: 0.8
   arcanaCost: 2
+  discardAfterCasting: 0
+  discardAfterTurn: 0
+  drawCard: {fileID: 0}
+  spawnEnemies: []
+  discardCards: 0
+  returnDiscardPile: 0
+  removeStatuses: 0
   multihitDelay: 0.15
   moduleDelay: 0
   spellModules:
@@ -28,6 +35,10 @@ MonoBehaviour:
     value: 2
     hitCount: 16
     executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
     statuses: []
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
+  impactObject: {fileID: 0}

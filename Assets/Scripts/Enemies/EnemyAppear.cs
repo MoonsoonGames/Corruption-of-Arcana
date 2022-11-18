@@ -19,10 +19,15 @@ namespace Necropanda
 
         GameObject player;
 
+        public bool activateOnStart = false;
+
         private void Start()
         {
-            art.SetActive(false);
+            art.SetActive(activateOnStart);
             aiScript = GetComponent<EnemyAI>();
+
+            if (activateOnStart)
+                fx = null;
         }
 
         public void Interacted(GameObject playerRef)

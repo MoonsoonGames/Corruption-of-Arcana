@@ -40,8 +40,13 @@ namespace Necropanda
             return new CombatHelperFunctions.SpellUtility();
         }
 
+        public int damageTakenThisTurn;
+        int damageTakenLastTurn; public int GetDamageTakenThisTurn() { return damageTakenLastTurn; }
+
         public virtual void StartTurn()
         {
+            damageTakenLastTurn = damageTakenThisTurn;
+            damageTakenThisTurn = 0;
             CheckOverlay();
             health.StartTurn();
         }
@@ -57,7 +62,7 @@ namespace Necropanda
 
         public void CheckHealth()
         {
-            if (health.GetHealth() < 1)
+            if (health.dying)
             {
                 StartCoroutine(IDelayDeath(0.01f));
             }
@@ -87,24 +92,27 @@ namespace Necropanda
 
         //Positive Statuses
         //[HideInInspector]
-        //Placeholder
+        public bool enlightened;
         //Neutral Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
-        [HideInInspector]
-        public bool banish, charm, silence, stun, curse;
+        //[HideInInspector]
+        public bool banish, charm, silence, stun, curse, confuse;
 
         public void ApplyStatus(bool apply, E_Statuses status)
         {
             switch (status)
             {
-                //Neutral Effects
+                //Positive Effects
                 case E_Statuses.Reflect:
                     if (deck != null)
                     {
                         deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
                     }
+                    break;
+                case E_Statuses.Enlightened:
+                    enlightened = apply;
                     break;
                 //Neutral Effects
                 case E_Statuses.EmpowerDeck:
@@ -137,10 +145,22 @@ namespace Necropanda
                     break;
                 case E_Statuses.Curse:
                     curse = apply;
+                    health.CheckCurseHealth();
+                    break;
+                case E_Statuses.Redirect:
+                    if (apply)
+                        CombatManager.instance.redirectedCharacter = this;
+                    else
+                        CombatManager.instance.redirectedCharacter = null;
+                    break;
+                case E_Statuses.Confuse:
+                    confuse = apply;
                     break;
                 default:
                     break;
             }
+
+            CheckOverlay();
         }
 
         protected virtual void Silence()
@@ -161,32 +181,53 @@ namespace Necropanda
             }
         }
 
+        public bool CanBeTargetted()
+        {
+            bool canTarget = true;
+
+            if (banish || health.GetHealth() < 1)
+            {
+                canTarget = false;
+            }
+
+            return canTarget;
+        }
+
         #endregion
 
         #region Simulating Turn
 
         int damage = 0, healing = 0, shield = 0;
+        float highestExecute;
         SimulateValues simulateValues;
 
-        public void SimulateValues(int newDamage, int newHealing, int newShield)
+        public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
         {
             damage += newDamage;
             healing += newHealing;
             shield += newShield;
 
+            if (newExecute > highestExecute)
+            {
+                highestExecute = newExecute;
+            }
+            
             PreviewValues();
         }
 
         void PreviewValues()
         {
-            Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            bool kills = damage >= health.GetHealth();
+            //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
+            bool kills = damage >= health.GetHealth() + healing ||
+                        health.GetHealthPercentageFromDamage(damage) < highestExecute;
+            //Save execute threshold to apply here
             int damagePreview = damage;
 
             if (kills)
             {
                 damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
             }
+
             simulateValues.DisplayValues(damagePreview, healing, shield, kills);
         }
 

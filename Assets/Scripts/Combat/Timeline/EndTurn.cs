@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -10,7 +12,7 @@ using UnityEngine.UI;
 /// </summary>
 namespace Necropanda
 {
-    public class EndTurn : MonoBehaviour
+    public class EndTurn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Deck2D playerHandDeck; //Hand that player cards are drawn into
         Deck2D[] decks;
@@ -23,6 +25,7 @@ namespace Necropanda
         public Color buttonUnavailable = new Color(0, 0, 0, 255);
 
         bool waitingForStartTurn = false;
+        bool waitingForSound = false;
 
         public float endTurndelay = 2f;
 
@@ -40,13 +43,14 @@ namespace Necropanda
         {
             DisableButton();
             DragManager.instance.canDrag = false;
+            PressSound();
 
             decks = GameObject.FindObjectsOfType<Deck2D>();
             foreach (Deck2D deck in decks)
             {
                 if (deck != playerHandDeck)
                 {
-                    deck.RemoveAllCards();
+                    deck.RemoveAllCards(false);
                 }
             }
 
@@ -109,7 +113,56 @@ namespace Necropanda
                 endTurnButton.interactable = true;
                 endTurnButton.image.color = buttonAvailable;
                 waitingForStartTurn = false;
+
+                if (waitingForSound)
+                {
+                    PlayHoverSound();
+                }
             }
         }
+
+        #region Sound Effects
+
+        public StudioEventEmitter hoverEmitter;
+        public StudioParameterTrigger pressTrigger;
+
+        void PlayHoverSound()
+        {
+            hoverEmitter.Play();
+        }
+
+        void StopHoverSound()
+        {
+            hoverEmitter.Stop();
+        }
+
+        void PressSound()
+        {
+            pressTrigger.TriggerParameters();
+        }
+
+        #endregion
+
+        #region Pointer Events
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (endTurnButton.interactable)
+            {
+                PlayHoverSound();
+            }
+            else
+            {
+                waitingForSound = true;
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            StopHoverSound();
+            waitingForSound = false;
+        }
+
+        #endregion
     }
 }

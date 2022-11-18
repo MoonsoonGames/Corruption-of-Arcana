@@ -14,6 +14,7 @@ namespace Necropanda
         public Character player;
         public TeamManager playerTeamManager;
         public TeamManager enemyTeamManager;
+        public Character redirectedCharacter;
 
         public GameObject victoryScreen;
         public GameObject defeatScreen;
@@ -29,6 +30,11 @@ namespace Necropanda
 
         public void CharacterDied(Character character)
         {
+            if (redirectedCharacter == character)
+            {
+                redirectedCharacter = null;
+            }
+
             //Debug.Log("Character Killed");
             if (playerTeamManager.team.Contains(character))
             {
