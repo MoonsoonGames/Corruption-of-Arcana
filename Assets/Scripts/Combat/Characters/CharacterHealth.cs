@@ -39,12 +39,17 @@ namespace Necropanda
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
         public GameObject curseOverlay;
+        UShake shake;
+        UColorFlash colorFlash;
+        public UColorFlash screenFlash;
 
         protected virtual void Start()
         {
             character = GetComponent<Character>();
             SetupHealth();
             SetupResistances();
+            shake = GetComponentInChildren<UShake>();
+            colorFlash = GetComponentInChildren<UColorFlash>();
         }
 
         protected virtual void SetupHealth()
@@ -83,6 +88,8 @@ namespace Necropanda
 
         #region Health
 
+        #region Health Calculations
+
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
             int damageTaken = 0;
@@ -115,10 +122,12 @@ namespace Necropanda
             if (health <= 0)
             {
                 //Debug.Log(health);
-                dying = true;
+                Kill();
             }
 
             PlaySound(type, trueValue);
+            ShakeCharacter(damageTaken);
+            ColorFlash(type);
             UpdateHealthUI();
             character.damageTakenThisTurn += damageTaken;
             return trueValue;
@@ -127,6 +136,10 @@ namespace Necropanda
         public float GetHealthPercentage() { return (float)health / (float)maxHealth; }
 
         public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
+
+        #endregion
+
+        #region UI
 
         void UpdateHealthUI()
         {
@@ -166,6 +179,9 @@ namespace Necropanda
 
         public void CheckCurseHealth()
         {
+            if (character == null)
+                return;
+
             if (character.curse)
             {
                 tempMaxHealth = cursedMaxHealth;
@@ -180,6 +196,24 @@ namespace Necropanda
 
             UpdateHealthUI();
         }
+
+        #endregion
+
+        #region Death
+
+        public GameObject[] disableOnKill;
+
+        void Kill()
+        {
+            dying = true;
+
+            foreach (var item in disableOnKill)
+            {
+                item.SetActive(false);
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -214,6 +248,8 @@ namespace Necropanda
         }
 
         #endregion
+
+        #region Feedback
 
         #region Sound Effects
 
@@ -266,6 +302,34 @@ namespace Necropanda
         {
             //Play death sound
         }
+
+        #endregion
+
+        #region Visual Effects
+
+        void ShakeCharacter(int damage)
+        {
+            if (shake != null && damage > 0)
+            {
+                float intensity = HelperFunctions.Remap(damage, 0, 20, 15, 30);
+                shake.CharacterShake(shake.baseDuration, intensity);
+            }
+        }
+
+        void ColorFlash(E_DamageTypes type)
+        {
+            if (colorFlash != null)
+            {
+                colorFlash.Flash(type);
+            }
+
+            if (screenFlash != null)
+            {
+                screenFlash.Flash(type);
+            }
+        }
+
+        #endregion
 
         #endregion
     }

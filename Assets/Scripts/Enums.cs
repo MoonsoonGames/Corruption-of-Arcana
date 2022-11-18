@@ -27,14 +27,15 @@ public enum E_StatusTargetType
 
 public enum E_Statuses
 {
-    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse
+    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse, Enlightened
 }
 
 public enum E_Scenes
 {
     [InspectorName("Dev Room")]
     DevRoom,
-    Combat
+    Combat,
+    Tiertarock
 }
 
 public enum E_UtilityScripts

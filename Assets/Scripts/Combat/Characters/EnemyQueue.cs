@@ -20,6 +20,7 @@ namespace Necropanda
         public void Setup()
         {
             loadCombatManager = LoadCombatManager.instance;
+            loadCombatManager.queue = this;
         }
 
         public void UpdateUI()

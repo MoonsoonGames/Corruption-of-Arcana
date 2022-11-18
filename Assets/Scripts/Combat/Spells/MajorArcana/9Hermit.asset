@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Hermit
   flavourText: 
-  spellDescription: Banish the target, target cannot cast spells on other characters
-    and cannot be targeted by other characters
+  spellDescription: Banish the target, target cannot take their turn or be targeted
+    by other characters
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.43676576, g: 0.5881653, b: 0.6132076, a: 1}
-  speed: 0.4
+  speed: 0
   arcanaCost: 1
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
+  spawnEnemies: []
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
@@ -31,7 +32,7 @@ MonoBehaviour:
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 0
+    effectType: 5
     value: 0
     hitCount: 1
     executeThreshold: 0
@@ -44,3 +45,4 @@ MonoBehaviour:
       chance: 1
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
+  impactObject: {fileID: 0}
