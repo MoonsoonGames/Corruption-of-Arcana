@@ -108,6 +108,7 @@ namespace Necropanda
                 case (E_DamageTypes.Perforation):
                     health = Mathf.Clamp(health - trueValue, 0, tempMaxHealth);
                     damageTaken = trueValue;
+                    ScreenFlash(type);
                     break;
                 default:
                     int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
@@ -116,6 +117,8 @@ namespace Necropanda
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
                     damageTaken = trueValue;
+                    if (damageOverShield > 0)
+                        ScreenFlash(type);
                     break;
             }
 
@@ -325,7 +328,10 @@ namespace Necropanda
             {
                 colorFlash.Flash(type);
             }
+        }
 
+        void ScreenFlash(E_DamageTypes type)
+        {
             if (screenFlash != null)
             {
                 screenFlash.Flash(type);
