@@ -39,7 +39,7 @@ namespace Necropanda
 
             if (applied)
             {
-                VFXManager.instance.SpawnImpact(effect, target.transform.position);
+                VFXManager.instance.SpawnImpact(applyEffect, target.transform.position);
 
                 foreach (CombatHelperFunctions.StatusModule module in effectModules)
                 {

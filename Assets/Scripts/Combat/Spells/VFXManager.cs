@@ -62,7 +62,7 @@ namespace Necropanda
             targetPositions.Add(target.transform.position);
 
             VFXManager.instance.SpawnProjectile(caster.transform.position, targetPositions, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
-            SpawnCastEffect(caster.gameObject.transform.position, target.gameObject.transform.position, spellRef.castObject);
+            SpawnCastEffect(caster.transform.position, target.gameObject.transform.position, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
@@ -111,10 +111,12 @@ namespace Necropanda
                 return;
             }
 
-            Debug.Log("Game object spawned, setting transform");
+            
             effectObject.transform.position = spawnPosition;
             Vector2 direction = targetPosition - spawnPosition;
             effectObject.transform.rotation = Quaternion.LookRotation(direction);
+
+            Debug.Log("Game object spawned at " + effectObject.transform.position);
         }
 
         /// <summary>

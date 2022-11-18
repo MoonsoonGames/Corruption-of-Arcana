@@ -268,10 +268,15 @@ namespace Necropanda
         {
             dying = true;
 
+            ActivateArt(false);
+        }
+
+        public void ActivateArt(bool activate)
+        {
             foreach (var item in disableOnKill)
             {
                 //Disable all art assets
-                item.SetActive(false);
+                item.SetActive(activate);
             }
         }
 

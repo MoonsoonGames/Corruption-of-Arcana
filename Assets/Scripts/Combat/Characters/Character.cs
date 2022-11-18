@@ -137,6 +137,7 @@ namespace Necropanda
                 //Negative Effects
                 case E_Statuses.Banish:
                     banish = apply;
+                    health.ActivateArt(!apply);
                     break;
                 case E_Statuses.Charm:
                     charm = apply;
@@ -187,6 +188,18 @@ namespace Necropanda
                 arcanaManager.silenced = false;
                 Timeline.instance.GetArcanaManager().AdjustArcanaMax(2);
             }
+        }
+
+        public bool CanCast()
+        {
+            bool canCast = true;
+
+            if (banish || health.dying || stun)
+            {
+                canCast = false;
+            }
+
+            return canCast;
         }
 
         public bool CanBeTargetted()

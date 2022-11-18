@@ -121,6 +121,9 @@ namespace Necropanda
         /// <param name="hand">The hand from which this spell was cast</param>
         public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
+            if (caster.CanCast() == false)
+                return;
+
             List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
             if (caster.confuse)
             {
