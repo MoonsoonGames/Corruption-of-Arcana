@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NecroPanda.Player;
+using Necropanda.Player;
 
 namespace Necropanda.Interfaces
 {
