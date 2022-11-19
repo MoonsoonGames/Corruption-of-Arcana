@@ -17,8 +17,10 @@ namespace Necropanda.Player
         public float mouseSensitivity = 100f;
         public Transform playerBody;
         public PlayerController playerController;
+        public CinemachineVirtualCamera vcam;
 
         float xRotation = 0f;
+        float yRotation = 0f;
 
         private void Start()
         {
@@ -51,8 +53,14 @@ namespace Necropanda.Player
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
 
             xRotation -= mouseY;
+            yRotation -= mouseX;
             // Clamp the up and down rotation.
             xRotation = Mathf.Clamp(xRotation, -90, 90);
+            yRotation = Mathf.Clamp(yRotation, -40, 40);
+            
+            var body = vcam.GetCinemachineComponent(CinemachineCore.Stage.Body);
+
+            
 
             transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
             // Apply the rotation
