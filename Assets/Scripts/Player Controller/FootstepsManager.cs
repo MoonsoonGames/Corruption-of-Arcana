@@ -75,7 +75,7 @@ namespace Necropanda
         /// Each type has a number in FMOD</param>
         private void PlayFootstep (int terrainType)
         {
-            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps/Footsteps");
+            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps");
             footsteps.setParameterByName("Terrain", terrainType);
             footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             footsteps.start();
@@ -86,27 +86,27 @@ namespace Necropanda
         {
             switch (currentTerrain)
             {
-                case CURRENT_TERRAIN.Dirt:
+                case CURRENT_TERRAIN.Grass:
                     PlayFootstep(1);
                     break;
 
-                case CURRENT_TERRAIN.Grass:
+                case CURRENT_TERRAIN.Stone:
                     PlayFootstep(0);
                     break;
 
-                case CURRENT_TERRAIN.Wood:
+                case CURRENT_TERRAIN.Dirt:
                     PlayFootstep(2);                
                     break;
 
-                case CURRENT_TERRAIN.Water:
+                case CURRENT_TERRAIN.Wood:
                     PlayFootstep(3);                
                     break;
 
-                case CURRENT_TERRAIN.Crystal:
+                case CURRENT_TERRAIN.Water:
                     PlayFootstep(4);                
                     break;
 
-                case CURRENT_TERRAIN.Stone:
+                case CURRENT_TERRAIN.Crystal:
                     PlayFootstep(5);                
                     break;
 
