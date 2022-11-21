@@ -35,17 +35,42 @@ namespace Necropanda
             //Set new y value of the water to the dequeued value
             desiredPos = gameObject.transform.localPosition;
             desiredPos.y = newY;
+
+            SoundFX(true);
+            moving = true;
         }
 
         private void Update()
         {
-            if (HelperFunctions.AlmostEqual(transform.localPosition.y, desiredPos.y, accuracyThreshold) == false)
+            if (moving)
             {
-                float posX = transform.localPosition.x;
-                float lerpY = Mathf.Lerp(transform.localPosition.y, desiredPos.y, scaleSpeed * Time.deltaTime);
-                float posZ = transform.localPosition.z;
+                if (HelperFunctions.AlmostEqual(transform.localPosition.y, desiredPos.y, accuracyThreshold) == false)
+                {
+                    float posX = transform.localPosition.x;
+                    float lerpY = Mathf.Lerp(transform.localPosition.y, desiredPos.y, scaleSpeed * Time.deltaTime);
+                    float posZ = transform.localPosition.z;
 
-                transform.localPosition = new Vector3(posX, lerpY, posZ);
+                    transform.localPosition = new Vector3(posX, lerpY, posZ);
+                }
+                else
+                {
+                    moving = false;
+                    SoundFX(false);
+                }
+            }
+        }
+
+        public void SoundFX(bool start)
+        {
+            if (start)
+            {
+                //TODO: Start playing water moving sound
+                Debug.Log("TODO: Start playing water moving sound");
+            }
+            else
+            {
+                //TODO: Stop playing water moving sound
+                Debug.Log("TODO: Stop playing water moving sound");
             }
         }
     }
