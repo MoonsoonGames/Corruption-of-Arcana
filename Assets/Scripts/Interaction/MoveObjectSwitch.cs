@@ -9,21 +9,21 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class WaterSwitch : MonoBehaviour, IInteractable
+    public class MoveObjectSwitch : MonoBehaviour, IInteractable
     {
-        public WaterLevel[] water;
+        public MoveObject[] objects;
 
         public void Interacted(GameObject player)
         {
-            if (water.Length > 0)
+            if (objects.Length > 0)
             {
-                foreach (WaterLevel level in water)
-                    level.AdjustWaterLevel();
+                foreach (MoveObject level in objects)
+                    level.AdjustPosition();
             }
             else
             {
-                //There is no water component
-                Debug.LogWarning("No water components have been set");
+                //There is no object component
+                Debug.LogWarning("No object components have been set");
             }
         }
     }

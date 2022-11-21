@@ -94,9 +94,17 @@ namespace Necropanda
             public bool forward;
         }
 
-        public static bool AlmostEqual(float a, float b, float threshold)
+        public static bool AlmostEqualFloat(float a, float b, float threshold)
         {
             return Mathf.Abs(a - b) <= threshold;
+        }
+
+        public static bool AlmostEqualVector3(Vector3 a, Vector3 b, float threshold)
+        {
+            bool x = AlmostEqualFloat(a.x, b.x, threshold);
+            bool y = AlmostEqualFloat(a.y, b.y, threshold);
+            bool z = AlmostEqualFloat(a.z, b.z, threshold);
+            return x && y && z;
         }
     }
 

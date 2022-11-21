@@ -9,32 +9,30 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class WaterLevel : MonoBehaviour
+    public class MoveObject : MonoBehaviour
     {
-        public List<float> waterLevels;
+        public List<Vector3> positions;
         public float scaleSpeed = 0.7f;
         public float accuracyThreshold = 0.2f;
 
         bool moving = false;
         Vector3 desiredPos;
 
-        public void AdjustWaterLevel()
+        public void AdjustPosition()
         {
-            if (waterLevels.Count <= 0)
+            if (positions.Count <= 0)
             {
-                //There are no water levels set
-                Debug.LogWarning("No water levels have been set");
+                //There are positions set
+                Debug.LogWarning("No positions have been set");
                 return;
             }
 
-            //Dequeue and enqueue water level
-            float newY = waterLevels[0];
-            waterLevels.RemoveAt(0);
-            waterLevels.Add(newY);
+            //Set desired position of the object to the first value
+            desiredPos = positions[0];
 
-            //Set new y value of the water to the dequeued value
-            desiredPos = gameObject.transform.localPosition;
-            desiredPos.y = newY;
+            //Dequeue and enqueue desired pos
+            positions.RemoveAt(0);
+            positions.Add(desiredPos);
 
             SoundFX(true);
             moving = true;
@@ -44,13 +42,13 @@ namespace Necropanda
         {
             if (moving)
             {
-                if (HelperFunctions.AlmostEqual(transform.localPosition.y, desiredPos.y, accuracyThreshold) == false)
+                if (HelperFunctions.AlmostEqualVector3(transform.localPosition, desiredPos, accuracyThreshold) == false)
                 {
-                    float posX = transform.localPosition.x;
+                    float lerpX = Mathf.Lerp(transform.localPosition.x, desiredPos.x, scaleSpeed * Time.deltaTime);
                     float lerpY = Mathf.Lerp(transform.localPosition.y, desiredPos.y, scaleSpeed * Time.deltaTime);
-                    float posZ = transform.localPosition.z;
+                    float lerpZ = Mathf.Lerp(transform.localPosition.z, desiredPos.z, scaleSpeed * Time.deltaTime);
 
-                    transform.localPosition = new Vector3(posX, lerpY, posZ);
+                    transform.localPosition = new Vector3(lerpX, lerpY, lerpZ);
                 }
                 else
                 {
@@ -65,12 +63,12 @@ namespace Necropanda
             if (start)
             {
                 //TODO: Start playing water moving sound
-                Debug.Log("TODO: Start playing water moving sound");
+                Debug.Log("TODO: Start playing moving sound");
             }
             else
             {
                 //TODO: Stop playing water moving sound
-                Debug.Log("TODO: Stop playing water moving sound");
+                Debug.Log("TODO: Stop playing moving sound");
             }
         }
     }
