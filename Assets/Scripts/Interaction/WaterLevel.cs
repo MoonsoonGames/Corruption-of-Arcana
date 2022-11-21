@@ -12,8 +12,8 @@ namespace Necropanda
     public class WaterLevel : MonoBehaviour
     {
         public List<float> waterLevels;
-        public float scaleSpeed = 0.005f;
-        public float accuracyThreshold = 1f;
+        public float scaleSpeed = 0.7f;
+        public float accuracyThreshold = 0.2f;
 
         bool moving = false;
         Vector3 desiredPos;
