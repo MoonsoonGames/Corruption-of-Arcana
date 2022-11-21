@@ -5,7 +5,7 @@ using UnityEngine;
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace NecroPanda.Player
+namespace Necropanda.Player
 {
     /// <summary>
     /// PlayerController class
@@ -97,22 +97,18 @@ namespace NecroPanda.Player
             {
                 if (move.z > moveDeadzone)
                 {
-                    Debug.Log("Moving forward");
                     animator.SetInteger("Direction", 1);
                 }
                 else if (move.z < -moveDeadzone)
                 {
-                    Debug.Log("Moving back");
                     animator.SetInteger("Direction", 2);
                 }
                 else if (move.x < -moveDeadzone)
                 {
-                    Debug.Log("Moving left");
                     animator.SetInteger("Direction", 3);
                 }
                 else if (move.x > moveDeadzone)
                 {
-                    Debug.Log("Moving right");
                     animator.SetInteger("Direction", 4);
                 }
             }

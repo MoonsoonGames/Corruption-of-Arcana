@@ -17,7 +17,8 @@ namespace Necropanda
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 
-        public EnemySpawner spawner;
+        [HideInInspector]
+        public EnemySpawner spawner; //Unused for the player right now, but it might be used in the future
 
         Deck2D deck;
 
@@ -34,15 +35,6 @@ namespace Necropanda
 
         #region Taking Turn
 
-        public virtual CombatHelperFunctions.SpellUtility PrepareSpell()
-        {
-            //Overwritten by children
-            return new CombatHelperFunctions.SpellUtility();
-        }
-
-        public int damageTakenThisTurn;
-        int damageTakenLastTurn; public int GetDamageTakenThisTurn() { return damageTakenLastTurn; }
-
         public virtual void StartTurn()
         {
             damageTakenLastTurn = damageTakenThisTurn;
@@ -50,6 +42,16 @@ namespace Necropanda
             CheckOverlay();
             health.StartTurn();
         }
+
+        public virtual CombatHelperFunctions.SpellUtility PrepareSpell()
+        {
+            //Overwritten by children
+            return new CombatHelperFunctions.SpellUtility();
+        }
+
+        [HideInInspector]
+        public int damageTakenThisTurn;
+        int damageTakenLastTurn; public int GetDamageTakenThisTurn() { return damageTakenLastTurn; }
 
         public void CheckOverlay()
         {
@@ -60,22 +62,20 @@ namespace Necropanda
 
         #region Health Checks
 
+        /// <summary>
+        /// Checks if the character should be dying
+        /// </summary>
         public void CheckHealth()
         {
             if (health.dying)
             {
                 StartCoroutine(IDelayDeath(0.01f));
             }
-            else
-            {
-                //Debug.Log(characterName + " has " + health.GetHealth() + " health left");
-            }
         }
 
         public IEnumerator IDelayDeath(float delay)
         {
             yield return new WaitForSeconds(delay);
-            //Debug.Log(characterName + " Should be killed");
             health.PlayDeathSound();
             CombatManager.instance.CharacterDied(this);
             teamManager.team.Remove(this);
@@ -91,15 +91,20 @@ namespace Necropanda
         #region Statuses
 
         //Positive Statuses
-        //[HideInInspector]
+        [HideInInspector]
         public bool enlightened;
         //Neutral Statuses
-        //[HideInInspector]
+        [HideInInspector]
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
-        //[HideInInspector]
+        [HideInInspector]
         public bool banish, charm, silence, stun, curse, confuse;
 
+        /// <summary>
+        /// Apply or remove a status effect from the character
+        /// </summary>
+        /// <param name="apply">Whether or not the status will be applied or removed</param>
+        /// <param name="status">The data status effect</param>
         public void ApplyStatus(bool apply, E_Statuses status)
         {
             switch (status)
@@ -132,6 +137,7 @@ namespace Necropanda
                 //Negative Effects
                 case E_Statuses.Banish:
                     banish = apply;
+                    health.ActivateArt(!apply);
                     break;
                 case E_Statuses.Charm:
                     charm = apply;
@@ -163,6 +169,9 @@ namespace Necropanda
             CheckOverlay();
         }
 
+        /// <summary>
+        /// Reduce the player's max arcana count
+        /// </summary>
         protected virtual void Silence()
         {
             ArcanaManager arcanaManager = Timeline.instance.GetArcanaManager();
@@ -181,11 +190,23 @@ namespace Necropanda
             }
         }
 
+        public bool CanCast()
+        {
+            bool canCast = true;
+
+            if (banish || health.dying || stun)
+            {
+                canCast = false;
+            }
+
+            return canCast;
+        }
+
         public bool CanBeTargetted()
         {
             bool canTarget = true;
 
-            if (banish || health.GetHealth() < 1)
+            if (banish || health.GetHealth() < 0)
             {
                 canTarget = false;
             }
@@ -198,7 +219,7 @@ namespace Necropanda
         #region Simulating Turn
 
         int damage = 0, healing = 0, shield = 0;
-        float highestExecute;
+        float highestExecute = 0;
         SimulateValues simulateValues;
 
         public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
@@ -207,6 +228,7 @@ namespace Necropanda
             healing += newHealing;
             shield += newShield;
 
+            //Save only the highest execute value
             if (newExecute > highestExecute)
             {
                 highestExecute = newExecute;
@@ -217,23 +239,26 @@ namespace Necropanda
 
         void PreviewValues()
         {
-            //Debug.Log(stats.characterName + " simulation is || Damage: " + damage + "Healing: " + healing + "Shield: " + shield);
-            bool kills = damage >= health.GetHealth() + healing ||
-                        health.GetHealthPercentageFromDamage(damage) < highestExecute;
-            //Save execute threshold to apply here
+            bool kills = damage >= health.GetHealth() + healing + shield ||
+                        health.GetHealthPercentageFromDamage(damage - shield) < highestExecute;
+            
             int damagePreview = damage;
+            int healingPreview = healing;
+            int shieldPreview = shield;
 
             if (kills)
             {
-                damagePreview = Mathf.Clamp(damage, 0, health.GetHealth() - damage);
+                damagePreview = Mathf.Abs(Mathf.Clamp(damage, 0, health.GetHealth() - damage));
+                healingPreview = 0;
+                shieldPreview = 0;
             }
 
-            simulateValues.DisplayValues(damagePreview, healing, shield, kills);
+            simulateValues.DisplayValues(damagePreview, healingPreview, shieldPreview, kills);
         }
 
         public void ResetValues()
         {
-            damage = 0; healing = 0; shield = 0;
+            damage = 0; healing = 0; shield = 0; highestExecute = 0;
             PreviewValues();
         }
 

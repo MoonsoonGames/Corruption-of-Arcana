@@ -57,6 +57,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: f86170c03c8dddc408e666bf1976c774, type: 2}
   spawner: {fileID: 0}
   damageTakenThisTurn: 0
+  enlightened: 0
   empowerDeck: 0
   weakenDeck: 0
   banish: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   silence: 0
   stun: 0
   curse: 0
+  confuse: 0
 --- !u!114 &3702093925428361592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb7f0a52717e0643a5995a04639ac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dying: 0
   healthIcon: {fileID: 0}
   healthText: {fileID: 0}
   shieldColor: {r: 0, g: 0.8627451, b: 1, a: 1}
@@ -83,6 +86,10 @@ MonoBehaviour:
   lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
   lowHealthThresholdPercentage: 0.3
   curseOverlay: {fileID: 0}
+  disableOnKill:
+  - {fileID: 3702093927457906039}
+  - {fileID: 1266921701922692979}
+  - {fileID: 6659194483254432364}
   defaultSoundEffectHealth:
     Guid:
       Data1: 1993795648
@@ -337,6 +344,8 @@ GameObject:
   - component: {fileID: 3702093927457906038}
   - component: {fileID: 3702093927457906040}
   - component: {fileID: 777648669318083062}
+  - component: {fileID: 5827426636579390954}
+  - component: {fileID: 2163718194952308900}
   - component: {fileID: 3702093927457906041}
   m_Layer: 5
   m_Name: Taro
@@ -399,6 +408,44 @@ MonoBehaviour:
     currentTime: 0
     forward: 0
   offset: {x: 0, y: 2}
+--- !u!114 &5827426636579390954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702093927457906039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3981ba1ff9e821409e34e038d649bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDuration: 0.1
+  intensityMultiplier: 0.005
+--- !u!114 &2163718194952308900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702093927457906039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe21f3dafde1c34ab2d22244a8ae5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  revertTime: 0.0005
+  normalColour: {r: 255, g: 255, b: 255, a: 255}
+  physicalColour: {r: 1, g: 0, b: 0, a: 1}
+  perforationColour: {r: 0.5059584, g: 0.06132078, b: 1, a: 0.4745098}
+  septicColour: {r: 0, g: 1, b: 0.1833334, a: 1}
+  bleakColour: {r: 0, g: 0.91588783, b: 1, a: 1}
+  staticColour: {r: 1, g: 0.61111116, b: 0, a: 1}
+  emberColour: {r: 1, g: 0.3647059, b: 0.023529412, a: 0.9843137}
+  healColour: {r: 0, g: 255, b: 0, a: 255}
+  shieldColour: {r: 0, g: 0, b: 255, a: 255}
+  arcanaColour: {r: 0.9254902, g: 0.23921569, b: 0.91764706, a: 1}
+  defaultColour: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &3702093927457906041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +680,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c913487153e986a49a066ebecefbeca0, type: 3}
+--- !u!1 &1266921701922692979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2257918834246738367, guid: c913487153e986a49a066ebecefbeca0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1063060223954337484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4364604539382231289 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3626117949360328245, guid: c913487153e986a49a066ebecefbeca0,
@@ -761,6 +814,12 @@ PrefabInstance:
 --- !u!224 &5171195937081700582 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7521988896325101703, guid: 3dbdeda9727f999469905d252eab62a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3431952107611183201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6659194483254432364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8343631188187826701, guid: 3dbdeda9727f999469905d252eab62a2,
     type: 3}
   m_PrefabInstance: {fileID: 3431952107611183201}
   m_PrefabAsset: {fileID: 0}

@@ -18,6 +18,8 @@ namespace Necropanda
         public string effectName;
         [TextArea(3, 10)]
         public string effectDescription; // Basic desciption of spell effect
+        public Object applyEffect;
+        public Object effect;
 
         public CombatHelperFunctions.StatusModule[] effectModules;
 
@@ -27,6 +29,9 @@ namespace Necropanda
 
         public void Apply(Character target, int duration)
         {
+            if (target.GetHealth().dying)
+                return;
+
             //Apply status effect on target, add to character list
             CombatHelperFunctions.StatusInstance instance = new CombatHelperFunctions.StatusInstance();
             instance.SetStatusInstance(this, target, duration);
@@ -34,6 +39,8 @@ namespace Necropanda
 
             if (applied)
             {
+                VFXManager.instance.SpawnImpact(applyEffect, target.transform.position);
+
                 foreach (CombatHelperFunctions.StatusModule module in effectModules)
                 {
                     switch (module.target)
@@ -68,6 +75,9 @@ namespace Necropanda
 
         public void Remove(Character target)
         {
+            if (target.GetHealth().dying)
+                return;
+
             //Remove status effect on target, remove from character list
             //Apply status effect on target, add to character list
             CombatHelperFunctions.StatusInstance instance = new CombatHelperFunctions.StatusInstance();
@@ -149,6 +159,9 @@ namespace Necropanda
 
         public void ActivateTurnModifiers(Character target)
         {
+            if (target.GetHealth().dying)
+                return;
+
             //Apply effects when timeline ends
             foreach (CombatHelperFunctions.StatusModule module in effectModules)
             {
@@ -181,7 +194,8 @@ namespace Necropanda
 
         void TurnModifiers(bool apply, Character target, E_Statuses modifier)
         {
-            target.ApplyStatus(apply, modifier);
+            if (target.GetHealth().dying == false)
+                target.ApplyStatus(apply, modifier);
         }
 
         #endregion
@@ -190,6 +204,9 @@ namespace Necropanda
 
         public void ActivateEffect(Character target)
         {
+            if (target.GetHealth().dying)
+                return;
+
             //Apply effects when timeline ends
             foreach (CombatHelperFunctions.StatusModule module in effectModules)
             {
@@ -203,14 +220,16 @@ namespace Necropanda
                         TeamManager targetTeamManager = target.GetManager();
                         foreach (Character character in targetTeamManager.team)
                         {
-                            AffectTarget(character, module.effectType, module.value);
+                            if (character.GetHealth().dying == false)
+                                AffectTarget(character, module.effectType, module.value);
                         }
                         break;
                     case E_StatusTargetType.OpponentTeam:
                         TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(target.GetManager());
                         foreach (Character character in opponentTeamManager.team)
                         {
-                            AffectTarget(character, module.effectType, module.value);
+                            if (character.GetHealth().dying == false)
+                                AffectTarget(character, module.effectType, module.value);
                         }
                         break;
                     default:
@@ -222,20 +241,31 @@ namespace Necropanda
 
         void AffectTarget(Character target, E_DamageTypes effectType, int value)
         {
-            //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-            E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(effectType);
-            target.GetHealth().ChangeHealth(realEffectType, value, null);
-
-            if (target.GetHealth().GetHealth() < 1)
+            if (target != null)
             {
-                target.CheckOverlay();
-            }
+                if (target.GetHealth().dying)
+                    return;
 
-            //Sound effects here
+                VFXManager.instance.SpawnImpact(effect, target.transform.position);
+
+                //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+                E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(effectType);
+                target.GetHealth().ChangeHealth(realEffectType, value, null);
+
+                if (target.GetHealth().GetHealth() < 1)
+                {
+                    target.CheckOverlay();
+                }
+
+                //Sound effects here
+            }
         }
 
         public void HitEffect(Character target, Character attacker)
         {
+            if (target.GetHealth().dying)
+                return;
+
             //Apply effects when timeline ends
             foreach (CombatHelperFunctions.StatusModule module in effectModules)
             {
