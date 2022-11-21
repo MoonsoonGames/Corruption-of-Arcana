@@ -61,6 +61,7 @@ namespace Necropanda
 
         [Header("FX")]
         //Visual effects for projectile
+        public Object castObject;
         public Object projectileObject;
         public Object impactObject;
         public Color trailColor;
@@ -120,6 +121,9 @@ namespace Necropanda
         /// <param name="hand">The hand from which this spell was cast</param>
         public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
+            if (caster.CanCast() == false)
+                return;
+
             List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
             if (caster.confuse)
             {
@@ -149,7 +153,7 @@ namespace Necropanda
                 if (spawnEnemies.Length > 0)
                 {
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.AddEnemy(item, spawnPosition, projectileObject, impactObject, trailColor);
+                        LoadCombatManager.instance.AddEnemy(item, caster.transform.position, spawnPosition, projectileObject, impactObject, trailColor);
                 }
             }
 
