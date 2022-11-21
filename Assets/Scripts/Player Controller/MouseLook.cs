@@ -52,18 +52,25 @@ namespace Necropanda.Player
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedDeltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
 
-            xRotation -= mouseY;
+            //xRotation -= mouseY;
             yRotation -= mouseX;
             // Clamp the up and down rotation.
             xRotation = Mathf.Clamp(xRotation, -90, 90);
-            yRotation = Mathf.Clamp(yRotation, -40, 40);
-            
-            var body = vcam.GetCinemachineComponent(CinemachineCore.Stage.Body);
+            yRotation = Mathf.Clamp(yRotation, -1.74f, 1.74f);
 
-            
+            if (!vcam)
+            {
+                vcam = gameObject.GetComponent<CinemachineVirtualCamera>();
+            }
 
+            Vector3 shoulderOffset = new Vector3(0, yRotation, 0);
+
+            // Apply the x rot
             transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            // Apply the rotation
+            // Apply the y rot
+            vcam.gameObject.GetComponent<CameraOffsetter>().m_Offset = shoulderOffset;
+
+            // Apply the x rotation
             playerBody.Rotate(Vector3.up * mouseX);
         }
     }
