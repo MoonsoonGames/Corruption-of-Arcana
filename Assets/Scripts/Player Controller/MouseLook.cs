@@ -19,8 +19,8 @@ namespace Necropanda.Player
         public PlayerController playerController;
         public CinemachineVirtualCamera vcam;
 
-        float xRotation = 0f;
-        float yRotation = 0f;
+        float xRotation = 0f; public float GetX() { return xRotation; }
+        float yRotation = 0f; public float GetY() { return yRotation; }
 
         private void Start()
         {
@@ -48,11 +48,11 @@ namespace Necropanda.Player
         /// </summary>
         void DoLook()
         {
-            // Get in input axis
+            // Get input axis
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedDeltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
 
-            //xRotation -= mouseY;
+            xRotation -= mouseY;
             yRotation -= mouseX;
             // Clamp the up and down rotation.
             xRotation = Mathf.Clamp(xRotation, -90, 90);
@@ -66,9 +66,9 @@ namespace Necropanda.Player
             Vector3 shoulderOffset = new Vector3(0, yRotation, 0);
 
             // Apply the x rot
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            //transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
             // Apply the y rot
-            vcam.gameObject.GetComponent<CameraOffsetter>().m_Offset = shoulderOffset;
+            //vcam.gameObject.GetComponent<CameraOffsetter>().m_Offset = shoulderOffset;
 
             // Apply the x rotation
             playerBody.Rotate(Vector3.up * mouseX);
