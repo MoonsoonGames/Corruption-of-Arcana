@@ -93,6 +93,11 @@ namespace Necropanda
             [HideInInspector]
             public bool forward;
         }
+
+        public static bool AlmostEqual(float a, float b, float threshold)
+        {
+            return Mathf.Abs(a - b) <= threshold;
+        }
     }
 
     public static class CombatHelperFunctions
