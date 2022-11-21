@@ -37,12 +37,12 @@ namespace Necropanda
             desiredPos.y = newY;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (HelperFunctions.AlmostEqual(transform.localPosition.y, desiredPos.y, accuracyThreshold) == false)
             {
                 float posX = transform.localPosition.x;
-                float lerpY = Mathf.Lerp(transform.localPosition.y, desiredPos.y, scaleSpeed);
+                float lerpY = Mathf.Lerp(transform.localPosition.y, desiredPos.y, scaleSpeed * Time.deltaTime);
                 float posZ = transform.localPosition.z;
 
                 transform.localPosition = new Vector3(posX, lerpY, posZ);
