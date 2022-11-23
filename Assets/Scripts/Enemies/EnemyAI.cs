@@ -25,6 +25,9 @@ namespace Necropanda.AI
         [Header("AI State Variables")]
         public ModuleManager moduleManager;
         public AIState currentState; // The current state of the AI. Wandering, Fleeing etc.
+        
+        public bool doOverrideState; // If true, the AI will only stay in this state. Regardless of anything else.
+        public AIState overrideState;
         public int avoidancePriority = 15; // The level of avoidance priority for the agent. lower = more important. Might be worth setting this based on the type of the enemy
         public float timer = 0f; // Internal timer used for state changes and tracking.
 
@@ -64,11 +67,19 @@ namespace Necropanda.AI
         // Update is called once per frame
         void Update()
         {
-            Timer();
-            if (active)
+            if (doOverrideState)
             {
-                HFSM();
+                currentState = overrideState;
             }
+            else
+            {
+                if (active)
+                {
+                    HFSM();
+                }
+            }
+
+            Timer();
         }
 
         /// <summary>
@@ -93,9 +104,13 @@ namespace Necropanda.AI
                     currentState = AIState.Nothing;
                     // Check if the AI has been running for long enough for a state switch.
                     // probably also need to reset the timer here too.
-                    if(timer > 5)
+                    if(timer > 5 && !doOverrideState)
                     {
                         currentState = AIState.Wandering;
+                    }
+                    else
+                    {
+                        currentState = overrideState;
                     }
                     break;
 

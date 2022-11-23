@@ -27,8 +27,9 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.AISpell spell in stats.aISpells)
             {
+                //Setup for the AI spells
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
-
+                
                 newSpell.spell = spell.spell;
                 newSpell.spawnAsCard = spell.spawnAsCard;
                 newSpell.targetSelf = spell.targetSelf;
@@ -41,81 +42,9 @@ namespace Necropanda
             }
         }
 
-        public override CombatHelperFunctions.SpellUtility PrepareSpell()
-        {
-            CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
-
-            if (spell.utility >= 0)
-            {
-                Character target = spell.target;
-                bool spawnCard = spell.spell.spawnAsCard;
-                //Debug.Log(spawnCard + " 1");
-                int index = 999;
-                for (int i = 0; i < aISpells.Count; i++)
-                {
-                    if (aISpells[i].spell == spell.spell.spell)
-                    {
-                        //Debug.Log(aISpells[i].spell.spellName + " same spell, set cooldown");
-                        index = i;
-                    }
-                    else
-                    {
-                        //Debug.Log("different spell, set cooldown");
-                    }
-                }
-
-                if (aISpells.Count > index)
-                {
-                    //Debug.Log("Reset spell cooldown of " + aISpells[index].spell.spellName);
-                    CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
-
-                    newSpell.spell = aISpells[index].spell;
-                    newSpell.spawnAsCard = aISpells[index].spawnAsCard;
-                    newSpell.targetSelf = aISpells[index].targetSelf;
-                    newSpell.targetAllies = aISpells[index].targetAllies;
-                    newSpell.targetEnemies = aISpells[index].targetEnemies;
-                    newSpell.timeCooldown = aISpells[index].timeCooldown;
-                    newSpell.lastUsed = 0;
-
-                    aISpells.RemoveAt(index);
-                    aISpells.Add(newSpell);
-
-                    spawnCard = newSpell.spawnAsCard;
-                    //Debug.Log(spawnCard + " 2");
-                }
-                else
-                {
-                    //Debug.Log(index + " index");
-                }
-
-                if (spawnCard)
-                {
-                    //Debug.Log("Spawn Enemy Card");
-                    Deck2D deck = target.GetComponentInChildren<Deck2D>();
-
-                    GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
-                    EnemyCard cardLogic = card.GetComponent<EnemyCard>();
-                    cardLogic.Setup(spell.spell.spell);
-                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
-
-                    //Add the card to the array
-                    deck.AddCard(cardDrag);
-
-                    //Reset card scales
-                    cardDrag.ScaleCard(1, false);
-                }
-                else
-                {
-                    //Debug.Log("Don't Spawn Enemy Card");
-                }
-            }
-
-            return spell;
-        }
-
         public override void StartTurn()
         {
-            if (stun || banish)
+            if (stun || banish || health.dying)
             {
                 Debug.Log(stats.characterName + " has been stunned/banished, skipping turn");
             }
@@ -149,6 +78,74 @@ namespace Necropanda
             base.StartTurn();
         }
 
+        /// <summary>
+        /// Determines the spell that the AI will cast this turn
+        /// </summary>
+        /// <returns>The spell the AI plans to cast</returns>
+        public override CombatHelperFunctions.SpellUtility PrepareSpell()
+        {
+            CombatHelperFunctions.SpellUtility spell = SpellCastingAI.GetSpell(aISpells, this, enemyManager.team, enemyManager.opposingTeam);
+
+            if (spell.utility >= 0)
+            {
+                Character target = spell.target;
+                bool spawnCard = spell.spell.spawnAsCard;
+                
+                int index = 999;
+                for (int i = 0; i < aISpells.Count; i++)
+                {
+                    //Determines which spell in the array is being cast
+                    if (aISpells[i].spell == spell.spell.spell)
+                    {
+                        //Saves the spell index
+                        index = i;
+                    }
+                }
+
+                if (aISpells.Count > index)
+                {
+                    //Resets the cooldown of the spell used
+                    CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
+
+                    newSpell.spell = aISpells[index].spell;
+                    newSpell.spawnAsCard = aISpells[index].spawnAsCard;
+                    newSpell.targetSelf = aISpells[index].targetSelf;
+                    newSpell.targetAllies = aISpells[index].targetAllies;
+                    newSpell.targetEnemies = aISpells[index].targetEnemies;
+                    newSpell.timeCooldown = aISpells[index].timeCooldown;
+                    newSpell.lastUsed = 0;
+
+                    aISpells.RemoveAt(index);
+                    aISpells.Add(newSpell);
+
+                    spawnCard = newSpell.spawnAsCard;
+                    Debug.Log(spawnCard + " 2");
+                }
+
+                if (spawnCard)
+                {
+                    //Spawn enemy card on player decks
+                    Deck2D deck = target.GetComponentInChildren<Deck2D>();
+
+                    GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
+                    EnemyCard cardLogic = card.GetComponent<EnemyCard>();
+                    cardLogic.Setup(spell.spell.spell);
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+
+                    //Add the card to the array
+                    deck.AddCard(cardDrag);
+
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
+                }
+            }
+
+            return spell;
+        }
+
+        /// <summary>
+        /// For every spell, add 1 to the last turn it was used
+        /// </summary>
         void ResetCooldowns()
         {
             List<CombatHelperFunctions.AISpell> newList = new List<CombatHelperFunctions.AISpell>();
