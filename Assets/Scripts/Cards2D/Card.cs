@@ -53,7 +53,7 @@ namespace Necropanda
             if (cardFace == null)
                 return;
 
-            List<CombatHelperFunctions.IconConstruct> iconConstructs = spell.GenerateIcons();
+            List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = spell.SpellIcons();
 
             foreach(var item in iconConstructs)
             {
@@ -62,7 +62,19 @@ namespace Necropanda
                 IconConstructor constructor = section.GetComponent<IconConstructor>();
 
                 if (constructor != null)
-                    constructor.Construct(item.value, GetEffectObject(item.effectType), item.hitCount, GetTargetType(item.target));
+                    constructor.ConstructSpell(item.value, GetEffectObject(item.effectType), item.hitCount, GetTargetType(item.target));
+            }
+
+            List<CombatHelperFunctions.StatusIconConstruct> statusConstructs = spell.EffectIcons();
+
+            foreach (var item in statusConstructs)
+            {
+                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
+                GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
+                IconConstructor constructor = section.GetComponent<IconConstructor>();
+
+                if (constructor != null)
+                    constructor.ConstructStatus(item.chance, item.effectIcon, item.duration, GetTargetType(item.target));
             }
         }
 

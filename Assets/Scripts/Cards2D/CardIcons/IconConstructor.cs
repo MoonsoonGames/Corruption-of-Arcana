@@ -18,14 +18,24 @@ namespace Necropanda
         public TextMeshProUGUI hitCount;
         public TextMeshProUGUI target;
 
-        public void Construct(int newValue, Object effectPrefab, int newHitCount, string newTarget)
+        public void ConstructSpell(int newValue, Object effectPrefab, int newHitCount, string newTarget)
         {
             if (newHitCount > 1)
-                value.text = newValue.ToString() + " X" + newHitCount.ToString();
+                value.text = newValue.ToString() + " X " + newHitCount.ToString();
             else
                 value.text = newValue.ToString();
 
-            target.text = newTarget;
+            target.text = "on " + newTarget;
+
+            Instantiate(effectPrefab, effectIcon.transform);
+        }
+
+        public void ConstructStatus(float newValue, Object effectPrefab, int duration, string newTarget)
+        {
+            float chance = newValue * 100;
+            value.text = chance.ToString() + "% for " + duration.ToString() + " turns";
+
+            target.text = "on " + newTarget;
 
             Instantiate(effectPrefab, effectIcon.transform);
         }

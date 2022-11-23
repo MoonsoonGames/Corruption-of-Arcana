@@ -175,23 +175,6 @@ namespace Necropanda
 
         #endregion
 
-        #region Icon Constructs
-
-        public struct IconConstruct
-        {
-            public int value;
-            public E_DamageTypes effectType;
-            public int hitCount;
-
-            //Scaling
-            public int discardScaling;
-            public int cleanseScaling;
-
-            public E_SpellTargetType target; // replace with images later
-        }
-
-        #endregion
-
         #endregion
 
         #region Status Effects
@@ -312,6 +295,32 @@ namespace Necropanda
             }
 
             return effectType;
+        }
+
+        #endregion
+
+        #region Icon Constructs
+
+        public struct SpellIconConstruct
+        {
+            public int value;
+            public E_DamageTypes effectType;
+            public int hitCount;
+
+            //Scaling
+            public int discardScaling;
+            public int cleanseScaling;
+
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        public struct StatusIconConstruct
+        {
+            public float chance;
+            public Object effectIcon;
+            public int duration;
+
+            public E_SpellTargetType target; // replace with images later
         }
 
         #endregion

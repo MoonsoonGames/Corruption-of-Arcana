@@ -447,17 +447,17 @@ namespace Necropanda
 
         #region Construct Card Icons
 
-        public List<CombatHelperFunctions.IconConstruct> GenerateIcons()
+        public List<CombatHelperFunctions.SpellIconConstruct> SpellIcons()
         {
             Debug.Log(spellName + " is generating icons");
-            List<CombatHelperFunctions.IconConstruct> iconConstructs = new List<CombatHelperFunctions.IconConstruct>();
+            List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = new List<CombatHelperFunctions.SpellIconConstruct>();
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
                 if (module.value == 0)
                     break;
 
-                CombatHelperFunctions.IconConstruct moduleConstruct = new CombatHelperFunctions.IconConstruct();
+                CombatHelperFunctions.SpellIconConstruct moduleConstruct = new CombatHelperFunctions.SpellIconConstruct();
 
                 moduleConstruct.value = module.value;
                 moduleConstruct.effectType = module.effectType;
@@ -469,6 +469,31 @@ namespace Necropanda
                 //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
 
                 iconConstructs.Add(moduleConstruct);
+            }
+
+            return iconConstructs;
+        }
+
+        public List<CombatHelperFunctions.StatusIconConstruct> EffectIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            List<CombatHelperFunctions.StatusIconConstruct> iconConstructs = new List<CombatHelperFunctions.StatusIconConstruct>();
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                foreach (CombatHelperFunctions.StatusStruct status in module.statuses)
+                {
+                    CombatHelperFunctions.StatusIconConstruct effectConstruct = new CombatHelperFunctions.StatusIconConstruct();
+
+                    effectConstruct.chance = status.chance;
+                    effectConstruct.effectIcon = status.status.effectIcon;
+                    effectConstruct.duration = status.duration;
+                    effectConstruct.target = module.target;
+
+                    //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
+
+                    iconConstructs.Add(effectConstruct);
+                }
             }
 
             return iconConstructs;
