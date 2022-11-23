@@ -112,7 +112,7 @@ namespace Necropanda
                 lastDeck = deck;
                 deck.RemoveCard(this);
 
-                dragManager.draggedCard = this;
+                dragManager.StartDragging(this);
                 SetRayCastTargetAll(false);
 
                 dragManager.canDrag = false;
@@ -182,7 +182,7 @@ namespace Necropanda
                 transform.eulerAngles = baseRot;
 
                 dragManager.canDrag = true;
-                dragManager.draggedCard = null;
+                dragManager.StartDragging(null);
             }
         }
 

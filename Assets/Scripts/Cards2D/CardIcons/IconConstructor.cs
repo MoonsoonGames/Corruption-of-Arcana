@@ -30,14 +30,36 @@ namespace Necropanda
             Instantiate(effectPrefab, effectIcon.transform);
         }
 
-        public void ConstructStatus(float newValue, Object effectPrefab, int duration, string newTarget)
+        public void ConstructStatus(float newValue, Object effectPrefab, int duration, string newTarget, StatusEffects status)
         {
             float chance = newValue * 100;
             value.text = chance.ToString() + "% for " + duration.ToString() + " turns";
 
             target.text = "on " + newTarget;
 
-            Instantiate(effectPrefab, effectIcon.transform);
+            GameObject icon = Instantiate(effectPrefab, effectIcon.transform) as GameObject;
+            TooltipInfo tooltip = icon.GetComponent<TooltipInfo>();
+
+            if (tooltip != null)
+            {
+                tooltip.title = status.effectName;
+                tooltip.description = status.effectDescription;
+            }
+        }
+
+        public Object executePrefab;
+
+        public void ConstructExecute(float newThreshold, string newTarget)
+        {
+            if (newThreshold > 0)
+            {
+                float threshold = newThreshold * 100;
+                value.text = threshold.ToString() + "%";
+
+                target.text = "on " + newTarget;
+
+                Instantiate(executePrefab, effectIcon.transform);
+            }
         }
     }
 }

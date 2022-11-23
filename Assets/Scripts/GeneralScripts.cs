@@ -316,10 +316,17 @@ namespace Necropanda
 
         public struct StatusIconConstruct
         {
+            public StatusEffects effect;
             public float chance;
             public Object effectIcon;
             public int duration;
 
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        public struct ExecuteIconConstruct
+        {
+            public float threshold;
             public E_SpellTargetType target; // replace with images later
         }
 

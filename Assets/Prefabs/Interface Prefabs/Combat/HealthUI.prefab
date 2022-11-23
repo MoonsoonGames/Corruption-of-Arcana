@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4692603897759727371}
   - component: {fileID: 7140123580745522141}
   - component: {fileID: 5022081300272653101}
+  - component: {fileID: 8126785171901793097}
   m_Layer: 5
   m_Name: CurseOverlay
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.09777261, b: 0.07075471, a: 0.6862745}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
@@ -76,6 +77,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8126785171901793097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2407278360699451476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630cee2dbf3f0bb4492b08071147e2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Cursed
+  description: Target's maximum health has been reduced
 --- !u!1 &3415882859578094318
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +102,7 @@ GameObject:
   - component: {fileID: 8929722799182580386}
   - component: {fileID: 310093109264364045}
   - component: {fileID: 5444615980771403720}
+  - component: {fileID: 8227996139943305512}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -136,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0.8638129, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
@@ -152,6 +168,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8227996139943305512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415882859578094318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630cee2dbf3f0bb4492b08071147e2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Health
+  description: Target's health is shown here
 --- !u!1 &4931756033265456320
 GameObject:
   m_ObjectHideFlags: 0

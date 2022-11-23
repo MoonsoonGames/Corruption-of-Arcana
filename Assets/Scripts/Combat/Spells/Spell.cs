@@ -456,6 +456,8 @@ namespace Necropanda
             Debug.Log(spellName + " is generating icons");
             List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = new List<CombatHelperFunctions.SpellIconConstruct>();
 
+            float highestExecute = 0;
+
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
                 if (module.value == 0)
@@ -489,6 +491,7 @@ namespace Necropanda
                 {
                     CombatHelperFunctions.StatusIconConstruct effectConstruct = new CombatHelperFunctions.StatusIconConstruct();
 
+                    effectConstruct.effect = status.status;
                     effectConstruct.chance = status.chance;
                     effectConstruct.effectIcon = status.status.effectIcon;
                     effectConstruct.duration = status.duration;
@@ -501,6 +504,25 @@ namespace Necropanda
             }
 
             return iconConstructs;
+        }
+
+        public CombatHelperFunctions.ExecuteIconConstruct ExecuteIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            CombatHelperFunctions.ExecuteIconConstruct moduleConstruct = new CombatHelperFunctions.ExecuteIconConstruct();
+
+            float highestExecute = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                if (module.executeThreshold > highestExecute)
+                {
+                    moduleConstruct.threshold = module.executeThreshold;
+                    moduleConstruct.target = module.target;
+                }
+            }
+
+            return moduleConstruct;
         }
 
         #endregion

@@ -27,7 +27,7 @@ namespace Necropanda
         {
             nameText.text = spell.spellName;
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
-            speedText.text = "Speed: " + spell.speed.ToString();
+            speedText.text = spell.speed.ToString();
             descriptionText.text = spell.spellDescription;
             if (spell.overrideColor)
                 cardBackground.color = spell.timelineColor;
@@ -53,9 +53,9 @@ namespace Necropanda
             if (cardFace == null)
                 return;
 
-            List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = spell.SpellIcons();
+            List<CombatHelperFunctions.SpellIconConstruct> spellConstructs = spell.SpellIcons();
 
-            foreach(var item in iconConstructs)
+            foreach(var item in spellConstructs)
             {
                 //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
                 GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
@@ -74,7 +74,19 @@ namespace Necropanda
                 IconConstructor constructor = section.GetComponent<IconConstructor>();
 
                 if (constructor != null)
-                    constructor.ConstructStatus(item.chance, item.effectIcon, item.duration, GetTargetType(item.target));
+                    constructor.ConstructStatus(item.chance, item.effectIcon, item.duration, GetTargetType(item.target), item.effect);
+            }
+
+            CombatHelperFunctions.ExecuteIconConstruct executeConstruct = spell.ExecuteIcons();
+
+            if (executeConstruct.threshold > 0)
+            {
+                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
+                GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
+                IconConstructor constructor = section.GetComponent<IconConstructor>();
+
+                if (constructor != null)
+                    constructor.ConstructExecute(executeConstruct.threshold, GetTargetType(executeConstruct.target));
             }
         }
 
