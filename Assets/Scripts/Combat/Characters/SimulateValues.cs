@@ -14,7 +14,7 @@ namespace Necropanda
     {
         public TextMeshProUGUI dmgText, shieldText;
         public Color dmgColor, healColor;
-        public GameObject deathIcon;
+        public GameObject deathIcon, healthObject, shieldObject;
 
 
         int dmgRef, healRef, shfRef;
@@ -33,26 +33,26 @@ namespace Necropanda
             if (totalShield < 0)
                 damageThroughShield = Mathf.Abs(totalShield);
 
-            shieldText.gameObject.SetActive(totalShield > 0);
+            shieldObject.SetActive(totalShield > 0);
             shieldText.text = "+" + totalShield;
 
             totalDmg = heal - damageThroughShield;
 
             if (totalDmg < 0)
             {
-                dmgText.gameObject.SetActive(true);
+                healthObject.SetActive(true);
                 dmgText.color = dmgColor;
                 dmgText.text = totalDmg.ToString();
             }
             else if (totalDmg > 0)
             {
-                dmgText.gameObject.SetActive(true);
+                healthObject.SetActive(true);
                 dmgText.color = healColor;
                 dmgText.text = "+" + totalDmg;
             }
             else
             {
-                dmgText.gameObject.SetActive(false);
+                healthObject.SetActive(false);
             }
 
             //Debug.Log("will kill? " + willKill);
