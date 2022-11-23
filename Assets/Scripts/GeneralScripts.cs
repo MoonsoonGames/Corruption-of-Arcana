@@ -103,6 +103,8 @@ namespace Necropanda
 
         #region Spells
 
+        #region Basic Info
+
         [System.Serializable]
         public struct SpellInstance
         {
@@ -147,6 +149,8 @@ namespace Necropanda
             }
         }
 
+        #endregion
+
         #region AI
 
         public struct SpellUtility
@@ -167,6 +171,22 @@ namespace Necropanda
             public int timeCooldown;
             //[HideInInspector]
             public int lastUsed;
+        }
+
+        #endregion
+
+        #region Icon Constructs
+
+        public struct IconConstruct
+        {
+            public int value;
+            public E_DamageTypes effectType;
+
+            //Scaling
+            public int discardScaling;
+            public int cleanseScaling;
+
+            public E_SpellTargetType target; // replace with images later
         }
 
         #endregion

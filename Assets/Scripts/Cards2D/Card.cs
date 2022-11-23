@@ -31,11 +31,8 @@ namespace Necropanda
             descriptionText.text = spell.spellDescription;
             if (spell.overrideColor)
                 cardBackground.color = spell.timelineColor;
-            if (spell.cardImage != null)
-            {
-                cardFace.sprite = spell.cardImage;
-                cardFace.color = Color.white;
-            }
+
+            SetupIcons();
 
             gameObject.name = spell.spellName;
 
@@ -46,5 +43,84 @@ namespace Necropanda
         {
             //spell.CastSpell(target, caster);
         }
+
+        #region Icons
+
+        public Object sectionPrefab;
+
+        public void SetupIcons()
+        {
+            if (spell.cardImage == null)
+                return;
+
+            List<CombatHelperFunctions.IconConstruct> iconConstructs = spell.GenerateIcons();
+
+            foreach(var item in iconConstructs)
+            {
+                Debug.Log("Module: " + item.value + " " + item.effectType + " on " + item.target.ToString());
+                GameObject section = Instantiate(sectionPrefab, this.transform) as GameObject;
+                IconConstructor constructor = section.GetComponent<IconConstructor>();
+
+                constructor.Construct(item.value, GetEffectObject(item.effectType), GetTargetType(item.target));
+            }
+        }
+
+        public Object physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, healingIcon, shieldIcon;
+
+        public Object GetEffectObject(E_DamageTypes effectType)
+        {
+            switch (effectType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalIcon;
+                case E_DamageTypes.Ember:
+                    return emberIcon;
+                case E_DamageTypes.Bleak:
+                    return bleakIcon;
+                case E_DamageTypes.Static:
+                    return staticIcon;
+                case E_DamageTypes.Septic:
+                    return septicIcon;
+                case E_DamageTypes.Perforation:
+                    return perfotationIcon;
+                case E_DamageTypes.Healing:
+                    return healingIcon;
+                case E_DamageTypes.Shield:
+                    return shieldIcon;
+                default:
+                    return null;
+            }
+        }
+
+        public string GetTargetType(E_SpellTargetType targetType)
+        {
+            return targetType.ToString();
+
+            /*
+            switch (targetType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalIcon;
+                case E_DamageTypes.Ember:
+                    return emberIcon;
+                case E_DamageTypes.Bleak:
+                    return bleakIcon;
+                case E_DamageTypes.Static:
+                    return staticIcon;
+                case E_DamageTypes.Septic:
+                    return septicIcon;
+                case E_DamageTypes.Perforation:
+                    return perfotationIcon;
+                case E_DamageTypes.Healing:
+                    return healingIcon;
+                case E_DamageTypes.Shield:
+                    return shieldIcon;
+                default:
+                    return null;
+            }
+            */
+        }
+
+        #endregion
     }
 }

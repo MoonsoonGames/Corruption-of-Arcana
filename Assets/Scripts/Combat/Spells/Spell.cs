@@ -444,5 +444,29 @@ namespace Necropanda
         #endregion
 
         #endregion
+
+        #region Construct Card Icons
+
+        public List<CombatHelperFunctions.IconConstruct> GenerateIcons()
+        {
+            List<CombatHelperFunctions.IconConstruct> iconConstructs = new List<CombatHelperFunctions.IconConstruct>();
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                CombatHelperFunctions.IconConstruct moduleConstruct = new CombatHelperFunctions.IconConstruct();
+
+                moduleConstruct.value = module.value;
+                moduleConstruct.effectType = module.effectType;
+                moduleConstruct.discardScaling = module.valueScalingPerDiscard;
+                moduleConstruct.cleanseScaling = module.valueScalingPerStatus;
+                moduleConstruct.target = module.target;
+
+                iconConstructs.Add(moduleConstruct);
+            }
+
+            return iconConstructs;
+        }
+
+        #endregion
     }
 }
