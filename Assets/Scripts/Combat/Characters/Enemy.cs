@@ -81,7 +81,7 @@ namespace Necropanda
                     aISpells.Add(newSpell);
 
                     spawnCard = newSpell.spawnAsCard;
-                    Debug.Log(spawnCard + " 2");
+                    //Debug.Log(spawnCard + " 2");
                 }
                 else
                 {

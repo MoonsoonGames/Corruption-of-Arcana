@@ -50,22 +50,23 @@ namespace Necropanda
 
         public void SetupIcons()
         {
-            if (spell.cardImage == null)
+            if (cardFace == null)
                 return;
 
             List<CombatHelperFunctions.IconConstruct> iconConstructs = spell.GenerateIcons();
 
             foreach(var item in iconConstructs)
             {
-                Debug.Log("Module: " + item.value + " " + item.effectType + " on " + item.target.ToString());
-                GameObject section = Instantiate(sectionPrefab, this.transform) as GameObject;
+                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
+                GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
                 IconConstructor constructor = section.GetComponent<IconConstructor>();
 
-                constructor.Construct(item.value, GetEffectObject(item.effectType), GetTargetType(item.target));
+                if (constructor != null)
+                    constructor.Construct(item.value, GetEffectObject(item.effectType), item.hitCount, GetTargetType(item.target));
             }
         }
 
-        public Object physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, healingIcon, shieldIcon;
+        public Object physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, randomIcon, healingIcon, shieldIcon;
 
         public Object GetEffectObject(E_DamageTypes effectType)
         {
@@ -83,6 +84,8 @@ namespace Necropanda
                     return septicIcon;
                 case E_DamageTypes.Perforation:
                     return perfotationIcon;
+                case E_DamageTypes.Random:
+                    return randomIcon;
                 case E_DamageTypes.Healing:
                     return healingIcon;
                 case E_DamageTypes.Shield:

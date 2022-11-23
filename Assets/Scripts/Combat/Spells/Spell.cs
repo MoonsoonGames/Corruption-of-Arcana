@@ -449,17 +449,24 @@ namespace Necropanda
 
         public List<CombatHelperFunctions.IconConstruct> GenerateIcons()
         {
+            Debug.Log(spellName + " is generating icons");
             List<CombatHelperFunctions.IconConstruct> iconConstructs = new List<CombatHelperFunctions.IconConstruct>();
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
+                if (module.value == 0)
+                    break;
+
                 CombatHelperFunctions.IconConstruct moduleConstruct = new CombatHelperFunctions.IconConstruct();
 
                 moduleConstruct.value = module.value;
                 moduleConstruct.effectType = module.effectType;
+                moduleConstruct.hitCount = module.hitCount;
                 moduleConstruct.discardScaling = module.valueScalingPerDiscard;
                 moduleConstruct.cleanseScaling = module.valueScalingPerStatus;
                 moduleConstruct.target = module.target;
+
+                //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
 
                 iconConstructs.Add(moduleConstruct);
             }

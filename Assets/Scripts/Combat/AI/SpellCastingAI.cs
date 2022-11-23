@@ -133,13 +133,13 @@ namespace Necropanda
 
             if (spell.spell.spawnEnemies != null)
             {
-                Debug.Log("Spell spawns allies, increase priority");
+                //Debug.Log("Spell spawns allies, increase priority");
 
                 float spawnUtility = spawnAllyUtility * spell.spell.spawnEnemies.Length;
                 spellUtility += spawnUtility;
             }
 
-            Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+            //Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
 
             return spellUtility;
         }

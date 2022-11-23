@@ -15,11 +15,16 @@ namespace Necropanda
     {
         public TextMeshProUGUI value;
         public GameObject effectIcon;
+        public TextMeshProUGUI hitCount;
         public TextMeshProUGUI target;
 
-        public void Construct(int newValue, Object effectPrefab, string newTarget)
+        public void Construct(int newValue, Object effectPrefab, int newHitCount, string newTarget)
         {
-            value.text = newValue.ToString();
+            if (newHitCount > 1)
+                value.text = newValue.ToString() + " X" + newHitCount.ToString();
+            else
+                value.text = newValue.ToString();
+
             target.text = newTarget;
 
             Instantiate(effectPrefab, effectIcon.transform);

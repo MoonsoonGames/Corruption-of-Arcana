@@ -21,7 +21,7 @@ namespace Necropanda
 
             Object spawnObject = enemy.stats.spawnObject;
 
-            Debug.Log("spawned enemy, spawn effect");
+            //Debug.Log("spawned enemy, spawn effect");
             if (spawnObject != null)
                 Instantiate(spawnObject, enemy.transform);
         }

@@ -181,6 +181,7 @@ namespace Necropanda
         {
             public int value;
             public E_DamageTypes effectType;
+            public int hitCount;
 
             //Scaling
             public int discardScaling;

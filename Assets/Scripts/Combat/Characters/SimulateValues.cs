@@ -55,7 +55,7 @@ namespace Necropanda
                 dmgText.gameObject.SetActive(false);
             }
 
-            Debug.Log("will kill? " + willKill);
+            //Debug.Log("will kill? " + willKill);
 
             deathIcon.SetActive(willKill);
         }
