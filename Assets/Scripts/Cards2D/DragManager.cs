@@ -44,7 +44,7 @@ namespace Necropanda
         public void StartDragging(CardDrag2D drag)
         {
             draggedCard = drag;
-            TooltipManager.instance.Showtooltip(false, null, null);
+            TooltipManager.instance.EnableTooltips(draggedCard == null);
         }
 
         public bool canDrag;

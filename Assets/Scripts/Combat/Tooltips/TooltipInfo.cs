@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -12,8 +13,14 @@ namespace Necropanda
 {
     public class TooltipInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        Image icon;
         public string title;
         public string description;
+
+        private void Start()
+        {
+            icon = GetComponent<Image>();
+        }
 
         /// <summary>
         /// Called when mouse hovers over icon
@@ -37,6 +44,11 @@ namespace Necropanda
                 return;
 
             TooltipManager.instance.Showtooltip(false, title, description);
+        }
+
+        public void EnableRaycasting(bool active)
+        {
+            icon.raycastTarget = active;
         }
     }
 }

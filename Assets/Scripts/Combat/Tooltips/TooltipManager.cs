@@ -38,5 +38,17 @@ namespace Necropanda
                 toolTip.SetText(titleText, descText);
             }
         }
+
+        public void EnableTooltips(bool active)
+        {
+            toolTipObject.SetActive(false);
+
+            TooltipInfo[] allTooltips = GameObject.FindObjectsOfType<TooltipInfo>();
+
+            foreach (var item in allTooltips)
+            {
+                item.EnableRaycasting(active);
+            }
+        }
     }
 }
