@@ -17,7 +17,7 @@ namespace Necropanda
         public Spell spell;
 
         public TextMeshProUGUI nameText;
-        public TextMeshProUGUI arcanaText;
+        public SpawnArcanaSymbol arcanaSpawner;
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI descriptionText;
         public Image cardBackground;
@@ -26,7 +26,7 @@ namespace Necropanda
         public void Setup()
         {
             nameText.text = spell.spellName;
-            arcanaText.text = spell.arcanaCost.ToString();
+            arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = "Speed: " + spell.speed.ToString();
             descriptionText.text = spell.spellDescription;
             if (spell.overrideColor)
