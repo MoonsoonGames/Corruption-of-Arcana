@@ -18,6 +18,7 @@ namespace Necropanda
         public string effectName;
         [TextArea(3, 10)]
         public string effectDescription; // Basic desciption of spell effect
+        public Object effectIcon;
         public Object applyEffect;
         public Object effect;
 

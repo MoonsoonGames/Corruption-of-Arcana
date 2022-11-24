@@ -356,7 +356,7 @@ namespace Necropanda
             }
 
             int removedStatusCount = Timeline.instance.StatusCount(target);
-            Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
+            //Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
@@ -446,6 +446,84 @@ namespace Necropanda
         }
 
         #endregion
+
+        #endregion
+
+        #region Construct Card Icons
+
+        public List<CombatHelperFunctions.SpellIconConstruct> SpellIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = new List<CombatHelperFunctions.SpellIconConstruct>();
+
+            float highestExecute = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                if (module.value == 0)
+                    break;
+
+                CombatHelperFunctions.SpellIconConstruct moduleConstruct = new CombatHelperFunctions.SpellIconConstruct();
+
+                moduleConstruct.value = module.value;
+                moduleConstruct.effectType = module.effectType;
+                moduleConstruct.hitCount = module.hitCount;
+                moduleConstruct.discardScaling = module.valueScalingPerDiscard;
+                moduleConstruct.cleanseScaling = module.valueScalingPerStatus;
+                moduleConstruct.target = module.target;
+
+                //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
+
+                iconConstructs.Add(moduleConstruct);
+            }
+
+            return iconConstructs;
+        }
+
+        public List<CombatHelperFunctions.StatusIconConstruct> EffectIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            List<CombatHelperFunctions.StatusIconConstruct> iconConstructs = new List<CombatHelperFunctions.StatusIconConstruct>();
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                foreach (CombatHelperFunctions.StatusStruct status in module.statuses)
+                {
+                    CombatHelperFunctions.StatusIconConstruct effectConstruct = new CombatHelperFunctions.StatusIconConstruct();
+
+                    effectConstruct.effect = status.status;
+                    effectConstruct.chance = status.chance;
+                    effectConstruct.effectIcon = status.status.effectIcon;
+                    effectConstruct.duration = status.duration;
+                    effectConstruct.target = module.target;
+
+                    //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
+
+                    iconConstructs.Add(effectConstruct);
+                }
+            }
+
+            return iconConstructs;
+        }
+
+        public CombatHelperFunctions.ExecuteIconConstruct ExecuteIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            CombatHelperFunctions.ExecuteIconConstruct moduleConstruct = new CombatHelperFunctions.ExecuteIconConstruct();
+
+            float highestExecute = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                if (module.executeThreshold > highestExecute)
+                {
+                    moduleConstruct.threshold = module.executeThreshold;
+                    moduleConstruct.target = module.target;
+                }
+            }
+
+            return moduleConstruct;
+        }
 
         #endregion
     }
