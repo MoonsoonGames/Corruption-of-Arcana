@@ -12,14 +12,17 @@ namespace Necropanda
 {
     public class SpellTooltipInfo : TooltipInfo, IPointerEnterHandler, IPointerExitHandler
     {
-        public void Setup(CombatHelperFunctions.SpellInstance spell, bool revealed)
+        Spell spell;
+
+        public void Setup(CombatHelperFunctions.SpellInstance newspell, bool revealed)
         {
-            title = spell.caster.stats.characterName;
+            spell = newspell.spell;
+            title = newspell.caster.stats.characterName;
 
             if (revealed)
-                description = spell.caster.stats.characterName + " is casting " + spell.spell.spellName + " on " + spell.target.stats.characterName + " (" + spell.spell.speed + ")";
+                description = newspell.caster.stats.characterName + " is casting " + newspell.spell.spellName + " on " + newspell.target.stats.characterName + " (" + newspell.spell.speed + ")";
             else
-                description = spell.caster.stats.characterName + " is casting a spell" + " (" + spell.spell.speed + ")";
+                description = newspell.caster.stats.characterName + " is casting a spell" + " (" + newspell.spell.speed + ")";
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace Necropanda
             if (TooltipManager.instance == null)
                 return;
 
-            TooltipManager.instance.ShowSpellTooltip(true, title, description);
+            TooltipManager.instance.ShowSpellTooltip(true, title, spell);
         }
 
         /// <summary>
@@ -43,7 +46,7 @@ namespace Necropanda
             if (TooltipManager.instance == null)
                 return;
 
-            TooltipManager.instance.ShowSpellTooltip(false, title, description);
+            TooltipManager.instance.ShowSpellTooltip(false, title, spell);
         }
     }
 }
