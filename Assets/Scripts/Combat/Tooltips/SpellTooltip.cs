@@ -41,6 +41,9 @@ namespace Necropanda
 
         public void DeleteOldIcons()
         {
+            if (oldSections == null) return;
+            if (oldSections.Count == 0) return;
+
             List<GameObject> newList = new List<GameObject>();
 
             foreach (GameObject section in oldSections)
