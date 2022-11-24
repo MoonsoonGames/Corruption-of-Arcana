@@ -38,6 +38,9 @@ namespace Necropanda.Player
         {
             cam = Camera.main;
             mouseLook = GetComponentInChildren<MouseLook>();
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
         }
 
         /// <summary>
@@ -67,8 +70,8 @@ namespace Necropanda.Player
             }
 
             // Get the movement axis
-            float x = -Input.GetAxis("Horizontal");
-            float z = -Input.GetAxis("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
             right = cam.transform.right * mouseLook.GetX();
             right = right.normalized;
@@ -114,19 +117,19 @@ namespace Necropanda.Player
             {
                 if (move.z > moveDeadzone)
                 {
-                    animator.SetInteger("Direction", 2);
+                    animator.SetInteger("Direction", 1);
                 }
                 else if (move.z < -moveDeadzone)
                 {
-                    animator.SetInteger("Direction", 1);
+                    animator.SetInteger("Direction", 2);
                 }
                 else if (move.x < -moveDeadzone)
                 {
-                    animator.SetInteger("Direction", 3);
+                    animator.SetInteger("Direction", 4);
                 }
                 else if (move.x > moveDeadzone)
                 {
-                    animator.SetInteger("Direction", 4);
+                    animator.SetInteger("Direction", 3);
                 }
             }
 
