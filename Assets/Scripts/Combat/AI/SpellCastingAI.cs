@@ -20,6 +20,14 @@ namespace Necropanda
         public float supportAllyUtility;
         public float spawnAllyUtility;
 
+        /// <summary>
+        /// Determines which spell the AI will cast
+        /// </summary>
+        /// <param name="spellList">The list of available spells</param>
+        /// <param name="self">The caster of the spell</param>
+        /// <param name="allyTeam">The allied team of the caster</param>
+        /// <param name="enemyTeam">The opposing team of the caster</param>
+        /// <returns></returns>
         public CombatHelperFunctions.SpellUtility GetSpell(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility spellUtility = new CombatHelperFunctions.SpellUtility();
@@ -45,6 +53,14 @@ namespace Necropanda
             return spellUtility;
         }
 
+        /// <summary>
+        /// Loops through all available spell to determine the best spell to cast based on its utility
+        /// </summary>
+        /// <param name="spellList">The list of available spells</param>
+        /// <param name="self">The caster of the spell</param>
+        /// <param name="allyTeam">The allied team of the caster</param>
+        /// <param name="enemyTeam">The opposing team of the caster</param>
+        /// <returns></returns>
         CombatHelperFunctions.SpellUtility UtilityCalculation(List<CombatHelperFunctions.AISpell> spellList, Character self, List<Character> allyTeam, List<Character> enemyTeam)
         {
             CombatHelperFunctions.SpellUtility bestSpell = new CombatHelperFunctions.SpellUtility();
@@ -88,10 +104,20 @@ namespace Necropanda
             return bestSpell;
         }
 
+        /// <summary>
+        /// Determines the spell utility of an individual spell
+        /// </summary>
+        /// <param name="spell">The spell being cast</param>
+        /// <param name="self">The caster of the spell</param>
+        /// <param name="target">The target of the spell</param>
+        /// <param name="allyTeam">The allied team of the caster</param>
+        /// <param name="enemyTeam">The opposing team of the caster</param>
+        /// <returns>A float value of the effectiveness of the spell</returns>
         float SpellUtility(CombatHelperFunctions.AISpell spell, Character self, Character target, List<Character> allyTeam, List<Character> enemyTeam)
         {
             float spellUtility = 0;
 
+            //Loop through all of the spell modules
             foreach (CombatHelperFunctions.SpellModule module in spell.spell.spellModules)
             {
                 float moduleUtility = 0;
@@ -150,6 +176,15 @@ namespace Necropanda
             return spellUtility;
         }
 
+        /// <summary>
+        /// Determines if the spell can be cast on the character
+        /// </summary>
+        /// <param name="spell">The spell being cast</param>
+        /// <param name="self">The caster of the spell</param>
+        /// <param name="target">The target of the spell</param>
+        /// <param name="allyTeam">The allied team of the caster</param>
+        /// <param name="enemyTeam">The opposing team of the caster</param>
+        /// <returns>True if spell can be cast, false otherwise</returns>
         bool CanCastSpell(CombatHelperFunctions.AISpell spell, Character self, Character target, List<Character> allyTeam, List<Character> enemyTeam)
         {
             if (spell.lastUsed < spell.timeCooldown)
