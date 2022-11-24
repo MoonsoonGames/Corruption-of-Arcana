@@ -356,7 +356,7 @@ namespace Necropanda
             }
 
             int removedStatusCount = Timeline.instance.StatusCount(target);
-            Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
+            //Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {

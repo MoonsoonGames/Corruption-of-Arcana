@@ -56,18 +56,24 @@ namespace Necropanda
             {
                 foreach (CombatHelperFunctions.AISpell spell in spellList)
                 {
-                    if (CanCastSpell(spell, self, target, allyTeam, enemyTeam))
+                    if (self.charm == false && CanCastSpell(spell, self, target, allyTeam, enemyTeam))
                     {
                         float utility = 0;
 
-                        if (self.charm)
+                        utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
+
+                        if (utility > bestSpell.utility)
                         {
-                            utility = SpellUtility(spell, self, target, enemyTeam, allyTeam);
+                            bestSpell.spell = spell;
+                            bestSpell.target = target;
+                            bestSpell.utility = utility;
                         }
-                        else
-                        {
-                            utility = SpellUtility(spell, self, target, allyTeam, enemyTeam);
-                        }
+                    }
+                    else if (self.charm && CanCastSpell(spell, self, target, enemyTeam, allyTeam))
+                    {
+                        float utility = 0;
+
+                        utility = SpellUtility(spell, self, target, enemyTeam, allyTeam);
 
                         if (utility > bestSpell.utility)
                         {
