@@ -64,6 +64,26 @@ namespace Necropanda
             return random1.CompareTo(random2);
         }
 
+        public static string AddSpacesToSentence(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return "";
+
+            List<char> newCharacters = new List<char>();
+            newCharacters.Add(text[0]);
+
+            for (int i = 1; i < text.Length; i++)
+            {
+                if (char.IsUpper(text[i]) && text[i - 1] != ' ')
+                    newCharacters.Add(' ');
+                newCharacters.Add(text[i]);
+            }
+
+            string newString = string.Concat(newCharacters.ToArray());
+
+            return newString;
+        }
+
         //remap function
         /// <summary>
         /// Remaps the passed in variables based on min and max. Written by @mattordev

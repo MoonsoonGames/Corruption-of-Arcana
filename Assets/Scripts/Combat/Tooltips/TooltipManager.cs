@@ -16,15 +16,24 @@ namespace Necropanda
         public GameObject toolTipObject;
         TooltipBox toolTip;
 
+        public GameObject spellToolTipObject;
+        TooltipBox spellToolTip;
+
         private void Start()
         {
             instance = this;
             toolTip = toolTipObject.GetComponent<TooltipBox>();
             toolTipObject.SetActive(false);
+
+            spellToolTip = spellToolTipObject.GetComponent<TooltipBox>();
+            spellToolTipObject.SetActive(false);
         }
 
-        public void Showtooltip(bool active, string titleText, string descText)
+        public void ShowTooltip(bool active, string titleText, string descText)
         {
+            if (spellToolTipObject != null)
+                spellToolTipObject.SetActive(false);
+
             if (toolTip == null || DragManager.instance.draggedCard != null)
             {
                 toolTipObject.SetActive(false);
@@ -39,13 +48,32 @@ namespace Necropanda
             }
         }
 
+        public void ShowSpellTooltip(bool active, string titleText, string descText)
+        {
+            if (toolTipObject != null)
+                toolTipObject.SetActive(false);
+
+            if (spellToolTip == null || DragManager.instance.draggedCard != null)
+            {
+                spellToolTipObject.SetActive(false);
+                return;
+            }
+
+            spellToolTipObject.SetActive(active);
+
+            if (active)
+            {
+                spellToolTip.SetText(titleText, descText);
+            }
+        }
+
         public void EnableTooltips(bool active)
         {
             toolTipObject.SetActive(false);
 
             TooltipInfo[] allTooltips = GameObject.FindObjectsOfType<TooltipInfo>();
 
-            foreach (var item in allTooltips)
+            foreach (TooltipInfo item in allTooltips)
             {
                 item.EnableRaycasting(active);
             }

@@ -121,7 +121,8 @@ namespace Necropanda
 
         public string GetTargetType(E_SpellTargetType targetType)
         {
-            return targetType.ToString();
+            string targetString = HelperFunctions.AddSpacesToSentence(targetType.ToString());
+            return targetString;
 
             /*
             switch (targetType)

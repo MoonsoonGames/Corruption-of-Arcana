@@ -13,11 +13,11 @@ namespace Necropanda
 {
     public class TooltipInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        Image icon;
+        protected Image icon;
         public string title;
         public string description;
 
-        private void Start()
+        protected virtual void Start()
         {
             icon = GetComponent<Image>();
         }
@@ -26,29 +26,30 @@ namespace Necropanda
         /// Called when mouse hovers over icon
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             if (TooltipManager.instance == null)
                 return;
 
-            TooltipManager.instance.Showtooltip(true, title, description);
+            TooltipManager.instance.ShowTooltip(true, title, description);
         }
 
         /// <summary>
         /// Called when mouse stops hovering over icon
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
             if (TooltipManager.instance == null)
                 return;
 
-            TooltipManager.instance.Showtooltip(false, title, description);
+            TooltipManager.instance.ShowTooltip(false, title, description);
         }
 
-        public void EnableRaycasting(bool active)
+        public virtual void EnableRaycasting(bool active)
         {
-            icon.raycastTarget = active;
+            if (icon != null)
+                icon.raycastTarget = active;
         }
     }
 }
