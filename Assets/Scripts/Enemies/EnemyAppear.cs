@@ -22,10 +22,17 @@ namespace Necropanda
 
         public bool activateOnStart = false;
 
+        float height;
+
+        Vector3 sightPos;
+        Vector3 targetDirection;
+
         private void Start()
         {
             art.SetActive(activateOnStart);
             aiScript = GetComponent<EnemyAI>();
+
+            height = GetComponent<CapsuleCollider>().height;
 
             if (activateOnStart)
                 fx = null;
@@ -51,10 +58,13 @@ namespace Necropanda
         {
             if (player != null)
             {
-                Vector3 targetDirection = player.transform.position - transform.position;
+                sightPos = gameObject.transform.position;
+                sightPos.y = gameObject.transform.position.y + height;
+
+                targetDirection = player.transform.position - sightPos;
                 RaycastHit hit;
                 // Does the ray intersect any objects excluding the player layer
-                if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, layerMask))
+                if (Physics.Raycast(sightPos, targetDirection, out hit, Mathf.Infinity, layerMask))
                 {
                     if (hit.collider.gameObject == player)
                     {
@@ -78,11 +88,11 @@ namespace Necropanda
                         }
                     }
 
-                    Debug.DrawRay(transform.position, targetDirection, Color.yellow);
+                    Debug.DrawRay(sightPos, targetDirection, Color.yellow);
                 }
                 else
                 {
-                    Debug.DrawRay(transform.position, targetDirection, Color.white);
+                    Debug.DrawRay(sightPos, targetDirection, Color.white);
                     Debug.Log("Did not Hit " + targetDirection);
                 }
             }
