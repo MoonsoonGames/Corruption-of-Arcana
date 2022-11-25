@@ -20,6 +20,7 @@ namespace Necropanda
         Character player;
         Character character;
         Timeline timeline;
+        BuildDeck buildDeck;
         DeckManager manager;
 
         public GameObject group;
@@ -69,11 +70,27 @@ namespace Necropanda
             layout = GetComponent<HorizontalLayoutGroup>();
 
             character = GetComponentInParent<Character>();
+            
             timeline = GameObject.FindObjectOfType<Timeline>();
-            player = timeline.player;
+            if (timeline != null)
+                player = timeline.player;
 
             untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
+
+            buildDeck = GetComponent<BuildDeck>();
+
+            if (buildDeck != null)
+            {
+                buildDeck.ClearSpells();
+
+                foreach (var card in cards)
+                {
+                    Spell spell = card.GetComponent<Card>().spell;
+
+                    buildDeck.AddRemoveSpell(spell, true);
+                }
+            }
         }
 
         #endregion
@@ -143,8 +160,14 @@ namespace Necropanda
             CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
             newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, empower, weaken, character, player);
 
-            timeline.RemoveSpellInstance(newSpellInstance);
-            timeline.SimulateSpellEffects();
+            if (timeline != null)
+            {
+                timeline.RemoveSpellInstance(newSpellInstance);
+                timeline.SimulateSpellEffects();
+            }
+
+            if (buildDeck != null)
+                buildDeck.AddRemoveSpell(card.GetComponent<Card>().spell, false);
         }
 
         /// <summary>
@@ -166,6 +189,10 @@ namespace Necropanda
                         drawCard.ReturnToDeck();
                     }
                 }
+
+                if (buildDeck != null)
+                    buildDeck.AddRemoveSpell(card.GetComponent<Card>().spell, false);
+
                 Destroy(card.gameObject);
             }
 
@@ -189,9 +216,15 @@ namespace Necropanda
                 CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
                 newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character.empowerDeck, character.weakenDeck, character, player);
 
-                timeline.AddSpellInstance(newSpellInstance);
+                if (timeline != null)
+                    timeline.AddSpellInstance(newSpellInstance);
             }
-            timeline.SimulateSpellEffects();
+
+            if (timeline != null)
+                timeline.SimulateSpellEffects();
+
+            if (buildDeck != null)
+                buildDeck.AddRemoveSpell(card.GetComponent<Card>().spell, true);
         }
 
         /// <summary>

@@ -34,6 +34,8 @@ namespace Necropanda
 
         #region Decks
 
+        public List<Spell> minorArcana;
+        public List<Spell> majorArcana;
         public List<Spell> playerDeck;
         public List<Spell> playedCards;
         public List<Spell> discardPile;
@@ -69,6 +71,13 @@ namespace Necropanda
         private void Start()
         {
             Singleton();
+
+            SetupDecks();
+        }
+
+        public void SetupDecks()
+        {
+            playerDeck = HelperFunctions.CombineLists(minorArcana, majorArcana);
             playerDeck.Sort(HelperFunctions.RandomSort);
         }
 
@@ -133,6 +142,18 @@ namespace Necropanda
             }
 
             playedCards.Clear();
+        }
+
+        public void SetDeck(List<Spell> spells)
+        {
+            majorArcana = new List<Spell>();
+
+            foreach (Spell spell in spells)
+            {
+                majorArcana.Add(spell);
+            }
+
+            SetupDecks();
         }
     }
 }

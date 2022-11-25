@@ -22,11 +22,17 @@ namespace Necropanda
         private void Start()
         {
             instance = this;
-            toolTip = toolTipObject.GetComponent<TooltipBox>();
-            toolTipObject.SetActive(false);
+            if (toolTipObject != null)
+            {
+                toolTip = toolTipObject.GetComponent<TooltipBox>();
+                toolTipObject.SetActive(false);
+            }
 
-            spellToolTip = spellToolTipObject.GetComponent<SpellTooltip>();
-            spellToolTipObject.SetActive(false);
+            if (spellToolTipObject)
+            {
+                spellToolTip = spellToolTipObject.GetComponent<SpellTooltip>();
+                spellToolTipObject.SetActive(false);
+            }
         }
 
         public void ShowTooltip(bool active, string titleText, string descText)
@@ -69,7 +75,8 @@ namespace Necropanda
 
         public void EnableTooltips(bool active)
         {
-            toolTipObject.SetActive(false);
+            if (toolTipObject != null)
+                toolTipObject.SetActive(false);
 
             TooltipInfo[] allTooltips = GameObject.FindObjectsOfType<TooltipInfo>();
 
