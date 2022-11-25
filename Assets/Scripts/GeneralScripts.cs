@@ -64,6 +64,26 @@ namespace Necropanda
             return random1.CompareTo(random2);
         }
 
+        public static string AddSpacesToSentence(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return "";
+
+            List<char> newCharacters = new List<char>();
+            newCharacters.Add(text[0]);
+
+            for (int i = 1; i < text.Length; i++)
+            {
+                if (char.IsUpper(text[i]) && text[i - 1] != ' ')
+                    newCharacters.Add(' ');
+                newCharacters.Add(text[i]);
+            }
+
+            string newString = string.Concat(newCharacters.ToArray());
+
+            return newString;
+        }
+
         //remap function
         /// <summary>
         /// Remaps the passed in variables based on min and max. Written by @mattordev
@@ -93,6 +113,19 @@ namespace Necropanda
             [HideInInspector]
             public bool forward;
         }
+
+        public static bool AlmostEqualFloat(float a, float b, float threshold)
+        {
+            return Mathf.Abs(a - b) <= threshold;
+        }
+
+        public static bool AlmostEqualVector3(Vector3 a, Vector3 b, float threshold)
+        {
+            bool x = AlmostEqualFloat(a.x, b.x, threshold);
+            bool y = AlmostEqualFloat(a.y, b.y, threshold);
+            bool z = AlmostEqualFloat(a.z, b.z, threshold);
+            return x && y && z;
+        }
     }
 
     public static class CombatHelperFunctions
@@ -102,6 +135,8 @@ namespace Necropanda
         // Could try to fix with custom inspectors https://www.youtube.com/watch?v=RInUu1_8aGw
 
         #region Spells
+
+        #region Basic Info
 
         [System.Serializable]
         public struct SpellInstance
@@ -146,6 +181,8 @@ namespace Necropanda
                 statuses = newStatusStructs;
             }
         }
+
+        #endregion
 
         #region AI
 
@@ -291,6 +328,39 @@ namespace Necropanda
             }
 
             return effectType;
+        }
+
+        #endregion
+
+        #region Icon Constructs
+
+        public struct SpellIconConstruct
+        {
+            public int value;
+            public E_DamageTypes effectType;
+            public int hitCount;
+
+            //Scaling
+            public int discardScaling;
+            public int cleanseScaling;
+
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        public struct StatusIconConstruct
+        {
+            public StatusEffects effect;
+            public float chance;
+            public Object effectIcon;
+            public int duration;
+
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        public struct ExecuteIconConstruct
+        {
+            public float threshold;
+            public E_SpellTargetType target; // replace with images later
         }
 
         #endregion
