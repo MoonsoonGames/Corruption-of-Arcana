@@ -15,6 +15,7 @@ namespace Necropanda
 
         public void SpawnArcanaSymbols(int count)
         {
+            count = Mathf.Clamp(count, 0, arcanaSymbols.Length - 1);
             if (count < arcanaSymbols.Length)
                 Instantiate(arcanaSymbols[count], this.transform);
         }
