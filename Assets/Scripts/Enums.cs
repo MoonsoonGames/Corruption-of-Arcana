@@ -35,7 +35,8 @@ public enum E_Scenes
     [InspectorName("Dev Room")]
     DevRoom,
     Combat,
-    Tiertarock
+    Tiertarock,
+    PuzzleRoom
 }
 
 public enum E_UtilityScripts
