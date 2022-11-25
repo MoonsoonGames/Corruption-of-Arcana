@@ -11,14 +11,12 @@ namespace Necropanda
 {
     public class SpawnArcanaSymbol : MonoBehaviour
     {
-        public Object arcanaSymbol;
+        public Object[] arcanaSymbols;
 
         public void SpawnArcanaSymbols(int count)
         {
-            for (int i = 0; i < count; i++)
-            {
-                Instantiate(arcanaSymbol, this.transform);
-            }
+            if (count < arcanaSymbols.Length)
+                Instantiate(arcanaSymbols[count], this.transform);
         }
     }
 }
