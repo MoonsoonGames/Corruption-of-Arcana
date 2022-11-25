@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1855861602151596794}
   - component: {fileID: 1139028533047903129}
   - component: {fileID: 7983421412197867272}
-  m_Layer: 14
+  m_Layer: 16
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +98,51 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &6979283290638230423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3648768233985993977}
+  - component: {fileID: 1803696305807346690}
+  m_Layer: 16
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3648768233985993977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979283290638230423}
+  m_LocalRotation: {x: -0, y: -0.5609368, z: 0, w: 0.8278587}
+  m_LocalPosition: {x: 1.062, y: 0.311, z: -1.163}
+  m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8251727994678591928}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1803696305807346690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979283290638230423}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.107575, y: 0.41430324, z: 4.8973145}
+  m_Center: {x: 1.4263555, y: 0.19906232, z: -0.1791258}
 --- !u!1 &8366869435047020511
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +154,7 @@ GameObject:
   - component: {fileID: 700882570928114853}
   - component: {fileID: 2350576339348541570}
   - component: {fileID: 3355020800608979391}
-  m_Layer: 14
+  m_Layer: 16
   m_Name: pCube17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8251727994678591928}
   - component: {fileID: 8434889817024341584}
-  m_Layer: 14
+  m_Layer: 16
   m_Name: Stepping Stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,12 +251,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8777469807173212930}
   m_LocalRotation: {x: -0, y: 0.5609368, z: -0, w: 0.8278587}
-  m_LocalPosition: {x: 22.14458, y: -0.53030515, z: 35.37226}
+  m_LocalPosition: {x: 22.14458, y: -0.235, z: 35.37226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 700882570928114853}
   - {fileID: 5769235065827934234}
+  - {fileID: 3648768233985993977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 68.241, z: 0}

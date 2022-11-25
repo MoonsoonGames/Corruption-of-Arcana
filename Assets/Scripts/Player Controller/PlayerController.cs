@@ -32,6 +32,17 @@ namespace Necropanda.Player
         // Animator vairables
         public Animator animator;
 
+        Camera cam;
+
+        private void Start()
+        {
+            cam = Camera.main;
+            mouseLook = GetComponentInChildren<MouseLook>();
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+        }
+
         /// <summary>
         /// Update here, ran each frome. Here we call for the inputs.
         /// </summary>
@@ -39,6 +50,10 @@ namespace Necropanda.Player
         {
             GetInput();
         }
+
+        Vector3 right;
+        Vector3 forward;
+        MouseLook mouseLook;
 
         /// <summary>
         /// This function gets all of the KEYBOARD updates and converts those inputs into movement within
@@ -58,8 +73,13 @@ namespace Necropanda.Player
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
+            right = cam.transform.right * mouseLook.GetX();
+            right = right.normalized;
+            forward = cam.transform.forward * mouseLook.GetX();
+            forward = forward.normalized;
+
             // Combine into one variable which gets used later
-            Vector3 moveVector = transform.right * x + transform.forward * z;
+            Vector3 moveVector = right * x + forward * z;
 
             // Move using the controller component
             controller.Move(moveVector * speed * Time.deltaTime);
@@ -105,11 +125,11 @@ namespace Necropanda.Player
                 }
                 else if (move.x < -moveDeadzone)
                 {
-                    animator.SetInteger("Direction", 3);
+                    animator.SetInteger("Direction", 4);
                 }
                 else if (move.x > moveDeadzone)
                 {
-                    animator.SetInteger("Direction", 4);
+                    animator.SetInteger("Direction", 3);
                 }
             }
 
