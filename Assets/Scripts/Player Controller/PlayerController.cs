@@ -34,10 +34,13 @@ namespace Necropanda.Player
 
         Camera cam;
 
+        Vector3 right;
+        Vector3 forward;
+
         private void Start()
         {
             cam = Camera.main;
-            mouseLook = GetComponentInChildren<MouseLook>();
+            //mouseLook = GetComponentInChildren<MouseLook>();
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
@@ -50,10 +53,6 @@ namespace Necropanda.Player
         {
             GetInput();
         }
-
-        Vector3 right;
-        Vector3 forward;
-        MouseLook mouseLook;
 
         /// <summary>
         /// This function gets all of the KEYBOARD updates and converts those inputs into movement within
@@ -73,9 +72,9 @@ namespace Necropanda.Player
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
-            right = cam.transform.right * mouseLook.GetX();
+            right = cam.transform.right;
             right = right.normalized;
-            forward = cam.transform.forward * mouseLook.GetX();
+            forward = cam.transform.forward;
             forward = forward.normalized;
 
             // Combine into one variable which gets used later
