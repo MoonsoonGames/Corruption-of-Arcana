@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 7948256169712108023}
   - component: {fileID: 1820769349100625109}
   - component: {fileID: 9098820405201995317}
+  - component: {fileID: 2235584833451838158}
   m_Layer: 5
   m_Name: CardLock
   m_TagString: Untagged
@@ -504,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.5471698, g: 0, b: 0, a: 0.3882353}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
@@ -520,6 +521,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2235584833451838158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6306351962893377200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630cee2dbf3f0bb4492b08071147e2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Enemy Spell
+  description: An enemy is casting a spell on this character, taking up one of your
+    card slots
 --- !u!1 &6531249856331907666
 GameObject:
   m_ObjectHideFlags: 0
