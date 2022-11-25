@@ -1,7 +1,8 @@
 using UnityEngine;
+using Cinemachine;
 
 /// <summary>
-/// Authored & Written by @mrobertscgd
+/// Authored & Written by @mrobertscgd, adjusted and worked on collaborativley by Andrew Scott (andrewscott@icloud.com)
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
@@ -24,7 +25,7 @@ namespace Necropanda.Player
         public Transform groundCheck; // Transform for checking whether the player is grounded.
         public float groundDistance = 0.4f; // The distance of the player to the ground.
         public LayerMask groundMask; // Used for telling the controller what ground is.
-        public bool paused; // Defines whether the game is paused, this might not be needed.
+        public bool paused = false; // Defines whether the game is paused, this might not be needed.
 
         Vector3 velocity; // The velocity(speed) of the player.
         bool isGrounded; // Tells us whether the player is grounded.
@@ -33,6 +34,7 @@ namespace Necropanda.Player
         public Animator animator;
 
         Camera cam;
+        public CinemachineBrain cmBrain;
 
         Vector3 right;
         Vector3 forward;
@@ -40,6 +42,7 @@ namespace Necropanda.Player
         private void Start()
         {
             cam = Camera.main;
+            cmBrain = FindObjectOfType<CinemachineBrain>();
             //mouseLook = GetComponentInChildren<MouseLook>();
 
             Cursor.lockState = CursorLockMode.Confined;
@@ -51,7 +54,15 @@ namespace Necropanda.Player
         /// </summary>
         void Update()
         {
-            GetInput();
+
+            if (!paused)
+            {
+                GetInput();
+                cmBrain.enabled = true;
+                return;
+            }
+            // Disable camera input
+            cmBrain.enabled = false;
         }
 
         /// <summary>
