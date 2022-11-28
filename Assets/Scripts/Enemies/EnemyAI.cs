@@ -25,7 +25,7 @@ namespace Necropanda.AI
         [Header("AI State Variables")]
         public ModuleManager moduleManager;
         public AIState currentState; // The current state of the AI. Wandering, Fleeing etc.
-        
+
         public bool doOverrideState; // If true, the AI will only stay in this state. Regardless of anything else.
         public AIState overrideState;
         public int avoidancePriority = 15; // The level of avoidance priority for the agent. lower = more important. Might be worth setting this based on the type of the enemy
@@ -42,6 +42,8 @@ namespace Necropanda.AI
         {
             animator = GetComponent<Animator>();
             moduleManager = gameObject.GetComponent<ModuleManager>();
+            moduleManager.ChangeModuleState(1, false);
+            moduleManager.ChangeModuleState(2, false);
 
             agent = GetComponent<NavMeshAgent>();
             startPos = transform.position;
@@ -54,15 +56,6 @@ namespace Necropanda.AI
             player = playerRef;
             active = true;
             //Debug.Log("Activate AI");
-        }
-
-        public void DeactivateAI()
-        {
-            player = null;
-            active = false;
-            //Debug.Log("Deactivate AI");
-            //Debug.Log("test");
-            agent.SetDestination(startPos);
         }
 
         // Update is called once per frame
@@ -106,7 +99,7 @@ namespace Necropanda.AI
         {
             switch (currentState)
             {
-                default:
+                case AIState.Nothing:
                     // Disable the other modules when the AI is doing nothing.
                     moduleManager.wander.enabled = false;
                     moduleManager.patrol.enabled = false;
@@ -114,7 +107,7 @@ namespace Necropanda.AI
                     currentState = AIState.Nothing;
                     // Check if the AI has been running for long enough for a state switch.
                     // probably also need to reset the timer here too.
-                    if(timer > 5 && !doOverrideState)
+                    if (timer > 5 && !doOverrideState)
                     {
                         currentState = AIState.Wandering;
                     }
@@ -128,6 +121,12 @@ namespace Necropanda.AI
                     moduleManager.wander.enabled = false;
                     moduleManager.patrol.enabled = false;
                     agent.SetDestination(player.transform.position);
+
+                    // Check to make sure the AI doesn't run into the player.
+                    if (agent.remainingDistance <= .5f)
+                    {
+                        agent.SetDestination(agent.transform.position);
+                    }
                     break;
 
                 case AIState.Wandering:
@@ -151,14 +150,16 @@ namespace Necropanda.AI
             timer += Time.deltaTime;
         }
 
-        private void OnTriggerStay(Collider other) {
+        private void OnTriggerStay(Collider other)
+        {
             if (other.tag == "Player")
             {
                 currentState = AIState.Chasing;
             }
         }
 
-        private void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other)
+        {
             currentState = AIState.Nothing;
         }
         #endregion
