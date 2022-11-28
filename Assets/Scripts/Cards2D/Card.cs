@@ -29,9 +29,7 @@ namespace Necropanda
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
-            if (spell.overrideColor)
-                cardBackground.color = spell.timelineColor;
-
+            
             //SetupIcons();
 
             gameObject.name = spell.spellName;
