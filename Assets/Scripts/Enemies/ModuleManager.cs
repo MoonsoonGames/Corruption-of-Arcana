@@ -21,7 +21,8 @@ namespace Necropanda.AI
             aiController = GetComponent<EnemyAI>();
         }
 
-        private void OnEnable() {
+        private void OnEnable()
+        {
             CheckScripts();
         }
 
@@ -64,37 +65,44 @@ namespace Necropanda.AI
         /// <summary>
         /// Needs additional work, avoid passing in a true bool for now.
         /// </summary>
-        /// <param name="type">Determines what it disables, 1 disable AI movement modules or 2 disable mouse modules</param>
-        /// <param name="state">determines whether the AI is enabled or disabled</param>
-        public void ChangeAllModuleStates(int type, bool state)
+        /// <param name="type">Determines what it disables, 1 to disable wander, 2 to disable patrol</param>
+        /// <param name="state">determines whether the module is enabled or disabled</param>
+        public void ChangeModuleState(int type, bool state)
         {
             aiController.currentState = AIState.Nothing;
             switch (type)
             {
                 case 1:
-                DisableAllAIMovementModules:
-                    try
+                    for (int i = 0; i < 5; i++)
                     {
-                        wander.enabled = state;
-                    }
-                    catch (NullReferenceException)
-                    {
-                        Debug.LogError("Couldn't disable the wandering module, trying again...");
-                        wander.enabled = false;
-                        goto DisableAllAIMovementModules; // Not sure if this is a good way to go about it..
-                    }
-
-                    try
-                    {
-                        patrol.enabled = state;
-                    }
-                    catch (NullReferenceException)
-                    {
-                        Debug.LogError("Tried to stop the patrol module, error occured. Forcefully stopping it.");
-                        patrol.enabled = false;
-                        goto DisableAllAIMovementModules; // Not sure if this is a good way to go about it..
+                        try
+                        {
+                            Debug.Log("Setting Wander to " + state);
+                            wander.enabled = state;
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Debug.LogError("Couldn't disable the wandering module, trying again for ${i}");
+                            wander.enabled = false;
+                        }
                     }
                     break;
+
+                case 2:
+                    for (int i = 0; i < 5; i++)
+                    {
+                        try
+                        {
+                            patrol.enabled = state;
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Debug.LogError("Tried to stop the patrol module, error occured. Forcefully stopping it.");
+                            patrol.enabled = false;
+                        }
+                    }
+                    break;
+
                 default:
                     Debug.LogError("Invalid type was entered. Please enter 1 or 2. Stopping script to avoid errors.");
                     break;
