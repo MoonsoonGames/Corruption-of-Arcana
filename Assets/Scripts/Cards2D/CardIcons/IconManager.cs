@@ -20,26 +20,16 @@ namespace Necropanda
             instance = this;
         }
 
-        public string[] damageTitles;
-        public string[] damageDescriptions;
+        public CombatHelperFunctions.IconToolTip[] iconTooltips;
 
         public string ReplaceText(string text)
         {
             string newText = text;
 
-
-            #region replaceText
-
-            newText = newText.Replace("$healing$", "<link=\"" + damageTitles[0] + "$split$" + damageDescriptions[0] + "\"><sprite index= 0></link>");
-            newText = newText.Replace("$shield$", "<link=\"" + damageTitles[1] + "$split$" + damageDescriptions[1] + "\"><sprite index= 1></link>");
-            newText = newText.Replace("$physical$", "<link=\"" + damageTitles[2] + "$split$" + damageDescriptions[2] + "\"><sprite index= 2></link>");
-            newText = newText.Replace("$phantom$", "<link=\"" + damageTitles[3] + "$split$" + damageDescriptions[3] + "\"><sprite index= 3></link>");
-            newText = newText.Replace("$static$", "<link=\"" + damageTitles[4] + "$split$" + damageDescriptions[4] + "\"><sprite index= 4></link>");
-            newText = newText.Replace("$glacial$", "<link=\"" + damageTitles[5] + "$split$" + damageDescriptions[5] + "\"><sprite index= 5></link>");
-            newText = newText.Replace("$ember$", "<link=\"" + damageTitles[6] + "$split$" + damageDescriptions[6] + "\"><sprite index= 6></link>");
-            newText = newText.Replace("$septic$", "<link=\"" + damageTitles[7] + "$split$" + damageDescriptions[7] + "\"><sprite index= 7></link>");
-
-            #endregion
+            foreach (var icon in iconTooltips)
+            {
+                newText = newText.Replace("$" + icon.replaceText + "$", "<link=\"" + icon.title + "$split$" + icon.description + "\"><sprite index= " + icon.imageID + "></link>");
+            }
 
             return newText;
         }
