@@ -81,32 +81,6 @@ namespace Necropanda
             SetOverlay(false, " ");
 
             buildDeck = GetComponentInParent<BuildDeck>();
-
-            if (buildDeck != null)
-            {
-                if (collection)
-                {
-                    buildDeck.collectedSpells.Clear();
-
-                    foreach (var card in cards)
-                    {
-                        Spell spell = card.GetComponent<Card>().spell;
-
-                        buildDeck.collectedSpells.Add(spell);
-                    }
-                }
-                else
-                {
-                    buildDeck.equippedSpells.Clear();
-
-                    foreach (var card in cards)
-                    {
-                        Spell spell = card.GetComponent<Card>().spell;
-
-                        buildDeck.equippedSpells.Add(spell);
-                    }
-                }
-            }
         }
 
         #endregion
@@ -261,13 +235,17 @@ namespace Necropanda
             if (buildDeck != null)
             {
                 Spell spell = card.GetComponent<Card>().spell;
-                if (collection)
+
+                if (spell != null)
                 {
-                    buildDeck.collectedSpells.Add(spell);
-                }
-                else
-                {
-                    buildDeck.equippedSpells.Add(spell);
+                    if (collection)
+                    {
+                        buildDeck.collectedSpells.Add(spell);
+                    }
+                    else
+                    {
+                        buildDeck.equippedSpells.Add(spell);
+                    }
                 }
             }
         }
