@@ -334,6 +334,11 @@ namespace Necropanda
 
         #region Icon Constructs
 
+        public struct IconToolTip
+        {
+
+        }
+
         public struct SpellIconConstruct
         {
             public int value;

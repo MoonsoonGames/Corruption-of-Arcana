@@ -24,7 +24,7 @@ namespace Necropanda
         {
             if (title != null)
             {
-                title.text = titleText;
+                title.text = IconManager.instance.ReplaceText(titleText);
             }
 
             if (spell != null)

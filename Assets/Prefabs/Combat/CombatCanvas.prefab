@@ -39,6 +39,69 @@ RectTransform:
   m_AnchoredPosition: {x: 3.621338, y: 30.746872}
   m_SizeDelta: {x: 1593.7523, y: 729.1205}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1334150381158104400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4060981093444796324}
+  - component: {fileID: 6190482673140921490}
+  m_Layer: 0
+  m_Name: TextManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4060981093444796324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334150381158104400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731661797901933100}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6190482673140921490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334150381158104400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38cb7043ebb4a28469119e0a856ebd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTitles:
+  - Health
+  - Shield
+  - Physical Damage
+  - Phantom Damage
+  - Static Damage
+  - Glacial Damage
+  - Ember Damage
+  - Septic Damage
+  damageDescriptions:
+  - Restores health to the target
+  - Shield absorbs damage taken, except phantom damage, and decays at the end of
+    every turn
+  - Deals Physical damage to the target
+  - Deals Phantom damage to the target, which ignores target's resistances and shields
+  - Deals Static damage to the target
+  - Deals Glacial damage to the target
+  - Deals Ember damage to the target
+  - Deals Septic damage to the target
 --- !u!1 &3731661797744981203
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +133,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3731661797901933100}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -230,6 +293,7 @@ RectTransform:
   - {fileID: 3731661797949196076}
   - {fileID: 3731661796765928961}
   - {fileID: 3731661797880581055}
+  - {fileID: 4060981093444796324}
   - {fileID: 2781755461037147230}
   - {fileID: 3731661797744981228}
   - {fileID: 1350412465248404830}
@@ -334,7 +398,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3731661797901933100}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -586,7 +650,7 @@ PrefabInstance:
     - target: {fileID: 413557508210026686, guid: 580a83f9e733dbf4e807a084565ef7db,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 413557508210026686, guid: 580a83f9e733dbf4e807a084565ef7db,
         type: 3}

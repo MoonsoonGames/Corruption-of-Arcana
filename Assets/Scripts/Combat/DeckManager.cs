@@ -78,7 +78,9 @@ namespace Necropanda
         public void SetupDecks()
         {
             playerDeck = HelperFunctions.CombineLists(minorArcana, majorArcana);
-            playerDeck.Sort(HelperFunctions.RandomSort);
+
+            for (int i = 0; i < 5; i++)
+                playerDeck.Sort(HelperFunctions.RandomSort);
         }
 
         /// <summary>

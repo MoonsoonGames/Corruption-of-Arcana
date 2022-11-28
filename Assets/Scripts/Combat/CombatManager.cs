@@ -27,6 +27,11 @@ namespace Necropanda
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
 
+            Invoke("Setup", 0.1f);
+        }
+
+        void Setup()
+        {
             DeckManager.instance.SetupDecks();
         }
 
