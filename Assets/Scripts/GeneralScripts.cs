@@ -334,6 +334,15 @@ namespace Necropanda
 
         #region Icon Constructs
 
+        [System.Serializable]
+        public struct IconToolTip
+        {
+            public string title;
+            public string replaceText;
+            public string description;
+            public int imageID;
+        }
+
         public struct SpellIconConstruct
         {
             public int value;

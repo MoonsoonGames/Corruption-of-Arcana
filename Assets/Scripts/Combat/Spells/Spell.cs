@@ -21,7 +21,7 @@ namespace Necropanda
         public string spellName;
         [TextArea(3, 10)]
         public string flavourText; // Flavour text
-        [TextArea(3, 10)]
+        [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
 

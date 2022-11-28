@@ -28,11 +28,9 @@ namespace Necropanda
             nameText.text = spell.spellName;
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
-            descriptionText.text = spell.spellDescription;
-            if (spell.overrideColor)
-                cardBackground.color = spell.timelineColor;
-
-            SetupIcons();
+            descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
+            
+            //SetupIcons();
 
             gameObject.name = spell.spellName;
 
@@ -44,111 +42,39 @@ namespace Necropanda
             //spell.CastSpell(target, caster);
         }
 
-        #region Icons
-
-        public Object sectionPrefab;
-
         public void SetupIcons()
         {
             if (cardFace == null)
                 return;
-
-            List<CombatHelperFunctions.SpellIconConstruct> spellConstructs = spell.SpellIcons();
-
-            foreach(var item in spellConstructs)
-            {
-                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
-                GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
-                IconConstructor constructor = section.GetComponent<IconConstructor>();
-
-                if (constructor != null)
-                    constructor.ConstructSpell(item.value, GetEffectObject(item.effectType), item.hitCount, GetTargetType(item.target));
-            }
-
-            List<CombatHelperFunctions.StatusIconConstruct> statusConstructs = spell.EffectIcons();
-
-            foreach (var item in statusConstructs)
-            {
-                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
-                GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
-                IconConstructor constructor = section.GetComponent<IconConstructor>();
-
-                if (constructor != null)
-                    constructor.ConstructStatus(item.chance, item.effectIcon, item.duration, GetTargetType(item.target), item.effect);
-            }
-
-            CombatHelperFunctions.ExecuteIconConstruct executeConstruct = spell.ExecuteIcons();
-
-            if (executeConstruct.threshold > 0)
-            {
-                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
-                GameObject section = Instantiate(sectionPrefab, cardFace.transform) as GameObject;
-                IconConstructor constructor = section.GetComponent<IconConstructor>();
-
-                if (constructor != null)
-                    constructor.ConstructExecute(executeConstruct.threshold, GetTargetType(executeConstruct.target));
-            }
+            
+            descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
         }
 
-        public Object physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, randomIcon, healingIcon, shieldIcon;
+        bool showing = false;
 
-        public Object GetEffectObject(E_DamageTypes effectType)
+        private void Update()
         {
-            switch (effectType)
+            int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, Camera.main);
+            if (linkIndex != -1)
             {
-                case E_DamageTypes.Physical:
-                    return physicalIcon;
-                case E_DamageTypes.Ember:
-                    return emberIcon;
-                case E_DamageTypes.Bleak:
-                    return bleakIcon;
-                case E_DamageTypes.Static:
-                    return staticIcon;
-                case E_DamageTypes.Septic:
-                    return septicIcon;
-                case E_DamageTypes.Perforation:
-                    return perfotationIcon;
-                case E_DamageTypes.Random:
-                    return randomIcon;
-                case E_DamageTypes.Healing:
-                    return healingIcon;
-                case E_DamageTypes.Shield:
-                    return shieldIcon;
-                default:
-                    return null;
+                TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex]; // Get the information about the link
+                // Do something based on what link ID or Link Text is encountered...
+
+                string id = linkInfo.GetLinkID();
+                string split = "$split$";
+                string[] parts = id.Split(split);
+
+                string title = parts[0];
+                string description = parts[1];
+
+                Debug.Log(title + " || " + description);
+                TooltipManager.instance.ShowTooltip(true, title, description);
+            }
+            else
+            {
+                Debug.Log("Close");
+                //TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
             }
         }
-
-        public string GetTargetType(E_SpellTargetType targetType)
-        {
-            string targetString = HelperFunctions.AddSpacesToSentence(targetType.ToString());
-            return targetString;
-
-            /*
-            switch (targetType)
-            {
-                case E_DamageTypes.Physical:
-                    return physicalIcon;
-                case E_DamageTypes.Ember:
-                    return emberIcon;
-                case E_DamageTypes.Bleak:
-                    return bleakIcon;
-                case E_DamageTypes.Static:
-                    return staticIcon;
-                case E_DamageTypes.Septic:
-                    return septicIcon;
-                case E_DamageTypes.Perforation:
-                    return perfotationIcon;
-                case E_DamageTypes.Healing:
-                    return healingIcon;
-                case E_DamageTypes.Shield:
-                    return shieldIcon;
-                default:
-                    return null;
-            }
-            */
-        }
-
-        #endregion
     }
 }

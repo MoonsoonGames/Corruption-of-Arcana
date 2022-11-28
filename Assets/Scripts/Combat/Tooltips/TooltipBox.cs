@@ -19,12 +19,12 @@ namespace Necropanda
         {
             if (title != null)
             {
-                title.text = titleText;
+                title.text = IconManager.instance.ReplaceText(titleText);
             }
 
             if (description != null)
             {
-                description.text = descText;
+                description.text = IconManager.instance.ReplaceText(descText);
             }
         }
     }
