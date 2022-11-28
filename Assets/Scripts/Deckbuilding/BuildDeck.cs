@@ -11,32 +11,20 @@ namespace Necropanda
 {
     public class BuildDeck : MonoBehaviour
     {
-        List<Spell> spells;
+        //[HideInInspector]
+        public List<Spell> collectedSpells, equippedSpells;
 
         // Start is called before the first frame update
         void Start()
         {
-            spells = new List<Spell>();
+            collectedSpells = new List<Spell>();
+            equippedSpells = new List<Spell>();
         }
 
-        public void ClearSpells()
+        public void SaveCards()
         {
-            spells.Clear();
-            DeckManager.instance.SetDeck(spells);
-        }
-
-        public void AddRemoveSpell(Spell spell, bool add)
-        {
-            if (add)
-            {
-                spells.Add(spell);
-            }
-            else
-            {
-                spells.Remove(spell);
-            }
-
-            DeckManager.instance.SetDeck(spells);
+            DeckManager.instance.collection = collectedSpells;
+            DeckManager.instance.majorArcana = equippedSpells;
         }
     }
 }

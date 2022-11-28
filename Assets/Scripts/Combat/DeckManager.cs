@@ -34,9 +34,12 @@ namespace Necropanda
 
         #region Decks
 
+        public List<Spell> collection;
+
         public List<Spell> minorArcana;
         public List<Spell> majorArcana;
         public List<Spell> playerDeck;
+
         public List<Spell> playedCards;
         public List<Spell> discardPile;
 
@@ -146,16 +149,28 @@ namespace Necropanda
             playedCards.Clear();
         }
 
-        public void SetDeck(List<Spell> spells)
+        public void SetCollectionDeck(List<Spell> spells)
         {
-            majorArcana = new List<Spell>();
+            collection.Clear();
+
+            foreach (Spell spell in spells)
+            {
+                collection.Add(spell);
+            }
+
+            //SetupDecks();
+        }
+
+        public void SetEquipDeck(List<Spell> spells)
+        {
+            majorArcana.Clear();
 
             foreach (Spell spell in spells)
             {
                 majorArcana.Add(spell);
             }
 
-            SetupDecks();
+            //SetupDecks();
         }
     }
 }

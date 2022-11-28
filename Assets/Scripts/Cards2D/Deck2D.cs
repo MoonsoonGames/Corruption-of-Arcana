@@ -32,6 +32,8 @@ namespace Necropanda
         bool open = true;
         UntargettableOverlay untargettableOverlay;
 
+        public bool collection = true;
+
         #endregion
 
         #region Cards
@@ -78,17 +80,31 @@ namespace Necropanda
             untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
 
-            buildDeck = GetComponent<BuildDeck>();
+            buildDeck = GetComponentInParent<BuildDeck>();
 
             if (buildDeck != null)
             {
-                buildDeck.ClearSpells();
-
-                foreach (var card in cards)
+                if (collection)
                 {
-                    Spell spell = card.GetComponent<Card>().spell;
+                    buildDeck.collectedSpells.Clear();
 
-                    buildDeck.AddRemoveSpell(spell, true);
+                    foreach (var card in cards)
+                    {
+                        Spell spell = card.GetComponent<Card>().spell;
+
+                        buildDeck.collectedSpells.Add(spell);
+                    }
+                }
+                else
+                {
+                    buildDeck.equippedSpells.Clear();
+
+                    foreach (var card in cards)
+                    {
+                        Spell spell = card.GetComponent<Card>().spell;
+
+                        buildDeck.equippedSpells.Add(spell);
+                    }
                 }
             }
         }
@@ -167,7 +183,16 @@ namespace Necropanda
             }
 
             if (buildDeck != null)
-                buildDeck.AddRemoveSpell(card.GetComponent<Card>().spell, false);
+            {
+                if (collection)
+                {
+                    buildDeck.collectedSpells.Remove(newSpellInstance.spell);
+                }
+                else
+                {
+                    buildDeck.equippedSpells.Remove(newSpellInstance.spell);
+                }
+            }
         }
 
         /// <summary>
@@ -191,7 +216,17 @@ namespace Necropanda
                 }
 
                 if (buildDeck != null)
-                    buildDeck.AddRemoveSpell(card.GetComponent<Card>().spell, false);
+                {
+                    Spell spell = card.GetComponent<Card>().spell;
+                    if (collection)
+                    {
+                        buildDeck.collectedSpells.Remove(spell);
+                    }
+                    else
+                    {
+                        buildDeck.equippedSpells.Remove(spell);
+                    }
+                }
 
                 Destroy(card.gameObject);
             }
@@ -224,7 +259,17 @@ namespace Necropanda
                 timeline.SimulateSpellEffects();
 
             if (buildDeck != null)
-                buildDeck.AddRemoveSpell(card.GetComponent<Card>().spell, true);
+            {
+                Spell spell = card.GetComponent<Card>().spell;
+                if (collection)
+                {
+                    buildDeck.collectedSpells.Add(spell);
+                }
+                else
+                {
+                    buildDeck.equippedSpells.Add(spell);
+                }
+            }
         }
 
         /// <summary>

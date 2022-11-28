@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1577780946432318839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4556865551640665987}
+  - component: {fileID: 5949183553137628341}
+  m_Layer: 0
+  m_Name: TextManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4556865551640665987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577780946432318839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5949183553137628341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577780946432318839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38cb7043ebb4a28469119e0a856ebd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconTooltips:
+  - title: Health
+    replaceText: health
+    description: Restores health to the target
+    imageID: 0
+  - title: Shield
+    replaceText: shield
+    description: Shield absorbs damage taken, except phantom damage, and decays at
+      the end of every turn
+    imageID: 1
+  - title: Physical Damage
+    replaceText: physical
+    description: Deals Physical damage to the target
+    imageID: 2
+  - title: Phantom Damage
+    replaceText: phantom
+    description: Deals Phantom damage to the target, which ignores target's resistances
+      and shields
+    imageID: 3
+  - title: Static Damage
+    replaceText: static
+    description: Deals Static damage to the target
+    imageID: 4
+  - title: Glacial Damage
+    replaceText: glacial
+    description: Deals Glacial damage to the target
+    imageID: 5
+  - title: Ember Damage
+    replaceText: ember
+    description: Deals Ember damage to the target
+    imageID: 6
+  - title: Septic Damage
+    replaceText: septic
+    description: Deals Septic damage to the target
+    imageID: 7
+  - title: Banish
+    replaceText: banish
+    description: Target cannot take their turn or be targeted by other characters
+    imageID: 3
+  - title: Barbed Guard
+    replaceText: barbedguard
+    description: Reflect 2 physical damage when hit
+    imageID: 2
+  - title: Charm
+    replaceText: charm
+    description: Target will consider allies as enemies and enemies as allies
+    imageID: 3
+  - title: Conductive
+    replaceText: conductive
+    description: Team takes 2 Static damage at the end of the timeline
+    imageID: 4
+  - title: Confuse
+    replaceText: confuse
+    description: Spells cast by this character will get redirected to random targets
+    imageID: 3
+  - title: Curse
+    replaceText: curse
+    description: Target's max health is reduced by 20%
+    imageID: 3
+  - title: Empower
+    replaceText: empower
+    description: This character's deck is Empowered, all cards applied here have
+      a 50% increased effectiveness
+    imageID: 8
+  - title: Enlighten
+    replaceText: enlighten
+    description: Target can see all of the spells cast by their opponents
+    imageID: 8
+  - title: Frostbite
+    replaceText: frostbite
+    description: Take 4 Bleak damage at the end of the timeline
+    imageID: 3
+  - title: Haste
+    replaceText: haste
+    description: Increases max arcana by 2 points
+    imageID: 4
+  - title: Radiant Aura
+    replaceText: radiantaura
+    description: Deal 2 Static damage to all enemies and heal 2 health at the end
+      of the timeline
+    imageID: 4
+  - title: Redirected
+    replaceText: redirected
+    description: Spells with random targets will be redirected to this character
+    imageID: 2
+  - title: Regeneration
+    replaceText: regeneration
+    description: Heal 3 health at the end of the timeline
+    imageID: 0
+  - title: Silence
+    replaceText: silence
+    description: Reduces max arcana by 2 points
+    imageID: 3
+  - title: Stun
+    replaceText: stun
+    description: Target can no longer take turns
+    imageID: 3
+  - title: Sleep
+    replaceText: sleep
+    description: Target can no longer take turns
+    imageID: 3
+  - title: Weaken
+    replaceText: weaken
+    description: This character's deck is Weakened, all cards applied here have a
+      50% decreased effectiveness
+    imageID: 3
+  - title: Wildfire
+    replaceText: wildfire
+    description: Upon taking damage, receive an additional 1 points of Ember damage
+    imageID: 6

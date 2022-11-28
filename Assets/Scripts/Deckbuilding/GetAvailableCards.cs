@@ -11,30 +11,54 @@ namespace Necropanda
 {
     public class GetAvailableCards : MonoBehaviour
     {
-        public GameObject content;
-        Deck2D availableCardsDeck;
-        public List<Spell> playerDeck;
+        public GameObject collectionContent, equipContent;
+        Deck2D collectionDeck, equipDeck;
+        BuildDeck buildDeck;
         public Object cardPrefab;
 
         // Start is called before the first frame update
         void Start()
         {
-            if (content == null) return;
-            availableCardsDeck = GetComponent<Deck2D>();
+            if (collectionContent == null) return;
+            collectionDeck = collectionContent.GetComponentInParent<Deck2D>();
 
-            foreach(Spell spell in playerDeck)
+            if (equipContent == null) return;
+            equipDeck = equipContent.GetComponentInParent<Deck2D>();
+
+            buildDeck = GetComponent<BuildDeck>();
+
+            foreach (Spell spell in DeckManager.instance.collection)
             {
-                GameObject card = Instantiate(cardPrefab, content.transform) as GameObject;
+                GameObject card = Instantiate(cardPrefab, collectionContent.transform) as GameObject;
                 CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
                 DrawCard drawCard = card.GetComponent<DrawCard>();
                 //Add the card to the array
-                availableCardsDeck.AddCard(cardDrag);
+                collectionDeck.AddCard(cardDrag);
 
                 //Reset card scales
                 cardDrag.ScaleCard(1, false);
 
                 drawCard.draw = false;
                 drawCard.Setup(spell);
+
+                buildDeck.collectedSpells.Add(spell);
+            }
+
+            foreach (Spell spell in DeckManager.instance.majorArcana)
+            {
+                GameObject card = Instantiate(cardPrefab, equipContent.transform) as GameObject;
+                CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+                DrawCard drawCard = card.GetComponent<DrawCard>();
+                //Add the card to the array
+                equipDeck.AddCard(cardDrag);
+
+                //Reset card scales
+                cardDrag.ScaleCard(1, false);
+
+                drawCard.draw = false;
+                drawCard.Setup(spell);
+
+                buildDeck.equippedSpells.Add(spell);
             }
         }
 
