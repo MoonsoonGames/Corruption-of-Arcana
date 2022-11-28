@@ -24,7 +24,7 @@ namespace Necropanda.AI.Movement
         private EnemyAI ai;
         public float timeToPatrol = 30f;
         public bool patrol = true;
-        
+
         public Vector3 originalPos;
         public Vector3[] patrolPoints;
 
@@ -32,7 +32,8 @@ namespace Necropanda.AI.Movement
         [Header("Temp Offset")]
         public float patrolPointOffset;
 
-        private enum Direction {
+        private enum Direction
+        {
             North,
             East,
             South,
@@ -46,17 +47,19 @@ namespace Necropanda.AI.Movement
             //Get the original position, i.e the center.
             originalPos = gameObject.transform.position;
 
-            
+
             StartCoroutine(Cooldown(timeToPatrol));
             GotoNextPoint();
         }
 
-        private void Setup(){
+        private void Setup()
+        {
             patrolPoints = GetPatrolPointsDiamond(patrolPointOffset);
             agent = GetComponent<NavMeshAgent>();
             ai = GetComponent<EnemyAI>();
 
-            for (int i = 0; i < patrolPoints.Length; i++) {
+            for (int i = 0; i < patrolPoints.Length; i++)
+            {
                 Vector3 point = patrolPoints[i];
 
                 // Check to see if point is valid
@@ -64,12 +67,12 @@ namespace Necropanda.AI.Movement
                 if (!isPathValid)
                 {
                     // This should set the destination to the closest thing on the navmesh
-                    if (agent.path.status == NavMeshPathStatus.PathComplete || 
+                    if (agent.path.status == NavMeshPathStatus.PathComplete ||
                     agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
                     {
                         agent.SetDestination(point);
                         Debug.LogWarning($"Point was off navmesh, point moved to: {agent.destination}");
-                        
+
                         patrolPoints[i] = agent.destination;
                     }
                 }
@@ -130,7 +133,7 @@ namespace Necropanda.AI.Movement
             agent.autoBraking = true;
             // Reset the state back to nothing
             ai.currentState = AIState.Nothing;
-            
+
             this.enabled = false;
         }
 
@@ -160,7 +163,7 @@ namespace Necropanda.AI.Movement
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            foreach(Vector3 point in patrolPoints)
+            foreach (Vector3 point in patrolPoints)
             {
                 Gizmos.DrawSphere(point, 1);
             }
