@@ -663,7 +663,7 @@ PrefabInstance:
     - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -688,12 +688,17 @@ PrefabInstance:
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: overrideState
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: doOverrideState
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: wanderingCoolDown
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21e94afcdf97434595d03b968ffa0d5, type: 3}
@@ -5597,6 +5602,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6750534686865133459, guid: 17096e33724e3674fb010ac09fc22166,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7298192787311657921, guid: 17096e33724e3674fb010ac09fc22166,
         type: 3}
       propertyPath: m_Name
@@ -7201,7 +7211,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -53.5
+      value: -46.69
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -7211,7 +7221,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.1
+      value: -41.13
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -7251,7 +7261,7 @@ PrefabInstance:
     - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -7266,12 +7276,12 @@ PrefabInstance:
     - target: {fileID: 6715505794480853126, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6715505794480853126, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6750534686865133459, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -7283,15 +7293,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: OV_Bandit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8762746955952038152, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: moduleManager
+      value: 
+      objectReference: {fileID: 1685745256}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: overrideState
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: doOverrideState
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: wanderingCoolDown
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21e94afcdf97434595d03b968ffa0d5, type: 3}
@@ -14580,6 +14605,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 730571196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1685745256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7966900699311784393, guid: e21e94afcdf97434595d03b968ffa0d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 730571196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bd2785c4f94dc448d82640b1c77614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1697840494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18478,7 +18515,7 @@ PrefabInstance:
     - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -18500,15 +18537,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: OV_Bandit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7966900699311784393, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: overrideState
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: doOverrideState
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: wanderingCoolDown
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21e94afcdf97434595d03b968ffa0d5, type: 3}
@@ -19533,17 +19580,17 @@ PrefabInstance:
     - target: {fileID: 1940659339477412595, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.037129562
+      value: 0.03712956
       objectReference: {fileID: 0}
     - target: {fileID: 1940659339477412595, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000037227221
+      value: 0.0000000037227221
       objectReference: {fileID: 0}
     - target: {fileID: 1940659339477412595, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.3831841e-10
+      value: -1.383184e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1940659339934191092, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
@@ -19633,17 +19680,17 @@ PrefabInstance:
     - target: {fileID: 8568691670746065184, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.03712956
+      value: 0.037129555
       objectReference: {fileID: 0}
     - target: {fileID: 8568691670746065184, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -4.43783e-16
+      value: 0.0000000037227217
       objectReference: {fileID: 0}
     - target: {fileID: 8568691670746065184, guid: 6afa242e5217b164fb37ec006b3e3241,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 2.6110477e-18
+      value: -1.3831837e-10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6afa242e5217b164fb37ec006b3e3241, type: 3}
