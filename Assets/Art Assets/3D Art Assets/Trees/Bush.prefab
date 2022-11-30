@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1742615622041826882
+--- !u!1 &8921291037657430886
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6204814847724032618}
-  - component: {fileID: 6916214359621386891}
-  - component: {fileID: 8526168937012821915}
+  - component: {fileID: 3359466875213933324}
+  - component: {fileID: 165594557324425023}
+  - component: {fileID: 7279113840776306651}
+  - component: {fileID: 5424125799431780209}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: Bush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6204814847724032618
+--- !u!4 &3359466875213933324
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742615622041826882}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 17.378, y: 17.378, z: 17.378}
+  m_GameObject: {fileID: 8921291037657430886}
+  m_LocalRotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: -1.044, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6310315828521808847}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6916214359621386891
+--- !u!33 &165594557324425023
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742615622041826882}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8526168937012821915
+  m_GameObject: {fileID: 8921291037657430886}
+  m_Mesh: {fileID: 4300000, guid: 20fcad7f9f236624ebd4a5ea2ef58413, type: 2}
+--- !u!23 &7279113840776306651
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742615622041826882}
+  m_GameObject: {fileID: 8921291037657430886}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 638f82664910e424dbae4a9c0fd09ba1, type: 2}
+  - {fileID: 2100000, guid: 57735959a57bacd4abe7ed627bd896d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,51 +84,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8484048887370330309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6310315828521808847}
-  - component: {fileID: 618320890419022665}
-  m_Layer: 0
-  m_Name: Cloud
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6310315828521808847
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8484048887370330309}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.107664, y: 13.456205, z: 45.12744}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6204814847724032618}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &618320890419022665
+--- !u!114 &5424125799431780209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8484048887370330309}
+  m_GameObject: {fileID: 8921291037657430886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 036aab1388014ad49b61c53fe1fedbf1, type: 3}
+  m_Script: {fileID: 11500000, guid: c122224900a334bd7b15e0923fe4ae28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockX: 0
-  lockY: 0
-  lockZ: 0
+  carrierMesh: {fileID: 4300000, guid: 737f8aaf60f7c4a688a6ba4e7e254611, type: 2}
+  particleMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  carrierScale: {x: 1, y: 1, z: 1}
+  particleScale: {x: 1, y: 1, z: 1}
+  particleScaleVariance: 0.2
+  numParticles: 250
+  carrierSampling: 0
+  offsetAlongNormal: -0.25
+  offsetAlongNormalFraction: 1
+  particleRotationRange: 90
+  geometryBasedNormals: 0
+  oneNormalPerParticle: 0
+  particleRotationBias: 0
+  biasTowardRotation: {x: 0, y: 0, z: 0}
+  noiseEnabled: 0
+  noiseFrequency: 1
+  noiseAmplitude: 1
+  noiseOctaves: 1
+  noiseScale: {x: 1, y: 1, z: 1}
+  noiseSeed: 1
+  folderPath: Art Assets/3D Art Assets/Trees
+  fileNamePrefix: Bush
+  appendMeshName: 1
+  appendTakeNumber: 0
+  takeNumber: 1
+  appendTimestamp: 0
+  exportOnEdit: 0
