@@ -209,8 +209,9 @@ namespace Necropanda
                             VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
-                case E_SpellTargetType.RandomTargetTeam:
-                    randTarget = CombatHelperFunctions.ReplaceRandomTarget(targetTeamManager.team);
+                case E_SpellTargetType.RandomEnemyTeam:
+                    TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
+                    randTarget = CombatHelperFunctions.ReplaceRandomTarget(opposingTeam.team);
                     if (randTarget != null && randTarget.GetHealth().dying == false)
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
@@ -388,7 +389,7 @@ namespace Necropanda
                                 Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
-                        case E_SpellTargetType.RandomTargetTeam:
+                        case E_SpellTargetType.RandomEnemyTeam:
                             //Simulate(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, empowered, weakened);
                             break;
                         case E_SpellTargetType.RandomAll:
