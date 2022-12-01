@@ -22,8 +22,11 @@ namespace Necropanda
 
         private FMOD.Studio.EventInstance footsteps;
 
-        private void Update() {
-            DetermineTerrainType();
+        private FootstepsFX footstepsFX;
+
+        private void Start()
+        {
+            footstepsFX = GetComponent<FootstepsFX>();
         }
 
         /// <summary>
@@ -33,37 +36,38 @@ namespace Necropanda
         /// </summary>
         private void DetermineTerrainType()
         {
-            RaycastHit[] hit;
+            RaycastHit hit;
 
             // Send a ray from the players postion down 10 units.
-            hit = Physics.RaycastAll(transform.position, Vector3.down, 10f);
-
-            foreach (RaycastHit rayHit in hit)
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
             {
-                // Can probably be converted to a switch statement, I hate how this reads...
-                if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Dirt"))
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Dirt"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Dirt;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Wood"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wood"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Wood;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Grass"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Grass"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Grass;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Water;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Crystal"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Crystal"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Crystal;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Stone"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Stone"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Stone;
+                }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
+                {
+                    currentTerrain = CURRENT_TERRAIN.Water;
                 }
             }
         }
@@ -73,48 +77,62 @@ namespace Necropanda
         /// </summary>
         /// <param name="terrainType">The type of terrain the player is one. 
         /// Each type has a number in FMOD</param>
-        private void PlayFootstep (int terrainType)
+        private void PlayFootstep (int terrainType, Vector3 pos)
         {
-            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps/Footsteps");
+            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps");
             footsteps.setParameterByName("Terrain", terrainType);
             footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             footsteps.start();
             footsteps.release();
+
+            footstepsFX.SpawnFootstepFX(terrainType, pos);
         }
 
-        public void SelectAndPlayFootstep()
+        public void SelectAndPlayFootstep(float xOffset)
         {
-            switch (currentTerrain)
+            DetermineTerrainType();
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
             {
-                case CURRENT_TERRAIN.Dirt:
-                    PlayFootstep(1);
-                    break;
+                Vector3 pos = hit.point;
 
-                case CURRENT_TERRAIN.Grass:
-                    PlayFootstep(0);
-                    break;
+                pos.x += xOffset;
 
-                case CURRENT_TERRAIN.Wood:
-                    PlayFootstep(2);                
-                    break;
+                switch (currentTerrain)
+                {
+                    case CURRENT_TERRAIN.Grass:
+                        PlayFootstep(1, pos);
+                        break;
 
-                case CURRENT_TERRAIN.Water:
-                    PlayFootstep(3);                
-                    break;
+                    case CURRENT_TERRAIN.Stone:
+                        PlayFootstep(0, pos);
+                        break;
 
-                case CURRENT_TERRAIN.Crystal:
-                    PlayFootstep(4);                
-                    break;
+                    case CURRENT_TERRAIN.Dirt:
+                        PlayFootstep(2, pos);
+                        break;
 
-                case CURRENT_TERRAIN.Stone:
-                    PlayFootstep(5);                
-                    break;
+                    case CURRENT_TERRAIN.Wood:
+                        PlayFootstep(3, pos);
+                        break;
 
-                default:
-                    Debug.LogWarning("No valid terrain type was found, reverting to default case");
-                    PlayFootstep(0);
-                    break;
+                    case CURRENT_TERRAIN.Water:
+                        PlayFootstep(4, pos);
+                        break;
+
+                    case CURRENT_TERRAIN.Crystal:
+                        PlayFootstep(5, pos);
+                        break;
+
+                    default:
+                        Debug.LogWarning("No valid terrain type was found, reverting to default case");
+                        PlayFootstep(0, pos);
+                        break;
+                }
             }
+            
         }
     }
 }

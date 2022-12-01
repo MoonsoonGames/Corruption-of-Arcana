@@ -112,7 +112,7 @@ namespace Necropanda
                 lastDeck = deck;
                 deck.RemoveCard(this);
 
-                dragManager.draggedCard = this;
+                dragManager.StartDragging(this);
                 SetRayCastTargetAll(false);
 
                 dragManager.canDrag = false;
@@ -141,12 +141,12 @@ namespace Necropanda
 
                 if (newRot.z > -rotateDeadZone && newRot.z < rotateDeadZone)
                 {
-                    Debug.Log("Not rotating");
+                    //Debug.Log("Not rotating");
                     transform.eulerAngles = baseRot;
                 }
                 else
                 {
-                    Debug.Log("Rotate");
+                    //Debug.Log("Rotate");
                     transform.eulerAngles = newRot;
                 }
 
@@ -182,7 +182,7 @@ namespace Necropanda
                 transform.eulerAngles = baseRot;
 
                 dragManager.canDrag = true;
-                dragManager.draggedCard = null;
+                dragManager.StartDragging(null);
             }
         }
 

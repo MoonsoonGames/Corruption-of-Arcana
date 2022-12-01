@@ -15,10 +15,18 @@ namespace Necropanda.Player
     public class MouseLook : MonoBehaviour
     {
         public float mouseSensitivity = 100f;
-        public Transform playerBody;
         public PlayerController playerController;
+        //public CinemachineVirtualCamera vcam;
 
-        float xRotation = 0f;
+        public float xRotation = 0f; public float GetX() { return xRotation; }
+        public float yRotation = 0f; public float GetY() { return yRotation; }
+
+        private void Start()
+        {
+            // Lock and disable the cursor
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+        }
 
         // Update is called once per frame
         void Update()
@@ -39,17 +47,15 @@ namespace Necropanda.Player
         /// </summary>
         void DoLook()
         {
-            // Get in input axis
+            // Get input axis
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedDeltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
 
             xRotation -= mouseY;
+            yRotation -= mouseX;
             // Clamp the up and down rotation.
-            xRotation = Mathf.Clamp(xRotation, -90, 90);
-
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            // Apply the rotation
-            playerBody.Rotate(Vector3.up * mouseX);
+            //xRotation = Mathf.Clamp(xRotation, -90, 90);
+            yRotation = Mathf.Clamp(yRotation, -1.74f, 1.74f);
         }
     }
 }

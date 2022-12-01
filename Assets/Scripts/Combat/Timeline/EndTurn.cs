@@ -63,28 +63,23 @@ namespace Necropanda
         {
             DragManager.instance.canDrag = true;
             //Debug.Log("New Turn");
-            foreach (Deck2D deck in decks)
+
+            //Only give cards if player's hand isn't full
+            if (playerHandDeck.CurrentCardsLength() < playerHandDeck.maxCards)
             {
-                if (deck == playerHandDeck)
+                //Get the difference between the current and max cards to determine how many need to be drawn in
+                float difference = playerHandDeck.maxCards - playerHandDeck.CurrentCardsLength();
+
+                for (int i = 0; i < difference; i++)
                 {
-                    //Only give cards if player's hand isn't full
-                    if (playerHandDeck.CurrentCardsLength() < deck.maxCards)
-                    {
-                        //Get the difference between the current and max cards to determine how many need to be drawn in
-                        float difference = deck.maxCards - deck.CurrentCardsLength();
+                    GameObject card = Instantiate(cardPrefab, playerHandDeck.transform) as GameObject;
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
 
-                        for (int i = 0; i < difference; i++)
-                        {
-                            GameObject card = Instantiate(cardPrefab, deck.transform) as GameObject;
-                            CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+                    //Add the card to the array
+                    playerHandDeck.AddCard(cardDrag);
 
-                            //Add the card to the array
-                            deck.AddCard(cardDrag);
-
-                            //Reset card scales
-                            cardDrag.ScaleCard(1, false);
-                        }
-                    }
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
                 }
             }
 

@@ -21,7 +21,7 @@ namespace Necropanda
         public string spellName;
         [TextArea(3, 10)]
         public string flavourText; // Flavour text
-        [TextArea(3, 10)]
+        [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
 
@@ -209,8 +209,9 @@ namespace Necropanda
                             VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
                     }
                     break;
-                case E_SpellTargetType.RandomTargetTeam:
-                    randTarget = CombatHelperFunctions.ReplaceRandomTarget(targetTeamManager.team);
+                case E_SpellTargetType.RandomEnemyTeam:
+                    TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
+                    randTarget = CombatHelperFunctions.ReplaceRandomTarget(opposingTeam.team);
                     if (randTarget != null && randTarget.GetHealth().dying == false)
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
                     break;
@@ -356,7 +357,7 @@ namespace Necropanda
             }
 
             int removedStatusCount = Timeline.instance.StatusCount(target);
-            Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
+            //Debug.Log("simulated found " + removedStatusCount + "statuses on " + target.stats.characterName);
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
@@ -388,7 +389,7 @@ namespace Necropanda
                                 Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
-                        case E_SpellTargetType.RandomTargetTeam:
+                        case E_SpellTargetType.RandomEnemyTeam:
                             //Simulate(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, empowered, weakened);
                             break;
                         case E_SpellTargetType.RandomAll:
@@ -446,6 +447,84 @@ namespace Necropanda
         }
 
         #endregion
+
+        #endregion
+
+        #region Construct Card Icons
+
+        public List<CombatHelperFunctions.SpellIconConstruct> SpellIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = new List<CombatHelperFunctions.SpellIconConstruct>();
+
+            float highestExecute = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                if (module.value == 0)
+                    break;
+
+                CombatHelperFunctions.SpellIconConstruct moduleConstruct = new CombatHelperFunctions.SpellIconConstruct();
+
+                moduleConstruct.value = module.value;
+                moduleConstruct.effectType = module.effectType;
+                moduleConstruct.hitCount = module.hitCount;
+                moduleConstruct.discardScaling = module.valueScalingPerDiscard;
+                moduleConstruct.cleanseScaling = module.valueScalingPerStatus;
+                moduleConstruct.target = module.target;
+
+                //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
+
+                iconConstructs.Add(moduleConstruct);
+            }
+
+            return iconConstructs;
+        }
+
+        public List<CombatHelperFunctions.StatusIconConstruct> EffectIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            List<CombatHelperFunctions.StatusIconConstruct> iconConstructs = new List<CombatHelperFunctions.StatusIconConstruct>();
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                foreach (CombatHelperFunctions.StatusStruct status in module.statuses)
+                {
+                    CombatHelperFunctions.StatusIconConstruct effectConstruct = new CombatHelperFunctions.StatusIconConstruct();
+
+                    effectConstruct.effect = status.status;
+                    effectConstruct.chance = status.chance;
+                    effectConstruct.effectIcon = status.status.effectIcon;
+                    effectConstruct.duration = status.duration;
+                    effectConstruct.target = module.target;
+
+                    //Debug.Log("Module: " + moduleConstruct.value + " X " + moduleConstruct.hitCount + " " + moduleConstruct.effectType + " on " + moduleConstruct.target.ToString());
+
+                    iconConstructs.Add(effectConstruct);
+                }
+            }
+
+            return iconConstructs;
+        }
+
+        public CombatHelperFunctions.ExecuteIconConstruct ExecuteIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+            CombatHelperFunctions.ExecuteIconConstruct moduleConstruct = new CombatHelperFunctions.ExecuteIconConstruct();
+
+            float highestExecute = 0;
+
+            foreach (CombatHelperFunctions.SpellModule module in spellModules)
+            {
+                if (module.executeThreshold > highestExecute)
+                {
+                    moduleConstruct.threshold = module.executeThreshold;
+                    moduleConstruct.target = module.target;
+                }
+            }
+
+            return moduleConstruct;
+        }
 
         #endregion
     }
