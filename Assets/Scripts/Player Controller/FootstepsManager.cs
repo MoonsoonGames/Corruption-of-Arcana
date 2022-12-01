@@ -22,6 +22,13 @@ namespace Necropanda
 
         private FMOD.Studio.EventInstance footsteps;
 
+        private FootstepsFX footstepsFX;
+
+        private void Start()
+        {
+            footstepsFX = GetComponent<FootstepsFX>();
+        }
+
         private void Update() {
             DetermineTerrainType();
         }
@@ -73,48 +80,61 @@ namespace Necropanda
         /// </summary>
         /// <param name="terrainType">The type of terrain the player is one. 
         /// Each type has a number in FMOD</param>
-        private void PlayFootstep (int terrainType)
+        private void PlayFootstep (int terrainType, Vector3 pos)
         {
             footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps");
             footsteps.setParameterByName("Terrain", terrainType);
             footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             footsteps.start();
             footsteps.release();
+
+            footstepsFX.SpawnFootstepFX(terrainType, pos);
         }
 
-        public void SelectAndPlayFootstep()
+        public void SelectAndPlayFootstep(float xOffset)
         {
-            switch (currentTerrain)
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
             {
-                case CURRENT_TERRAIN.Grass:
-                    PlayFootstep(1);
-                    break;
+                Vector3 pos = hit.point;
 
-                case CURRENT_TERRAIN.Stone:
-                    PlayFootstep(0);
-                    break;
+                pos.x += xOffset;
 
-                case CURRENT_TERRAIN.Dirt:
-                    PlayFootstep(2);                
-                    break;
 
-                case CURRENT_TERRAIN.Wood:
-                    PlayFootstep(3);                
-                    break;
+                switch (currentTerrain)
+                {
+                    case CURRENT_TERRAIN.Grass:
+                        PlayFootstep(1, pos);
+                        break;
 
-                case CURRENT_TERRAIN.Water:
-                    PlayFootstep(4);                
-                    break;
+                    case CURRENT_TERRAIN.Stone:
+                        PlayFootstep(0, pos);
+                        break;
 
-                case CURRENT_TERRAIN.Crystal:
-                    PlayFootstep(5);                
-                    break;
+                    case CURRENT_TERRAIN.Dirt:
+                        PlayFootstep(2, pos);
+                        break;
 
-                default:
-                    Debug.LogWarning("No valid terrain type was found, reverting to default case");
-                    PlayFootstep(0);
-                    break;
+                    case CURRENT_TERRAIN.Wood:
+                        PlayFootstep(3, pos);
+                        break;
+
+                    case CURRENT_TERRAIN.Water:
+                        PlayFootstep(4, pos);
+                        break;
+
+                    case CURRENT_TERRAIN.Crystal:
+                        PlayFootstep(5, pos);
+                        break;
+
+                    default:
+                        Debug.LogWarning("No valid terrain type was found, reverting to default case");
+                        PlayFootstep(0, pos);
+                        break;
+                }
             }
+            
         }
     }
 }
