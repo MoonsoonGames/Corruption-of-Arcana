@@ -41,6 +41,15 @@ namespace Necropanda
             Singleton();
         }
 
+        public void StartDragging(CardDrag2D drag)
+        {
+            draggedCard = drag;
+
+            if (TooltipManager.instance == null) return;
+
+            TooltipManager.instance.EnableTooltips(draggedCard == null);
+        }
+
         public bool canDrag;
     }
 }

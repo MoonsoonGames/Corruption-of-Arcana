@@ -17,7 +17,7 @@ public enum E_DamageTypes
 
 public enum E_SpellTargetType
 {
-    Caster, Target, Cleave, Chain, RandomTargetTeam, RandomAll, All
+    Caster, Target, Cleave, Chain, RandomEnemyTeam, RandomAll, All
 }
 
 public enum E_StatusTargetType
@@ -35,7 +35,8 @@ public enum E_Scenes
     [InspectorName("Dev Room")]
     DevRoom,
     Combat,
-    Tiertarock
+    Tiertarock,
+    PuzzleRoom
 }
 
 public enum E_UtilityScripts

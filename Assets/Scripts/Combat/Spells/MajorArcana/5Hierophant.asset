@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Hierophant
   flavourText: 
-  spellDescription: Hit target with 5 Static damage 3 times, each hit has a chance
-    to apply Conductive for 3 turns
+  spellDescription: 'Deal 5 $static$ damage 3 times
+
+
+    Apply $conductive$ for
+    2 turns'
   cardImage: {fileID: 21300000, guid: c4b6205a7a7659e4cb9d1dafad788c50, type: 3}
   overrideColor: 1
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   speed: 0.45
-  arcanaCost: 2
+  arcanaCost: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -39,10 +42,20 @@ MonoBehaviour:
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
+    statuses: []
+  - target: 1
+    effectType: 2
+    value: 0
+    hitCount: 1
+    executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
     statuses:
     - status: {fileID: 11400000, guid: 1a66da312d3e2ab4ab4effe9ada7a53c, type: 2}
       duration: 3
-      chance: 0.6
+      chance: 1
+  castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   impactObject: {fileID: 6441297445223667176, guid: c3de2173c0f41884da1878ebdb1eb46e,
