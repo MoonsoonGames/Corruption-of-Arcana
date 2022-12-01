@@ -19,22 +19,22 @@ namespace Necropanda
             switch (terrain)
             {
                 case 0:
-                    Instantiate(grass, pos, new Quaternion(0, 0, 0, 0));
+                    Instantiate(stone, pos, new Quaternion(0, 0, 0, 0));
                     break;
                 case 1:
-                    Instantiate(dirt, pos, new Quaternion(0, 0, 0, 0));
+                    Instantiate(grass, pos, new Quaternion(0, 0, 0, 0));
                     break;
                 case 2:
-                    Instantiate(stone, pos, new Quaternion(0, 0, 0, 0));
+                    Instantiate(dirt, pos, new Quaternion(0, 0, 0, 0));
                     break;
                 case 3:
                     Instantiate(wood, pos, new Quaternion(0, 0, 0, 0));
                     break;
                 case 4:
-                    Instantiate(crystal, pos, new Quaternion(0, 0, 0, 0));
+                    Instantiate(water, pos, new Quaternion(0, 0, 0, 0));
                     break;
                 case 5:
-                    Instantiate(water, pos, new Quaternion(0, 0, 0, 0));
+                    Instantiate(crystal, pos, new Quaternion(0, 0, 0, 0));
                     break;
                 default:
                     Debug.Log("Not Spawning effect");

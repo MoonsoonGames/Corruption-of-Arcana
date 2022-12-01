@@ -29,10 +29,6 @@ namespace Necropanda
             footstepsFX = GetComponent<FootstepsFX>();
         }
 
-        private void Update() {
-            DetermineTerrainType();
-        }
-
         /// <summary>
         /// This determines what type of terrain the player is on. 
         /// There might be a more performant way to do this using groundsphere
@@ -40,37 +36,38 @@ namespace Necropanda
         /// </summary>
         private void DetermineTerrainType()
         {
-            RaycastHit[] hit;
+            RaycastHit hit;
 
             // Send a ray from the players postion down 10 units.
-            hit = Physics.RaycastAll(transform.position, Vector3.down, 10f);
-
-            foreach (RaycastHit rayHit in hit)
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
             {
-                // Can probably be converted to a switch statement, I hate how this reads...
-                if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Dirt"))
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Dirt"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Dirt;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Wood"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wood"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Wood;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Grass"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Grass"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Grass;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Water;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Crystal"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Crystal"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Crystal;
                 }
-                else if (rayHit.transform.gameObject.layer == LayerMask.NameToLayer("Stone"))
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Stone"))
                 {
                     currentTerrain = CURRENT_TERRAIN.Stone;
+                }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Water"))
+                {
+                    currentTerrain = CURRENT_TERRAIN.Water;
                 }
             }
         }
@@ -93,6 +90,8 @@ namespace Necropanda
 
         public void SelectAndPlayFootstep(float xOffset)
         {
+            DetermineTerrainType();
+
             RaycastHit hit;
 
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
@@ -100,7 +99,6 @@ namespace Necropanda
                 Vector3 pos = hit.point;
 
                 pos.x += xOffset;
-
 
                 switch (currentTerrain)
                 {
