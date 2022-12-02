@@ -10,6 +10,7 @@ namespace Necropanda.Utils.Debugger
         None,
         Error,
         Warning,
-        Log
+        Log,
+        All
     }
 }
