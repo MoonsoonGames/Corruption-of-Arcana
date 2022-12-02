@@ -11,6 +11,7 @@ namespace Necropanda
 {
     public class DrawCard : MonoBehaviour
     {
+        public bool draw = true;
         DeckManager deckManager;
         Card card;
 
@@ -19,14 +20,17 @@ namespace Necropanda
         {
             deckManager = GameObject.FindObjectOfType<DeckManager>();
 
-            if (deckManager != null)
+            if (deckManager != null && draw)
             {
-                Spell spell = deckManager.GetSpell();
-
-                card = GetComponent<Card>();
-                card.spell = spell;
-                card.Setup();
+                Setup(deckManager.GetSpell());
             }
+        }
+
+        public void Setup(Spell spell)
+        {
+            card = GetComponent<Card>();
+            card.spell = spell;
+            card.Setup();
         }
 
         public void ReturnToDeck()

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Judgement
   flavourText: 
-  spellDescription: Returns cards in discard pile to your deck and Empowers the target
-    deck
+  spellDescription: 'Returns cards in discard pile to your deck
+
+
+    Apply $empower$
+    for 2 turns'
   cardImage: {fileID: 21300000, guid: 989d4add15666f14f96f619366642915, type: 3}
   overrideColor: 1
   timelineColor: {r: 0.33333334, g: 0.68298405, b: 0.6901961, a: 1}
   speed: 0
-  arcanaCost: 2
+  arcanaCost: 1
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -43,6 +46,8 @@ MonoBehaviour:
     - status: {fileID: 11400000, guid: 27ca1b3af8b88bf4fad48ae900b853fd, type: 2}
       duration: 3
       chance: 1
+  castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   impactObject: {fileID: 0}
+  trailColor: {r: 0, g: 0, b: 0, a: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: 1 of Cups
   flavourText: 
-  spellDescription: Deal 1 Glacial damage to all targets
+  spellDescription: Deal 1 $glacial$ damage to all targets
   cardImage: {fileID: 0}
   overrideColor: 0
   timelineColor: {r: 0, g: 0.42002833, b: 0.50980395, a: 1}
@@ -23,6 +23,7 @@ MonoBehaviour:
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
+  spawnEnemies: []
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
@@ -38,6 +39,8 @@ MonoBehaviour:
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     statuses: []
+  castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   impactObject: {fileID: 0}
+  trailColor: {r: 0, g: 0, b: 0, a: 0}

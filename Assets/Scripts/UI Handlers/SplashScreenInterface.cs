@@ -4,32 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SplashScreenInterface : MonoBehaviour
+namespace Necropanda.Interfaces
 {
-    public GameObject SettingsMenu;
-
-    // Start is called before the first frame update
-    void Start()
+    public class SplashScreenInterface : MonoBehaviour
     {
-        
-    }
+        public GameObject SettingsMenu;
 
-    public void NewGame()
-    {
-        //Reset loadsettings/progress
-        SceneManager.LoadScene("DevRoom");
-        //load game
-    }
+        public void NewGame()
+        {
+            //Reset loadsettings/progress
+            SceneManager.LoadScene("DevRoom");
+            //load game
+        }
 
-    public void LoadGame()
-    {
-        //locate save file
-        //set load settings/progress
-        //load game
-    }
+        public void LoadGame()
+        {
+            //locate save file
+            //set load settings/progress
+            //load game
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void Settings()
+        {
+            SettingsMenu.SetActive(true);
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

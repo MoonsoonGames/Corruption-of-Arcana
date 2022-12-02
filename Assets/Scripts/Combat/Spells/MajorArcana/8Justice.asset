@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Justice
   flavourText: 
-  spellDescription: Provide 10 shield and draw the Balance the Scales card next turn
+  spellDescription: 'Apply $barbedguard$ for 2 turns
+
+
+    Draw the Balance the Scales
+    card next turn'
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.8, g: 0.37470466, b: 0.23137255, a: 255}
@@ -32,13 +36,18 @@ MonoBehaviour:
   spellModules:
   - target: 1
     effectType: 8
-    value: 10
+    value: 0
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
-    statuses: []
+    statuses:
+    - status: {fileID: 11400000, guid: 72af2937fdae48340b79c8edfd79d1c8, type: 2}
+      duration: 3
+      chance: 1
+  castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   impactObject: {fileID: 0}
+  trailColor: {r: 0, g: 0, b: 0, a: 0}

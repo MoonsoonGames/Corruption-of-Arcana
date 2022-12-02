@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Empress
   flavourText: 
-  spellDescription: Restore 6 health and apply Regeneration to target for 3 turns
+  spellDescription: 'Restore 6 $health$
+
+
+    Apply $regeneration$ for 2 turns'
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.29636884, g: 0.5660378, b: 0.32597953, a: 255}
@@ -42,6 +45,8 @@ MonoBehaviour:
     - status: {fileID: 11400000, guid: ba0b975f08f81f146b239484799de96a, type: 2}
       duration: 3
       chance: 1
+  castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   impactObject: {fileID: 0}
+  trailColor: {r: 0, g: 0, b: 0, a: 0}

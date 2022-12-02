@@ -26,6 +26,13 @@ namespace Necropanda
             instance = this;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+
+            Invoke("Setup", 0.1f);
+        }
+
+        void Setup()
+        {
+            DeckManager.instance.SetupDecks();
         }
 
         public void CharacterDied(Character character)
