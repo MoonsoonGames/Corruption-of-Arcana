@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Necropanda.Utils.Debugger;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com and @mattordev
@@ -122,13 +123,13 @@ namespace Necropanda.AI
                 case AIState.Wandering:
                     moduleManager.wander.enabled = true;
                     moduleManager.wander.WanderInRadius(blocked, hit);
-                    Debug.Log("Enabled Wandering module on Enemy AI " + gameObject.name);
+                    Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
                     break;
 
                 case AIState.Patrolling:
                     moduleManager.patrol.enabled = true;
                     moduleManager.wander.enabled = false;
-                    Debug.Log("Enabled Patrolling module on Enemy AI " + gameObject.name);
+                    Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
                     break;
             }
         }
