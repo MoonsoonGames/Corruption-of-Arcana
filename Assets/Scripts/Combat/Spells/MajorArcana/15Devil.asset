@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
+  m_Name: 15Devil
+  m_EditorClassIdentifier: 
+  spellName: The Devil
+  flavourText: 
+  spellDescription: 'Clear all statuses on target
+
+
+    Restore 6 $septic$ and 4
+    $septic$ per status cleared'
+  cardImage: {fileID: 21300000, guid: 4d515e7b93068a549b6e2cc9b508d236, type: 3}
+  overrideColor: 1
+  timelineColor: {r: 0.026210386, g: 0.2924528, b: 0.06792458, a: 255}
+  speed: 0.7
+  arcanaCost: 1
+  discardAfterCasting: 0
+  discardAfterTurn: 0
+  drawCard: {fileID: 0}
+  spawnEnemies: []
+  discardCards: 0
+  returnDiscardPile: 0
+  removeStatuses: 1
+  multihitDelay: 0.1
+  moduleDelay: 0
+  spellModules:
+  - target: 1
+    effectType: 4
+    value: 6
+    hitCount: 1
+    executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 4
+    statuses: []
+  castObject: {fileID: 0}
+  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}
+  impactObject: {fileID: 0}
+  trailColor: {r: 0, g: 0, b: 0, a: 0}
