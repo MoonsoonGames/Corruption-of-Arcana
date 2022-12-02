@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Necropanda.AI.Movement;
+using Necropanda.Utils.Debugger;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com and @mattordev
@@ -23,20 +24,21 @@ namespace Necropanda.AI
 
         private void OnEnable()
         {
-            CheckScripts();
+            if (!wander || !patrol)
+                CheckScripts();
         }
 
         public void CheckScripts()
         {
-            //Debug.Log("Checking Enemy AI scripts on " + gameObject.name);
+
             try
             {
                 wander = gameObject.GetComponent<Wander>();
             }
             catch (NullReferenceException err)
             {
-                Debug.LogError($"No wander module found on this {this.gameObject.name}, adding one..");
-                Debug.LogWarning($"{err.Message}, should be fixed now. Disabling module to avoid errors");
+                Debugger.instance.SendDebug($"No wander module found on this {this.gameObject.name}, adding one..", 3);
+                Debugger.instance.SendDebug($"{err.Message}, should be fixed now. Disabling module to avoid errors", 2);
                 wander = gameObject.AddComponent<Wander>();
                 wander.enabled = false;
             }
@@ -47,8 +49,8 @@ namespace Necropanda.AI
             }
             catch (NullReferenceException err)
             {
-                Debug.LogError($"No patrol module found on this {this.gameObject.name}, adding one..");
-                Debug.LogWarning($"{err.Message}, should be fixed now. Disabling module to avoid errors");
+                Debugger.instance.SendDebug($"No patrol module found on this {this.gameObject.name}, adding one..", 3);
+                Debugger.instance.SendDebug($"{err.Message}, should be fixed now. Disabling module to avoid errors", 2);
                 patrol = gameObject.AddComponent<Patrol>();
                 try
                 {
@@ -56,20 +58,21 @@ namespace Necropanda.AI
                 }
                 catch (NullReferenceException)
                 {
-                    Debug.LogWarningFormat("Tried to stop patrol, error occured. Forcefully stopping it.");
+                    Debugger.instance.SendDebug("Tried to stop patrol, error occured. Forcefully stopping it.", 2);
                     patrol.enabled = false;
                 }
             }
+
+            Debugger.instance.SendDebug($"Had to check scripts on {gameObject.name}, is something unnassgined?", 2);
         }
 
         /// <summary>
-        /// Needs additional work, avoid passing in a true bool for now.
+        /// Disables selected modules.
         /// </summary>
         /// <param name="type">Determines what it disables, 1 to disable wander, 2 to disable patrol</param>
         /// <param name="state">determines whether the module is enabled or disabled</param>
         public void ChangeModuleState(int type, bool state)
         {
-            aiController.currentState = AIState.Nothing;
             switch (type)
             {
                 case 1:
@@ -77,12 +80,11 @@ namespace Necropanda.AI
                     {
                         try
                         {
-                            Debug.Log("Setting Wander to " + state);
                             wander.enabled = state;
                         }
                         catch (NullReferenceException)
                         {
-                            Debug.LogError("Couldn't disable the wandering module, trying again for ${i}");
+                            Debugger.instance.SendDebug($"Couldn't disable the wandering module, trying again for {i} more time(s)", 3);
                             wander.enabled = false;
                         }
                     }
@@ -97,16 +99,25 @@ namespace Necropanda.AI
                         }
                         catch (NullReferenceException)
                         {
-                            Debug.LogError("Tried to stop the patrol module, error occured. Forcefully stopping it.");
+                            Debugger.instance.SendDebug("Tried to stop the patrol module, error occured. Forcefully stopping it.", 3);
                             patrol.enabled = false;
                         }
                     }
                     break;
 
                 default:
-                    Debug.LogError("Invalid type was entered. Please enter 1 or 2. Stopping script to avoid errors.");
+                    Debugger.instance.SendDebug("Invalid type was entered. Please enter 1 or 2. Stopping script to avoid errors.", 3);
                     break;
             }
+        }
+
+        /// <summary>
+        /// Disables all modules. Pass no args for this functionality.
+        /// </summary>
+        public void ChangeModuleState()
+        {
+            ChangeModuleState(1, false);
+            ChangeModuleState(2, false);
         }
     }
 }

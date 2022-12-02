@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Necropanda.Utils.Debugger;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com and @mattordev
@@ -71,7 +72,7 @@ namespace Necropanda.AI.Movement
                     agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
                     {
                         agent.SetDestination(point);
-                        Debug.LogWarning($"Point was off navmesh, point moved to: {agent.destination}");
+                        Debugger.instance.SendDebug($"Point was off navmesh, point moved to: {agent.destination}", 2);
 
                         patrolPoints[i] = agent.destination;
                     }
@@ -96,7 +97,7 @@ namespace Necropanda.AI.Movement
             // Check to make sure offset isn't 0
             if (offset == 0)
             {
-                Debug.LogError("No offset added to patrol pattern, returning to avoid weird behaviour..");
+                Debugger.instance.SendDebug("No offset added to patrol pattern, returning to avoid weird behaviour..", 3);
                 return null;
             }
 
@@ -125,6 +126,7 @@ namespace Necropanda.AI.Movement
             // Choose the next point in the array as the destination
             // cyling to the start if necessary.
             destPoint = (destPoint + 1) % patrolPoints.Length;
+            // StartCoroutine(Cooldown(3));
         }
 
         public void StopPatrol()
@@ -154,7 +156,7 @@ namespace Necropanda.AI.Movement
         IEnumerator Cooldown(float coolDown)
         {
             yield return new WaitForSeconds(coolDown);
-            Debug.Log("Running patrol cooldown");
+            Debugger.instance.SendDebug("Running patrol cooldown");
             patrol = false;
         }
         /// <summary>

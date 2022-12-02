@@ -40,7 +40,7 @@ namespace Necropanda.Utils.Debugger
 
         #endregion
 
-        private void Start()
+        private void Awake()
         {
             Singleton();
         }
@@ -49,22 +49,37 @@ namespace Necropanda.Utils.Debugger
         /// Function that collects and sends the correct message into the console.
         /// </summary>
         /// <param name="message">The message to be sent</param>
-        public void SendDebug(string message)
+        public void SendDebug(string message, int priority)
         {
-            switch (debugLevel)
+            if (priority > (int)debugLevel)
             {
-                case DebuggerState.None:
-                    break;
-                case DebuggerState.Log:
+                return;
+            }
+
+            switch (priority)
+            {
+                case 3:
                     Debug.Log(message);
                     break;
-                case DebuggerState.Warning:
+                case 2:
                     Debug.LogWarning(message);
                     break;
-                case DebuggerState.Error:
+                case 1:
                     Debug.LogError(message);
                     break;
+                default:
+                    break;
+
             }
+        }
+
+        /// <summary>
+        /// Function that collects and sends the correct message into the console with the lowest priority (log).
+        /// </summary>
+        /// <param name="message">The message to be sent</param>
+        public void SendDebug(string message)
+        {
+            SendDebug(message, 3);
         }
     }
 }
