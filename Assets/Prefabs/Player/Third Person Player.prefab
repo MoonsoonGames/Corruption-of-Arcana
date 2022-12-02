@@ -55,7 +55,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239610159641735547}
-  m_LocalRotation: {x: 0.055300366, y: -1e-45, z: -0, w: 0.99846977}
+  m_LocalRotation: {x: 0.055300366, y: -0, z: -0, w: 0.99846977}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1106,7 +1106,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8428916118208087725}
-  m_LocalRotation: {x: 0.03712956, y: -4.43783e-16, z: 2.6110477e-18, w: 0.9993105}
+  m_LocalRotation: {x: 0.037129555, y: 0.0000000037227217, z: -1.3831837e-10, w: 0.9993105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1201,6 +1201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7247102870796374873}
   - component: {fileID: 5532446606560843935}
+  - component: {fileID: 7422374348214831585}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -1284,8 +1285,8 @@ MonoBehaviour:
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
     m_enabled: 1
-    m_WaitTime: 1
-    m_RecenteringTime: 0.5
+    m_WaitTime: 10
+    m_RecenteringTime: 1.8
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
@@ -1330,6 +1331,36 @@ MonoBehaviour:
   - {fileID: 4512773360464337712}
   - {fileID: 4638660706692386078}
   - {fileID: 5610877718490179340}
+--- !u!114 &7422374348214831585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049758617516852530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: 
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1001 &4486291755596204106
 PrefabInstance:
   m_ObjectHideFlags: 0
