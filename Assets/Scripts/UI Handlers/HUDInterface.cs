@@ -2,41 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Necropanda.Player;
 
-public class HUDInterface : MonoBehaviour
+
+namespace Necropanda.Interfaces
 {
-    public GameObject SettingsMenu;
-    public bool SettingsOpen = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public class HUDInterface : MonoBehaviour
     {
-        
-    }
+        public GameObject Pausemenu;
+        public PlayerController player;
+        public GameObject HUD;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        // Start is called before the first frame update
+        void Start()
         {
-            if(SettingsOpen == false)
+            HUD.SetActive(true);
+            Pausemenu.SetActive(false);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
-                Debug.Log("Open Settings");
-                SettingsMenu.SetActive(true);
-                SettingsOpen = true;
+                //open pause menu
+                if(player.paused == false)
+                {
+                    Pausemenu.SetActive(true);
+                    HUD.SetActive(false);
+                    player.paused = true;
+                    Time.timeScale = 0;
+                }        
 
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }        
-
-            else if (SettingsOpen == true)
-            {
-                Debug.Log("Close Settings");
-                SettingsMenu.SetActive(false);
-                SettingsOpen = false;
-
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.None;
+                //close pause menu
+                else if (player.paused == true)
+                {
+                    Pausemenu.SetActive(false);
+                    HUD.SetActive(true);
+                    player.paused = false;
+                    Time.timeScale = 1;
+                }
             }
         }
     }

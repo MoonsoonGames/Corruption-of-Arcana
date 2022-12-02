@@ -10,7 +10,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Direction
-    m_EventTreshold: 3
+    m_EventTreshold: 4
   - m_ConditionMode: 2
     m_ConditionEvent: Moving
     m_EventTreshold: 0
@@ -38,7 +38,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Direction
-    m_EventTreshold: 4
+    m_EventTreshold: 3
   - m_ConditionMode: 1
     m_ConditionEvent: Moving
     m_EventTreshold: 0
@@ -76,7 +76,7 @@ AnimatorStateMachine:
     m_Position: {x: 390, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6297702038340203506}
-    m_Position: {x: 400, y: 400, z: 0}
+    m_Position: {x: 390, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8176447084035520750}
     m_Position: {x: 380, y: 310, z: 0}
@@ -98,7 +98,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroNorth_Walk
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -110,7 +110,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 447db51f24f65b54c84c68b119be8e20, type: 2}
+  m_Motion: {fileID: 7400000, guid: dc2d97ce50cb9c945908fe01acdb12a0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -124,7 +124,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroWest_Walk
-  m_Speed: 1
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -136,7 +136,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 23e0c59e2e548c94eb7719883d31d530, type: 2}
+  m_Motion: {fileID: 7400000, guid: f250f2f2815bb37428cf9e11404b3848, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -150,7 +150,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroEast_Walk
-  m_Speed: 1.8
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -162,7 +162,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: eff6aa8b5277b9e4fb93fdc721affd43, type: 2}
+  m_Motion: {fileID: 7400000, guid: bd4f1bc87e066f943be4224e0622c74f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -207,7 +207,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroSouth_Walk
-  m_Speed: 1.8
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -242,10 +242,10 @@ AnimatorStateMachine:
     m_Position: {x: 410, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6950322485930021582}
-    m_Position: {x: 390, y: 390, z: 0}
+    m_Position: {x: 400, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3669253553239255904}
-    m_Position: {x: 400, y: 290, z: 0}
+    m_Position: {x: 410, y: 320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -266,7 +266,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Direction
-    m_EventTreshold: 3
+    m_EventTreshold: 4
   - m_ConditionMode: 1
     m_ConditionEvent: Moving
     m_EventTreshold: 0
@@ -323,7 +323,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroNorth_Walk
-  m_Speed: 1.8
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -335,7 +335,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 447db51f24f65b54c84c68b119be8e20, type: 2}
+  m_Motion: {fileID: 7400000, guid: dc2d97ce50cb9c945908fe01acdb12a0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -451,7 +451,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroSouth_Walk
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -525,7 +525,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Direction
-    m_EventTreshold: 4
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6950322485930021582}
   m_Solo: 0
@@ -579,7 +579,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroWest_Walk
-  m_Speed: 1.8
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -591,7 +591,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 23e0c59e2e548c94eb7719883d31d530, type: 2}
+  m_Motion: {fileID: 7400000, guid: f250f2f2815bb37428cf9e11404b3848, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -637,10 +637,10 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9025971061776075469}
-    m_Position: {x: 400, y: 270, z: 0}
+    m_Position: {x: 400, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5031696899923179385}
-    m_Position: {x: 410, y: 350, z: 0}
+    m_Position: {x: 400, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7764163121522301730}
     m_Position: {x: 400, y: 190, z: 0}
@@ -674,7 +674,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8d72fd2688158a5438f67f0b8573e7f7, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2a0ed7d6a03fbac4bae61be8f7dfbb82, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -690,7 +690,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Direction
-    m_EventTreshold: 4
+    m_EventTreshold: 3
   - m_ConditionMode: 2
     m_ConditionEvent: Moving
     m_EventTreshold: 0
@@ -724,7 +724,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Direction
-    m_EventTreshold: 3
+    m_EventTreshold: 4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3669253553239255904}
   m_Solo: 0
@@ -775,7 +775,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroEast_Walk
-  m_Speed: 1
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -787,7 +787,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: eff6aa8b5277b9e4fb93fdc721affd43, type: 2}
+  m_Motion: {fileID: 7400000, guid: bd4f1bc87e066f943be4224e0622c74f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -801,7 +801,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TaroSouth_Idle
-  m_Speed: 0.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -839,7 +839,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4fa248c9f0a643b4e82af4a9eabe95c6, type: 2}
+  m_Motion: {fileID: 7400000, guid: fffadec92eb330d419c42e39345de74e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

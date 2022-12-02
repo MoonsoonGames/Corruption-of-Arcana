@@ -14,9 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: Barbed Guard
   effectDescription: Reflect 2 physical damage when hit
+  effectIcon: {fileID: 5697033374532816281, guid: 079fa987308d668449a314ecb578ba6a,
+    type: 3}
+  applyEffect: {fileID: 0}
+  effect: {fileID: 6441297445223667176, guid: 3a675a191c219ee4ca59c084d80673a8, type: 3}
   effectModules:
   - target: 3
     status: 0
     effectType: 0
     value: 2
-    resistanceModifier: 0
+    statModifier: 0
+  - target: 0
+    status: 8
+    effectType: 0
+    value: 0
+    statModifier: 0

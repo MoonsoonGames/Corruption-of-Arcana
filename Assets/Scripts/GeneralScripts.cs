@@ -3,7 +3,7 @@ using UnityEngine;
 using FMODUnity;
 
 /// <summary>
-/// Authored & Written by Andrew Scott andrewscott@icloud.com / @mattordev (remap func)
+/// Authored & Written by Andrew Scott andrewscott@icloud.com & @mattordev
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
@@ -14,6 +14,11 @@ namespace Necropanda
     public interface IInteractable
     {
         void Interacted(GameObject player);
+    }
+
+    public interface ICancelInteractable
+    {
+        void CancelInteraction(GameObject player);
     }
 
     #endregion
@@ -59,6 +64,26 @@ namespace Necropanda
             return random1.CompareTo(random2);
         }
 
+        public static string AddSpacesToSentence(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return "";
+
+            List<char> newCharacters = new List<char>();
+            newCharacters.Add(text[0]);
+
+            for (int i = 1; i < text.Length; i++)
+            {
+                if (char.IsUpper(text[i]) && text[i - 1] != ' ')
+                    newCharacters.Add(' ');
+                newCharacters.Add(text[i]);
+            }
+
+            string newString = string.Concat(newCharacters.ToArray());
+
+            return newString;
+        }
+
         //remap function
         /// <summary>
         /// Remaps the passed in variables based on min and max. Written by @mattordev
@@ -88,6 +113,19 @@ namespace Necropanda
             [HideInInspector]
             public bool forward;
         }
+
+        public static bool AlmostEqualFloat(float a, float b, float threshold)
+        {
+            return Mathf.Abs(a - b) <= threshold;
+        }
+
+        public static bool AlmostEqualVector3(Vector3 a, Vector3 b, float threshold)
+        {
+            bool x = AlmostEqualFloat(a.x, b.x, threshold);
+            bool y = AlmostEqualFloat(a.y, b.y, threshold);
+            bool z = AlmostEqualFloat(a.z, b.z, threshold);
+            return x && y && z;
+        }
     }
 
     public static class CombatHelperFunctions
@@ -98,15 +136,22 @@ namespace Necropanda
 
         #region Spells
 
+        #region Basic Info
+
+        [System.Serializable]
         public struct SpellInstance
         {
             public Spell spell;
+            public bool empowered;
+            public bool weakened;
             public Character caster;
             public Character target;
 
-            public void SetSpellInstance(Spell newSpell, Character newTarget, Character newCaster)
+            public void SetSpellInstance(Spell newSpell, bool newEmpowered, bool newWeakened, Character newTarget, Character newCaster)
             {
                 spell = newSpell;
+                empowered = newEmpowered;
+                weakened = newWeakened;
                 target = newTarget;
                 caster = newCaster;
             }
@@ -120,18 +165,48 @@ namespace Necropanda
             public int value;
             public int hitCount;
             public float executeThreshold;
+            public float valueScalingDamageTaken;
+            public int valueScalingPerDiscard;
+            public int valueScalingPerStatus;
             public StatusStruct[] statuses;
 
-            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, StatusStruct[] newStatusStructs)
+            public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, int newValueScalingPerDiscard, StatusStruct[] newStatusStructs)
             {
                 target = newTarget;
                 effectType = newEffectType;
                 value = newValue;
                 hitCount = newHitCount;
                 executeThreshold = newExecuteThreshold;
+                valueScalingPerDiscard = newValueScalingPerDiscard;
                 statuses = newStatusStructs;
             }
         }
+
+        #endregion
+
+        #region AI
+
+        public struct SpellUtility
+        {
+            public AISpell spell;
+            public Character target;
+            public float utility;
+        }
+
+        [System.Serializable]
+        public struct AISpell
+        {
+            public Spell spell;
+            public bool spawnAsCard;
+            public bool targetSelf;
+            public bool targetAllies;
+            public bool targetEnemies;
+            public int timeCooldown;
+            //[HideInInspector]
+            public int lastUsed;
+        }
+
+        #endregion
 
         #endregion
 
@@ -164,6 +239,7 @@ namespace Necropanda
             public float chance;
         }
 
+        [System.Serializable]
         public struct StatusInstance
         {
             public StatusEffects status;
@@ -199,7 +275,44 @@ namespace Necropanda
 
         #endregion
 
-        public static E_DamageTypes ReplaceRandom(E_DamageTypes effectType)
+        #region Replacing Random
+
+        public static Character ReplaceRandomTarget(List<Character> characters)
+        {
+            if (CombatManager.instance.redirectedCharacter != null)
+            {
+                if (CombatManager.instance.redirectedCharacter.GetHealth().dying == false)
+                {
+                    Debug.Log("Redirect to target");
+                    return CombatManager.instance.redirectedCharacter;
+                }
+                    
+            }
+
+            if (characters.Count > 0)
+            {
+                List<Character> targets = new List<Character>();
+
+                foreach (Character character in characters)
+                {
+                    if (character.CanBeTargetted())
+                    {
+                        targets.Add(character);
+                    }
+                }
+
+                if (targets.Count > 0)
+                {
+                    int randomInt = Random.Range(0, targets.Count);
+
+                    return targets[randomInt];
+                } 
+            }
+
+            return null;
+        }
+
+        public static E_DamageTypes ReplaceRandomDamageType(E_DamageTypes effectType)
         {
             if (effectType == E_DamageTypes.Random)
             {
@@ -216,6 +329,50 @@ namespace Necropanda
 
             return effectType;
         }
+
+        #endregion
+
+        #region Icon Constructs
+
+        [System.Serializable]
+        public struct IconToolTip
+        {
+            public string title;
+            public string replaceText;
+            public string description;
+            public int imageID;
+        }
+
+        public struct SpellIconConstruct
+        {
+            public int value;
+            public E_DamageTypes effectType;
+            public int hitCount;
+
+            //Scaling
+            public int discardScaling;
+            public int cleanseScaling;
+
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        public struct StatusIconConstruct
+        {
+            public StatusEffects effect;
+            public float chance;
+            public Object effectIcon;
+            public int duration;
+
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        public struct ExecuteIconConstruct
+        {
+            public float threshold;
+            public E_SpellTargetType target; // replace with images later
+        }
+
+        #endregion
     }
 
     public static class SoundEffects

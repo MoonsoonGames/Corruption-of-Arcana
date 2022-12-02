@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 304820693566625413}
   - component: {fileID: 8893270897852100536}
   - component: {fileID: 3728531217452261415}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LoadCombat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.9
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.42, z: 0}
 --- !u!114 &8893270897852100536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4358614321547803312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.062, z: 0}
+  m_LocalPosition: {x: 0, y: 1.29, z: 0}
   m_LocalScale: {x: 0.25392976, y: 0.25392976, z: 0.25392976}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -304,7 +304,10 @@ GameObject:
   - component: {fileID: 7114917235580297854}
   - component: {fileID: 4983053923874958858}
   - component: {fileID: 3872063757365783237}
-  m_Layer: 0
+  - component: {fileID: 5873795582209272868}
+  - component: {fileID: 8048376360966747922}
+  - component: {fileID: 7279085905103998437}
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6510964414938246700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.59, y: 1.913084, z: 5.04}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -341,7 +344,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!135 &5082439595224059109
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -382,6 +385,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   art: {fileID: 4358614321547803312}
   fx: {fileID: 1119363657369942268, guid: fc2938af6abe28a46b360948cf7c6b4b, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 475
 --- !u!114 &4983053923874958858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,9 +400,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc34678c5ace08949ba2991bd15ae2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   enemyObject: {fileID: 2611122861618082293, guid: 1c339c0dbdc88d0499d5f72bcb5f93f5,
     type: 3}
   boss: 0
+  moduleManager: {fileID: 0}
+  currentState: 0
+  avoidancePriority: 15
+  timer: 0
+  wanderingCoolDown: 0
+  wanderRadius: 0
 --- !u!195 &3872063757365783237
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -416,9 +429,53 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5873795582209272868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bd2785c4f94dc448d82640b1c77614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wander: {fileID: 8048376360966747922}
+  patrol: {fileID: 7279085905103998437}
+--- !u!114 &8048376360966747922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233ba9b9f892ba247ac52297b5e13422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxWanderDuration: 30
+  timeLeftTillScriptCleanup: 0
+--- !u!114 &7279085905103998437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d352368085911b948ab1f97ca8e655d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToPatrol: 30
+  patrol: 1
+  originalPos: {x: 0, y: 0, z: 0}
+  patrolPoints: []
 --- !u!1001 &3332651844201392422
 PrefabInstance:
   m_ObjectHideFlags: 0

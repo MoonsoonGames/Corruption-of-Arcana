@@ -11,49 +11,71 @@ namespace Necropanda
 {
     public class Character : MonoBehaviour
     {
-        public string characterName;
-        public Sprite characterSprite;
-        public Color timelineColor = new Color(0, 0, 0, 255); //Sets up alpha
+        #region Setup
+
+        public CharacterStats stats;
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
 
-        public EnemySpawner spawner;
+        [HideInInspector]
+        public EnemySpawner spawner; //Unused for the player right now, but it might be used in the future
 
-        private void Start()
+        Deck2D deck;
+
+        protected virtual void Start()
         {
             health = GetComponent<CharacterHealth>();
-
+            deck = GetComponentInChildren<Deck2D>();
             teamManager = GetComponentInParent<TeamManager>();
             teamManager.Add(this);
+            simulateValues = GetComponentInChildren<SimulateValues>();
         }
 
-        public virtual Spell PrepareSpell()
-        {
-            //Overwritten by children
-            return null;
-        }
+        #endregion
+
+        #region Taking Turn
 
         public virtual void StartTurn()
         {
-            
+            damageTakenLastTurn = damageTakenThisTurn;
+            damageTakenThisTurn = 0;
+            CheckOverlay();
+            health.StartTurn();
         }
 
+        public virtual CombatHelperFunctions.SpellUtility PrepareSpell()
+        {
+            //Overwritten by children
+            return new CombatHelperFunctions.SpellUtility();
+        }
+
+        [HideInInspector]
+        public int damageTakenThisTurn;
+        int damageTakenLastTurn; public int GetDamageTakenThisTurn() { return damageTakenLastTurn; }
+
+        public void CheckOverlay()
+        {
+            deck.CheckOverlay();
+        }
+
+        #endregion
+
+        #region Health Checks
+
+        /// <summary>
+        /// Checks if the character should be dying
+        /// </summary>
         public void CheckHealth()
         {
-            if (health.GetHealth() < 1)
+            if (health.dying)
             {
                 StartCoroutine(IDelayDeath(0.01f));
-            }
-            else
-            {
-                //Debug.Log(characterName + " has " + health.GetHealth() + " health left");
             }
         }
 
         public IEnumerator IDelayDeath(float delay)
         {
             yield return new WaitForSeconds(delay);
-            //Debug.Log(characterName + " Should be killed");
             health.PlayDeathSound();
             CombatManager.instance.CharacterDied(this);
             teamManager.team.Remove(this);
@@ -63,5 +85,183 @@ namespace Necropanda
             }
             Destroy(gameObject);
         }
+
+        #endregion
+
+        #region Statuses
+
+        //Positive Statuses
+        [HideInInspector]
+        public bool enlightened;
+        //Neutral Statuses
+        [HideInInspector]
+        public bool empowerDeck, weakenDeck;
+        //Negative Statuses
+        [HideInInspector]
+        public bool banish, charm, silence, stun, curse, confuse;
+
+        /// <summary>
+        /// Apply or remove a status effect from the character
+        /// </summary>
+        /// <param name="apply">Whether or not the status will be applied or removed</param>
+        /// <param name="status">The data status effect</param>
+        public void ApplyStatus(bool apply, E_Statuses status)
+        {
+            switch (status)
+            {
+                //Positive Effects
+                case E_Statuses.Reflect:
+                    if (deck != null)
+                    {
+                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
+                    }
+                    break;
+                case E_Statuses.Enlightened:
+                    enlightened = apply;
+                    break;
+                //Neutral Effects
+                case E_Statuses.EmpowerDeck:
+                    empowerDeck = apply;
+                    if (deck != null)
+                    {
+                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
+                    }
+                    break;
+                case E_Statuses.WeakenDeck:
+                    weakenDeck = apply;
+                    if (deck != null)
+                    {
+                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
+                    }
+                    break;
+                //Negative Effects
+                case E_Statuses.Banish:
+                    banish = apply;
+                    health.ActivateArt(!apply);
+                    break;
+                case E_Statuses.Charm:
+                    charm = apply;
+                    break;
+                case E_Statuses.Silence:
+                    silence = apply;
+                    Silence();
+                    break;
+                case E_Statuses.Stun:
+                    stun = apply;
+                    break;
+                case E_Statuses.Curse:
+                    curse = apply;
+                    health.CheckCurseHealth();
+                    break;
+                case E_Statuses.Redirect:
+                    if (apply)
+                        CombatManager.instance.redirectedCharacter = this;
+                    else
+                        CombatManager.instance.redirectedCharacter = null;
+                    break;
+                case E_Statuses.Confuse:
+                    confuse = apply;
+                    break;
+                default:
+                    break;
+            }
+
+            CheckOverlay();
+        }
+
+        /// <summary>
+        /// Reduce the player's max arcana count
+        /// </summary>
+        protected virtual void Silence()
+        {
+            ArcanaManager arcanaManager = Timeline.instance.GetArcanaManager();
+            if (silence)
+            {
+                if (arcanaManager.silenced == false)
+                {
+                    arcanaManager.silenced = true;
+                    arcanaManager.AdjustArcanaMax(-2);
+                }
+            }
+            else
+            {
+                arcanaManager.silenced = false;
+                Timeline.instance.GetArcanaManager().AdjustArcanaMax(2);
+            }
+        }
+
+        public bool CanCast()
+        {
+            bool canCast = true;
+
+            if (banish || health.dying || stun)
+            {
+                canCast = false;
+            }
+
+            return canCast;
+        }
+
+        public bool CanBeTargetted()
+        {
+            bool canTarget = true;
+
+            if (banish || health.GetHealth() < 0)
+            {
+                canTarget = false;
+            }
+
+            return canTarget;
+        }
+
+        #endregion
+
+        #region Simulating Turn
+
+        int damage = 0, healing = 0, shield = 0;
+        float highestExecute = 0;
+        SimulateValues simulateValues;
+
+        public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
+        {
+            damage += newDamage;
+            healing += newHealing;
+            shield += newShield;
+
+            //Save only the highest execute value
+            if (newExecute > highestExecute)
+            {
+                highestExecute = newExecute;
+            }
+            
+            PreviewValues();
+        }
+
+        void PreviewValues()
+        {
+            bool kills = damage >= health.GetHealth() + healing + shield ||
+                        health.GetHealthPercentageFromDamage(damage - shield) < highestExecute;
+            
+            int damagePreview = damage;
+            int healingPreview = healing;
+            int shieldPreview = shield;
+
+            if (kills)
+            {
+                damagePreview = Mathf.Abs(Mathf.Clamp(damage, 0, health.GetHealth() - damage));
+                healingPreview = 0;
+                shieldPreview = 0;
+            }
+
+            simulateValues.DisplayValues(damagePreview, healingPreview, shieldPreview, kills);
+        }
+
+        public void ResetValues()
+        {
+            damage = 0; healing = 0; shield = 0; highestExecute = 0;
+            PreviewValues();
+        }
+
+        #endregion
     }
 }

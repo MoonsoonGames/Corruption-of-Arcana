@@ -17,119 +17,205 @@ namespace Necropanda
     {
         #region Setup
 
+        #region Variables
+
         Character character;
 
-        //Health Values
-        public int maxHealth;
+        #region Health Values
+
+        [HideInInspector]
+        public bool dying = false;
+        protected int maxHealth; public int GetMaxHealth() { return maxHealth; }
+        protected int cursedMaxHealth;
+        protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
-        //Hit sound modifier for health
         protected int shield;
-        //Hit sound modifier for shield
 
         //Damage Resistances
-        Dictionary<E_DamageTypes, float> baseDamageResistances;
-        public E_DamageTypes[] baseDamageResistancesType;
-        public float[] baseDamageResistancesModifier;
         Dictionary<E_DamageTypes, float> currentDamageResistances;
 
+        #endregion
+
+        #region UI
+
+        [Header("UI")]
         public Image healthIcon;
         public TextMeshProUGUI healthText;
         public Color shieldColor;
         public Color healthColor;
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
+        public GameObject curseOverlay;
+        UShake shake;
+        UColorFlash colorFlash;
+        public UColorFlash screenFlash;
+
+        #endregion
+
+        #endregion
 
         protected virtual void Start()
         {
             character = GetComponent<Character>();
             SetupHealth();
             SetupResistances();
+            shake = GetComponentInChildren<UShake>();
+            colorFlash = GetComponentInChildren<UColorFlash>();
         }
 
+        /// <summary>
+        /// Sets up the max health, cursed health and temp max health from the character stats
+        /// </summary>
         protected virtual void SetupHealth()
         {
+            maxHealth = character.stats.maxHealth;
+            tempMaxHealth = maxHealth;
             health = maxHealth;
-            UpdateHealthUI();
+            cursedMaxHealth = (int)(maxHealth * 0.8);
+
+            CheckCurseHealth();
         }
 
+        /// <summary>
+        /// Sets up the current resistances from the base resistance values
+        /// </summary>
         protected virtual void SetupResistances()
         {
-            baseDamageResistances = new Dictionary<E_DamageTypes, float>();
-
-            for (int i = 0; i < baseDamageResistancesType.Length; i++)
-            {
-                baseDamageResistances.Add(baseDamageResistancesType[i], baseDamageResistancesModifier[i]);
-            }
-
             currentDamageResistances = new Dictionary<E_DamageTypes, float>();
 
-            foreach (E_DamageTypes type in baseDamageResistances.Keys)
+            for (int i = 0; i < character.stats.baseDamageResistancesModifier.Length; i++)
             {
-                currentDamageResistances.Add(type, baseDamageResistances[type]);
+                currentDamageResistances.Add(character.stats.baseDamageResistancesType[i], character.stats.baseDamageResistancesModifier[i]);
             }
+        }
+
+        #endregion
+
+        #region Start Turn
+
+        public void StartTurn()
+        {
+            //Decay shield
+            //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
+            shield = shield / 2;
+            CheckCurseHealth();
         }
 
         #endregion
 
         #region Health
 
+        #region Health Calculations
+
+        /// <summary>
+        /// Apply an effect to the character that changes their health
+        /// </summary>
+        /// <param name="type">The effect type affecting the character</param>
+        /// <param name="value">The value of the damage affecting the target</param>
+        /// <param name="attacker">The attacker dealing the damage</param>
+        /// <returns>The true value (affected by resistances and shield) of the effect</returns>
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
+            #region Damage Calculations
+
+            int damageTaken = 0;
+
             //Resistance check
             int trueValue = (int)(value * CheckResistances(type));
 
             switch (type)
             {
                 case (E_DamageTypes.Healing):
-                    health = Mathf.Clamp(health + trueValue, 0, maxHealth);
+                    health = Mathf.Clamp(health + trueValue, 0, tempMaxHealth);
                     break;
                 case (E_DamageTypes.Shield):
                     shield += trueValue;
                     break;
                 case (E_DamageTypes.Perforation):
-                    health = Mathf.Clamp(health - trueValue, 0, maxHealth);
+                    health = Mathf.Clamp(health - trueValue, 0, tempMaxHealth);
+                    damageTaken = trueValue;
+                    ScreenFlash(type);
                     break;
                 default:
                     int damageOverShield = (int)Mathf.Clamp(trueValue - shield, 0, Mathf.Infinity);
                     shield = (int)Mathf.Clamp(shield - trueValue, 0, Mathf.Infinity);
-                    health = Mathf.Clamp(health - damageOverShield, 0, maxHealth);
+                    health = Mathf.Clamp(health - damageOverShield, 0, tempMaxHealth);
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
+                    damageTaken = damageOverShield;
+                    if (damageTaken > 0)
+                        ScreenFlash(type);
                     break;
             }
 
-            if (health <= 0)
-            {
-                //Debug.Log(health);
-            }
+            character.damageTakenThisTurn += damageTaken;
 
+            #endregion
+
+            #region Effects
+
+            //FX
             PlaySound(type, trueValue);
             UpdateHealthUI();
+
+            if (health <= 0)
+            {
+                Kill();
+            }
+            else
+            {
+                //Visual effects that rely on the character being alive
+                ShakeCharacter(damageTaken);
+                ColorFlash(type);
+            }
+
+            #endregion
+
             return trueValue;
         }
 
+        /// <summary>
+        /// Calculates the percentage of health the character has
+        /// </summary>
+        /// <returns>Character's health percentage</returns>
         public float GetHealthPercentage() { return (float)health / (float)maxHealth; }
 
+        /// <summary>
+        /// Calculates the percentage of health the character has based on how much damage they will take
+        /// </summary>
+        /// <param name="damage">The damage the target will take to thier health</param>
+        /// <returns>Character's health percentage affected by the damage</returns>
+        public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
+
+        #endregion
+
+        #region UI
+
+        /// <summary>
+        /// Updates the UI for the health text and shield overlay
+        /// </summary>
         void UpdateHealthUI()
         {
             if (shield > 0)
             {
+                //Shield overlay
                 if (healthIcon != null)
                 {
                     healthIcon.color = shieldColor;
                 }
 
+                //Set shield value
                 if (healthText != null)
                 {
-                    healthText.text = health.ToString() + "/" + maxHealth.ToString() + " + " + shield.ToString();
+                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString() + " + " + shield.ToString();
                 }
             }
             else
             {
+                //Health overlay
                 if (healthIcon != null)
                 {
-                    //Debug.Log((float)((float)health / (float)maxHealth));
-                    if ((float)((float)health / (float)maxHealth) < lowHealthThresholdPercentage)
+                    if ((float)((float)health / (float)tempMaxHealth) < lowHealthThresholdPercentage)
                     {
                         healthIcon.color = lowHealthColor;
                     }
@@ -139,34 +225,94 @@ namespace Necropanda
                     }
                 }
 
+                //Set health value
                 if (healthText != null)
                 {
-                    healthText.text = health.ToString() + "/" + maxHealth.ToString();
+                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Updates the UI for the curse overlay
+        /// </summary>
+        public void CheckCurseHealth()
+        {
+            if (character == null)
+                return;
+
+            if (character.curse)
+            {
+                //Activate the overlay, set the temp max health to the curse value and clamp the current health value to the new max
+                tempMaxHealth = cursedMaxHealth;
+                health = Mathf.Clamp(health, 0, tempMaxHealth);
+                curseOverlay.SetActive(true);
+            }
+            else
+            {
+                //Resets the overlay and max health
+                tempMaxHealth = maxHealth;
+                curseOverlay.SetActive(false);
+            }
+
+            UpdateHealthUI();
+        }
+
+        #endregion
+
+        #region Death
+
+        public GameObject[] disableOnKill;
+
+        void Kill()
+        {
+            dying = true;
+
+            ActivateArt(false);
+        }
+
+        public void ActivateArt(bool activate)
+        {
+            foreach (var item in disableOnKill)
+            {
+                //Disable all art assets
+                item.SetActive(activate);
             }
         }
 
         #endregion
 
+        #endregion
+
         #region Resistances
 
-        public bool ModifyResistanceModifier(E_DamageTypes damageType, float newValue)
+        /// <summary>
+        /// Change the resistance values to a new value
+        /// </summary>
+        /// <param name="damageType">The damage type being changed</param>
+        /// <param name="valueModifier">The modifier to add or subtract from the current resistance value</param>
+        /// <returns>True if the resistance was already contained and modified. False if the resistance was not contained and added.</returns>
+        public bool ModifyResistanceModifier(E_DamageTypes damageType, float valueModifier)
         {
             if (currentDamageResistances.ContainsKey(damageType))
             {
-                currentDamageResistances[damageType] += newValue;
+                currentDamageResistances[damageType] += valueModifier;
                 return true;
             }
             else
             {
-                currentDamageResistances.Add(damageType, 1f + newValue);
+                currentDamageResistances.Add(damageType, 1f + valueModifier);
                 return false;
             }
         }
 
+        /// <summary>
+        /// Checks the resistance multiplier for an input damage type
+        /// </summary>
+        /// <param name="type">The damage type being checked</param>
+        /// <returns>Returns the multiplier for the damage type</returns>
         public float CheckResistances(E_DamageTypes type)
         {
-            //needs to check resistances
             if (currentDamageResistances.ContainsKey(type))
             {
                 return currentDamageResistances[type];
@@ -180,8 +326,11 @@ namespace Necropanda
 
         #endregion
 
+        #region Feedback
+
         #region Sound Effects
 
+        [Header("Sound Effects")]
         public EventReference defaultSoundEffectHealth;
         public EventReference defaultSoundEffectShield;
         public Vector2Int damageScaling;
@@ -190,6 +339,7 @@ namespace Necropanda
 
         public void PlaySound(E_DamageTypes type, int value)
         {
+            //Play sound from the damage type
             foreach(var item in soundEffects)
             {
                 if (item.effectType == type)
@@ -231,6 +381,37 @@ namespace Necropanda
         {
             //Play death sound
         }
+
+        #endregion
+
+        #region Visual Effects
+
+        void ShakeCharacter(int damage)
+        {
+            if (shake != null && damage > 0)
+            {
+                float intensity = HelperFunctions.Remap(damage, 0, 20, 15, 30);
+                shake.CharacterShake(shake.baseDuration, intensity);
+            }
+        }
+
+        void ColorFlash(E_DamageTypes type)
+        {
+            if (colorFlash != null)
+            {
+                colorFlash.Flash(type);
+            }
+        }
+
+        void ScreenFlash(E_DamageTypes type)
+        {
+            if (screenFlash != null)
+            {
+                screenFlash.Flash(type);
+            }
+        }
+
+        #endregion
 
         #endregion
     }

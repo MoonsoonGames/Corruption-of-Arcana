@@ -8,15 +8,13 @@ using FMODUnity;
 /// </summary>
 namespace Necropanda.Utils.Audio
 {
-    public class PlaySoundOnKeyPress : MonoBehaviour
+    public class PlaySoundOnKeyPress : MonoBehaviour, IInteractable
     {
         public EventReference sound;
 
-        private void OnTriggerStay(Collider other) {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                RuntimeManager.PlayOneShot(sound);
-            }
+        public void Interacted(GameObject player)
+        {
+            RuntimeManager.PlayOneShot(sound);
         }
     }
 }
