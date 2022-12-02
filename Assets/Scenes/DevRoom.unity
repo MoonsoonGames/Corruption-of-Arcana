@@ -600,11 +600,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 903611522}
     m_Modifications:
-    - target: {fileID: 770011594899736360, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_RootOrder
@@ -660,26 +655,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: timeToPatrol
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: patrolPointOffset
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6750534686865133459, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: activateOnStart
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7298192787311657921, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_Name
@@ -687,19 +662,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
-      propertyPath: overrideState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: doOverrideState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: wanderingCoolDown
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: moduleManager
+      value: 
+      objectReference: {fileID: 399849352}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21e94afcdf97434595d03b968ffa0d5, type: 3}
 --- !u!1001 &38579032
@@ -4743,6 +4708,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 390702529}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &399849352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7966900699311784393, guid: e21e94afcdf97434595d03b968ffa0d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 37963303}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bd2785c4f94dc448d82640b1c77614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &410466473
 GameObject:
   m_ObjectHideFlags: 0
@@ -7306,7 +7283,7 @@ PrefabInstance:
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: overrideState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
@@ -12128,7 +12105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d28fc24fa20fd43affe693af146ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLevel: 0
+  debugLevel: 4
 --- !u!4 &1359789692
 Transform:
   m_ObjectHideFlags: 0
@@ -13838,6 +13815,11 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750534686865133459, guid: e21e94afcdf97434595d03b968ffa0d5,
+        type: 3}
+      propertyPath: activateOnStart
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7298192787311657921, guid: e21e94afcdf97434595d03b968ffa0d5,
@@ -18487,21 +18469,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 903611522}
     m_Modifications:
-    - target: {fileID: 770011594899736360, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5810320439868594943, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5810320439868594943, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: maxWanderDuration
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_RootOrder
@@ -18557,50 +18524,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: timeToPatrol
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 6491787267032162312, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: patrolPointOffset
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6750534686865133459, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: activateOnStart
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7298192787311657921, guid: e21e94afcdf97434595d03b968ffa0d5,
         type: 3}
       propertyPath: m_Name
       value: OV_Bandit (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7966900699311784393, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: overrideState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: doOverrideState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805849177099797479, guid: e21e94afcdf97434595d03b968ffa0d5,
-        type: 3}
-      propertyPath: wanderingCoolDown
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e21e94afcdf97434595d03b968ffa0d5, type: 3}

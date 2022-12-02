@@ -51,7 +51,7 @@ namespace Necropanda.Utils.Debugger
         /// <param name="message">The message to be sent</param>
         public void SendDebug(string message, int priority)
         {
-            if (priority > (int)debugLevel)
+            if (priority != (int)debugLevel && debugLevel != DebuggerState.All)
             {
                 return;
             }
