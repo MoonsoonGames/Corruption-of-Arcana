@@ -29,7 +29,7 @@ namespace Necropanda.AI
 
         public bool doOverrideState; // If true, the AI will only stay in this state. Regardless of anything else.
         public AIState overrideState;
-        public int avoidancePriority = 15; // The level of avoidance priority for the agent. lower = more important. Might be worth setting this based on the type of the enemy
+        public int avoidancePriority = 15; // The level of aDebugvoidance priority for the agent. lower = more important. Might be worth setting this based on the type of the enemy
         public float timer = 0f; // Internal timer used for state changes and tracking.
 
         [Header("Wandering Variables")]
@@ -37,6 +37,11 @@ namespace Necropanda.AI
         public float wanderRadius;
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
+
+        #region Checking Variables
+        bool hasDebuggedWandering;
+        bool hasDebuggedPatrol;
+        #endregion
 
 
         private void Start()
@@ -55,7 +60,7 @@ namespace Necropanda.AI
         {
             player = playerRef;
             active = true;
-            Debug.Log("Activate AI");
+            Debugger.instance.SendDebug("Activate AI");
         }
 
         // Update is called once per frame
@@ -67,10 +72,8 @@ namespace Necropanda.AI
             }
             else
             {
-                if (active)
-                {
-                    HFSM();
-                }
+
+                HFSM();
             }
 
             Timer();
@@ -91,9 +94,8 @@ namespace Necropanda.AI
             switch (currentState)
             {
                 case AIState.Nothing:
-                    // Disable the other modules when the AI is doing nothing.
-                    moduleManager.wander.enabled = false;
-                    moduleManager.patrol.enabled = false;
+                    // Disable the other modules when the AI is doing nothing. We pass nothing here for that.
+                    moduleManager.ChangeModuleState();
                     // Set the state to nothing.
                     currentState = AIState.Nothing;
                     // Check if the AI has been running for long enough for a state switch.
@@ -109,9 +111,16 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Chasing:
-                    moduleManager.wander.enabled = false;
-                    moduleManager.patrol.enabled = false;
-                    agent.SetDestination(player.transform.position);
+                    // Disable the other modules
+                    moduleManager.ChangeModuleState();
+                    try
+                    {
+                        agent.SetDestination(player.transform.position);
+                    }
+                    catch (System.NullReferenceException)
+                    {
+                        player = GameObject.FindGameObjectWithTag("Player");
+                    }
 
                     // Check to make sure the AI doesn't run into the player.
                     if (agent.remainingDistance <= .5f)
@@ -121,15 +130,24 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
-                    moduleManager.wander.enabled = true;
+                    moduleManager.ChangeModuleState(1, true);
+                    moduleManager.ChangeModuleState(2, false);
                     moduleManager.wander.WanderInRadius(blocked, hit);
-                    Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
+                    if (!hasDebuggedWandering)
+                    {
+                        Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
+                        hasDebuggedWandering = true;
+                    }
                     break;
 
                 case AIState.Patrolling:
-                    moduleManager.patrol.enabled = true;
-                    moduleManager.wander.enabled = false;
-                    Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
+                    moduleManager.ChangeModuleState(1, false);
+                    moduleManager.ChangeModuleState(2, true);
+                    if (!hasDebuggedPatrol)
+                    {
+                        Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
+                        hasDebuggedPatrol = true;
+                    }
                     break;
             }
         }
@@ -151,7 +169,7 @@ namespace Necropanda.AI
 
         private void OnTriggerExit(Collider other)
         {
-            currentState = AIState.Nothing;
+            currentState = AIState.Patrolling;
         }
         #endregion
     }

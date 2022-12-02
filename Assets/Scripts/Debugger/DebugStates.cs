@@ -8,8 +8,8 @@ namespace Necropanda.Utils.Debugger
     public enum DebuggerState
     {
         None,
-        Log,
+        Error,
         Warning,
-        Error
+        Log
     }
 }
