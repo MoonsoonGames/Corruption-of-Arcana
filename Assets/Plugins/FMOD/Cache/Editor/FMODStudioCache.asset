@@ -908,6 +908,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-3759104135087352379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/Potion Button/Potion Button Hover Off
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/Potion Button/Potion Button Hover Off
+  Guid:
+    Data1: 1294428796
+    Data2: 1253390588
+    Data3: 2145255598
+    Data4: -1594202022
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 252
 --- !u!114 &-3678787745459319238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,6 +1121,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
+--- !u!114 &-2459118875146509936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/Potion Button/Potion Button Hover On
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/Potion Button/Potion Button Hover On
+  Guid:
+    Data1: 1332722961
+    Data2: 1121672958
+    Data3: 1486032291
+    Data4: -1212481999
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 230
 --- !u!114 &-2298488890420184349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1190,10 +1244,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638049694931309876
+  lastModified: 638057697634506426
   FileSizes:
   - Name: 
-    Value: 2830
+    Value: 3192
   Exists: 1
 --- !u!114 &-2089825020503676980
 MonoBehaviour:
@@ -1249,6 +1303,36 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3082
+--- !u!114 &-1788909856966964108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Terrain
+  m_EditorClassIdentifier: 
+  Name: Terrain
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 1
+  ID:
+    data1: 2555359183
+    data2: 754625829
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Stone
+  - Grass
+  - Dirt
+  - Wood
+  - Water
+  - Crystal
+  Exists: 1
 --- !u!114 &-1601295554535106802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,6 +1384,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-1324360962476337983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Marked for death
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Marked for death
+  Guid:
+    Data1: -264618130
+    Data2: 1099684790
+    Data3: -1702789953
+    Data4: -44692601
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 556919973994440383}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 790
 --- !u!114 &-1057815444855474218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1611,7 +1723,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 1165
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,14 +1768,19 @@ MonoBehaviour:
   - {fileID: -8037903084593450173}
   - {fileID: 7123658988203634697}
   - {fileID: -5861089105481463775}
-  - {fileID: 2627241432337839241}
-  - {fileID: 1061888618811531984}
+  - {fileID: -2459118875146509936}
+  - {fileID: 4752518604494208478}
+  - {fileID: -1324360962476337983}
+  - {fileID: 3694224957126933349}
+  - {fileID: -3759104135087352379}
+  - {fileID: 6353518573406594685}
+  - {fileID: 5426891507490990066}
   EditorParameters: []
   MasterBanks:
   - {fileID: 392371019205590055}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638049694931309876
+  cacheTime: 638057697634506426
   cacheVersion: 131591
 --- !u!114 &261568529271131633
 MonoBehaviour:
@@ -1708,8 +1825,32 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638049694931309876
+  lastModified: 638057697634495756
   FileSizes: []
+  Exists: 1
+--- !u!114 &556919973994440383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Marked for death/Marked for death
+  m_EditorClassIdentifier: 
+  Name: Marked for death
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2779955207
+    data2: 4119984827
+  Type: 1
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &609677920330908324
 MonoBehaviour:
@@ -1767,33 +1908,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 166000
---- !u!114 &1061888618811531984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Main Menu/Button Press (PH)
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Main Menu/Button Press (PH)
-  Guid:
-    Data1: -1315422354
-    Data2: 1329435131
-    Data3: -1282201928
-    Data4: -975397895
-  Banks:
-  - {fileID: 392371019205590055}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1025
 --- !u!114 &1346072634672971062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,33 +2013,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &2627241432337839241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Taro/Take Damage (PH)
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Taro/Take Damage (PH)
-  Guid:
-    Data1: 1993795648
-    Data2: 1131469179
-    Data3: -885849706
-    Data4: 2082907646
-  Banks:
-  - {fileID: 392371019205590055}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 360
 --- !u!114 &2779904650945718204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,6 +2121,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3694224957126933349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Main Menu/Button Press
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Main Menu/Button Press
+  Guid:
+    Data1: -1315422354
+    Data2: 1329435131
+    Data3: -1282201928
+    Data4: -975397895
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1239
 --- !u!114 &3735923784259524496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,6 +2275,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 101439
+--- !u!114 &4752518604494208478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Taro/Take Damage
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Taro/Take Damage
+  Guid:
+    Data1: 1993795648
+    Data2: 1131469179
+    Data3: -885849706
+    Data4: 2082907646
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 360
 --- !u!114 &5147000214674028810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2242,6 +2383,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1920
+--- !u!114 &5426891507490990066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/Potion Button/Potion Button Press
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/Potion Button/Potion Button Press
+  Guid:
+    Data1: 347177364
+    Data2: 1329233152
+    Data3: -1792255080
+    Data4: 671971258
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 191
 --- !u!114 &5584793091053718565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,6 +2545,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1120
+--- !u!114 &6353518573406594685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Footsteps
+  Guid:
+    Data1: -1064609916
+    Data2: 1286582625
+    Data3: -1932242531
+    Data4: 789797936
+  Banks:
+  - {fileID: 392371019205590055}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1788909856966964108}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6550474226055045735
 MonoBehaviour:
   m_ObjectHideFlags: 0
