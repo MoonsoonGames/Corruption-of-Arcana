@@ -3,7 +3,7 @@
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace Necropanda
+namespace Necropanda.SaveSystem
 {
     public interface ISaveable
     {
