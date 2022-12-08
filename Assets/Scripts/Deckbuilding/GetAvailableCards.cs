@@ -16,8 +16,14 @@ namespace Necropanda
         BuildDeck buildDeck;
         public Object cardPrefab;
 
-        public void Setup()
+        bool setup = false;
+
+        public void LoadCards()
         {
+            if (setup) return;
+
+            setup = true;
+
             if (collectionContent == null) return;
             collectionDeck = collectionContent.GetComponentInParent<Deck2D>();
 
