@@ -45,6 +45,24 @@ namespace Necropanda
             return cards.Length;
         }
 
+        public List<Spell> GetSpells()
+        {
+            List<Spell> spells = new List<Spell>();
+
+            if (cards.Length <= 0) return spells;
+
+            foreach (CardDrag2D card in cards)
+            {
+                Card cardInstance = card.GetComponent<Card>();
+
+                Spell spellInstance= cardInstance.spell;
+
+                spells.Add(spellInstance);
+            }
+
+            return spells;
+        }
+
         public float deckScale = 1;
 
         #endregion
