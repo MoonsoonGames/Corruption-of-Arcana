@@ -5,16 +5,26 @@ using UnityEngine.EventSystems;
 
 public class TabMovement : MonoBehaviour
 {
+    Vector3 originalPos = new Vector3();
 
     public void OnMouseEnter()
     {
         Debug.Log("Hovering Over");
-        transform.position = new Vector3(655f, 0, 0);
+        originalPos = transform.position;
+        Vector3 newPos = new Vector3();
+        newPos.x = originalPos.x + 50f;
+        newPos.y = originalPos.y;
+        newPos.z = originalPos.z;
+        transform.position = newPos;
     }
 
     public void OnMouseExit()
     {
         Debug.Log("Moved Off");
-        transform.position = new Vector3(585f, 0, 0);
+        Vector3 newPos = new Vector3();
+        newPos.x = originalPos.x;
+        newPos.y = originalPos.y;
+        newPos.z = originalPos.z;
+        transform.position = newPos;
     }
 }
