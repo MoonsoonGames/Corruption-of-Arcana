@@ -8,7 +8,7 @@ using Necropanda.SaveSystem.Serializables;
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace Necropanda
+namespace Necropanda.SaveSystem
 {
     /// <summary>
     /// Saves player location, health and other relevant stats
@@ -17,14 +17,24 @@ namespace Necropanda
     /// </summary>
     public class PlayerSaving : MonoBehaviour, ISaveable
     {
+        // Player
+        [Header("Player")]
         [SerializeField] private SerializableVector3 position;
         [SerializeField] private float health;
         [SerializeField] private int maxHealth;
+        [SerializeField] private int gold;
+        [SerializeField] private int arcana;
 
-        // Quest Saving vars
+        // Potions
+        [Header("Potions")]
+        [SerializeField] private int healthPotAmount;
+        [SerializeField] private int ragePotAmount;
+        [SerializeField] private int swiftPotAmount;
+        [SerializeField] private int arcanaPotAmount;
+
+        // Quest Saving vars // Enemy stat stuff
+        [Header("Quest and Enemies")]
         [SerializeField] private int questStage = 0;
-
-        // Enemy stat stuff
         [SerializeField] private int numberOfEnemiesDefeated = 0;
 
 
@@ -35,6 +45,12 @@ namespace Necropanda
                 position = position,
                 health = health,
                 maxHealth = maxHealth,
+                gold = gold,
+                arcana = arcana,
+                healthPotAmount = healthPotAmount,
+                ragePotAmount = ragePotAmount,
+                swiftPotAmount = swiftPotAmount,
+                arcanaPotAmount = arcanaPotAmount,
                 questStage = questStage,
                 numberOfEnemiesDefeated = numberOfEnemiesDefeated
             };
@@ -45,9 +61,18 @@ namespace Necropanda
         {
             var saveData = (SaveData)state;
 
+            // Player
             position = saveData.position;
             health = saveData.health;
             maxHealth = saveData.maxHealth;
+            gold = saveData.gold;
+            arcana = saveData.arcana;
+            // Potions
+            healthPotAmount = saveData.healthPotAmount;
+            ragePotAmount = saveData.ragePotAmount;
+            swiftPotAmount = saveData.swiftPotAmount;
+            arcanaPotAmount = saveData.arcanaPotAmount;
+            // Quests and enemies
             questStage = saveData.questStage;
             numberOfEnemiesDefeated = saveData.numberOfEnemiesDefeated;
         }
@@ -58,6 +83,13 @@ namespace Necropanda
             public SerializableVector3 position;
             public float health;
             public int maxHealth;
+            public int gold;
+            public int arcana;
+
+            public int healthPotAmount;
+            public int ragePotAmount;
+            public int swiftPotAmount;
+            public int arcanaPotAmount;
 
             public int questStage;
             public int numberOfEnemiesDefeated;
