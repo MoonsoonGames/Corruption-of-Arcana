@@ -6,12 +6,12 @@ using Necropanda;
 public class JournalMainCode : MonoBehaviour
 {
     #region Game Objects 
-        public int currentPage = 0;
+        private int currentPage = 0;
 
         #region Sections
         [Header("Sections and SubTabs")]
         public GameObject[] JournalSections;
-
+        public GameObject[] MainTabs;
         public GameObject[] Subtabs;
         #endregion
 
@@ -63,6 +63,18 @@ public class JournalMainCode : MonoBehaviour
         foreach(GameObject obj in pages)
         {
             obj.SetActive(state);
+        }
+    }
+
+    void Update()
+    {
+        //Home open
+        if(JournalSections[0].activeSelf == false)
+        {
+            GameObject currentTab = MainTabs[0];
+            currentTab.GetComponent<TabMovement>().enabled = true;
+
+            currentTab.transform.localPosition = new Vector3(585, 310, 0);
         }
     }
 
@@ -118,6 +130,10 @@ public class JournalMainCode : MonoBehaviour
         Page.SetActive(true);
 
         TogglePages(Subtabs, false);//off all subtabs 
+
+        GameObject currentTab = MainTabs[0];
+        currentTab.GetComponent<TabMovement>().enabled = false;
+        currentTab.transform.localPosition = new Vector3(658.0594f, 310, 0);
     }
     #endregion
 
