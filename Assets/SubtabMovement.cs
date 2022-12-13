@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TabMovement : MonoBehaviour
+public class SubtabMovement : MonoBehaviour
 {
     Vector3 originalPos = new Vector3();
 
@@ -12,7 +12,7 @@ public class TabMovement : MonoBehaviour
         //Debug.Log("Hovering Over");
         originalPos = transform.position;
         Vector3 newPos = new Vector3();
-        newPos.x = originalPos.x + 50f;
+        newPos.x = originalPos.x - 50f;
         newPos.y = originalPos.y;
         newPos.z = originalPos.z;
         transform.position = newPos;
