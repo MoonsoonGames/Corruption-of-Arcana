@@ -216,8 +216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 30
-  playerBody: {fileID: 1940659339934191092}
   playerController: {fileID: 6415384419620348150}
+  xRotation: 0
+  yRotation: 0
 --- !u!114 &8519582550250632340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,7 @@ GameObject:
   - component: {fileID: 4646851015473541259}
   - component: {fileID: -6369506473341814810}
   - component: {fileID: 5710260920175286304}
+  - component: {fileID: -7733352736605582764}
   m_Layer: 8
   m_Name: TP NEW
   m_TagString: Player
@@ -383,6 +385,7 @@ MonoBehaviour:
     m_Bits: 8
   paused: 0
   animator: {fileID: 6611967239967125590}
+  cmBrain: {fileID: 0}
 --- !u!95 &6611967239967125590
 Animator:
   serializedVersion: 4
@@ -488,6 +491,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTerrain: 0
+--- !u!114 &-7733352736605582764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940659339934191094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c54bea6d8f15e443866121b37b505b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass: {fileID: 6913681875276513784, guid: 01aebb57ba4bfb24d91c0322520e9748, type: 3}
+  dirt: {fileID: 6913681875276513784, guid: 2f7c24743f061f7489471b285338349e, type: 3}
+  stone: {fileID: 6441297445223667176, guid: ef7c953fee4c76f408e245e605681566, type: 3}
+  wood: {fileID: 6441297445223667176, guid: ef7c953fee4c76f408e245e605681566, type: 3}
+  crystal: {fileID: 6913681875276513784, guid: 0edfb41e832d7df43898b17b841e9bb8, type: 3}
+  water: {fileID: 6913681875276513784, guid: c5385e7b61a43a24c9d40eb5b3985085, type: 3}
 --- !u!1 &1940659340735814500
 GameObject:
   m_ObjectHideFlags: 0
