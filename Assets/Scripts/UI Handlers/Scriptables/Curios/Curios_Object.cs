@@ -9,19 +9,11 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    [CreateAssetMenu(fileName = "New Entry")]
-    public class Bestiary_Entry : ScriptableObject
+    [CreateAssetMenu(fileName = "New Curio")]
+    public class Curios_Object : ScriptableObject
     {
-        public new string Name;
+        public string Name;
         public Sprite Artwork;
         public string Description;
-
-        public bool Tier1;
-        public bool Tier2;
-        public bool Tier3;
-
-        public string Location;
-        public string Resistances;
-        public string Weaknesses;
     }
 }
