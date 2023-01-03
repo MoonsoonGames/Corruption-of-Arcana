@@ -11,12 +11,13 @@ namespace Necropanda.Interfaces
     {
         public GameObject Pausemenu;
         public PlayerController player;
-        public GameObject HUD;
+        public GameObject mainHUD;
+        public static bool gameIsPaused;
 
         // Start is called before the first frame update
         void Start()
         {
-            HUD.SetActive(true);
+            mainHUD.SetActive(true);
             Pausemenu.SetActive(false);
         }
 
@@ -25,23 +26,31 @@ namespace Necropanda.Interfaces
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
-                //open pause menu
-                if(player.paused == false)
-                {
-                    Pausemenu.SetActive(true);
-                    HUD.SetActive(false);
-                    player.paused = true;
-                    Time.timeScale = 0;
-                }        
+                gameIsPaused = !gameIsPaused;
+                PauseGame();
+            }
+        }
 
-                //close pause menu
-                else if (player.paused == true)
-                {
-                    Pausemenu.SetActive(false);
-                    HUD.SetActive(true);
-                    player.paused = false;
-                    Time.timeScale = 1;
-                }
+        void PauseGame()
+        {
+            if (gameIsPaused)
+            {
+                Pausemenu.SetActive(true);
+                mainHUD.SetActive(false);
+                Time.timeScale = 0;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                player.paused = true;
+            }
+
+            else 
+            {
+                Pausemenu.SetActive(false);
+                mainHUD.SetActive(true);
+                Time.timeScale = 1;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                player.paused = false;
             }
         }
     }
