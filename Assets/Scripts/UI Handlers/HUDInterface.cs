@@ -11,7 +11,12 @@ namespace Necropanda.Interfaces
     {
         public GameObject Pausemenu;
         public PlayerController player;
+        private JournalMainCode JournalCode;
         public GameObject mainHUD;
+        public GameObject Inventory;
+        public GameObject Journal;
+        public GameObject Settings;
+
         public static bool gameIsPaused;
 
         // Start is called before the first frame update
@@ -26,9 +31,50 @@ namespace Necropanda.Interfaces
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
-                gameIsPaused = !gameIsPaused;
-                PauseGame();
+                if(Inventory.activeSelf == true)
+                {
+                    player.paused = false;
+                    Time.timeScale = 1;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Inventory.SetActive(false);
+                    mainHUD.SetActive(true);
+                }
+                else
+                {
+                    gameIsPaused = !gameIsPaused;
+                    PauseGame();
+                }
+
+                if(Journal.activeSelf == true)
+                {
+                    Journal.SetActive(false);
+                    Inventory.SetActive(true);
+                    gameIsPaused = true;
+                    Pausemenu.SetActive(false);
+                    JournalCode.BestiarySection.SetActive(false);
+                }
+
+                if(Settings.activeSelf == true)
+                {
+                    Settings.SetActive(false);
+                    PauseGame();
+                }
             }
+
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                if(gameIsPaused == false)
+                {
+                    Inventory.SetActive(true);
+                    mainHUD.SetActive(false);
+                    player.paused = true;
+                    Time.timeScale = 0;
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.Confined;
+                }
+            }
+            
         }
 
         void PauseGame()
