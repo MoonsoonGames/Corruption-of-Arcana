@@ -21,21 +21,23 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda.SaveSystem
 {
-    public class SavingLoadingAdvancedExample : MonoBehaviour
+    public class SavingLoading : MonoBehaviour
     {
         private string SavePath => $"{Application.persistentDataPath}/save.dat";
 
         [ContextMenu("Save")]
-        private void Save()
+        public void Save()
         {
+            Debug.Log("saving");
             var state = LoadFile();
             CaptureState(state);
             SaveFile(state);
         }
 
         [ContextMenu("Load")]
-        private void Load()
+        public void Load()
         {
+            Debug.Log("loading");
             var state = LoadFile();
             RestoreState(state);
         }
@@ -84,6 +86,7 @@ namespace Necropanda.SaveSystem
         {
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())
             {
+                Debug.Log(saveable.gameObject.name);
                 if (state.TryGetValue(saveable.Id, out object value))
                 {
                     saveable.RestoreState(value);
