@@ -9,10 +9,10 @@ namespace Necropanda.Interfaces
     {
         public GameObject Pausemenu;
         public GameObject SettingsScreen;
-        public Slider MasterVolume;
-        public Slider MusicVolume;
-        public Slider SEVolume;
-        public Slider DialogueVolume; //This might be scraped due to timeframe
+        // public Slider MasterVolume;
+        // public Slider MusicVolume;
+        // public Slider SEVolume;
+        // public Slider DialogueVolume; //This might be scraped due to timeframe
 
         public void Close()
         {

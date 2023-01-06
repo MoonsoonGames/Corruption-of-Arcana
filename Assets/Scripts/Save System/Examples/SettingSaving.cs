@@ -38,20 +38,8 @@ namespace Necropanda.SaveSystem
             master.value = saveData.master;
             music.value = saveData.music;
             sfx.value = saveData.sfx;
-            dialogue.value = saveData.sfx;
+            dialogue.value = saveData.dialogue;
         }
-
-        // /// <summary>
-        // /// Call this to set any of the settings to the saved values
-        // /// </summary>
-        // public void SetSettings()
-        // {
-        //     Debug.Log("test");
-        //     master.value = masterVol;
-        //     music.value = musicVol;
-        //     sfx.value = sfxVol;
-        //     dialogue.value = dialogueVol;
-        // }
 
         [System.Serializable]
         private struct SaveData

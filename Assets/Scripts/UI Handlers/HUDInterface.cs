@@ -29,9 +29,9 @@ namespace Necropanda.Interfaces
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if(Inventory.activeSelf == true)
+                if (Inventory.activeSelf == true)
                 {
                     player.paused = false;
                     Time.timeScale = 1;
@@ -46,7 +46,7 @@ namespace Necropanda.Interfaces
                     PauseGame();
                 }
 
-                if(Journal.activeSelf == true)
+                if (Journal.activeSelf == true)
                 {
                     Journal.SetActive(false);
                     Inventory.SetActive(true);
@@ -55,16 +55,16 @@ namespace Necropanda.Interfaces
                     JournalCode.BestiarySection.SetActive(false);
                 }
 
-                if(Settings.activeSelf == true)
+                if (Settings.activeSelf == true)
                 {
                     Settings.SetActive(false);
                     PauseGame();
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                if(gameIsPaused == false)
+                if (gameIsPaused == false)
                 {
                     Inventory.SetActive(true);
                     mainHUD.SetActive(false);
@@ -74,7 +74,7 @@ namespace Necropanda.Interfaces
                     Cursor.lockState = CursorLockMode.Confined;
                 }
             }
-            
+
         }
 
         void PauseGame()
@@ -83,13 +83,13 @@ namespace Necropanda.Interfaces
             {
                 Pausemenu.SetActive(true);
                 mainHUD.SetActive(false);
-                Time.timeScale = 0;
+                // Time.timeScale = 0;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 player.paused = true;
             }
 
-            else 
+            else
             {
                 Pausemenu.SetActive(false);
                 mainHUD.SetActive(true);
