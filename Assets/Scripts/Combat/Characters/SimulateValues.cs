@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -15,6 +16,7 @@ namespace Necropanda
         public TextMeshProUGUI dmgText, shieldText;
         public Color dmgColor, healColor;
         public GameObject deathIcon, healthObject, shieldObject;
+        public EventReference deathSound;
 
 
         int dmgRef, healRef, shfRef;
@@ -58,6 +60,11 @@ namespace Necropanda
             //Debug.Log("will kill? " + willKill);
 
             deathIcon.SetActive(willKill);
+            if (willKill)
+            {
+                //play sound here
+                RuntimeManager.PlayOneShot(deathSound);
+            }
         }
     }
 }
