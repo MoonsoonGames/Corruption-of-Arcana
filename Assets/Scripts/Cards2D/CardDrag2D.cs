@@ -24,6 +24,8 @@ namespace Necropanda
         [HideInInspector]
         public Deck2D newDeck;
 
+        Card card;
+
         public bool playerCard = true;
 
         DragManager dragManager;
@@ -62,6 +64,8 @@ namespace Necropanda
             baseColor = cardBackground.color;
             desiredColor = baseColor;
             baseRot = transform.rotation.eulerAngles;
+
+            card = GetComponent<Card>();
         }
 
         #endregion
@@ -79,6 +83,7 @@ namespace Necropanda
                 //Debug.Log("Pointer Enter");
                 ScaleCard(hoverScale, false);
                 Highlight(true);
+                ShowArt(false);
             }
         }
 
@@ -93,6 +98,7 @@ namespace Necropanda
                 //Debug.Log("Pointer Exit");
                 ScaleCard(1, false);
                 Highlight(false);
+                ShowArt(deck.showArt);
             }
         }
 
@@ -108,6 +114,7 @@ namespace Necropanda
 
                 Highlight(false);
                 ScaleCard(pickupScale, true);
+                ShowArt(false);
 
                 lastDeck = deck;
                 deck.RemoveCard(this);
@@ -179,6 +186,7 @@ namespace Necropanda
 
                 ScaleCard(1, false);
                 Highlight(false);
+                ShowArt(deck.showArt);
                 transform.eulerAngles = baseRot;
 
                 dragManager.canDrag = true;
@@ -233,6 +241,11 @@ namespace Necropanda
             {
                 desiredScale = baseScale * scaleFactor * deck.deckScale;
             }
+        }
+
+        void ShowArt(bool show)
+        {
+            card.ShowArt(show);
         }
 
         private void FixedUpdate()

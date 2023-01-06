@@ -29,12 +29,25 @@ namespace Necropanda
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
-            
+            cardFace.sprite = spell.cardImage;
             //SetupIcons();
 
             gameObject.name = spell.spellName;
 
             GetComponent<CardDrag2D>().Setup();
+        }
+
+        public void ShowArt(bool show)
+        {
+            bool canShow = show;
+
+            if (cardFace.sprite == null)
+                canShow = false;
+
+            Color color = Color.white;
+            color.a = canShow ? 1 : 0;
+
+            cardFace.color = color;
         }
 
         public void CastSpell(Character target, Character caster)
