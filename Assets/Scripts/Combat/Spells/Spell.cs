@@ -169,7 +169,7 @@ namespace Necropanda
 
             if (returnDiscardPile)
             {
-                DeckManager.instance.DiscardPileToDeck(true);
+                DeckManager.instance.DiscardPileToDeck(true, false);
             }
         }
 

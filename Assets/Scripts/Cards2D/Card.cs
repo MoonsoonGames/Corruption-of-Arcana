@@ -69,11 +69,17 @@ namespace Necropanda
 
                 Debug.Log(title + " || " + description);
                 TooltipManager.instance.ShowTooltip(true, title, description);
+
+                showing = true;
             }
             else
             {
-                Debug.Log("Close");
-                //TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
+                if (showing)
+                {
+                    Debug.Log("Close");
+                    TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
+                    showing = false;
+                }
             }
         }
     }
