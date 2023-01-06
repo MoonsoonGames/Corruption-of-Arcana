@@ -55,8 +55,10 @@ namespace Necropanda
         private void Update()
         {
             int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, Camera.main);
+            Debug.Log("link info: " + linkIndex);
             if (linkIndex != -1)
             {
+                Debug.Log("show tooltip - link info");
                 TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex]; // Get the information about the link
                 // Do something based on what link ID or Link Text is encountered...
 

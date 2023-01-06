@@ -33,6 +33,7 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public override void OnPointerEnter(PointerEventData eventData)
         {
+            //Debug.Log("show tooltip - spell info");
             if (TooltipManager.instance == null)
                 return;
 

@@ -28,7 +28,7 @@ namespace Necropanda
                 toolTipObject.SetActive(false);
             }
 
-            if (spellToolTipObject)
+            if (spellToolTipObject != null)
             {
                 spellToolTip = spellToolTipObject.GetComponent<SpellTooltip>();
                 spellToolTipObject.SetActive(false);
@@ -37,7 +37,7 @@ namespace Necropanda
 
         public void ShowTooltip(bool active, string titleText, string descText)
         {
-            Debug.Log("show tooltip " + active);
+            //Debug.Log("show tooltip - manager");
             if (spellToolTipObject != null)
                 spellToolTipObject.SetActive(false);
 
