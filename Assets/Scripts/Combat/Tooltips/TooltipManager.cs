@@ -37,6 +37,7 @@ namespace Necropanda
 
         public void ShowTooltip(bool active, string titleText, string descText)
         {
+            Debug.Log("show tooltip " + active);
             if (spellToolTipObject != null)
                 spellToolTipObject.SetActive(false);
 
