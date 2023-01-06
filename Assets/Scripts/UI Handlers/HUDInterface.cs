@@ -29,6 +29,20 @@ namespace Necropanda.Interfaces
         // Update is called once per frame
         void Update()
         {
+            
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                if(gameIsPaused == false)
+                {
+                    Inventory.SetActive(true);
+                    mainHUD.SetActive(false);
+                    player.paused = true;
+                    Time.timeScale = 0;
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.Confined;
+                }
+            }
+            
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 if(Inventory.activeSelf == true)
@@ -60,21 +74,7 @@ namespace Necropanda.Interfaces
                     Settings.SetActive(false);
                     PauseGame();
                 }
-            }
-
-            if(Input.GetKeyDown(KeyCode.I))
-            {
-                if(gameIsPaused == false)
-                {
-                    Inventory.SetActive(true);
-                    mainHUD.SetActive(false);
-                    player.paused = true;
-                    Time.timeScale = 0;
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.Confined;
-                }
-            }
-            
+            }            
         }
 
         void PauseGame()
