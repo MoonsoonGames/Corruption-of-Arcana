@@ -30,6 +30,11 @@ public enum E_Statuses
     None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse, Enlightened
 }
 
+public enum E_ProjectilePoints
+{
+    Caster, Target, Ground, OpponentGround, Backstab, BackstabOpponent, Above, AboveOpponents, Sky, TimeBlock
+}
+
 public enum E_Scenes
 {
     [InspectorName("Dev Room")]

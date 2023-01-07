@@ -18,7 +18,7 @@ namespace Necropanda
         Image image;
 
         bool moving = false;
-        List<Vector2> movePositions;
+        Vector2[] movePositions;
         int currentTarget = 0;
         float speed = 0;
 
@@ -29,7 +29,7 @@ namespace Necropanda
             impactEffect = effect;
         }
 
-        public void MoveToPositions(float newSpeed, List<Vector2> newMovePositions)
+        public void MoveToPositions(float newSpeed, Vector2[] newMovePositions)
         {
             movePositions = newMovePositions;
             speed = newSpeed;
@@ -38,9 +38,9 @@ namespace Necropanda
 
         private void FixedUpdate()
         {
-            if (moving && movePositions.Count != 0)
+            if (moving && movePositions.Length != 0)
             {
-                if (movePositions.Count > currentTarget)
+                if (movePositions.Length > currentTarget)
                 {
                     float lerpX = Mathf.Lerp(transform.position.x, movePositions[currentTarget].x, speed);
                     float lerpY = Mathf.Lerp(transform.position.y, movePositions[currentTarget].y, speed);
