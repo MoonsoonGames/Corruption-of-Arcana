@@ -86,7 +86,6 @@ namespace Necropanda.SaveSystem
         {
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())
             {
-                Debug.Log(saveable.gameObject.name);
                 if (state.TryGetValue(saveable.Id, out object value))
                 {
                     saveable.RestoreState(value);
