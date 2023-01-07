@@ -19,22 +19,24 @@ namespace Necropanda
             Debug.Log("Character shake");
             Vector3 originalPos = gameObject.transform.position;
 
-            float randx = transform.position.x + Random.Range(-intensity, intensity);
-            float randy = transform.position.y + Random.Range(-intensity, intensity);
+            Vector2 randMove = new Vector2();
+            randMove.x = Random.Range(-intensity, intensity);
+            randMove.y = Random.Range(-intensity, intensity);
 
-            Vector3 newPos = new Vector3(randx, randy, transform.position.z);
+            Vector3 newPos = new Vector3(randMove.x, randMove.y, 0);
 
-            //Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
-            transform.position = newPos;
+            Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
+            transform.position += newPos;
 
-            StartCoroutine(ResetShake(originalPos, duration));
+            StartCoroutine(ResetShake(randMove, duration));
         }
 
-        IEnumerator ResetShake(Vector3 originalPosition, float delay)
+        IEnumerator ResetShake(Vector2 offset, float delay)
         {
             yield return new WaitForSeconds(delay);
-            //Debug.Log(name + " returns from " + transform.position + " to " + originalPosition);
-            transform.position = originalPosition;
+            Vector3 newPos = new Vector3(-offset.x, -offset.y, 0);
+            Debug.Log(name + " returns from " + transform.position + " to " + newPos);
+            transform.position += newPos;
         }
     }
 }
