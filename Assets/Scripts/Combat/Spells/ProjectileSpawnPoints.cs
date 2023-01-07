@@ -24,8 +24,8 @@ namespace Necropanda
                 {
                     if (item.point == pointEnum)
                     {
-                        pos.x = item.pos.x;
-                        pos.y = item.pos.y;
+                        pos.x = item.transform.position.x;
+                        pos.y = item.transform.position.y;
                     }
                 }
             }
@@ -35,8 +35,8 @@ namespace Necropanda
                 {
                     if (item.point == pointEnum)
                     {
-                        pos.x = item.pos.x;
-                        pos.y = item.pos.y;
+                        pos.x = item.transform.position.x;
+                        pos.y = item.transform.position.y;
                     }
                 }
             }

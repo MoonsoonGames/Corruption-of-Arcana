@@ -63,6 +63,7 @@ namespace Necropanda
         //Visual effects for projectile
         public Object castObject;
         public Object projectileObject;
+        public float projectileSpeed = 0.4f;
         public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
         public Color trailColor;
@@ -84,7 +85,7 @@ namespace Necropanda
         /// <param name="caster">The character that cast the spell</param>
         /// <param name="spawnPosition">The spawn position of the projectile</param>
         /// <returns>Time taken for the last projectile to hit the target</returns>
-        public float QuerySpellCastTime(Character target, Character caster)
+        public float QuerySpellCastTime(Character target, Character caster, float projectileSpeed)
         {
             float time = 0;
 
@@ -94,8 +95,8 @@ namespace Necropanda
                 float moduleTime = 0;
 
                 bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
-                Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, playerTeam);
-                moduleTime = VFXManager.instance.QueryTime(points) + hitDelay + time;
+                Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
+                moduleTime = VFXManager.instance.QueryTime(points, projectileSpeed) + hitDelay + time;
 
                 time += moduleDelay + moduleTime;
             }
@@ -148,9 +149,9 @@ namespace Necropanda
                 if (spawnEnemies.Length > 0)
                 {
                     bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
-                    Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, playerTeam);
+                    Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.AddEnemy(item, points, projectileObject, impactObject, trailColor);
+                        LoadCombatManager.instance.AddEnemy(item, points, projectileObject, projectileSpeed, impactObject, trailColor);
                 }
             }
 

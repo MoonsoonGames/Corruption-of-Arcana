@@ -289,7 +289,7 @@ namespace Necropanda
                 //Use a coroutine to stagger spellcasting
                 StartCoroutine(IDelaySpell(item, i + initialDelay));
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
-                i += item.spell.QuerySpellCastTime(item.target, item.caster) + spellDelayOffset;
+                i += item.spell.QuerySpellCastTime(item.target, item.caster, item.spell.projectileSpeed) + spellDelayOffset;
 
                 //Debug.Log("Spell " + item.spell.spellName + " has a delay of " + i);
             }
@@ -379,7 +379,7 @@ namespace Necropanda
                 DeckManager.instance.AddToStart(spellInstance.spell.drawCard);
             }
 
-            yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster));
+            yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spellInstance.spell.projectileSpeed));
 
             SimulateSpellEffects();
             RemoveSpellInstance(spellInstance);

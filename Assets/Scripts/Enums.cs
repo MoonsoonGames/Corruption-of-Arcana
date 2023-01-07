@@ -32,7 +32,7 @@ public enum E_Statuses
 
 public enum E_ProjectilePoints
 {
-    Caster, Target, Ground, OpponentGround, Backstab, BackstabOpponent, Above, AboveOpponents, Sky, TimeBlock
+    Caster, Target, Ground, OpponentGround, Backstab, BackstabOpponent, Above, AboveOpponents, Sky, TimeBlock, Wheel, SpawnEnemy
 }
 
 public enum E_Scenes

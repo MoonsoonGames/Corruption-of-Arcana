@@ -23,6 +23,14 @@ namespace Necropanda
 
         void StartScript()
         {
+            for (int i = 0; i < utilityModules.Length; i++)
+            {
+                if (utilityModules[i].time < 0)
+                {
+                    utilityModules[i].time = Mathf.Infinity;
+                }
+            }
+
             moving = true;
         }
 

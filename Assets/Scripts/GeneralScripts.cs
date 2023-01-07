@@ -186,7 +186,7 @@ namespace Necropanda
         public struct ProjectilePoint
         {
             public E_ProjectilePoints point;
-            public Vector2 pos;
+            public Transform transform;
         }
 
         #endregion

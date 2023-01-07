@@ -15,7 +15,6 @@ namespace Necropanda
 
         public static VFXManager instance;
         public Vector2 middlePositionOffset;
-        public float projectileSpeed = 0.4f;
         public float speedCalculationMultiplier = 700;
         ProjectileSpawnPoints projectileSpawner;
 
@@ -39,9 +38,9 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, caster);
-            float effectDelay = QueryTime(points);
+            float effectDelay = QueryTime(points, spellRef.projectileSpeed);
 
-            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, effectType);
             SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
@@ -56,15 +55,15 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, target);
-            float effectDelay = QueryTime(points);
+            float effectDelay = QueryTime(points, spellRef.projectileSpeed);
 
-            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, effectType);
             SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
 
-        public float QueryTime(Vector2[] points)
+        public float QueryTime(Vector2[] points, float projectileSpeed)
         {
             //Calculate and return delay (T=D/S)
             float distance = 0;
@@ -120,8 +119,10 @@ namespace Necropanda
         /// <param name="trailColor">Colour of the projectile and trail, leave as (0, 0, 0, 0) to default to the damage type</param>
         /// <param name="impactRef">Impact effect of the projectile and trail, leave as null to default to the damage type</param>
         /// <param name="damageType">Damage type dealt by the projectile</param>
-        public void SpawnProjectile(Vector2[] points, Object projectileRef, Color trailColor, Object impactRef, E_DamageTypes damageType)
+        public void SpawnProjectile(Vector2[] points, Object projectileRef, float projectileSpeed, Color trailColor, Object impactRef, E_DamageTypes damageType)
         {
+            if (points.Length <= 0) { return; }
+
             #region Spawning the projectile as an game object
 
             if (projectileRef == null)
@@ -215,7 +216,7 @@ namespace Necropanda
                         projectilePoints[i] = caster.transform.position;
                         break;
                     case E_ProjectilePoints.Target:
-                        projectilePoints[i] = caster.transform.position;
+                        projectilePoints[i] = target.transform.position;
                         break;
                     case E_ProjectilePoints.TimeBlock:
                         //TODO: Not implemented Properly

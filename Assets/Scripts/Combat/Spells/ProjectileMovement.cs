@@ -42,6 +42,7 @@ namespace Necropanda
             {
                 if (movePositions.Length > currentTarget)
                 {
+                    //Vector3.SmoothDamp() is a cool thing
                     float lerpX = Mathf.Lerp(transform.position.x, movePositions[currentTarget].x, speed);
                     float lerpY = Mathf.Lerp(transform.position.y, movePositions[currentTarget].y, speed);
 
