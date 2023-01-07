@@ -321,17 +321,19 @@ namespace Necropanda
         /// <returns>The empowered or weakened value</returns>
         int EmpowerWeakenValue(int originalValue, bool empowered, bool weakened)
         {
-            int value = originalValue;
+            float floatValue = originalValue;
             if (empowered && !weakened)
             {
-                Debug.Log(spellName + " is empowered " + value + " to " + (int)(value * 1.5f));
-                value = (int)(value * 1.5f);
+                Debug.Log(spellName + " is empowered " + floatValue + " to " + (floatValue * 1.5f));
+                floatValue = (floatValue * 1.5f);
             }
             else if (weakened && !empowered)
             {
-                Debug.Log(spellName + " is weakened " + value + " to " + (int)(value * 0.5f));
-                value = (int)(value * 0.5f);
+                Debug.Log(spellName + " is weakened " + floatValue + " to " + (floatValue * 0.5f));
+                floatValue = (floatValue * 0.5f);
             }
+
+            int value = (int)Mathf.Round(floatValue);
             return value;
         }
 
