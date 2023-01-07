@@ -21,10 +21,19 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda.SaveSystem
 {
+    /// <summary>
+    /// This class contains all the logic for saving and loading. Uses unitys persistant
+    /// data path to save files and load them
+    /// 
+    /// Currently utilizes a binary formatter but this will be removed in the future.
+    /// </summary>
     public class SavingLoading : MonoBehaviour
     {
         private string SavePath => $"{Application.persistentDataPath}/save.dat";
 
+        /// <summary>
+        /// Saves the games state to a save file in unitys persistant data path
+        /// </summary>
         [ContextMenu("Save")]
         public void Save()
         {
@@ -34,6 +43,9 @@ namespace Necropanda.SaveSystem
             SaveFile(state);
         }
 
+        /// <summary>
+        /// Loads the save file from unitys persistant data path
+        /// </summary>
         [ContextMenu("Load")]
         public void Load()
         {
@@ -42,6 +54,9 @@ namespace Necropanda.SaveSystem
             RestoreState(state);
         }
 
+        /// <summary>
+        /// Deletes the save file
+        /// </summary>
         [ContextMenu("Delete Save Data")]
         private void DeleteSaveData()
         {
@@ -51,6 +66,10 @@ namespace Necropanda.SaveSystem
             }
         }
 
+        /// <summary>
+        /// Dictionary class used for setting up the save file.
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<string, object> LoadFile()
         {
             if (!File.Exists(SavePath))
@@ -65,6 +84,10 @@ namespace Necropanda.SaveSystem
             }
         }
 
+        /// <summary>
+        /// Save file class, this creates the save file using a BF
+        /// </summary>
+        /// <param name="state"></param>
         private void SaveFile(object state)
         {
             using (var stream = File.Open(SavePath, FileMode.Create))
@@ -74,6 +97,10 @@ namespace Necropanda.SaveSystem
             }
         }
 
+        /// <summary>
+        /// This function captures the "state" or progress of all tracked metrics in the game.
+        /// </summary>
+        /// <param name="state"></param>
         private void CaptureState(Dictionary<string, object> state)
         {
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())
@@ -82,6 +109,10 @@ namespace Necropanda.SaveSystem
             }
         }
 
+        /// <summary>
+        /// This loads all tracked metrics from disk.
+        /// </summary>
+        /// <param name="state"></param>
         private void RestoreState(Dictionary<string, object> state)
         {
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())

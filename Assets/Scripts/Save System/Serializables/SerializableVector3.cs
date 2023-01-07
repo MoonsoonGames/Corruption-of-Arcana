@@ -9,9 +9,13 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda.SaveSystem.Serializables
 {
+    /// <summary>
+    /// A simple class that creates a serializable vector3 from a normal unity Vector3.
+    /// </summary>
     [System.Serializable]
     public class SerializableVector3
     {
+        // Three axis
         public float x;
         public float y;
         public float z;

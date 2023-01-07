@@ -38,6 +38,10 @@ namespace Necropanda.SaveSystem
         [SerializeField] private int numberOfEnemiesDefeated = 0;
 
 
+        /// <summary>
+        /// Implemented class. Called when SavingLoading SAVES to disk.
+        /// </summary>
+        /// <returns></returns>
         public object CaptureState()
         {
             return new SaveData
@@ -56,7 +60,10 @@ namespace Necropanda.SaveSystem
             };
         }
 
-
+        /// <summary>
+        /// Implemented class. Called when SavingLoading LOADS from disk.
+        /// </summary>
+        /// <returns></returns>
         public void RestoreState(object state)
         {
             var saveData = (SaveData)state;
@@ -77,6 +84,9 @@ namespace Necropanda.SaveSystem
             numberOfEnemiesDefeated = saveData.numberOfEnemiesDefeated;
         }
 
+        /// <summary>
+        /// Savedata data structure
+        /// </summary>
         [System.Serializable]
         private struct SaveData
         {

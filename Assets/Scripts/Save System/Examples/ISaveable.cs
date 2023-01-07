@@ -5,6 +5,9 @@
 /// </summary>
 namespace Necropanda.SaveSystem
 {
+    /// <summary>
+    /// Interface, holds the two functions that are used to Save and Load
+    /// </summary>
     public interface ISaveable
     {
         // Saves the state. Object is used to keep it serializable

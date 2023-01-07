@@ -11,15 +11,24 @@ using UnityEngine.UI;
 /// </summary>
 namespace Necropanda.SaveSystem
 {
+    /// <summary>
+    /// Saves settings and other relevant things.
+    /// 
+    /// Extended by ISaveable
+    /// </summary>
     public class SettingSaving : MonoBehaviour, ISaveable
     {
-
+        // Sliders
         [Header("Audio UI")]
         public Slider master;
         public Slider music;
         public Slider sfx;
         public Slider dialogue;
 
+        /// <summary>
+        /// Implemented class. Called when SavingLoading SAVES to disk.
+        /// </summary>
+        /// <returns></returns>
         public object CaptureState()
         {
             return new SaveData
@@ -31,6 +40,10 @@ namespace Necropanda.SaveSystem
             };
         }
 
+        /// <summary>
+        /// Implemented class. Called when SavingLoading LOADS from disk.
+        /// </summary>
+        /// <returns></returns>
         public void RestoreState(object state)
         {
             var saveData = (SaveData)state;
@@ -41,6 +54,9 @@ namespace Necropanda.SaveSystem
             dialogue.value = saveData.dialogue;
         }
 
+        /// <summary>
+        /// Savedata data structure
+        /// </summary>
         [System.Serializable]
         private struct SaveData
         {
