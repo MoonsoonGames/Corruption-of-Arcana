@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Necropanda.SaveSystem.Serializables;
 using UnityEngine.UI;
+using System.Diagnostics;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -12,11 +12,9 @@ using UnityEngine.UI;
 namespace Necropanda.SaveSystem
 {
     /// <summary>
-    /// Saves settings and other relevant things.
-    /// 
-    /// Extended by ISaveable
+    /// Saves settings and other relevant things using the built in Player Prefs system
     /// </summary>
-    public class SettingSaving : MonoBehaviour, ISaveable
+    public class SettingSaving : MonoBehaviour
     {
         // Sliders
         [Header("Audio UI")]
@@ -25,45 +23,31 @@ namespace Necropanda.SaveSystem
         public Slider sfx;
         public Slider dialogue;
 
-        /// <summary>
-        /// Implemented class. Called when SavingLoading SAVES to disk.
-        /// </summary>
-        /// <returns></returns>
-        public object CaptureState()
+        [Header("Other")]
+        public Stopwatch stopwatch;
+
+        public void SaveSliders()
         {
-            return new SaveData
-            {
-                master = master.value,
-                music = music.value,
-                sfx = sfx.value,
-                dialogue = dialogue.value
-            };
+            PlayerPrefs.SetFloat("master", master.value);
+            PlayerPrefs.SetFloat("music", music.value);
+            PlayerPrefs.SetFloat("sfx", sfx.value);
+            PlayerPrefs.SetFloat("dialogue", dialogue.value);
         }
 
-        /// <summary>
-        /// Implemented class. Called when SavingLoading LOADS from disk.
-        /// </summary>
-        /// <returns></returns>
-        public void RestoreState(object state)
+        public void LoadSliders()
         {
-            var saveData = (SaveData)state;
-
-            master.value = saveData.master;
-            music.value = saveData.music;
-            sfx.value = saveData.sfx;
-            dialogue.value = saveData.dialogue;
+            master.value = PlayerPrefs.GetFloat("master");
+            music.value = PlayerPrefs.GetFloat("music");
+            sfx.value = PlayerPrefs.GetFloat("sfx");
+            dialogue.value = PlayerPrefs.GetFloat("dialogue");
         }
 
-        /// <summary>
-        /// Savedata data structure
-        /// </summary>
-        [System.Serializable]
-        private struct SaveData
+        public void SaveSettings()
         {
-            public float master;
-            public float music;
-            public float sfx;
-            public float dialogue;
+            stopwatch.Start();
+            PlayerPrefs.Save();
+            stopwatch.Stop();
+            UnityEngine.Debug.Log($"Settings save completed in {stopwatch.Elapsed}");
         }
     }
 }

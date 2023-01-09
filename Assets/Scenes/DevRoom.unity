@@ -10926,6 +10926,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4050986, y: 1.2549479, z: 0.14440985}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &937517965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1565450197394283657, guid: b9664471e07c132468b3358717686c0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1269669907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2d597915599b448973a92416806db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &940653539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14374,6 +14386,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 937517965}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SaveSliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Necropanda.SaveSystem.SettingSaving, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631304202617509913, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1953750654288109250, guid: b9664471e07c132468b3358717686c0c,
         type: 3}
       propertyPath: Player
@@ -14478,7 +14525,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1308562938}
+      objectReference: {fileID: 937517965}
+    - target: {fileID: 7761644580770244973, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadSliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761644580770244973, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Necropanda.SaveSystem.SettingSaving, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8297268047194949602, guid: b9664471e07c132468b3358717686c0c,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
