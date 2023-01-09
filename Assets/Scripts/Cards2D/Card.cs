@@ -67,7 +67,7 @@ namespace Necropanda
 
         private void Update()
         {
-            int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, Camera.main);
+            int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, DragManager.instance.UICam);
             Debug.Log("link info: " + linkIndex);
             if (linkIndex != -1)
             {
