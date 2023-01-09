@@ -142,8 +142,8 @@ namespace Necropanda
                     health = Mathf.Clamp(health - damageOverShield, 0, tempMaxHealth);
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
-                    damageTaken = damageOverShield;
-                    if (damageTaken > 0)
+                    damageTaken = trueValue;
+                    if (damageOverShield > 0)
                         ScreenFlash(type);
                     break;
             }

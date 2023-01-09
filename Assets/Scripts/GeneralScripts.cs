@@ -267,6 +267,7 @@ namespace Necropanda
             public E_StatusTargetType target;
             public E_Statuses status;
             public E_DamageTypes effectType;
+            public Object effect;
             public int value;
             public float statModifier;
 
