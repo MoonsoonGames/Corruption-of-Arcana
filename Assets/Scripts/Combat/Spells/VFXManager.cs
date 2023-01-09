@@ -84,6 +84,8 @@ namespace Necropanda
 
         #region VFX
 
+        #region Spell Effects
+
         public void SpawnCastEffect(Vector2[] points, Object effectRef)
         {
             if (effectRef == null)
@@ -233,6 +235,8 @@ namespace Necropanda
             return projectilePoints;
         }
 
+        #endregion
+
         #region Colour
 
         [Header("Colour based on damage")]
@@ -321,6 +325,17 @@ namespace Necropanda
                 default:
                     return defaultObject;
             }
+        }
+
+        #endregion
+
+        #region KillFX
+
+        public UShake screenShake;
+
+        public void ScreenShake()
+        {
+            screenShake.CharacterShake(screenShake.baseDuration, screenShake.intensityMultiplier, 5);
         }
 
         #endregion

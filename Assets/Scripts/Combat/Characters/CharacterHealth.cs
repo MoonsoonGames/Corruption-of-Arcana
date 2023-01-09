@@ -390,8 +390,8 @@ namespace Necropanda
         {
             if (shake != null && damage > 0)
             {
-                float intensity = HelperFunctions.Remap(damage, 0, 20, 15, 30);
-                shake.CharacterShake(shake.baseDuration, intensity);
+                float intensity = HelperFunctions.Remap(damage, 0, 20, 7, 14);
+                shake.CharacterShake(shake.baseDuration, intensity, 3);
             }
         }
 
@@ -401,6 +401,8 @@ namespace Necropanda
             {
                 colorFlash.Flash(type);
             }
+
+            //VFXManager.instance.ScreenShake();
         }
 
         void ScreenFlash(E_DamageTypes type)
@@ -420,6 +422,7 @@ namespace Necropanda
             Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             spawnPos.z = VFXManager.instance.transform.position.z;
             VFXManager.instance.SpawnImpact(killFX, spawnPos);
+            VFXManager.instance.ScreenShake();
         }
 
         #endregion

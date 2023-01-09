@@ -67,6 +67,7 @@ namespace Necropanda
         public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
         public Color trailColor;
+        public bool screenShake;
 
         //Visual effects for hit effect
 
@@ -226,6 +227,11 @@ namespace Necropanda
                             VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, delay, empowered, weakened);
                     }
                     break;
+            }
+
+            if (screenShake)
+            {
+                VFXManager.instance.ScreenShake();
             }
         }
 
