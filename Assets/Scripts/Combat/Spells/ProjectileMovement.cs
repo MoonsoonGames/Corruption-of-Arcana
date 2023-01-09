@@ -70,7 +70,7 @@ namespace Necropanda
             if (impactEffect != null)
             {
                 Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
+                spawnPos.z = VFXManager.instance.transform.position.z;
                 VFXManager.instance.SpawnImpact(impactEffect, spawnPos);
             }
 

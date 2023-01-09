@@ -267,7 +267,7 @@ namespace Necropanda
         void Kill()
         {
             dying = true;
-
+            KillFX();
             ActivateArt(false);
         }
 
@@ -409,6 +409,17 @@ namespace Necropanda
             {
                 screenFlash.Flash(type);
             }
+        }
+
+        public Object killFX;
+
+        void KillFX()
+        {
+            if (killFX == null) { return; }
+
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            spawnPos.z = VFXManager.instance.transform.position.z;
+            VFXManager.instance.SpawnImpact(killFX, spawnPos);
         }
 
         #endregion
