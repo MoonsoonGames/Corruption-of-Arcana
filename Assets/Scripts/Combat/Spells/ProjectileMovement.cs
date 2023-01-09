@@ -16,6 +16,7 @@ namespace Necropanda
 
         public Object impactEffect;
         Image image;
+        TrailRenderer trailRenderer;
 
         bool moving = false;
         Vector2[] movePositions;
@@ -25,7 +26,9 @@ namespace Necropanda
         public void Setup(Color color, Object effect)
         {
             image = GetComponentInChildren<Image>();
+            trailRenderer = GetComponentInChildren<TrailRenderer>();
             image.color = color;
+            trailRenderer.startColor = color;
             impactEffect = effect;
         }
 
