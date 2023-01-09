@@ -213,10 +213,12 @@ namespace Necropanda
                 switch (projectileEnums[i])
                 {
                     case E_ProjectilePoints.Caster:
-                        projectilePoints[i] = caster.transform.position;
+                        if (caster != null)
+                            projectilePoints[i] = caster.transform.position;
                         break;
                     case E_ProjectilePoints.Target:
-                        projectilePoints[i] = target.transform.position;
+                        if (target != null)
+                            projectilePoints[i] = target.transform.position;
                         break;
                     case E_ProjectilePoints.TimeBlock:
                         //TODO: Not implemented Properly

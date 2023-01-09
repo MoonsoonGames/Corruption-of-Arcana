@@ -28,7 +28,8 @@ namespace Necropanda
             Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
             transform.position += newPos;
 
-            StartCoroutine(ResetShake(randMove, duration));
+            if (gameObject.activeSelf)
+                StartCoroutine(ResetShake(randMove, duration));
         }
 
         IEnumerator ResetShake(Vector2 offset, float delay)
