@@ -63,7 +63,7 @@ namespace Necropanda
         //Visual effects for projectile
         public Object castObject;
         public Object projectileObject;
-        public float projectileSpeed = 0.4f;
+        public float projectileSpeed = 0.3f;
         public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
         public Color trailColor;

@@ -25,7 +25,7 @@ namespace Necropanda
         {
             for (int i = 0; i < utilityModules.Length; i++)
             {
-                if (utilityModules[i].time < 0)
+                if (utilityModules[i].time <= 0)
                 {
                     utilityModules[i].time = Mathf.Infinity;
                 }

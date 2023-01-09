@@ -12,7 +12,7 @@ namespace Necropanda
 {
     public class ProjectileMovement : MonoBehaviour
     {
-        public float distanceAllowance = 0.1f;
+        public float distanceAllowance = 0.5f;
 
         public Object impactEffect;
         Image image;
@@ -24,7 +24,7 @@ namespace Necropanda
 
         public void Setup(Color color, Object effect)
         {
-            image = GetComponent<Image>();
+            image = GetComponentInChildren<Image>();
             image.color = color;
             impactEffect = effect;
         }
