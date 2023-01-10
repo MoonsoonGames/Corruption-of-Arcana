@@ -35,7 +35,8 @@ namespace Necropanda
             if (totalShield < 0)
                 damageThroughShield = Mathf.Abs(totalShield);
 
-            shieldObject.SetActive(totalShield > 0);
+            if (shieldObject != null)
+                shieldObject.SetActive(totalShield > 0);
             shieldText.text = "+" + totalShield;
 
             totalDmg = heal - damageThroughShield;

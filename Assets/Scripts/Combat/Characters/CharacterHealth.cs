@@ -142,8 +142,8 @@ namespace Necropanda
                     health = Mathf.Clamp(health - damageOverShield, 0, tempMaxHealth);
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
-                    damageTaken = damageOverShield;
-                    if (damageTaken > 0)
+                    damageTaken = trueValue;
+                    if (damageOverShield > 0)
                         ScreenFlash(type);
                     break;
             }
@@ -267,7 +267,7 @@ namespace Necropanda
         void Kill()
         {
             dying = true;
-
+            KillFX();
             ActivateArt(false);
         }
 
@@ -390,8 +390,8 @@ namespace Necropanda
         {
             if (shake != null && damage > 0)
             {
-                float intensity = HelperFunctions.Remap(damage, 0, 20, 15, 30);
-                shake.CharacterShake(shake.baseDuration, intensity);
+                float intensity = HelperFunctions.Remap(damage, 0, 20, 7, 14);
+                shake.CharacterShake(shake.baseDuration, intensity, 3);
             }
         }
 
@@ -401,6 +401,8 @@ namespace Necropanda
             {
                 colorFlash.Flash(type);
             }
+
+            //VFXManager.instance.ScreenShake();
         }
 
         void ScreenFlash(E_DamageTypes type)
@@ -409,6 +411,18 @@ namespace Necropanda
             {
                 screenFlash.Flash(type);
             }
+        }
+
+        public Object killFX;
+
+        void KillFX()
+        {
+            if (killFX == null) { return; }
+
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            spawnPos.z = VFXManager.instance.transform.position.z;
+            VFXManager.instance.SpawnImpact(killFX, spawnPos);
+            VFXManager.instance.ScreenShake();
         }
 
         #endregion

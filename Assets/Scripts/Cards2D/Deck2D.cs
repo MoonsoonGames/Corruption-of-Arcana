@@ -33,6 +33,7 @@ namespace Necropanda
         UntargettableOverlay untargettableOverlay;
 
         public bool collection = true;
+        public bool showArt = false;
 
         #endregion
 
@@ -235,6 +236,7 @@ namespace Necropanda
         {
             card.gameObject.transform.SetParent(group.transform);
             card.deck = this;
+            card.GetComponent<Card>().ShowArt(showArt);
 
             ResetArrays();
 

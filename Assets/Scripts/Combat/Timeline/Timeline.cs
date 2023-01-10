@@ -289,7 +289,7 @@ namespace Necropanda
                 //Use a coroutine to stagger spellcasting
                 StartCoroutine(IDelaySpell(item, i + initialDelay));
                 Vector2 spawnPosition = new Vector2(spellBlocks[0].transform.position.x, spellBlocks[0].transform.position.y);
-                i += item.spell.QuerySpellCastTime(item.target, item.caster, spawnPosition) + spellDelayOffset;
+                i += item.spell.QuerySpellCastTime(item.target, item.caster, item.spell.projectileSpeed) + spellDelayOffset;
 
                 //Debug.Log("Spell " + item.spell.spellName + " has a delay of " + i);
             }
@@ -297,11 +297,11 @@ namespace Necropanda
             return i;
         }
 
-        public void StartSpellCoroutine(Spell spell, Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
+        public void StartSpellCoroutine(Spell spell, Character target, Character caster, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
             CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
             TeamManager targetTeamManager, List<Character> allCharacters)
         {
-            StartCoroutine(spell.IDetermineTarget(target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
+            StartCoroutine(spell.IDetermineTarget(target, caster, empowered, weakened, hand, cardsInHand,
                 module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters));
         }
 
@@ -371,7 +371,7 @@ namespace Necropanda
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spawnPosition, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
             }
 
             if (spellInstance.spell.drawCard != null)
@@ -379,7 +379,7 @@ namespace Necropanda
                 DeckManager.instance.AddToStart(spellInstance.spell.drawCard);
             }
 
-            yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spawnPosition));
+            yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spellInstance.spell.projectileSpeed));
 
             SimulateSpellEffects();
             RemoveSpellInstance(spellInstance);

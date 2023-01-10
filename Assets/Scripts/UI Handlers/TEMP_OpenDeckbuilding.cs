@@ -42,7 +42,7 @@ namespace Necropanda
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 deckbuildingMenu.SetActive(true);
-                getAvailableCards.Setup();
+                getAvailableCards.LoadCards();
             }
             else
             {
