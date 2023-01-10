@@ -16,6 +16,8 @@ namespace Necropanda
 
         private void Start()
         {
+            spellReferences = new Dictionary<Spell, string>();
+
             foreach (Spell spell in saveableSpells)
             {
                 string spellRef = spell.spellName;
