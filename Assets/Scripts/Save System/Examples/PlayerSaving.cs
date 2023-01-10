@@ -23,7 +23,7 @@ namespace Necropanda.SaveSystem
         [SerializeField] private float health;
         [SerializeField] private int maxHealth;
         [SerializeField] private int gold;
-        [SerializeField] private int arcana;
+        [SerializeField] private int maxArcana;
         [SerializeField] private List<UnityEngine.Object> curios;
 
         // Potions
@@ -38,6 +38,8 @@ namespace Necropanda.SaveSystem
         [SerializeField] private int questStage = 0;
         [SerializeField] private int numberOfEnemiesDefeated = 0;
 
+        public GameObject player;
+
 
 
 
@@ -49,11 +51,11 @@ namespace Necropanda.SaveSystem
         {
             return new SaveData
             {
-                position = position,
+                position = new SerializableVector3(player.transform.position),
                 health = health,
                 maxHealth = maxHealth,
                 gold = gold,
-                arcana = arcana,
+                maxArcana = maxArcana,
                 healthPotAmount = healthPotAmount,
                 ragePotAmount = ragePotAmount,
                 swiftPotAmount = swiftPotAmount,
@@ -73,11 +75,11 @@ namespace Necropanda.SaveSystem
             var saveData = (SaveData)state;
 
             // Player
-            position = saveData.position;
+            player.transform.position = HelperFunctions.ConvertSerializable(position);
             health = saveData.health;
             maxHealth = saveData.maxHealth;
             gold = saveData.gold;
-            arcana = saveData.arcana;
+            maxArcana = saveData.maxArcana;
             // Potions
             healthPotAmount = saveData.healthPotAmount;
             ragePotAmount = saveData.ragePotAmount;
@@ -100,7 +102,7 @@ namespace Necropanda.SaveSystem
             public float health;
             public int maxHealth;
             public int gold;
-            public int arcana;
+            public int maxArcana;
 
             public int healthPotAmount;
             public int ragePotAmount;
@@ -111,5 +113,7 @@ namespace Necropanda.SaveSystem
             public int questStage;
             public int numberOfEnemiesDefeated;
         }
+
+
     }
 }
