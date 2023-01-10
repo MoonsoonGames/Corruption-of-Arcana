@@ -24,6 +24,8 @@ namespace Necropanda
 
             setup = true;
 
+            DeckManager.instance.LoadDeck();
+
             if (collectionContent == null) return;
             collectionDeck = collectionContent.GetComponentInParent<Deck2D>();
 

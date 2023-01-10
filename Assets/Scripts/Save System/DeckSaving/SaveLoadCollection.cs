@@ -18,55 +18,72 @@ namespace Necropanda
         void Start()
         {
             spellRefTable = GetComponent<SpellReferenceTable>();
+            collectedSpellsSaved = new List<string>();
+            equippedSpellsSaved = new List<string>();
         }
 
         public void SaveCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
             if (spellRefTable == null) { return; }
+            Debug.Log("Saving Cards");
+
+            collectedSpellsSaved.Clear();
+            equippedSpellsSaved.Clear();
 
             foreach (var item in collectedSpells)
             {
                 string reference = spellRefTable.GetReferenceDataFromSpell(item);
-
-                //Save spells in collection
+                Debug.Log(reference + " is being saved");
+                collectedSpellsSaved.Add(reference);
             }
 
             foreach (var item in equippedSpells)
             {
                 string reference = spellRefTable.GetReferenceDataFromSpell(item);
-
-                //Save equipped spells
+                Debug.Log(reference + " is being saved");
+                equippedSpellsSaved.Add(reference);
             }
+
+            GetComponentInChildren<SavingLoading>().Save();
         }
 
         public void LoadCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
+            List<Spell> newCollection = new List<Spell>();
+            List<Spell> newEquipped = new List<Spell>();
+
+            GetComponentInChildren<SavingLoading>().Load();
+
             if (spellRefTable == null) { return; }
+            Debug.Log("Loading Cards");
 
-            foreach (var item in collectedSpells)
+            foreach (var item in collectedSpellsSaved)
             {
-                string reference = spellRefTable.GetReferenceDataFromSpell(item);
-
-                //Load spells in collection and add to list
+                Spell reference = spellRefTable.GetSpellFromReferenceData(item);
+                Debug.Log(reference.spellName + " has been loaded");
+                newCollection.Add(reference);
             }
 
-            foreach (var item in equippedSpells)
+            foreach (var item in equippedSpellsSaved)
             {
-                string reference = spellRefTable.GetReferenceDataFromSpell(item);
-
-                //Load equipped spells and add to list
+                Spell reference = spellRefTable.GetSpellFromReferenceData(item);
+                Debug.Log(reference.spellName + " has been loaded");
+                newEquipped.Add(reference);
             }
+
+            collectedSpells = newCollection;
+            equippedSpells = newEquipped;
         }
 
-        List<string> collectedSpells;
-        List<string> equippedSpells;
+        List<string> collectedSpellsSaved;
+        List<string> equippedSpellsSaved;
 
         public object CaptureState()
         {
             return new SaveData 
             { 
-                collectedSpells = this.collectedSpells,
-                equippedSpells = this.equippedSpells
+                collectedSpells = this.collectedSpellsSaved,
+                equippedSpells = this.equippedSpellsSaved
             };
         }
 
@@ -74,8 +91,8 @@ namespace Necropanda
         {
             var saveData = (SaveData)state;
 
-            collectedSpells = saveData.collectedSpells;
-            equippedSpells = saveData.equippedSpells;
+            collectedSpellsSaved = saveData.collectedSpells;
+            equippedSpellsSaved = saveData.equippedSpells;
         }
 
         [System.Serializable]
