@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: bc7715910c164fa46b45b499aa5f2f6a,
+  m_Shader: {fileID: -6465566751694194690, guid: 43dfa3c1d5738a54798d19259e027a5d,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -89,6 +89,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Distance: 20
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -101,6 +102,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Refraction_Scale: 20
+    - _Refraction_Strength: 0.1
+    - _Refraction_speed: 0.05
     - _SampleGI: 0
     - _Shininess: 0
     - _Smoothness: 0.5
@@ -116,9 +120,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Deep: {r: 0.26855642, g: 0.59815866, b: 0.6698113, a: 1}
+    - _Deep: {r: 0.26855642, g: 0.59815866, b: 0.6698113, a: 0.49411765}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Shallow: {r: 0.1715023, g: 0.6682057, b: 0.7735849, a: 1}
+    - _Shallow: {r: 0.1715023, g: 0.6682057, b: 0.7735849, a: 0.19215687}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3547158206466124110
