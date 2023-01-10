@@ -28,7 +28,15 @@ namespace Necropanda
             nameText.text = spell.spellName;
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
-            descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
+            if(IconManager.instance == null)
+            {
+                Debug.Log("no icon manager");
+            }
+            else
+            {
+                Debug.Log("icon manager is valid");
+                descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
+            }
             cardFace.sprite = spell.cardImage;
             //SetupIcons();
 
