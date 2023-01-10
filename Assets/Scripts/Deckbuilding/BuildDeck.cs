@@ -13,18 +13,42 @@ namespace Necropanda
     {
         //[HideInInspector]
         public List<Spell> collectedSpells, equippedSpells;
+        public Deck2D collectedDeck, equippedDeck;
+        SaveLoadCollection saveLoadCollection;
 
         // Start is called before the first frame update
         void Start()
         {
-            collectedSpells = new List<Spell>();
-            equippedSpells = new List<Spell>();
+            if (collectedDeck.CurrentCardsLength() > 0)
+            {
+                collectedSpells = collectedDeck.GetSpells();
+            }
+            else
+            {
+                collectedSpells = new List<Spell>();
+            }
+
+            if (equippedDeck.CurrentCardsLength() > 0)
+            {
+                equippedSpells = equippedDeck.GetSpells();
+            }
+            else
+            {
+                equippedSpells = new List<Spell>();
+            }
+
+            saveLoadCollection = GetComponent<SaveLoadCollection>();
         }
 
         public void SaveCards()
         {
             DeckManager.instance.collection = collectedSpells;
             DeckManager.instance.majorArcana = equippedSpells;
+
+            if (saveLoadCollection != null)
+            {
+                saveLoadCollection.SaveCards(collectedSpells, equippedSpells);
+            }
         }
     }
 }

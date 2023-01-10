@@ -15,71 +15,62 @@ namespace Necropanda
 
         public static VFXManager instance;
         public Vector2 middlePositionOffset;
-        public float projectileSpeed = 0.4f;
         public float speedCalculationMultiplier = 700;
+        ProjectileSpawnPoints projectileSpawner;
 
         private void Start()
         {
             instance = this;
+
+            projectileSpawner = GetComponentInChildren<ProjectileSpawnPoints>();
         }
 
         #endregion
 
         #region Spell Logic
 
-        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
         {
-            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, effectType, cardsDiscarded, removedStatuses, spawnPosition, delay, empowered, weakened));
+            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, effectType, cardsDiscarded, removedStatuses, delay, empowered, weakened));
         }
 
-        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
         {
             yield return new WaitForSeconds(delay);
-            float effectDelay = QueryTime(spawnPosition, caster.transform.position);
+            Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, caster);
+            float effectDelay = QueryTime(points, spellRef.projectileSpeed);
 
-            List<Vector2> targetPositions = new List<Vector2>();
-            targetPositions.Add(spawnPosition);
-            targetPositions.Add(caster.transform.position);
-
-            VFXManager.instance.SpawnProjectile(caster.transform.position, targetPositions, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
-            SpawnCastEffect(caster.transform.position, caster.transform.position, spellRef.castObject);
+            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, effectType);
+            SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
 
-        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
         {
-            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, effectType, cardsDiscarded, removedStatuses, spawnPosition, delay, empowered, weakened));
+            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, effectType, cardsDiscarded, removedStatuses, delay, empowered, weakened));
         }
 
-        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, Vector2 spawnPosition, float delay, bool empowered, bool weakened)
+        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
         {
             yield return new WaitForSeconds(delay);
-            float effectDelay = QueryTime(spawnPosition, target.transform.position);
+            Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, target);
+            float effectDelay = QueryTime(points, spellRef.projectileSpeed);
 
-            List<Vector2> targetPositions = new List<Vector2>();
-            targetPositions.Add(spawnPosition);
-            targetPositions.Add(target.transform.position);
-
-            VFXManager.instance.SpawnProjectile(caster.transform.position, targetPositions, spellRef.projectileObject, spellRef.trailColor, spellRef.impactObject, effectType);
-            SpawnCastEffect(caster.transform.position, target.gameObject.transform.position, spellRef.castObject);
+            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, effectType);
+            SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
         }
 
-        public float QueryTime(Vector2 spawnPosition, Vector2 targetPosition)
+        public float QueryTime(Vector2[] points, float projectileSpeed)
         {
-            List<Vector2> movementPositions = new List<Vector2>();
-            movementPositions.Add(spawnPosition);
-            movementPositions.Add(spawnPosition + middlePositionOffset);
-            movementPositions.Add(targetPosition);
-
             //Calculate and return delay (T=D/S)
             float distance = 0;
 
-            for (int i = 0; i < movementPositions.Count - 1; i++)
+            for (int i = 0; i < points.Length - 1; i++)
             {
-                distance += Vector2.Distance(movementPositions[i], movementPositions[i + 1]);
+                distance += Vector2.Distance(points[i], points[i + 1]);
             }
 
             float time = distance / (projectileSpeed * speedCalculationMultiplier);
@@ -93,7 +84,9 @@ namespace Necropanda
 
         #region VFX
 
-        public void SpawnCastEffect(Vector2 spawnPosition, Vector2 targetPosition, Object effectRef)
+        #region Spell Effects
+
+        public void SpawnCastEffect(Vector2[] points, Object effectRef)
         {
             if (effectRef == null)
             {
@@ -112,8 +105,8 @@ namespace Necropanda
             }
 
             
-            effectObject.transform.position = spawnPosition;
-            Vector2 direction = targetPosition - spawnPosition;
+            effectObject.transform.position = points[0];
+            Vector2 direction = points[points.Length-1] - points[0];
             effectObject.transform.rotation = Quaternion.LookRotation(direction);
 
             Debug.Log("Game object spawned at " + effectObject.transform.position);
@@ -128,8 +121,10 @@ namespace Necropanda
         /// <param name="trailColor">Colour of the projectile and trail, leave as (0, 0, 0, 0) to default to the damage type</param>
         /// <param name="impactRef">Impact effect of the projectile and trail, leave as null to default to the damage type</param>
         /// <param name="damageType">Damage type dealt by the projectile</param>
-        public void SpawnProjectile(Vector2 spawnPosition, List<Vector2> targetPositions, Object projectileRef, Color trailColor, Object impactRef, E_DamageTypes damageType)
+        public void SpawnProjectile(Vector2[] points, Object projectileRef, float projectileSpeed, Color trailColor, Object impactRef, E_DamageTypes damageType)
         {
+            if (points.Length <= 0) { return; }
+
             #region Spawning the projectile as an game object
 
             if (projectileRef == null)
@@ -177,16 +172,13 @@ namespace Necropanda
 
             #region Setting up the projectile movement
 
-            projectileObject.transform.position = spawnPosition;
+            projectileObject.transform.position = points[0];
 
             ProjectileMovement projectileMovement = projectileObject.GetComponent<ProjectileMovement>();
 
             projectileMovement.Setup(color, impactFX);
 
-            List<Vector2> movementPositions = targetPositions;
-            movementPositions.Insert(0, spawnPosition);
-
-            projectileMovement.MoveToPositions(projectileSpeed, movementPositions);
+            projectileMovement.MoveToPositions(projectileSpeed, points);
 
             #endregion
         }
@@ -213,6 +205,37 @@ namespace Necropanda
                 }
             }
         }
+
+        public Vector2[] GetProjectilePoints(E_ProjectilePoints[] projectileEnums, Character caster, Character target)
+        {
+            Vector2[] projectilePoints = new Vector2[(int)projectileEnums.Length];
+            bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
+            for (int i = 0; i < projectilePoints.Length; i++)
+            {
+                switch (projectileEnums[i])
+                {
+                    case E_ProjectilePoints.Caster:
+                        if (caster != null)
+                            projectilePoints[i] = caster.transform.position;
+                        break;
+                    case E_ProjectilePoints.Target:
+                        if (target != null)
+                            projectilePoints[i] = target.transform.position;
+                        break;
+                    case E_ProjectilePoints.TimeBlock:
+                        //TODO: Not implemented Properly
+                        projectilePoints[i] = projectileSpawner.GetPointPos(projectileEnums[i], playerTeam);
+                        break;
+                    default:
+                        projectilePoints[i] = projectileSpawner.GetPointPos(projectileEnums[i], playerTeam);
+                        break;
+                }
+            }
+
+            return projectilePoints;
+        }
+
+        #endregion
 
         #region Colour
 
@@ -302,6 +325,17 @@ namespace Necropanda
                 default:
                     return defaultObject;
             }
+        }
+
+        #endregion
+
+        #region KillFX
+
+        public UShake screenShake;
+
+        public void ScreenShake()
+        {
+            screenShake.CharacterShake(screenShake.baseDuration, screenShake.intensityMultiplier, 5);
         }
 
         #endregion

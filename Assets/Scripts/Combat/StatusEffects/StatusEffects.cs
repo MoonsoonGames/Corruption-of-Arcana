@@ -40,7 +40,9 @@ namespace Necropanda
 
             if (applied)
             {
-                VFXManager.instance.SpawnImpact(applyEffect, target.transform.position);
+                Vector3 spawnPos = target.transform.position;
+                spawnPos.z = VFXManager.instance.transform.position.z;
+                VFXManager.instance.SpawnImpact(applyEffect, spawnPos);
 
                 foreach (CombatHelperFunctions.StatusModule module in effectModules)
                 {
@@ -215,14 +217,14 @@ namespace Necropanda
                 switch (module.target)
                 {
                     case E_StatusTargetType.Self:
-                        AffectTarget(target, module.effectType, module.value);
+                        AffectTarget(target, module.effectType, module.effect, module.value);
                         break;
                     case E_StatusTargetType.Team:
                         TeamManager targetTeamManager = target.GetManager();
                         foreach (Character character in targetTeamManager.team)
                         {
                             if (character.GetHealth().dying == false)
-                                AffectTarget(character, module.effectType, module.value);
+                                AffectTarget(character, module.effectType, module.effect, module.value);
                         }
                         break;
                     case E_StatusTargetType.OpponentTeam:
@@ -230,7 +232,7 @@ namespace Necropanda
                         foreach (Character character in opponentTeamManager.team)
                         {
                             if (character.GetHealth().dying == false)
-                                AffectTarget(character, module.effectType, module.value);
+                                AffectTarget(character, module.effectType, module.effect, module.value);
                         }
                         break;
                     default:
@@ -240,14 +242,16 @@ namespace Necropanda
             }
         }
 
-        void AffectTarget(Character target, E_DamageTypes effectType, int value)
+        void AffectTarget(Character target, E_DamageTypes effectType, Object effect, int value)
         {
             if (target != null)
             {
                 if (target.GetHealth().dying)
                     return;
 
-                VFXManager.instance.SpawnImpact(effect, target.transform.position);
+                Vector3 spawnPos = target.transform.position;
+                spawnPos.z = VFXManager.instance.transform.position.z;
+                VFXManager.instance.SpawnImpact(effect, spawnPos);
 
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(effectType);
@@ -276,13 +280,13 @@ namespace Necropanda
                     case E_StatusTargetType.SelfHit:
                         if (attacker != null)
                         {
-                            AffectTarget(target, module.effectType, module.value);
+                            AffectTarget(target, module.effectType, module.effect, module.value);
                         }
                         break;
                     case E_StatusTargetType.Reflect:
                         if (attacker != null)
                         {
-                            AffectTarget(attacker, module.effectType, module.value);
+                            AffectTarget(attacker, module.effectType, module.effect, module.value);
                         }
                         break;
                     default:

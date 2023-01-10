@@ -16,9 +16,14 @@ namespace Necropanda
         BuildDeck buildDeck;
         public Object cardPrefab;
 
-        // Start is called before the first frame update
-        void Start()
+        bool setup = false;
+
+        public void LoadCards()
         {
+            if (setup) return;
+
+            setup = true;
+
             if (collectionContent == null) return;
             collectionDeck = collectionContent.GetComponentInParent<Deck2D>();
 
@@ -60,12 +65,6 @@ namespace Necropanda
 
                 buildDeck.equippedSpells.Add(spell);
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
     }
 }

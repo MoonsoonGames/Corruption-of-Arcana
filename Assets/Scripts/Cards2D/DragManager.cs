@@ -34,6 +34,7 @@ namespace Necropanda
         #endregion
 
         public Canvas canvas;
+        public Camera UICam;
         public CardDrag2D draggedCard;
 
         private void Awake()
