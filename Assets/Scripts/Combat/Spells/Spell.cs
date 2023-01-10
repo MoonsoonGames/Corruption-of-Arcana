@@ -63,8 +63,11 @@ namespace Necropanda
         //Visual effects for projectile
         public Object castObject;
         public Object projectileObject;
+        public float projectileSpeed = 0.3f;
+        public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
         public Color trailColor;
+        public bool screenShake;
 
         //Visual effects for hit effect
 
@@ -83,7 +86,7 @@ namespace Necropanda
         /// <param name="caster">The character that cast the spell</param>
         /// <param name="spawnPosition">The spawn position of the projectile</param>
         /// <returns>Time taken for the last projectile to hit the target</returns>
-        public float QuerySpellCastTime(Character target, Character caster, Vector2 spawnPosition)
+        public float QuerySpellCastTime(Character target, Character caster, float projectileSpeed)
         {
             float time = 0;
 
@@ -91,16 +94,10 @@ namespace Necropanda
             {
                 float hitDelay = module.hitCount * multihitDelay;
                 float moduleTime = 0;
-                //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
-                switch (module.target)
-                {
-                    case E_SpellTargetType.Caster:
-                        moduleTime = VFXManager.instance.QueryTime(spawnPosition, caster.transform.position) + hitDelay + time;
-                        break;
-                    default:
-                        moduleTime = VFXManager.instance.QueryTime(spawnPosition, target.transform.position) + hitDelay + time;
-                        break;
-                }
+
+                bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
+                Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
+                moduleTime = VFXManager.instance.QueryTime(points, projectileSpeed) + hitDelay + time;
 
                 time += moduleDelay + moduleTime;
             }
@@ -119,7 +116,7 @@ namespace Necropanda
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
         /// <param name="hand">The hand from which this spell was cast</param>
-        public void CastSpell(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
+        public void CastSpell(Character target, Character caster, bool empowered, bool weakened, Deck2D hand, int cardsInHand)
         {
             if (caster.CanCast() == false)
                 return;
@@ -141,7 +138,7 @@ namespace Necropanda
                     float hitDelay = i * this.multihitDelay;
                     //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
 
-                    Timeline.instance.StartSpellCoroutine(this, target, caster, spawnPosition, empowered, weakened, hand, cardsInHand,
+                    Timeline.instance.StartSpellCoroutine(this, target, caster, empowered, weakened, hand, cardsInHand,
                     module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters);
 
                     time += moduleDelay;
@@ -152,8 +149,10 @@ namespace Necropanda
             {
                 if (spawnEnemies.Length > 0)
                 {
+                    bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
+                    Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.AddEnemy(item, caster.transform.position, spawnPosition, projectileObject, impactObject, trailColor);
+                        LoadCombatManager.instance.AddEnemy(item, points, projectileObject, projectileSpeed, impactObject, trailColor);
                 }
             }
 
@@ -169,11 +168,11 @@ namespace Necropanda
 
             if (returnDiscardPile)
             {
-                DeckManager.instance.DiscardPileToDeck(true);
+                DeckManager.instance.DiscardPileToDeck(true, false);
             }
         }
 
-        public IEnumerator IDetermineTarget(Character target, Character caster, Vector2 spawnPosition, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
+        public IEnumerator IDetermineTarget(Character target, Character caster, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
             CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
             TeamManager targetTeamManager, List<Character> allCharacters)
         {
@@ -187,18 +186,18 @@ namespace Necropanda
             {
                 case E_SpellTargetType.Caster:
                     if (caster.GetHealth().dying == false)
-                        VFXManager.instance.AffectSelfDelay(this, caster, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                        VFXManager.instance.AffectSelfDelay(this, caster, module, trueEffectType, cardsInHand, removedStatusCount, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.Target:
                     if (target.GetHealth().dying == false)
-                        VFXManager.instance.AffectTargetDelay(this, caster, target, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                        VFXManager.instance.AffectTargetDelay(this, caster, target, module, trueEffectType, cardsInHand, removedStatusCount, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.Chain:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in targetTeamManager.team)
                     {
                         if (character.GetHealth().dying == false)
-                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, delay, empowered, weakened);
                     }
                     break;
                 case E_SpellTargetType.Cleave:
@@ -206,28 +205,33 @@ namespace Necropanda
                     foreach (Character character in targetTeamManager.team)
                     {
                         if (character.GetHealth().dying == false)
-                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, delay, empowered, weakened);
                     }
                     break;
                 case E_SpellTargetType.RandomEnemyTeam:
                     TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
                     randTarget = CombatHelperFunctions.ReplaceRandomTarget(opposingTeam.team);
                     if (randTarget != null && randTarget.GetHealth().dying == false)
-                        VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                        VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.RandomAll:
                     randTarget = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
                     if (randTarget != null && randTarget.GetHealth().dying == false)
-                        VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, 0f, empowered, weakened);
+                        VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, 0f, empowered, weakened);
                     break;
                 case E_SpellTargetType.All:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in allCharacters)
                     {
                         if (character.GetHealth().dying == false)
-                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, spawnPosition, delay, empowered, weakened);
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, delay, empowered, weakened);
                     }
                     break;
+            }
+
+            if (screenShake)
+            {
+                VFXManager.instance.ScreenShake();
             }
         }
 
@@ -321,17 +325,19 @@ namespace Necropanda
         /// <returns>The empowered or weakened value</returns>
         int EmpowerWeakenValue(int originalValue, bool empowered, bool weakened)
         {
-            int value = originalValue;
+            float floatValue = originalValue;
             if (empowered && !weakened)
             {
-                Debug.Log(spellName + " is empowered " + value + " to " + (int)(value * 1.5f));
-                value = (int)(value * 1.5f);
+                Debug.Log(spellName + " is empowered " + floatValue + " to " + (floatValue * 1.5f));
+                floatValue = (floatValue * 1.5f);
             }
             else if (weakened && !empowered)
             {
-                Debug.Log(spellName + " is weakened " + value + " to " + (int)(value * 0.5f));
-                value = (int)(value * 0.5f);
+                Debug.Log(spellName + " is weakened " + floatValue + " to " + (floatValue * 0.5f));
+                floatValue = (floatValue * 0.5f);
             }
+
+            int value = (int)Mathf.Round(floatValue);
             return value;
         }
 

@@ -16,11 +16,13 @@ namespace Necropanda
 
         public void LoadVictoryScene()
         {
+            DeckManager.instance.ResetDecks();
             LoadingScene.instance.LoadScene(victoryScene);
         }
 
         public void LoadDefeatScene()
         {
+            DeckManager.instance.ResetDecks();
             LoadingScene.instance.LoadScene(defeatScene);
         }
     }

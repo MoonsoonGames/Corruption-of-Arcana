@@ -20,5 +20,10 @@ namespace Necropanda.Interfaces
             SettingsScreen.SetActive(false);
             Pausemenu.SetActive(true);
         }
+
+        public void SplashClose()
+        {
+            SettingsScreen.SetActive(false);
+        }
     }
 }

@@ -28,6 +28,8 @@ namespace Necropanda
         /// <param name="eventData"></param>
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
+
+            //Debug.Log("show tooltip - tooltip info");
             if (TooltipManager.instance == null)
                 return;
 

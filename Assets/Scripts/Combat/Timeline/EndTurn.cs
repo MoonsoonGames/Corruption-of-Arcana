@@ -56,11 +56,13 @@ namespace Necropanda
 
             float delay = timeline.PlayTimeline() + endTurndelay;
 
+            SetUIEnabled(false);
             Invoke("StartNextTurn", delay);
         }
 
         public void StartNextTurn()
         {
+            SetUIEnabled(true);
             DragManager.instance.canDrag = true;
             //Debug.Log("New Turn");
 
@@ -156,6 +158,20 @@ namespace Necropanda
         {
             StopHoverSound();
             waitingForSound = false;
+        }
+
+        #endregion
+
+        #region UI
+
+        public List<GameObject> disableUIElements;
+
+        void SetUIEnabled(bool enable)
+        {
+            foreach (var item in disableUIElements)
+            {
+                item.SetActive(enable);
+            }
         }
 
         #endregion
