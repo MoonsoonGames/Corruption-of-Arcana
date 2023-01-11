@@ -27,11 +27,12 @@ namespace Necropanda
 
         #endregion
 
-        #region Timeline Colour
+        #region Timeline Icon
 
         [Header("Timeline Colour")]
         public bool overrideColor;
         public Color timelineColor = new Color(0, 0, 0, 255);
+        public Sprite timelineIcon;
 
         #endregion
 

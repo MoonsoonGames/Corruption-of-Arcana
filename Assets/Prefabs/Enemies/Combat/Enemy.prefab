@@ -83,7 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dying: 0
   healthSlider: {fileID: 3941799195607175873}
-  shieldColor: {r: 0, g: 0.8627451, b: 1, a: 1}
+  shieldUI: {fileID: 1467073594511968057}
+  shieldColor: {r: 1, g: 0.7137255, b: 0, a: 1}
   healthColor: {r: 1, g: 0, b: 0.047058824, a: 1}
   lowHealthColor: {r: 0.7647059, g: 0.23529412, b: 0.49019608, a: 1}
   lowHealthThresholdPercentage: 0.3
@@ -776,8 +777,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthUI
       objectReference: {fileID: 0}
+    - target: {fileID: 9010957040503617638, guid: ee540ef747ad3cf44a895426e6a6cd0f,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 53.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee540ef747ad3cf44a895426e6a6cd0f, type: 3}
+--- !u!114 &1467073594511968057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1128230311058780141, guid: ee540ef747ad3cf44a895426e6a6cd0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2014323808281913556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c814faa8edbf747b721b2d874554d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3941799195607175873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3260682748428778005, guid: ee540ef747ad3cf44a895426e6a6cd0f,

@@ -15,16 +15,12 @@ namespace Necropanda
         Spell spell;
         bool revealed = false;
 
-        public void Setup(CombatHelperFunctions.SpellInstance newspell, bool newRevealed)
+        public void Setup(CombatHelperFunctions.SpellInstance newspell)
         {
             spell = newspell.spell;
             title = newspell.caster.stats.characterName;
-            revealed = newRevealed;
 
-            if (newRevealed)
-                description = newspell.caster.stats.characterName + " is casting " + newspell.spell.spellName + " on " + newspell.target.stats.characterName + " (" + newspell.spell.speed + ")";
-            else
-                description = newspell.caster.stats.characterName + " is casting a spell" + " (" + newspell.spell.speed + ")";
+            description = newspell.caster.stats.characterName + " is casting " + newspell.spell.spellName + " on " + newspell.target.stats.characterName + " (" + newspell.spell.speed + ")";
         }
 
         /// <summary>

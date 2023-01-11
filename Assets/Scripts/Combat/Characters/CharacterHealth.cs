@@ -40,6 +40,7 @@ namespace Necropanda
 
         [Header("UI")]
         public SliderValue healthSlider;
+        public ShieldUI shieldUI;
         public Color shieldColor;
         public Color healthColor;
         public Color lowHealthColor;
@@ -74,6 +75,7 @@ namespace Necropanda
 
             healthSlider.Setup(maxHealth);
             healthSlider.SetSliderValue(health);
+            shieldUI.Setup(shield);
 
             CheckCurseHealth();
         }
@@ -202,6 +204,7 @@ namespace Necropanda
                 return;
 
             healthSlider.SetSliderValue(health);
+            shieldUI.SetShield(shield);
 
             if (shield > 0)
             {

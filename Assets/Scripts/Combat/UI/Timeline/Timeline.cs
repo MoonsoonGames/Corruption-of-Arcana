@@ -182,7 +182,7 @@ namespace Necropanda
                     //Sets spell block values
                     SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
 
-                    spellBlock.SetInfo(revealed, color, text, item);
+                    spellBlock.SetInfo(item);
 
                     //Adds spell block to layout group
                     spellBlocks.Add(spellBlock);

@@ -14,19 +14,16 @@ namespace Necropanda
     public class SpellBlock : MonoBehaviour
     {
         Image image;
-        TextMeshProUGUI text;
 
-        public void SetInfo(bool revealed, Color color, string basicText, CombatHelperFunctions.SpellInstance spell)
+        public void SetInfo(CombatHelperFunctions.SpellInstance spell)
         {
             image = GetComponentInChildren<Image>();
-            text = GetComponentInChildren<TextMeshProUGUI>();
 
-            image.color = color;
-            text.text = basicText;
+            image.sprite = spell.spell.timelineIcon;
 
             SpellTooltipInfo tooltip = GetComponentInChildren<SpellTooltipInfo>();
 
-            tooltip.Setup(spell, revealed);
+            tooltip.Setup(spell);
         }
     }
 }
