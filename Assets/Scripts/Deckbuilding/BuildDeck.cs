@@ -41,6 +41,8 @@ namespace Necropanda
         {
             DeckManager.instance.collection = collectedSpells;
             DeckManager.instance.majorArcana = equippedSpells;
+
+            DeckManager.instance.SaveDeck();
         }
     }
 }

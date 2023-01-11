@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4722478674671916285}
   m_HandleRect: {fileID: 4722478674671916274}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1112,6 +1112,7 @@ GameObject:
   - component: {fileID: 5810381919550690089}
   - component: {fileID: 615407021853725188}
   - component: {fileID: 4905343217910697385}
+  - component: {fileID: 6956149797818524181}
   m_Layer: 5
   m_Name: Deckbuilding_Interface
   m_TagString: Untagged
@@ -1161,6 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  UICam: {fileID: 0}
   draggedCard: {fileID: 0}
   canDrag: 1
 --- !u!114 &615407021853725188
@@ -1195,6 +1197,19 @@ MonoBehaviour:
   equippedSpells: []
   collectedDeck: {fileID: 3003432164079892233}
   equippedDeck: {fileID: 8419578729983606250}
+--- !u!114 &6956149797818524181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722478674403774682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228d0cf0cb8781c41bc5cc5f8e540824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: cd7a2add-717a-415d-a114-91a543d4f57b
 --- !u!1 &4722478674422341182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: {fileID: 4722478673983310964}
   collection: 0
+  showArt: 0
   maxCards: 15
   deckScale: 0.8
   highlightColor: {r: 0, g: 1, b: 0.14668608, a: 1}
@@ -1935,6 +1951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: {fileID: 3990877202821801649}
   collection: 1
+  showArt: 0
   maxCards: 999
   deckScale: 1
   highlightColor: {r: 0, g: 1, b: 0.14668608, a: 1}

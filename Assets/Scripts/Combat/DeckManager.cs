@@ -11,6 +11,10 @@ namespace Necropanda
 {
     public class DeckManager : MonoBehaviour
     {
+        #region Setup
+
+        SaveLoadCollection saveLoadCollection;
+
         #region Singleton
         //Code from last year
 
@@ -74,7 +78,7 @@ namespace Necropanda
         private void Start()
         {
             Singleton();
-
+            saveLoadCollection = GetComponent<SaveLoadCollection>();
             SetupDecks();
         }
 
@@ -85,6 +89,8 @@ namespace Necropanda
             for (int i = 0; i < 5; i++)
                 playerDeck.Sort(HelperFunctions.RandomSort);
         }
+
+        #endregion
 
         /// <summary>
         /// Adds a card to the start of the spell list
@@ -179,6 +185,22 @@ namespace Necropanda
         {
             DiscardPileToDeck(true, true);
             DrawFromPlayed();
+        }
+
+        public void SaveDeck()
+        {
+            if (saveLoadCollection != null)
+            {
+                saveLoadCollection.SaveCards(collection, majorArcana);
+            }
+        }
+
+        public void LoadDeck()
+        {
+            if (saveLoadCollection != null)
+            {
+                saveLoadCollection.LoadCards(collection, majorArcana);
+            }
         }
     }
 }
