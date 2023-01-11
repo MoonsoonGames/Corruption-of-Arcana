@@ -15,7 +15,7 @@ namespace Necropanda
 
         public static Timeline instance;
 
-        public bool showAllspells = false;
+        public bool showAllspells = false; public bool ShowSpells(Character caster) { return player == caster || player.enlightened || showAllspells; }
         public float initialDelay = 2f;
 
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
@@ -163,7 +163,7 @@ namespace Necropanda
                 //Spawn UI for cards
                 foreach (var item in spells)
                 {
-                    bool revealed = player == item.caster || player.enlightened || showAllspells;
+                    bool revealed = ShowSpells(item.caster);
                     string text = item.caster.stats.characterName + " is casting a spell (" + item.spell.speed + ")";
 
                     if (revealed)
