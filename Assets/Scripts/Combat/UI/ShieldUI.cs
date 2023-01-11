@@ -30,7 +30,7 @@ namespace Necropanda
             {
                 image.gameObject.SetActive(true);
                 text.gameObject.SetActive(true);
-                text.text = "+" + value.ToString();
+                text.text = value.ToString();
             }
             else
             {
