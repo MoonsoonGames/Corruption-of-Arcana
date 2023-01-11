@@ -26,7 +26,7 @@ namespace Necropanda
 
         private void Start()
         {
-            arcanaSlider.SetSliderMax(arcanaMax);
+            arcanaSlider.Setup(arcanaMax);
         }
 
         public void AdjustArcanaMax(int change)

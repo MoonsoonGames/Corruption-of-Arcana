@@ -72,7 +72,7 @@ namespace Necropanda
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
 
-            healthSlider.SetSliderMax(maxHealth);
+            healthSlider.Setup(maxHealth);
             healthSlider.SetSliderValue(health);
 
             CheckCurseHealth();

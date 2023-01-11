@@ -17,12 +17,14 @@ namespace Necropanda
         //[HideInInspector]
         public Image standardFill;
 
-        private void Start()
+        public void Setup(int maxValue)
         {
             if (slider != null)
                 standardFill = slider.fillRect.GetComponent<Image>();
             else
                 Debug.LogWarning("No standard slider is set");
+
+            SetSliderMax(maxValue);
         }
 
         public void SetSliderMax(int value)

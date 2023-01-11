@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.047058824, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ef6ea83b849023642927c3c8e6f4bbf6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7637f651ecb1333498eee656c436dab5, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -199,7 +199,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2462448679461716119}
-  - component: {fileID: 8296925202719671003}
   m_Layer: 5
   m_Name: HealthUI
   m_TagString: Untagged
@@ -228,22 +227,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.0006}
   m_SizeDelta: {x: 129.5774, y: 129.5774}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8296925202719671003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5062201239301145102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c14a16186e0a1240b6fee819b2ea8f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standardSlider: {fileID: 6674430376172608969}
-  tempMaxSlider: {fileID: 0}
-  standardFill: {fileID: 0}
-  tempFill: {fileID: 0}
 --- !u!1 &8099268580794887401
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3439522352194108860}
   - component: {fileID: 6674430376172608969}
+  - component: {fileID: 3260682748428778005}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -334,6 +318,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3260682748428778005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8099268580794887401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c14a16186e0a1240b6fee819b2ea8f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 6674430376172608969}
+  standardFill: {fileID: 0}
 --- !u!1 &8325915265157014082
 GameObject:
   m_ObjectHideFlags: 0
