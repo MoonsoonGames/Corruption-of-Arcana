@@ -39,13 +39,12 @@ namespace Necropanda
         #region UI
 
         [Header("UI")]
-        public Image healthIcon;
-        public TextMeshProUGUI healthText;
+        public SliderValue healthSlider;
         public Color shieldColor;
         public Color healthColor;
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
-        public GameObject curseOverlay;
+        //public GameObject curseOverlay;
         UShake shake;
         UColorFlash colorFlash;
         public UColorFlash screenFlash;
@@ -72,6 +71,9 @@ namespace Necropanda
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
+
+            healthSlider.SetSliderMax(maxHealth);
+            healthSlider.SetSliderValue(health);
 
             CheckCurseHealth();
         }
@@ -196,40 +198,33 @@ namespace Necropanda
         /// </summary>
         void UpdateHealthUI()
         {
+            if (healthSlider == null)
+                return;
+
+            healthSlider.SetSliderValue(health);
+
             if (shield > 0)
             {
                 //Shield overlay
-                if (healthIcon != null)
-                {
-                    healthIcon.color = shieldColor;
-                }
+                healthSlider.standardFill.color = shieldColor;
 
                 //Set shield value
-                if (healthText != null)
-                {
-                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString() + " + " + shield.ToString();
-                }
+                //healthText.text = health.ToString() + "/" + tempMaxHealth.ToString() + " + " + shield.ToString();
             }
             else
             {
                 //Health overlay
-                if (healthIcon != null)
+                if ((float)((float)health / (float)tempMaxHealth) < lowHealthThresholdPercentage)
                 {
-                    if ((float)((float)health / (float)tempMaxHealth) < lowHealthThresholdPercentage)
-                    {
-                        healthIcon.color = lowHealthColor;
-                    }
-                    else
-                    {
-                        healthIcon.color = healthColor;
-                    }
+                    healthSlider.standardFill.color = lowHealthColor;
+                }
+                else
+                {
+                    healthSlider.standardFill.color = healthColor;
                 }
 
                 //Set health value
-                if (healthText != null)
-                {
-                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString();
-                }
+                //healthText.text = health.ToString() + "/" + tempMaxHealth.ToString();
             }
         }
 
@@ -246,13 +241,13 @@ namespace Necropanda
                 //Activate the overlay, set the temp max health to the curse value and clamp the current health value to the new max
                 tempMaxHealth = cursedMaxHealth;
                 health = Mathf.Clamp(health, 0, tempMaxHealth);
-                curseOverlay.SetActive(true);
+                //curseOverlay.SetActive(true);
             }
             else
             {
                 //Resets the overlay and max health
                 tempMaxHealth = maxHealth;
-                curseOverlay.SetActive(false);
+                //curseOverlay.SetActive(false);
             }
 
             UpdateHealthUI();
