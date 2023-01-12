@@ -118,12 +118,6 @@ namespace Necropanda.AI
                     moduleManager.wander.enabled = false;
                     moduleManager.patrol.enabled = false;
                     agent.SetDestination(player.transform.position);
-                    
-                    // Check to make sure the AI doesn't run into the player.
-                    if (agent.remainingDistance <= .5f)
-                    {
-                        agent.SetDestination(agent.transform.position);
-                    }
                     break;
 
                 case AIState.Wandering:
