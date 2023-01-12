@@ -36,6 +36,7 @@ namespace Necropanda
 
             foreach (Spell spell in DeckManager.instance.collection)
             {
+                Debug.Log(spell.spellName + " should be in collection");
                 GameObject card = Instantiate(cardPrefab, collectionContent.transform) as GameObject;
                 CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
                 DrawCard drawCard = card.GetComponent<DrawCard>();
