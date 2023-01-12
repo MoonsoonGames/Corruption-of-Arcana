@@ -37,12 +37,16 @@ namespace Necropanda
         void Start()
         {
             Singleton();
+            interacted = new List<string>();
         }
 
         public E_Scenes combatScene;
         public E_Scenes lastScene;
         public Vector3 lastPos;
         public Quaternion lastRot;
+
+        public List<string> interacted;
+
         public float combatRadius = 15f;
 
         public EnemyQueue queue;
