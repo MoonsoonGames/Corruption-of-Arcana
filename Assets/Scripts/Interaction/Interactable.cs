@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -11,8 +12,37 @@ namespace Necropanda.Interactable
 {
     public class Interactable : MonoBehaviour
     {
+        public string interactID;
+        public bool multipleInteractions = true;
+
         public bool forceInteract;
         GameObject interactingCharacter;
+
+        private void Start()
+        {
+            Interactable[] allInteractables = FindObjectsOfType<Interactable>();
+
+            for (int i = 0; i < allInteractables.Length; i++)
+            {
+                if (allInteractables[i] == this)
+                {
+                    //interactID = allInteractables[i].name + "-" + i + "-" + SceneManager.GetActiveScene().name;
+                }
+            }
+            foreach (var item in allInteractables)
+            {
+                if (item == this)
+                {
+                    interactID = item.name + "-" + item.transform.position + "-" + SceneManager.GetActiveScene().name;
+                }
+            }
+
+            if (LoadCombatManager.instance.interacted.Contains(interactID))
+            {
+                Debug.Log("Contains, destroy");
+                Destroy(gameObject);
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -68,6 +98,10 @@ namespace Necropanda.Interactable
             //Call interface function
             Debug.Log("Interact");
             GetComponent<IInteractable>().Interacted(playerRef);
+            if (multipleInteractions == false)
+            {
+                LoadCombatManager.instance.interacted.Add(interactID);
+            }
         }
 
         void CancelInteract(GameObject playerRef)

@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7fad3bdd99e554d965512145b839ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactID: 
+  multipleInteractions: 1
   forceInteract: 1
 --- !u!114 &3728531217452261415
 MonoBehaviour:
@@ -205,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4498143383126369336}
   - component: {fileID: 7041094723879179133}
+  - component: {fileID: 3947421279099256988}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -289,6 +292,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &3947421279099256988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102985013633161729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &6510964414938246700
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7fad3bdd99e554d965512145b839ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactID: 
+  multipleInteractions: 0
   forceInteract: 1
 --- !u!114 &7114917235580297854
 MonoBehaviour:
@@ -388,6 +413,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 475
+  activateOnStart: 0
 --- !u!114 &4983053923874958858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +432,8 @@ MonoBehaviour:
   boss: 0
   moduleManager: {fileID: 0}
   currentState: 0
+  doOverrideState: 0
+  overrideState: 0
   avoidancePriority: 15
   timer: 0
   wanderingCoolDown: 0
@@ -476,6 +504,7 @@ MonoBehaviour:
   patrol: 1
   originalPos: {x: 0, y: 0, z: 0}
   patrolPoints: []
+  patrolPointOffset: 0
 --- !u!1001 &3332651844201392422
 PrefabInstance:
   m_ObjectHideFlags: 0

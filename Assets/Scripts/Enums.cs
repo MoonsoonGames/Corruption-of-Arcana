@@ -37,6 +37,7 @@ public enum E_ProjectilePoints
 
 public enum E_Scenes
 {
+    Null,
     [InspectorName("Dev Room")]
     DevRoom,
     Combat,

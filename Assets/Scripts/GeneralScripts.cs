@@ -27,6 +27,14 @@ namespace Necropanda
 
     public static class HelperFunctions
     {
+        public static E_Scenes StringToSceneEnum(string sceneString)
+        {
+            Debug.Log(sceneString);
+
+            E_Scenes scene = (E_Scenes)System.Enum.Parse(typeof(E_Scenes), sceneString);
+            return scene;
+        }
+
         /// <summary>
         /// Combines 2 lists together, even if they are of different types
         /// </summary>

@@ -39,10 +39,23 @@ namespace Necropanda
             Singleton();
         }
 
-        public void LoadScene(E_Scenes scene)
+        public void LoadScene(E_Scenes scene, E_Scenes lastScene)
         {
+            if (lastScene != E_Scenes.Null)
+            {
+                LoadCombatManager.instance.lastScene = lastScene;
+            }
+
             //Save current player position if applicable
             SceneManager.LoadScene(scene.ToString());
+        }
+
+        public void LoadLastScene(E_Scenes lastScene)
+        {
+            E_Scenes scene = LoadCombatManager.instance.lastScene;
+
+            //Save current player position if applicable
+            LoadScene(scene, lastScene);
         }
     }
 }

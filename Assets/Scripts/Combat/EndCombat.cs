@@ -11,19 +11,19 @@ namespace Necropanda
 {
     public class EndCombat : MonoBehaviour
     {
-        public E_Scenes victoryScene;
-        public E_Scenes defeatScene;
+        //public E_Scenes victoryScene;
+        //public E_Scenes defeatScene;
 
         public void LoadVictoryScene()
         {
             DeckManager.instance.ResetDecks();
-            LoadingScene.instance.LoadScene(victoryScene);
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null);
         }
 
         public void LoadDefeatScene()
         {
             DeckManager.instance.ResetDecks();
-            LoadingScene.instance.LoadScene(defeatScene);
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null);
         }
     }
 }
