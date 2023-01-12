@@ -41,7 +41,8 @@ public enum E_Scenes
     DevRoom,
     Combat,
     Tiertarock,
-    PuzzleRoom
+    PuzzleRoom,
+    Thoth
 }
 
 public enum E_UtilityScripts

@@ -9,11 +9,12 @@ namespace Necropanda.Interfaces
     public class SplashScreenInterface : MonoBehaviour
     {
         public GameObject SettingsMenu;
+        public E_Scenes initialScene;
 
         public void NewGame()
         {
             //Reset loadsettings/progress
-            SceneManager.LoadScene("DevRoom");
+            SceneManager.LoadScene(initialScene.ToString());
             //load game
         }
 
