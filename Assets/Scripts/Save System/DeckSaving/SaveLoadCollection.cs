@@ -14,12 +14,21 @@ namespace Necropanda
     {
         SpellReferenceTable spellRefTable;
 
+        public List<Spell> baseCollection;
+
         // Start is called before the first frame update
         void Start()
         {
             spellRefTable = GetComponent<SpellReferenceTable>();
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();
+
+            //LoadBaseCollection();
+        }
+
+        public void LoadBaseCollection()
+        {
+            SaveCards(baseCollection, new List<Spell>());
         }
 
         public void SaveCards(List<Spell> collectedSpells, List<Spell> equippedSpells)

@@ -3847,7 +3847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328e10ac427a755478fdf9f2a1cd5b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckbuildingMenu: {fileID: 294441873}
+  deckbuildingMenu: {fileID: 0}
 --- !u!1 &270210745 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 995f6ec00f3f4eb4c9c1383f64d66abf,
@@ -4263,12 +4263,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!1 &294441873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7099237266219120151, guid: b9664471e07c132468b3358717686c0c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1269669907}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &300498804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4666363347788618029, guid: 9ff5a7a8c73522540b6927c2d3234d34,
@@ -14591,6 +14585,21 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 267800668}
+    - target: {fileID: 8639155217824875041, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639155217824875041, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639155217824875041, guid: b9664471e07c132468b3358717686c0c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8644180920909105178, guid: b9664471e07c132468b3358717686c0c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -25070,11 +25079,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 381482427967027085, guid: 9b95e2084a81d8944866456a1dfead65,
-        type: 3}
-      propertyPath: majorArcana.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4415307684541209905, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: m_RootOrder
@@ -25135,6 +25139,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6265937370777209544, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: baseCollection.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265937370777209544, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: baseCollection.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 828588e310ce7d643bb359c61a724afb,
+        type: 2}
+    - target: {fileID: 6265937370777209544, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: baseCollection.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 39c886e3104ac7441b667a904776b425,
+        type: 2}
+    - target: {fileID: 6265937370777209544, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: baseCollection.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ea75387dc0433654c86159bb1208755a,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b95e2084a81d8944866456a1dfead65, type: 3}
 --- !u!1001 &5134818261994186369
