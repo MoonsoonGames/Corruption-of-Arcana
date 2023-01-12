@@ -27,11 +27,12 @@ namespace Necropanda
 
         #endregion
 
-        #region Timeline Colour
+        #region Timeline Icon
 
         [Header("Timeline Colour")]
         public bool overrideColor;
         public Color timelineColor = new Color(0, 0, 0, 255);
+        public Sprite timelineIcon;
 
         #endregion
 
@@ -357,7 +358,7 @@ namespace Necropanda
         /// <param name="hand">The hand from which this spell was cast</param>
         public void SimulateSpellValues(Character player, Character target, Character caster, bool empowered, bool weakened, int cardsInHand)
         {
-            if (player != caster && player.enlightened == false)
+            if (Timeline.instance.ShowSpells(caster) == false)
             {
                 return;
             }
