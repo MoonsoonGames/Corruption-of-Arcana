@@ -40,12 +40,15 @@ namespace Necropanda
         }
 
         public E_Scenes combatScene;
+        public E_Scenes lastScene;
+        public Vector3 lastPos;
+        public Quaternion lastRot;
         public float combatRadius = 15f;
 
         public EnemyQueue queue;
         public List<Object> enemies;
 
-        public void LoadCombat(GameObject player)
+        public void LoadCombat(GameObject player, E_Scenes lastScene)
         {
             //Get enemies within radius of player and save them in a list
             enemies.Clear();
@@ -68,8 +71,15 @@ namespace Necropanda
                 }
             }
 
+            //Saving last scene
+            if (lastScene != E_Scenes.Null)
+            {
+                lastPos = player.transform.position;
+                lastRot = player.transform.rotation;
+            }
+
             Debug.Log("Interacted - Load Combat");
-            LoadingScene.instance.LoadScene(combatScene);
+            LoadingScene.instance.LoadScene(combatScene, lastScene);
         }
 
         public void AddEnemy(Object enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)
