@@ -83,6 +83,9 @@ namespace Necropanda
                     //Reset card scales
                     cardDrag.ScaleCard(1, false);
                 }
+
+                //Spawn sound effect for cards
+                PlayShuffleSound();
             }
 
             timeline.ActivateTurnModifiers();
@@ -122,6 +125,12 @@ namespace Necropanda
 
         public StudioEventEmitter hoverEmitter;
         public StudioParameterTrigger pressTrigger;
+        public EventReference cardShuffle;
+
+        void PlayShuffleSound()
+        {
+            RuntimeManager.PlayOneShot(cardShuffle);
+        }
 
         void PlayHoverSound()
         {
