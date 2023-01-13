@@ -15,8 +15,12 @@ namespace Necropanda.Interactable
         public string interactID;
         public bool multipleInteractions = true;
 
+        public bool lockInteractions = false;
+        Collider player;
+
         public bool forceInteract;
         GameObject interactingCharacter;
+
 
         private void Start()
         {
@@ -44,24 +48,6 @@ namespace Necropanda.Interactable
             }
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                //Debug.Log(other.name + " has entered collision");
-
-                if (forceInteract)
-                {
-                    Interact(other.gameObject);
-                }
-                else
-                {
-                    //Open interact message
-                    interactingCharacter = other.gameObject;
-                }
-            }
-        }
-
         private void Update()
         {
             if (interactingCharacter != null && forceInteract == false)
@@ -75,21 +61,62 @@ namespace Necropanda.Interactable
             }
         }
 
+
+        public void UnlockInteraction()
+        {
+            lockInteractions = false;
+            if (player != null)
+            {
+                CheckInteraction(player.gameObject);
+            }
+        }
+
+        void CheckInteraction(GameObject playerObj)
+        {
+            if (forceInteract)
+            {
+                Interact(playerObj);
+            }
+            else
+            {
+                //Open interact message
+                interactingCharacter = playerObj;
+            }
+        }
+
+        void CheckCancelInteraction(GameObject playerObj)
+        {
+            if (forceInteract)
+            {
+                CancelInteract(playerObj);
+            }
+            else
+            {
+                //Close interact message
+                interactingCharacter = null;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                //Debug.Log(other.name + " has entered collision");
+                player = other;
+                if (lockInteractions) return;
+
+                CheckInteraction(other.gameObject);
+            }
+        }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 //Debug.Log(other.name + " has left collision");
+                player = null;
+                if (lockInteractions) return;
 
-                if (forceInteract)
-                {
-                    CancelInteract(other.gameObject);
-                }
-                else
-                {
-                    //Close interact message
-                    interactingCharacter = null;
-                }
+                CheckCancelInteraction(other.gameObject);
             }
         }
 
