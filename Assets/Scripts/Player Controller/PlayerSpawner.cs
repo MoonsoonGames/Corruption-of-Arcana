@@ -54,8 +54,10 @@ namespace Necropanda
 
             //Setting Up camera stack
             Camera cam = player.GetComponentInChildren<Camera>();
+            Camera.SetupCurrent(cam);
             UniversalAdditionalCameraData cameraData = cam.GetUniversalAdditionalCameraData();
             cameraData.cameraStack.Add(GameObject.Find("UICamera").GetComponent<Camera>());
+            LoadCombatManager.instance.mainCam = cam;
         }
 
         private void OnDrawGizmos()

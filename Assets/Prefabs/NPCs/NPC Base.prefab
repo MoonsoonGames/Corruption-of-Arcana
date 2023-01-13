@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3410105519247210679}
   - component: {fileID: 2140853561821042128}
-  - component: {fileID: 7410320239262721006}
   m_Layer: 0
   m_Name: SpriteContainer
   m_TagString: Untagged
@@ -49,26 +48,6 @@ MonoBehaviour:
   lockX: 1
   lockY: 0
   lockZ: 1
---- !u!114 &7410320239262721006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2382737996772884465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22021802ab006b441a026713fe22a0bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  utilityModules:
-  - type: 2
-    axes: {x: 0.4, y: 0.4, z: 0.4}
-    speed: 0.005
-    time: 0.75
-    currentTime: 0
-    forward: 0
-  offset: {x: 0, y: 1}
 --- !u!1 &3142319793514134228
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8433251129639511175}
   - component: {fileID: 8433251129639511174}
+  - component: {fileID: 4499373685320425828}
   m_Layer: 0
   m_Name: SpriteRenderer
   m_TagString: Untagged
@@ -233,3 +213,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4499373685320425828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433251129639511173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22021802ab006b441a026713fe22a0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  utilityModules:
+  - type: 2
+    axes: {x: 0.4, y: 0.4, z: 0.4}
+    speed: 0.005
+    time: 0.75
+    currentTime: 0
+    forward: 0
+  offset: {x: 0, y: 1}
