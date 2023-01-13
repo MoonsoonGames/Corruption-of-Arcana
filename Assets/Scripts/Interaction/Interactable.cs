@@ -21,6 +21,9 @@ namespace Necropanda.Interactable
         public bool forceInteract;
         GameObject interactingCharacter;
 
+        static TooltipBox interactionPopup;
+        public string interactionPopupTitle;
+        public string interactionPopupMessage;
 
         private void Start()
         {
@@ -46,6 +49,8 @@ namespace Necropanda.Interactable
                 Debug.Log("Contains, destroy");
                 Destroy(gameObject);
             }
+
+            SetInteractMessage(null, null);
         }
 
         private void Update()
@@ -81,6 +86,7 @@ namespace Necropanda.Interactable
             {
                 //Open interact message
                 interactingCharacter = playerObj;
+                SetInteractMessage(interactionPopupTitle, interactionPopupMessage);
             }
         }
 
@@ -94,6 +100,7 @@ namespace Necropanda.Interactable
             {
                 //Close interact message
                 interactingCharacter = null;
+                SetInteractMessage(null, null);
             }
         }
 
@@ -122,6 +129,8 @@ namespace Necropanda.Interactable
 
         void Interact(GameObject playerRef)
         {
+            SetInteractMessage(null, null);
+
             //Call interface function
             Debug.Log("Interact");
             IInteractable[] interacts = GetComponents<IInteractable>();
@@ -138,12 +147,33 @@ namespace Necropanda.Interactable
 
         void CancelInteract(GameObject playerRef)
         {
+            SetInteractMessage(null, null);
             //Call interface function
             Debug.Log("Interact");
             ICancelInteractable[] interacts = GetComponents<ICancelInteractable>();
             foreach (var item in interacts)
             {
                 item.CancelInteraction(playerRef);
+            }
+        }
+
+        void SetInteractMessage(string title, string message)
+        {
+            if (interactionPopup == null)
+            {
+                interactionPopup = GameObject.FindGameObjectWithTag("InteractPopup").GetComponent<TooltipBox>();
+            }
+
+            if (interactionPopup == null) return;
+
+            if (title != null && message != null)
+            {
+                interactionPopup.gameObject.SetActive(true);
+                interactionPopup.SetText(interactionPopupTitle, interactionPopupMessage);
+            }
+            else
+            {
+                interactionPopup.gameObject.SetActive(false);
             }
         }
     }
