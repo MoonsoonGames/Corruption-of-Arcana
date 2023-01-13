@@ -12,6 +12,13 @@ namespace Necropanda
 {
     public class LoadCombat : MonoBehaviour, IInteractable
     {
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject player)
         {
             string sceneString = SceneManager.GetActiveScene().name;

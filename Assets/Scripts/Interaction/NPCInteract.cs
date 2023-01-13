@@ -13,8 +13,14 @@ namespace Necropanda
     public class NPCInteract : MonoBehaviour, IInteractable
     {
         public string SpeakToMessage = "SpeakingTo";
+        public string ID;
 
-            public void Interacted(GameObject player)
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
+        public void Interacted(GameObject player)
             {
                 Flowchart.BroadcastFungusMessage(SpeakToMessage);
                 Debug.Log("Spoken to NPC");

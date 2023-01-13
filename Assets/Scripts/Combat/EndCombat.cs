@@ -17,13 +17,15 @@ namespace Necropanda
         public void LoadVictoryScene()
         {
             DeckManager.instance.ResetDecks();
-            LoadingScene.instance.LoadLastScene(E_Scenes.Null);
+            LoadCombatManager.instance.EnemiesDefeated();
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null, true);
         }
 
         public void LoadDefeatScene()
         {
             DeckManager.instance.ResetDecks();
-            LoadingScene.instance.LoadLastScene(E_Scenes.Null);
+            LoadCombatManager.instance.enemyIDs.Clear();
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null, false);
         }
     }
 }
