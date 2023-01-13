@@ -93,7 +93,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat");
             loading = false;
-            LoadingScene.instance.LoadScene(combatScene, lastScene);
+            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }
 
         public void AddEnemy(Object enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)

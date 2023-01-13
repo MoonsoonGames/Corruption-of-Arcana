@@ -37,7 +37,7 @@ namespace Necropanda
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
 
-            LoadingScene.instance.LoadScene(scene, lastScene);
+            LoadingScene.instance.LoadScene(scene, lastScene, false);
         }
     }
 }

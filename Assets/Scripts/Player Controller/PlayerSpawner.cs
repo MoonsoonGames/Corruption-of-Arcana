@@ -32,7 +32,7 @@ namespace Necropanda
             string currentSceneString = SceneManager.GetActiveScene().name;
             E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
 
-            if (LoadCombatManager.instance != null)
+            if (LoadingScene.instance.loadLastPos && LoadCombatManager.instance != null)
             {
                 if (LoadCombatManager.instance.lastScene != E_Scenes.Null)
                 {
