@@ -12,7 +12,7 @@ namespace Necropanda
 {
     public class NPCInteract : MonoBehaviour, IInteractable
     {
-        public string SpeakToMessage = "SpeakingTo";
+        public GameObject flowChart;
         public string ID;
 
         public void SetID(string newID)
@@ -21,10 +21,12 @@ namespace Necropanda
         }
 
         public void Interacted(GameObject player)
+        {
+            if (flowChart != null)
             {
-                Flowchart.BroadcastFungusMessage(SpeakToMessage);
-                Debug.Log("Spoken to NPC");
+                flowChart.SetActive(true);
             }
+        }
 
     }
 }

@@ -48,6 +48,8 @@ namespace Necropanda
         public void Interacted(GameObject playerRef)
         {
             player = playerRef;
+            Interactable.Interactable loadInteract = GetComponentInChildren<LoadCombat>().GetComponent<Interactable.Interactable>();
+            loadInteract.UnlockInteraction();
         }
 
         public void CancelInteraction(GameObject playerRef)
