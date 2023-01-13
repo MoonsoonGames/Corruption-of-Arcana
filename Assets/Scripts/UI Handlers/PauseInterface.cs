@@ -14,7 +14,6 @@ namespace Necropanda.Interfaces
         public PlayerController player;
         //public GameObject AchievementScreen;
 
-
         public void Resume()
         {
             Debug.Log("resuming");

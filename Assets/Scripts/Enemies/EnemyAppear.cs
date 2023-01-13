@@ -38,6 +38,13 @@ namespace Necropanda
                 fx = null;
         }
 
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject playerRef)
         {
             player = playerRef;

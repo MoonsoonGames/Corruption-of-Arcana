@@ -51,11 +51,17 @@ namespace Necropanda
 
         public EnemyQueue queue;
         public List<Object> enemies;
+        public List<string> enemyIDs;
+        bool loading = false;
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
         {
+            if (loading) return;
+            loading = true;
+
             //Get enemies within radius of player and save them in a list
             enemies.Clear();
+            enemyIDs.Clear();
             EnemyAI[] enemyAI = GameObject.FindObjectsOfType<EnemyAI>();
 
             foreach (EnemyAI enemy in enemyAI)
@@ -72,6 +78,9 @@ namespace Necropanda
                         //Else append them at the end of the list
                         enemies.Insert(enemies.Count, enemy.enemyObject);
                     }
+
+                    Interactable.Interactable interactable = enemy.GetComponent<Interactable.Interactable>();
+                    enemyIDs.Add(interactable.interactID);
                 }
             }
 
@@ -83,6 +92,7 @@ namespace Necropanda
             }
 
             Debug.Log("Interacted - Load Combat");
+            loading = false;
             LoadingScene.instance.LoadScene(combatScene, lastScene);
         }
 
@@ -95,6 +105,16 @@ namespace Necropanda
             VFXManager.instance.SpawnProjectile(points, projectileObject, projectileSpeed, trailColor, impactObject, E_DamageTypes.Physical);
             enemies.Add(enemy);
             queue.UpdateUI();
+        }
+
+        public void EnemiesDefeated()
+        {
+            foreach (string ID in enemyIDs)
+            {
+                interacted.Add(ID);
+            }
+
+            enemyIDs.Clear();
         }
 
         private void OnDrawGizmosSelected()

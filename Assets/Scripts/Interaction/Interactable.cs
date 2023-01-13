@@ -97,7 +97,12 @@ namespace Necropanda.Interactable
         {
             //Call interface function
             Debug.Log("Interact");
-            GetComponent<IInteractable>().Interacted(playerRef);
+            IInteractable[] interacts = GetComponents<IInteractable>();
+            foreach (var item in interacts)
+            {
+                item.Interacted(playerRef);
+            }
+
             if (multipleInteractions == false)
             {
                 LoadCombatManager.instance.interacted.Add(interactID);
@@ -108,7 +113,11 @@ namespace Necropanda.Interactable
         {
             //Call interface function
             Debug.Log("Interact");
-            GetComponent<ICancelInteractable>().CancelInteraction(playerRef);
+            ICancelInteractable[] interacts = GetComponents<ICancelInteractable>();
+            foreach (var item in interacts)
+            {
+                item.CancelInteraction(playerRef);
+            }
         }
     }
 }

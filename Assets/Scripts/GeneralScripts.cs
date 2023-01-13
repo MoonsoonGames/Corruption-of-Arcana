@@ -13,6 +13,8 @@ namespace Necropanda
 
     public interface IInteractable
     {
+        void SetID(string newID);
+
         void Interacted(GameObject player);
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -16,6 +17,12 @@ namespace Necropanda
 
         // Start is called before the first frame update
         void Start()
+        {
+            SpawnPlayer();
+            Destroy(this.gameObject);
+        }
+
+        void SpawnPlayer()
         {
             if (playerRef == null) { return; }
 
@@ -40,9 +47,22 @@ namespace Necropanda
             }
 
             GameObject player = Instantiate(playerRef, spawnPos, spawnRot) as GameObject;
+            Player.PlayerController controller = player.GetComponent<Player.PlayerController>();
 
-            //set up references
-            Debug.Log(player.name);
+            Interfaces.HUDInterface hud = GameObject.FindObjectOfType<Interfaces.HUDInterface>();
+            hud.player = controller;
+
+            //Setting Up camera stack
+            Camera cam = player.GetComponentInChildren<Camera>();
+            UniversalAdditionalCameraData cameraData = cam.GetUniversalAdditionalCameraData();
+            cameraData.cameraStack.Add(GameObject.Find("UICamera").GetComponent<Camera>());
+        }
+
+        private void OnDrawGizmos()
+        {
+            // Draw a yellow sphere at the transform's position
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(transform.position, 1);
         }
     }
 }

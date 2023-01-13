@@ -19,6 +19,12 @@ namespace Necropanda
     public class LoadTiertarock : MonoBehaviour, IInteractable
     {
         public E_Scenes scene;
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
 
         // Start is called before the first frame update
         public void Interacted(GameObject player)
