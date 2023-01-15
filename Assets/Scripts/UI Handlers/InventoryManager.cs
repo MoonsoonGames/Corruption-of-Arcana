@@ -17,6 +17,11 @@ public class InventoryManager : MonoBehaviour
 
     public PlayerController Player;
 
+    private void Start()
+    {
+
+    }
+
     public void JournalBTN()
     {
         InventoryScreen.SetActive(false);
@@ -45,7 +50,7 @@ public class InventoryManager : MonoBehaviour
     {
         InventoryScreen.SetActive(false);
         MainHUD.SetActive(true);
-           
+
         Player.paused = false;
         Time.timeScale = 1;
         Cursor.visible = false;
