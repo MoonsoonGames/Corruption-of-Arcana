@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8843786430198868398}
   - component: {fileID: 1317729603069479034}
+  - component: {fileID: 1310953169267818542}
   m_Layer: 0
   m_Name: Point Light (1)
   m_TagString: Untagged
@@ -94,6 +95,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1310953169267818542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769903549735237692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1001 &4545244797020794349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 3872063757365783237, guid: d29add27a67727b418273c0e8eb4ca9a,
         type: 3}
       propertyPath: m_Speed
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3872063757365783237, guid: d29add27a67727b418273c0e8eb4ca9a,
         type: 3}
