@@ -12,14 +12,14 @@ namespace Necropanda
 {
     public class MainQuestTracker : MonoBehaviour
     {
-        public Flowchart flowChart;
-
         public GameObject[] state1, state2, state3, state4, state5, state6;
+
+        public Flowchart flowchart;
 
         // Start is called before the first frame update
         void Start()
         {
-            int questState = flowChart.GetIntegerVariable("QuestState");
+            int questState = LoadCombatManager.instance.GetQuestState();
 
             Debug.Log("Quest state is " + questState);
             
@@ -62,6 +62,13 @@ namespace Necropanda
                     }
                     break;
             }
+
+            flowchart.SetIntegerVariable("QuestState", questState);
+        }
+
+        public void SetQuestState(int state)
+        {
+            LoadCombatManager.instance.UpdateQuestState(state);
         }
     }
 }
