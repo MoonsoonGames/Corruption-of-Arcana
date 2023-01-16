@@ -49,13 +49,13 @@ namespace Necropanda
                         item.SetActive(true);
                     }
                     break;
-                case 5:
+                case 6:
                     foreach (var item in state5)
                     {
                         item.SetActive(true);
                     }
                     break;
-                case 6:
+                case 7:
                     foreach (var item in state6)
                     {
                         item.SetActive(true);
