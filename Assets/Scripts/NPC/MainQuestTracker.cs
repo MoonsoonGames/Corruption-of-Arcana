@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -13,7 +14,8 @@ namespace Necropanda
     public class MainQuestTracker : MonoBehaviour
     {
         public GameObject[] state1, state2, state3, state4, state5, state6;
-
+        public TextMeshProUGUI questStep;
+        public TextMeshProUGUI questDescription;
         public Flowchart flowchart;
 
         // Start is called before the first frame update
@@ -49,13 +51,19 @@ namespace Necropanda
                         item.SetActive(true);
                     }
                     break;
-                case 6:
+                case 5:
                     foreach (var item in state5)
                     {
                         item.SetActive(true);
                     }
                     break;
-                case 7:
+                case 6:
+                    foreach (var item in state6)
+                    {
+                        item.SetActive(true);
+                    }
+                    break;
+                default:
                     foreach (var item in state6)
                     {
                         item.SetActive(true);
@@ -64,11 +72,17 @@ namespace Necropanda
             }
 
             flowchart.SetIntegerVariable("QuestState", questState);
+            SetQuestState(questState);
         }
+
+        public string[] questDescriptions;
 
         public void SetQuestState(int state)
         {
             LoadCombatManager.instance.UpdateQuestState(state);
+
+            questStep.text = "#" + state;
+            questDescription.text = questDescriptions[state-1];
         }
     }
 }
