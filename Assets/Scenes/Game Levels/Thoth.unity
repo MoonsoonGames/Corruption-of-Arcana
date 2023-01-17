@@ -1034,6 +1034,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 70450952}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &18540296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9145497060598712786, guid: b9664471e07c132468b3358717686c0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 534371828}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &18764341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2979,6 +2991,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb45a6b39c00eb4ab7a4def321cf1e3, type: 3}
+--- !u!114 &64556076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3907016840436845128, guid: b9664471e07c132468b3358717686c0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 534371828}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &65250930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3359466875213933324, guid: 9fb45a6b39c00eb4ab7a4def321cf1e3,
@@ -4466,7 +4490,7 @@ PrefabInstance:
     - target: {fileID: 913548394070248906, guid: 66dec9c94b95a474c8961c2997345102,
         type: 3}
       propertyPath: questState
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 66dec9c94b95a474c8961c2997345102,
         type: 3}
@@ -13919,7 +13943,17 @@ MonoBehaviour:
   state6:
   - {fileID: 281397714}
   - {fileID: 1580892681}
+  questStep: {fileID: 64556076}
+  questDescription: {fileID: 18540296}
   flowchart: {fileID: 1557550339}
+  questDescriptions:
+  - Speak with Mama Reinfeld
+  - Speak with Mama Reinfeld
+  - Speak with Mama Reinfeld
+  - Speak with Mama Reinfeld
+  - Speak with Lt. Hierophante
+  - Defeat the Corrupted Animals in the Farm
+  - Speak with Lt.Hierophante
 --- !u!4 &324821241
 Transform:
   m_ObjectHideFlags: 0
@@ -14023,11 +14057,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1055979845}
     m_Modifications:
-    - target: {fileID: 913548394070248906, guid: 201f5c08c2029aa4fa3744a5c1f103b2,
-        type: 3}
-      propertyPath: questState
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 201f5c08c2029aa4fa3744a5c1f103b2,
         type: 3}
       propertyPath: m_RootOrder
@@ -14036,7 +14065,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 201f5c08c2029aa4fa3744a5c1f103b2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.17
+      value: 24.4
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 201f5c08c2029aa4fa3744a5c1f103b2,
         type: 3}
@@ -14046,7 +14075,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 201f5c08c2029aa4fa3744a5c1f103b2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.7
+      value: -38.48
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 201f5c08c2029aa4fa3744a5c1f103b2,
         type: 3}
@@ -25548,11 +25577,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1055979845}
     m_Modifications:
-    - target: {fileID: 913548394070248906, guid: 889d9d1e1b7cc4142aade2d066d7149c,
-        type: 3}
-      propertyPath: questState
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
       propertyPath: m_RootOrder
@@ -25561,7 +25585,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.33
+      value: 22.38
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
@@ -25571,7 +25595,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.68
+      value: -36.33
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
@@ -42779,7 +42803,7 @@ PrefabInstance:
     - target: {fileID: 913548394070248906, guid: 66dec9c94b95a474c8961c2997345102,
         type: 3}
       propertyPath: questState
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 66dec9c94b95a474c8961c2997345102,
         type: 3}
@@ -62595,7 +62619,7 @@ PrefabInstance:
     - target: {fileID: 913548394070248906, guid: dd58bc28db5f18a4f9960f228dc6a689,
         type: 3}
       propertyPath: questState
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: dd58bc28db5f18a4f9960f228dc6a689,
         type: 3}
@@ -71336,11 +71360,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1055979845}
     m_Modifications:
-    - target: {fileID: 913548394070248906, guid: 889d9d1e1b7cc4142aade2d066d7149c,
-        type: 3}
-      propertyPath: questState
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
       propertyPath: m_RootOrder
@@ -71349,7 +71368,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.893875
+      value: 25.25
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
@@ -71359,7 +71378,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -41.3571
+      value: -41.44
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 889d9d1e1b7cc4142aade2d066d7149c,
         type: 3}
@@ -90463,6 +90482,11 @@ PrefabInstance:
       propertyPath: _targetGameObject.gameObjectVal
       value: 
       objectReference: {fileID: 1223697888}
+    - target: {fileID: 2152723988813586670, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: conditions.Array.data[0].anyVar.data.integerData.integerVal
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2457070572315049638, guid: 0ec42391227e09c46844b3d1537c7788,
         type: 3}
       propertyPath: targetObject
@@ -90473,6 +90497,31 @@ PrefabInstance:
       propertyPath: _targetGameObject.gameObjectVal
       value: 
       objectReference: {fileID: 826488838}
+    - target: {fileID: 4297151974821349983, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: commandList.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297151974821349983, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: commandList.Array.data[3]
+      value: 
+      objectReference: {fileID: 8482240915833538114}
+    - target: {fileID: 4297151974821349983, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: commandList.Array.data[4]
+      value: 
+      objectReference: {fileID: 8482240915833538096}
+    - target: {fileID: 4297151974821349983, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: commandList.Array.data[5]
+      value: 
+      objectReference: {fileID: 8482240915833538061}
+    - target: {fileID: 4297151974821349983, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: commandList.Array.data[6]
+      value: 
+      objectReference: {fileID: 8482240915833538076}
     - target: {fileID: 4973206357410617109, guid: 0ec42391227e09c46844b3d1537c7788,
         type: 3}
       propertyPath: nodeRect.width
@@ -90603,6 +90652,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6756459372950010374, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: conditions.Array.data[0].anyVar.data.integerData.integerVal
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7199542627679640198, guid: 0ec42391227e09c46844b3d1537c7788,
         type: 3}
       propertyPath: m_Name
@@ -90628,11 +90682,21 @@ PrefabInstance:
       propertyPath: targetObject
       value: 
       objectReference: {fileID: 324821239}
+    - target: {fileID: 8482240915833538040, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: methodParameters.Array.data[0].objValue.intValue
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8482240915833538041, guid: 0ec42391227e09c46844b3d1537c7788,
         type: 3}
       propertyPath: targetObject
       value: 
       objectReference: {fileID: 324821239}
+    - target: {fileID: 8482240915833538041, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: methodParameters.Array.data[0].objValue.intValue
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8482240915833538042, guid: 0ec42391227e09c46844b3d1537c7788,
         type: 3}
       propertyPath: targetObject
@@ -90673,6 +90737,16 @@ PrefabInstance:
       propertyPath: _targetGameObject.gameObjectVal
       value: 
       objectReference: {fileID: 281397714}
+    - target: {fileID: 9038416513739973025, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: anyVar.data.integerData.integerVal
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176972951847041969, guid: 0ec42391227e09c46844b3d1537c7788,
+        type: 3}
+      propertyPath: anyVar.data.integerData.integerVal
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ec42391227e09c46844b3d1537c7788, type: 3}
 --- !u!114 &8482240915833538036 stripped
@@ -90827,4 +90901,61 @@ MonoBehaviour:
   activeState:
     booleanRef: {fileID: 0}
     booleanVal: 0
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &8482240915833538061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8482240915833538039, guid: 0ec42391227e09c46844b3d1537c7788,
+    type: 3}
+  m_PrefabInstance: {fileID: 8482240915833538035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557550296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8482240915833538076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7204617973705201879, guid: 0ec42391227e09c46844b3d1537c7788,
+    type: 3}
+  m_PrefabInstance: {fileID: 8482240915833538035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557550296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8482240915833538096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7884989111399415442, guid: 0ec42391227e09c46844b3d1537c7788,
+    type: 3}
+  m_PrefabInstance: {fileID: 8482240915833538035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557550296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8482240915833538114
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557550296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 80
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 1580892681}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
   targetGameObjectOLD: {fileID: 0}
