@@ -294,6 +294,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 123280
+--- !u!114 &-7214770631604761421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music
+  m_EditorClassIdentifier: 
+  Name: Thoth Music
+  StudioPath: parameter:/Thoth Music
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 2062682416
+    data2: 3705960116
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Entrance
+  - Village
+  - Village Expanded
+  - Fina lopp
+  - Enemy Close
+  Exists: 1
 --- !u!114 &-7174984059870051091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,17 +497,18 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 4
   Default: 0
   ID:
     data1: 2062682416
     data2: 3705960116
   Type: 2
-  IsGlobal: 0
+  IsGlobal: 1
   Labels:
   - Entrance
   - Village
   - Village Expanded
+  - Fina lopp
   - Enemy Close
   Exists: 1
 --- !u!114 &-5124406496997275583
@@ -686,7 +716,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638091418718335282
+  lastModified: 638094812383625443
   FileSizes: []
   Exists: 1
 --- !u!114 &-3053542360527846427
@@ -977,7 +1007,7 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638091418718385297
+  lastModified: 638094812383643526
   FileSizes:
   - Name: 
     Value: 3838
@@ -1202,11 +1232,12 @@ MonoBehaviour:
   - {fileID: 5290217830072651608}
   EditorParameters:
   - {fileID: -8572358270947847299}
+  - {fileID: -7214770631604761421}
   MasterBanks:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638091418718385297
+  cacheTime: 638094812383643526
   cacheVersion: 131591
 --- !u!114 &360610475724078421
 MonoBehaviour:
@@ -2587,7 +2618,7 @@ MonoBehaviour:
   - {fileID: 8372865748723905896}
   MinDistance: 1
   MaxDistance: 20
-  Length: 101576
+  Length: 112594
 --- !u!114 &6744775575514386292
 MonoBehaviour:
   m_ObjectHideFlags: 0
