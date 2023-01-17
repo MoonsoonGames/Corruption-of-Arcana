@@ -86,22 +86,53 @@ namespace Necropanda.Utils.Console
         {
 
             inputField.text = string.Empty;
+            hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+            inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+            journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
 
             if (uiCanvas.activeSelf)
             {
-                hudInterface.enabled = true;
-                inventoryManager.enabled = true;
-                journalMainCode.enabled = true;
+                // try
+                // {
+                //     hudInterface.enabled = true;
+                //     inventoryManager.enabled = true;
+                //     journalMainCode.enabled = true;
+                // }
+                // catch (MissingReferenceException err)
+                // {
+                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
+                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
+
+
+                // }
+                // catch (UnassignedReferenceException err)
+                // {
+                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
+                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
+
+                //     hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+                //     inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+                //     journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
+                // }
+
 
                 Time.timeScale = pausedTimeScale;
                 uiCanvas.SetActive(false);
             }
             else
             {
-                hudInterface.enabled = false;
-                inventoryManager.enabled = false;
-                journalMainCode.enabled = false;
-
+                if (hudInterface != null)
+                {
+                    hudInterface.enabled = false;
+                }
+                else if (inventoryManager != null)
+                {
+                    inventoryManager.enabled = false;
+                }
+                else if (journalMainCode != null)
+                {
+                    journalMainCode.enabled = false;
+                }
                 pausedTimeScale = Time.timeScale;
                 Time.timeScale = 0;
                 uiCanvas.SetActive(true);
