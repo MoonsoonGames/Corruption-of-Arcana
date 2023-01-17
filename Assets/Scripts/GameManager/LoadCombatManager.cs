@@ -37,18 +37,33 @@ namespace Necropanda
         void Start()
         {
             Singleton();
+            interacted = new List<string>();
         }
 
+        public Camera mainCam;
+
         public E_Scenes combatScene;
+        public E_Scenes lastScene;
+        public Vector3 lastPos;
+        public Quaternion lastRot;
+
+        public List<string> interacted;
+
         public float combatRadius = 15f;
 
         public EnemyQueue queue;
         public List<Object> enemies;
+        public List<string> enemyIDs;
+        bool loading = false;
 
-        public void LoadCombat(GameObject player)
+        public void LoadCombat(GameObject player, E_Scenes lastScene)
         {
+            if (loading) return;
+            loading = true;
+
             //Get enemies within radius of player and save them in a list
             enemies.Clear();
+            enemyIDs.Clear();
             EnemyAI[] enemyAI = GameObject.FindObjectsOfType<EnemyAI>();
 
             foreach (EnemyAI enemy in enemyAI)
@@ -65,27 +80,64 @@ namespace Necropanda
                         //Else append them at the end of the list
                         enemies.Insert(enemies.Count, enemy.enemyObject);
                     }
+
+                    Interactable.Interactable interactable = enemy.GetComponent<Interactable.Interactable>();
+                    enemyIDs.Add(interactable.interactID);
                 }
             }
 
+            //Saving last scene
+            if (lastScene != E_Scenes.Null)
+            {
+                lastPos = player.transform.position;
+                lastRot = player.transform.rotation;
+            }
+
             Debug.Log("Interacted - Load Combat");
-            LoadingScene.instance.LoadScene(combatScene);
+            loading = false;
+            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }
 
-        public void AddEnemy(Object enemy, Vector2 spawnPos, Vector2 midPos, Object projectileObject, Object impactObject, Color trailColor)
+        public void AddEnemy(Object enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)
         {
             List<Vector2> targetPositions = new List<Vector2>();
-            targetPositions.Add(midPos);
+            //targetPositions.Add(midPos);
             targetPositions.Add(queue.transform.position);
 
-            VFXManager.instance.SpawnProjectile(spawnPos, targetPositions, projectileObject, trailColor, impactObject, E_DamageTypes.Physical);
+            VFXManager.instance.SpawnProjectile(points, projectileObject, projectileSpeed, trailColor, impactObject, E_DamageTypes.Physical);
             enemies.Add(enemy);
             queue.UpdateUI();
+        }
+
+        public void EnemiesDefeated()
+        {
+            foreach (string ID in enemyIDs)
+            {
+                interacted.Add(ID);
+            }
+
+            enemyIDs.Clear();
+
+            UpdateQuestState(questStateUponCombatVictory);
+            questStateUponCombatVictory = 0;
         }
 
         private void OnDrawGizmosSelected()
         {
             Gizmos.DrawWireSphere(transform.position, combatRadius);
         }
+
+        #region Quest Data - Delete later
+
+        int questState = 1; public int GetQuestState() { return questState; }
+        public int questStateUponCombatVictory = 0;
+
+        public void UpdateQuestState(int questState)
+        {
+            if (this.questState + 1 == questState)
+                this.questState = questState;
+        }
+
+        #endregion
     }
 }

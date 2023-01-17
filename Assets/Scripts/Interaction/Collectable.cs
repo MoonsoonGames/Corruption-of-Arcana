@@ -11,6 +11,13 @@ namespace Necropanda
 {
     public class Collectable : MonoBehaviour, IInteractable
     {
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject player)
         {
             Destroy(this.gameObject);

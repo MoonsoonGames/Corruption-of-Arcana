@@ -13,6 +13,8 @@ namespace Necropanda
 
     public interface IInteractable
     {
+        void SetID(string newID);
+
         void Interacted(GameObject player);
     }
 
@@ -27,6 +29,14 @@ namespace Necropanda
 
     public static class HelperFunctions
     {
+        public static E_Scenes StringToSceneEnum(string sceneString)
+        {
+            Debug.Log(sceneString);
+
+            E_Scenes scene = (E_Scenes)System.Enum.Parse(typeof(E_Scenes), sceneString);
+            return scene;
+        }
+
         /// <summary>
         /// Combines 2 lists together, even if they are of different types
         /// </summary>
@@ -182,6 +192,13 @@ namespace Necropanda
             }
         }
 
+        [System.Serializable]
+        public struct ProjectilePoint
+        {
+            public E_ProjectilePoints point;
+            public Transform transform;
+        }
+
         #endregion
 
         #region AI
@@ -260,6 +277,7 @@ namespace Necropanda
             public E_StatusTargetType target;
             public E_Statuses status;
             public E_DamageTypes effectType;
+            public Object effect;
             public int value;
             public float statModifier;
 

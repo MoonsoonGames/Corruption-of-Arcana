@@ -13,6 +13,13 @@ namespace Necropanda
     {
         public MoveObject[] objects;
 
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject player)
         {
             if (objects.Length > 0)

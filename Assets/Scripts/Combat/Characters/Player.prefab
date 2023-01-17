@@ -79,13 +79,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dying: 0
-  healthIcon: {fileID: 0}
-  healthText: {fileID: 0}
+  healthSlider: {fileID: 0}
+  shieldUI: {fileID: 0}
   shieldColor: {r: 0, g: 0.8627451, b: 1, a: 1}
-  healthColor: {r: 0.018116832, g: 1, b: 0, a: 1}
+  healthColor: {r: 1, g: 0, b: 0, a: 1}
   lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
   lowHealthThresholdPercentage: 0.3
-  curseOverlay: {fileID: 0}
   screenFlash: {fileID: 0}
   disableOnKill:
   - {fileID: 3702093927457906039}
@@ -97,7 +96,7 @@ MonoBehaviour:
       Data2: 1131469179
       Data3: -885849706
       Data4: 2082907646
-    Path: event:/Combat/Taro/Take Damage (PH)
+    Path: event:/Combat/Taro/Take Damage
   defaultSoundEffectShield:
     Guid:
       Data1: 174370161
@@ -315,6 +314,7 @@ MonoBehaviour:
           Data4: -1998702692
         Path: event:/Combat/Shields/Shield level 3
       intensityThreshold: 0.6
+  killFX: {fileID: 6441297445223667176, guid: 3ab7803e4a177184f9e9816b97033770, type: 3}
 --- !u!114 &4211181404541985285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,9 +329,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arcanaMaxBase: 3
   buttonOverlay: {fileID: 0}
-  arcanaText: {fileID: 0}
-  arcanaImage: {fileID: 0}
-  enableColor: {r: 0.3820755, g: 0.90683955, b: 1, a: 1}
+  arcanaSlider: {fileID: 0}
+  enableColor: {r: 1, g: 1, b: 1, a: 1}
   disableColor: {r: 1, g: 0, b: 0, a: 1}
   silenced: 0
 --- !u!1 &3702093927457906039

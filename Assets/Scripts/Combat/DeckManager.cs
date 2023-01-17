@@ -11,6 +11,10 @@ namespace Necropanda
 {
     public class DeckManager : MonoBehaviour
     {
+        #region Setup
+
+        SaveLoadCollection saveLoadCollection;
+
         #region Singleton
         //Code from last year
 
@@ -74,7 +78,7 @@ namespace Necropanda
         private void Start()
         {
             Singleton();
-
+            saveLoadCollection = GetComponent<SaveLoadCollection>();
             SetupDecks();
         }
 
@@ -85,6 +89,8 @@ namespace Necropanda
             for (int i = 0; i < 5; i++)
                 playerDeck.Sort(HelperFunctions.RandomSort);
         }
+
+        #endregion
 
         /// <summary>
         /// Adds a card to the start of the spell list
@@ -117,10 +123,12 @@ namespace Necropanda
         /// Returns all discarded cards to the deck
         /// </summary>
         /// <param name="start">Determines whether the cards appear at the start of the deck (meaning they get drawn first) or the end</param>
-        public void DiscardPileToDeck(bool start)
+        public void DiscardPileToDeck(bool start, bool removeDiscardOnCast)
         {
             foreach(Spell spell in discardPile)
             {
+                if (removeDiscardOnCast) break;
+
                 if (start)
                 {
                     playerDeck.Insert(0, spell);
@@ -171,6 +179,28 @@ namespace Necropanda
             }
 
             //SetupDecks();
+        }
+
+        public void ResetDecks()
+        {
+            DiscardPileToDeck(true, true);
+            DrawFromPlayed();
+        }
+
+        public void SaveDeck()
+        {
+            if (saveLoadCollection != null)
+            {
+                saveLoadCollection.SaveCards(collection, majorArcana);
+            }
+        }
+
+        public void LoadDeck()
+        {
+            if (saveLoadCollection != null)
+            {
+                saveLoadCollection.LoadCards(collection, majorArcana);
+            }
         }
     }
 }

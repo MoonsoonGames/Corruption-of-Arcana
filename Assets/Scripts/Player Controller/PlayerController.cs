@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 
 /// <summary>
@@ -41,12 +42,34 @@ namespace Necropanda.Player
 
         private void Start()
         {
+            paused = true;
+
             cam = Camera.main;
             cmBrain = FindObjectOfType<CinemachineBrain>();
             //mouseLook = GetComponentInChildren<MouseLook>();
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
+
+            SetupMovement();
+        }
+
+        void SetupMovement()
+        {
+            string currentSceneString = SceneManager.GetActiveScene().name;
+            E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
+
+            if (LoadCombatManager.instance.lastScene != E_Scenes.Null)
+            {
+                if (currentScene == LoadCombatManager.instance.lastScene)
+                {
+                    Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
+                    transform.position = LoadCombatManager.instance.lastPos;
+                    Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
+                }
+            }
+
+            paused = false;
         }
 
         /// <summary>
@@ -54,7 +77,6 @@ namespace Necropanda.Player
         /// </summary>
         void Update()
         {
-
             if (!paused)
             {
                 GetInput();
