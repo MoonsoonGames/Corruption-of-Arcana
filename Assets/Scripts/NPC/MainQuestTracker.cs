@@ -13,7 +13,7 @@ namespace Necropanda
 {
     public class MainQuestTracker : MonoBehaviour
     {
-        public GameObject[] state1, state2, state3, state4, state5, state6;
+        public GameObject[] state1, state2, state3, state4, state5, state6, state7;
         public TextMeshProUGUI questStep;
         public TextMeshProUGUI questDescription;
         public Flowchart flowchart;
@@ -59,6 +59,12 @@ namespace Necropanda
                     break;
                 case 6:
                     foreach (var item in state6)
+                    {
+                        item.SetActive(true);
+                    }
+                    break;
+                case 7:
+                    foreach (var item in state7)
                     {
                         item.SetActive(true);
                     }
