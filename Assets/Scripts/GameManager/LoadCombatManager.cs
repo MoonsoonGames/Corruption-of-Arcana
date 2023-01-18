@@ -117,11 +117,27 @@ namespace Necropanda
             }
 
             enemyIDs.Clear();
+
+            UpdateQuestState(questStateUponCombatVictory);
+            questStateUponCombatVictory = 0;
         }
 
         private void OnDrawGizmosSelected()
         {
             Gizmos.DrawWireSphere(transform.position, combatRadius);
         }
+
+        #region Quest Data - Delete later
+
+        int questState = 1; public int GetQuestState() { return questState; }
+        public int questStateUponCombatVictory = 0;
+
+        public void UpdateQuestState(int questState)
+        {
+            if (this.questState + 1 == questState)
+                this.questState = questState;
+        }
+
+        #endregion
     }
 }

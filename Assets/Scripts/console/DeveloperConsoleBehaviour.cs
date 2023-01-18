@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+
+using Necropanda.Interfaces;
 using Necropanda.Utils.Console.Commands;
 
 /// <summary>
@@ -19,17 +21,23 @@ namespace Necropanda.Utils.Console
     {
         [SerializeField] private string prefix = string.Empty;  // The prefix we will send commands with.
         public ConsoleCommand[] commands = new ConsoleCommand[0]; // The list of commands we can use.
-        
+
         // UI Stuff, self explanatory.
         [Header("UI")]
         [SerializeField] private GameObject uiCanvas = null;
         [SerializeField] private TMP_InputField inputField = null;
         [SerializeField] private TMP_Text consoleText = null;
 
+        [Header("Game UI Scripts")]
+        [SerializeField] private HUDInterface hudInterface;
+        [SerializeField] private JournalMainCode journalMainCode;
+        [SerializeField] private InventoryManager inventoryManager;
+
+
         private float pausedTimeScale;  // Float for holding the paused time scale.
 
         private static DeveloperConsoleBehaviour instance;  // The instance of the console. There can only be one.
-        
+
         private DeveloperConsole developerConsole;  // Reference the the Console
         private DeveloperConsole DeveloperConsole   // Getter for the console
         {
@@ -45,7 +53,7 @@ namespace Necropanda.Utils.Console
         /// <summary>
         /// Called when the object is loaded, hands the singleton check.
         /// </summary>
-        private void Awake() 
+        private void Awake()
         {
             // Singleton check.
             if (instance != null && instance != this)
@@ -62,10 +70,10 @@ namespace Necropanda.Utils.Console
         /// <summary>
         /// Update is called every frame. We are only using it to check for a key press.
         /// </summary>
-        private void Update() 
+        private void Update()
         {
             // check for our key press. This then toggles the console window.
-            if(Input.GetKeyDown(KeyCode.BackQuote))
+            if (Input.GetKeyDown(KeyCode.BackQuote))
             {
                 Toggle();
             }
@@ -76,15 +84,55 @@ namespace Necropanda.Utils.Console
         /// </summary>
         public void Toggle()
         {
+
             inputField.text = string.Empty;
+            hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+            inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+            journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
 
             if (uiCanvas.activeSelf)
             {
+                // try
+                // {
+                //     hudInterface.enabled = true;
+                //     inventoryManager.enabled = true;
+                //     journalMainCode.enabled = true;
+                // }
+                // catch (MissingReferenceException err)
+                // {
+                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
+                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
+
+
+                // }
+                // catch (UnassignedReferenceException err)
+                // {
+                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
+                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
+
+                //     hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+                //     inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+                //     journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
+                // }
+
+
                 Time.timeScale = pausedTimeScale;
                 uiCanvas.SetActive(false);
             }
             else
             {
+                if (hudInterface != null)
+                {
+                    hudInterface.enabled = false;
+                }
+                else if (inventoryManager != null)
+                {
+                    inventoryManager.enabled = false;
+                }
+                else if (journalMainCode != null)
+                {
+                    journalMainCode.enabled = false;
+                }
                 pausedTimeScale = Time.timeScale;
                 Time.timeScale = 0;
                 uiCanvas.SetActive(true);
