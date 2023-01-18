@@ -43,7 +43,8 @@ public enum E_Scenes
     Combat,
     Tiertarock,
     PuzzleRoom,
-    Thoth
+    Thoth,
+    Cave
 }
 
 public enum E_UtilityScripts
