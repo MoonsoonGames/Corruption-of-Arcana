@@ -55,6 +55,16 @@ namespace Necropanda
                 buttonOverlay.SetActive(true);
                 arcanaSlider.standardFill.color = disableColor;
             }
+
+            GameObject[] cardObjects = GameObject.FindGameObjectsWithTag("Card");
+
+            foreach (var item in cardObjects)
+            {
+                Card itemCard = item.GetComponent<Card>();
+
+                if (itemCard != null)
+                    itemCard.ShowUnavailableOverlay(arcanaMax - arcana);
+            }
         }
     }
 }
