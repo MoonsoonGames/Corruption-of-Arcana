@@ -15,6 +15,18 @@ namespace Necropanda
         public TextMeshProUGUI title;
         public GameObject sections;
 
+        public bool followMouse = false;
+
+        private void Update()
+        {
+            if (followMouse)
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                transform.position = mousePosition;
+            }
+        }
+
         private void Start()
         {
             oldSections = new List<GameObject>();
