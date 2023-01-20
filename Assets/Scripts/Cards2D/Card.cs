@@ -54,7 +54,9 @@ namespace Necropanda
 
         public void ShowUnavailableOverlay(int availableArcana)
         {
+            Debug.Log("Show arcana overlay");
             bool unavailable = availableArcana < spell.arcanaCost ? true : false;
+            Debug.Log(spell.spellName + " ||" + spell.arcanaCost + "/" + availableArcana + " || " + unavailable);
             unavailableOverlay.SetActive(unavailable);
         }
 
