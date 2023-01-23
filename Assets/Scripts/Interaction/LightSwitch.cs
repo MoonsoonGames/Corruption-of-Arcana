@@ -12,6 +12,13 @@ namespace Necropanda.Interactable
     public class LightSwitch : MonoBehaviour, IInteractable
     {
         public GameObject[] thingsToSwitch;
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject player)
         {
             foreach (GameObject GO in thingsToSwitch){

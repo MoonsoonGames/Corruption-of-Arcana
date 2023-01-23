@@ -19,7 +19,12 @@ namespace Necropanda
         // Start is called before the first frame update
         void Start()
         {
-            cam = Camera.main;
+            Invoke("Setup", 0.5f);
+        }
+
+        void Setup()
+        {
+            cam = LoadCombatManager.instance.mainCam;
         }
 
         // Update is called once per frame

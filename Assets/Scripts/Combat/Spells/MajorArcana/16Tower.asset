@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Tower
   flavourText: 
-  spellDescription: 'Deal 5 $ember$ damage to all targets
+  spellDescription: 'Deal 5 $ember$ to all targets
 
 
-    Apply $wildfire$
-    to all targets for 2 turns'
+    Upon the target taking damage,
+    they receive an additional 1 $ember$ for 2 turns'
   cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.6886792, g: 0.30117348, b: 0.1786668, a: 255}
+  timelineIcon: {fileID: -1737488561, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0.3
   arcanaCost: 3
   discardAfterCasting: 0
@@ -47,7 +48,10 @@ MonoBehaviour:
       duration: 3
       chance: 1
   castObject: {fileID: 0}
-  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+  projectileObject: {fileID: 2083095811265704842, guid: f766f29bc8549f44e9cdc675716182e5,
     type: 3}
+  projectileSpeed: 0.3
+  projectilePoints: 0300000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
+  screenShake: 1

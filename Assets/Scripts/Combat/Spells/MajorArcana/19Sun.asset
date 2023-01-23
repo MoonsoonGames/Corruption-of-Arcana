@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Sun
   flavourText: 
-  spellDescription: Apply $radiantaura$ for 2 turns
-  cardImage: {fileID: 0}
+  spellDescription: Apply an aura that deals 2 $static$ to all enemies and heals
+    2 $health$ to the target at the end of the round for 2 turns
+  cardImage: {fileID: 21300000, guid: a1b91b846c6540f4b8bef7103d6dfa4f, type: 3}
   overrideColor: 1
   timelineColor: {r: 1, g: 0.9536118, b: 0.10849059, a: 255}
+  timelineIcon: {fileID: -1312889009, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0.1
   arcanaCost: 2
   discardAfterCasting: 0
@@ -45,5 +47,8 @@ MonoBehaviour:
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
+  projectileSpeed: 0.3
+  projectilePoints: 
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
+  screenShake: 1

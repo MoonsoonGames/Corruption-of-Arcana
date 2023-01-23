@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -15,6 +16,7 @@ namespace Necropanda
         public TextMeshProUGUI dmgText, shieldText;
         public Color dmgColor, healColor;
         public GameObject deathIcon, healthObject, shieldObject;
+        public EventReference deathSound;
 
 
         int dmgRef, healRef, shfRef;
@@ -33,7 +35,8 @@ namespace Necropanda
             if (totalShield < 0)
                 damageThroughShield = Mathf.Abs(totalShield);
 
-            shieldObject.SetActive(totalShield > 0);
+            if (shieldObject != null)
+                shieldObject.SetActive(totalShield > 0);
             shieldText.text = "+" + totalShield;
 
             totalDmg = heal - damageThroughShield;
@@ -58,6 +61,11 @@ namespace Necropanda
             //Debug.Log("will kill? " + willKill);
 
             deathIcon.SetActive(willKill);
+            if (willKill)
+            {
+                //play sound here
+                RuntimeManager.PlayOneShot(deathSound);
+            }
         }
     }
 }

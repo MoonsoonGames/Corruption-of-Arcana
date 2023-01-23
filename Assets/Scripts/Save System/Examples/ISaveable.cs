@@ -3,8 +3,11 @@
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
-namespace Necropanda
+namespace Necropanda.SaveSystem
 {
+    /// <summary>
+    /// Interface, holds the two functions that are used to Save and Load
+    /// </summary>
     public interface ISaveable
     {
         // Saves the state. Object is used to keep it serializable

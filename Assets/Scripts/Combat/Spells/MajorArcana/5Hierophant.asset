@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: The Hierophant
   flavourText: 
-  spellDescription: 'Deal 5 $static$ damage 3 times
+  spellDescription: 'Deal 5 $static$ 3 times
 
 
-    Apply $conductive$ for
-    2 turns'
-  cardImage: {fileID: 21300000, guid: c4b6205a7a7659e4cb9d1dafad788c50, type: 3}
+    Target''s team takes 2 $static$
+    at the end of the round for 2 turns'
+  cardImage: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
+  timelineIcon: {fileID: -1117572714, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0.45
   arcanaCost: 2
   discardAfterCasting: 0
@@ -56,8 +57,11 @@ MonoBehaviour:
       duration: 3
       chance: 1
   castObject: {fileID: 0}
-  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+  projectileObject: {fileID: 2083095811265704842, guid: f8c2fb7549481904c9a5f01aefbe65ef,
     type: 3}
+  projectileSpeed: 0.3
+  projectilePoints: 0000000001000000
   impactObject: {fileID: 6441297445223667176, guid: c3de2173c0f41884da1878ebdb1eb46e,
     type: 3}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
+  screenShake: 1

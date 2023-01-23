@@ -22,6 +22,7 @@ namespace Necropanda
         public TextMeshProUGUI descriptionText;
         public Image cardBackground;
         public Image cardFace;
+        public GameObject unavailableOverlay;
 
         public void Setup()
         {
@@ -29,12 +30,34 @@ namespace Necropanda
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
-            
+            cardFace.sprite = spell.cardImage;
             //SetupIcons();
 
             gameObject.name = spell.spellName;
 
             GetComponent<CardDrag2D>().Setup();
+            ShowUnavailableOverlay(0);
+        }
+
+        public void ShowArt(bool show)
+        {
+            bool canShow = show;
+
+            if (cardFace.sprite == null)
+                canShow = false;
+
+            Color color = Color.white;
+            color.a = canShow ? 1 : 0;
+
+            cardFace.color = color;
+        }
+
+        public void ShowUnavailableOverlay(int availableArcana)
+        {
+            Debug.Log("Show arcana overlay");
+            bool unavailable = availableArcana < spell.arcanaCost ? true : false;
+            Debug.Log(spell.spellName + " ||" + spell.arcanaCost + "/" + availableArcana + " || " + unavailable);
+            unavailableOverlay.SetActive(unavailable);
         }
 
         public void CastSpell(Character target, Character caster)
@@ -54,9 +77,11 @@ namespace Necropanda
 
         private void Update()
         {
-            int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, Camera.main);
+            int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, DragManager.instance.UICam);
+            //Debug.Log("link info: " + linkIndex);
             if (linkIndex != -1)
             {
+                //Debug.Log("show tooltip - link info");
                 TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex]; // Get the information about the link
                 // Do something based on what link ID or Link Text is encountered...
 
@@ -69,11 +94,17 @@ namespace Necropanda
 
                 Debug.Log(title + " || " + description);
                 TooltipManager.instance.ShowTooltip(true, title, description);
+
+                showing = true;
             }
             else
             {
-                Debug.Log("Close");
-                //TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
+                if (showing)
+                {
+                    Debug.Log("Close");
+                    TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
+                    showing = false;
+                }
             }
         }
     }
