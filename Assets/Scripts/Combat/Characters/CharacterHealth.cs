@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using FMODUnity;
+using Necropanda.Utils.Console;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -264,6 +266,16 @@ namespace Necropanda
 
         void Kill()
         {
+            // Get ref to the dev console
+            DeveloperConsoleBehaviour behaviour = GameObject.FindGameObjectWithTag("Console").GetComponent<DeveloperConsoleBehaviour>();
+
+            // Need to find a better way to do this
+            ToggleGodMode tgm = (ToggleGodMode)behaviour.commands[6];
+
+            if (tgm.GodMode == true)
+            {
+                return;
+            }
             dying = true;
             KillFX();
             ActivateArt(false);
@@ -338,7 +350,7 @@ namespace Necropanda
         public void PlaySound(E_DamageTypes type, int value)
         {
             //Play sound from the damage type
-            foreach(var item in soundEffects)
+            foreach (var item in soundEffects)
             {
                 if (item.effectType == type)
                 {

@@ -13,14 +13,11 @@ namespace Necropanda.Utils.Console.Commands
     /// </summary>
     public class ToggleGodMode : ConsoleCommand
     {
+        public bool GodMode;
         public override bool Process(string[] args)
         {
-            // Get the text to log based on the args passed in.
-            string logText = string.Join(" ", args);
-
-            // Log the passed in text.
-            Debug.Log(logText);
-            DeveloperConsoleBehaviour.OutputMessage = $"Logged: {logText}";
+            GodMode = !GodMode;
+            DeveloperConsoleBehaviour.OutputMessage = $"God Mode {GodMode}";
             // get ref, call the function to update the message
             DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
             developerConsoleBehaviour.UpdateOutputMessage();
