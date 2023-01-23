@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9119715165121547371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Taro/Shield Down
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Taro/Shield Down
+  Guid:
+    Data1: 174370161
+    Data2: 1325307161
+    Data3: -1080130168
+    Data4: -2023253719
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8903061559362113973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,58 +54,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 360
---- !u!114 &-8820039987133950854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Combat/Potion Button/Potion Button Press
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Combat/Potion Button/Potion Button Press
-  Guid:
-    Data1: 347177364
-    Data2: 1329233152
-    Data3: -1792255080
-    Data4: 671971258
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 191
---- !u!114 &-8572358270947847299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Enemies Close
-  m_EditorClassIdentifier: 
-  Name: Enemies Close
-  StudioPath: parameter:/Enemies Close
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 627404541
-    data2: 3780954883
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
---- !u!114 &-8161575251081702039
+--- !u!114 &-8682054400502989981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +81,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-8067917615772608506
+--- !u!114 &-7804150156147322650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,51 +90,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Taro/Shield Up
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Menu Music/50 health
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Taro/Shield Up
-  Guid:
-    Data1: -1847229833
-    Data2: 1093870972
-    Data3: -1582224970
-    Data4: -532221602
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1165
---- !u!114 &-7669399176021235175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Taro/Shield Down
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Taro/Shield Down
-  Guid:
-    Data1: 174370161
-    Data2: 1325307161
-    Data3: -1080130168
-    Data4: -2023253719
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  Name: 50 health
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3597231001
+    data2: 1681809175
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7558148111103923252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,30 +162,6 @@ MonoBehaviour:
   - Water
   - Crystal
   Exists: 1
---- !u!114 &-7428867142743685260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Marked for death/Marked for death
-  m_EditorClassIdentifier: 
-  Name: Marked for death
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2779955207
-    data2: 4119984827
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-7296615446362076061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,33 +189,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &-7266795757690862684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Thoth/Market
-  m_EditorClassIdentifier: 
-  Path: event:/Overworld/Thoth/Market
-  Guid:
-    Data1: -82219645
-    Data2: 1300092649
-    Data3: 1178262159
-    Data4: 1549626892
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 123280
 --- !u!114 &-7174984059870051091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +216,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1506
---- !u!114 &-6727407554423215943
+--- !u!114 &-6953597752473624901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,14 +226,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Perforation
+  m_Name: event:/Combat/Damage Type/Static
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Perforation
+  Path: event:/Combat/Damage Type/Static
   Guid:
-    Data1: -1376418105
-    Data2: 1144063312
-    Data3: 1637996417
-    Data4: 1451605003
+    Data1: 1196759936
+    Data2: 1315050620
+    Data3: -285352050
+    Data4: 1996717534
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -347,7 +242,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1506
+  Length: 2000
+--- !u!114 &-6792770128641517601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Damage Type/Physical/Physical - Flesh
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Damage Type/Physical/Physical - Flesh
+  Guid:
+    Data1: 173915668
+    Data2: 1256608992
+    Data3: -749856847
+    Data4: 2031926762
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 900
 --- !u!114 &-6700947386375476885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +324,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 226
---- !u!114 &-5424302570090220574
+--- !u!114 &-6273802219308264160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -412,14 +334,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Collectible Pick-up (PH)
+  m_Name: event:/Combat/Damage Type/Physical/Physical - Bone
   m_EditorClassIdentifier: 
-  Path: event:/Overworld/Collectible Pick-up (PH)
+  Path: event:/Combat/Damage Type/Physical/Physical - Bone
   Guid:
-    Data1: -11092688
-    Data2: 1308984566
-    Data3: 869364886
-    Data4: -733009792
+    Data1: 183625093
+    Data2: 1161898323
+    Data3: -223175269
+    Data4: -851767712
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -428,7 +350,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2000
+  Length: 3218
+--- !u!114 &-5578250063931163563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/Potion Button/Potion Button Press
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/Potion Button/Potion Button Press
+  Guid:
+    Data1: 347177364
+    Data2: 1329233152
+    Data3: -1792255080
+    Data4: 671971258
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 191
 --- !u!114 &-5278036044569944257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,89 +402,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-5127594463213572779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Thoth Music/Thoth Music
-  m_EditorClassIdentifier: 
-  Name: Thoth Music
-  StudioPath: 
-  Min: 0
-  Max: 3
-  Default: 0
-  ID:
-    data1: 2062682416
-    data2: 3705960116
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Entrance
-  - Village
-  - Village Expanded
-  - Enemy Close
-  Exists: 1
---- !u!114 &-5124406496997275583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Physical/Physical - Shield
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Physical/Physical - Shield
-  Guid:
-    Data1: 861278500
-    Data2: 1079044660
-    Data3: -1680872559
-    Data4: 636264882
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 900
---- !u!114 &-4896067798463448116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Status Effects/Frostbite
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Status Effects/Frostbite
-  Guid:
-    Data1: 1728683018
-    Data2: 1291755082
-    Data3: 694168759
-    Data4: -263968863
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2400
---- !u!114 &-4785058554512400291
+--- !u!114 &-4984553677043508895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -562,6 +429,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3274
+--- !u!114 &-4976033469701297747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Collectible Pick-up (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Collectible Pick-up (PH)
+  Guid:
+    Data1: -11092688
+    Data2: 1308984566
+    Data3: 869364886
+    Data4: -733009792
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-4760812364665733626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,7 +483,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1920
---- !u!114 &-4545480900743264385
+--- !u!114 &-4554350025606276297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -599,14 +493,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Physical/Physical - Bone
+  m_Name: event:/Music/Thoth Music
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Physical/Physical - Bone
+  Path: event:/Music/Thoth Music
   Guid:
-    Data1: 183625093
-    Data2: 1161898323
-    Data3: -223175269
-    Data4: -851767712
+    Data1: 600476593
+    Data2: 1264173346
+    Data3: 1837255859
+    Data4: 450701464
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1251034163089824299}
+  - {fileID: 185760781916185715}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 112594
+--- !u!114 &-4479399052011416534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Damage Type/Physical/Physical - Shield
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Damage Type/Physical/Physical - Shield
+  Guid:
+    Data1: 861278500
+    Data2: 1079044660
+    Data3: -1680872559
+    Data4: 636264882
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -615,7 +538,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 3218
+  Length: 900
+--- !u!114 &-4455844268114869059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Status Effects/Frostbite
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Status Effects/Frostbite
+  Guid:
+    Data1: 1728683018
+    Data2: 1291755082
+    Data3: 694168759
+    Data4: -263968863
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2400
 --- !u!114 &-4441769045340435941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +594,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4345912078407978645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Test Tone
+  m_EditorClassIdentifier: 
+  Path: event:/Test Tone
+  Guid:
+    Data1: -613801997
+    Data2: 1313323711
+    Data3: -1507013481
+    Data4: -817045963
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3082
 --- !u!114 &-4183867603249787024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +648,168 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3274
+--- !u!114 &-4158554034477727552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 2
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 2
+  Guid:
+    Data1: -1201431630
+    Data2: 1321216654
+    Data3: -1915640672
+    Data4: 1526296554
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4052866589722388599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Inventory/Potions
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Inventory/Potions
+  Guid:
+    Data1: 1201423993
+    Data2: 1287198295
+    Data3: -40098118
+    Data4: -2088914390
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 226
+--- !u!114 &-4020511584075915616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/Potion Button/Potion Button Hover On
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/Potion Button/Potion Button Hover On
+  Guid:
+    Data1: 1332722961
+    Data2: 1121672958
+    Data3: 1486032291
+    Data4: -1212481999
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 230
+--- !u!114 &-3880527975275140435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Market
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Market
+  Guid:
+    Data1: -82219645
+    Data2: 1300092649
+    Data3: 1178262159
+    Data4: 1549626892
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 123280
+--- !u!114 &-3824376414449931859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 1 (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 1 (PH)
+  Guid:
+    Data1: -573268067
+    Data2: 1219841203
+    Data3: -107470449
+    Data4: -179748631
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-3616295353173080569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Construct
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Construct
+  Guid:
+    Data1: 1604006159
+    Data2: 1238663121
+    Data3: -1606628724
+    Data4: 1919972240
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1343
 --- !u!114 &-3478392790158526990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +825,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638091418718335282
+  lastModified: 638097545353365480
   FileSizes: []
   Exists: 1
 --- !u!114 &-3053542360527846427
@@ -716,7 +855,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 252
---- !u!114 &-2915559521072271652
+--- !u!114 &-2951892389087699082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,25 +864,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Arcana/'Out of Mana'
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Marked for death/Marked for death
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Arcana/'Out of Mana'
-  Guid:
-    Data1: 401268115
-    Data2: 1232673390
-    Data3: 1437885083
-    Data4: -400394452
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-2898886612970743907
+  Name: Marked for death
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2779955207
+    data2: 4119984827
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-2779059578322212958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -752,24 +888,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Thoth/Cow
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music
   m_EditorClassIdentifier: 
-  Path: event:/Overworld/Thoth/Cow
-  Guid:
-    Data1: 1473539106
-    Data2: 1097232087
-    Data3: 843628723
-    Data4: -1183600525
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2700
+  Name: Thoth Music
+  StudioPath: parameter:/Thoth Music
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 2062682416
+    data2: 3705960116
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Entrance
+  - Village
+  - Village Expanded
+  - Fina lopp
+  - Enemy Close
+  Exists: 1
 --- !u!114 &-2777066467332977818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,33 +935,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 571
---- !u!114 &-2671799313122266133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Shields/Shield level 3
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Shields/Shield level 3
-  Guid:
-    Data1: -1248918156
-    Data2: 1196484605
-    Data3: -44034127
-    Data4: -1998702692
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2631150668158183505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,11 +1088,94 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638091418718385297
+  lastModified: 638097545353415495
   FileSizes:
   - Name: 
-    Value: 3838
+    Value: 3952
   Exists: 1
+--- !u!114 &-1921533208420121227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Chickens
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Chickens
+  Guid:
+    Data1: -220158822
+    Data2: 1158059858
+    Data3: 1107546033
+    Data4: 1404692197
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-1251034163089824299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Thoth Music
+  m_EditorClassIdentifier: 
+  Name: Thoth Music
+  StudioPath: 
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 2062682416
+    data2: 3705960116
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Entrance
+  - Village
+  - Village Expanded
+  - Fina lopp
+  - Enemy Close
+  Exists: 1
+--- !u!114 &-1223762433863208235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Skeleton
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Skeleton
+  Guid:
+    Data1: 872647646
+    Data2: 1213459861
+    Data3: -350376052
+    Data4: -1159379082
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-1196731273281488453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,7 +1203,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &-1108929591643389251
+--- !u!114 &-1026807910646044509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1019,23 +1213,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Physical/Physical - Flesh
+  m_Name: event:/Combat/Enemy/Marked for death
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Physical/Physical - Flesh
+  Path: event:/Combat/Enemy/Marked for death
   Guid:
-    Data1: 173915668
-    Data2: 1256608992
-    Data3: -749856847
-    Data4: 2031926762
+    Data1: -264618130
+    Data2: 1099684790
+    Data3: -1702789953
+    Data4: -44692601
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -2951892389087699082}
   MinDistance: 1
   MaxDistance: 20
-  Length: 900
+  Length: 790
 --- !u!114 &-941260558145035481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,7 +1255,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-903551530204379419
+--- !u!114 &-681466330450046100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1069,21 +1264,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/End Turn Button/End Turn Press
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Inventory/Journal
   m_EditorClassIdentifier: 
-  Name: End Turn Press
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2345476614
-    data2: 728321606
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Path: event:/UI/Inventory/Journal
+  Guid:
+    Data1: -135260650
+    Data2: 1182077174
+    Data3: 15290268
+    Data4: -984341806
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 632
+--- !u!114 &-602500230232920819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Near Enemy (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Near Enemy (PH)
+  Guid:
+    Data1: 877598045
+    Data2: 1309018763
+    Data3: 53957562
+    Data4: -1358479284
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 101439
 --- !u!114 &-441549234410799709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,6 +1336,65 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 179422
+--- !u!114 &-385322574932822612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Main Menu Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Main Menu Music
+  Guid:
+    Data1: -2002392299
+    Data2: 1326034325
+    Data3: -480529492
+    Data4: -1636748660
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6907097059012474018}
+  - {fileID: -7804150156147322650}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 166000
+--- !u!114 &-335902459152607017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Terrain
+  m_EditorClassIdentifier: 
+  Name: Terrain
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 1
+  ID:
+    data1: 2555359183
+    data2: 754625829
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Stone
+  - Grass
+  - Dirt
+  - Wood
+  - Water
+  - Crystal
+  Exists: 1
 --- !u!114 &-199485318285088829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1422,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 900
+--- !u!114 &-79191697188493102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Damage Type/Physical/Physical - Rock
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Damage Type/Physical/Physical - Rock
+  Guid:
+    Data1: -1702069412
+    Data2: 1171116392
+    Data3: -503146085
+    Data4: -1642058399
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1120
+--- !u!114 &-53199025604749994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Status Effects/Burn
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Status Effects/Burn
+  Guid:
+    Data1: -241180006
+    Data2: 1334956873
+    Data3: -2066584192
+    Data4: -2001897411
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,61 +1492,88 @@ MonoBehaviour:
   - {fileID: -2122709412123504311}
   - {fileID: -3478392790158526990}
   EditorEvents:
-  - {fileID: -4896067798463448116}
-  - {fileID: 8793394672665593683}
-  - {fileID: -1108929591643389251}
-  - {fileID: 1417876652609343105}
-  - {fileID: 1233918839759620896}
-  - {fileID: 2350905725686345825}
-  - {fileID: -2898886612970743907}
-  - {fileID: -5124406496997275583}
-  - {fileID: 5481211245543795467}
-  - {fileID: -5424302570090220574}
-  - {fileID: 2795382584816754330}
-  - {fileID: 1717167575867102732}
-  - {fileID: -4785058554512400291}
-  - {fileID: 4003168387602890322}
-  - {fileID: 8774610818629369390}
-  - {fileID: 4758745273483031362}
-  - {fileID: 8826024358451350208}
-  - {fileID: 4848982804776602696}
-  - {fileID: 952012112968245142}
-  - {fileID: 4563755039282173373}
-  - {fileID: 8317741512702478233}
-  - {fileID: -7669399176021235175}
-  - {fileID: -2671799313122266133}
-  - {fileID: -8067917615772608506}
-  - {fileID: 6142226882231403815}
-  - {fileID: 370814772780483969}
-  - {fileID: 4176913527824561343}
-  - {fileID: 4183737299756386549}
-  - {fileID: 907058042827921602}
-  - {fileID: -7266795757690862684}
-  - {fileID: 360610475724078421}
-  - {fileID: -4545480900743264385}
-  - {fileID: -2915559521072271652}
-  - {fileID: -8820039987133950854}
-  - {fileID: -8161575251081702039}
-  - {fileID: 2404749513656931288}
-  - {fileID: 5907292064978058174}
-  - {fileID: 2224084067590312173}
-  - {fileID: 6729523827353790851}
-  - {fileID: 553104932275488409}
-  - {fileID: 5477622760688834244}
-  - {fileID: 911454355858788654}
-  - {fileID: -6727407554423215943}
-  - {fileID: 1528652126765941346}
-  - {fileID: 7720204409862589923}
-  - {fileID: 5290217830072651608}
+  - {fileID: -4455844268114869059}
+  - {fileID: -3616295353173080569}
+  - {fileID: -4020511584075915616}
+  - {fileID: -6792770128641517601}
+  - {fileID: -385322574932822612}
+  - {fileID: -681466330450046100}
+  - {fileID: 3624623988860853773}
+  - {fileID: 4414370298195328322}
+  - {fileID: -4479399052011416534}
+  - {fileID: 556033349914367981}
+  - {fileID: -4976033469701297747}
+  - {fileID: 1555180739918163220}
+  - {fileID: 2679686007364334698}
+  - {fileID: -4984553677043508895}
+  - {fileID: 6495308571405696395}
+  - {fileID: 6744618691414408204}
+  - {fileID: -79191697188493102}
+  - {fileID: -602500230232920819}
+  - {fileID: 8564332060910557821}
+  - {fileID: 366039495060918748}
+  - {fileID: -1026807910646044509}
+  - {fileID: 8219951957859578949}
+  - {fileID: -9119715165121547371}
+  - {fileID: 2586436884718594708}
+  - {fileID: 5623757371034403913}
+  - {fileID: -4052866589722388599}
+  - {fileID: 4820094031312405377}
+  - {fileID: 5079250830890809328}
+  - {fileID: 7980035951206941148}
+  - {fileID: -6953597752473624901}
+  - {fileID: -3880527975275140435}
+  - {fileID: 6570537511519319704}
+  - {fileID: -6273802219308264160}
+  - {fileID: 5997805323528713816}
+  - {fileID: -5578250063931163563}
+  - {fileID: -8682054400502989981}
+  - {fileID: -1921533208420121227}
+  - {fileID: -53199025604749994}
+  - {fileID: -3824376414449931859}
+  - {fileID: -4554350025606276297}
+  - {fileID: -4158554034477727552}
+  - {fileID: 6819316858432947109}
+  - {fileID: 1055830245539827589}
+  - {fileID: 7822944363929632436}
+  - {fileID: -1223762433863208235}
+  - {fileID: 9201053662742276429}
+  - {fileID: 4360130461001644292}
+  - {fileID: -4345912078407978645}
   EditorParameters:
-  - {fileID: -8572358270947847299}
+  - {fileID: -2779059578322212958}
+  - {fileID: 3036812639338466427}
   MasterBanks:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638091418718385297
+  cacheTime: 638097545353415495
   cacheVersion: 131591
---- !u!114 &360610475724078421
+--- !u!114 &185760781916185715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Enemies Close
+  m_EditorClassIdentifier: 
+  Name: Enemies Close
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 627404541
+    data2: 3780954883
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &366039495060918748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1218,69 +1583,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Character/Footsteps
+  m_Name: event:/UI/Card Shuffle/Card Shuffle Randomised
   m_EditorClassIdentifier: 
-  Path: event:/Character/Footsteps
+  Path: event:/UI/Card Shuffle/Card Shuffle Randomised
   Guid:
-    Data1: -1064609916
-    Data2: 1286582625
-    Data3: -1932242531
-    Data4: 789797936
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 6022887027082449268}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &370814772780483969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Thoth/Ambience
-  m_EditorClassIdentifier: 
-  Path: event:/Overworld/Thoth/Ambience
-  Guid:
-    Data1: -1580909958
-    Data2: 1281487010
-    Data3: 1581638834
-    Data4: -1025285198
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 179422
---- !u!114 &553104932275488409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 2
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 2
-  Guid:
-    Data1: -1201431630
-    Data2: 1321216654
-    Data3: -1915640672
-    Data4: 1526296554
+    Data1: 1247719785
+    Data2: 1087473341
+    Data3: 1888519096
+    Data4: 460011053
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -1289,7 +1599,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 783
+--- !u!114 &556033349914367981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Status Effects/Conductive
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Status Effects/Conductive
+  Guid:
+    Data1: 274216237
+    Data2: 1169001395
+    Data3: -1373400947
+    Data4: -1025473273
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &753188867848532654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,34 +1681,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 632
---- !u!114 &907058042827921602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Static
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Static
-  Guid:
-    Data1: 1196759936
-    Data2: 1315050620
-    Data3: -285352050
-    Data4: 1996717534
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
---- !u!114 &911454355858788654
+--- !u!114 &1055830245539827589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1398,33 +1708,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &952012112968245142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Card Shuffle/Card Shuffle Randomised
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Card Shuffle/Card Shuffle Randomised
-  Guid:
-    Data1: 1247719785
-    Data2: 1087473341
-    Data3: 1888519096
-    Data4: 460011053
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 783
 --- !u!114 &1205770246214103201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,33 +1736,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 790
---- !u!114 &1233918839759620896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Inventory/Journal
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Inventory/Journal
-  Guid:
-    Data1: -135260650
-    Data2: 1182077174
-    Data3: 15290268
-    Data4: -984341806
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 632
 --- !u!114 &1362468912401968465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,35 +1763,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3082
---- !u!114 &1417876652609343105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Main Menu Music
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Main Menu Music
-  Guid:
-    Data1: -2002392299
-    Data2: 1326034325
-    Data3: -480529492
-    Data4: -1636748660
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 5911034783406514063}
-  - {fileID: 4713348463486247231}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 166000
 --- !u!114 &1492796787473580973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,7 +1814,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1165
---- !u!114 &1528652126765941346
+--- !u!114 &1555180739918163220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1597,14 +1824,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 3
+  m_Name: event:/UI/Inventory/Weapons
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 3
+  Path: event:/UI/Inventory/Weapons
   Guid:
-    Data1: -1021220890
-    Data2: 1120440723
-    Data3: 705257095
-    Data4: 1843508093
+    Data1: -1960124108
+    Data2: 1201986422
+    Data3: 2052523694
+    Data4: 2098256482
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -1613,35 +1840,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &1717167575867102732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Combat/End Turn Button
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Combat/End Turn Button
-  Guid:
-    Data1: 1611679294
-    Data2: 1219409533
-    Data3: 1005470087
-    Data4: 412830684
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -903551530204379419}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2600
+  Length: 571
 --- !u!114 &1775873046027583526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,7 +1868,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2224084067590312173
+--- !u!114 &2586436884718594708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1679,14 +1878,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 1 (PH)
+  m_Name: event:/Combat/Shields/Shield level 3
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 1 (PH)
+  Path: event:/Combat/Shields/Shield level 3
   Guid:
-    Data1: -573268067
-    Data2: 1219841203
-    Data3: -107470449
-    Data4: -179748631
+    Data1: -1248918156
+    Data2: 1196484605
+    Data3: -44034127
+    Data4: -1998702692
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -1695,8 +1894,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2000
---- !u!114 &2350905725686345825
+  Length: 0
+--- !u!114 &2679686007364334698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1706,77 +1905,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Septic
+  m_Name: event:/UI/Combat/End Turn Button
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Septic
+  Path: event:/UI/Combat/End Turn Button
   Guid:
-    Data1: 1124745761
-    Data2: 1174287793
-    Data3: 2027661213
-    Data4: 1841421538
+    Data1: 1611679294
+    Data2: 1219409533
+    Data3: 1005470087
+    Data4: 412830684
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6955811757782773807}
   MinDistance: 1
   MaxDistance: 20
-  Length: 1920
---- !u!114 &2404749513656931288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Thoth/Chickens
-  m_EditorClassIdentifier: 
-  Path: event:/Overworld/Thoth/Chickens
-  Guid:
-    Data1: -220158822
-    Data2: 1158059858
-    Data3: 1107546033
-    Data4: 1404692197
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
---- !u!114 &2795382584816754330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Inventory/Weapons
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Inventory/Weapons
-  Guid:
-    Data1: -1960124108
-    Data2: 1201986422
-    Data3: 2052523694
-    Data4: 2098256482
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 571
+  Length: 2600
 --- !u!114 &2927095107604214110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,6 +1950,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3036812639338466427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Enemies Close
+  m_EditorClassIdentifier: 
+  Name: Enemies Close
+  StudioPath: parameter:/Enemies Close
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 627404541
+    data2: 3780954883
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &3051327767663862132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1940,7 +2110,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4003168387602890322
+--- !u!114 &3624623988860853773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1950,14 +2120,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Taro/Take Damage
+  m_Name: event:/Combat/Damage Type/Septic
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Taro/Take Damage
+  Path: event:/Combat/Damage Type/Septic
   Guid:
-    Data1: 1993795648
-    Data2: 1131469179
-    Data3: -885849706
-    Data4: 2082907646
+    Data1: 1124745761
+    Data2: 1174287793
+    Data3: 2027661213
+    Data4: 1841421538
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -1966,8 +2136,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 360
---- !u!114 &4176913527824561343
+  Length: 1920
+--- !u!114 &4360130461001644292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1977,14 +2147,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Shields/Shield level 2
+  m_Name: event:/UI/Inventory/Cards
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Shields/Shield level 2
+  Path: event:/UI/Inventory/Cards
   Guid:
-    Data1: -1083547268
-    Data2: 1230458430
-    Data3: -1794470743
-    Data4: -883226374
+    Data1: -657224208
+    Data2: 1126136638
+    Data3: 1630928810
+    Data4: 607936638
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -1993,8 +2163,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &4183737299756386549
+  Length: 1218
+--- !u!114 &4414370298195328322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2004,14 +2174,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Combat/Potion Button/Potion Button Hover Off
+  m_Name: event:/Overworld/Thoth/Cow
   m_EditorClassIdentifier: 
-  Path: event:/UI/Combat/Potion Button/Potion Button Hover Off
+  Path: event:/Overworld/Thoth/Cow
   Guid:
-    Data1: 1294428796
-    Data2: 1253390588
-    Data3: 2145255598
-    Data4: -1594202022
+    Data1: 1473539106
+    Data2: 1097232087
+    Data3: 843628723
+    Data4: -1183600525
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -2020,7 +2190,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 252
+  Length: 2700
 --- !u!114 &4532388492953260007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2048,7 +2218,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 230
---- !u!114 &4563755039282173373
+--- !u!114 &4820094031312405377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2058,102 +2228,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Enemy/Marked for death
+  m_Name: event:/Overworld/Thoth/Ambience
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Enemy/Marked for death
+  Path: event:/Overworld/Thoth/Ambience
   Guid:
-    Data1: -264618130
-    Data2: 1099684790
-    Data3: -1702789953
-    Data4: -44692601
+    Data1: -1580909958
+    Data2: 1281487010
+    Data3: 1581638834
+    Data4: -1025285198
   Banks:
   - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -7428867142743685260}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 790
---- !u!114 &4713348463486247231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/50 health
-  m_EditorClassIdentifier: 
-  Name: 50 health
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3597231001
-    data2: 1681809175
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &4758745273483031362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Physical/Physical - Rock
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Physical/Physical - Rock
-  Guid:
-    Data1: -1702069412
-    Data2: 1171116392
-    Data3: -503146085
-    Data4: -1642058399
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1120
---- !u!114 &4848982804776602696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Shields/Shield level 1 (PH)
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Shields/Shield level 1 (PH)
-  Guid:
-    Data1: -1692745119
-    Data2: 1253261577
-    Data3: -1752632413
-    Data4: -1123925768
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1281
+  Length: 179422
 --- !u!114 &4903265569285638259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2208,6 +2299,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &5079250830890809328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Shields/Shield level 2
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Shields/Shield level 2
+  Guid:
+    Data1: -1083547268
+    Data2: 1230458430
+    Data3: -1794470743
+    Data4: -883226374
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5236389103861417661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2235,33 +2353,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 11626
---- !u!114 &5290217830072651608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Test Tone
-  m_EditorClassIdentifier: 
-  Path: event:/Test Tone
-  Guid:
-    Data1: -613801997
-    Data2: 1313323711
-    Data3: -1507013481
-    Data4: -817045963
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 3082
 --- !u!114 &5398932500138831784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2289,7 +2380,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
---- !u!114 &5477622760688834244
+--- !u!114 &5623757371034403913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2299,41 +2390,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Thoth/Mama R
+  m_Name: event:/Combat/Taro/Shield Up
   m_EditorClassIdentifier: 
-  Path: event:/Overworld/Thoth/Mama R
+  Path: event:/Combat/Taro/Shield Up
   Guid:
-    Data1: -1566411587
-    Data2: 1228921765
-    Data3: 805570232
-    Data4: -1278965412
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 11626
---- !u!114 &5481211245543795467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Status Effects/Conductive
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Status Effects/Conductive
-  Guid:
-    Data1: 274216237
-    Data2: 1169001395
-    Data3: -1373400947
-    Data4: -1025473273
+    Data1: -1847229833
+    Data2: 1093870972
+    Data3: -1582224970
+    Data4: -532221602
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -2342,8 +2406,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1000
---- !u!114 &5907292064978058174
+  Length: 1165
+--- !u!114 &5997805323528713816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2353,14 +2417,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Status Effects/Burn
+  m_Name: event:/Combat/Arcana/'Out of Mana'
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Status Effects/Burn
+  Path: event:/Combat/Arcana/'Out of Mana'
   Guid:
-    Data1: -241180006
-    Data2: 1334956873
-    Data3: -2066584192
-    Data4: -2001897411
+    Data1: 401268115
+    Data2: 1232673390
+    Data3: 1437885083
+    Data4: -400394452
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -2369,88 +2433,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1000
---- !u!114 &5911034783406514063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/Combat Switch
-  m_EditorClassIdentifier: 
-  Name: Combat Switch
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1032635727
-    data2: 2169746850
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &6022887027082449268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Footsteps/Terrain
-  m_EditorClassIdentifier: 
-  Name: Terrain
-  StudioPath: 
-  Min: 0
-  Max: 5
-  Default: 1
-  ID:
-    data1: 2555359183
-    data2: 754625829
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Stone
-  - Grass
-  - Dirt
-  - Wood
-  - Water
-  - Crystal
-  Exists: 1
---- !u!114 &6142226882231403815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Inventory/Potions
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Inventory/Potions
-  Guid:
-    Data1: 1201423993
-    Data2: 1287198295
-    Data3: -40098118
-    Data4: -2088914390
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 226
+  Length: 0
 --- !u!114 &6203739213827279343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,6 +2515,61 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6495308571405696395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Taro/Take Damage
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Taro/Take Damage
+  Guid:
+    Data1: 1993795648
+    Data2: 1131469179
+    Data3: -885849706
+    Data4: 2082907646
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 360
+--- !u!114 &6570537511519319704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Footsteps
+  Guid:
+    Data1: -1064609916
+    Data2: 1286582625
+    Data3: -1932242531
+    Data4: 789797936
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -335902459152607017}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6653268680734312143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2559,7 +2597,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1281
---- !u!114 &6729523827353790851
+--- !u!114 &6744618691414408204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2569,25 +2607,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Thoth Music
+  m_Name: event:/Combat/Damage Type/Bleak
   m_EditorClassIdentifier: 
-  Path: event:/Music/Thoth Music
+  Path: event:/Combat/Damage Type/Bleak
   Guid:
-    Data1: 600476593
-    Data2: 1264173346
-    Data3: 1837255859
-    Data4: 450701464
+    Data1: 402154826
+    Data2: 1337035093
+    Data3: 8897692
+    Data4: 1886637711
   Banks:
   - {fileID: -3478392790158526990}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -5127594463213572779}
-  - {fileID: 8372865748723905896}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 101576
+  Length: 2366
 --- !u!114 &6744775575514386292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,6 +2644,81 @@ MonoBehaviour:
   ID:
     data1: 2779955207
     data2: 4119984827
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6819316858432947109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Mama R
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Mama R
+  Guid:
+    Data1: -1566411587
+    Data2: 1228921765
+    Data3: 805570232
+    Data4: -1278965412
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 11626
+--- !u!114 &6907097059012474018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Main Menu Music/Combat Switch
+  m_EditorClassIdentifier: 
+  Name: Combat Switch
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1032635727
+    data2: 2169746850
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6955811757782773807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/End Turn Button/End Turn Press
+  m_EditorClassIdentifier: 
+  Name: End Turn Press
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2345476614
+    data2: 728321606
   Type: 1
   IsGlobal: 0
   Labels: []
@@ -2666,7 +2777,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2366
---- !u!114 &7720204409862589923
+--- !u!114 &7822944363929632436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2676,14 +2787,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Inventory/Cards
+  m_Name: event:/Combat/Damage Type/Perforation
   m_EditorClassIdentifier: 
-  Path: event:/UI/Inventory/Cards
+  Path: event:/Combat/Damage Type/Perforation
   Guid:
-    Data1: -657224208
-    Data2: 1126136638
-    Data3: 1630928810
-    Data4: 607936638
+    Data1: -1376418105
+    Data2: 1144063312
+    Data3: 1637996417
+    Data4: 1451605003
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -2692,7 +2803,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1218
+  Length: 1506
+--- !u!114 &7980035951206941148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/Potion Button/Potion Button Hover Off
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/Potion Button/Potion Button Hover Off
+  Guid:
+    Data1: 1294428796
+    Data2: 1253390588
+    Data3: 2145255598
+    Data4: -1594202022
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 252
 --- !u!114 &8166860137353120610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2717,7 +2855,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &8317741512702478233
+--- !u!114 &8219951957859578949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2744,30 +2882,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1239
---- !u!114 &8372865748723905896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Thoth Music/Enemies Close
-  m_EditorClassIdentifier: 
-  Name: Enemies Close
-  StudioPath: 
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 627404541
-    data2: 3780954883
-  Type: 0
-  IsGlobal: 1
-  Labels: []
-  Exists: 1
 --- !u!114 &8391978167875961879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2822,7 +2936,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 123280
---- !u!114 &8774610818629369390
+--- !u!114 &8564332060910557821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2832,14 +2946,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Damage Type/Bleak
+  m_Name: event:/Combat/Shields/Shield level 1 (PH)
   m_EditorClassIdentifier: 
-  Path: event:/Combat/Damage Type/Bleak
+  Path: event:/Combat/Shields/Shield level 1 (PH)
   Guid:
-    Data1: 402154826
-    Data2: 1337035093
-    Data3: 8897692
-    Data4: 1886637711
+    Data1: -1692745119
+    Data2: 1253261577
+    Data3: -1752632413
+    Data4: -1123925768
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
@@ -2848,61 +2962,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2366
---- !u!114 &8793394672665593683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Combat/Potion Button/Potion Button Hover On
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Combat/Potion Button/Potion Button Hover On
-  Guid:
-    Data1: 1332722961
-    Data2: 1121672958
-    Data3: 1486032291
-    Data4: -1212481999
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 230
---- !u!114 &8826024358451350208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Overworld/Near Enemy (PH)
-  m_EditorClassIdentifier: 
-  Path: event:/Overworld/Near Enemy (PH)
-  Guid:
-    Data1: 877598045
-    Data2: 1309018763
-    Data3: 53957562
-    Data4: -1358479284
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 101439
+  Length: 1281
 --- !u!114 &8929090569141571664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,6 +2981,33 @@ MonoBehaviour:
     Data2: 1325307161
     Data3: -1080130168
     Data4: -2023253719
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9201053662742276429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 3
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 3
+  Guid:
+    Data1: -1021220890
+    Data2: 1120440723
+    Data3: 705257095
+    Data4: 1843508093
   Banks:
   - {fileID: -3478392790158526990}
   IsStream: 0
