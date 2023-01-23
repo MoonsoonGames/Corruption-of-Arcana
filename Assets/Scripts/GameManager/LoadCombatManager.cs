@@ -66,6 +66,8 @@ namespace Necropanda
             enemyIDs.Clear();
             EnemyAI[] enemyAI = GameObject.FindObjectsOfType<EnemyAI>();
 
+            List<Quest> quests = new List<Quest>();
+
             foreach (EnemyAI enemy in enemyAI)
             {
                 if (enemy.GetActive() && Vector3.Distance(player.transform.position, enemy.transform.position) < combatRadius)
@@ -81,10 +83,27 @@ namespace Necropanda
                         enemies.Insert(enemies.Count, enemy.enemyObject);
                     }
 
+                    if (enemy.GetComponentInChildren<LoadCombat>().progressQuests.Length > 0)
+                    {
+                        List<Quest> enemyQuests = new List<Quest>();
+
+                        foreach (Quest quest in enemy.GetComponentInChildren<LoadCombat>().progressQuests)
+                        {
+                            quests.Add(quest);
+                        }
+                    }
+
                     Interactable.Interactable interactable = enemy.GetComponent<Interactable.Interactable>();
                     enemyIDs.Add(interactable.interactID);
                 }
             }
+
+            foreach(var item in quests)
+            {
+                Debug.Log(item.questName);
+            }
+
+            progressQuestUponCombatVictory = quests;
 
             //Saving last scene
             if (lastScene != E_Scenes.Null)
@@ -118,8 +137,8 @@ namespace Necropanda
 
             enemyIDs.Clear();
 
-            UpdateQuestState(questStateUponCombatVictory);
-            questStateUponCombatVictory = 0;
+            foreach (var item in progressQuestUponCombatVictory)
+                item.QuestProgress();
         }
 
         private void OnDrawGizmosSelected()
@@ -127,16 +146,9 @@ namespace Necropanda
             Gizmos.DrawWireSphere(transform.position, combatRadius);
         }
 
-        #region Quest Data - Delete later
+        #region Quest Data
 
-        int questState = 1; public int GetQuestState() { return questState; }
-        public int questStateUponCombatVictory = 0;
-
-        public void UpdateQuestState(int questState)
-        {
-            if (this.questState + 1 == questState)
-                this.questState = questState;
-        }
+        public List<Quest> progressQuestUponCombatVictory;
 
         #endregion
     }
