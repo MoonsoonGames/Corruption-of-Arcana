@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Fungus;
-using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -11,8 +9,11 @@ using TMPro;
 /// </summary>
 namespace Necropanda
 {
-    public class MainQuestTracker : MonoBehaviour
+    public class ProgressQuest : MonoBehaviour
     {
-
+        public void Progress(Quest quest)
+        {
+            quest.QuestProgress();
+        }
     }
 }
