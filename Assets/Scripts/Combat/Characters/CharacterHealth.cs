@@ -47,7 +47,7 @@ namespace Necropanda
         public float lowHealthThresholdPercentage;
         //public GameObject curseOverlay;
         UShake shake;
-        UColorFlash colorFlash;
+        UColorFlash colorFlash; public UColorFlash GetColorFlash() { return colorFlash; }
         public UColorFlash screenFlash;
 
         #endregion
