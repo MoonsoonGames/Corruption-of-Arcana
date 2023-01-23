@@ -11,10 +11,7 @@ namespace Necropanda
 {
     public class ProgressQuest : MonoBehaviour
     {
-        public Quest quest;
-
-        [ContextMenu("Progress Quest")]
-        public void Progress()
+        public void Progress(Quest quest)
         {
             quest.QuestProgress();
         }

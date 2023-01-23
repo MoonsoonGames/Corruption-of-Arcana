@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
-using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -11,8 +10,14 @@ using TMPro;
 /// </summary>
 namespace Necropanda
 {
-    public class MainQuestTracker : MonoBehaviour
+    public class FungusQuest : MonoBehaviour
     {
+        public Flowchart flowchart;
 
+        public void SetFungusVariables(Quest quest)
+        {
+            if (flowchart != null)
+                flowchart.SetIntegerVariable("QuestState", quest.currentProgress);
+        }
     }
 }

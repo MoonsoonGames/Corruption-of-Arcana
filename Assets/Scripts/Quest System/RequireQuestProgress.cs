@@ -24,10 +24,7 @@ namespace Necropanda
                     available = true;
             }
 
-            if (available == false)
-            {
-                Destroy(this.gameObject);
-            }
+            gameObject.SetActive(available);
         }
     }
 }

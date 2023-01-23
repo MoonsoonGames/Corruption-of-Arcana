@@ -13,7 +13,7 @@ namespace Necropanda
     public class LoadCombat : MonoBehaviour, IInteractable
     {
         public string ID;
-        public int questState;
+        public Quest[] progressQuests;
 
         public void SetID(string newID)
         {
@@ -24,7 +24,6 @@ namespace Necropanda
         {
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
-            LoadCombatManager.instance.questStateUponCombatVictory = questState;
             LoadCombatManager.instance.LoadCombat(player, lastScene);
         }
     }
