@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Necropanda.Utils.Console;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
@@ -20,8 +21,12 @@ namespace Necropanda.Utils.Console.Commands
             if (args.Length != 1) { return false; }
 
             var sceneToLoad = args[0];
-            
-            Debug.Log(sceneToLoad);
+
+            // update the output message
+            DeveloperConsoleBehaviour.OutputMessage = $"Changing scene to {args[0]}.";
+            // get ref, call the function to update the message
+            DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+            developerConsoleBehaviour.UpdateOutputMessage();
             SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
             return true;
         }

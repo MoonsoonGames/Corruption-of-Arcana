@@ -38,6 +38,28 @@ namespace Necropanda.Utils.Console
 
         private static DeveloperConsoleBehaviour instance;  // The instance of the console. There can only be one.
 
+        private static string _outputMessage;
+        public static string OutputMessage
+        {
+            get { return _outputMessage; }
+            set
+            {
+                // Check the message len
+                if (value.Length > 50)
+                {
+                    // Warn that the status message might be too long
+                    Debug.LogWarning("Status message was too long! It might not fit in the window!");
+                    // Set the status variable
+                    _outputMessage = value;
+                }
+                else
+                {
+                    // Set the status variable
+                    _outputMessage = value;
+                }
+            }
+        }
+
         private DeveloperConsole developerConsole;  // Reference the the Console
         private DeveloperConsole DeveloperConsole   // Getter for the console
         {
@@ -92,30 +114,6 @@ namespace Necropanda.Utils.Console
 
             if (uiCanvas.activeSelf)
             {
-                // try
-                // {
-                //     hudInterface.enabled = true;
-                //     inventoryManager.enabled = true;
-                //     journalMainCode.enabled = true;
-                // }
-                // catch (MissingReferenceException err)
-                // {
-                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
-                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
-
-
-                // }
-                // catch (UnassignedReferenceException err)
-                // {
-                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
-                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
-
-                //     hudInterface = GameObject.FindObjectOfType<HUDInterface>();
-                //     inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-                //     journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
-                // }
-
-
                 Time.timeScale = pausedTimeScale;
                 uiCanvas.SetActive(false);
             }
@@ -149,6 +147,12 @@ namespace Necropanda.Utils.Console
             DeveloperConsole.ProcessCommand(inputValue);    // Process the command.
 
             inputField.text = string.Empty; // Reset the input field text.
+        }
+
+        public void UpdateOutputMessage()
+        {
+            consoleText.text += "\n";
+            consoleText.text += OutputMessage;
         }
     }
 }
