@@ -15,6 +15,18 @@ namespace Necropanda
         public TextMeshProUGUI title;
         public TextMeshProUGUI description;
 
+        public bool followMouse = false;
+
+        private void Update()
+        {
+            if (followMouse)
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                transform.position = mousePosition;
+            }
+        }
+
         public void SetText(string titleText, string descText)
         {
             if (title != null)

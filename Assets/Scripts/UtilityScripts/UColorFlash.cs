@@ -60,6 +60,17 @@ namespace Necropanda
             return lerpColour;
         }
 
+        public void Highlight(Color color)
+        {
+            flashColour = color;
+            image.color = flashColour;
+        }
+
+        public void RemoveHighlightColour()
+        {
+            image.color = normalColour;
+        }
+
         #region Colour
 
         public Color normalColour = new Color(255, 255, 255, 255);
