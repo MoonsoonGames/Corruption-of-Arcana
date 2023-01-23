@@ -5250,6 +5250,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6e24838a119adc5469933478083b808d,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1180626274180459696, guid: 6e24838a119adc5469933478083b808d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5259,11 +5264,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wooden Gate Closed (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 6e24838a119adc5469933478083b808d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e24838a119adc5469933478083b808d, type: 3}
@@ -11546,6 +11546,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 402155265}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &281397715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281397714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: d58d605cf73e751458dfa9054b826547, type: 2}
+    states: 02000000
 --- !u!1001 &281525645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13918,7 +13933,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324821239}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbf2141810682bf4e90b94b6af016887, type: 3}
   m_Name: 
@@ -17203,11 +17218,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wooden Gate Open
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: c56d45eab18209b47a8acf339730288a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c56d45eab18209b47a8acf339730288a, type: 3}
@@ -21449,11 +21459,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MamaR (4) - No Icon
       objectReference: {fileID: 0}
-    - target: {fileID: 6446433488075586969, guid: e4f69f6a51b0c0443a220bc6dac92103,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3355011573167823889, guid: e4f69f6a51b0c0443a220bc6dac92103, type: 3}
     - {fileID: 5123992610293722991, guid: e4f69f6a51b0c0443a220bc6dac92103, type: 3}
@@ -21476,6 +21481,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 516730804}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &516730808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516730807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: 93b445e3202a4ed4a8dd04c703e6b3b0, type: 2}
+    states: 02000000
 --- !u!4 &516867264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 586731049651241984, guid: 75c4d6d64107db841bc74a378f17ea7b,
@@ -34785,11 +34805,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MamaR (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6446433488075586969, guid: e4f69f6a51b0c0443a220bc6dac92103,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6763268647754176703, guid: e4f69f6a51b0c0443a220bc6dac92103,
         type: 3}
       propertyPath: nodeRect.x
@@ -34819,6 +34834,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 826488836}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &826488839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826488838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: 4e5d554b8d319174ba0068a8259c80e0, type: 2}
+    states: 01000000
 --- !u!1001 &831509552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37866,11 +37896,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MamaR (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6446433488075586969, guid: e4f69f6a51b0c0443a220bc6dac92103,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6941215719214835796, guid: e4f69f6a51b0c0443a220bc6dac92103,
         type: 3}
       propertyPath: selectedBlocks.Array.size
@@ -37891,6 +37916,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 918804759}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &918804762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918804761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: 21a6eb9250c49924d8e1ef71d38d6555, type: 2}
+    states: 01000000
 --- !u!1001 &919099302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39624,13 +39664,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 947408369}
+  - component: {fileID: 947408370}
   m_Layer: 0
   m_Name: BlockerCrystals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &947408369
 Transform:
   m_ObjectHideFlags: 0
@@ -39659,6 +39700,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: -9.204, z: 0}
+--- !u!114 &947408370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947408368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: 21a6eb9250c49924d8e1ef71d38d6555, type: 2}
+    states: 02000000
 --- !u!1001 &947952766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50732,6 +50788,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 128118004}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1223697889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223697888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: d58d605cf73e751458dfa9054b826547, type: 2}
+    states: 01000000
 --- !u!1001 &1223944422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65641,11 +65712,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MamaR (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 6446433488075586969, guid: e4f69f6a51b0c0443a220bc6dac92103,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3355011573167823889, guid: e4f69f6a51b0c0443a220bc6dac92103, type: 3}
     - {fileID: 5123992610293722991, guid: e4f69f6a51b0c0443a220bc6dac92103, type: 3}
@@ -65662,6 +65728,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1580892679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1580892682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580892681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: 93b445e3202a4ed4a8dd04c703e6b3b0, type: 2}
+    states: 01000000
 --- !u!1001 &1581511105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66886,13 +66967,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594410047}
+  - component: {fileID: 1594410048}
   m_Layer: 0
   m_Name: IntroCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1594410047
 Transform:
   m_ObjectHideFlags: 0
@@ -66910,6 +66992,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1594410048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594410046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: d58d605cf73e751458dfa9054b826547, type: 2}
+    states: 01000000
 --- !u!1001 &1595207453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76271,11 +76368,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MamaR (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6446433488075586969, guid: e4f69f6a51b0c0443a220bc6dac92103,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4f69f6a51b0c0443a220bc6dac92103, type: 3}
 --- !u!4 &1839178903 stripped
@@ -76284,6 +76376,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1839178902}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1839178904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057956356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: ef32e21cf49853d4cabca554bd7ff0f4, type: 2}
+    states: 01000000
 --- !u!1001 &1841601793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77084,7 +77191,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859778100}
-  m_LocalRotation: {x: 0.62628376, y: 0.020881712, z: -0.014987609, w: 0.77917135}
+  m_LocalRotation: {x: 0.6262838, y: 0.020881578, z: -0.014987531, w: 0.77917135}
   m_LocalPosition: {x: 3.4327455, y: -4.442923, z: 21.879965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -78866,11 +78973,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MamaR
       objectReference: {fileID: 0}
-    - target: {fileID: 6446433488075586969, guid: e4f69f6a51b0c0443a220bc6dac92103,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9199573660409371052, guid: e4f69f6a51b0c0443a220bc6dac92103,
         type: 3}
       propertyPath: m_Radius
@@ -78898,6 +79000,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flowChart: {fileID: 1557550296}
   ID: 
+--- !u!114 &1894251958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38042869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStates:
+  - quest: {fileID: 11400000, guid: d58d605cf73e751458dfa9054b826547, type: 2}
+    states: 01000000
 --- !u!1001 &1895517403
 PrefabInstance:
   m_ObjectHideFlags: 0
