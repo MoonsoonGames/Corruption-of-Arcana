@@ -511,7 +511,7 @@ MonoBehaviour:
   - {fileID: 185760781916185715}
   MinDistance: 1
   MaxDistance: 20
-  Length: 112594
+  Length: 174416
 --- !u!114 &-4479399052011416534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +729,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 230
+--- !u!114 &-4003756384628365541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/End Fight/Victory
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/End Fight/Victory
+  Guid:
+    Data1: -2045222330
+    Data2: 1327481813
+    Data3: -1008235359
+    Data4: 1651196696
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &-3880527975275140435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,7 +852,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638097545353365480
+  lastModified: 638100880683440978
   FileSizes: []
   Exists: 1
 --- !u!114 &-3053542360527846427
@@ -894,7 +921,7 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: parameter:/Thoth Music
   Min: 0
-  Max: 4
+  Max: 7
   Default: 0
   ID:
     data1: 2062682416
@@ -907,6 +934,9 @@ MonoBehaviour:
   - Village Expanded
   - Fina lopp
   - Enemy Close
+  - Battle Music
+  - Battle Victory
+  - Battle Defeat
   Exists: 1
 --- !u!114 &-2777066467332977818
 MonoBehaviour:
@@ -1088,10 +1118,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638097545353415495
+  lastModified: 638100880683490993
   FileSizes:
   - Name: 
-    Value: 3952
+    Value: 4060
   Exists: 1
 --- !u!114 &-1921533208420121227
 MonoBehaviour:
@@ -1135,7 +1165,7 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 7
   Default: 0
   ID:
     data1: 2062682416
@@ -1148,6 +1178,9 @@ MonoBehaviour:
   - Village Expanded
   - Fina lopp
   - Enemy Close
+  - Battle Music
+  - Battle Victory
+  - Battle Defeat
   Exists: 1
 --- !u!114 &-1223762433863208235
 MonoBehaviour:
@@ -1540,6 +1573,8 @@ MonoBehaviour:
   - {fileID: 9201053662742276429}
   - {fileID: 4360130461001644292}
   - {fileID: -4345912078407978645}
+  - {fileID: 5568804788973321867}
+  - {fileID: -4003756384628365541}
   EditorParameters:
   - {fileID: -2779059578322212958}
   - {fileID: 3036812639338466427}
@@ -1547,7 +1582,7 @@ MonoBehaviour:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638097545353415495
+  cacheTime: 638100880683490993
   cacheVersion: 131591
 --- !u!114 &185760781916185715
 MonoBehaviour:
@@ -2380,6 +2415,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
+--- !u!114 &5568804788973321867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/End Fight/Defeat
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/End Fight/Defeat
+  Guid:
+    Data1: -900584421
+    Data2: 1238738634
+    Data3: 702788246
+    Data4: -323379570
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &5623757371034403913
 MonoBehaviour:
   m_ObjectHideFlags: 0
