@@ -78,6 +78,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-8185718098586200362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 1 (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 1 (PH)
+  Guid:
+    Data1: -573268067
+    Data2: 1219841203
+    Data3: -107470449
+    Data4: -179748631
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-8161575251081702039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +159,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1165
+--- !u!114 &-7867207304086016853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/End Fight/Defeat
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/End Fight/Defeat
+  Guid:
+    Data1: -900584421
+    Data2: 1238738634
+    Data3: 702788246
+    Data4: -323379570
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &-7669399176021235175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +363,7 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: parameter:/Thoth Music
   Min: 0
-  Max: 4
+  Max: 6
   Default: 0
   ID:
     data1: 2062682416
@@ -322,6 +376,8 @@ MonoBehaviour:
   - Village Expanded
   - Fina lopp
   - Enemy Close
+  - Battle Music
+  - Battle End
   Exists: 1
 --- !u!114 &-7174984059870051091
 MonoBehaviour:
@@ -497,7 +553,7 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 6
   Default: 0
   ID:
     data1: 2062682416
@@ -510,6 +566,8 @@ MonoBehaviour:
   - Village Expanded
   - Fina lopp
   - Enemy Close
+  - Battle Music
+  - Battle End
   Exists: 1
 --- !u!114 &-5124406496997275583
 MonoBehaviour:
@@ -716,7 +774,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638094812383625443
+  lastModified: 638100945452127264
   FileSizes: []
   Exists: 1
 --- !u!114 &-3053542360527846427
@@ -1007,10 +1065,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638094812383643526
+  lastModified: 638100945452197274
   FileSizes:
   - Name: 
-    Value: 3838
+    Value: 4106
   Exists: 1
 --- !u!114 &-1196731273281488453
 MonoBehaviour:
@@ -1066,6 +1124,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 900
+--- !u!114 &-1075661836514517185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 2
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 2
+  Guid:
+    Data1: -1201431630
+    Data2: 1321216654
+    Data3: -1915640672
+    Data4: 1526296554
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-958559986297560032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Skeleton
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Skeleton
+  Guid:
+    Data1: 872647646
+    Data2: 1213459861
+    Data3: -350376052
+    Data4: -1159379082
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-941260558145035481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,15 +1333,19 @@ MonoBehaviour:
   - {fileID: -8161575251081702039}
   - {fileID: 2404749513656931288}
   - {fileID: 5907292064978058174}
-  - {fileID: 2224084067590312173}
   - {fileID: 6729523827353790851}
-  - {fileID: 553104932275488409}
   - {fileID: 5477622760688834244}
   - {fileID: 911454355858788654}
   - {fileID: -6727407554423215943}
-  - {fileID: 1528652126765941346}
   - {fileID: 7720204409862589923}
   - {fileID: 5290217830072651608}
+  - {fileID: 7327128480707200880}
+  - {fileID: -7867207304086016853}
+  - {fileID: 5941689743329064075}
+  - {fileID: -8185718098586200362}
+  - {fileID: -1075661836514517185}
+  - {fileID: -958559986297560032}
+  - {fileID: 2501237064449929814}
   EditorParameters:
   - {fileID: -8572358270947847299}
   - {fileID: -7214770631604761421}
@@ -1237,7 +1353,7 @@ MonoBehaviour:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638094812383643526
+  cacheTime: 638100945452197274
   cacheVersion: 131591
 --- !u!114 &360610475724078421
 MonoBehaviour:
@@ -1294,33 +1410,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 179422
---- !u!114 &553104932275488409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 2
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 2
-  Guid:
-    Data1: -1201431630
-    Data2: 1321216654
-    Data3: -1915640672
-    Data4: 1526296554
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &753188867848532654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1437,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 32004
+--- !u!114 &814735152533911377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Healthbar
+  m_EditorClassIdentifier: 
+  Name: Healthbar
+  StudioPath: 
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 3597231001
+    data2: 1681809175
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &830557574367032042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1618,33 +1731,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1165
---- !u!114 &1528652126765941346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 3
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 3
-  Guid:
-    Data1: -1021220890
-    Data2: 1120440723
-    Data3: 705257095
-    Data4: 1843508093
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &1717167575867102732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1700,33 +1786,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2224084067590312173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Combat/Healing/Heal level 1 (PH)
-  m_EditorClassIdentifier: 
-  Path: event:/Combat/Healing/Heal level 1 (PH)
-  Guid:
-    Data1: -573268067
-    Data2: 1219841203
-    Data3: -107470449
-    Data4: -179748631
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
 --- !u!114 &2350905725686345825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1781,6 +1840,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &2501237064449929814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 3
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 3
+  Guid:
+    Data1: -1021220890
+    Data2: 1120440723
+    Data3: 705257095
+    Data4: 1843508093
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &2795382584816754330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1917,6 +2003,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3218
+--- !u!114 &3446762295517170636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Combat End
+  m_EditorClassIdentifier: 
+  Name: Combat End
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1490029009
+    data2: 2818538874
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &3549826215236629923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2117,12 +2227,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/50 health
+  m_Name: parameter:/Main Menu Music/Healthbar
   m_EditorClassIdentifier: 
-  Name: 50 health
+  Name: Healthbar
   StudioPath: 
   Min: 0
-  Max: 1
+  Max: 4
   Default: 0
   ID:
     data1: 3597231001
@@ -2425,6 +2535,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &5941689743329064075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/End Fight/Victory
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/End Fight/Victory
+  Guid:
+    Data1: -2045222330
+    Data2: 1327481813
+    Data3: -1008235359
+    Data4: 1651196696
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &6022887027082449268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2616,9 +2753,11 @@ MonoBehaviour:
   Parameters:
   - {fileID: -5127594463213572779}
   - {fileID: 8372865748723905896}
+  - {fileID: 814735152533911377}
+  - {fileID: 3446762295517170636}
   MinDistance: 1
   MaxDistance: 20
-  Length: 112594
+  Length: 169083
 --- !u!114 &6744775575514386292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,6 +2782,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &7327128480707200880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Construct
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Construct
+  Guid:
+    Data1: 1604006159
+    Data2: 1238663121
+    Data3: -1606628724
+    Data4: 1919972240
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1343
 --- !u!114 &7336264148571149768
 MonoBehaviour:
   m_ObjectHideFlags: 0
