@@ -393,6 +393,31 @@ namespace Necropanda
         #endregion
     }
 
+    public static class QuestHelperFuncions
+    {
+        [System.Serializable]
+        public struct QuestInstance
+        {
+            public Quest quest;
+            public E_QuestStates[] states;
+
+            public bool Available()
+            {
+                bool available = false;
+
+                foreach (E_QuestStates state in states)
+                {
+                    if (quest.state == state)
+                    {
+                        available = true;
+                    }
+                }
+
+                return available;
+            }
+        }
+    }
+
     public static class SoundEffects
     {
         [System.Serializable]

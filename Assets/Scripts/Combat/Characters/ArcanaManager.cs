@@ -27,12 +27,14 @@ namespace Necropanda
         private void Start()
         {
             arcanaSlider.Setup(arcanaMax);
+            CheckCardOverlays(arcanaMax);
         }
 
         public void AdjustArcanaMax(int change)
         {
             arcanaMax += change;
             arcanaSlider.SetSliderMax(arcanaMax);
+            CheckCardOverlays(arcanaMax);
             //arcanaText.text = arcanaMax - arcanaMax + "/" + arcanaMax;
             //arcanaImage.color = enableColor;
         }
@@ -54,6 +56,25 @@ namespace Necropanda
                 //Can't cast, enable message and disable end turn
                 buttonOverlay.SetActive(true);
                 arcanaSlider.standardFill.color = disableColor;
+            }
+
+            CheckCardOverlays(arcana);
+        }
+
+        void CheckCardOverlays(int arcana)
+        {
+            GameObject[] cardObjects = GameObject.FindGameObjectsWithTag("Card");
+            Debug.Log("Length is " + cardObjects.Length);
+            foreach (var item in cardObjects)
+            {
+                Card itemCard = item.GetComponent<Card>();
+
+                if (itemCard != null)
+                    itemCard.ShowUnavailableOverlay(arcanaMax - arcana);
+                else
+                {
+                    Debug.Log("Invalid");
+                }
             }
         }
     }
