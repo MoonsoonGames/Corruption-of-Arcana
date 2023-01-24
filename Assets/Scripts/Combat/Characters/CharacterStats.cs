@@ -13,6 +13,7 @@ namespace Necropanda
     public class CharacterStats : ScriptableObject
     {
         public string characterName;
+        public Object characterObject;
         public Sprite characterSprite;
         public string characterDescription;
         public string location;
