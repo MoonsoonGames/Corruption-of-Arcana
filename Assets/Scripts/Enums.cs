@@ -45,6 +45,7 @@ public enum E_Scenes
     PuzzleRoom,
     Thoth,
     ArenaMode,
+    EastForest,
     SplashScreen
 }
 
