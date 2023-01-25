@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: Drained
+  m_Name: ReleaseMadness
   m_EditorClassIdentifier: 
-  spellName: Drained
+  spellName: Release Madness
   flavourText: 
-  spellDescription: 'This card has no effect
+  spellDescription: 'This card deals 2 $perforation$ to every character
 
 
-    An enemy has placed this card
-    on you to take up spaces in your hand
+    An
+    enemy has placed this card on you to take up spaces in your hand
 
 
-    Play it to remove it'
+    Play it
+    to remove it'
   cardImage: {fileID: 0}
   overrideColor: 0
   timelineColor: {r: 0, g: 0, b: 0, a: 255}
@@ -37,12 +38,21 @@ MonoBehaviour:
   removeStatuses: 0
   multihitDelay: 0.1
   moduleDelay: 0
-  spellModules: []
+  spellModules:
+  - target: 6
+    effectType: 6
+    value: 2
+    hitCount: 0
+    executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
+    statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   projectileSpeed: 0.3
-  projectilePoints: 0000000009000000
+  projectilePoints: 0000000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
