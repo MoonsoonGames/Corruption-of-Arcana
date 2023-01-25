@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 /// <summary>
@@ -46,7 +47,9 @@ namespace Necropanda
 
         public void FightButton()
         {
-            LoadCombatManager.instance.LoadCombat(enemies);
+            string sceneString = SceneManager.GetActiveScene().name;
+            E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
+            LoadCombatManager.instance.LoadCombat(enemies, lastScene);
         }
     }
 }
