@@ -32,6 +32,7 @@ namespace Necropanda
         [ContextMenu("Force Restart Quest")]
         public void ForceRestartQuest()
         {
+            DebugQuest();
             ForceResetQuest();
             StartQuest("Mama R", null);
         }
@@ -39,13 +40,14 @@ namespace Necropanda
         [ContextMenu("Force Start Quest")]
         public void ForceStartQuest()
         {
+            DebugQuest();
             StartQuest("Mama R", null);
         }
 
         [ContextMenu("Force Reset Quest")]
         public void ForceResetQuest()
         {
-            Debug.Log("Force reset quest " + questName);
+            DebugQuest();
             state = E_QuestStates.NotStarted;
             currentProgress = 0;
 
@@ -57,6 +59,7 @@ namespace Necropanda
 
         public void StartQuest(string questGiver, Quest parent)
         {
+            DebugQuest();
             if (state != E_QuestStates.NotStarted)
                 return;
 
@@ -72,6 +75,7 @@ namespace Necropanda
         [ContextMenu("Quest Progress")]
         public void QuestProgress()
         {
+            DebugQuest();
             //currently this only allows quests with a linear progression, so no choices yet
             if (state != E_QuestStates.InProgress && linear)
                 return;
@@ -96,6 +100,7 @@ namespace Necropanda
 
         void EnableNextObjective()
         {
+            DebugQuest();
             if (subQuests.Length > 0)
             {
                 if (linear)
@@ -107,8 +112,14 @@ namespace Necropanda
 
         void GiveRewards()
         {
+            DebugQuest();
             //could have this depend on how the quest was finished
-            //rewards.GiveRe
+            //rewards.GiveRewards
+        }
+
+        void DebugQuest()
+        {
+            Debug.Log("Force reset quest " + questName);
         }
     }
 }
