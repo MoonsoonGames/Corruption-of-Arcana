@@ -236,13 +236,13 @@ namespace Necropanda
 
             if (roll <= chance)
             {
-                Debug.Log("Apply success");
+                //Debug.Log("Apply success");
                 apply = true;
             }
             else
             {
 
-                Debug.Log("Apply failed");
+                //Debug.Log("Apply failed");
             }
 
             return apply;

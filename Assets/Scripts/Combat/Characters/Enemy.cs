@@ -50,26 +50,29 @@ namespace Necropanda
             }
             else
             {
-                //In future, determine target depending on spell so it can cast support spells on allies/self
-                CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
-
-                if (spellUtility.utility >= 0)
+                for (int i = 0; i < stats.actions; i++)
                 {
-                    if (spellUtility.spell.spawnAsCard)
+                    //In future, determine target depending on spell so it can cast support spells on allies/self
+                    CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
+                    CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
+
+                    if (spellUtility.utility >= 0)
                     {
-                        newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                        if (spellUtility.spell.spawnAsCard)
+                        {
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                        }
+                        else
+                        {
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                        }
+
+                        enemyManager.AddSpellInstance(newSpellInstance);
                     }
                     else
                     {
-                        newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                        Debug.Log(stats.characterName + " is skipping their turn");
                     }
-
-                    enemyManager.AddSpellInstance(newSpellInstance);
-                }
-                else
-                {
-                    Debug.Log(stats.characterName + " is skipping their turn");
                 }
             }
 

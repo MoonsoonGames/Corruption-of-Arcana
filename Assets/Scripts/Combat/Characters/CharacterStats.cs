@@ -26,6 +26,7 @@ namespace Necropanda
         public Object spawnObject;
 
         public SpellCastingAI ai;
+        public int actions = 1;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
     }
 }

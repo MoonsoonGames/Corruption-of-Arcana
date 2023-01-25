@@ -50,6 +50,15 @@ namespace Necropanda
 
             //Debug.Log(self.stats.characterName + " is planning to cast " + spellUtility.spell.spell.spellName + " on " + spellUtility.target + " with a utility: " + spellUtility.utility);
 
+            if (spellUtility.target == null)
+            {
+                Debug.Log("target is null");
+            }
+            else if (spellUtility.target.GetHealth().dying)
+            {
+                Debug.Log(spellUtility.target + " is dying");
+            }
+
             return spellUtility;
         }
 
@@ -70,6 +79,9 @@ namespace Necropanda
 
             foreach (Character target in allTargets)
             {
+                if (!target.CanBeTargetted())
+                    break;
+
                 foreach (CombatHelperFunctions.AISpell spell in spellList)
                 {
                     if (self.charm == false && CanCastSpell(spell, self, target, allyTeam, enemyTeam))
