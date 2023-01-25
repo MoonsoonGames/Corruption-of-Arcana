@@ -18,7 +18,7 @@ namespace Necropanda
         public string questDescription;
         string questGiver = "";
 
-        public E_QuestStates state = E_QuestStates.NotStarted;
+        public E_QuestStates state;
         public int currentProgress = 0;
         public int maxProgress = 1;
 
@@ -101,16 +101,6 @@ namespace Necropanda
                 if (linear)
                 {
                     subQuests[currentProgress].StartQuest(questGiver, this);
-                }
-                else
-                {
-                    foreach (Quest objective in subQuests)
-                    {
-                        if (objective.state == E_QuestStates.NotStarted)
-                        {
-                            objective.StartQuest(questGiver, this);
-                        }
-                    }
                 }
             }
         }
