@@ -10,28 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: Silence
+  m_Name: 3DrainingStrike
   m_EditorClassIdentifier: 
-  spellName: Silence
+  spellName: Draining Strike
   flavourText: 
-  spellDescription: 'Deal 5 $perforation$ damage to target
-
-
-    Reduces max $arcana$
-    by 2 points for 2 turns
-
-
-    Cards played on the target have 50% reduced effect
-    for 3 turns'
+  spellDescription: Deal 9 $bleak$
   cardImage: {fileID: 0}
   overrideColor: 0
-  timelineColor: {r: 0.6710777, g: 0.4764596, b: 0.7830189, a: 1}
-  timelineIcon: {fileID: 335509689, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0.6
+  timelineColor: {r: 0, g: 0.8113208, b: 0.6740148, a: 1}
+  timelineIcon: {fileID: 563448678, guid: f465a941178bb0d429d18de762a2632b, type: 3}
+  speed: 0.3
   arcanaCost: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
-  drawCard: {fileID: 0}
+  drawCard: {fileID: 11400000, guid: 2d8f2425028efc24db0cec417d1c2a29, type: 2}
   spawnEnemies: []
   discardCards: 0
   returnDiscardPile: 0
@@ -40,25 +32,19 @@ MonoBehaviour:
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 6
-    value: 5
+    effectType: 3
+    value: 9
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
-    statuses:
-    - status: {fileID: 11400000, guid: 0acb6b34b647c8b4eabfda6cf3a52280, type: 2}
-      duration: 2
-      chance: 1
-    - status: {fileID: 11400000, guid: 8961b0799f6ee7741b8d85767e4afa53, type: 2}
-      duration: 3
-      chance: 1
+    statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   projectileSpeed: 0.3
-  projectilePoints: 000000000700000001000000
+  projectilePoints: 000000000100000000000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
-  screenShake: 0
+  screenShake: 1
