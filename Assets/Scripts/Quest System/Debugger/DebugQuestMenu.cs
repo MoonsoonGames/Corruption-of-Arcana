@@ -12,10 +12,11 @@ namespace Necropanda
     public class DebugQuestMenu : MonoBehaviour
     {
         public GameObject menu;
+        public bool openOnStart = false;
 
         private void Start()
         {
-            menu.SetActive(false);
+            menu.SetActive(openOnStart);
         }
 
         private void Update()
