@@ -52,7 +52,7 @@ namespace Necropanda
         public float combatRadius = 15f;
 
         public EnemyQueue queue;
-        public List<Object> enemies;
+        public List<CharacterStats> enemies;
         public List<string> enemyIDs;
         bool loading = false;
 
@@ -75,12 +75,12 @@ namespace Necropanda
                     if (enemy.boss)
                     {
                         //If enemy is a boss, save them in the first space
-                        enemies.Insert(0, enemy.enemyObject);
+                        enemies.Insert(0, enemy.enemyStats);
                     }
                     else
                     {
                         //Else append them at the end of the list
-                        enemies.Insert(enemies.Count, enemy.enemyObject);
+                        enemies.Insert(enemies.Count, enemy.enemyStats);
                     }
 
                     if (enemy.GetComponentInChildren<LoadCombat>().progressQuests.Length > 0)
@@ -117,7 +117,22 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }
 
-        public void AddEnemy(Object enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)
+        public void LoadCombat(List<CharacterStats> newEnemies)
+        {
+            if (loading) return;
+            loading = true;
+
+            //Get enemies within radius of player and save them in a list
+            enemies.Clear();
+            enemies = newEnemies;
+            enemyIDs.Clear();
+
+            Debug.Log("Interacted - Load Combat from Arena");
+            loading = false;
+            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+        }
+
+        public void AddEnemy(CharacterStats enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)
         {
             List<Vector2> targetPositions = new List<Vector2>();
             //targetPositions.Add(midPos);
@@ -137,8 +152,11 @@ namespace Necropanda
 
             enemyIDs.Clear();
 
-            foreach (var item in progressQuestUponCombatVictory)
-                item.QuestProgress();
+            if (progressQuestUponCombatVictory.Count > 0)
+            {
+                foreach (var item in progressQuestUponCombatVictory)
+                    item.QuestProgress();
+            }
         }
 
         private void OnDrawGizmosSelected()

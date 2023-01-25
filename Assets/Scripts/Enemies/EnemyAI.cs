@@ -18,7 +18,7 @@ namespace Necropanda.AI
         public NavMeshAgent agent;
         Vector3 startPos;
 
-        public Object enemyObject;
+        public CharacterStats enemyStats;
         public bool boss;
 
         //state variables

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: LichStats
   m_EditorClassIdentifier: 
   characterName: Lich
+  characterObject: {fileID: 2076760838207709071, guid: 3290d8b1d33d0e541be943471f3b4b29,
+    type: 3}
   characterSprite: {fileID: 21300000, guid: 2b96b0ebb8ee9374689bd2541c55a9d8, type: 3}
   characterDescription: 
   location: 
@@ -23,24 +25,32 @@ MonoBehaviour:
   spawnObject: {fileID: 6441297445223667176, guid: f7fff2595f51cc34da7178b7fa2edbb6,
     type: 3}
   ai: {fileID: 11400000, guid: 01324d18549c82248b3a834616aeae83, type: 2}
+  actions: 2
   aISpells:
-  - spell: {fileID: 11400000, guid: 6f306ebebf9dea844a28f0faf7c1736d, type: 2}
+  - spell: {fileID: 11400000, guid: 9ef82026aa9c8cf4d9903095abf3590a, type: 2}
     spawnAsCard: 1
     targetSelf: 0
     targetAllies: 0
     targetEnemies: 1
     timeCooldown: 0
     lastUsed: 0
-  - spell: {fileID: 11400000, guid: 62f9a936ef0ac8e4eb33c455128f270e, type: 2}
+  - spell: {fileID: 11400000, guid: c31a9ba5b1cb7534488ca462e3fdb5e1, type: 2}
     spawnAsCard: 1
     targetSelf: 0
     targetAllies: 0
     targetEnemies: 1
     timeCooldown: 2
     lastUsed: 0
-  - spell: {fileID: 11400000, guid: 74f0daba23fa5034f9276d76fc10e12c, type: 2}
+  - spell: {fileID: 11400000, guid: 6f24f21c5d6da49438e4d3a326eb97a4, type: 2}
     spawnAsCard: 1
     targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 2
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: e089e17c25603034ba54f14e576ffa76, type: 2}
+    spawnAsCard: 1
+    targetSelf: 1
     targetAllies: 1
     targetEnemies: 0
     timeCooldown: 1
