@@ -152,8 +152,11 @@ namespace Necropanda
 
             enemyIDs.Clear();
 
-            foreach (var item in progressQuestUponCombatVictory)
-                item.QuestProgress();
+            if (progressQuestUponCombatVictory.Count > 0)
+            {
+                foreach (var item in progressQuestUponCombatVictory)
+                    item.QuestProgress();
+            }
         }
 
         private void OnDrawGizmosSelected()
