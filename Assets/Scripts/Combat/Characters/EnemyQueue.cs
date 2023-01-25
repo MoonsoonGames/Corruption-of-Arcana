@@ -29,8 +29,8 @@ namespace Necropanda
 
             if (loadCombatManager.enemies.Count > 0)
             {
-                Object nextEnemy = loadCombatManager.enemies[0];
-                GameObject objectRef = Instantiate(nextEnemy, gameObject.transform) as GameObject;
+                CharacterStats nextEnemy = loadCombatManager.enemies[0];
+                GameObject objectRef = Instantiate(nextEnemy.characterObject, gameObject.transform) as GameObject;
                 Character character = objectRef.GetComponent<Character>();
                 Sprite newSprite = character.stats.characterSprite;
                 enemyImage.sprite = newSprite;

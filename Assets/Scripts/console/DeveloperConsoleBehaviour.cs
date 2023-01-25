@@ -92,28 +92,18 @@ namespace Necropanda.Utils.Console
 
             if (uiCanvas.activeSelf)
             {
-                // try
-                // {
-                //     hudInterface.enabled = true;
-                //     inventoryManager.enabled = true;
-                //     journalMainCode.enabled = true;
-                // }
-                // catch (MissingReferenceException err)
-                // {
-                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
-                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
-
-
-                // }
-                // catch (UnassignedReferenceException err)
-                // {
-                //     Debug.Log($"One of the UI Scripts isn't assigned in the dev console! The offender is: {err.Message}");
-                //     Debug.LogWarning("Toggling UI may not work correctly, attempting to fix...");
-
-                //     hudInterface = GameObject.FindObjectOfType<HUDInterface>();
-                //     inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-                //     journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
-                // }
+                if (hudInterface != null)
+                {
+                    hudInterface.enabled = true;
+                }
+                else if (inventoryManager != null)
+                {
+                    inventoryManager.enabled = true;
+                }
+                else if (journalMainCode != null)
+                {
+                    journalMainCode.enabled = true;
+                }
 
 
                 Time.timeScale = pausedTimeScale;

@@ -43,10 +43,16 @@ public enum E_Scenes
     Combat,
     Tiertarock,
     PuzzleRoom,
-    Thoth
+    Thoth,
+    ArenaMode
 }
 
 public enum E_UtilityScripts
 {
     Position, Rotation, Scale
+}
+
+public enum E_QuestStates
+{
+    NotStarted, InProgress, Completed
 }
