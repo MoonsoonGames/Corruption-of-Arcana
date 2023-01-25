@@ -117,7 +117,7 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }
 
-        public void LoadCombat(List<CharacterStats> newEnemies)
+        public void LoadCombat(List<CharacterStats> newEnemies, E_Scenes lastScene)
         {
             if (loading) return;
             loading = true;

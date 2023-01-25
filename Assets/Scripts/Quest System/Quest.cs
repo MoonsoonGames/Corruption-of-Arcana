@@ -29,6 +29,13 @@ namespace Necropanda
         //public RewardsPool rewards
         //public int rewardNumber
 
+        [ContextMenu("Force Restart Quest")]
+        public void ForceRestartQuest()
+        {
+            ForceResetQuest();
+            StartQuest("Mama R", null);
+        }
+
         [ContextMenu("Force Start Quest")]
         public void ForceStartQuest()
         {
