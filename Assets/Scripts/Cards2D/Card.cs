@@ -92,7 +92,7 @@ namespace Necropanda
                 string title = parts[0];
                 string description = parts[1];
 
-                Debug.Log(title + " || " + description);
+                //Debug.Log(title + " || " + description);
                 TooltipManager.instance.ShowTooltip(true, title, description);
 
                 showing = true;
@@ -101,7 +101,7 @@ namespace Necropanda
             {
                 if (showing)
                 {
-                    Debug.Log("Close");
+                    //Debug.Log("Close");
                     TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
                     showing = false;
                 }

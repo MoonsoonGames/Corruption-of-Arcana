@@ -63,9 +63,9 @@ namespace Necropanda.Player
             {
                 if (currentScene == LoadCombatManager.instance.lastScene)
                 {
-                    Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
+                    //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
                     transform.position = LoadCombatManager.instance.lastPos;
-                    Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
+                    //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
                 }
             }
 

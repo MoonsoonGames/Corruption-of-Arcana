@@ -27,7 +27,7 @@ namespace Necropanda.AI
 
         public void CheckScripts()
         {
-            Debug.Log("Checking Enemy AI scripts on " + gameObject.name);
+            //Debug.Log("Checking Enemy AI scripts on " + gameObject.name);
             try
             {
                 wander = gameObject.GetComponent<Wander>();

@@ -45,6 +45,7 @@ namespace Necropanda
         [ContextMenu("Force Reset Quest")]
         public void ForceResetQuest()
         {
+            Debug.Log("Force reset quest " + questName);
             state = E_QuestStates.NotStarted;
             currentProgress = 0;
 
