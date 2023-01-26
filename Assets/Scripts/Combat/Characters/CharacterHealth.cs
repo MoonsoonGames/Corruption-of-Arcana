@@ -69,6 +69,7 @@ namespace Necropanda
         protected virtual void SetupHealth()
         {
             maxHealth = character.stats.maxHealth;
+            shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
@@ -101,7 +102,8 @@ namespace Necropanda
         {
             //Decay shield
             //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
-            shield = shield / 2;
+            if (character.stats.decayShields)
+                shield = shield / 2;
             CheckCurseHealth();
         }
 

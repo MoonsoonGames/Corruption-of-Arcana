@@ -19,6 +19,8 @@ namespace Necropanda
         public string location;
 
         public int maxHealth;
+        public int startingShields;
+        public bool decayShields;
         public E_DamageTypes[] baseDamageResistancesType;
         public float[] baseDamageResistancesModifier;
 
