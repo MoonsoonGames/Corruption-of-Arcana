@@ -18,6 +18,11 @@ namespace Necropanda
         public TextMeshProUGUI nameText, descriptionText;
         public Image image;
 
+        private void OnEnable()
+        {
+            PreviewWeapon(DeckManager.instance.weapon);
+        }
+
         public void PreviewWeapon(Weapon weapon)
         {
             previewWeapon = weapon;
