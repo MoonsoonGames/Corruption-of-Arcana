@@ -25853,7 +25853,7 @@ PrefabInstance:
     - target: {fileID: 8066974073211405778, guid: b9664471e07c132468b3358717686c0c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000078876445
+      value: 0.0007029475
       objectReference: {fileID: 0}
     - target: {fileID: 8067404819137673059, guid: b9664471e07c132468b3358717686c0c,
         type: 3}
@@ -58936,8 +58936,8 @@ Transform:
   - {fileID: 2019240479}
   - {fileID: 169670001}
   - {fileID: 1029376033}
-  - {fileID: 1545732814}
   - {fileID: 2066166771}
+  - {fileID: 1545732814}
   - {fileID: 1414433191}
   - {fileID: 893926201}
   m_Father: {fileID: 2040976437}
@@ -66652,6 +66652,68 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1421238447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1421798808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421798809}
+  - component: {fileID: 1421798810}
+  m_Layer: 0
+  m_Name: Entrance Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1421798809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421798808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.83, z: 12.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1929119829}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1421798810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421798808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1580909958
+      Data2: 1281487010
+      Data3: 1581638834
+      Data4: -1025285198
+    Path: event:/Overworld/Thoth/Ambience
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 56.4
 --- !u!1001 &1422013287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91893,6 +91955,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1928244270}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1929119828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929119829}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1929119829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929119828}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 136.51852, y: 229.53238, z: 20.225925}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1421798809}
+  - {fileID: 1957211484}
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1932720650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93211,6 +93306,68 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1956436083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1957211483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1957211484}
+  - component: {fileID: 1957211485}
+  m_Layer: 0
+  m_Name: 'Water '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1957211484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957211483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.68, y: -4.367, z: -7.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1929119829}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1957211485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957211483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 231601474
+      Data2: 1214134770
+      Data3: -2096021598
+      Data4: 1203307867
+    Path: event:/Overworld/Thoth/Water
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 44.45
 --- !u!4 &1958883224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1408565942310914508, guid: 9f2a14bc4126db94396d786e2143c0c8,
