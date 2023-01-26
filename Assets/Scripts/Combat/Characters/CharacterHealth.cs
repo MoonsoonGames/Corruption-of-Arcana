@@ -29,7 +29,7 @@ namespace Necropanda
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
-        protected int shield;
+        protected int shield; public int GetShield() { return shield; }
 
         //Damage Resistances
         Dictionary<E_DamageTypes, float> currentDamageResistances;

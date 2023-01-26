@@ -229,12 +229,11 @@ namespace Necropanda
 
         #region Status Effects
 
-        public static bool ApplyChance(float chance)
+        public static bool ApplyEffect(Character target, StatusStruct status)
         {
             bool apply = false;
-            float roll = Random.Range(0f, 1f);
 
-            if (roll <= chance)
+            if (target.GetHealth().GetShield() <= 0 || status.applyOverShield)
             {
                 //Debug.Log("Apply success");
                 apply = true;
@@ -253,7 +252,7 @@ namespace Necropanda
         {
             public StatusEffects status;
             public int duration;
-            public float chance;
+            public bool applyOverShield;
         }
 
         [System.Serializable]
@@ -377,7 +376,7 @@ namespace Necropanda
         public struct StatusIconConstruct
         {
             public StatusEffects effect;
-            public float chance;
+            public bool applyOverShield;
             public Object effectIcon;
             public int duration;
 

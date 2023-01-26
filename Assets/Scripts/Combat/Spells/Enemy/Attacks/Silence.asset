@@ -17,12 +17,12 @@ MonoBehaviour:
   spellDescription: 'Deal 5 $perforation$ damage to target
 
 
-    Reduces max $arcana$
-    by 2 points for 2 turns
+    If target has no
+    shield, reduce max $arcana$ by 2 points for 2 turns
 
 
-    Cards played on the target have 50% reduced effect
-    for 3 turns'
+    If target has no shield,
+    cards played on the target have 50% reduced effect for 3 turns'
   cardImage: {fileID: 0}
   overrideColor: 0
   timelineColor: {r: 0.6710777, g: 0.4764596, b: 0.7830189, a: 1}
@@ -50,10 +50,10 @@ MonoBehaviour:
     statuses:
     - status: {fileID: 11400000, guid: 0acb6b34b647c8b4eabfda6cf3a52280, type: 2}
       duration: 2
-      chance: 1
+      applyOverShield: 0
     - status: {fileID: 11400000, guid: 8961b0799f6ee7741b8d85767e4afa53, type: 2}
       duration: 3
-      chance: 1
+      applyOverShield: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
