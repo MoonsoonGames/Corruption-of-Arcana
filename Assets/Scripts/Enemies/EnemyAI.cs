@@ -18,7 +18,7 @@ namespace Necropanda.AI
         public NavMeshAgent agent;
         Vector3 startPos;
 
-        public Object enemyObject;
+        public CharacterStats enemyStats;
         public bool boss;
 
         //state variables
@@ -52,15 +52,15 @@ namespace Necropanda.AI
         {
             player = playerRef;
             active = true;
-            Debug.Log("Activate AI");
+            //Debug.Log("Activate AI");
         }
 
         public void DeactivateAI()
         {
             player = null;
             active = false;
-            Debug.Log("Deactivate AI");
-            Debug.Log("test");
+            //Debug.Log("Deactivate AI");
+            //Debug.Log("test");
             agent.SetDestination(startPos);
         }
 

@@ -25,7 +25,7 @@ namespace Necropanda
 
         public void Flash(E_DamageTypes effectType)
         {
-            Debug.Log("Flash color");
+            //Debug.Log("Flash color");
             CancelInvoke();
             p = 0;
 

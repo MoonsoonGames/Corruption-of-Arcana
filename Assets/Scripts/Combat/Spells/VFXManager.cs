@@ -90,7 +90,7 @@ namespace Necropanda
         {
             if (effectRef == null)
             {
-                Debug.Log("No reference to projectile");
+                //Debug.Log("No reference to projectile");
                 return;
             }
 
@@ -100,7 +100,7 @@ namespace Necropanda
 
             if (effectObject == null)
             {
-                Debug.Log("No game object spawned, returning");
+                //Debug.Log("No game object spawned, returning");
                 return;
             }
 

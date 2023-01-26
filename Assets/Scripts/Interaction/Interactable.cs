@@ -132,7 +132,7 @@ namespace Necropanda.Interactable
             SetInteractMessage(null, null);
 
             //Call interface function
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
             IInteractable[] interacts = GetComponents<IInteractable>();
             foreach (var item in interacts)
             {
@@ -149,7 +149,7 @@ namespace Necropanda.Interactable
         {
             SetInteractMessage(null, null);
             //Call interface function
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
             ICancelInteractable[] interacts = GetComponents<ICancelInteractable>();
             foreach (var item in interacts)
             {

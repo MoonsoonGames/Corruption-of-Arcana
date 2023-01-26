@@ -114,6 +114,20 @@ namespace Necropanda.Utils.Console
 
             if (uiCanvas.activeSelf)
             {
+                if (hudInterface != null)
+                {
+                    hudInterface.enabled = true;
+                }
+                else if (inventoryManager != null)
+                {
+                    inventoryManager.enabled = true;
+                }
+                else if (journalMainCode != null)
+                {
+                    journalMainCode.enabled = true;
+                }
+
+
                 Time.timeScale = pausedTimeScale;
                 uiCanvas.SetActive(false);
             }

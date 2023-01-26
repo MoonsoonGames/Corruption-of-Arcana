@@ -352,21 +352,21 @@ namespace Necropanda
 
             if (caster.stun)
             {
-                Debug.Log("Stunned, skip spell");
+                //Debug.Log("Stunned, skip spell");
                 //Effect for fumbling spell
             }
             else if (caster.GetHealth().dying)
             {
-                Debug.Log("Dead, skip spell");
+                //Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell
             }
             else if (caster.banish && caster != target)
             {
-                Debug.Log("Caster is banished, skip spell");
+                //Debug.Log("Caster is banished, skip spell");
             }
             else if (target.banish && caster != target)
             {
-                Debug.Log("Target is banished, skip spell");
+                //Debug.Log("Target is banished, skip spell");
             }
             else
             {

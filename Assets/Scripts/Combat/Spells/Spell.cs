@@ -46,7 +46,7 @@ namespace Necropanda
         public bool discardAfterCasting = false;
         public bool discardAfterTurn = false;
         public Spell drawCard;
-        public Object[] spawnEnemies;
+        public CharacterStats[] spawnEnemies;
         public bool discardCards = false;
         public bool returnDiscardPile = false;
         public bool removeStatuses = false;

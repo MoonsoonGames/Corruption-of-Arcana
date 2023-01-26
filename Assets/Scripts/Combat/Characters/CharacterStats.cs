@@ -13,6 +13,7 @@ namespace Necropanda
     public class CharacterStats : ScriptableObject
     {
         public string characterName;
+        public Object characterObject;
         public Sprite characterSprite;
         public string characterDescription;
         public string location;
@@ -25,6 +26,7 @@ namespace Necropanda
         public Object spawnObject;
 
         public SpellCastingAI ai;
+        public int actions = 1;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
     }
 }

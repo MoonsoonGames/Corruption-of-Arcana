@@ -17,7 +17,7 @@ namespace Necropanda
 
         public void CharacterShake(float duration, float intensity, int shakeCount)
         {
-            Debug.Log("Character shake");
+            //Debug.Log("Character shake");
 
             for (int i = 0; i < shakeCount; i++)
             {
@@ -27,7 +27,7 @@ namespace Necropanda
 
                 Vector3 newPos = new Vector3(randMove.x, randMove.y, 0);
 
-                Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
+                //Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
 
                 if (gameObject.activeSelf)
                     StartCoroutine(MoveShake(randMove, i * shakeOffset));
@@ -41,7 +41,7 @@ namespace Necropanda
         {
             yield return new WaitForSeconds(delay);
             Vector3 newPos = new Vector3(offset.x, offset.y, 0);
-            Debug.Log(name + " returns from " + transform.position + " to " + newPos);
+            //Debug.Log(name + " returns from " + transform.position + " to " + newPos);
             transform.position += newPos;
         }
     }
