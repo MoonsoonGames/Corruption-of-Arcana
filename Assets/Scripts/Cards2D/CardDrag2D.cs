@@ -17,7 +17,6 @@ namespace Necropanda
 
         #region Variables
 
-        [HideInInspector]
         public Deck2D deck;
         [HideInInspector]
         public Deck2D lastDeck;

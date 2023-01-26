@@ -22,6 +22,7 @@ namespace Necropanda
         public TextMeshProUGUI descriptionText;
         public Image cardBackground;
         public Image cardFace;
+        public GameObject unavailableOverlay;
 
         public void Setup()
         {
@@ -35,6 +36,7 @@ namespace Necropanda
             gameObject.name = spell.spellName;
 
             GetComponent<CardDrag2D>().Setup();
+            ShowUnavailableOverlay(0);
         }
 
         public void ShowArt(bool show)
@@ -48,6 +50,14 @@ namespace Necropanda
             color.a = canShow ? 1 : 0;
 
             cardFace.color = color;
+        }
+
+        public void ShowUnavailableOverlay(int availableArcana)
+        {
+            //Debug.Log("Show arcana overlay");
+            bool unavailable = availableArcana < spell.arcanaCost ? true : false;
+            //Debug.Log(spell.spellName + " ||" + spell.arcanaCost + "/" + availableArcana + " || " + unavailable);
+            unavailableOverlay.SetActive(unavailable);
         }
 
         public void CastSpell(Character target, Character caster)
@@ -82,7 +92,7 @@ namespace Necropanda
                 string title = parts[0];
                 string description = parts[1];
 
-                Debug.Log(title + " || " + description);
+                //Debug.Log(title + " || " + description);
                 TooltipManager.instance.ShowTooltip(true, title, description);
 
                 showing = true;
@@ -91,7 +101,7 @@ namespace Necropanda
             {
                 if (showing)
                 {
-                    Debug.Log("Close");
+                    //Debug.Log("Close");
                     TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
                     showing = false;
                 }

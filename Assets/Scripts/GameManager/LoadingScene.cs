@@ -50,6 +50,7 @@ namespace Necropanda
             }
 
             //Save current player position if applicable
+            Time.timeScale = 1;
             SceneManager.LoadScene(scene.ToString());
         }
 

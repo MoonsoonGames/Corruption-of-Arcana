@@ -25,7 +25,7 @@ namespace Necropanda
 
         public void Flash(E_DamageTypes effectType)
         {
-            Debug.Log("Flash color");
+            //Debug.Log("Flash color");
             CancelInvoke();
             p = 0;
 
@@ -58,6 +58,17 @@ namespace Necropanda
             lerpColour.a = Mathf.Lerp(flashColour.a, normalColour.a, i);
 
             return lerpColour;
+        }
+
+        public void Highlight(Color color)
+        {
+            flashColour = color;
+            image.color = flashColour;
+        }
+
+        public void RemoveHighlightColour()
+        {
+            image.color = normalColour;
         }
 
         #region Colour
