@@ -40,7 +40,7 @@ namespace Necropanda
 
         public List<Spell> collection;
 
-        public List<Spell> minorArcana;
+        public Weapon weapon;
         public List<Spell> majorArcana;
         public List<Spell> playerDeck;
 
@@ -84,7 +84,7 @@ namespace Necropanda
 
         public void SetupDecks()
         {
-            playerDeck = HelperFunctions.CombineLists(minorArcana, majorArcana);
+            playerDeck = HelperFunctions.CombineLists(weapon.spells, majorArcana);
 
             for (int i = 0; i < 5; i++)
                 playerDeck.Sort(HelperFunctions.RandomSort);
