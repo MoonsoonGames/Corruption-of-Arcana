@@ -19,6 +19,8 @@ namespace Necropanda
         public string location;
 
         public int maxHealth;
+        public int startingShields;
+        public bool decayShields;
         public E_DamageTypes[] baseDamageResistancesType;
         public float[] baseDamageResistancesModifier;
 
@@ -27,6 +29,7 @@ namespace Necropanda
 
         public SpellCastingAI ai;
         public int actions = 1;
+        public bool usesArcana;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
     }
 }

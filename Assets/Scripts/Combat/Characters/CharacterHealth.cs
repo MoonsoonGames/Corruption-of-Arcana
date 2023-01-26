@@ -29,7 +29,7 @@ namespace Necropanda
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
-        protected int shield;
+        protected int shield; public int GetShield() { return shield; }
 
         //Damage Resistances
         Dictionary<E_DamageTypes, float> currentDamageResistances;
@@ -69,6 +69,7 @@ namespace Necropanda
         protected virtual void SetupHealth()
         {
             maxHealth = character.stats.maxHealth;
+            shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
@@ -101,7 +102,8 @@ namespace Necropanda
         {
             //Decay shield
             //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
-            shield = shield / 2;
+            if (character.stats.decayShields)
+                shield = shield / 2;
             CheckCurseHealth();
         }
 
