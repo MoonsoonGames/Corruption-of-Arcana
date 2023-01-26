@@ -15,8 +15,8 @@ namespace Necropanda
         public float distanceAllowance = 0.5f;
 
         public Object impactEffect;
-        Image image;
-        TrailRenderer trailRenderer;
+        Image[] images;
+        TrailRenderer[] trailRenderers;
 
         bool moving = false;
         Vector2[] movePositions;
@@ -25,10 +25,19 @@ namespace Necropanda
 
         public void Setup(Color color, Object effect)
         {
-            image = GetComponentInChildren<Image>();
-            trailRenderer = GetComponentInChildren<TrailRenderer>();
-            image.color = color;
-            trailRenderer.startColor = color;
+            images = GetComponentsInChildren<Image>();
+            trailRenderers = GetComponentsInChildren<TrailRenderer>();
+
+            foreach (var item in images)
+            {
+                item.color = color;
+            }
+
+            foreach (var item in trailRenderers)
+            {
+                item.startColor = color;
+            }
+
             impactEffect = effect;
         }
 
