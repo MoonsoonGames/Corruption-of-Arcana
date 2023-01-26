@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e306a5ff4f2a5e4a899426faa5a526a, type: 3}
-  m_Name: RatStats
+  m_Name: DireRatStats
   m_EditorClassIdentifier: 
-  characterName: Rat
-  characterObject: {fileID: 2611122861618082293, guid: b1325222814895e4c96e1cd3eec55d2a,
+  characterName: Dire Rat
+  characterObject: {fileID: 2611122861618082293, guid: 2f0e6ec842593ec49bb7626cbc32b57d,
     type: 3}
-  characterSprite: {fileID: 21300000, guid: d39b537d1357c2247b888ce2b990eb8d, type: 3}
+  characterSprite: {fileID: 21300000, guid: 22882333dd0f6a24db11803ffcbac899, type: 3}
   characterDescription: 
   location: 
-  maxHealth: 10
+  maxHealth: 20
   baseDamageResistancesType: 
   baseDamageResistancesModifier: []
   timelineColor: {r: 0.5943396, g: 0.22178254, b: 0.19904771, a: 255}
@@ -33,4 +33,18 @@ MonoBehaviour:
     targetAllies: 0
     targetEnemies: 1
     timeCooldown: 0
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 5ea616b9066b32345a79b67411f70154, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 2
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 3a7fd58c8d2199f43af62835f7f1e0e9, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 3
     lastUsed: 0
