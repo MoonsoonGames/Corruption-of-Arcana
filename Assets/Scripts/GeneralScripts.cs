@@ -398,17 +398,18 @@ namespace Necropanda
         public struct QuestInstance
         {
             public Quest quest;
+            public bool invert;
             public E_QuestStates[] states;
 
             public bool Available()
             {
-                bool available = false;
+                bool available = invert;
 
                 foreach (E_QuestStates state in states)
                 {
                     if (quest.state == state)
                     {
-                        available = true;
+                        available = !invert;
                     }
                 }
 
