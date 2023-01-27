@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 1557550349}
   - component: {fileID: 1557550350}
   - component: {fileID: 1557550389}
-  - component: {fileID: 1557550393}
   - component: {fileID: 1557550426}
   - component: {fileID: 1557550427}
   - component: {fileID: 1557550428}
@@ -90,6 +89,11 @@ GameObject:
   - component: {fileID: 1540057006973464008}
   - component: {fileID: 3669766324439929916}
   - component: {fileID: 4985473023725300849}
+  - component: {fileID: 83853800857293423}
+  - component: {fileID: 469972127416671259}
+  - component: {fileID: 3578661475510205378}
+  - component: {fileID: 4830993491160757885}
+  - component: {fileID: 7257580637123735686}
   m_Layer: 0
   m_Name: MamaRFlowchart
   m_TagString: Untagged
@@ -137,7 +141,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 4297151974821349983}
+  - {fileID: 4973206357410617109}
   selectedCommands: []
   variables:
   - {fileID: 2576016953601205380}
@@ -1286,10 +1290,9 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 8748186801338313306}
-  - {fileID: 1557550393}
-  - {fileID: 1540057006973464006}
-  - {fileID: 7884989111399415442}
   - {fileID: 4978002322658613527}
+  - {fileID: 7884989111399415442}
+  - {fileID: 1540057006973464006}
   - {fileID: 1172977976506605490}
   suppressAllAutoSelections: 0
 --- !u!114 &8748186801338313306
@@ -1497,9 +1500,12 @@ MonoBehaviour:
     want a tutorial or not
   eventHandler: {fileID: 0}
   commandList:
-  - {fileID: 4403016621361458454}
+  - {fileID: 3578661475510205378}
   - {fileID: 2199788546822213885}
   - {fileID: 1557550389}
+  - {fileID: 4403016621361458454}
+  - {fileID: 4830993491160757885}
+  - {fileID: 4477335463836749615}
   - {fileID: 3062201584010359577}
   - {fileID: 1557550350}
   - {fileID: 1557550348}
@@ -1507,7 +1513,7 @@ MonoBehaviour:
   - {fileID: 7706553607675805815}
   - {fileID: 552022054756719989}
   - {fileID: 2457070572315049638}
-  - {fileID: 4477335463836749615}
+  - {fileID: 83853800857293423}
   suppressAllAutoSelections: 0
 --- !u!114 &4403016621361458454
 MonoBehaviour:
@@ -1523,9 +1529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 18
   indentLevel: 0
-  storyText: "Oh my, what's going on here? \r\nWe can\u2019t just leave these people
-    to be attacked Taro, take up arms, we have to defend them. Here, take these,
-    they\u2019re spares of mine that you can use!\r\n"
+  storyText: I'll destroy this barrier
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -1782,7 +1786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 617.0734
+    x: 618.6359
     y: 45.348083
     width: 87.499985
     height: 40
@@ -1799,6 +1803,7 @@ MonoBehaviour:
   - {fileID: 1292409871385088050}
   - {fileID: 8749211361311615168}
   - {fileID: 1540057006973464007}
+  - {fileID: 469972127416671259}
   - {fileID: 1900314673144115651}
   - {fileID: 4985473023725300849}
   suppressAllAutoSelections: 0
@@ -2065,7 +2070,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 623.2538
-    y: -62.919327
+    y: -64.48183
     width: 87.499985
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -2077,6 +2082,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 2670141765464632066}
   - {fileID: 1540057006973464008}
+  - {fileID: 7257580637123735686}
   - {fileID: 5397583368496700652}
   - {fileID: 3669766324439929916}
   suppressAllAutoSelections: 0
@@ -2471,27 +2477,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &1557550393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 52
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &1557550426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3564,7 +3549,7 @@ MonoBehaviour:
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 155, y: 230, z: 148}
+      vector3Value: {x: 155.67, y: 232.49, z: 148}
     variableKey: 
   saveReturnValue: 0
   returnValueVariableKey: 
@@ -3609,7 +3594,7 @@ MonoBehaviour:
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 137, y: 224, z: 45}
+      vector3Value: {x: 116.3, y: 226.04, z: 75.6}
     variableKey: 
   saveReturnValue: 0
   returnValueVariableKey: 
@@ -3654,7 +3639,7 @@ MonoBehaviour:
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 139.86, y: 224, z: 27}
+      vector3Value: {x: 136.8, y: 226.04, z: 44.71}
     variableKey: 
   saveReturnValue: 0
   returnValueVariableKey: 
@@ -3703,3 +3688,164 @@ MonoBehaviour:
     booleanRef: {fileID: 0}
     booleanVal: 0
   targetGameObjectOLD: {fileID: 0}
+--- !u!114 &83853800857293423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 121
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 7199542627679640198}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &469972127416671259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 119
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 7199542627679640198}
+  targetComponentAssemblyName: Necropanda.ProgressQuest, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: ProgressQuest
+  targetMethod: Progress
+  targetMethodText: 'Progress (Quest): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: Necropanda.Quest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      typeFullname: Necropanda.Quest
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 11400000, guid: 4e5d554b8d319174ba0068a8259c80e0, type: 2}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 0, y: 0, z: 0}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &3578661475510205378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 120
+  indentLevel: 0
+  storyText: "Oh my, what's going on here? \r\nWe can\u2019t just leave these people
+    to be attacked Taro, take up arms, we have to defend them. Here, take these,
+    they\u2019re spares of mine that you can use!\r\n"
+  description: 
+  character: {fileID: 0}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &4830993491160757885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 117
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 0}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &7257580637123735686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 118
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 7199542627679640198}
+  targetComponentAssemblyName: Necropanda.ProgressQuest, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: ProgressQuest
+  targetMethod: Progress
+  targetMethodText: 'Progress (Quest): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: Necropanda.Quest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      typeFullname: Necropanda.Quest
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 11400000, guid: d58d605cf73e751458dfa9054b826547, type: 2}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 0, y: 0, z: 0}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
