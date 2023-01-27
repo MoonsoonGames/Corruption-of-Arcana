@@ -119,7 +119,7 @@ namespace Necropanda
 
         void DebugQuest()
         {
-            Debug.Log("Force reset quest " + questName);
+            //Debug.Log("Force reset quest " + questName);
         }
     }
 }
