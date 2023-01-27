@@ -14,8 +14,17 @@ namespace Necropanda
     {
         public NavMeshAgent agent;
 
+        public float defaultDelay = 0.5f;
+
         public void SetDestination(Vector3 position)
         {
+            StartCoroutine(ISetDestination(position, defaultDelay));
+        }
+
+        public IEnumerator ISetDestination(Vector3 position, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
             agent.SetDestination(position);
         }
     }
