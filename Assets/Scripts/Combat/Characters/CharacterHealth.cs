@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using FMODUnity;
+using Necropanda.Utils.Console;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -29,7 +31,7 @@ namespace Necropanda
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
-        protected int shield;
+        protected int shield; public int GetShield() { return shield; }
 
         //Damage Resistances
         Dictionary<E_DamageTypes, float> currentDamageResistances;
@@ -69,6 +71,7 @@ namespace Necropanda
         protected virtual void SetupHealth()
         {
             maxHealth = character.stats.maxHealth;
+            shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
@@ -101,7 +104,8 @@ namespace Necropanda
         {
             //Decay shield
             //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
-            shield = shield / 2;
+            if (character.stats.decayShields)
+                shield = shield / 2;
             CheckCurseHealth();
         }
 
@@ -264,6 +268,16 @@ namespace Necropanda
 
         void Kill()
         {
+            // Get ref to the dev console
+            DeveloperConsoleBehaviour behaviour = GameObject.FindGameObjectWithTag("Console").GetComponent<DeveloperConsoleBehaviour>();
+
+            // Need to find a better way to do this
+            ToggleGodMode tgm = (ToggleGodMode)behaviour.commands[6];
+
+            if (tgm.GodMode == true)
+            {
+                return;
+            }
             dying = true;
             KillFX();
             ActivateArt(false);
@@ -338,7 +352,7 @@ namespace Necropanda
         public void PlaySound(E_DamageTypes type, int value)
         {
             //Play sound from the damage type
-            foreach(var item in soundEffects)
+            foreach (var item in soundEffects)
             {
                 if (item.effectType == type)
                 {

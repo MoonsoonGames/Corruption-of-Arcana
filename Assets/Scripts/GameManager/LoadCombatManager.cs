@@ -54,6 +54,7 @@ namespace Necropanda
         public EnemyQueue queue;
         public List<CharacterStats> enemies;
         public List<string> enemyIDs;
+        public Sprite backdrop;
         bool loading = false;
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
