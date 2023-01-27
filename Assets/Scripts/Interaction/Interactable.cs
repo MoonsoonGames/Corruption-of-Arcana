@@ -28,11 +28,6 @@ namespace Necropanda.Interactable
 
         private void Start()
         {
-            Invoke("Setup", 0.5f);
-        }
-
-        private void Setup()
-        {
             Interactable[] allInteractables = FindObjectsOfType<Interactable>();
 
             for (int i = 0; i < allInteractables.Length; i++)
