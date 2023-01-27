@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -21,17 +22,30 @@ namespace Necropanda
 
         public static CombatManager instance;
 
+        public Image backdropImage;
+        public GameObject loadingImage;
+
         private void Start()
         {
             instance = this;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
 
+            loadingImage.SetActive(true);
+
             Invoke("Setup", 0.1f);
         }
 
         void Setup()
         {
+            loadingImage.SetActive(false);
+
+            if (LoadCombatManager.instance.backdrop != null)
+            {
+                backdropImage.sprite = LoadCombatManager.instance.backdrop;
+                LoadCombatManager.instance.backdrop = null;
+            }
+
             DeckManager.instance.SetupDecks();
         }
 

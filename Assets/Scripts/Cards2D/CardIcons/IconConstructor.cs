@@ -30,10 +30,9 @@ namespace Necropanda
             Instantiate(effectPrefab, effectIcon.transform);
         }
 
-        public void ConstructStatus(float newValue, Object effectPrefab, int duration, string newTarget, StatusEffects status)
+        public void ConstructStatus(bool applyOverShield, Object effectPrefab, int duration, string newTarget, StatusEffects status)
         {
-            float chance = newValue * 100;
-            value.text = chance.ToString() + "% for " + duration.ToString() + " turns";
+            value.text = applyOverShield ? "" : "This status is resisted by shields";
 
             target.text = "on " + newTarget;
 

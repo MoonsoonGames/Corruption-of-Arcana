@@ -100,7 +100,7 @@ namespace Necropanda
                 IconConstructor constructor = section.GetComponent<IconConstructor>();
 
                 if (constructor != null)
-                    constructor.ConstructStatus(item.chance, item.effectIcon, item.duration, GetTargetType(item.target), item.effect);
+                    constructor.ConstructStatus(item.applyOverShield, item.effectIcon, item.duration, GetTargetType(item.target), item.effect);
 
                 oldSections.Add(section);
             }
