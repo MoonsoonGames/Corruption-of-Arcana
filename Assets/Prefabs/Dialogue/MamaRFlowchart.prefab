@@ -38,14 +38,12 @@ GameObject:
   - component: {fileID: 1900314673144115651}
   - component: {fileID: 1390153319984406287}
   - component: {fileID: 2670141765464632066}
-  - component: {fileID: 3632879638105130428}
   - component: {fileID: 5397583368496700652}
   - component: {fileID: 2576016953601205380}
   - component: {fileID: -5899837082202159541}
   - component: {fileID: 3695006393057515360}
   - component: {fileID: -7204617973705201879}
   - component: {fileID: 4590581632041232560}
-  - component: {fileID: -5399129278910862881}
   - component: {fileID: 1557550347}
   - component: {fileID: 1557550348}
   - component: {fileID: 1557550349}
@@ -56,9 +54,6 @@ GameObject:
   - component: {fileID: 1557550427}
   - component: {fileID: 1557550428}
   - component: {fileID: 1557550429}
-  - component: {fileID: 1557550430}
-  - component: {fileID: 1557550431}
-  - component: {fileID: 1557550443}
   - component: {fileID: 8482240915833538044}
   - component: {fileID: 8482240915833538045}
   - component: {fileID: 8482240915833538047}
@@ -69,8 +64,6 @@ GameObject:
   - component: {fileID: 7792812529770926800}
   - component: {fileID: 3095628652083129235}
   - component: {fileID: 6505335250807431848}
-  - component: {fileID: 5764016320541968722}
-  - component: {fileID: 8482240915833538114}
   - component: {fileID: 2633085887354796342}
   - component: {fileID: 8957513061101197563}
   - component: {fileID: 3867581736499739443}
@@ -92,6 +85,11 @@ GameObject:
   - component: {fileID: 7034122205469997651}
   - component: {fileID: 6634580495160358230}
   - component: {fileID: 2273708091613306806}
+  - component: {fileID: 1540057006973464006}
+  - component: {fileID: 1540057006973464007}
+  - component: {fileID: 1540057006973464008}
+  - component: {fileID: 3669766324439929916}
+  - component: {fileID: 4985473023725300849}
   m_Layer: 0
   m_Name: MamaRFlowchart
   m_TagString: Untagged
@@ -127,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -206.20378, y: 54.1554}
+  scrollPos: {x: -181.20378, y: 143.21777}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 598
@@ -139,9 +137,8 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 7358425574035776968}
-  selectedCommands:
-  - {fileID: 579693572301727684}
+  - {fileID: 4297151974821349983}
+  selectedCommands: []
   variables:
   - {fileID: 2576016953601205380}
   description: 
@@ -1290,8 +1287,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 8748186801338313306}
   - {fileID: 1557550393}
-  - {fileID: 1557550443}
-  - {fileID: 8482240915833538114}
+  - {fileID: 1540057006973464006}
   - {fileID: 7884989111399415442}
   - {fileID: 4978002322658613527}
   - {fileID: 1172977976506605490}
@@ -1504,7 +1500,6 @@ MonoBehaviour:
   - {fileID: 4403016621361458454}
   - {fileID: 2199788546822213885}
   - {fileID: 1557550389}
-  - {fileID: 5764016320541968722}
   - {fileID: 3062201584010359577}
   - {fileID: 1557550350}
   - {fileID: 1557550348}
@@ -1513,7 +1508,6 @@ MonoBehaviour:
   - {fileID: 552022054756719989}
   - {fileID: 2457070572315049638}
   - {fileID: 4477335463836749615}
-  - {fileID: 3867581736499739443}
   suppressAllAutoSelections: 0
 --- !u!114 &4403016621361458454
 MonoBehaviour:
@@ -1789,7 +1783,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 617.0734
-    y: 43.785583
+    y: 45.348083
     width: 87.499985
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1804,11 +1798,9 @@ MonoBehaviour:
   - {fileID: 3518114114803904247}
   - {fileID: 1292409871385088050}
   - {fileID: 8749211361311615168}
-  - {fileID: 1557550430}
-  - {fileID: 1557550431}
+  - {fileID: 1540057006973464007}
   - {fileID: 1900314673144115651}
-  - {fileID: 7792812529770926800}
-  - {fileID: 8957513061101197563}
+  - {fileID: 4985473023725300849}
   suppressAllAutoSelections: 0
 --- !u!114 &673152519570245988
 MonoBehaviour:
@@ -2084,11 +2076,9 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2670141765464632066}
-  - {fileID: -5399129278910862881}
-  - {fileID: 3632879638105130428}
+  - {fileID: 1540057006973464008}
   - {fileID: 5397583368496700652}
-  - {fileID: 8221264800283203940}
-  - {fileID: 2633085887354796342}
+  - {fileID: 3669766324439929916}
   suppressAllAutoSelections: 0
 --- !u!114 &2670141765464632066
 MonoBehaviour:
@@ -2118,27 +2108,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &3632879638105130428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 33
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
-  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &5397583368496700652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2390,27 +2359,6 @@ MonoBehaviour:
     booleanRef: {fileID: 0}
     booleanVal: 0
   targetGameObjectOLD: {fileID: 0}
---- !u!114 &-5399129278910862881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 46
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &1557550347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2621,69 +2569,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 58
   indentLevel: 0
---- !u!114 &1557550430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 60
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
---- !u!114 &1557550431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 59
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
-  targetGameObjectOLD: {fileID: 0}
---- !u!114 &1557550443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 61
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &8482240915833538044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2973,48 +2858,6 @@ MonoBehaviour:
   returnValueType: System.Void
   showInherited: 0
   callMode: 0
---- !u!114 &5764016320541968722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 79
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
---- !u!114 &8482240915833538114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7199542627679640198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 80
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
-  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &2633085887354796342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3675,6 +3518,183 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 111
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 7199542627679640198}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &1540057006973464006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 114
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 0}
+  targetComponentAssemblyName: Necropanda.NPCMovement, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: NPCMovement
+  targetMethod: SetDestination
+  targetMethodText: 'SetDestination (Vector3): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      typeFullname: UnityEngine.Vector3
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 0}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 155, y: 230, z: 148}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &1540057006973464007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 113
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 0}
+  targetComponentAssemblyName: Necropanda.NPCMovement, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: NPCMovement
+  targetMethod: SetDestination
+  targetMethodText: 'SetDestination (Vector3): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      typeFullname: UnityEngine.Vector3
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 0}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 137, y: 224, z: 45}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &1540057006973464008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 112
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 0}
+  targetComponentAssemblyName: Necropanda.NPCMovement, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: NPCMovement
+  targetMethod: SetDestination
+  targetMethodText: 'SetDestination (Vector3): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      typeFullname: UnityEngine.Vector3
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 0}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 139.86, y: 224, z: 27}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &3669766324439929916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 115
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 7199542627679640198}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &4985473023725300849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199542627679640198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 116
   indentLevel: 0
   _targetGameObject:
     gameObjectRef: {fileID: 0}
