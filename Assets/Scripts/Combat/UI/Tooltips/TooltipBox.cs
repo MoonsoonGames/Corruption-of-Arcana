@@ -44,10 +44,20 @@ namespace Necropanda
                 {
                     tooltipPos.x = canvas.rect.width - width;
                 }
+                else if (Mathf.Abs(tooltipPos.x) + width > canvas.rect.width)
+                {
+                    tooltipPos.x = -canvas.rect.width + width;
+                }
+
                 if (tooltipPos.y + height > canvas.rect.height)
                 {
                     tooltipPos.y = canvas.rect.height - height;
                 }
+                else if (Mathf.Abs(tooltipPos.y) + height > canvas.rect.height)
+                {
+                    tooltipPos.y = -canvas.rect.width + height;
+                }
+
                 transform.GetComponent<RectTransform>().anchoredPosition = tooltipPos;
             }
         }
