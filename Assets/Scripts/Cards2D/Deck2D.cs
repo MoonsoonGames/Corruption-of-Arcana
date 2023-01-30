@@ -222,9 +222,9 @@ namespace Necropanda
                             buildDeck.equippedSpells.Remove(spell);
                         }
                     }
-                }
 
-                Destroy(card.gameObject);
+                    Destroy(card.gameObject);
+                }
             }
 
             ResetArrays();
