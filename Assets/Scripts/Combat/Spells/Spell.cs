@@ -533,6 +533,27 @@ namespace Necropanda
             return moduleConstruct;
         }
 
+        public Dictionary<CharacterStats, int> SummonIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+
+            Dictionary<CharacterStats, int> moduleDictionary = new Dictionary<CharacterStats, int>();
+
+            foreach (var item in spawnEnemies)
+            {
+                if (moduleDictionary.ContainsKey(item))
+                {
+                    moduleDictionary[item]++;
+                }
+                else
+                {
+                    moduleDictionary.Add(item, 1);
+                }
+            }
+
+            return moduleDictionary;
+        }
+
         #endregion
     }
 }

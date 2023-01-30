@@ -16,14 +16,39 @@ namespace Necropanda
         public TextMeshProUGUI description;
 
         public bool followMouse = false;
+        RectTransform bg;
+        public RectTransform canvas;
+        public float xMultiplier = 1.87f;
+        public float yMultiplier = 2.475f;
+
+        private void Start()
+        {
+            bg = GetComponent<RectTransform>();
+        }
 
         private void Update()
         {
             if (followMouse)
             {
+                //https://www.youtube.com/watch?v=dzkFdkwzVhs
+
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 transform.position = mousePosition;
+
+                Vector2 tooltipPos = transform.GetComponent<RectTransform>().anchoredPosition;
+                float width = bg.rect.width * xMultiplier;
+                float height = bg.rect.height * yMultiplier;
+
+                if (tooltipPos.x + width > canvas.rect.width)
+                {
+                    tooltipPos.x = canvas.rect.width - width;
+                }
+                if (tooltipPos.y + height > canvas.rect.height)
+                {
+                    tooltipPos.y = canvas.rect.height - height;
+                }
+                transform.GetComponent<RectTransform>().anchoredPosition = tooltipPos;
             }
         }
 
