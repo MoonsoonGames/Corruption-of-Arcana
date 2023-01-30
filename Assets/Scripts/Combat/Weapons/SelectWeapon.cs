@@ -34,7 +34,7 @@ namespace Necropanda
 
             previewWeapon = weapon;
 
-            nameText.text = weapon.weaponName;
+            nameText.text = weapon.weaponName + " (Card Strength:" + weapon.power + ")";
             descriptionText.text = weapon.description;
             image.sprite = previewWeapon.image;
 
