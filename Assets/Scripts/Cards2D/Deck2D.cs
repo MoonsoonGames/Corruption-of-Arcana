@@ -195,37 +195,56 @@ namespace Necropanda
         {
             foreach (CardDrag2D card in cards)
             {
-                DrawCard drawCard = card.GetComponent<DrawCard>();
-                if (drawCard != null)
+                if (card != null)
                 {
-                    if (discard)
+                    DrawCard drawCard = card.GetComponent<DrawCard>();
+                    if (drawCard != null)
                     {
-                        drawCard.DiscardCard();
+                        if (discard)
+                        {
+                            drawCard.DiscardCard();
+                        }
+                        else
+                        {
+                            drawCard.ReturnToDeck();
+                        }
                     }
-                    else
-                    {
-                        drawCard.ReturnToDeck();
-                    }
-                }
 
-                if (buildDeck != null)
-                {
-                    Spell spell = card.GetComponent<Card>().spell;
-                    if (collection)
+                    if (buildDeck != null)
                     {
-                        buildDeck.collectedSpells.Remove(spell);
-                    }
-                    else
-                    {
-                        buildDeck.equippedSpells.Remove(spell);
+                        Spell spell = card.GetComponent<Card>().spell;
+                        if (collection)
+                        {
+                            buildDeck.collectedSpells.Remove(spell);
+                        }
+                        else
+                        {
+                            buildDeck.equippedSpells.Remove(spell);
+                        }
                     }
                 }
 
                 Destroy(card.gameObject);
             }
 
-            cards = new CardDrag2D[0];
-            timeline.SimulateSpellEffects();
+            ResetArrays();
+            if (timeline != null)
+                timeline.SimulateSpellEffects();
+        }
+
+        /// <summary>
+        /// Removes all cards from the deck without taking them from the timeline
+        /// </summary>
+        public void DestroyAllCards()
+        {
+            CardDrag2D[] cardObjects = GetComponentsInChildren<CardDrag2D>();
+
+            foreach (CardDrag2D card in cardObjects)
+            {
+                Destroy(card.gameObject);
+            }
+
+            ResetArrays();
         }
 
         /// <summary>

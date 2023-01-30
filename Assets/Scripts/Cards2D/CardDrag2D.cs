@@ -65,6 +65,8 @@ namespace Necropanda
             baseRot = transform.rotation.eulerAngles;
 
             card = GetComponent<Card>();
+
+            ScaleCard(1, false);
         }
 
         #endregion

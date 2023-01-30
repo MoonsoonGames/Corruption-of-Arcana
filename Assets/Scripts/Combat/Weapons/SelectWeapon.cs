@@ -18,18 +18,46 @@ namespace Necropanda
         public TextMeshProUGUI nameText, descriptionText;
         public Image image;
 
+        public Deck2D deck;
+
+        public Object cardPrefab;
+
         private void OnEnable()
         {
-            PreviewWeapon(DeckManager.instance.weapon);
+            if (DeckManager.instance.weapon != null)
+                PreviewWeapon(DeckManager.instance.weapon);
         }
 
         public void PreviewWeapon(Weapon weapon)
         {
+            deck.DestroyAllCards();
+
             previewWeapon = weapon;
 
             nameText.text = weapon.weaponName;
             descriptionText.text = weapon.description;
             image.sprite = previewWeapon.image;
+
+            foreach (var item in weapon.spells)
+            {
+                if (item == null)
+                    break;
+
+                Debug.Log(item.spellName);
+                GameObject card = Instantiate(cardPrefab, transform.GetChild(0).transform) as GameObject;
+                CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+                DrawCard drawCard = card.GetComponent<DrawCard>();
+
+                drawCard.draw = false;
+                drawCard.Setup(item);
+
+                deck.AddCard(cardDrag);
+
+                //Reset card scales
+                cardDrag.transform.localScale *= 10;
+                cardDrag.Setup();
+                cardDrag.ScaleCard(1, false);
+            }
         }
 
         public void EquipWeapon()
