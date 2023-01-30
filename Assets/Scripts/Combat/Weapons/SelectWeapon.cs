@@ -30,7 +30,8 @@ namespace Necropanda
 
         public void PreviewWeapon(Weapon weapon)
         {
-            deck.DestroyAllCards();
+            if (deck.CurrentCardsLength() > 0)
+                deck.RemoveAllCards(false);
 
             previewWeapon = weapon;
 

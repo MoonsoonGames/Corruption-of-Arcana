@@ -56,7 +56,7 @@ namespace Necropanda
             {
                 Card cardInstance = card.GetComponent<Card>();
 
-                Spell spellInstance= cardInstance.spell;
+                Spell spellInstance = cardInstance.spell;
 
                 spells.Add(spellInstance);
             }
@@ -91,7 +91,7 @@ namespace Necropanda
             layout = GetComponent<HorizontalLayoutGroup>();
 
             character = GetComponentInParent<Character>();
-            
+
             timeline = GameObject.FindObjectOfType<Timeline>();
             if (timeline != null)
                 player = timeline.player;
@@ -195,56 +195,37 @@ namespace Necropanda
         {
             foreach (CardDrag2D card in cards)
             {
-                if (card != null)
+                DrawCard drawCard = card.GetComponent<DrawCard>();
+                if (drawCard != null)
                 {
-                    DrawCard drawCard = card.GetComponent<DrawCard>();
-                    if (drawCard != null)
+                    if (discard)
                     {
-                        if (discard)
-                        {
-                            drawCard.DiscardCard();
-                        }
-                        else
-                        {
-                            drawCard.ReturnToDeck();
-                        }
+                        drawCard.DiscardCard();
                     }
-
-                    if (buildDeck != null)
+                    else
                     {
-                        Spell spell = card.GetComponent<Card>().spell;
-                        if (collection)
-                        {
-                            buildDeck.collectedSpells.Remove(spell);
-                        }
-                        else
-                        {
-                            buildDeck.equippedSpells.Remove(spell);
-                        }
+                        drawCard.ReturnToDeck();
                     }
-
-                    Destroy(card.gameObject);
                 }
-            }
 
-            ResetArrays();
-            if (timeline != null)
-                timeline.SimulateSpellEffects();
-        }
+                if (buildDeck != null)
+                {
+                    Spell spell = card.GetComponent<Card>().spell;
+                    if (collection)
+                    {
+                        buildDeck.collectedSpells.Remove(spell);
+                    }
+                    else
+                    {
+                        buildDeck.equippedSpells.Remove(spell);
+                    }
+                }
 
-        /// <summary>
-        /// Removes all cards from the deck without taking them from the timeline
-        /// </summary>
-        public void DestroyAllCards()
-        {
-            CardDrag2D[] cardObjects = GetComponentsInChildren<CardDrag2D>();
-
-            foreach (CardDrag2D card in cardObjects)
-            {
                 Destroy(card.gameObject);
             }
 
-            ResetArrays();
+            cards = new CardDrag2D[0];
+            timeline.SimulateSpellEffects();
         }
 
         /// <summary>
