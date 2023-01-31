@@ -62,6 +62,9 @@ GameObject:
   - component: {fileID: 3887030957885319202}
   - component: {fileID: 6003572469788025619}
   - component: {fileID: 360053527035535608}
+  - component: {fileID: 1665256261173967772}
+  - component: {fileID: 8127732162219825049}
+  - component: {fileID: 5688403151481914171}
   m_Layer: 2
   m_Name: NPC Base
   m_TagString: Untagged
@@ -166,6 +169,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 6003572469788025619}
   defaultDelay: 0.5
+  animatorDelay: {x: 0, y: 1}
+--- !u!95 &1665256261173967772
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142319793514134228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7a495ad6217b2d945b9e58b4c40d142b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8127732162219825049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142319793514134228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338ee8a5ba381bb4fbec23f392776ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTerrain: 0
+--- !u!114 &5688403151481914171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142319793514134228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c54bea6d8f15e443866121b37b505b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass: {fileID: 6913681875276513784, guid: 01aebb57ba4bfb24d91c0322520e9748, type: 3}
+  dirt: {fileID: 6913681875276513784, guid: 2f7c24743f061f7489471b285338349e, type: 3}
+  stone: {fileID: 6441297445223667176, guid: ef7c953fee4c76f408e245e605681566, type: 3}
+  wood: {fileID: 6441297445223667176, guid: ef7c953fee4c76f408e245e605681566, type: 3}
+  crystal: {fileID: 6913681875276513784, guid: 0edfb41e832d7df43898b17b841e9bb8, type: 3}
+  water: {fileID: 6913681875276513784, guid: c5385e7b61a43a24c9d40eb5b3985085, type: 3}
 --- !u!1 &8433251129639511173
 GameObject:
   m_ObjectHideFlags: 0
