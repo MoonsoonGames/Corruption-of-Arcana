@@ -55,12 +55,12 @@ namespace Necropanda
                 {
                     if (LoadCombatManager.instance.enemies.Count != 0)
                     {
-                        Object enemyObject = LoadCombatManager.instance.enemies[0];
+                        CharacterStats enemyObject = LoadCombatManager.instance.enemies[0];
                         LoadCombatManager.instance.enemies.RemoveAt(0);
 
                         if (enemyObject != null)
                         {
-                            GameObject enemyRef = Instantiate(enemyObject, spawners[i].gameObject.transform) as GameObject;
+                            GameObject enemyRef = Instantiate(enemyObject.characterObject, spawners[i].gameObject.transform) as GameObject;
 
                             Character enemyCharacter = enemyRef.GetComponent<Character>();
 

@@ -18,7 +18,7 @@ namespace Necropanda
         public string questDescription;
         string questGiver = "";
 
-        public E_QuestStates state = E_QuestStates.NotStarted;
+        public E_QuestStates state;
         public int currentProgress = 0;
         public int maxProgress = 1;
 
@@ -29,10 +29,19 @@ namespace Necropanda
         //public RewardsPool rewards
         //public int rewardNumber
 
+        [ContextMenu("Force Restart Quest")]
+        public void ForceRestartQuest()
+        {
+            ForceResetQuest();
+            StartQuest("Mama R", null);
+            UpdateQuestInfo();
+        }
+
         [ContextMenu("Force Start Quest")]
         public void ForceStartQuest()
         {
             StartQuest("Mama R", null);
+            UpdateQuestInfo();
         }
 
         [ContextMenu("Force Reset Quest")]
@@ -45,6 +54,8 @@ namespace Necropanda
             {
                 quest.ForceResetQuest();
             }
+
+            UpdateQuestInfo();
         }
 
         public void StartQuest(string questGiver, Quest parent)
@@ -59,6 +70,8 @@ namespace Necropanda
             state = E_QuestStates.InProgress;
 
             EnableNextObjective();
+
+            UpdateQuestInfo();
         }
 
         [ContextMenu("Quest Progress")]
@@ -84,6 +97,8 @@ namespace Necropanda
             {
                 EnableNextObjective();
             }
+
+            UpdateQuestInfo();
         }
 
         void EnableNextObjective()
@@ -94,23 +109,47 @@ namespace Necropanda
                 {
                     subQuests[currentProgress].StartQuest(questGiver, this);
                 }
-                else
-                {
-                    foreach (Quest objective in subQuests)
-                    {
-                        if (objective.state == E_QuestStates.NotStarted)
-                        {
-                            objective.StartQuest(questGiver, this);
-                        }
-                    }
-                }
             }
+
+            UpdateQuestInfo();
         }
 
         void GiveRewards()
         {
+            UpdateQuestInfo();
             //could have this depend on how the quest was finished
-            //rewards.GiveRe
+            //rewards.GiveRewards
+        }
+
+        void UpdateQuestInfo()
+        {
+            if (QuestInfo.instance != null)
+            {
+                QuestInfo.instance.UpdateQuestInfo();
+            }
+        }
+
+        public Quest GetCurrentQuestProgress()
+        {
+            //currently this only allows quests with a linear progression, so no choices yet
+            if (state != E_QuestStates.InProgress)
+                return null;
+
+            Quest quest = null;
+
+            if (subQuests.Length == 0)
+            {
+                if (state == E_QuestStates.InProgress)
+                {
+                    quest = this;
+                }
+            }
+            else
+            {
+                quest = subQuests[currentProgress].GetCurrentQuestProgress();
+            }
+
+            return quest;
         }
     }
 }

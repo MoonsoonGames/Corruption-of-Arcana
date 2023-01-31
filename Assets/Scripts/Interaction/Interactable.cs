@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -54,6 +55,7 @@ namespace Necropanda.Interactable
         }
 
         private void Update()
+        
         {
             if (interactingCharacter != null && forceInteract == false)
             {
@@ -132,7 +134,7 @@ namespace Necropanda.Interactable
             SetInteractMessage(null, null);
 
             //Call interface function
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
             IInteractable[] interacts = GetComponents<IInteractable>();
             foreach (var item in interacts)
             {
@@ -149,7 +151,7 @@ namespace Necropanda.Interactable
         {
             SetInteractMessage(null, null);
             //Call interface function
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
             ICancelInteractable[] interacts = GetComponents<ICancelInteractable>();
             foreach (var item in interacts)
             {

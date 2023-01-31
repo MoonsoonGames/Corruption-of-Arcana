@@ -38,6 +38,28 @@ namespace Necropanda.Utils.Console
 
         private static DeveloperConsoleBehaviour instance;  // The instance of the console. There can only be one.
 
+        private static string _outputMessage;
+        public static string OutputMessage
+        {
+            get { return _outputMessage; }
+            set
+            {
+                // Check the message len
+                if (value.Length > 50)
+                {
+                    // Warn that the status message might be too long
+                    Debug.LogWarning("Status message was too long! It might not fit in the window!");
+                    // Set the status variable
+                    _outputMessage = value;
+                }
+                else
+                {
+                    // Set the status variable
+                    _outputMessage = value;
+                }
+            }
+        }
+
         private DeveloperConsole developerConsole;  // Reference the the Console
         private DeveloperConsole DeveloperConsole   // Getter for the console
         {
@@ -139,6 +161,12 @@ namespace Necropanda.Utils.Console
             DeveloperConsole.ProcessCommand(inputValue);    // Process the command.
 
             inputField.text = string.Empty; // Reset the input field text.
+        }
+
+        public void UpdateOutputMessage()
+        {
+            consoleText.text += "\n";
+            consoleText.text += OutputMessage;
         }
     }
 }

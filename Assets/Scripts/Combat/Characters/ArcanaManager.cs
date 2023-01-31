@@ -42,7 +42,7 @@ namespace Necropanda
         public void CheckArcana(int arcana)
         {
             arcanaSlider.SetSliderValue(arcana);
-            Debug.Log("Arcana is " + arcana + "/" + arcanaMax);
+            //Debug.Log("Arcana is " + arcana + "/" + arcanaMax);
             if (arcana <= arcanaMax)
             {
                 //Debug.Log("Can cast");
@@ -64,7 +64,7 @@ namespace Necropanda
         void CheckCardOverlays(int arcana)
         {
             GameObject[] cardObjects = GameObject.FindGameObjectsWithTag("Card");
-            Debug.Log("Length is " + cardObjects.Length);
+            //Debug.Log("Length is " + cardObjects.Length);
             foreach (var item in cardObjects)
             {
                 Card itemCard = item.GetComponent<Card>();
