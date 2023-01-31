@@ -15,7 +15,7 @@ namespace Necropanda
 
         public void SpawnFootstepFX(int terrain, Vector3 pos)
         {
-            Debug.Log("Spawning effect");
+            //Debug.Log("Spawning effect");
             switch (terrain)
             {
                 case 0:

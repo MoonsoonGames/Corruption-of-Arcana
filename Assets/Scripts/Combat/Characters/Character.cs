@@ -206,7 +206,7 @@ namespace Necropanda
         {
             bool canTarget = true;
 
-            if (banish || health.GetHealth() < 0)
+            if (banish || health.GetHealth() < 0 || health.dying)
             {
                 canTarget = false;
             }

@@ -13,11 +13,14 @@ namespace Necropanda
     public class CharacterStats : ScriptableObject
     {
         public string characterName;
+        public Object characterObject;
         public Sprite characterSprite;
         public string characterDescription;
         public string location;
 
         public int maxHealth;
+        public int startingShields;
+        public bool decayShields;
         public E_DamageTypes[] baseDamageResistancesType;
         public float[] baseDamageResistancesModifier;
 
@@ -25,6 +28,8 @@ namespace Necropanda
         public Object spawnObject;
 
         public SpellCastingAI ai;
+        public int actions = 1;
+        public bool usesArcana;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
     }
 }

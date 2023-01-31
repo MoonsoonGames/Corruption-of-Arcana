@@ -18,7 +18,7 @@ namespace Necropanda.AI
         public NavMeshAgent agent;
         Vector3 startPos;
 
-        public Object enemyObject;
+        public CharacterStats enemyStats;
         public bool boss;
 
         //state variables
@@ -36,10 +36,11 @@ namespace Necropanda.AI
         public float wanderRadius;
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
-        
+        Animator animator;
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
             moduleManager = gameObject.GetComponent<ModuleManager>();
 
             agent = GetComponent<NavMeshAgent>();
@@ -52,15 +53,15 @@ namespace Necropanda.AI
         {
             player = playerRef;
             active = true;
-            Debug.Log("Activate AI");
+            //Debug.Log("Activate AI");
         }
 
         public void DeactivateAI()
         {
             player = null;
             active = false;
-            Debug.Log("Deactivate AI");
-            Debug.Log("test");
+            //Debug.Log("Deactivate AI");
+            //Debug.Log("test");
             agent.SetDestination(startPos);
         }
 
@@ -80,6 +81,15 @@ namespace Necropanda.AI
             }
 
             Timer();
+
+            bool moving =
+                (
+                agent.velocity.x > 0.5f || agent.velocity.x < -0.5f ||
+                agent.velocity.y > 0.5f || agent.velocity.y < -0.5f ||
+                agent.velocity.z > 0.5f || agent.velocity.z < -0.5f
+                );
+
+            animator.SetBool("Moving", moving);
         }
 
         /// <summary>

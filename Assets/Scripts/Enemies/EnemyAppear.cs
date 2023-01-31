@@ -79,7 +79,7 @@ namespace Necropanda
                     {
                         if (!active)
                         {
-                            Debug.Log("Interacted - Unearth and activate AI");
+                            //Debug.Log("Interacted - Unearth and activate AI");
                             //Unearth and activate AI
                             art.SetActive(true);
                             aiScript.ActivateAI(player);
