@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.14057495, g: 0.15922877, b: 0.254717, a: 1}
+  m_FogColor: {r: 0.030037384, g: 0.065830715, b: 0.23584908, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.03
+  m_FogDensity: 0.04
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 08560bf0f77f44d4aaeb4adceaf75b2b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09634491, g: 0.12139518, b: 0.22974214, a: 1}
+  m_Sun: {fileID: 1857555243}
+  m_IndirectSpecularColor: {r: 0.01547995, g: 0.017742882, b: 0.089901425, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -250,6 +250,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6576177783100473247, guid: 3578337a01447f54086e9042ed6eca0b,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8229430158608909562, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -345,6 +350,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1103618553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4634495050974075080, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+    type: 3}
+  m_PrefabInstance: {fileID: 125262453561125712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1103618557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103618553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: fe77b204590ba5848bc8993d736f536d, type: 2}
+--- !u!64 &1103618558
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103618553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1831455838
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,8 +514,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9716981, g: 0.9579477, b: 0.9579477, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.3915094, g: 0.5668978, b: 1, a: 1}
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -482,7 +524,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.684
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -565,6 +607,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 366214820293807554, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 366214820293807554, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 366214820293807554, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 366214820293807554, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.43867922
+      objectReference: {fileID: 0}
+    - target: {fileID: 366214820293807554, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 366214820293807554, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.93257385
+      objectReference: {fileID: 0}
+    - target: {fileID: 657472341836094340, guid: 2af6c3e99733dda41925c45baa1b7ed6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9cce3349ab88d47489e170882d71cc20, type: 2}
     - target: {fileID: 4634495050974075080, guid: 2af6c3e99733dda41925c45baa1b7ed6,
         type: 3}
       propertyPath: m_Name
