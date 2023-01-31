@@ -60,6 +60,18 @@ namespace Necropanda
             return outputList;
         }
 
+        public static List<T> ArrayToList<T>(T[] array)
+        {
+            List<T> list = new List<T>();
+
+            foreach (var item in array)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
+
         /// <summary>
         /// Randomly sorts a list
         /// </summary>
@@ -229,12 +241,11 @@ namespace Necropanda
 
         #region Status Effects
 
-        public static bool ApplyChance(float chance)
+        public static bool ApplyEffect(Character target, StatusStruct status)
         {
             bool apply = false;
-            float roll = Random.Range(0f, 1f);
 
-            if (roll <= chance)
+            if (target.GetHealth().GetShield() <= 0 || status.applyOverShield)
             {
                 //Debug.Log("Apply success");
                 apply = true;
@@ -253,7 +264,7 @@ namespace Necropanda
         {
             public StatusEffects status;
             public int duration;
-            public float chance;
+            public bool applyOverShield;
         }
 
         [System.Serializable]
@@ -377,7 +388,7 @@ namespace Necropanda
         public struct StatusIconConstruct
         {
             public StatusEffects effect;
-            public float chance;
+            public bool applyOverShield;
             public Object effectIcon;
             public int duration;
 
@@ -399,17 +410,18 @@ namespace Necropanda
         public struct QuestInstance
         {
             public Quest quest;
+            public bool invert;
             public E_QuestStates[] states;
 
             public bool Available()
             {
-                bool available = false;
+                bool available = invert;
 
                 foreach (E_QuestStates state in states)
                 {
                     if (quest.state == state)
                     {
-                        available = true;
+                        available = !invert;
                     }
                 }
 

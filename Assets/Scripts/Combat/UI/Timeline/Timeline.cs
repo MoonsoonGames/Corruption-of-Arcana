@@ -187,7 +187,7 @@ namespace Necropanda
                     //Adds spell block to layout group
                     spellBlocks.Add(spellBlock);
 
-                    if (item.caster == player)
+                    if (item.caster.stats.usesArcana)
                     {
                         arcanaCount += item.spell.arcanaCost;
                     }

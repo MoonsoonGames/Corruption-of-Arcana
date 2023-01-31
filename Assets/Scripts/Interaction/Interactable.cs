@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -54,6 +55,7 @@ namespace Necropanda.Interactable
         }
 
         private void Update()
+        
         {
             if (interactingCharacter != null && forceInteract == false)
             {

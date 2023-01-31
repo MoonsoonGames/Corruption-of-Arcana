@@ -21,6 +21,8 @@ namespace Necropanda
             title = newspell.caster.stats.characterName;
 
             description = newspell.caster.stats.characterName + " is casting " + newspell.spell.spellName + " on " + newspell.target.stats.characterName + " (" + newspell.spell.speed + ")";
+
+            revealed = Timeline.instance.ShowSpells(newspell.caster);
         }
 
         /// <summary>

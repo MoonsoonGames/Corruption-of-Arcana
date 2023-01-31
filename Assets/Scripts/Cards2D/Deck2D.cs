@@ -43,6 +43,7 @@ namespace Necropanda
         public int maxCards = 3;
         public int CurrentCardsLength()
         {
+            if (cards == null) return 0;
             return cards.Length;
         }
 
@@ -56,7 +57,7 @@ namespace Necropanda
             {
                 Card cardInstance = card.GetComponent<Card>();
 
-                Spell spellInstance= cardInstance.spell;
+                Spell spellInstance = cardInstance.spell;
 
                 spells.Add(spellInstance);
             }
@@ -91,7 +92,7 @@ namespace Necropanda
             layout = GetComponent<HorizontalLayoutGroup>();
 
             character = GetComponentInParent<Character>();
-            
+
             timeline = GameObject.FindObjectOfType<Timeline>();
             if (timeline != null)
                 player = timeline.player;
@@ -193,6 +194,7 @@ namespace Necropanda
         /// </summary>
         public void RemoveAllCards(bool discard)
         {
+            ResetArrays();
             foreach (CardDrag2D card in cards)
             {
                 DrawCard drawCard = card.GetComponent<DrawCard>();
@@ -225,7 +227,8 @@ namespace Necropanda
             }
 
             cards = new CardDrag2D[0];
-            timeline.SimulateSpellEffects();
+            if (timeline != null)
+                timeline.SimulateSpellEffects();
         }
 
         /// <summary>

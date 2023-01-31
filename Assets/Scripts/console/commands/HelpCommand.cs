@@ -22,7 +22,10 @@ namespace Necropanda.Utils.Console.Commands
             foreach (var command in behaviour.commands)
             {
                 string helpText = command.ToString();
-                Debug.Log(helpText);
+                DeveloperConsoleBehaviour.OutputMessage = $"All availabe commands are: \n {command}";
+                // get ref, call the function to update the message
+                DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+                developerConsoleBehaviour.UpdateOutputMessage();
             }
 
             // Return true when the command is done.

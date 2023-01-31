@@ -19,14 +19,15 @@ namespace Necropanda.Utils.Console.Commands
             // // Check to make sure that an arguemnt is passed in, if not return false (do nothing)
             // if (args.Length != 1) { return false; }
 
-
-
             // Get ref to all of the UI
             Canvas allUI = GameObject.FindGameObjectWithTag("AllUI").GetComponent<Canvas>();
-
             // Toggle the UI
             allUI.enabled = !allUI.enabled;
 
+            DeveloperConsoleBehaviour.OutputMessage = $"Toggled the UI, state is {allUI.isActiveAndEnabled}";
+            // get ref, call the function to update the message
+            DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+            developerConsoleBehaviour.UpdateOutputMessage();
 
             return true;
         }

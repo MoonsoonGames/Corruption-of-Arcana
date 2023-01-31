@@ -12,16 +12,24 @@ namespace Necropanda
     public class TEMP_OpenDeckbuilding : MonoBehaviour
     {
         public GameObject deckbuildingMenu;
+        public GameObject weaponsMenu;
         GetAvailableCards getAvailableCards;
         BuildDeck buildDeck;
 
         // Start is called before the first frame update
         void Start()
         {
-            if (deckbuildingMenu == null) return;
-            getAvailableCards = deckbuildingMenu.GetComponent<GetAvailableCards>();
-            buildDeck = deckbuildingMenu.GetComponent<BuildDeck>();
-            deckbuildingMenu.SetActive(false);
+            if (deckbuildingMenu != null)
+            {
+                getAvailableCards = deckbuildingMenu.GetComponent<GetAvailableCards>();
+                buildDeck = deckbuildingMenu.GetComponent<BuildDeck>();
+                deckbuildingMenu.SetActive(false);
+            }
+
+            if (weaponsMenu != null)
+            {
+                weaponsMenu.SetActive(false);
+            }
         }
 
         // Update is called once per frame
@@ -31,25 +39,32 @@ namespace Necropanda
 
             if (Input.GetKeyDown(KeyCode.K))
             {
-                OpenCloseMenu(!deckbuildingMenu.activeSelf);
+                OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+            }
+
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
             }
         }
 
-        public void OpenCloseMenu(bool open)
+        public void OpenCloseMenu(bool open, GameObject menu)
         {
             if (open)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                deckbuildingMenu.SetActive(true);
-                getAvailableCards.LoadCards();
+                menu.SetActive(true);
+                if (menu == deckbuildingMenu)
+                    getAvailableCards.LoadCards();
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = false;
-                buildDeck.SaveCards();
-                deckbuildingMenu.SetActive(false);
+                if (menu == deckbuildingMenu)
+                    buildDeck.SaveCards();
+                menu.SetActive(false);
             }
         }
     }
