@@ -37,6 +37,7 @@ namespace Necropanda.AI
         public float wanderRadius;
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
+        private Animator animator;
 
         #region Checking Variables
         bool hasDebuggedWandering;
