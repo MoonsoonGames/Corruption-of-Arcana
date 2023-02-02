@@ -60,6 +60,18 @@ namespace Necropanda
             return outputList;
         }
 
+        public static List<T> ArrayToList<T>(T[] array)
+        {
+            List<T> list = new List<T>();
+
+            foreach (var item in array)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
+
         /// <summary>
         /// Randomly sorts a list
         /// </summary>

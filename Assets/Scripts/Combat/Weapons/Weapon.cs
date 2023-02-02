@@ -16,6 +16,7 @@ namespace Necropanda
         [TextArea(3, 10)]
         public string description;
         public Sprite image;
+        public int power;
         public List<Spell> spells;
 
         public void Equip()

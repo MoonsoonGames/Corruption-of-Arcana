@@ -186,6 +186,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 252
+--- !u!114 &-8373017722276361879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Combat End
+  m_EditorClassIdentifier: 
+  Name: Combat End
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1490029009
+    data2: 2818538874
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-8299513244776855158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +342,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1281
+--- !u!114 &-7983490096734386687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Dog
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Dog
+  Guid:
+    Data1: 1055856450
+    Data2: 1088345034
+    Data3: 1784672913
+    Data4: -1291126406
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
 --- !u!114 &-7683822543912824662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +553,7 @@ MonoBehaviour:
   - {fileID: -3478392790158526990}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -947,6 +998,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 900
+--- !u!114 &-5083295025266608706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Healthbar
+  m_EditorClassIdentifier: 
+  Name: Healthbar
+  StudioPath: 
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 3597231001
+    data2: 1681809175
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5046646585857783537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Beast
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Beast
+  Guid:
+    Data1: -2035156959
+    Data2: 1145358833
+    Data3: 1425650324
+    Data4: -577473916
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
 --- !u!114 &-4922164944416723414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,6 +1181,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1920
+--- !u!114 &-4753867519253889432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Construct
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Construct
+  Guid:
+    Data1: 1604006159
+    Data2: 1238663121
+    Data3: -1606628724
+    Data4: 1919972240
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1343
 --- !u!114 &-4545480900743264385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,7 +1441,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638103278513561527
+  lastModified: 638107801946039051
   FileSizes: []
   Exists: 1
 --- !u!114 &-3385272441961079213
@@ -1558,6 +1687,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2666398774589749766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Water
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Water
+  Guid:
+    Data1: 231601474
+    Data2: 1214134770
+    Data3: -2096021598
+    Data4: 1203307867
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 48000
 --- !u!114 &-2631150668158183505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,6 +1825,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1920
+--- !u!114 &-2477492196346742912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 3
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 3
+  Guid:
+    Data1: -1021220890
+    Data2: 1120440723
+    Data3: 705257095
+    Data4: 1843508093
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2366536233887169543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1807,10 +1990,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638103278513724391
+  lastModified: 638107801946049009
   FileSizes:
   - Name: 
-    Value: 4106
+    Value: 4212
   Exists: 1
 --- !u!114 &-1825881764341196921
 MonoBehaviour:
@@ -2133,13 +2316,16 @@ MonoBehaviour:
   - {fileID: -6727407554423215943}
   - {fileID: 7720204409862589923}
   - {fileID: 5290217830072651608}
-  - {fileID: 2750955377286359611}
-  - {fileID: 6346714099819478558}
-  - {fileID: 3458768394281295804}
-  - {fileID: -4497078676391881342}
-  - {fileID: -2963229266432413335}
-  - {fileID: -6214452546697181291}
-  - {fileID: -5322752600915442199}
+  - {fileID: -4753867519253889432}
+  - {fileID: 5457426590505140491}
+  - {fileID: 2421853914062707239}
+  - {fileID: 3186840665443544907}
+  - {fileID: 7280366073118886531}
+  - {fileID: 7289088622241174078}
+  - {fileID: -2477492196346742912}
+  - {fileID: -5046646585857783537}
+  - {fileID: -7983490096734386687}
+  - {fileID: -2666398774589749766}
   EditorParameters:
   - {fileID: -8572358270947847299}
   - {fileID: -7214770631604761421}
@@ -2147,7 +2333,7 @@ MonoBehaviour:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638103278513724391
+  cacheTime: 638107801946049009
   cacheVersion: 131591
 --- !u!114 &119436515826132346
 MonoBehaviour:
@@ -2931,6 +3117,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &2421853914062707239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/End Fight/Victory
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/End Fight/Victory
+  Guid:
+    Data1: -2045222330
+    Data2: 1327481813
+    Data3: -1008235359
+    Data4: 1651196696
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &2750955377286359611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,6 +3334,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3186840665443544907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 1 (PH)
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 1 (PH)
+  Guid:
+    Data1: -573268067
+    Data2: 1219841203
+    Data3: -107470449
+    Data4: -179748631
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &3233547439089446652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3686,6 +3926,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
+--- !u!114 &5457426590505140491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/End Fight/Defeat
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/End Fight/Defeat
+  Guid:
+    Data1: -900584421
+    Data2: 1238738634
+    Data3: 702788246
+    Data4: -323379570
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &5477622760688834244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4090,8 +4357,8 @@ MonoBehaviour:
   Parameters:
   - {fileID: -5127594463213572779}
   - {fileID: 8372865748723905896}
-  - {fileID: 6773639414338627721}
-  - {fileID: -4922164944416723414}
+  - {fileID: -5083295025266608706}
+  - {fileID: -8373017722276361879}
   MinDistance: 1
   MaxDistance: 20
   Length: 169083
@@ -4224,6 +4491,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1343
+--- !u!114 &7280366073118886531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Enemy/Healing/Heal level 2
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Enemy/Healing/Heal level 2
+  Guid:
+    Data1: -1201431630
+    Data2: 1321216654
+    Data3: -1915640672
+    Data4: 1526296554
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7289088622241174078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Enemy Spawn/Skeleton
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Enemy Spawn/Skeleton
+  Guid:
+    Data1: 872647646
+    Data2: 1213459861
+    Data3: -350376052
+    Data4: -1159379082
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &7336264148571149768
 MonoBehaviour:
   m_ObjectHideFlags: 0

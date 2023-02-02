@@ -32,7 +32,7 @@ namespace Necropanda
 
         public void ConstructStatus(bool applyOverShield, Object effectPrefab, int duration, string newTarget, StatusEffects status)
         {
-            value.text = applyOverShield ? "" : "This status is resisted by shields";
+            value.text = applyOverShield ? "" : "Resisted by Shield";
 
             target.text = "on " + newTarget;
 
@@ -58,6 +58,20 @@ namespace Necropanda
                 target.text = "on " + newTarget;
 
                 Instantiate(executePrefab, effectIcon.transform);
+            }
+        }
+
+        public void ConstructSummon(CharacterStats summon, int count)
+        {
+            if (count > 0)
+            {
+                value.text = "Spawns " + count.ToString();
+
+                target.text = summon.name;
+
+                GameObject icon = Instantiate(executePrefab, effectIcon.transform) as GameObject;
+
+                icon.GetComponent<Image>().sprite = summon.characterSprite;
             }
         }
     }

@@ -36,10 +36,11 @@ namespace Necropanda.AI
         public float wanderRadius;
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
-        
+        Animator animator;
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
             moduleManager = gameObject.GetComponent<ModuleManager>();
 
             agent = GetComponent<NavMeshAgent>();
@@ -80,6 +81,15 @@ namespace Necropanda.AI
             }
 
             Timer();
+
+            bool moving =
+                (
+                agent.velocity.x > 0.5f || agent.velocity.x < -0.5f ||
+                agent.velocity.y > 0.5f || agent.velocity.y < -0.5f ||
+                agent.velocity.z > 0.5f || agent.velocity.z < -0.5f
+                );
+
+            animator.SetBool("Moving", moving);
         }
 
         /// <summary>
