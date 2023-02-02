@@ -25,6 +25,7 @@ namespace Necropanda.AI
         //state variables
         [Header("AI State Variables")]
         public ModuleManager moduleManager;
+        public AIState startState; // The state the AI will go to after the initial timer has passed in the nothing state
         public AIState currentState; // The current state of the AI. Wandering, Fleeing etc.
 
         public bool doOverrideState; // If true, the AI will only stay in this state. Regardless of anything else.
@@ -113,7 +114,7 @@ namespace Necropanda.AI
                     // probably also need to reset the timer here too.
                     if (timer > 5 && !doOverrideState)
                     {
-                        currentState = AIState.Wandering;
+                        currentState = startState;
                     }
                     else
                     {
@@ -131,12 +132,6 @@ namespace Necropanda.AI
                     catch (System.NullReferenceException)
                     {
                         player = GameObject.FindGameObjectWithTag("Player");
-                    }
-
-                    // Check to make sure the AI doesn't run into the player.
-                    if (agent.remainingDistance <= .5f)
-                    {
-                        agent.SetDestination(agent.transform.position);
                     }
                     break;
 
