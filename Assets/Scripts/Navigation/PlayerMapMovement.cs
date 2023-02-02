@@ -9,9 +9,9 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class NavMovement : MonoBehaviour
+    public class PlayerMapMovement : MonoBehaviour
     {
-        //public CharacterController controller; // Ref to the Character Controller Component.
+        public CharacterController controller; // Ref to the Character Controller Component.
 
         bool sprinting = false;
         public float speed = 12f; // The speed at which the player moves.
@@ -78,15 +78,15 @@ namespace Necropanda
 
             horizontal = gameObject.transform.right;
             horizontal = horizontal.normalized;
-            vertical = gameObject.transform.up;
+            vertical = gameObject.transform.forward;
             vertical = vertical.normalized;
 
             // Combine into one variable which gets used later
             Vector3 moveVector = horizontal * x + vertical * z;
 
             // Move using the controller component
-            gameObject.transform.position += moveVector * speed * Time.deltaTime;
-            //controller.Move(moveVector * speed * Time.deltaTime);
+            //gameObject.transform.position += moveVector * speed * Time.deltaTime;
+            controller.Move(moveVector * speed * Time.deltaTime);
 
             /*
             bool moving = moveVector != new Vector3(0, 0, 0);
