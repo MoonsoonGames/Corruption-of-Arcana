@@ -35,7 +35,12 @@ namespace Necropanda
             height = GetComponent<CapsuleCollider>().height;
 
             if (activateOnStart)
+            {
                 fx = null;
+                active = true;
+                aiScript.ActivateAI(player);
+            }
+
         }
 
         public string ID;
@@ -58,8 +63,7 @@ namespace Necropanda
             {
                 Debug.Log("Cancel interaction");
 
-                player = null;
-                Deactivate();
+                //player = null;
             }
         }
 
@@ -104,23 +108,6 @@ namespace Necropanda
                     Debug.DrawRay(sightPos, targetDirection, Color.white);
                     Debug.Log("Did not Hit " + targetDirection);
                 }
-            }
-        }
-
-        void Deactivate()
-        {
-            if (active)
-            {
-                Debug.Log("Deactivate AI");
-                //Unearth and activate AI
-                //art.SetActive(true);
-                aiScript.moduleManager.CheckScripts();
-                aiScript.DeactivateAI();
-                active = false;
-            }
-            else
-            {
-                //Already active
             }
         }
     }
