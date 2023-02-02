@@ -16,6 +16,7 @@ namespace Necropanda
         public CharacterStats stats;
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
+        protected StatusManager statusManager; public StatusManager GetStatusManager() { return statusManager; }
 
         [HideInInspector]
         public EnemySpawner spawner; //Unused for the player right now, but it might be used in the future
@@ -24,11 +25,20 @@ namespace Necropanda
 
         protected virtual void Start()
         {
+            SetupReferences();
+        }
+
+        [ContextMenu("Setup References")]
+        public virtual void SetupReferences()
+        {
             health = GetComponent<CharacterHealth>();
             deck = GetComponentInChildren<Deck2D>();
             teamManager = GetComponentInParent<TeamManager>();
-            teamManager.Add(this);
+            if (teamManager != null)
+                teamManager.Add(this);
             simulateValues = GetComponentInChildren<SimulateValues>();
+
+            statusManager = GetComponentInChildren<StatusManager>();
         }
 
         #endregion

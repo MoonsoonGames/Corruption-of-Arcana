@@ -20,7 +20,7 @@ namespace Necropanda
         public string effectDescription; // Basic desciption of spell effect
         public Object effectIcon;
         public Object applyEffect;
-        public Object effect;
+        public Sprite iconSprite;
 
         public CombatHelperFunctions.StatusModule[] effectModules;
 
