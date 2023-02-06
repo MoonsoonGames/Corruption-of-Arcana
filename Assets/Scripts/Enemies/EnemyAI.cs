@@ -40,6 +40,7 @@ namespace Necropanda.AI
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
         private Animator animator;
 
+
         #region Checking Variables
         bool hasDebuggedWandering;
         bool hasDebuggedPatrol;
@@ -136,6 +137,9 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
+                    // Set the home point
+
+
                     moduleManager.ChangeModuleState(1, true);
                     moduleManager.ChangeModuleState(2, false);
                     moduleManager.wander.WanderInRadius(blocked, hit);
@@ -144,6 +148,7 @@ namespace Necropanda.AI
                         Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
                         hasDebuggedWandering = true;
                     }
+
                     break;
 
                 case AIState.Patrolling:
