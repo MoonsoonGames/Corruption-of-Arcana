@@ -19,7 +19,7 @@ namespace Necropanda
         string questGiver = "";
 
         public E_QuestStates state;
-        public int currentProgress = 0;
+        public int currentProgress = -1;
         public int maxProgress = 1;
 
         public Quest parentQuest;
@@ -48,7 +48,7 @@ namespace Necropanda
         public void ForceResetQuest()
         {
             state = E_QuestStates.NotStarted;
-            currentProgress = 0;
+            currentProgress = -1;
 
             foreach (Quest quest in subQuests)
             {
@@ -68,6 +68,8 @@ namespace Necropanda
 
             this.questGiver = questGiver;
             state = E_QuestStates.InProgress;
+
+            currentProgress = 0;
 
             EnableNextObjective();
 
