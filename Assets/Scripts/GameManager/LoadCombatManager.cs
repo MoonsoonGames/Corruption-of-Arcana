@@ -54,6 +54,7 @@ namespace Necropanda
         public EnemyQueue queue;
         public List<CharacterStats> enemies;
         public List<string> enemyIDs;
+        public Sprite backdrop;
         bool loading = false;
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
@@ -119,7 +120,7 @@ namespace Necropanda
 
         public void LoadCombat(List<CharacterStats> newEnemies, E_Scenes lastScene)
         {
-            if (loading) return;
+            if (loading || newEnemies.Count == 0) return;
             loading = true;
 
             //Get enemies within radius of player and save them in a list

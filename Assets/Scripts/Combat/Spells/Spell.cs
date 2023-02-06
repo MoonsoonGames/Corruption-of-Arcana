@@ -260,7 +260,7 @@ namespace Necropanda
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
-                    if (CombatHelperFunctions.ApplyChance(spell.statuses[i].chance))
+                    if (CombatHelperFunctions.ApplyEffect(caster, spell.statuses[i]))
                     {
                         //apply status i on target
                         spell.statuses[i].status.Apply(caster, spell.statuses[i].duration);
@@ -295,7 +295,7 @@ namespace Necropanda
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
-                    if (CombatHelperFunctions.ApplyChance(spell.statuses[i].chance))
+                    if (CombatHelperFunctions.ApplyEffect(target, spell.statuses[i]))
                     {
                         //apply status i on target
                         spell.statuses[i].status.Apply(target, spell.statuses[i].duration);
@@ -500,7 +500,7 @@ namespace Necropanda
                     CombatHelperFunctions.StatusIconConstruct effectConstruct = new CombatHelperFunctions.StatusIconConstruct();
 
                     effectConstruct.effect = status.status;
-                    effectConstruct.chance = status.chance;
+                    effectConstruct.applyOverShield = status.applyOverShield;
                     effectConstruct.effectIcon = status.status.effectIcon;
                     effectConstruct.duration = status.duration;
                     effectConstruct.target = module.target;
@@ -531,6 +531,27 @@ namespace Necropanda
             }
 
             return moduleConstruct;
+        }
+
+        public Dictionary<CharacterStats, int> SummonIcons()
+        {
+            Debug.Log(spellName + " is generating icons");
+
+            Dictionary<CharacterStats, int> moduleDictionary = new Dictionary<CharacterStats, int>();
+
+            foreach (var item in spawnEnemies)
+            {
+                if (moduleDictionary.ContainsKey(item))
+                {
+                    moduleDictionary[item]++;
+                }
+                else
+                {
+                    moduleDictionary.Add(item, 1);
+                }
+            }
+
+            return moduleDictionary;
         }
 
         #endregion
