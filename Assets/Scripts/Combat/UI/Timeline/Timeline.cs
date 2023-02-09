@@ -101,6 +101,8 @@ namespace Necropanda
                 }
             }
 
+            StatusIcons();
+
             return apply;
         }
 
@@ -121,6 +123,8 @@ namespace Necropanda
 
             Debug.Log(remove.status.effectName + " has been removed");
             statuses.Remove(remove);
+
+            StatusIcons();
         }
 
         public void UpdateStatusDurations()
@@ -135,6 +139,31 @@ namespace Necropanda
             }
 
             statuses = newStatusList;
+
+            StatusIcons();
+        }
+
+        void StatusIcons()
+        {
+            List<Character> allCharacters = CombatManager.instance.GetAllCharacters();
+            foreach (var item in allCharacters)
+            {
+                StatusManager statusManager = item.GetStatusManager();
+
+                if (statusManager != null)
+                {
+                    statusManager.ClearIcons();
+                }
+                else
+                {
+                    Debug.LogWarning("No status manager");
+                }
+            }
+            foreach (var item in statuses)
+            {
+                if (item.target != null)
+                    item.target.GetStatusManager().AddStatus(item);
+            }
         }
 
         #endregion
@@ -187,7 +216,7 @@ namespace Necropanda
                     //Adds spell block to layout group
                     spellBlocks.Add(spellBlock);
 
-                    if (item.caster == player)
+                    if (item.caster.stats.usesArcana)
                     {
                         arcanaCount += item.spell.arcanaCost;
                     }
@@ -352,21 +381,21 @@ namespace Necropanda
 
             if (caster.stun)
             {
-                Debug.Log("Stunned, skip spell");
+                //Debug.Log("Stunned, skip spell");
                 //Effect for fumbling spell
             }
             else if (caster.GetHealth().dying)
             {
-                Debug.Log("Dead, skip spell");
+                //Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell
             }
             else if (caster.banish && caster != target)
             {
-                Debug.Log("Caster is banished, skip spell");
+                //Debug.Log("Caster is banished, skip spell");
             }
             else if (target.banish && caster != target)
             {
-                Debug.Log("Target is banished, skip spell");
+                //Debug.Log("Target is banished, skip spell");
             }
             else
             {

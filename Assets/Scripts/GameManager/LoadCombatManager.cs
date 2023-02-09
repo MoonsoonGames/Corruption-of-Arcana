@@ -52,8 +52,9 @@ namespace Necropanda
         public float combatRadius = 15f;
 
         public EnemyQueue queue;
-        public List<Object> enemies;
+        public List<CharacterStats> enemies;
         public List<string> enemyIDs;
+        public Sprite backdrop;
         bool loading = false;
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
@@ -66,6 +67,8 @@ namespace Necropanda
             enemyIDs.Clear();
             EnemyAI[] enemyAI = GameObject.FindObjectsOfType<EnemyAI>();
 
+            List<Quest> quests = new List<Quest>();
+
             foreach (EnemyAI enemy in enemyAI)
             {
                 if (enemy.GetActive() && Vector3.Distance(player.transform.position, enemy.transform.position) < combatRadius)
@@ -73,18 +76,35 @@ namespace Necropanda
                     if (enemy.boss)
                     {
                         //If enemy is a boss, save them in the first space
-                        enemies.Insert(0, enemy.enemyObject);
+                        enemies.Insert(0, enemy.enemyStats);
                     }
                     else
                     {
                         //Else append them at the end of the list
-                        enemies.Insert(enemies.Count, enemy.enemyObject);
+                        enemies.Insert(enemies.Count, enemy.enemyStats);
+                    }
+
+                    if (enemy.GetComponentInChildren<LoadCombat>().progressQuests.Length > 0)
+                    {
+                        List<Quest> enemyQuests = new List<Quest>();
+
+                        foreach (Quest quest in enemy.GetComponentInChildren<LoadCombat>().progressQuests)
+                        {
+                            quests.Add(quest);
+                        }
                     }
 
                     Interactable.Interactable interactable = enemy.GetComponent<Interactable.Interactable>();
                     enemyIDs.Add(interactable.interactID);
                 }
             }
+
+            foreach(var item in quests)
+            {
+                Debug.Log(item.questName);
+            }
+
+            progressQuestUponCombatVictory = quests;
 
             //Saving last scene
             if (lastScene != E_Scenes.Null)
@@ -98,7 +118,22 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }
 
-        public void AddEnemy(Object enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)
+        public void LoadCombat(List<CharacterStats> newEnemies, E_Scenes lastScene)
+        {
+            if (loading || newEnemies.Count == 0) return;
+            loading = true;
+
+            //Get enemies within radius of player and save them in a list
+            enemies.Clear();
+            enemies = newEnemies;
+            enemyIDs.Clear();
+
+            Debug.Log("Interacted - Load Combat from Arena");
+            loading = false;
+            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+        }
+
+        public void AddEnemy(CharacterStats enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Color trailColor)
         {
             List<Vector2> targetPositions = new List<Vector2>();
             //targetPositions.Add(midPos);
@@ -118,8 +153,11 @@ namespace Necropanda
 
             enemyIDs.Clear();
 
-            UpdateQuestState(questStateUponCombatVictory);
-            questStateUponCombatVictory = 0;
+            if (progressQuestUponCombatVictory.Count > 0)
+            {
+                foreach (var item in progressQuestUponCombatVictory)
+                    item.QuestProgress();
+            }
         }
 
         private void OnDrawGizmosSelected()
@@ -127,16 +165,9 @@ namespace Necropanda
             Gizmos.DrawWireSphere(transform.position, combatRadius);
         }
 
-        #region Quest Data - Delete later
+        #region Quest Data
 
-        int questState = 1; public int GetQuestState() { return questState; }
-        public int questStateUponCombatVictory = 0;
-
-        public void UpdateQuestState(int questState)
-        {
-            if (this.questState + 1 == questState)
-                this.questState = questState;
-        }
+        public List<Quest> progressQuestUponCombatVictory;
 
         #endregion
     }

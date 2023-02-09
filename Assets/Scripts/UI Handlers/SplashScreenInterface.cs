@@ -14,8 +14,13 @@ namespace Necropanda.Interfaces
         public void NewGame()
         {
             //Reset loadsettings/progress
-            SceneManager.LoadScene(initialScene.ToString());
+            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
+        }
+
+        public void ArenaMode()
+        {
+            LoadingScene.instance.LoadScene(E_Scenes.ArenaMode, E_Scenes.Null, false);
         }
 
         public void LoadGame()

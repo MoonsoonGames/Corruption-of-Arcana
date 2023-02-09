@@ -17,7 +17,6 @@ namespace Necropanda
 
         #region Variables
 
-        [HideInInspector]
         public Deck2D deck;
         [HideInInspector]
         public Deck2D lastDeck;
@@ -66,6 +65,8 @@ namespace Necropanda
             baseRot = transform.rotation.eulerAngles;
 
             card = GetComponent<Card>();
+
+            ScaleCard(1, false);
         }
 
         #endregion

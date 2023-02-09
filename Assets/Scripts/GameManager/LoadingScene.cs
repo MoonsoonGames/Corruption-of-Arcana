@@ -49,7 +49,13 @@ namespace Necropanda
                 LoadCombatManager.instance.lastScene = lastScene;
             }
 
+            if (SceneBackdrops.instance != null)
+            {
+                SceneBackdrops.instance.SetBackdrop();
+            }
+
             //Save current player position if applicable
+            Time.timeScale = 1;
             SceneManager.LoadScene(scene.ToString());
         }
 

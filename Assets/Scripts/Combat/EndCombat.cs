@@ -25,7 +25,7 @@ namespace Necropanda
         {
             DeckManager.instance.ResetDecks();
             LoadCombatManager.instance.enemyIDs.Clear();
-            LoadCombatManager.instance.questStateUponCombatVictory = 0;
+            LoadCombatManager.instance.progressQuestUponCombatVictory = null;
             LoadingScene.instance.LoadLastScene(E_Scenes.Null, false);
         }
     }

@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c55e01062d71804e922f867b7da0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadLastPos: 0
 --- !u!114 &5181202587678652608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,11 +63,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f205e12edaf6ea8429a05d581edc7358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCam: {fileID: 0}
   combatScene: 2
   lastScene: 0
+  lastPos: {x: 0, y: 0, z: 0}
+  lastRot: {x: 0, y: 0, z: 0, w: 0}
+  interacted: []
   combatRadius: 20
   queue: {fileID: 0}
   enemies: []
+  enemyIDs: []
+  progressQuestUponCombatVictory: []
 --- !u!114 &7335189887903770136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,23 +121,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afe0686d8d3ea324e845e60552ba3f14, type: 2}
   - {fileID: 11400000, guid: 7337a5103a10c41429dc6b18a599ce35, type: 2}
   - {fileID: 11400000, guid: 1813970156e34b847a9ecc1d0fdc38f3, type: 2}
-  minorArcana:
-  - {fileID: 11400000, guid: d4ba24a71e4d4a4468f500b180814039, type: 2}
-  - {fileID: 11400000, guid: 0862782c0418ebb4c896bf24dc95fd4c, type: 2}
-  - {fileID: 11400000, guid: 28085d0c98caeac4faaa4a107b0308ad, type: 2}
-  - {fileID: 11400000, guid: 79c0139e6d795c540a465a576c02bb0b, type: 2}
-  - {fileID: 11400000, guid: f1d5ff832fb527343a3a28f226dba3d3, type: 2}
-  - {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
-  - {fileID: 11400000, guid: ac8b3580619e02c4dbd18fde48d18c10, type: 2}
-  - {fileID: 11400000, guid: 74f0daba23fa5034f9276d76fc10e12c, type: 2}
-  - {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
-  - {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
-  - {fileID: 11400000, guid: cc2663eb98b04d64aba93bf9d8421fd7, type: 2}
-  - {fileID: 11400000, guid: aadf83d7d909c444380b61e2434c617c, type: 2}
-  - {fileID: 11400000, guid: 184e7e742dde759419e21c21fd3241c0, type: 2}
-  - {fileID: 11400000, guid: eee1c554563d8114091ba9b77553b299, type: 2}
-  - {fileID: 11400000, guid: 6f306ebebf9dea844a28f0faf7c1736d, type: 2}
-  - {fileID: 11400000, guid: 62f9a936ef0ac8e4eb33c455128f270e, type: 2}
+  weapon: {fileID: 11400000, guid: 6f637ba1ec9613744afbbde0e259e161, type: 2}
   majorArcana: []
   playerDeck: []
   playedCards: []

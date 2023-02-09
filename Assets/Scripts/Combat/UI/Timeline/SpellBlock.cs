@@ -13,6 +13,7 @@ namespace Necropanda
 {
     public class SpellBlock : MonoBehaviour
     {
+        CombatHelperFunctions.SpellInstance spell;
         Image image;
 
         public void SetInfo(CombatHelperFunctions.SpellInstance spell)
@@ -24,6 +25,22 @@ namespace Necropanda
             SpellTooltipInfo tooltip = GetComponentInChildren<SpellTooltipInfo>();
 
             tooltip.Setup(spell);
+
+            this.spell = spell;
+        }
+
+        public void HighlightTargets(bool highlight)
+        {
+            if (highlight)
+            {
+                spell.target.GetHealth().GetColorFlash().Highlight(Color.red);
+                spell.caster.GetHealth().GetColorFlash().Highlight(Color.green);
+            }
+            else
+            {
+                spell.caster.GetHealth().GetColorFlash().RemoveHighlightColour();
+                spell.target.GetHealth().GetColorFlash().RemoveHighlightColour();
+            }
         }
     }
 }
