@@ -64,11 +64,12 @@ namespace Necropanda
         //Visual effects for projectile
         public Object castObject;
         public Object projectileObject;
-        public float projectileSpeed = 0.3f;
+        public float projectileSpeed = 0.6f;
         public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
         public Color trailColor;
         public bool screenShake;
+        public E_SpellTargetType idealTarget = E_SpellTargetType.Target;
 
         //Visual effects for hit effect
 
