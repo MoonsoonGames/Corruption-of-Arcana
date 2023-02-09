@@ -238,6 +238,7 @@ namespace Necropanda
         public void AddCard(CardDrag2D card)
         {
             card.gameObject.transform.SetParent(group.transform);
+            card.gameObject.transform.position = gameObject.transform.position;
             card.deck = this;
             card.GetComponent<Card>().ShowArt(showArt);
 
@@ -323,6 +324,11 @@ namespace Necropanda
                 float lerpA = Mathf.Lerp(deckBackground.color.a, desiredColor.a, highlightSpeed);
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                Debug.Break();
             }
         }
 

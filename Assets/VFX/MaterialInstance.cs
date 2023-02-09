@@ -27,5 +27,10 @@ namespace Necropanda
         {
             mat.SetFloat("_Disolve_amount", dissolveAmount);
         }
+
+        public void SetColour(Color color)
+        {
+            mat.SetVector("_Color", color);
+        }
     }
 }

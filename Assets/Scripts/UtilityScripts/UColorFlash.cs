@@ -12,7 +12,7 @@ namespace Necropanda
 {
     public class UColorFlash : MonoBehaviour
     {
-        SpriteRenderer spriteRenderer;
+        MaterialInstance matInst;
         public float revertTime = 0.0005f;
 
         Color flashColour;
@@ -20,7 +20,7 @@ namespace Necropanda
 
         private void Start()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            matInst = GetComponent<MaterialInstance>();
         }
 
         public void Flash(E_DamageTypes effectType)
@@ -30,14 +30,14 @@ namespace Necropanda
             p = 0;
 
             flashColour = ColourFromDamageType(effectType);
-            spriteRenderer.color = flashColour;
+            matInst.SetColour(flashColour);
 
             InvokeRepeating("RevertColour", 0f, 0.05f);
         }
 
         void RevertColour()
         {
-            spriteRenderer.color = LerpColour(p);
+            matInst.SetColour(LerpColour(p));
 
             p += revertTime;
 
@@ -63,12 +63,12 @@ namespace Necropanda
         public void Highlight(Color color)
         {
             flashColour = color;
-            spriteRenderer.color = flashColour;
+            matInst.SetColour(flashColour);
         }
 
         public void RemoveHighlightColour()
         {
-            spriteRenderer.color = normalColour;
+            matInst.SetColour(normalColour);
         }
 
         #region Colour

@@ -172,6 +172,7 @@ namespace Necropanda
                 }
 
                 transform.position = dragManager.canvas.transform.TransformPoint(newPos);
+                transform.position += new Vector3(0, 0, -50);
 
                 lastPos = newPos;
             }
