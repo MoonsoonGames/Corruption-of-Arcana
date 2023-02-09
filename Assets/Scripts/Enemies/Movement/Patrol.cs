@@ -21,13 +21,13 @@ namespace Necropanda.AI.Movement
     public class Patrol : MonoBehaviour
     {
         private int destPoint = 0;
-        private NavMeshAgent agent;
+        public NavMeshAgent agent;
         private EnemyAI ai;
         public float timeToPatrol = 30f;
         public bool patrol = true;
 
         public Vector3 originalPos;
-        public Vector3[] patrolPoints;
+        public List<Vector3> patrolPoints;
 
         [Space]
         [Header("Temp Offset")]
@@ -59,7 +59,7 @@ namespace Necropanda.AI.Movement
             agent = GetComponent<NavMeshAgent>();
             ai = GetComponent<EnemyAI>();
 
-            for (int i = 0; i < patrolPoints.Length; i++)
+            for (int i = 0; i < patrolPoints.Count; i++)
             {
                 Vector3 point = patrolPoints[i];
 
@@ -92,7 +92,7 @@ namespace Necropanda.AI.Movement
         /// Rewrote this.. Still feels like there's a better way to do it
         /// </summary>
         /// <param name="offset">The offset amount to add to each direction.</param>
-        Vector3[] GetPatrolPointsDiamond(float offset)
+        List<Vector3> GetPatrolPointsDiamond(float offset)
         {
             // Check to make sure offset isn't 0
             if (offset == 0)
@@ -104,7 +104,7 @@ namespace Necropanda.AI.Movement
             float x = transform.position.x;
             float z = transform.position.z;
 
-            Vector3[] patrolPoints = new Vector3[4];
+            List<Vector3> patrolPoints = new List<Vector3>(4);
 
             patrolPoints[(int)Direction.North] = new Vector3(x + offset, 0, z);
             patrolPoints[(int)Direction.East] = new Vector3(x, 0, z - offset);
@@ -117,7 +117,7 @@ namespace Necropanda.AI.Movement
         void GotoNextPoint()
         {
             // Returns if no points have been set up.
-            if (patrolPoints.Length == 0)
+            if (patrolPoints.Count == 0)
                 return;
 
             // Set the agent to go to the currently selected point.
@@ -125,7 +125,7 @@ namespace Necropanda.AI.Movement
 
             // Choose the next point in the array as the destination
             // cyling to the start if necessary.
-            destPoint = (destPoint + 1) % patrolPoints.Length;
+            destPoint = (destPoint + 1) % patrolPoints.Count;
             // StartCoroutine(Cooldown(3));
         }
 
@@ -158,17 +158,6 @@ namespace Necropanda.AI.Movement
             yield return new WaitForSeconds(coolDown);
             Debugger.instance.SendDebug("Running patrol cooldown");
             patrol = false;
-        }
-        /// <summary>
-        /// Callback to draw gizmos only if the object is selected.
-        /// </summary>
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            foreach (Vector3 point in patrolPoints)
-            {
-                Gizmos.DrawSphere(point, 1);
-            }
         }
     }
 
