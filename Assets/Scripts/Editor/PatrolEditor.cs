@@ -34,6 +34,11 @@ namespace Necropanda.AI.Movement
         // declare a List which stores the patrol points
         List<Vector3> patrolPoints;
 
+        // option vars
+        public bool snapToGround = false;
+        public bool gridSnap = false;
+        public Vector3 snapAmount;
+
         /// <summary>
         /// When the object is deselected in the scene view of the Unity Editor
         /// </summary>
@@ -92,6 +97,9 @@ namespace Necropanda.AI.Movement
 
             // draw the buttons
             DrawButtons();
+            // Draw the other options for the script
+            DrawOptions();
+            SetOptions();
         }
 
         /// <summary>
@@ -118,6 +126,66 @@ namespace Necropanda.AI.Movement
             }
         }
 
+        private void DrawOptions()
+        {
+            GUILayout.Space(2f);
+            snapToGround = GUILayout.Toggle(snapToGround, "Snap to Ground?");
+            gridSnap = GUILayout.Toggle(gridSnap, "Grid Snapping?");
+        }
+
+        private void SetOptions()
+        {
+            SnapPointToGround();
+            SnapToGrid();
+        }
+
+        private void SnapPointToGround()
+        {
+            if (!snapToGround)
+            {
+                return;
+            }
+            //surface detection
+            RaycastHit hit;
+            for (int i = 0; i < patrolPoints.Count; i++)
+            {
+                if (Physics.Raycast(patrolPoints[i], new Vector3(0, -1, 0), out hit, Mathf.Infinity))
+                {
+                    if (patrolPoints[i] == null)
+                        patrolPoints.Remove(patrolPoints[i]); //if we find a null item in the list, remove that item
+
+
+                    if (hit.transform.gameObject == null)
+                    {
+                        Debug.Log("hit nothing");
+                        //Remove from the list
+                        patrolPoints.Remove(patrolPoints[i]);
+                        //destroy
+                        // DestroyImmediate(patrolPoints[i]);
+                    }
+                    else
+                    {
+                        Debug.Log("hit something");
+                        Vector3 GOPos = patrolPoints[i];
+                        GOPos.y -= hit.distance;
+                        patrolPoints[i] = new Vector3(patrolPoints[i].x, GOPos.y, patrolPoints[i].z); // remove the hit dist from the y coord
+                    }
+                }
+            }
+        }
+
+        private void SnapToGrid()
+        {
+            // Doesn't work
+            EditorSnapSettings.gridSnapEnabled = snapToGround;
+            EditorSnapSettings.move = snapAmount;
+
+            if (gridSnap)
+            {
+                EditorGUILayout.Vector3Field("Grid Snap Amount:", snapAmount);
+            }
+        }
+
         /// <summary>
         /// Draw the button which starts the editing mode
         /// </summary>
@@ -129,6 +197,7 @@ namespace Necropanda.AI.Movement
                 // set the mode to edit
                 mode = Mode.Edit;
             }
+
         }
 
         /// <summary>
