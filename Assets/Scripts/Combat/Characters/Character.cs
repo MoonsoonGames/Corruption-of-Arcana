@@ -26,6 +26,9 @@ namespace Necropanda
         protected virtual void Start()
         {
             SetupReferences();
+
+            SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = stats.characterSprite;
         }
 
         [ContextMenu("Setup References")]
