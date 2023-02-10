@@ -229,22 +229,25 @@ namespace Necropanda
             switch (card.spell.idealTarget)
             {
                 case E_SpellTargetType.Caster:
-                    Debug.Log("Highlight caster for " + card.spell.spellName);
-                    casterHealth.GetColorFlash().Highlight(Color.green);
+                    //Debug.Log("Highlight caster for " + card.spell.spellName);
+                    if (casterHealth.dying == false)
+                        casterHealth.GetColorFlash().Highlight(Color.green);
                     break;
                 case E_SpellTargetType.Target:
-                    Debug.Log("Highlight targets for " + card.spell.spellName);
+                    //Debug.Log("Highlight targets for " + card.spell.spellName);
                     foreach (var item in targetHealths)
                     {
-                        item.GetColorFlash().Highlight(Color.red);
+                        if (item.dying == false)
+                            item.GetColorFlash().Highlight(Color.red);
                     }
                     break;
                 case E_SpellTargetType.All:
-                    Debug.Log("Highlight all characters for " + card.spell.spellName);
+                    //Debug.Log("Highlight all characters for " + card.spell.spellName);
                     casterHealth.GetColorFlash().Highlight(Color.yellow);
                     foreach (var item in targetHealths)
                     {
-                        item.GetColorFlash().Highlight(Color.yellow);
+                        if (item.dying == false)
+                            item.GetColorFlash().Highlight(Color.yellow);
                     }
                     break;
                 default:
@@ -258,22 +261,34 @@ namespace Necropanda
             switch (card.spell.idealTarget)
             {
                 case E_SpellTargetType.Caster:
-                    Debug.Log("Highlight caster for " + card.spell.spellName);
-                    casterHealth.GetColorFlash().RemoveHighlightColour();
+                    //Debug.Log("Highlight caster for " + card.spell.spellName);
+                    if (casterHealth != null)
+                    {
+                        if (casterHealth.dying == false)
+                            casterHealth.GetColorFlash().RemoveHighlightColour();
+                    }
                     break;
                 case E_SpellTargetType.Target:
-                    Debug.Log("Highlight targets for " + card.spell.spellName);
+                    //Debug.Log("Highlight targets for " + card.spell.spellName);
                     foreach (var item in targetHealths)
                     {
-                        item.GetColorFlash().RemoveHighlightColour();
+                        if (item != null)
+                        {
+                            if (item.dying == false)
+                                item.GetColorFlash().RemoveHighlightColour();
+                        }
                     }
                     break;
                 case E_SpellTargetType.All:
-                    Debug.Log("Highlight all characters for " + card.spell.spellName);
+                    //Debug.Log("Highlight all characters for " + card.spell.spellName);
                     casterHealth.GetColorFlash().RemoveHighlightColour();
                     foreach (var item in targetHealths)
                     {
-                        item.GetColorFlash().RemoveHighlightColour();
+                        if (item != null)
+                        {
+                            if (item.dying == false)
+                                item.GetColorFlash().RemoveHighlightColour();
+                        }
                     }
                     break;
                 default:

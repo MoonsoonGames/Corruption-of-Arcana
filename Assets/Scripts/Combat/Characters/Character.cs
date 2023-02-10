@@ -150,7 +150,7 @@ namespace Necropanda
                 //Negative Effects
                 case E_Statuses.Banish:
                     banish = apply;
-                    health.ActivateArt(!apply);
+                    health.ActivateArt(!apply, true, E_DamageTypes.Perforation);
                     break;
                 case E_Statuses.Charm:
                     charm = apply;

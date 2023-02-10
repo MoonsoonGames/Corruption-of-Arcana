@@ -14,7 +14,7 @@ namespace Necropanda
     {
         MaterialInstance matInst;
         SpriteRenderer spriteRenderer;
-        public float revertTime = 0.075f;
+        float revertTime = 0.1f;
 
         Color flashColour;
         float p = 0;
@@ -39,6 +39,55 @@ namespace Necropanda
                 spriteRenderer.color = flashColour;
 
             InvokeRepeating("RevertColour", 0f, 0.05f);
+        }
+
+        public void ApplyDissolve(E_DamageTypes effectType)
+        {
+            //Debug.Log("Dissolve");
+            if (matInst != null)
+                matInst.SetDissolveColor(ColourFromDamageType(effectType));
+
+            InvokeRepeating("DissolveInvoke", 0f, 0.05f);
+        }
+
+        public void ReverseDissolve(E_DamageTypes effectType)
+        {
+            //Debug.Log("Reverse Dissolve");
+            if (matInst != null)
+                matInst.SetDissolveColor(ColourFromDamageType(effectType));
+
+            InvokeRepeating("ReverseDissolveInvoke", 0f, 0.05f);
+        }
+
+        float dissolveTime = 0.1f;
+        float currentDissolve = 0;
+
+        void DissolveInvoke()
+        {
+            currentDissolve += dissolveTime;
+
+            if (currentDissolve >= 1)
+            {
+                CancelInvoke();
+                currentDissolve = 1;
+            }
+
+            if (matInst != null)
+                matInst.SetDissolve(currentDissolve);
+        }
+
+        void ReverseDissolveInvoke()
+        {
+            currentDissolve -= dissolveTime;
+
+            if (currentDissolve <= 0)
+            {
+                CancelInvoke();
+                currentDissolve = 0;
+            }
+
+            if (matInst != null)
+                matInst.SetDissolve(currentDissolve);
         }
 
         void RevertColour()
