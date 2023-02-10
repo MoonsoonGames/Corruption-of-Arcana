@@ -168,7 +168,7 @@ namespace Necropanda
 
             if (health <= 0)
             {
-                Kill();
+                Kill(type);
             }
             else
             {
@@ -266,7 +266,7 @@ namespace Necropanda
 
         public GameObject[] disableOnKill;
 
-        void Kill()
+        void Kill(E_DamageTypes type)
         {
             // Get ref to the dev console
             GameObject console = GameObject.FindGameObjectWithTag("Console");
@@ -285,15 +285,28 @@ namespace Necropanda
             
             dying = true;
             KillFX();
-            ActivateArt(false);
+            ActivateArt(false, true, type);
         }
 
-        public void ActivateArt(bool activate)
+        public void ActivateArt(bool activate, bool dissolve, E_DamageTypes type)
         {
             foreach (var item in disableOnKill)
             {
                 //Disable all art assets
                 item.SetActive(activate);
+            }
+
+            if (colorFlash != null)
+            {
+                if (dissolve)
+                {
+                    if (activate)
+                        colorFlash.ReverseDissolve(type);
+                    else
+                        colorFlash.ApplyDissolve(type);
+                }
+                else
+                    colorFlash.gameObject.SetActive(activate);
             }
         }
 

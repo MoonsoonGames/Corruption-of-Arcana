@@ -64,11 +64,12 @@ namespace Necropanda
         //Visual effects for projectile
         public Object castObject;
         public Object projectileObject;
-        public float projectileSpeed = 0.3f;
+        public float projectileSpeed = 0.6f;
         public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
         public Color trailColor;
         public bool screenShake;
+        public E_SpellTargetType idealTarget = E_SpellTargetType.Target;
 
         //Visual effects for hit effect
 
@@ -461,7 +462,7 @@ namespace Necropanda
 
         public List<CombatHelperFunctions.SpellIconConstruct> SpellIcons()
         {
-            Debug.Log(spellName + " is generating icons");
+            //Debug.Log(spellName + " is generating icons");
             List<CombatHelperFunctions.SpellIconConstruct> iconConstructs = new List<CombatHelperFunctions.SpellIconConstruct>();
 
             float highestExecute = 0;
@@ -490,7 +491,7 @@ namespace Necropanda
 
         public List<CombatHelperFunctions.StatusIconConstruct> EffectIcons()
         {
-            Debug.Log(spellName + " is generating icons");
+            //Debug.Log(spellName + " is generating icons");
             List<CombatHelperFunctions.StatusIconConstruct> iconConstructs = new List<CombatHelperFunctions.StatusIconConstruct>();
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
@@ -516,7 +517,7 @@ namespace Necropanda
 
         public CombatHelperFunctions.ExecuteIconConstruct ExecuteIcons()
         {
-            Debug.Log(spellName + " is generating icons");
+            //Debug.Log(spellName + " is generating icons");
             CombatHelperFunctions.ExecuteIconConstruct moduleConstruct = new CombatHelperFunctions.ExecuteIconConstruct();
 
             float highestExecute = 0;
@@ -535,7 +536,7 @@ namespace Necropanda
 
         public Dictionary<CharacterStats, int> SummonIcons()
         {
-            Debug.Log(spellName + " is generating icons");
+            //Debug.Log(spellName + " is generating icons");
 
             Dictionary<CharacterStats, int> moduleDictionary = new Dictionary<CharacterStats, int>();
 
