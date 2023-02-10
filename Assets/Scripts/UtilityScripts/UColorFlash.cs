@@ -12,7 +12,8 @@ namespace Necropanda
 {
     public class UColorFlash : MonoBehaviour
     {
-        public MaterialInstance matInst;
+        MaterialInstance matInst;
+        SpriteRenderer spriteRenderer;
         public float revertTime = 0.075f;
 
         Color flashColour;
@@ -20,7 +21,8 @@ namespace Necropanda
 
         private void Start()
         {
-            //matInst = GetComponent<MaterialInstance>();
+            matInst = GetComponent<MaterialInstance>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         public void Flash(E_DamageTypes effectType)
@@ -34,7 +36,7 @@ namespace Necropanda
             if (matInst != null)
                 matInst.SetColour(flashColour);
             else
-                Debug.LogError("There is no mat instance");
+                spriteRenderer.color = flashColour;
 
             InvokeRepeating("RevertColour", 0f, 0.05f);
         }
@@ -44,7 +46,7 @@ namespace Necropanda
             if (matInst != null)
                 matInst.SetColour(LerpColour(p));
             else
-                Debug.LogError("There is no mat instance");
+                spriteRenderer.color = LerpColour(p);
 
             p += revertTime;
 
@@ -73,7 +75,7 @@ namespace Necropanda
             if (matInst != null)
                 matInst.SetColour(flashColour);
             else
-                Debug.LogError("There is no mat instance");
+                spriteRenderer.color = flashColour;
         }
 
         public void RemoveHighlightColour()
@@ -81,7 +83,7 @@ namespace Necropanda
             if (matInst != null)
                 matInst.SetColour(normalColour);
             else
-                Debug.LogError("There is no mat instance");
+                spriteRenderer.color = normalColour;
         }
 
         #region Colour

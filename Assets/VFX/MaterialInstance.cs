@@ -13,13 +13,15 @@ namespace Necropanda
     {
         SpriteRenderer spriteRenderer;
         public float dissolveAmount;
-        public Material mat;
-        
+        Material mat;
+
         // Start is called before the first frame update
         public void Start()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             mat = spriteRenderer.material;
+            
+            SetColour(new Color(1, 1, 1, 255));
         }
 
         // Update is called once per frame
