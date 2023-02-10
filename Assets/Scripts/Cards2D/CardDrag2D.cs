@@ -51,6 +51,9 @@ namespace Necropanda
         public float rotationScale = 0.1f;
         public float rotateDeadZone = 5;
 
+        public CharacterHealth casterHealth;
+        public List<CharacterHealth> targetHealths;
+
         #endregion
 
         public void Setup()
@@ -67,6 +70,14 @@ namespace Necropanda
             card = GetComponent<Card>();
 
             ScaleCard(1, false);
+
+            casterHealth = CombatManager.instance.player.GetHealth();
+            targetHealths = new List<CharacterHealth>();
+
+            foreach (var item in CombatManager.instance.enemyTeamManager.team)
+            {
+                targetHealths.Add(item.GetHealth());
+            }
         }
 
         #endregion
@@ -85,6 +96,7 @@ namespace Necropanda
                 ScaleCard(hoverScale, false);
                 Highlight(true);
                 ShowArt(false);
+                HighlightTarget();
             }
         }
 
@@ -100,6 +112,7 @@ namespace Necropanda
                 ScaleCard(1, false);
                 Highlight(false);
                 ShowArt(deck.showArt);
+                StopHighlightTarget();
             }
         }
 
@@ -159,6 +172,7 @@ namespace Necropanda
                 }
 
                 transform.position = dragManager.canvas.transform.TransformPoint(newPos);
+                transform.position += new Vector3(0, 0, -50);
 
                 lastPos = newPos;
             }
@@ -209,6 +223,79 @@ namespace Necropanda
         #endregion
 
         #region Visual Feedback
+
+        public void HighlightTarget()
+        {
+            switch (card.spell.idealTarget)
+            {
+                case E_SpellTargetType.Caster:
+                    //Debug.Log("Highlight caster for " + card.spell.spellName);
+                    if (casterHealth.dying == false)
+                        casterHealth.GetColorFlash().Highlight(Color.green);
+                    break;
+                case E_SpellTargetType.Target:
+                    //Debug.Log("Highlight targets for " + card.spell.spellName);
+                    foreach (var item in targetHealths)
+                    {
+                        if (item.dying == false)
+                            item.GetColorFlash().Highlight(Color.red);
+                    }
+                    break;
+                case E_SpellTargetType.All:
+                    //Debug.Log("Highlight all characters for " + card.spell.spellName);
+                    casterHealth.GetColorFlash().Highlight(Color.yellow);
+                    foreach (var item in targetHealths)
+                    {
+                        if (item.dying == false)
+                            item.GetColorFlash().Highlight(Color.yellow);
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Ideal target is not valid for " + card.spell.spellName);
+                    break;
+            }
+        }
+
+        public void StopHighlightTarget()
+        {
+            switch (card.spell.idealTarget)
+            {
+                case E_SpellTargetType.Caster:
+                    //Debug.Log("Highlight caster for " + card.spell.spellName);
+                    if (casterHealth != null)
+                    {
+                        if (casterHealth.dying == false)
+                            casterHealth.GetColorFlash().RemoveHighlightColour();
+                    }
+                    break;
+                case E_SpellTargetType.Target:
+                    //Debug.Log("Highlight targets for " + card.spell.spellName);
+                    foreach (var item in targetHealths)
+                    {
+                        if (item != null)
+                        {
+                            if (item.dying == false)
+                                item.GetColorFlash().RemoveHighlightColour();
+                        }
+                    }
+                    break;
+                case E_SpellTargetType.All:
+                    //Debug.Log("Highlight all characters for " + card.spell.spellName);
+                    casterHealth.GetColorFlash().RemoveHighlightColour();
+                    foreach (var item in targetHealths)
+                    {
+                        if (item != null)
+                        {
+                            if (item.dying == false)
+                                item.GetColorFlash().RemoveHighlightColour();
+                        }
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Ideal target is not valid for " + card.spell.spellName);
+                    break;
+            }
+        }
 
         /// <summary>
         /// Turns the highlight colour on or off

@@ -26,6 +26,9 @@ namespace Necropanda
         protected virtual void Start()
         {
             SetupReferences();
+
+            SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = stats.characterSprite;
         }
 
         [ContextMenu("Setup References")]
@@ -147,7 +150,7 @@ namespace Necropanda
                 //Negative Effects
                 case E_Statuses.Banish:
                     banish = apply;
-                    health.ActivateArt(!apply);
+                    health.ActivateArt(!apply, true, E_DamageTypes.Perforation);
                     break;
                 case E_Statuses.Charm:
                     charm = apply;

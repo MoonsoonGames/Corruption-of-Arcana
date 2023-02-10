@@ -12,15 +12,17 @@ namespace Necropanda
 {
     public class UColorFlash : MonoBehaviour
     {
-        Image image;
-        public float revertTime = 0.0005f;
+        MaterialInstance matInst;
+        SpriteRenderer spriteRenderer;
+        float revertTime = 0.1f;
 
         Color flashColour;
         float p = 0;
 
         private void Start()
         {
-            image = GetComponent<Image>();
+            matInst = GetComponent<MaterialInstance>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         public void Flash(E_DamageTypes effectType)
@@ -30,18 +32,74 @@ namespace Necropanda
             p = 0;
 
             flashColour = ColourFromDamageType(effectType);
-            image.color = flashColour;
+
+            if (matInst != null)
+                matInst.SetColour(flashColour);
+            else
+                spriteRenderer.color = flashColour;
 
             InvokeRepeating("RevertColour", 0f, 0.05f);
         }
 
+        public void ApplyDissolve(E_DamageTypes effectType)
+        {
+            //Debug.Log("Dissolve");
+            if (matInst != null)
+                matInst.SetDissolveColor(ColourFromDamageType(effectType));
+
+            InvokeRepeating("DissolveInvoke", 0f, 0.05f);
+        }
+
+        public void ReverseDissolve(E_DamageTypes effectType)
+        {
+            //Debug.Log("Reverse Dissolve");
+            if (matInst != null)
+                matInst.SetDissolveColor(ColourFromDamageType(effectType));
+
+            InvokeRepeating("ReverseDissolveInvoke", 0f, 0.05f);
+        }
+
+        float dissolveTime = 0.1f;
+        float currentDissolve = 0;
+
+        void DissolveInvoke()
+        {
+            currentDissolve += dissolveTime;
+
+            if (currentDissolve >= 1)
+            {
+                CancelInvoke();
+                currentDissolve = 1;
+            }
+
+            if (matInst != null)
+                matInst.SetDissolve(currentDissolve);
+        }
+
+        void ReverseDissolveInvoke()
+        {
+            currentDissolve -= dissolveTime;
+
+            if (currentDissolve <= 0)
+            {
+                CancelInvoke();
+                currentDissolve = 0;
+            }
+
+            if (matInst != null)
+                matInst.SetDissolve(currentDissolve);
+        }
+
         void RevertColour()
         {
-            image.color = LerpColour(p);
+            if (matInst != null)
+                matInst.SetColour(LerpColour(p));
+            else
+                spriteRenderer.color = LerpColour(p);
 
             p += revertTime;
 
-            if (p == 1)
+            if (p >= 1)
             {
                 CancelInvoke();
                 p = 0;
@@ -63,12 +121,18 @@ namespace Necropanda
         public void Highlight(Color color)
         {
             flashColour = color;
-            image.color = flashColour;
+            if (matInst != null)
+                matInst.SetColour(flashColour);
+            else
+                spriteRenderer.color = flashColour;
         }
 
         public void RemoveHighlightColour()
         {
-            image.color = normalColour;
+            if (matInst != null)
+                matInst.SetColour(normalColour);
+            else
+                spriteRenderer.color = normalColour;
         }
 
         #region Colour
