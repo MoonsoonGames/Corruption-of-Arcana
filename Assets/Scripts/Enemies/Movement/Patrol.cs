@@ -29,18 +29,6 @@ namespace Necropanda.AI.Movement
         public Vector3 originalPos;
         public List<Vector3> patrolPoints;
 
-        [Space]
-        [Header("Temp Offset")]
-        public float patrolPointOffset;
-
-        private enum Direction
-        {
-            North,
-            East,
-            South,
-            West
-        }
-
         void Start()
         {
             Setup();
@@ -55,30 +43,13 @@ namespace Necropanda.AI.Movement
 
         private void Setup()
         {
-            patrolPoints = GetPatrolPointsDiamond(patrolPointOffset);
             agent = GetComponent<NavMeshAgent>();
             ai = GetComponent<EnemyAI>();
 
             for (int i = 0; i < patrolPoints.Count; i++)
             {
-                Vector3 point = patrolPoints[i];
-
-                // Check to see if point is valid
-                bool isPathValid = agent.CalculatePath(point, agent.path);
-                if (!isPathValid)
-                {
-                    // This should set the destination to the closest thing on the navmesh
-                    if (agent.path.status == NavMeshPathStatus.PathComplete ||
-                    agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
-                    {
-                        agent.SetDestination(point);
-                        Debugger.instance.SendDebug($"Point was off navmesh, point moved to: {agent.destination}", 2);
-
-                        patrolPoints[i] = agent.destination;
-                    }
-                }
+                IsPointValid(patrolPoints[i], i);
             }
-            // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
 
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
@@ -87,31 +58,28 @@ namespace Necropanda.AI.Movement
         }
 
         /// <summary>
-        /// Gets points in the 4 cardinal directions. Creates a diamond patrol pattern.
+        /// Checks to see whether the point is valid, if not, move to the closest valid point on the navmesh.
         /// 
-        /// Rewrote this.. Still feels like there's a better way to do it
+        /// ref: https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
         /// </summary>
-        /// <param name="offset">The offset amount to add to each direction.</param>
-        List<Vector3> GetPatrolPointsDiamond(float offset)
+        /// <param name="point">the point to check</param>
+        /// <param name="iterator">Which point in the list to check</param>
+        public void IsPointValid(Vector3 point, int iterator)
         {
-            // Check to make sure offset isn't 0
-            if (offset == 0)
+            // Check to see if point is valid
+            bool isPathValid = agent.CalculatePath(point, agent.path);
+            if (!isPathValid)
             {
-                Debugger.instance.SendDebug("No offset added to patrol pattern, returning to avoid weird behaviour..", 3);
-                return null;
+                // This should set the destination to the closest thing on the navmesh
+                if (agent.path.status == NavMeshPathStatus.PathComplete ||
+                agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
+                {
+                    agent.SetDestination(point);
+                    Debugger.instance.SendDebug($"Point was off navmesh, point moved to: {agent.destination}", 2);
+
+                    patrolPoints[iterator] = agent.destination;
+                }
             }
-
-            float x = transform.position.x;
-            float z = transform.position.z;
-
-            List<Vector3> patrolPoints = new List<Vector3>(4);
-
-            patrolPoints[(int)Direction.North] = new Vector3(x + offset, 0, z);
-            patrolPoints[(int)Direction.East] = new Vector3(x, 0, z - offset);
-            patrolPoints[(int)Direction.South] = new Vector3(x - offset, 0, z);
-            patrolPoints[(int)Direction.West] = new Vector3(x, 0, z + offset);
-
-            return patrolPoints;
         }
 
         void GotoNextPoint()
