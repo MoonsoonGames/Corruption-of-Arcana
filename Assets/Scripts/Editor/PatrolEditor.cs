@@ -28,6 +28,8 @@ namespace Necropanda.AI.Movement
         Mode mode = Mode.None;
         // set the inital point to zero
         int point = 0;
+        // Sets the direction of the surface snap raycast, -1 is down, 1 is up
+
 
         // delare a reference to the patrol
         Patrol patrol;
@@ -36,8 +38,10 @@ namespace Necropanda.AI.Movement
 
         // option vars
         public bool snapToGround = false;
+        [Range(-1, 1)]
+        private int surfaceRayCastDirection;
         public bool gridSnap = false;
-        public Vector3 snapAmount;
+        public Vector3 snapAmount = new Vector3(0.5f, 0.5f, 0.5f);
 
         /// <summary>
         /// When the object is deselected in the scene view of the Unity Editor
@@ -149,7 +153,8 @@ namespace Necropanda.AI.Movement
             RaycastHit hit;
             for (int i = 0; i < patrolPoints.Count; i++)
             {
-                if (Physics.Raycast(patrolPoints[i], new Vector3(0, -1, 0), out hit, Mathf.Infinity))
+
+                if (Physics.Raycast(patrolPoints[i], new Vector3(0, surfaceRayCastDirection, 0), out hit, Mathf.Infinity))
                 {
                     if (patrolPoints[i] == null)
                         patrolPoints.Remove(patrolPoints[i]); //if we find a null item in the list, remove that item
@@ -162,6 +167,8 @@ namespace Necropanda.AI.Movement
                         patrolPoints.Remove(patrolPoints[i]);
                         //destroy
                         // DestroyImmediate(patrolPoints[i]);
+
+                        // might be worth to run the raycast again to make sure that the point ins't under the ground
                     }
                     else
                     {
@@ -176,14 +183,21 @@ namespace Necropanda.AI.Movement
 
         private void SnapToGrid()
         {
-            // Doesn't work
-            EditorSnapSettings.gridSnapEnabled = snapToGround;
-            EditorSnapSettings.move = snapAmount;
+            // Set the snap amount to whatever it is in the editor to begin with.
+            snapAmount = EditorSnapSettings.move;
 
-            if (gridSnap)
+            if (!gridSnap)
             {
-                EditorGUILayout.Vector3Field("Grid Snap Amount:", snapAmount);
+                // Make sure it gets set back to false
+                EditorSnapSettings.gridSnapEnabled = gridSnap;
+                return;
             }
+
+            EditorSnapSettings.gridSnapEnabled = gridSnap;
+            snapAmount = EditorGUILayout.Vector3Field("Grid Snap Amount:", snapAmount);
+            // Currently doesn't work
+            EditorSnapSettings.move = snapAmount;
+            Debug.Log(EditorSnapSettings.move);
         }
 
         /// <summary>
