@@ -15,6 +15,8 @@ namespace Necropanda
     public class EndTurn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Deck2D playerHandDeck; //Hand that player cards are drawn into
+        public Deck2D potionDeck; //Hand that potion cards are drawn into
+        public Spell[] potions;
         Deck2D[] decks;
         public GameObject cardPrefab; //Prefab of the parent card type
         Timeline timeline;
@@ -88,6 +90,8 @@ namespace Necropanda
                 PlayShuffleSound();
             }
 
+            RedrawPotions();
+
             timeline.ActivateTurnModifiers();
 
             foreach (TeamManager manager in teamManagers)
@@ -97,6 +101,30 @@ namespace Necropanda
             DisableButton();
             waitingForStartTurn = true;
             Invoke("EnableButton", 2f);
+        }
+
+        void RedrawPotions()
+        {
+            potionDeck.RemoveAllCards(false);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (PotionManager.instance.PotionAvailable(potions[i].potionType, potions[i].potionCost))
+                {
+                    GameObject card = Instantiate(cardPrefab, potionDeck.transform) as GameObject;
+                    DrawCard drawCard = card.GetComponent<DrawCard>();
+                    drawCard.draw = false;
+                    drawCard.Setup(potions[i]);
+
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+
+                    //Add the card to the array
+                    potionDeck.AddCard(cardDrag);
+
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
+                }
+            }
         }
 
         void DisableButton()

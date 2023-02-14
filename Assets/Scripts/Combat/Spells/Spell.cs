@@ -41,6 +41,8 @@ namespace Necropanda
         [Header("Spell Logic")]
         public float speed;
         public int arcanaCost;
+        public int potionCost;
+        public E_PotionType potionType;
 
         [Header("Advanced Logic")]
         public bool discardAfterCasting = false;
@@ -171,6 +173,11 @@ namespace Necropanda
             if (returnDiscardPile)
             {
                 DeckManager.instance.DiscardPileToDeck(true, false);
+            }
+
+            if (potionCost > 0)
+            {
+                PotionManager.instance.ChangePotion(potionType, -potionCost);
             }
         }
 

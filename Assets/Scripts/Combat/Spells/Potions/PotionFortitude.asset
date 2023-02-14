@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 1BleakTouch
+  m_Name: PotionFortitude
   m_EditorClassIdentifier: 
-  spellName: Bleak Touch
+  spellName: Potion of Fortitude
   flavourText: 
-  spellDescription: Deal 3 $bleak$
-  cardImage: {fileID: 0}
-  overrideColor: 0
-  timelineColor: {r: 0, g: 0.8113208, b: 0.6740148, a: 1}
-  timelineIcon: {fileID: 563448678, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0.45
+  spellDescription: Provide 20 $shield$
+  cardImage: {fileID: 21300000, guid: 7b1a1d5d4e82d3b42b8291f72b1711f6, type: 3}
+  overrideColor: 1
+  timelineColor: {r: 0.8113208, g: 0.511558, b: 0.095674604, a: 255}
+  timelineIcon: {fileID: 21300000, guid: bcd5b5f11de95ec4ba92005e4a404502, type: 3}
+  speed: 0
   arcanaCost: 0
+  potionCost: 1
+  potionType: 2
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -32,8 +34,8 @@ MonoBehaviour:
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 3
-    value: 3
+    effectType: 8
+    value: 20
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
@@ -44,8 +46,8 @@ MonoBehaviour:
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   projectileSpeed: 0.6
-  projectilePoints: 000000000100000000000000
+  projectilePoints: 0000000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
-  idealTarget: 1
+  idealTarget: 0

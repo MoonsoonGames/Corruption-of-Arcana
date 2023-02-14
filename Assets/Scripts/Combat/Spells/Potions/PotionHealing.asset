@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 1BleakTouch
+  m_Name: PotionHealing
   m_EditorClassIdentifier: 
-  spellName: Bleak Touch
+  spellName: Potion of Healing
   flavourText: 
-  spellDescription: Deal 3 $bleak$
-  cardImage: {fileID: 0}
-  overrideColor: 0
-  timelineColor: {r: 0, g: 0.8113208, b: 0.6740148, a: 1}
-  timelineIcon: {fileID: 563448678, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0.45
+  spellDescription: Restore 12 $health$
+  cardImage: {fileID: 21300000, guid: 6f0172be3e0f63a489d041f8154217d7, type: 3}
+  overrideColor: 1
+  timelineColor: {r: 0.764151, g: 0.23335567, b: 0.13336597, a: 255}
+  timelineIcon: {fileID: 21300000, guid: bcd5b5f11de95ec4ba92005e4a404502, type: 3}
+  speed: 0
   arcanaCost: 0
+  potionCost: 1
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -32,8 +34,8 @@ MonoBehaviour:
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 3
-    value: 3
+    effectType: 7
+    value: 12
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
@@ -44,8 +46,9 @@ MonoBehaviour:
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   projectileSpeed: 0.6
-  projectilePoints: 000000000100000000000000
-  impactObject: {fileID: 0}
-  trailColor: {r: 0, g: 0, b: 0, a: 0}
+  projectilePoints: 0000000001000000
+  impactObject: {fileID: 6441297445223667176, guid: 3a675a191c219ee4ca59c084d80673a8,
+    type: 3}
+  trailColor: {r: 1, g: 0, b: 0, a: 0}
   screenShake: 0
-  idealTarget: 1
+  idealTarget: 0
