@@ -37,6 +37,7 @@ namespace Necropanda
 
         public void SetDissolveColor(Color color)
         {
+            color *= 8f;
             mat.SetVector("_Disolve_Colour", color);
         }
 
