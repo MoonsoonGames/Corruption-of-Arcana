@@ -139,18 +139,28 @@ namespace Necropanda
 
         public Color normalColour = new Color(255, 255, 255, 255);
 
-        public Color physicalColour;
-        public Color perforationColour;
-        public Color septicColour;
-        public Color bleakColour;
-        public Color staticColour;
-        public Color emberColour;
+        [ColorUsage(true, true)]
+        public Color physicalColour = new Color(255, 40, 40, 255);
+        [ColorUsage(true, true)]
+        public Color perforationColour = new Color(129, 16, 255, 103);
+        [ColorUsage(true, true)]
+        public Color septicColour = new Color(23, 132, 69, 255);
+        [ColorUsage(true, true)]
+        public Color bleakColour = new Color(90, 241, 255, 255);
+        [ColorUsage(true, true)]
+        public Color staticColour = new Color(255, 187, 81, 255);
+        [ColorUsage(true, true)]
+        public Color emberColour = new Color(250, 143, 86, 255);
 
-        public Color healColour;
-        public Color shieldColour;
-        public Color arcanaColour;
+        [ColorUsage(true, true)]
+        public Color healColour = new Color(76, 255, 76, 255);
+        [ColorUsage(true, true)]
+        public Color shieldColour = new Color(76, 76, 185, 255);
+        [ColorUsage(true, true)]
+        public Color arcanaColour = new Color(255, 16, 255, 255);
 
-        public Color defaultColour;
+        //[ColorUsage(true, true)]
+        public Color defaultColour = new Color(245, 75, 243, 255);
 
         Color ColourFromDamageType(E_DamageTypes damageType)
         {
