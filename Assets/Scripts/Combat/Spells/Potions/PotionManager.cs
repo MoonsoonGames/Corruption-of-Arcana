@@ -42,7 +42,7 @@ namespace Necropanda
 
             potions.Add(E_PotionType.Healing, healing);
             potions.Add(E_PotionType.Haste, haste);
-            potions.Add(E_PotionType.Fortitude, fortitude);
+            potions.Add(E_PotionType.Recall, fortitude);
             potions.Add(E_PotionType.Poison, poison);
         }
 
@@ -60,6 +60,6 @@ namespace Necropanda
 
     public enum E_PotionType
     {
-        Healing, Haste, Fortitude, Poison
+        Healing, Haste, Recall, Poison
     }
 }

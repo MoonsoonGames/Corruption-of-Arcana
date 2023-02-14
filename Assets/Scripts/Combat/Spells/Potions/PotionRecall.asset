@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: PotionFortitude
+  m_Name: PotionRecall
   m_EditorClassIdentifier: 
-  spellName: Potion of Fortitude
+  spellName: Potion of Recall
   flavourText: 
-  spellDescription: Provide 20 $shield$
-  cardImage: {fileID: 21300000, guid: 7b1a1d5d4e82d3b42b8291f72b1711f6, type: 3}
+  spellDescription: Discard all of the cards in your hand
+  cardImage: {fileID: 21300000, guid: 989d4add15666f14f96f619366642915, type: 3}
   overrideColor: 1
-  timelineColor: {r: 0.8113208, g: 0.511558, b: 0.095674604, a: 255}
+  timelineColor: {r: 0.5584396, g: 0.09411763, b: 0.8117647, a: 255}
   timelineIcon: {fileID: 21300000, guid: bcd5b5f11de95ec4ba92005e4a404502, type: 3}
   speed: 0
   arcanaCost: 0
@@ -27,15 +27,15 @@ MonoBehaviour:
   discardAfterTurn: 0
   drawCard: {fileID: 0}
   spawnEnemies: []
-  discardCards: 0
+  discardCards: 1
   returnDiscardPile: 0
   removeStatuses: 0
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 8
-    value: 20
+    effectType: 9
+    value: 0
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
@@ -50,4 +50,4 @@ MonoBehaviour:
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
-  idealTarget: 0
+  idealTarget: 6
