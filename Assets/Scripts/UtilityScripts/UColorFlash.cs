@@ -103,6 +103,10 @@ namespace Necropanda
             {
                 CancelInvoke();
                 p = 0;
+                if (matInst != null)
+                    matInst.SetColour(normalColour);
+                else
+                    spriteRenderer.color = normalColour;
             }
         }
 
@@ -137,6 +141,7 @@ namespace Necropanda
 
         #region Colour
 
+        [ColorUsage(true, true)]
         public Color normalColour = new Color(255, 255, 255, 255);
 
         [ColorUsage(true, true)]
@@ -159,7 +164,7 @@ namespace Necropanda
         [ColorUsage(true, true)]
         public Color arcanaColour = new Color(255, 16, 255, 255);
 
-        //[ColorUsage(true, true)]
+        [ColorUsage(true, true)]
         public Color defaultColour = new Color(245, 75, 243, 255);
 
         Color ColourFromDamageType(E_DamageTypes damageType)
