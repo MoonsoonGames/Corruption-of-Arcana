@@ -136,7 +136,7 @@ namespace Necropanda
         {
             flashColour = color;
             if (matInst != null)
-                matInst.SetEdgeColour(flashColour);
+                matInst.SetColour(flashColour);
             else
                 spriteRenderer.color = flashColour;
         }
@@ -144,7 +144,7 @@ namespace Necropanda
         public void RemoveHighlightColour()
         {
             if (matInst != null)
-                matInst.SetEdgeColour(Color.black);
+                matInst.SetColour(normalColour);
             else
                 spriteRenderer.color = normalColour;
         }
