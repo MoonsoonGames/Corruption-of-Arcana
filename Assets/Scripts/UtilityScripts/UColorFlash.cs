@@ -25,21 +25,7 @@ namespace Necropanda
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public void Flash(E_DamageTypes effectType)
-        {
-            //Debug.Log("Flash color");
-            CancelInvoke();
-            p = 0;
-
-            flashColour = ColourFromDamageType(effectType);
-
-            if (matInst != null)
-                matInst.SetColour(flashColour);
-            else
-                spriteRenderer.color = flashColour;
-
-            InvokeRepeating("RevertColour", 0f, 0.05f);
-        }
+        #region Dissolve
 
         public void ApplyDissolve(E_DamageTypes effectType)
         {
@@ -90,6 +76,26 @@ namespace Necropanda
                 matInst.SetDissolve(currentDissolve);
         }
 
+        #endregion
+
+        #region Colour Flash
+
+        public void Flash(E_DamageTypes effectType)
+        {
+            //Debug.Log("Flash color");
+            CancelInvoke();
+            p = 0;
+
+            flashColour = ColourFromDamageType(effectType);
+
+            if (matInst != null)
+                matInst.SetColour(flashColour);
+            else
+                spriteRenderer.color = flashColour;
+
+            InvokeRepeating("RevertColour", 0f, 0.05f);
+        }
+
         void RevertColour()
         {
             if (matInst != null)
@@ -122,11 +128,15 @@ namespace Necropanda
             return lerpColour;
         }
 
+        #endregion
+
+        #region Edge Highlight
+
         public void Highlight(Color color)
         {
             flashColour = color;
             if (matInst != null)
-                matInst.SetColour(flashColour);
+                matInst.SetEdgeColour(flashColour);
             else
                 spriteRenderer.color = flashColour;
         }
@@ -134,10 +144,12 @@ namespace Necropanda
         public void RemoveHighlightColour()
         {
             if (matInst != null)
-                matInst.SetColour(normalColour);
+                matInst.SetEdgeColour(Color.black);
             else
                 spriteRenderer.color = normalColour;
         }
+
+        #endregion
 
         #region Colour
 

@@ -35,9 +35,15 @@ namespace Necropanda
             mat.SetVector("_Color", color);
         }
 
+        public void SetEdgeColour(Color color)
+        {
+            //color *= 100f;
+            mat.SetVector("_EdgeColor", color);
+        }
+
         public void SetDissolveColor(Color color)
         {
-            color *= 8f;
+            //color *= 8f;
             mat.SetVector("_Disolve_Colour", color);
         }
 
