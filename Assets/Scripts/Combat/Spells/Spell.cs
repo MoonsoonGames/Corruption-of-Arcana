@@ -24,6 +24,7 @@ namespace Necropanda
         [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
+        public E_CardTypes cardType = E_CardTypes.Cards;
 
         #endregion
 

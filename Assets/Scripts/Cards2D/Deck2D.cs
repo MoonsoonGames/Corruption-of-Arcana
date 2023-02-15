@@ -40,6 +40,7 @@ namespace Necropanda
         #region Cards
 
         CardDrag2D[] cards;
+        public List<E_CardTypes> availableCards;
         public int maxCards = 3;
         public int CurrentCardsLength()
         {
@@ -116,6 +117,9 @@ namespace Necropanda
             //Only fires logic when player is dragging a card into the deck
             if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
+                if (availableCards.Contains(dragManager.draggedCard.GetComponent<Card>().spell.cardType) == false)
+                    return;
+
                 if (cards.Length < maxCards)
                 {
                     //Debug.Log(cards.Length + " / " + maxCards);
@@ -370,5 +374,10 @@ namespace Necropanda
         }
 
         #endregion
+    }
+
+    public enum E_CardTypes
+    {
+        All, Cards, Potions, Weapons, Trinkets, None
     }
 }
