@@ -505,7 +505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe21f3dafde1c34ab2d22244a8ae5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revertTime: 0.05
   normalColour: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
   physicalColour: {r: 1, g: 0, b: 0, a: 0.39215687}
   perforationColour: {r: 0.5059584, g: 0.06132078, b: 1, a: 0.39215687}
@@ -989,7 +988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe21f3dafde1c34ab2d22244a8ae5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revertTime: 0.05
   normalColour: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
   physicalColour: {r: 1, g: 0, b: 0, a: 0.39215687}
   perforationColour: {r: 0.5059584, g: 0.06132078, b: 1, a: 0.39215687}
@@ -2121,12 +2119,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189404465d9c59c43a05bf3aa7ea0325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3731661798716781316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8935503329657459408, guid: d53833f3bd3854743bef439acb6cfbb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5749071758269686228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3731661798716781317 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8935503329657459409, guid: d53833f3bd3854743bef439acb6cfbb8,
     type: 3}
   m_PrefabInstance: {fileID: 5749071758269686228}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6365603398473849597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1702330823634107177, guid: d53833f3bd3854743bef439acb6cfbb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5749071758269686228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189404465d9c59c43a05bf3aa7ea0325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5838738808123045780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2723,6 +2739,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 398171297663633720, guid: 1ce90e937e73e0946ab8d09e9b94557a,
         type: 3}
+      propertyPath: potionDeck
+      value: 
+      objectReference: {fileID: 6365603398473849597}
+    - target: {fileID: 398171297663633720, guid: 1ce90e937e73e0946ab8d09e9b94557a,
+        type: 3}
+      propertyPath: hoverEmitter
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 398171297663633720, guid: 1ce90e937e73e0946ab8d09e9b94557a,
+        type: 3}
+      propertyPath: pressTrigger
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 398171297663633720, guid: 1ce90e937e73e0946ab8d09e9b94557a,
+        type: 3}
       propertyPath: playerHandDeck
       value: 
       objectReference: {fileID: 3731661797279335977}
@@ -2761,6 +2792,11 @@ PrefabInstance:
       propertyPath: cardShuffle.Guid.Data4
       value: 460011053
       objectReference: {fileID: 0}
+    - target: {fileID: 398171297663633720, guid: 1ce90e937e73e0946ab8d09e9b94557a,
+        type: 3}
+      propertyPath: disableUIElements.Array.data[0]
+      value: 
+      objectReference: {fileID: 3731661798716781316}
     - target: {fileID: 398171297663633724, guid: 1ce90e937e73e0946ab8d09e9b94557a,
         type: 3}
       propertyPath: m_SizeDelta.x
