@@ -27,59 +27,57 @@ namespace Necropanda
 
         #region Dissolve
 
+        public void ApplyDissolve(E_DamageTypes effectType, float target)
+        {
+            dissolving = true;
+            dissolveTarget = target;
+            increasing = target > currentDissolve;
+            
+            if (matInst != null)
+                matInst.SetDissolveColor(ColourFromDamageType(effectType));
+        }
+
         bool dissolving = false;
-
-        public void ApplyDissolve(E_DamageTypes effectType)
-        {
-            dissolving = true;
-            //Debug.Log("Dissolve");
-            if (matInst != null)
-                matInst.SetDissolveColor(ColourFromDamageType(effectType));
-
-            InvokeRepeating("DissolveInvoke", 0f, 0.05f);
-        }
-
-        public void ReverseDissolve(E_DamageTypes effectType)
-        {
-            dissolving = true;
-            //Debug.Log("Reverse Dissolve");
-            if (matInst != null)
-                matInst.SetDissolveColor(ColourFromDamageType(effectType));
-
-            InvokeRepeating("ReverseDissolveInvoke", 0f, 0.05f);
-        }
-
-        float dissolveTime = 0.1f;
+        bool increasing = true;
+        float dissolveTarget = 0;
+        float dissolveTime = 1f;
         float currentDissolve = 0;
 
-        void DissolveInvoke()
+        private void Update()
         {
-            currentDissolve += dissolveTime;
+            if (matInst == null) return;
 
-            if (currentDissolve >= 1)
+            if (dissolving)
             {
-                CancelInvoke();
-                currentDissolve = 1;
-                dissolving = false;
-            }
+                if (increasing)
+                {
+                    currentDissolve += dissolveTime * Time.deltaTime;
 
-            if (matInst != null)
+                    if (currentDissolve >= dissolveTarget)
+                    {
+                        CancelInvoke();
+                        currentDissolve = dissolveTarget;
+                        dissolving = false;
+                    }
+                }
+                else
+                {
+                    currentDissolve -= dissolveTime * Time.deltaTime;
+
+                    if (currentDissolve <= dissolveTarget)
+                    {
+                        CancelInvoke();
+                        currentDissolve = dissolveTarget;
+                        dissolving = false;
+                    }
+                }
+
                 matInst.SetDissolve(currentDissolve);
-        }
-
-        void ReverseDissolveInvoke()
-        {
-            currentDissolve -= dissolveTime;
-
-            if (currentDissolve <= 0)
+            }
+            else
             {
-                CancelInvoke();
-                currentDissolve = 0;
-                dissolving = false;
+                matInst.SetDissolve(dissolveTarget);
             }
-
-            if (matInst != null)
-                matInst.SetDissolve(currentDissolve);
         }
 
         #endregion
@@ -88,9 +86,6 @@ namespace Necropanda
 
         public void Flash(E_DamageTypes effectType)
         {
-            if (dissolving) return;
-
-            //Debug.Log("Flash color");
             CancelInvoke();
             p = 0;
 
@@ -142,8 +137,6 @@ namespace Necropanda
 
         public void Highlight(Color color)
         {
-            if (dissolving) return;
-
             flashColour = color;
             if (matInst != null)
                 matInst.SetColour(flashColour);
@@ -153,8 +146,6 @@ namespace Necropanda
 
         public void RemoveHighlightColour()
         {
-            if (dissolving) return;
-
             if (matInst != null)
                 matInst.SetColour(normalColour);
             else
