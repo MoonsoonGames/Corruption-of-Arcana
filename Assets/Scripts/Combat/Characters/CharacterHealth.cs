@@ -301,9 +301,9 @@ namespace Necropanda
                 if (dissolve)
                 {
                     if (activate)
-                        colorFlash.ReverseDissolve(type);
+                        colorFlash.ApplyDissolve(type, 0);
                     else
-                        colorFlash.ApplyDissolve(type);
+                        colorFlash.ApplyDissolve(type, 1);
                 }
                 else
                     colorFlash.gameObject.SetActive(activate);
