@@ -27,8 +27,11 @@ namespace Necropanda
 
         #region Dissolve
 
+        bool dissolving = false;
+
         public void ApplyDissolve(E_DamageTypes effectType)
         {
+            dissolving = true;
             //Debug.Log("Dissolve");
             if (matInst != null)
                 matInst.SetDissolveColor(ColourFromDamageType(effectType));
@@ -38,6 +41,7 @@ namespace Necropanda
 
         public void ReverseDissolve(E_DamageTypes effectType)
         {
+            dissolving = true;
             //Debug.Log("Reverse Dissolve");
             if (matInst != null)
                 matInst.SetDissolveColor(ColourFromDamageType(effectType));
@@ -56,6 +60,7 @@ namespace Necropanda
             {
                 CancelInvoke();
                 currentDissolve = 1;
+                dissolving = false;
             }
 
             if (matInst != null)
@@ -70,6 +75,7 @@ namespace Necropanda
             {
                 CancelInvoke();
                 currentDissolve = 0;
+                dissolving = false;
             }
 
             if (matInst != null)
@@ -82,6 +88,8 @@ namespace Necropanda
 
         public void Flash(E_DamageTypes effectType)
         {
+            if (dissolving) return;
+
             //Debug.Log("Flash color");
             CancelInvoke();
             p = 0;
@@ -134,6 +142,8 @@ namespace Necropanda
 
         public void Highlight(Color color)
         {
+            if (dissolving) return;
+
             flashColour = color;
             if (matInst != null)
                 matInst.SetColour(flashColour);
@@ -143,6 +153,8 @@ namespace Necropanda
 
         public void RemoveHighlightColour()
         {
+            if (dissolving) return;
+
             if (matInst != null)
                 matInst.SetColour(normalColour);
             else
