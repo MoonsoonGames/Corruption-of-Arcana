@@ -11,48 +11,18 @@ namespace Necropanda
 {
     public class PlayerMapMovement : MonoBehaviour
     {
-        public CharacterController controller; // Ref to the Character Controller Component.
-
-        bool sprinting = false;
-        public float speed = 12f; // The speed at which the player moves.
-        public float moveDeadzone = 0.6f;
-
-        public bool paused = false; // Defines whether the game is paused, this might not be needed.
-
-        Vector3 velocity; // The velocity(speed) of the player.
-        bool isGrounded; // Tells us whether the player is grounded.
-
-        Vector3 horizontal;
-        Vector3 vertical;
+        //All of this data will need to be saved as well as the current position when a random event occurs
+        public NavigationWaypoint currentWaypoint;
+        NavigationWaypoint[] minorWaypoints;
+        NavigationWaypoint nextWaypoint;
+        int currentWaypointIndex = 0;
+        NavigationWaypoint destinationWaypoint;
+        public float speed = 0.6f;
+        public float distanceThreshold = 5f;
 
         private void Start()
         {
-            paused = true;
-
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
-
-            SetupMovement();
-        }
-
-        void SetupMovement()
-        {
-            /* Get last nav pos from load manager
-            string currentSceneString = SceneManager.GetActiveScene().name;
-            E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
-
-            if (LoadCombatManager.instance.lastScene != E_Scenes.Null)
-            {
-                if (currentScene == LoadCombatManager.instance.lastScene)
-                {
-                    //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
-                    transform.position = LoadCombatManager.instance.lastPos;
-                    //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos + paused);
-                }
-            }
-            */
-
-            paused = false;
+            UpdateWaypoints();
         }
 
         /// <summary>
@@ -60,77 +30,96 @@ namespace Necropanda
         /// </summary>
         void Update()
         {
-            if (!paused)
+            if (nextWaypoint == null) return;
+
+            if (HelperFunctions.AlmostEqualVector3(transform.position, nextWaypoint.transform.position, distanceThreshold, new Vector3(0, 0, 1)))
             {
-                GetInput();
+                if (currentWaypointIndex > minorWaypoints.Length)
+                {
+                    transform.position = new Vector3(destinationWaypoint.transform.position.x, destinationWaypoint.transform.position.y, transform.position.z);
+                    Debug.Log("Arrived");
+                    currentWaypoint = destinationWaypoint;
+                    ArrivedAtNode();
+                    UpdateWaypoints();
+                }
+                else
+                {
+                    ArrivedAtNode();
+                    GetNextWaypoint();
+                }
+            }
+            else
+            {
+                Debug.Log("Moving");
+                Vector3 dir = nextWaypoint.transform.position - transform.position;
+                dir.Normalize();
+                dir.z = 0;
+
+                transform.position += dir * speed;
             }
         }
 
-        /// <summary>
-        /// This function gets all of the KEYBOARD updates and converts those inputs into movement within
-        /// the world space.
-        /// </summary>
-        void GetInput()
+        public void SetDestination(NavigationWaypoint destination)
         {
-            // Get the movement axis
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-
-            horizontal = gameObject.transform.right;
-            horizontal = horizontal.normalized;
-            vertical = gameObject.transform.forward;
-            vertical = vertical.normalized;
-
-            // Combine into one variable which gets used later
-            Vector3 moveVector = horizontal * x + vertical * z;
-
-            // Move using the controller component
-            //gameObject.transform.position += moveVector * speed * Time.deltaTime;
-            controller.Move(moveVector * speed * Time.deltaTime);
-
-            /*
-            bool moving = moveVector != new Vector3(0, 0, 0);
-
-            Vector3 inputVector = new Vector3(x, 0, z);
-
-            HandleAnimations(inputVector, moving);
-            */
-        }
-
-        /// <summary>
-        /// This function handles the sprite animations of taro. Interacts with the animator component.
-        /// </summary>
-        void HandleAnimations(Vector3 move, bool moving)
-        {
-            /*
-            //Debug.Log("Moving: " + move);
-            if (moving)
+            bool canTravel = false;
+            
+            foreach (var item in currentWaypoint.paths)
             {
-                if (move.z > moveDeadzone)
+                if (item.waypoint == destination)
                 {
-                    animator.SetInteger("Direction", 1);
-                }
-                else if (move.z < -moveDeadzone)
-                {
-                    animator.SetInteger("Direction", 2);
-                }
-                else if (move.x < -moveDeadzone)
-                {
-                    animator.SetInteger("Direction", 4);
-                }
-                else if (move.x > moveDeadzone)
-                {
-                    animator.SetInteger("Direction", 3);
+                    canTravel = true;
+                    minorWaypoints = item.minorWaypoints;
                 }
             }
 
-            animator.SetBool("Moving", moving);
-            animator.SetBool("Sprinting", sprinting);
+            if (canTravel)
+            {
+                currentWaypointIndex = 0;
+                this.destinationWaypoint = destination;
+                nextWaypoint = minorWaypoints[currentWaypointIndex];
+            }
+            else
+            {
+                Debug.Log("Waypoint not available");
+            }
+        }
 
-            //Check to see player direction
+        void ArrivedAtNode()
+        {
+            //Check scene in node, enterring at a specific entrance depending on path
+            //Check random events in node
+        }
 
-            //Apply animation based on direction
-            */
+        void GetNextWaypoint()
+        {
+            currentWaypointIndex++;
+
+            currentWaypoint = nextWaypoint;
+
+            if (currentWaypointIndex >= minorWaypoints.Length)
+                nextWaypoint = destinationWaypoint;
+            else
+                nextWaypoint = minorWaypoints[currentWaypointIndex];
+        }
+
+        void UpdateWaypoints()
+        {
+            NavigationWaypoint[] allWaypoints = GameObject.FindObjectsOfType<NavigationWaypoint>();
+
+            foreach (var waypoint in allWaypoints)
+            {
+                bool available = false;
+
+                foreach (var paths in currentWaypoint.paths)
+                {
+                    if (paths.waypoint == waypoint)
+                    {
+                        available = true;
+                    }
+                }
+
+                waypoint.SetAvailable(available);
+            }
         }
     }
 }
