@@ -388,33 +388,39 @@ namespace Necropanda
                     switch (module.target)
                     {
                         case E_SpellTargetType.Caster:
-                            Simulate(caster, caster, module, cardsInHand, removedStatusCount, empowered, weakened);
+                            Simulate(caster, caster, false, module, cardsInHand, removedStatusCount, empowered, weakened);
                             break;
                         case E_SpellTargetType.Target:
-                            Simulate(caster, target, module, cardsInHand, removedStatusCount, empowered, weakened);
+                            Simulate(caster, target, false, module, cardsInHand, removedStatusCount, empowered, weakened);
                             break;
                         case E_SpellTargetType.Chain:
                             foreach (Character character in targetTeamManager.team)
                             {
-                                Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
+                                Simulate(caster, character, false, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.Cleave:
                             foreach (Character character in targetTeamManager.team)
                             {
-                                Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
+                                Simulate(caster, character, false, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
                         case E_SpellTargetType.RandomEnemyTeam:
-                            //Simulate(caster, targetTeamManager.team[Random.Range(0, targetTeamManager.team.Count)], module, cardsInHand, empowered, weakened);
+                            foreach (Character character in targetTeamManager.team)
+                            {
+                                Simulate(caster, character, true, module, cardsInHand, removedStatusCount, empowered, weakened);
+                            }
                             break;
                         case E_SpellTargetType.RandomAll:
-                            //Simulate(caster, allCharacters[Random.Range(0, allCharacters.Count)], module, cardsInHand, empowered, weakened);
+                            foreach (Character character in allCharacters)
+                            {
+                                Simulate(caster, character, true, module, cardsInHand, removedStatusCount, empowered, weakened);
+                            }
                             break;
                         case E_SpellTargetType.All:
                             foreach (Character character in allCharacters)
                             {
-                                Simulate(caster, character, module, cardsInHand, removedStatusCount, empowered, weakened);
+                                Simulate(caster, character, false, module, cardsInHand, removedStatusCount, empowered, weakened);
                             }
                             break;
                     }
@@ -431,9 +437,10 @@ namespace Necropanda
         /// <param name="cardsDiscarded">The number of cards discarded</param>
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
-        public void Simulate(Character caster, Character target, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, int statusesCleared, bool empowered, bool weakened)
+        public void Simulate(Character caster, Character target, bool rand, CombatHelperFunctions.SpellModule spell, int cardsDiscarded, int statusesCleared, bool empowered, bool weakened)
         {
-            int damage = 0, healing = 0, shield = 0;
+            Vector2Int damage = new Vector2Int(0, 0);
+            int shield = 0;
 
             if (target != null)
             {
@@ -446,7 +453,15 @@ namespace Necropanda
                 switch (spell.effectType)
                 {
                     case E_DamageTypes.Healing:
-                        healing += value;
+                        if (rand)
+                        {
+                            damage.x += value;
+                        }
+                        else
+                        {
+                            damage.x += value;
+                            damage.y += value;
+                        }
                         break;
                     case E_DamageTypes.Shield:
                         shield += value;
@@ -454,12 +469,20 @@ namespace Necropanda
                     case E_DamageTypes.Arcana:
                         break;
                     default:
-                        damage += value;
+                        if (rand)
+                        {
+                            damage.y -= value;
+                        }
+                        else
+                        {
+                            damage.x -= value;
+                            damage.y -= value;
+                        }
                         break;
                 }
             }
 
-            target.SimulateValues(damage, healing, shield, spell.executeThreshold);
+            target.SimulateValues(damage, shield, spell.executeThreshold);
         }
 
         #endregion
