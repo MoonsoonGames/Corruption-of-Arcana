@@ -64,6 +64,13 @@ namespace Necropanda
 
         public void SetText(string titleText, string descText)
         {
+            if (IconManager.instance == null)
+            {
+                title.text = titleText;
+                description.text = descText;
+                return;
+            }
+
             if (title != null)
             {
                 title.text = IconManager.instance.ReplaceText(titleText);

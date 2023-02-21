@@ -12,11 +12,11 @@ namespace Necropanda
 {
     public class NavigationWaypoint : MonoBehaviour
     {
-        PlayerMapMovement player;
+        PlayerMapMovement player; public void SetPlayer(PlayerMapMovement player) { this.player = player; }
 
         public WaypointNodes[] paths;
         //public RandomEvent[] events;
-        //public E_Scenes loadScene;
+        public E_Scenes loadScene;
 
         private void Start()
         {
@@ -34,6 +34,23 @@ namespace Necropanda
         {
             if (image == null) return;
             image.color = available ? Color.green : Color.red;
+        }
+
+        public void Arrived()
+        {
+            //load scene
+            player.SetLevel(loadScene);
+
+            if (loadScene != E_Scenes.Null)
+            {
+                //load tooltip instead
+                TooltipManager.instance.ShowTooltip(true, "Enter " + loadScene.ToString(), "Press 'F' to enter level");
+            }
+            else
+            {
+                TooltipManager.instance.ShowTooltip(false, "", "");
+                //load random event
+            }
         }
     }
 

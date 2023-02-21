@@ -23,13 +23,25 @@ namespace Necropanda
         private void Start()
         {
             UpdateWaypoints();
+            currentWaypoint.SetPlayer(this);
+            currentWaypoint.Arrived();
         }
+
+        E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
 
         /// <summary>
         /// Update here, ran each frome. Here we call for the inputs.
         /// </summary>
         void Update()
         {
+            if (enterLevel != E_Scenes.Null)
+            {
+                if (Input.GetButton("Interact"))
+                {
+                    LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, false);
+                }
+            }
+
             if (nextWaypoint == null) return;
 
             if (HelperFunctions.AlmostEqualVector3(transform.position, nextWaypoint.transform.position, distanceThreshold, new Vector3(0, 0, 1)))
@@ -39,12 +51,12 @@ namespace Necropanda
                     transform.position = new Vector3(destinationWaypoint.transform.position.x, destinationWaypoint.transform.position.y, transform.position.z);
                     Debug.Log("Arrived");
                     currentWaypoint = destinationWaypoint;
-                    ArrivedAtNode();
+                    ArrivedAtNode(currentWaypoint);
                     UpdateWaypoints();
                 }
                 else
                 {
-                    ArrivedAtNode();
+                    ArrivedAtNode(nextWaypoint);
                     GetNextWaypoint();
                 }
             }
@@ -84,8 +96,9 @@ namespace Necropanda
             }
         }
 
-        void ArrivedAtNode()
+        void ArrivedAtNode(NavigationWaypoint node)
         {
+            node.Arrived();
             //Check scene in node, enterring at a specific entrance depending on path
             //Check random events in node
         }
