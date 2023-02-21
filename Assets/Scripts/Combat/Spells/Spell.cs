@@ -480,6 +480,16 @@ namespace Necropanda
                         }
                         break;
                 }
+
+                foreach (var item in spell.statuses)
+                {
+                    if (CombatHelperFunctions.ApplyEffect(target, item))
+                    {
+                        item.status.SimulateStatusValues(target);
+                    }
+                }
+
+                Timeline.instance.SimulateHitStatuses(target, caster);
             }
 
             target.SimulateValues(damage, shield, spell.executeThreshold);
