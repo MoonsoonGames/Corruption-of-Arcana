@@ -16,30 +16,38 @@ namespace Necropanda
         public List<CharacterStats> enemies;
 
         public TextMeshProUGUI text;
+        public string overideDescription;
 
         private void Start()
         {
             string description = "";
 
-            Dictionary<CharacterStats, int> enemyDictionary = new Dictionary<CharacterStats, int>();
-
-            foreach (var item in enemies)
+            if (overideDescription == "")
             {
-                if (enemyDictionary.ContainsKey(item))
+                Dictionary<CharacterStats, int> enemyDictionary = new Dictionary<CharacterStats, int>();
+
+                foreach (var item in enemies)
                 {
-                    enemyDictionary[item] = enemyDictionary[item] + 1;
+                    if (enemyDictionary.ContainsKey(item))
+                    {
+                        enemyDictionary[item] = enemyDictionary[item] + 1;
+                    }
+                    else
+                    {
+                        enemyDictionary.Add(item, 1);
+                    }
                 }
-                else
+
+                foreach (var item in enemyDictionary)
                 {
-                    enemyDictionary.Add(item, 1);
+                    string enemyName = item.Key.characterName;
+
+                    description += item.Value + " " + enemyName + ", ";
                 }
             }
-
-            foreach (var item in enemyDictionary)
+            else
             {
-                string enemyName = item.Key.characterName;
-
-                description += item.Value + " " + enemyName + ", ";
+                description = overideDescription;
             }
 
             text.text = description;

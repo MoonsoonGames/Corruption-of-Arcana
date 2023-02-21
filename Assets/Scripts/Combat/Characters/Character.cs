@@ -238,6 +238,8 @@ namespace Necropanda
 
         public void SimulateValues(Vector2Int newDmg, int newShield, float newExecute)
         {
+            if (health.dying) return;
+
             dmg += newDmg;
             shield += newShield;
 
