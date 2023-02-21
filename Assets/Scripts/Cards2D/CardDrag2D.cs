@@ -111,7 +111,14 @@ namespace Necropanda
                 //Debug.Log("Pointer Exit");
                 ScaleCard(1, false);
                 Highlight(false);
-                ShowArt(deck.showArt);
+                if (deck != null)
+                {
+                    ShowArt(deck.showArt);
+                }
+                else
+                {
+                    ShowArt(false);
+                }
                 StopHighlightTarget();
             }
         }

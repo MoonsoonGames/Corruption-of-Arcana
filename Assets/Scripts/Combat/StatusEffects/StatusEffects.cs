@@ -374,7 +374,7 @@ namespace Necropanda
             Vector2Int damage = new Vector2Int(0, 0);
             int shield = 0;
 
-            if (target != null)
+            if (target != null && target.GetHealth().dying == false)
             {
                 int value = status.value;
 

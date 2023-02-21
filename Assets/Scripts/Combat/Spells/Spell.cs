@@ -477,6 +477,9 @@ namespace Necropanda
                         {
                             damage.x -= value;
                             damage.y -= value;
+
+                            if (value > 0)
+                                Timeline.instance.SimulateHitStatuses(target, caster);
                         }
                         break;
                 }
@@ -488,8 +491,6 @@ namespace Necropanda
                         item.status.SimulateStatusValues(target);
                     }
                 }
-
-                Timeline.instance.SimulateHitStatuses(target, caster);
             }
 
             target.SimulateValues(damage, shield, spell.executeThreshold);
