@@ -13,6 +13,7 @@ namespace Necropanda
 {
     public class StartFight : MonoBehaviour
     {
+        public List<Quest> progressQuest;
         public List<CharacterStats> enemies;
 
         public TextMeshProUGUI text;
@@ -20,6 +21,8 @@ namespace Necropanda
 
         private void Start()
         {
+            if (text == null) return;
+
             string description = "";
 
             if (overideDescription == "")
@@ -57,7 +60,16 @@ namespace Necropanda
         {
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
-            LoadCombatManager.instance.LoadCombat(enemies, lastScene);
+            LoadCombatManager.instance.LoadCombat(null, lastScene, enemies, progressQuest);
+        }
+
+        public void StartFightFromLevel()
+        {
+            GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
+
+            string sceneString = SceneManager.GetActiveScene().name;
+            E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
+            LoadCombatManager.instance.LoadCombat(player, lastScene, enemies, progressQuest);
         }
     }
 }
