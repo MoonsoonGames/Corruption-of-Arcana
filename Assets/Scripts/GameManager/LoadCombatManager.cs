@@ -109,7 +109,7 @@ namespace Necropanda
             progressQuestUponCombatVictory = quests;
 
             //Saving last scene
-            if (lastScene != E_Scenes.Null)
+            if (lastScene != E_Scenes.Null && player != null)
             {
                 lastPos = player.transform.position;
                 lastRot = player.transform.rotation;
@@ -131,7 +131,7 @@ namespace Necropanda
             enemyIDs.Clear();
 
             //Saving last scene
-            if (lastScene != E_Scenes.Null)
+            if (lastScene != E_Scenes.Null && player != null)
             {
                 lastPos = player.transform.position;
                 lastRot = player.transform.rotation;
