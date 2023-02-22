@@ -111,7 +111,14 @@ namespace Necropanda
                 //Debug.Log("Pointer Exit");
                 ScaleCard(1, false);
                 Highlight(false);
-                ShowArt(deck.showArt);
+                if (deck != null)
+                {
+                    ShowArt(deck.showArt);
+                }
+                else
+                {
+                    ShowArt(false);
+                }
                 StopHighlightTarget();
             }
         }
@@ -224,6 +231,13 @@ namespace Necropanda
 
         #region Visual Feedback
 
+        [ColorUsage(true, true)]
+        public Color greenColour = Color.green;
+        [ColorUsage(true, true)]
+        public Color redColour = Color.red;
+        [ColorUsage(true, true)]
+        public Color yellowColour = Color.yellow;
+
         public void HighlightTarget()
         {
             switch (card.spell.idealTarget)
@@ -231,23 +245,23 @@ namespace Necropanda
                 case E_SpellTargetType.Caster:
                     //Debug.Log("Highlight caster for " + card.spell.spellName);
                     if (casterHealth.dying == false)
-                        casterHealth.GetColorFlash().Highlight(Color.green);
+                        casterHealth.GetColorFlash().Highlight(greenColour);
                     break;
                 case E_SpellTargetType.Target:
                     //Debug.Log("Highlight targets for " + card.spell.spellName);
                     foreach (var item in targetHealths)
                     {
                         if (item.dying == false)
-                            item.GetColorFlash().Highlight(Color.red);
+                            item.GetColorFlash().Highlight(redColour);
                     }
                     break;
                 case E_SpellTargetType.All:
                     //Debug.Log("Highlight all characters for " + card.spell.spellName);
-                    casterHealth.GetColorFlash().Highlight(Color.yellow);
+                    casterHealth.GetColorFlash().Highlight(yellowColour);
                     foreach (var item in targetHealths)
                     {
                         if (item.dying == false)
-                            item.GetColorFlash().Highlight(Color.yellow);
+                            item.GetColorFlash().Highlight(yellowColour);
                     }
                     break;
                 default:

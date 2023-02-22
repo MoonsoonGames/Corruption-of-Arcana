@@ -25,9 +25,67 @@ namespace Necropanda
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        #region Dissolve
+
+        public void ApplyDissolve(E_DamageTypes effectType, float target)
+        {
+            dissolving = true;
+            dissolveTarget = target;
+            increasing = target > currentDissolve;
+            
+            if (matInst != null)
+                matInst.SetDissolveColor(ColourFromDamageType(effectType));
+        }
+
+        bool dissolving = false;
+        bool increasing = true;
+        float dissolveTarget = 0;
+        float dissolveTime = 1f;
+        float currentDissolve = 0;
+
+        private void Update()
+        {
+            if (matInst == null) return;
+
+            if (dissolving)
+            {
+                if (increasing)
+                {
+                    currentDissolve += dissolveTime * Time.deltaTime;
+
+                    if (currentDissolve >= dissolveTarget)
+                    {
+                        CancelInvoke();
+                        currentDissolve = dissolveTarget;
+                        dissolving = false;
+                    }
+                }
+                else
+                {
+                    currentDissolve -= dissolveTime * Time.deltaTime;
+
+                    if (currentDissolve <= dissolveTarget)
+                    {
+                        CancelInvoke();
+                        currentDissolve = dissolveTarget;
+                        dissolving = false;
+                    }
+                }
+
+                matInst.SetDissolve(currentDissolve);
+            }
+            else
+            {
+                matInst.SetDissolve(dissolveTarget);
+            }
+        }
+
+        #endregion
+
+        #region Colour Flash
+
         public void Flash(E_DamageTypes effectType)
         {
-            //Debug.Log("Flash color");
             CancelInvoke();
             p = 0;
 
@@ -39,55 +97,6 @@ namespace Necropanda
                 spriteRenderer.color = flashColour;
 
             InvokeRepeating("RevertColour", 0f, 0.05f);
-        }
-
-        public void ApplyDissolve(E_DamageTypes effectType)
-        {
-            //Debug.Log("Dissolve");
-            if (matInst != null)
-                matInst.SetDissolveColor(ColourFromDamageType(effectType));
-
-            InvokeRepeating("DissolveInvoke", 0f, 0.05f);
-        }
-
-        public void ReverseDissolve(E_DamageTypes effectType)
-        {
-            //Debug.Log("Reverse Dissolve");
-            if (matInst != null)
-                matInst.SetDissolveColor(ColourFromDamageType(effectType));
-
-            InvokeRepeating("ReverseDissolveInvoke", 0f, 0.05f);
-        }
-
-        float dissolveTime = 0.1f;
-        float currentDissolve = 0;
-
-        void DissolveInvoke()
-        {
-            currentDissolve += dissolveTime;
-
-            if (currentDissolve >= 1)
-            {
-                CancelInvoke();
-                currentDissolve = 1;
-            }
-
-            if (matInst != null)
-                matInst.SetDissolve(currentDissolve);
-        }
-
-        void ReverseDissolveInvoke()
-        {
-            currentDissolve -= dissolveTime;
-
-            if (currentDissolve <= 0)
-            {
-                CancelInvoke();
-                currentDissolve = 0;
-            }
-
-            if (matInst != null)
-                matInst.SetDissolve(currentDissolve);
         }
 
         void RevertColour()
@@ -103,6 +112,10 @@ namespace Necropanda
             {
                 CancelInvoke();
                 p = 0;
+                if (matInst != null)
+                    matInst.SetColour(normalColour);
+                else
+                    spriteRenderer.color = normalColour;
             }
         }
 
@@ -117,6 +130,10 @@ namespace Necropanda
 
             return lerpColour;
         }
+
+        #endregion
+
+        #region Edge Highlight
 
         public void Highlight(Color color)
         {
@@ -135,22 +152,35 @@ namespace Necropanda
                 spriteRenderer.color = normalColour;
         }
 
+        #endregion
+
         #region Colour
 
+        [ColorUsage(true, true)]
         public Color normalColour = new Color(255, 255, 255, 255);
 
-        public Color physicalColour;
-        public Color perforationColour;
-        public Color septicColour;
-        public Color bleakColour;
-        public Color staticColour;
-        public Color emberColour;
+        [ColorUsage(true, true)]
+        public Color physicalColour = new Color(255, 40, 40, 255);
+        [ColorUsage(true, true)]
+        public Color perforationColour = new Color(129, 16, 255, 103);
+        [ColorUsage(true, true)]
+        public Color septicColour = new Color(23, 132, 69, 255);
+        [ColorUsage(true, true)]
+        public Color bleakColour = new Color(90, 241, 255, 255);
+        [ColorUsage(true, true)]
+        public Color staticColour = new Color(255, 187, 81, 255);
+        [ColorUsage(true, true)]
+        public Color emberColour = new Color(250, 143, 86, 255);
 
-        public Color healColour;
-        public Color shieldColour;
-        public Color arcanaColour;
+        [ColorUsage(true, true)]
+        public Color healColour = new Color(76, 255, 76, 255);
+        [ColorUsage(true, true)]
+        public Color shieldColour = new Color(76, 76, 185, 255);
+        [ColorUsage(true, true)]
+        public Color arcanaColour = new Color(255, 16, 255, 255);
 
-        public Color defaultColour;
+        [ColorUsage(true, true)]
+        public Color defaultColour = new Color(245, 75, 243, 255);
 
         Color ColourFromDamageType(E_DamageTypes damageType)
         {

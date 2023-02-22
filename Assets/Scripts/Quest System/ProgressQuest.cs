@@ -11,6 +11,11 @@ namespace Necropanda
 {
     public class ProgressQuest : MonoBehaviour
     {
+        public void StartQuest(Quest quest, string npc)
+        {
+            quest.StartQuest(npc, null);
+        }
+
         public void Progress(Quest quest)
         {
             quest.QuestProgress();

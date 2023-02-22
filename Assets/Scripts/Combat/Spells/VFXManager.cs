@@ -240,17 +240,27 @@ namespace Necropanda
         #region Colour
 
         [Header("Colour based on damage")]
+        [ColorUsage(true, true)]
         public Color physicalColour;
+        [ColorUsage(true, true)]
         public Color perforationColour;
+        [ColorUsage(true, true)]
         public Color septicColour;
+        [ColorUsage(true, true)]
         public Color bleakColour;
+        [ColorUsage(true, true)]
         public Color staticColour;
+        [ColorUsage(true, true)]
         public Color emberColour;
 
+        [ColorUsage(true, true)]
         public Color healColour;
+        [ColorUsage(true, true)]
         public Color shieldColour;
+        [ColorUsage(true, true)]
         public Color arcanaColour;
 
+        [ColorUsage(true, true)]
         public Color defaultColour;
 
         Color ColourFromDamageType(E_DamageTypes damageType)
