@@ -99,6 +99,8 @@ namespace Necropanda
                 }
             }
 
+            if (enemies.Count <= 0) return;
+
             foreach(var item in quests)
             {
                 Debug.Log(item.questName);
@@ -107,7 +109,7 @@ namespace Necropanda
             progressQuestUponCombatVictory = quests;
 
             //Saving last scene
-            if (lastScene != E_Scenes.Null)
+            if (lastScene != E_Scenes.Null && player != null)
             {
                 lastPos = player.transform.position;
                 lastRot = player.transform.rotation;
@@ -118,7 +120,7 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }
 
-        public void LoadCombat(List<CharacterStats> newEnemies, E_Scenes lastScene)
+        public void LoadCombat(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
         {
             if (loading || newEnemies.Count == 0) return;
             loading = true;
@@ -128,7 +130,16 @@ namespace Necropanda
             enemies = newEnemies;
             enemyIDs.Clear();
 
-            Debug.Log("Interacted - Load Combat from Arena");
+            //Saving last scene
+            if (lastScene != E_Scenes.Null && player != null)
+            {
+                lastPos = player.transform.position;
+                lastRot = player.transform.rotation;
+            }
+
+            progressQuestUponCombatVictory = quests;
+
+            Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
         }

@@ -255,6 +255,7 @@ namespace Necropanda
 
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 E_DamageTypes realEffectType = CombatHelperFunctions.ReplaceRandomDamageType(effectType);
+
                 target.GetHealth().ChangeHealth(realEffectType, value, null);
 
                 if (target.GetHealth().GetHealth() < 1)
@@ -297,6 +298,109 @@ namespace Necropanda
         }
 
         #endregion
+
+        #endregion
+
+        #region Simulate Status
+
+        /// <summary>
+        /// Simulates the effects of the spell on the caster and targets without applying them
+        /// </summary>
+        /// <param name="target">The initial target the spell was cast on</param>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
+        /// <param name="hand">The hand from which this spell was cast</param>
+        public void SimulateStatusValues(Character target)
+        {
+            foreach (CombatHelperFunctions.StatusModule module in effectModules)
+            {
+                TeamManager targetTeamManager = target.GetManager();
+                TeamManager opponentTeamManager = CombatManager.instance.GetOpposingTeam(targetTeamManager);
+
+                //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
+                switch (module.target)
+                {
+                    case E_StatusTargetType.Self:
+                        Simulate(target, module);
+                        break;
+                    case E_StatusTargetType.Team:
+                        foreach (Character character in targetTeamManager.team)
+                        {
+                            Simulate(character, module);
+                        }
+                        break;
+                    case E_StatusTargetType.OpponentTeam:
+                        foreach (Character character in opponentTeamManager.team)
+                        {
+                            Simulate(character, module);
+                        }
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Simulates the effects of the spell on the caster and targets without applying them
+        /// </summary>
+        /// <param name="target">The initial target the spell was cast on</param>
+        /// <param name="caster">The character that cast the spell</param>
+        /// <param name="empowered">Whether the spell is empowered</param>
+        /// <param name="weakened">Whether the spell is weakened</param>
+        /// <param name="hand">The hand from which this spell was cast</param>
+        public void SimulateHitValues(Character target, Character attacker)
+        {
+            foreach (CombatHelperFunctions.StatusModule module in effectModules)
+            {
+                //May need additional checks to see if target is still valid in case they are killed by the multihit effect, speficially for the lists
+                switch (module.target)
+                {
+                    case E_StatusTargetType.SelfHit:
+                        Simulate(target, module);
+                        break;
+                    case E_StatusTargetType.Reflect:
+                        Simulate(attacker, module);
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks the effect of an individual spell module
+        /// </summary>
+        /// <param name="target">The initial target the spell was cast on</param>
+        void Simulate(Character target, CombatHelperFunctions.StatusModule status)
+        {
+            Vector2Int damage = new Vector2Int(0, 0);
+            int shield = 0;
+
+            if (target != null && target.GetHealth().dying == false)
+            {
+                int value = status.value;
+
+                //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
+                //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+
+                switch (status.effectType)
+                {
+                    case E_DamageTypes.Healing:
+                        damage.x += value;
+                        damage.y += value;
+                        break;
+                    case E_DamageTypes.Shield:
+                        shield += value;
+                        break;
+                    case E_DamageTypes.Arcana:
+                        break;
+                    default:
+                        damage.x -= value;
+                        damage.y -= value;
+                        break;
+                }
+            }
+
+            target.SimulateValues(damage, shield, 0);
+        }
 
         #endregion
     }

@@ -70,7 +70,7 @@ namespace Necropanda
         #region Icons
 
         public Object sectionPrefab;
-        List<GameObject> oldSections;
+        List<GameObject> oldSections = new List<GameObject>();
 
         public void DeleteOldIcons()
         {

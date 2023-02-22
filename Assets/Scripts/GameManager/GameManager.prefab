@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 381482427967027085}
   - component: {fileID: 6265937370777209544}
   - component: {fileID: 747937194218677508}
+  - component: {fileID: 370352225201231436}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -73,6 +74,7 @@ MonoBehaviour:
   queue: {fileID: 0}
   enemies: []
   enemyIDs: []
+  backdrop: {fileID: 0}
   progressQuestUponCombatVictory: []
 --- !u!114 &7335189887903770136
 MonoBehaviour:
@@ -174,6 +176,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afe0686d8d3ea324e845e60552ba3f14, type: 2}
   - {fileID: 11400000, guid: 7337a5103a10c41429dc6b18a599ce35, type: 2}
   - {fileID: 11400000, guid: 1813970156e34b847a9ecc1d0fdc38f3, type: 2}
+--- !u!114 &370352225201231436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415307684541209907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceaa14671196f024ba15176447bad955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healing: 2
+  haste: 1
+  fortitude: 2
+  poison: 1
 --- !u!1 &8296228320225068966
 GameObject:
   m_ObjectHideFlags: 0
