@@ -208,15 +208,20 @@ namespace Necropanda
         {
             Deck2D[] decks = GameObject.FindObjectsOfType<Deck2D>();
 
+            ClearMissing();
+
             foreach (var deck in decks)
             {
                 bool duplicate = false;
                 foreach (var item in disableUIElements)
                 {
-                    if (item.GetComponentInChildren<Deck2D>() == deck)
+                    if (item != null)
                     {
-                        Debug.Log("Found copy");
-                        duplicate = true;
+                        if (item.GetComponentInChildren<Deck2D>() == deck)
+                        {
+                            Debug.Log("Found copy");
+                            duplicate = true;
+                        }
                     }
                 }
 
@@ -231,12 +236,28 @@ namespace Necropanda
             }
         }
 
+        void ClearMissing()
+        {
+            List<GameObject> newDisableUIElements = new List<GameObject>();
+
+            foreach (var item in disableUIElements)
+            {
+                if (item != null)
+                {
+                    newDisableUIElements.Add(item);
+                }
+            }
+
+            disableUIElements = newDisableUIElements;
+        }
+
         void SetUIEnabled(bool enable)
         {
             SetupDictionary();
             foreach (var item in disableUIElementsDictionary)
             {
-                item.Key.transform.position = enable ? item.Value : new Vector3(0, -500000000, 0);
+                if (item.Key != null)
+                    item.Key.transform.position = enable ? item.Value : new Vector3(0, -500000000, 0);
             }
         }
 
