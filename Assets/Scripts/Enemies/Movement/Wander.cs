@@ -31,8 +31,20 @@ namespace Necropanda.AI.Movement
 
         private void OnEnable()
         {
-            timeLeftTillScriptCleanup = maxWanderDuration;
             aiController = gameObject.GetComponent<EnemyAI>();
+            if (aiController.returnHomeAfterWander == true)
+            {
+                homePoint = transform.position;
+                if (aiController.debugMode == true)
+                {
+                    GameObject refPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    refPoint.transform.position = homePoint;
+                    refPoint.gameObject.name = $"{gameObject.name}HomePoint";
+                }
+
+            }
+
+            timeLeftTillScriptCleanup = maxWanderDuration;
             //aiController.currentState = AIState.Wandering;
             disableScript = StartCoroutine(WaitForDelete(maxWanderDuration));
         }
@@ -73,10 +85,6 @@ namespace Necropanda.AI.Movement
         /// <param name="agent">The navmesh agent, passed in from controller.</param>
         public void WanderInRadius(bool blocked, NavMeshHit hit)
         {
-            if (aiController.returnHomeAfterWander == true)
-            {
-                homePoint = transform.position;
-            }
             aiController.wanderingCoolDown = wanderCooldown;
             if (timer >= wanderCooldown)
             {
