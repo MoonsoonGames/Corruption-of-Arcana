@@ -41,6 +41,19 @@ namespace Necropanda
             Invoke("EndTurnButton", 0.1f);
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (waitingForStartTurn == false)
+                {
+                    DisableButton();
+                    Debug.Log("End turn success");
+                    EndTurnButton();
+                }
+            }
+        }
+
         public void EndTurnButton()
         {
             DisableButton();
@@ -129,7 +142,7 @@ namespace Necropanda
 
         void DisableButton()
         {
-            waitingForStartTurn = false;
+            waitingForStartTurn = true;
             endTurnButton.image.color = buttonUnavailable;
             endTurnButton.interactable = false;
         }
