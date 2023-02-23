@@ -96,6 +96,7 @@ namespace Necropanda
             if (willKill)
             {
                 //play sound here
+                healthObject.SetActive(false);
                 RuntimeManager.PlayOneShot(deathSound);
             }
         }

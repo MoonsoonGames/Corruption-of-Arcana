@@ -19,11 +19,13 @@ namespace Necropanda
 
         [Header("Basic Info")]
         public string spellName;
+        public Sprite nameImage;
         [TextArea(3, 10)]
         public string flavourText; // Flavour text
         [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
+        public Sprite background;
         public E_CardTypes cardType = E_CardTypes.Cards;
 
         #endregion
