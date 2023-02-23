@@ -44,6 +44,8 @@ namespace Necropanda
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
             cardFace.sprite = spell.cardImage;
+            if (cardFace.sprite == null)
+                ShowArt(false);
             //SetupIcons();
 
             gameObject.name = spell.spellName;

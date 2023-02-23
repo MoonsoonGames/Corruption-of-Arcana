@@ -65,9 +65,11 @@ namespace Necropanda
         {
             if (count > 0)
             {
-                value.text = "Spawns " + count.ToString();
+                value.text = "Spawns ";
 
-                target.text = summon.name;
+                string nameText = summon.characterName;
+                if (count > 1) nameText += "s X" + count.ToString();
+                target.text = nameText;
 
                 GameObject icon = Instantiate(executePrefab, effectIcon.transform) as GameObject;
 

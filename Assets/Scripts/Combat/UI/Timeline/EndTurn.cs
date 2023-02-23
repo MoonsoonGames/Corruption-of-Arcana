@@ -202,12 +202,41 @@ namespace Necropanda
         #region UI
 
         public List<GameObject> disableUIElements;
+        Dictionary<GameObject, Vector3> disableUIElementsDictionary = new Dictionary<GameObject, Vector3>();
+
+        void SetupDictionary()
+        {
+            Deck2D[] decks = GameObject.FindObjectsOfType<Deck2D>();
+
+            foreach (var deck in decks)
+            {
+                bool duplicate = false;
+                foreach (var item in disableUIElements)
+                {
+                    if (item.GetComponentInChildren<Deck2D>() == deck)
+                    {
+                        Debug.Log("Found copy");
+                        duplicate = true;
+                    }
+                }
+
+                if (duplicate == false)
+                    disableUIElements.Add(deck.gameObject);
+            }
+
+            foreach(var item in disableUIElements)
+            {
+                if (!disableUIElementsDictionary.ContainsKey(item))
+                    disableUIElementsDictionary.Add(item, item.transform.position);
+            }
+        }
 
         void SetUIEnabled(bool enable)
         {
-            foreach (var item in disableUIElements)
+            SetupDictionary();
+            foreach (var item in disableUIElementsDictionary)
             {
-                item.SetActive(enable);
+                item.Key.transform.position = enable ? item.Value : new Vector3(0, -500000000, 0);
             }
         }
 
