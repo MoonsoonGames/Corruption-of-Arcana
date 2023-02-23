@@ -39,6 +39,7 @@ namespace Necropanda.AI
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
         private Animator animator;
+        public bool returnHomeAfterWander = true; // This defines whether the AI should return home after wandering.
 
 
         #region Checking Variables
