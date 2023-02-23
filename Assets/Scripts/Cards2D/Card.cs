@@ -44,6 +44,7 @@ namespace Necropanda
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
             cardFace.sprite = spell.cardImage;
+            ShowSymbols();
             if (cardFace.sprite == null)
                 ShowArt(false);
             //SetupIcons();
@@ -65,6 +66,83 @@ namespace Necropanda
             color.a = canShow ? 1 : 0;
 
             cardFace.color = color;
+
+            //gridLayout.gameObject.SetActive(canShow);
+            gridLayout.gameObject.SetActive(false);
+        }
+
+
+        public Object imageObject;
+        public GridLayoutGroup gridLayout;
+
+        void ShowSymbols()
+        {
+            List<Sprite> sprites = new List<Sprite>();
+
+            foreach (var item in spell.spellModules)
+            {
+                Sprite newSprite = GetEffectObject(item.effectType);
+
+                if (!sprites.Contains(newSprite) && item.value > 0)
+                    sprites.Add(newSprite);
+
+                foreach (var status in item.statuses)
+                {
+                    Sprite statusSprite = status.status.iconSprite;
+
+                    if (!sprites.Contains(statusSprite))
+                        sprites.Add(statusSprite);
+
+                    foreach (var effect in status.status.effectModules)
+                    {
+                        Sprite effectSprite = GetEffectObject(effect.effectType);
+
+                        if (!sprites.Contains(effectSprite))
+                            sprites.Add(effectSprite);
+                    }
+                }
+            }
+
+            foreach (var item in sprites)
+            {
+                GameObject image = Instantiate(imageObject, gridLayout.gameObject.transform) as GameObject;
+
+                foreach (var imageObj in image.GetComponentsInChildren<Image>())
+                {
+                    imageObj.sprite = item;
+                }
+            }
+        }
+
+        public Sprite physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, randomIcon, healingIcon, shieldIcon, arcanaIcon;
+
+        public Sprite GetEffectObject(E_DamageTypes effectType)
+        {
+            switch (effectType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalIcon;
+                case E_DamageTypes.Ember:
+                    return emberIcon;
+                case E_DamageTypes.Bleak:
+                    return bleakIcon;
+                case E_DamageTypes.Static:
+                    return staticIcon;
+                case E_DamageTypes.Septic:
+                    return septicIcon;
+                case E_DamageTypes.Perforation:
+                    return perfotationIcon;
+                case E_DamageTypes.Random:
+                    return randomIcon;
+                case E_DamageTypes.Healing:
+                    return healingIcon;
+                case E_DamageTypes.Shield:
+                    return shieldIcon;
+                case E_DamageTypes.Arcana:
+                    return arcanaIcon;
+                default:
+                    return null;
+            }
         }
 
         public void ShowUnavailableOverlay(int availableArcana)
