@@ -36,7 +36,7 @@ namespace Necropanda
             gameObject.name = spell.spellName;
 
             GetComponent<CardDrag2D>().Setup();
-            ShowUnavailableOverlay(0);
+            ShowUnavailableOverlay(3);
         }
 
         public void ShowArt(bool show)
