@@ -378,6 +378,6 @@ namespace Necropanda
 
     public enum E_CardTypes
     {
-        All, Cards, Potions, Weapons, Trinkets, None
+        All, Cards, Potions, Bombs, Weapons, Trinkets, None
     }
 }
