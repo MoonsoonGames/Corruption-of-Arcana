@@ -13,20 +13,23 @@ MonoBehaviour:
   m_Name: SecondWind
   m_EditorClassIdentifier: 
   spellName: Second Wind
+  nameImage: {fileID: 0}
   flavourText: 
   spellDescription: 'Restore 8 $health%
 
-    Provide 8 $shield%
 
-
-    Restore 3 $health$
-    at the end of the round for 3 turns'
+    Restore 3 $health$ at the end of the
+    round for 3 turns'
   cardImage: {fileID: 0}
+  background: {fileID: 21300000, guid: f19634bd17ddbfe40b603fece6bb6f44, type: 3}
+  cardType: 1
   overrideColor: 0
   timelineColor: {r: 1, g: 0.058691405, b: 0, a: 1}
-  timelineIcon: {fileID: 757424492, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0.1
+  timelineIcon: {fileID: 1825877585, guid: 9bea2b9472fbb12409c79a0ec3e75ae9, type: 3}
+  speed: 0.55
   arcanaCost: 0
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -48,21 +51,13 @@ MonoBehaviour:
     statuses:
     - status: {fileID: 11400000, guid: ba0b975f08f81f146b239484799de96a, type: 2}
       duration: 3
-      chance: 1
-  - target: 1
-    effectType: 8
-    value: 8
-    hitCount: 1
-    executeThreshold: 0
-    valueScalingDamageTaken: 0
-    valueScalingPerDiscard: 0
-    valueScalingPerStatus: 0
-    statuses: []
+      applyOverShield: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
-  projectileSpeed: 0.3
+  projectileSpeed: 0.6
   projectilePoints: 01000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
+  idealTarget: 1

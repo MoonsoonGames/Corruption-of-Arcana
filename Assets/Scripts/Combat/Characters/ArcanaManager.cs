@@ -41,7 +41,7 @@ namespace Necropanda
 
         public void CheckArcana(int arcana)
         {
-            arcanaSlider.SetSliderValue(arcana);
+            arcanaSlider.SetSliderValue(arcanaMax - arcana);
             //Debug.Log("Arcana is " + arcana + "/" + arcanaMax);
             if (arcana <= arcanaMax)
             {
