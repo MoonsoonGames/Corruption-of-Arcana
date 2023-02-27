@@ -47,7 +47,8 @@ public enum E_Scenes
     Cave,
     ArenaMode,
     SplashScreen,
-    Navigation
+    Navigation,
+    EastForest
 }
 
 public enum E_UtilityScripts

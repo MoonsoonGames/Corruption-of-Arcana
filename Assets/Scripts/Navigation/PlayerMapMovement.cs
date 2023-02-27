@@ -39,6 +39,9 @@ namespace Necropanda
             pos.z = transform.position.z;
             transform.position = pos;
 
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+
             setup = true;
         }
 
@@ -65,7 +68,7 @@ namespace Necropanda
                 if (currentWaypointIndex > minorWaypoints.Length)
                 {
                     transform.position = new Vector3(destinationWaypoint.transform.position.x, destinationWaypoint.transform.position.y, transform.position.z);
-                    Debug.Log("Arrived");
+                    //Debug.Log("Arrived");
                     currentWaypoint = destinationWaypoint;
                     ArrivedAtNode(currentWaypoint);
                     UpdateWaypoints();
@@ -78,7 +81,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log("Moving");
+                //Debug.Log("Moving");
                 Vector3 dir = nextWaypoint.transform.position - transform.position;
                 dir.Normalize();
                 dir.z = 0;
