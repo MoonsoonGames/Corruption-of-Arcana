@@ -44,6 +44,7 @@ public enum E_Scenes
     Tiertarock,
     PuzzleRoom,
     Thoth,
+    Cave,
     ArenaMode,
     SplashScreen,
     Navigation
