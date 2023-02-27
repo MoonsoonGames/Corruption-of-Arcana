@@ -45,7 +45,8 @@ public enum E_Scenes
     PuzzleRoom,
     Thoth,
     ArenaMode,
-    SplashScreen
+    SplashScreen,
+    Navigation
 }
 
 public enum E_UtilityScripts
