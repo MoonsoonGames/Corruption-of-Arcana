@@ -42,7 +42,7 @@ namespace Necropanda
         {
             if (moving)
             {
-                if (HelperFunctions.AlmostEqualVector3(transform.localPosition, desiredPos, accuracyThreshold) == false)
+                if (HelperFunctions.AlmostEqualVector3(transform.localPosition, desiredPos, accuracyThreshold, new Vector3(0, 0, 0)) == false)
                 {
                     float lerpX = Mathf.Lerp(transform.localPosition.x, desiredPos.x, scaleSpeed * Time.deltaTime);
                     float lerpY = Mathf.Lerp(transform.localPosition.y, desiredPos.y, scaleSpeed * Time.deltaTime);

@@ -13,50 +13,82 @@ namespace Necropanda
 {
     public class SimulateValues : MonoBehaviour
     {
-        public TextMeshProUGUI dmgText, shieldText;
+        public TextMeshProUGUI minDmgText, maxDmgText, defaultDmgText, shieldText;
         public Color dmgColor, healColor;
         public GameObject deathIcon, healthObject, shieldObject;
         public EventReference deathSound;
 
-
-        int dmgRef, healRef, shfRef;
-        int totalShield;
-        int damageThroughShield;
-        int totalDmg;
-
-        public void DisplayValues(int dmg, int heal, int shd, bool willKill)
+        public void DisplayValues(Vector2Int dmg, int shd, bool willKill)
         {
-            dmgRef = dmg;
-            healRef = heal;
-            shfRef = shd;
-            totalShield = shd - dmg;
-            damageThroughShield = 0;
-
-            if (totalShield < 0)
-                damageThroughShield = Mathf.Abs(totalShield);
-
             if (shieldObject != null)
-                shieldObject.SetActive(totalShield > 0);
-            shieldText.text = "+" + totalShield;
+                shieldObject.SetActive(shd > 0);
+            shieldText.text = "+" + shd;
 
-            totalDmg = heal - damageThroughShield;
+            if (dmg.x == dmg.y)
+            {
+                minDmgText.text = "";
+                maxDmgText.text = "";
 
-            if (totalDmg < 0)
-            {
-                healthObject.SetActive(true);
-                dmgText.color = dmgColor;
-                dmgText.text = totalDmg.ToString();
-            }
-            else if (totalDmg > 0)
-            {
-                healthObject.SetActive(true);
-                dmgText.color = healColor;
-                dmgText.text = "+" + totalDmg;
+                #region Default Damage
+
+                if (dmg.x < 0)
+                {
+                    healthObject.SetActive(true);
+                    defaultDmgText.color = dmgColor;
+                    defaultDmgText.text = dmg.x.ToString();
+                }
+                else if (dmg.x > 0)
+                {
+                    healthObject.SetActive(true);
+                    defaultDmgText.color = healColor;
+                    defaultDmgText.text = "+" + dmg.x;
+                }
+                else
+                {
+                    healthObject.SetActive(false);
+                }
+
+                #endregion
             }
             else
             {
-                healthObject.SetActive(false);
+                defaultDmgText.text = "";
+
+                #region Min Damage
+
+                if (dmg.x <= 0)
+                {
+                    healthObject.SetActive(true);
+                    minDmgText.color = dmgColor;
+                    minDmgText.text = dmg.x.ToString();
+                }
+                else if (dmg.x > 0)
+                {
+                    healthObject.SetActive(true);
+                    minDmgText.color = healColor;
+                    minDmgText.text = "+" + dmg.x;
+                }
+
+                #endregion
+
+                #region Max Damage
+
+                if (dmg.y <= 0)
+                {
+                    healthObject.SetActive(true);
+                    maxDmgText.color = dmgColor;
+                    maxDmgText.text = dmg.y.ToString();
+                }
+                else if (dmg.y > 0)
+                {
+                    healthObject.SetActive(true);
+                    maxDmgText.color = healColor;
+                    maxDmgText.text = "+" + dmg.y;
+                }
+
+                #endregion
             }
+
 
             //Debug.Log("will kill? " + willKill);
 
@@ -64,6 +96,7 @@ namespace Necropanda
             if (willKill)
             {
                 //play sound here
+                healthObject.SetActive(false);
                 RuntimeManager.PlayOneShot(deathSound);
             }
         }

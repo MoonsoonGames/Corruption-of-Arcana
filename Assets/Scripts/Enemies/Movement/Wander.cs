@@ -18,10 +18,11 @@ namespace Necropanda.AI.Movement
     {
         float wanderCooldown;
         float timer;
-        public float maxWanderDuration = 30f;
+        public float maxWanderDuration = 10f;
         [SerializeField]
         private float timeLeftTillScriptCleanup;
         EnemyAI aiController;
+        private Vector3 homePoint; // The home point for the AI, which it will return to after a set amount of time.
 
         private Coroutine disableScript;
 
@@ -72,6 +73,7 @@ namespace Necropanda.AI.Movement
         /// <param name="agent">The navmesh agent, passed in from controller.</param>
         public void WanderInRadius(bool blocked, NavMeshHit hit)
         {
+            homePoint = transform.position;
             aiController.wanderingCoolDown = wanderCooldown;
             if (timer >= wanderCooldown)
             {
@@ -138,6 +140,8 @@ namespace Necropanda.AI.Movement
         public void DisableScript()
         {
             //Debug.Log("ran");
+            // after a set amount of time return to the home point
+            aiController.agent.SetDestination(homePoint);
             this.enabled = false;
         }
     }

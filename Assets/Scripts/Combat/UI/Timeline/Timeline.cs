@@ -267,6 +267,11 @@ namespace Necropanda
             {
                 item.spell.SimulateSpellValues(player, item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
             }
+
+            foreach (CombatHelperFunctions.StatusInstance item in statuses)
+            {
+                item.status.SimulateStatusValues(item.target);
+            }
         }
 
         #endregion
@@ -357,6 +362,17 @@ namespace Necropanda
                 if (item.target == target)
                 {
                     item.status.HitEffect(target, attacker);
+                }
+            }
+        }
+
+        public void SimulateHitStatuses(Character target, Character attacker)
+        {
+            foreach (CombatHelperFunctions.StatusInstance item in statuses)
+            {
+                if (item.target == target)
+                {
+                    item.status.SimulateHitValues(target, attacker);
                 }
             }
         }

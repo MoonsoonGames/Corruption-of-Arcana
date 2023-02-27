@@ -41,7 +41,7 @@ namespace Necropanda
             if (spellToolTipObject != null)
                 spellToolTipObject.SetActive(false);
 
-            if (toolTip == null || DragManager.instance.draggedCard != null)
+            if (toolTip == null || (DragManager.instance != null && DragManager.instance.draggedCard != null))
             {
                 toolTipObject.SetActive(false);
                 return;

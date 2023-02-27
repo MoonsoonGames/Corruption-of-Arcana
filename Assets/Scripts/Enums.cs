@@ -46,7 +46,9 @@ public enum E_Scenes
     Thoth,
     Cave,
     ArenaMode,
-    SplashScreen
+    SplashScreen,
+    Navigation,
+    EastForest
 }
 
 public enum E_UtilityScripts
