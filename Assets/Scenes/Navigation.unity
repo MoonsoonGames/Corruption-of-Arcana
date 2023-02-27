@@ -2011,9 +2011,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd2e152496e694aa083acfe5001043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWaypoint: {fileID: 1600378798}
+  defaultWaypoint: {fileID: 1600378798}
   speed: 1
   distanceThreshold: 10
+  sceneNodes:
+  - scene: 5
+    node: {fileID: 1600378798}
+  - scene: 6
+    node: {fileID: 1461901473}
+  - scene: 1
+    node: {fileID: 674617454}
 --- !u!212 &988527752
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3489,6 +3496,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1440910337}
     m_Modifications:
+    - target: {fileID: 4215209384723241538, guid: 1bd31b23bb2c2b94cbc42e1af0d746c4,
+        type: 3}
+      propertyPath: loadScene
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4215209384723241538, guid: 1bd31b23bb2c2b94cbc42e1af0d746c4,
         type: 3}
       propertyPath: paths.Array.size

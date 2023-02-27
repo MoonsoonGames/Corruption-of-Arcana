@@ -71,7 +71,8 @@ namespace Necropanda
 
             ScaleCard(1, false);
 
-            casterHealth = CombatManager.instance.player.GetHealth();
+            if (CombatManager.instance != null)
+                casterHealth = CombatManager.instance.player.GetHealth();
         }
 
         #endregion
@@ -234,6 +235,8 @@ namespace Necropanda
 
         public void HighlightTarget()
         {
+            if (CombatManager.instance == null) return;
+
             targetHealths = new List<CharacterHealth>();
 
             foreach (var item in CombatManager.instance.enemyTeamManager.team)
@@ -273,6 +276,8 @@ namespace Necropanda
 
         public void StopHighlightTarget()
         {
+            if (CombatManager.instance == null) return;
+
             targetHealths = new List<CharacterHealth>();
 
             foreach (var item in CombatManager.instance.enemyTeamManager.team)

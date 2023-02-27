@@ -12,7 +12,8 @@ namespace Necropanda
     public class PlayerMapMovement : MonoBehaviour
     {
         //All of this data will need to be saved as well as the current position when a random event occurs
-        public NavigationWaypoint currentWaypoint;
+        public NavigationWaypoint defaultWaypoint;
+        NavigationWaypoint currentWaypoint;
         NavigationWaypoint[] minorWaypoints;
         NavigationWaypoint nextWaypoint;
         int currentWaypointIndex = 0;
@@ -20,11 +21,25 @@ namespace Necropanda
         public float speed = 0.6f;
         public float distanceThreshold = 5f;
 
+        bool setup = false;
+
         private void Start()
         {
+            NavigationWaypoint loadWaypoint = SceneToNode(LoadingScene.instance.navScene);
+            if (loadWaypoint != null)
+                currentWaypoint = loadWaypoint;
+            else
+                currentWaypoint = defaultWaypoint;
+
             UpdateWaypoints();
             currentWaypoint.SetPlayer(this);
             currentWaypoint.Arrived();
+
+            Vector3 pos = currentWaypoint.transform.position;
+            pos.z = transform.position.z;
+            transform.position = pos;
+
+            setup = true;
         }
 
         E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
@@ -34,6 +49,7 @@ namespace Necropanda
         /// </summary>
         void Update()
         {
+            if (!setup) return;
             if (enterLevel != E_Scenes.Null)
             {
                 if (Input.GetButton("Interact"))
@@ -133,6 +149,28 @@ namespace Necropanda
 
                 waypoint.SetAvailable(available);
             }
+        }
+
+        public SceneNode[] sceneNodes;
+
+        public NavigationWaypoint SceneToNode(E_Scenes scene)
+        {
+            foreach (var item in sceneNodes)
+            {
+                if (item.scene == scene)
+                {
+                    return item.node;
+                }
+            }
+
+            return null;
+        }
+
+        [System.Serializable]
+        public struct SceneNode
+        {
+            public E_Scenes scene;
+            public NavigationWaypoint node;
         }
     }
 }
