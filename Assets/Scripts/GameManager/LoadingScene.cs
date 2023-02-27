@@ -40,9 +40,15 @@ namespace Necropanda
         }
 
         public bool loadLastPos;
+        public E_Scenes navScene;
 
         public void LoadScene(E_Scenes scene, E_Scenes lastScene, bool loadLastPos)
         {
+            if (scene == E_Scenes.Navigation)
+            {
+                navScene = lastScene;
+            }
+
             this.loadLastPos = loadLastPos;
             if (lastScene != E_Scenes.Null)
             {

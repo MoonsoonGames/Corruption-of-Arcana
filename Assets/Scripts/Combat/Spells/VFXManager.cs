@@ -40,7 +40,7 @@ namespace Necropanda
             Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, caster);
             float effectDelay = QueryTime(points, spellRef.projectileSpeed);
 
-            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, spellRef.projectileFXObject, effectType);
             SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
@@ -57,7 +57,7 @@ namespace Necropanda
             Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, target);
             float effectDelay = QueryTime(points, spellRef.projectileSpeed);
 
-            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, effectType);
+            VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, spellRef.projectileFXObject, effectType);
             SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
             spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
@@ -97,7 +97,7 @@ namespace Necropanda
             //Spawn projectile at spawn position
             GameObject effectObject;
             effectObject = Instantiate(effectRef, this.gameObject.transform) as GameObject;
-
+            effectObject.transform.rotation = new Quaternion(0, 0, 0, 0);
             if (effectObject == null)
             {
                 //Debug.Log("No game object spawned, returning");
@@ -106,10 +106,8 @@ namespace Necropanda
 
             
             effectObject.transform.position = points[0];
-            Vector2 direction = points[points.Length-1] - points[0];
-            effectObject.transform.rotation = Quaternion.LookRotation(direction);
 
-            Debug.Log("Game object spawned at " + effectObject.transform.position);
+            Debug.Log("Cast Effect: Game object spawned at " + effectObject.transform.position);
         }
 
         /// <summary>
@@ -121,7 +119,7 @@ namespace Necropanda
         /// <param name="trailColor">Colour of the projectile and trail, leave as (0, 0, 0, 0) to default to the damage type</param>
         /// <param name="impactRef">Impact effect of the projectile and trail, leave as null to default to the damage type</param>
         /// <param name="damageType">Damage type dealt by the projectile</param>
-        public void SpawnProjectile(Vector2[] points, Object projectileRef, float projectileSpeed, Color trailColor, Object impactRef, E_DamageTypes damageType)
+        public void SpawnProjectile(Vector2[] points, Object projectileRef, float projectileSpeed, Color trailColor, Object impactRef, Object projectileFXRef, E_DamageTypes damageType)
         {
             if (points.Length <= 0) { return; }
 
@@ -176,7 +174,7 @@ namespace Necropanda
 
             ProjectileMovement projectileMovement = projectileObject.GetComponent<ProjectileMovement>();
 
-            projectileMovement.Setup(color, impactFX);
+            projectileMovement.Setup(color, impactFX, projectileFXRef);
 
             projectileMovement.MoveToPositions(projectileSpeed, points);
 
