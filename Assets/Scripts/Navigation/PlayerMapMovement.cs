@@ -28,7 +28,7 @@ namespace Necropanda
 
         private void Start()
         {
-            Invoke("Setup", 0.2f);
+            Invoke("Setup", 0.05f);
         }
 
         void Setup()
@@ -38,17 +38,19 @@ namespace Necropanda
 
             currentWaypoint = defaultWaypoint;
 
-            string str = "Default | " + defaultWaypoint;
+            string str = "Default";
 
             if (LoadingScene.instance != null)
             {
                 NavigationWaypoint loadWaypoint = SceneToNode(LoadingScene.instance.navScene);
+
                 if (loadWaypoint != null)
                 {
                     currentWaypoint = loadWaypoint;
-                    str = "Loaded | " + loadWaypoint;
+                    str = "Loaded | " + loadWaypoint.gameObject.name;
                 }
-                    
+                else
+                    str = "Default - instance is converted wrong";
             }
 
             UpdateWaypoints();
@@ -173,11 +175,21 @@ namespace Necropanda
 
         public NavigationWaypoint SceneToNode(E_Scenes scene)
         {
+            if (scene == E_Scenes.Null)
+            {
+                Debug.Log("Scene is null: " + scene.ToString());
+                return null;
+            }
             foreach (var item in sceneNodes)
             {
                 if (item.scene == scene)
                 {
+                    Debug.Log(scene.ToString() + " == " + item.scene.ToString());
                     return item.node;
+                }
+                else
+                {
+                    Debug.Log(scene.ToString() + " != " + item.scene.ToString());
                 }
             }
 

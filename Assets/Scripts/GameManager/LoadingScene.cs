@@ -23,6 +23,7 @@ namespace Necropanda
             {
                 instance = this;
 
+                gameObject.transform.SetParent(null);
                 DontDestroyOnLoad(this);
             }
             else if (instance != this)
