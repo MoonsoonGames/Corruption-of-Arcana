@@ -69,7 +69,10 @@ namespace Necropanda.Interactable
 
         private void Update()
         {
-            if (!setup) return;
+            if (!setup)
+            {
+                Setup();
+            }
 
             if (interactingCharacter != null && forceInteract == false)
             {
