@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -23,13 +24,32 @@ namespace Necropanda
 
         bool setup = false;
 
+        public TextMeshProUGUI text;
+
         private void Start()
         {
-            NavigationWaypoint loadWaypoint = SceneToNode(LoadingScene.instance.navScene);
-            if (loadWaypoint != null)
-                currentWaypoint = loadWaypoint;
-            else
-                currentWaypoint = defaultWaypoint;
+            Invoke("Setup", 0.2f);
+        }
+
+        void Setup()
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+
+            currentWaypoint = defaultWaypoint;
+
+            string str = "Default | " + defaultWaypoint;
+
+            if (LoadingScene.instance != null)
+            {
+                NavigationWaypoint loadWaypoint = SceneToNode(LoadingScene.instance.navScene);
+                if (loadWaypoint != null)
+                {
+                    currentWaypoint = loadWaypoint;
+                    str = "Loaded | " + loadWaypoint;
+                }
+                    
+            }
 
             UpdateWaypoints();
             currentWaypoint.SetPlayer(this);
@@ -39,18 +59,13 @@ namespace Necropanda
             pos.z = transform.position.z;
             transform.position = pos;
 
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-
             setup = true;
-        }
 
+            text.text = str;
+        }
         E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
 
-        /// <summary>
-        /// Update here, ran each frome. Here we call for the inputs.
-        /// </summary>
-        void Update()
+        void FixedUpdate()
         {
             if (!setup) return;
             if (enterLevel != E_Scenes.Null)
