@@ -26,7 +26,19 @@ namespace Necropanda.Interactable
         public string interactionPopupTitle;
         public string interactionPopupMessage;
 
+        bool setup = false;
+
         private void Start()
+        {
+            Setup();
+        }
+
+        private void Awake()
+        {
+            Setup();
+        }
+
+        public void Setup()
         {
             Interactable[] allInteractables = FindObjectsOfType<Interactable>();
 
@@ -52,11 +64,13 @@ namespace Necropanda.Interactable
             }
 
             SetInteractMessage(null, null);
+            setup = true;
         }
 
         private void Update()
-        
         {
+            if (!setup) return;
+
             if (interactingCharacter != null && forceInteract == false)
             {
                 //Debug.Log("Can interact");
