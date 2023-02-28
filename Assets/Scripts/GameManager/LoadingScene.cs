@@ -37,6 +37,7 @@ namespace Necropanda
         // Start is called before the first frame update
         void Start()
         {
+            SceneLoaded();
             Singleton();
         }
 
@@ -61,6 +62,8 @@ namespace Necropanda
                 SceneBackdrops.instance.SetBackdrop();
             }
 
+            QuestDataManager.instance.SaveQuestData();
+
             //Save current player position if applicable
             Time.timeScale = 1;
             SceneManager.LoadScene(scene.ToString());
@@ -72,6 +75,11 @@ namespace Necropanda
 
             //Save current player position if applicable
             LoadScene(scene, lastScene, loadLastPos);
+        }
+
+        public void SceneLoaded()
+        {
+            QuestDataManager.instance.LoadQuestData();
         }
     }
 }
