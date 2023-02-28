@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -10,7 +11,7 @@ using UnityEngine;
 namespace Necropanda
 {
     [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/Quest", order = 0)]
-    public class Quest : ScriptableObject
+    public class Quest : ScriptableObject, ISaveable
     {
         public string questName;
         public int questNumber;
@@ -129,6 +130,8 @@ namespace Necropanda
             {
                 QuestInfo.instance.UpdateQuestInfo();
             }
+
+            SaveQuestData();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -153,5 +156,74 @@ namespace Necropanda
 
             return quest;
         }
+
+        #region Saving and Loading
+
+        [ContextMenu("Save Data")]
+        public void SaveQuestData()
+        {
+            /*
+            var state = new Dictionary<string, object>();
+
+            state.Add(questName, CaptureState());
+
+            foreach (var item in subQuests)
+                item.SaveQuestData();
+            */
+        }
+
+        [ContextMenu("Load Data")]
+        public void LoadQuestData()
+        {
+            /*
+            RestoreState(SavingLoading.instance.LoadFile());
+
+            foreach (var item in subQuests)
+                item.LoadQuestData();
+            */
+        }
+
+        /*
+        public object CaptureState()
+        {
+            /*
+            Debug.Log("Saving quest " + questName);
+
+            return new SaveData
+            {
+                questName = this.questName,
+                progress = this.currentProgress
+            };
+        }
+        */
+
+        public void RestoreState(object state)
+        {
+            /*
+            var saveData = (SaveData)state;
+
+            if (saveData.questName == this.questName)
+                currentProgress = saveData.progress;
+
+            if (currentProgress == -1)
+                this.state = E_QuestStates.NotStarted;
+            else if (currentProgress == maxProgress)
+                this.state = E_QuestStates.Completed;
+            else
+                this.state = E_QuestStates.InProgress;
+            */
+        }
+
+        /// <summary>
+        /// Savedata data structure
+        /// </summary>
+        [System.Serializable]
+        private struct SaveData
+        {
+            public string questName;
+            public int progress;
+        }
+
+        #endregion
     }
 }
