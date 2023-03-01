@@ -11,7 +11,7 @@ using Necropanda.SaveSystem;
 namespace Necropanda
 {
     [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/Quest", order = 0)]
-    public class Quest : ScriptableObject, ISaveable
+    public class Quest : ScriptableObject
     {
         public string questName;
         public int questNumber;
@@ -131,7 +131,7 @@ namespace Necropanda
                 QuestInfo.instance.UpdateQuestInfo();
             }
 
-            SaveQuestData();
+            //SaveQuestData();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -162,66 +162,84 @@ namespace Necropanda
         [ContextMenu("Save Data")]
         public void SaveQuestData()
         {
-            /*
-            var state = new Dictionary<string, object>();
+            QuestSaving.SaveQuestData(RSaveQuestData());
+        }
 
-            state.Add(questName, CaptureState());
+        [ContextMenu("Save Base Data")]
+        public void SaveBaseQuestData()
+        {
+            QuestSaving.SaveBaseQuestData(RSaveQuestData());
+        }
+
+
+        List<Quest> RSaveQuestData()
+        {
+            List<Quest> state = new List<Quest>();
+
+            state.Add(this);
 
             foreach (var item in subQuests)
-                item.SaveQuestData();
-            */
+            {
+                List<Quest> newStates = item.RSaveQuestData();
+
+                foreach (var stateItem in newStates)
+                    state.Add(stateItem);
+            }
+
+            return state;
         }
 
         [ContextMenu("Load Data")]
         public void LoadQuestData()
         {
-            /*
-            RestoreState(SavingLoading.instance.LoadFile());
+            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
+
+            if (questData == null) return;
+
+            RLoadQuestData(questData);
 
             foreach (var item in subQuests)
-                item.LoadQuestData();
-            */
-        }
-
-        /*
-        public object CaptureState()
-        {
-            /*
-            Debug.Log("Saving quest " + questName);
-
-            return new SaveData
             {
-                questName = this.questName,
-                progress = this.currentProgress
-            };
+                item.RLoadQuestData(questData);
+            }
         }
-        */
 
-        public void RestoreState(object state)
+        [ContextMenu("Load Base Data")]
+        public void LoadBaseQuestData()
         {
-            /*
-            var saveData = (SaveData)state;
+            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
 
-            if (saveData.questName == this.questName)
-                currentProgress = saveData.progress;
+            if (questData == null) return;
 
+            RLoadQuestData(questData);
+
+            foreach (var item in subQuests)
+            {
+                item.RLoadQuestData(questData);
+            }
+        }
+
+        void RLoadQuestData(QuestData questData)
+        {
+            foreach (var item in questData.questDict)
+            {
+                if (item.Key == this.name)
+                {
+                    currentProgress = item.Value;
+
+                    CheckProgress();
+                }
+            }
+        }
+
+        void CheckProgress()
+        {
             if (currentProgress == -1)
-                this.state = E_QuestStates.NotStarted;
+                state = E_QuestStates.NotStarted;
             else if (currentProgress == maxProgress)
-                this.state = E_QuestStates.Completed;
+                state = E_QuestStates.Completed;
             else
-                this.state = E_QuestStates.InProgress;
-            */
-        }
-
-        /// <summary>
-        /// Savedata data structure
-        /// </summary>
-        [System.Serializable]
-        private struct SaveData
-        {
-            public string questName;
-            public int progress;
+                state = E_QuestStates.InProgress;
         }
 
         #endregion

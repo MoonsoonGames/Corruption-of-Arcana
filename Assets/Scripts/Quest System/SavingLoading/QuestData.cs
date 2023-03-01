@@ -9,8 +9,18 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
+    [System.Serializable]
     public class QuestData
     {
-        
+        public Dictionary<string, int> questDict;
+        public string fileName;
+
+        public QuestData(List<Quest> questsToSave)
+        {
+            fileName = questsToSave[0].questName;
+            questDict = new Dictionary<string, int>();
+            foreach (Quest quest in questsToSave)
+                questDict.Add(quest.name, quest.currentProgress);
+        }
     }
 }
