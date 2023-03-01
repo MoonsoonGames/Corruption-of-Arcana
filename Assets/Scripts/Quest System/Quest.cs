@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -129,6 +130,8 @@ namespace Necropanda
             {
                 QuestInfo.instance.UpdateQuestInfo();
             }
+
+            //SaveQuestData();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -153,5 +156,92 @@ namespace Necropanda
 
             return quest;
         }
+
+        #region Saving and Loading
+
+        [ContextMenu("Save Data")]
+        public void SaveQuestData()
+        {
+            QuestSaving.SaveQuestData(RSaveQuestData());
+        }
+
+        [ContextMenu("Save Base Data")]
+        public void SaveBaseQuestData()
+        {
+            QuestSaving.SaveBaseQuestData(RSaveQuestData());
+        }
+
+
+        List<Quest> RSaveQuestData()
+        {
+            List<Quest> state = new List<Quest>();
+
+            state.Add(this);
+
+            foreach (var item in subQuests)
+            {
+                List<Quest> newStates = item.RSaveQuestData();
+
+                foreach (var stateItem in newStates)
+                    state.Add(stateItem);
+            }
+
+            return state;
+        }
+
+        [ContextMenu("Load Data")]
+        public void LoadQuestData()
+        {
+            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
+
+            if (questData == null) return;
+
+            RLoadQuestData(questData);
+
+            foreach (var item in subQuests)
+            {
+                item.RLoadQuestData(questData);
+            }
+        }
+
+        [ContextMenu("Load Base Data")]
+        public void LoadBaseQuestData()
+        {
+            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
+
+            if (questData == null) return;
+
+            RLoadQuestData(questData);
+
+            foreach (var item in subQuests)
+            {
+                item.RLoadQuestData(questData);
+            }
+        }
+
+        void RLoadQuestData(QuestData questData)
+        {
+            foreach (var item in questData.questDict)
+            {
+                if (item.Key == this.name)
+                {
+                    currentProgress = item.Value;
+
+                    CheckProgress();
+                }
+            }
+        }
+
+        void CheckProgress()
+        {
+            if (currentProgress == -1)
+                state = E_QuestStates.NotStarted;
+            else if (currentProgress == maxProgress)
+                state = E_QuestStates.Completed;
+            else
+                state = E_QuestStates.InProgress;
+        }
+
+        #endregion
     }
 }

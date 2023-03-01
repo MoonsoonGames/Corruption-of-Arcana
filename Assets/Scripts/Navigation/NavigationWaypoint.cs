@@ -38,16 +38,20 @@ namespace Necropanda
 
         public void Arrived()
         {
-            //load scene
-            player.SetLevel(loadScene);
+            if (player == null) player = GameObject.FindObjectOfType<PlayerMapMovement>();
+            if (player == null) return;
 
             if (loadScene != E_Scenes.Null)
             {
+                //load scene
+                player.SetLevel(loadScene);
                 //load tooltip instead
                 TooltipManager.instance.ShowTooltip(true, "Enter " + loadScene.ToString(), "Press 'F' to enter level");
             }
             else
             {
+                //load scene
+                player.SetLevel(E_Scenes.Null);
                 TooltipManager.instance.ShowTooltip(false, "", "");
                 //load random event
             }

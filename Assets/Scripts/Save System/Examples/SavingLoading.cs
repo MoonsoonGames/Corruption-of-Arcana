@@ -29,6 +29,33 @@ namespace Necropanda.SaveSystem
     /// </summary>
     public class SavingLoading : MonoBehaviour
     {
+        #region Singleton
+        //Code from last year
+
+        public static SavingLoading instance = null;
+
+        void Singleton()
+        {
+            if (instance == null)
+            {
+                instance = this;
+
+                gameObject.transform.SetParent(null);
+                DontDestroyOnLoad(this);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+
+        private void Start()
+        {
+            Singleton();
+        }
+
         private string SavePath => $"{Application.persistentDataPath}/save.dat";
 
         /// <summary>
@@ -70,7 +97,7 @@ namespace Necropanda.SaveSystem
         /// Dictionary class used for setting up the save file.
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, object> LoadFile()
+        public Dictionary<string, object> LoadFile()
         {
             if (!File.Exists(SavePath))
             {
