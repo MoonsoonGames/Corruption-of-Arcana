@@ -41,6 +41,19 @@ namespace Necropanda
             Invoke("EndTurnButton", 0.1f);
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (waitingForStartTurn == false)
+                {
+                    DisableButton();
+                    Debug.Log("End turn success");
+                    EndTurnButton();
+                }
+            }
+        }
+
         public void EndTurnButton()
         {
             DisableButton();
@@ -129,7 +142,7 @@ namespace Necropanda
 
         void DisableButton()
         {
-            waitingForStartTurn = false;
+            waitingForStartTurn = true;
             endTurnButton.image.color = buttonUnavailable;
             endTurnButton.interactable = false;
         }
@@ -202,12 +215,62 @@ namespace Necropanda
         #region UI
 
         public List<GameObject> disableUIElements;
+        Dictionary<GameObject, Vector3> disableUIElementsDictionary = new Dictionary<GameObject, Vector3>();
+
+        void SetupDictionary()
+        {
+            Deck2D[] decks = GameObject.FindObjectsOfType<Deck2D>();
+
+            ClearMissing();
+
+            foreach (var deck in decks)
+            {
+                bool duplicate = false;
+                foreach (var item in disableUIElements)
+                {
+                    if (item != null)
+                    {
+                        if (item.GetComponentInChildren<Deck2D>() == deck)
+                        {
+                            Debug.Log("Found copy");
+                            duplicate = true;
+                        }
+                    }
+                }
+
+                if (duplicate == false)
+                    disableUIElements.Add(deck.gameObject);
+            }
+
+            foreach(var item in disableUIElements)
+            {
+                if (!disableUIElementsDictionary.ContainsKey(item))
+                    disableUIElementsDictionary.Add(item, item.transform.position);
+            }
+        }
+
+        void ClearMissing()
+        {
+            List<GameObject> newDisableUIElements = new List<GameObject>();
+
+            foreach (var item in disableUIElements)
+            {
+                if (item != null)
+                {
+                    newDisableUIElements.Add(item);
+                }
+            }
+
+            disableUIElements = newDisableUIElements;
+        }
 
         void SetUIEnabled(bool enable)
         {
-            foreach (var item in disableUIElements)
+            SetupDictionary();
+            foreach (var item in disableUIElementsDictionary)
             {
-                item.SetActive(enable);
+                if (item.Key != null)
+                    item.Key.transform.position = enable ? item.Value : new Vector3(0, -500000000, 0);
             }
         }
 

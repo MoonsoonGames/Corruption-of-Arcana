@@ -35,7 +35,7 @@ namespace Necropanda
             max = value;
 
             if (slider != null)
-                slider.maxValue = max;
+                slider.maxValue = value;
             else
                 Debug.LogWarning("No standard slider is set");
 

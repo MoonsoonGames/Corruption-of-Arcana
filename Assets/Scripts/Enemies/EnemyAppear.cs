@@ -54,6 +54,7 @@ namespace Necropanda
         {
             player = playerRef;
             Interactable.Interactable loadInteract = GetComponentInChildren<LoadCombat>().GetComponent<Interactable.Interactable>();
+            loadInteract.Setup();
             loadInteract.UnlockInteraction();
         }
 

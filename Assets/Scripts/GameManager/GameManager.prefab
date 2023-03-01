@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6265937370777209544}
   - component: {fileID: 747937194218677508}
   - component: {fileID: 370352225201231436}
+  - component: {fileID: 102021436237786214}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadLastPos: 0
+  navScene: 0
 --- !u!114 &5181202587678652608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +194,21 @@ MonoBehaviour:
   haste: 1
   fortitude: 2
   poison: 1
+--- !u!114 &102021436237786214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415307684541209907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d893b2f8e9bbb349a562c9f75c011a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questsToSave:
+  - {fileID: 11400000, guid: f87b483580c5c8241958d78036d7b9b2, type: 2}
+  - {fileID: 11400000, guid: 0fcecc14f7785ec41aba59ec4b0657f6, type: 2}
 --- !u!1 &8296228320225068966
 GameObject:
   m_ObjectHideFlags: 0

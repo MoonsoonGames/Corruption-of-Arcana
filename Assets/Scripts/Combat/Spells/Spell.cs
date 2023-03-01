@@ -19,11 +19,13 @@ namespace Necropanda
 
         [Header("Basic Info")]
         public string spellName;
+        public Sprite nameImage;
         [TextArea(3, 10)]
         public string flavourText; // Flavour text
         [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
+        public Sprite background;
         public E_CardTypes cardType = E_CardTypes.Cards;
 
         #endregion
@@ -70,6 +72,7 @@ namespace Necropanda
         public float projectileSpeed = 0.6f;
         public E_ProjectilePoints[] projectilePoints;
         public Object impactObject;
+        public Object projectileFXObject;
         public Color trailColor;
         public bool screenShake;
         public E_SpellTargetType idealTarget = E_SpellTargetType.Target;
@@ -157,7 +160,7 @@ namespace Necropanda
                     bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
                     Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
                     foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.AddEnemy(item, points, projectileObject, projectileSpeed, impactObject, trailColor);
+                        LoadCombatManager.instance.AddEnemy(item, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                 }
             }
 

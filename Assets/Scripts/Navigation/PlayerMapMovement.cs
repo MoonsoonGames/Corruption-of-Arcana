@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -12,7 +13,8 @@ namespace Necropanda
     public class PlayerMapMovement : MonoBehaviour
     {
         //All of this data will need to be saved as well as the current position when a random event occurs
-        public NavigationWaypoint currentWaypoint;
+        public NavigationWaypoint defaultWaypoint;
+        NavigationWaypoint currentWaypoint;
         NavigationWaypoint[] minorWaypoints;
         NavigationWaypoint nextWaypoint;
         int currentWaypointIndex = 0;
@@ -20,20 +22,54 @@ namespace Necropanda
         public float speed = 0.6f;
         public float distanceThreshold = 5f;
 
+        bool setup = false;
+
+        public TextMeshProUGUI text;
+
         private void Start()
         {
+            Invoke("Setup", 0.05f);
+        }
+
+        void Setup()
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+
+            currentWaypoint = defaultWaypoint;
+
+            string str = "Default";
+
+            if (LoadingScene.instance != null)
+            {
+                NavigationWaypoint loadWaypoint = SceneToNode(LoadingScene.instance.navScene);
+
+                if (loadWaypoint != null)
+                {
+                    currentWaypoint = loadWaypoint;
+                    str = "Loaded | " + loadWaypoint.gameObject.name;
+                }
+                else
+                    str = "Default - instance is converted wrong";
+            }
+
             UpdateWaypoints();
             currentWaypoint.SetPlayer(this);
             currentWaypoint.Arrived();
-        }
 
+            Vector3 pos = currentWaypoint.transform.position;
+            pos.z = transform.position.z;
+            transform.position = pos;
+
+            setup = true;
+
+            text.text = str;
+        }
         E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
 
-        /// <summary>
-        /// Update here, ran each frome. Here we call for the inputs.
-        /// </summary>
-        void Update()
+        void FixedUpdate()
         {
+            if (!setup) return;
             if (enterLevel != E_Scenes.Null)
             {
                 if (Input.GetButton("Interact"))
@@ -49,7 +85,7 @@ namespace Necropanda
                 if (currentWaypointIndex > minorWaypoints.Length)
                 {
                     transform.position = new Vector3(destinationWaypoint.transform.position.x, destinationWaypoint.transform.position.y, transform.position.z);
-                    Debug.Log("Arrived");
+                    //Debug.Log("Arrived");
                     currentWaypoint = destinationWaypoint;
                     ArrivedAtNode(currentWaypoint);
                     UpdateWaypoints();
@@ -62,7 +98,7 @@ namespace Necropanda
             }
             else
             {
-                Debug.Log("Moving");
+                //Debug.Log("Moving");
                 Vector3 dir = nextWaypoint.transform.position - transform.position;
                 dir.Normalize();
                 dir.z = 0;
@@ -133,6 +169,38 @@ namespace Necropanda
 
                 waypoint.SetAvailable(available);
             }
+        }
+
+        public SceneNode[] sceneNodes;
+
+        public NavigationWaypoint SceneToNode(E_Scenes scene)
+        {
+            if (scene == E_Scenes.Null)
+            {
+                Debug.Log("Scene is null: " + scene.ToString());
+                return null;
+            }
+            foreach (var item in sceneNodes)
+            {
+                if (item.scene == scene)
+                {
+                    Debug.Log(scene.ToString() + " == " + item.scene.ToString());
+                    return item.node;
+                }
+                else
+                {
+                    Debug.Log(scene.ToString() + " != " + item.scene.ToString());
+                }
+            }
+
+            return null;
+        }
+
+        [System.Serializable]
+        public struct SceneNode
+        {
+            public E_Scenes scene;
+            public NavigationWaypoint node;
         }
     }
 }

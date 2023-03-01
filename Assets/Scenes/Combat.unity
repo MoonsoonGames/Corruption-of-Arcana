@@ -222,6 +222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &708327446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6963371159659730763, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731661797055633548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &922119378 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3731661797360661598, guid: 93fcb1b03dd625240b642e42f4a5e61b,
@@ -234,68 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6876466cb1eba479fb7fdd564c4067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &937437937
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 937437938}
-  - component: {fileID: 937437939}
-  m_Layer: 0
-  m_Name: Marked for death
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &937437938
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937437937}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 999666355}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &937437939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937437937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -264618130
-      Data2: 1099684790
-      Data3: -1702789953
-      Data4: -44692601
-    Path: event:/Combat/Enemy/Marked for death
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &946320890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3731661797183335798, guid: 93fcb1b03dd625240b642e42f4a5e61b,
@@ -308,12 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b1c5a14c8fb5649886f5198ecfd5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &999666355 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4393746935799850981, guid: 6cd3fe53340e34c4886a48d6bf15fd5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 457921196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1118964786 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3731661797842019007, guid: 93fcb1b03dd625240b642e42f4a5e61b,
@@ -1068,10 +1006,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 240622107, guid: 93fcb1b03dd625240b642e42f4a5e61b, type: 3}
-      propertyPath: Emitters.Array.data[0].Target
-      value: 
-      objectReference: {fileID: 937437939}
     - target: {fileID: 3731661797901933072, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_Name
@@ -1197,16 +1131,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6988979447148374165, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: hoverEmitter
       value: 
       objectReference: {fileID: 457921198}
-    - target: {fileID: 6988979447148374165, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: pressTrigger
       value: 
       objectReference: {fileID: 457921197}
+    - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: disableUIElements.Array.data[3]
+      value: 
+      objectReference: {fileID: 708327446}
     - target: {fileID: 7105575415227751608, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_AnchorMax.x

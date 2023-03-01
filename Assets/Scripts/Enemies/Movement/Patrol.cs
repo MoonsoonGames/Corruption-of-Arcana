@@ -15,31 +15,18 @@ namespace Necropanda.AI.Movement
     /// <para>Simple Patrol module that can be added to the AI.</para>
     /// Will drop points around the origin, and make the AI move to them. Most values are exposed for editing.
     /// 
-    /// TODO: rewrite to avoid the use of gameobjects for points, consider using navmesh hits in 4 places. DONE
     /// TODO: fix state change when stopping patrol
     /// </summary>
     public class Patrol : MonoBehaviour
     {
         private int destPoint = 0;
-        private NavMeshAgent agent;
+        public NavMeshAgent agent;
         private EnemyAI ai;
         public float timeToPatrol = 30f;
         public bool patrol = true;
 
         public Vector3 originalPos;
-        public Vector3[] patrolPoints;
-
-        [Space]
-        [Header("Temp Offset")]
-        public float patrolPointOffset;
-
-        private enum Direction
-        {
-            North,
-            East,
-            South,
-            West
-        }
+        public List<Vector3> patrolPoints;
 
         void Start()
         {
@@ -55,30 +42,13 @@ namespace Necropanda.AI.Movement
 
         private void Setup()
         {
-            patrolPoints = GetPatrolPointsDiamond(patrolPointOffset);
             agent = GetComponent<NavMeshAgent>();
             ai = GetComponent<EnemyAI>();
 
-            for (int i = 0; i < patrolPoints.Length; i++)
+            for (int i = 0; i < patrolPoints.Count; i++)
             {
-                Vector3 point = patrolPoints[i];
-
-                // Check to see if point is valid
-                bool isPathValid = agent.CalculatePath(point, agent.path);
-                if (!isPathValid)
-                {
-                    // This should set the destination to the closest thing on the navmesh
-                    if (agent.path.status == NavMeshPathStatus.PathComplete ||
-                    agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
-                    {
-                        agent.SetDestination(point);
-                        Debugger.instance.SendDebug($"Point was off navmesh, point moved to: {agent.destination}", 2);
-
-                        patrolPoints[i] = agent.destination;
-                    }
-                }
+                IsPointValid(patrolPoints[i], i);
             }
-            // ref https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
 
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
@@ -87,37 +57,34 @@ namespace Necropanda.AI.Movement
         }
 
         /// <summary>
-        /// Gets points in the 4 cardinal directions. Creates a diamond patrol pattern.
+        /// Checks to see whether the point is valid, if not, move to the closest valid point on the navmesh.
         /// 
-        /// Rewrote this.. Still feels like there's a better way to do it
+        /// ref: https://gamedev.stackexchange.com/questions/93886/find-closest-point-on-navmesh-if-current-target-unreachable
         /// </summary>
-        /// <param name="offset">The offset amount to add to each direction.</param>
-        Vector3[] GetPatrolPointsDiamond(float offset)
+        /// <param name="point">the point to check</param>
+        /// <param name="iterator">Which point in the list to check</param>
+        public void IsPointValid(Vector3 point, int iterator)
         {
-            // Check to make sure offset isn't 0
-            if (offset == 0)
+            // Check to see if point is valid
+            bool isPathValid = agent.CalculatePath(point, agent.path);
+            if (!isPathValid)
             {
-                Debugger.instance.SendDebug("No offset added to patrol pattern, returning to avoid weird behaviour..", 3);
-                return null;
+                // This should set the destination to the closest thing on the navmesh
+                if (agent.path.status == NavMeshPathStatus.PathComplete ||
+                agent.hasPath && agent.path.status == NavMeshPathStatus.PathPartial)
+                {
+                    agent.SetDestination(point);
+                    Debugger.instance.SendDebug($"Point was off navmesh, point moved to: {agent.destination}", 2);
+
+                    patrolPoints[iterator] = agent.destination;
+                }
             }
-
-            float x = transform.position.x;
-            float z = transform.position.z;
-
-            Vector3[] patrolPoints = new Vector3[4];
-
-            patrolPoints[(int)Direction.North] = new Vector3(x + offset, 0, z);
-            patrolPoints[(int)Direction.East] = new Vector3(x, 0, z - offset);
-            patrolPoints[(int)Direction.South] = new Vector3(x - offset, 0, z);
-            patrolPoints[(int)Direction.West] = new Vector3(x, 0, z + offset);
-
-            return patrolPoints;
         }
 
         void GotoNextPoint()
         {
             // Returns if no points have been set up.
-            if (patrolPoints.Length == 0)
+            if (patrolPoints.Count == 0)
                 return;
 
             // Set the agent to go to the currently selected point.
@@ -125,7 +92,7 @@ namespace Necropanda.AI.Movement
 
             // Choose the next point in the array as the destination
             // cyling to the start if necessary.
-            destPoint = (destPoint + 1) % patrolPoints.Length;
+            destPoint = (destPoint + 1) % patrolPoints.Count;
             // StartCoroutine(Cooldown(3));
         }
 
@@ -158,17 +125,6 @@ namespace Necropanda.AI.Movement
             yield return new WaitForSeconds(coolDown);
             Debugger.instance.SendDebug("Running patrol cooldown");
             patrol = false;
-        }
-        /// <summary>
-        /// Callback to draw gizmos only if the object is selected.
-        /// </summary>
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            foreach (Vector3 point in patrolPoints)
-            {
-                Gizmos.DrawSphere(point, 1);
-            }
         }
     }
 

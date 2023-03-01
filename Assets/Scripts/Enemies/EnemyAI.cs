@@ -137,9 +137,6 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
-                    // Set the home point
-
-
                     moduleManager.ChangeModuleState(1, true);
                     moduleManager.ChangeModuleState(2, false);
                     moduleManager.wander.WanderInRadius(blocked, hit);

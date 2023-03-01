@@ -71,13 +71,8 @@ namespace Necropanda
 
             ScaleCard(1, false);
 
-            casterHealth = CombatManager.instance.player.GetHealth();
-            targetHealths = new List<CharacterHealth>();
-
-            foreach (var item in CombatManager.instance.enemyTeamManager.team)
-            {
-                targetHealths.Add(item.GetHealth());
-            }
+            if (CombatManager.instance != null)
+                casterHealth = CombatManager.instance.player.GetHealth();
         }
 
         #endregion
@@ -240,6 +235,15 @@ namespace Necropanda
 
         public void HighlightTarget()
         {
+            if (CombatManager.instance == null) return;
+
+            targetHealths = new List<CharacterHealth>();
+
+            foreach (var item in CombatManager.instance.enemyTeamManager.team)
+            {
+                targetHealths.Add(item.GetHealth());
+            }
+
             switch (card.spell.idealTarget)
             {
                 case E_SpellTargetType.Caster:
@@ -272,6 +276,15 @@ namespace Necropanda
 
         public void StopHighlightTarget()
         {
+            if (CombatManager.instance == null) return;
+
+            targetHealths = new List<CharacterHealth>();
+
+            foreach (var item in CombatManager.instance.enemyTeamManager.team)
+            {
+                targetHealths.Add(item.GetHealth());
+            }
+
             switch (card.spell.idealTarget)
             {
                 case E_SpellTargetType.Caster:
