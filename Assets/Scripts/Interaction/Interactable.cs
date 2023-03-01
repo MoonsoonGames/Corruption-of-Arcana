@@ -40,6 +40,8 @@ namespace Necropanda.Interactable
 
         public void Setup()
         {
+            if (LoadCombatManager.instance == null) return;
+
             Interactable[] allInteractables = FindObjectsOfType<Interactable>();
 
             for (int i = 0; i < allInteractables.Length; i++)

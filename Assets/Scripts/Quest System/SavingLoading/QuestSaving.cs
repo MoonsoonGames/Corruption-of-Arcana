@@ -47,5 +47,25 @@ namespace Necropanda
                 return null;
             }
         }
+
+        public static void SaveBaseQuestData(List<Quest> questsToSave)
+        {
+            QuestData questData = new QuestData(questsToSave);
+            string localPath = savePath + "/" + questData.fileName + "_questBase.dat";
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(localPath, FileMode.Create);
+
+            formatter.Serialize(stream, questData);
+
+            stream.Close();
+        }
+
+        public static bool BaseDataExists(List<Quest> questsToSave)
+        {
+            QuestData questData = new QuestData(questsToSave);
+            string localPath = savePath + "/" + questData.fileName + "_questBase.dat";
+            return File.Exists(localPath);
+        }
     }
 }

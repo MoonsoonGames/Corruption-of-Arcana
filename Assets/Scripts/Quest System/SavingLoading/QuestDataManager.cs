@@ -39,7 +39,7 @@ namespace Necropanda
             Singleton();
         }
 
-        public Quest[] questsToSave;
+        public List<Quest> questsToSave;
 
         [ContextMenu("Save Quest Data")]
         public void SaveQuestData()
@@ -50,12 +50,33 @@ namespace Necropanda
             }
         }
 
+        [ContextMenu("Save Base Quest Data")]
+        public void SaveBaseQuestData()
+        {
+            foreach (Quest quest in questsToSave)
+            {
+                List<Quest> questList = new List<Quest> { quest };
+
+                if (!QuestSaving.BaseDataExists(questList))
+                    quest.SaveBaseQuestData();
+            }
+        }
+
         [ContextMenu("Load Quest Data")]
         public void LoadQuestData()
         {
             foreach (Quest quest in questsToSave)
             {
                 quest.LoadQuestData();
+            }
+        }
+
+        [ContextMenu("Load Base Quest Data")]
+        public void LoadBaseQuestData()
+        {
+            foreach (Quest quest in questsToSave)
+            {
+                quest.LoadBaseQuestData();
             }
         }
     }

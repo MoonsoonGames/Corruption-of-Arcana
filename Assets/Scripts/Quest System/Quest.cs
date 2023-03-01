@@ -165,6 +165,12 @@ namespace Necropanda
             QuestSaving.SaveQuestData(RSaveQuestData());
         }
 
+        [ContextMenu("Save Base Data")]
+        public void SaveBaseQuestData()
+        {
+            QuestSaving.SaveBaseQuestData(RSaveQuestData());
+        }
+
 
         List<Quest> RSaveQuestData()
         {
@@ -187,6 +193,21 @@ namespace Necropanda
         public void LoadQuestData()
         {
             QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
+
+            if (questData == null) return;
+
+            RLoadQuestData(questData);
+
+            foreach (var item in subQuests)
+            {
+                item.RLoadQuestData(questData);
+            }
+        }
+
+        [ContextMenu("Load Base Data")]
+        public void LoadBaseQuestData()
+        {
+            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
 
             if (questData == null) return;
 
