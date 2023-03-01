@@ -18,7 +18,7 @@ namespace Necropanda
         public static void SaveQuestData(List<Quest> questsToSave)
         {
             QuestData questData = new QuestData(questsToSave);
-            string localPath = savePath + "/QuestData/" + questData.fileName + "_quest.dat";
+            string localPath = savePath + "/" + questData.fileName + "_quest.dat";
 
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(localPath, FileMode.Create);

@@ -186,8 +186,10 @@ namespace Necropanda
         [ContextMenu("Load Data")]
         public void LoadQuestData()
         {
-            QuestData questData = QuestSaving.LoadQuestData("/QuestData/" + questName + "_quest.dat");
-            
+            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
+
+            if (questData == null) return;
+
             RLoadQuestData(questData);
 
             foreach (var item in subQuests)
