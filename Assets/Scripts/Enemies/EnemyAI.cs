@@ -25,6 +25,7 @@ namespace Necropanda.AI
         //state variables
         [Header("AI State Variables")]
         public ModuleManager moduleManager;
+        public AIState startState; // The state the AI will go to after the initial timer has passed in the nothing state
         public AIState currentState; // The current state of the AI. Wandering, Fleeing etc.
 
         public bool doOverrideState; // If true, the AI will only stay in this state. Regardless of anything else.
@@ -38,6 +39,7 @@ namespace Necropanda.AI
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
         private Animator animator;
+
 
         #region Checking Variables
         bool hasDebuggedWandering;
@@ -113,7 +115,7 @@ namespace Necropanda.AI
                     // probably also need to reset the timer here too.
                     if (timer > 5 && !doOverrideState)
                     {
-                        currentState = AIState.Wandering;
+                        currentState = startState;
                     }
                     else
                     {
@@ -132,12 +134,6 @@ namespace Necropanda.AI
                     {
                         player = GameObject.FindGameObjectWithTag("Player");
                     }
-
-                    // Check to make sure the AI doesn't run into the player.
-                    if (agent.remainingDistance <= .5f)
-                    {
-                        agent.SetDestination(agent.transform.position);
-                    }
                     break;
 
                 case AIState.Wandering:
@@ -149,6 +145,7 @@ namespace Necropanda.AI
                         Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
                         hasDebuggedWandering = true;
                     }
+
                     break;
 
                 case AIState.Patrolling:

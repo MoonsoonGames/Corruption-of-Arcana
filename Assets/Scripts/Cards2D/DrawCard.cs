@@ -35,6 +35,8 @@ namespace Necropanda
 
         public void ReturnToDeck()
         {
+            if (card.spell.potionCost > 0) return;
+
             if (card.spell.discardAfterCasting)
             {
                 deckManager.DiscardCard(card.spell);

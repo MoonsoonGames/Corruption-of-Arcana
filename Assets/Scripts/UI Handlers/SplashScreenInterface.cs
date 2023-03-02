@@ -11,8 +11,15 @@ namespace Necropanda.Interfaces
         public GameObject SettingsMenu;
         public E_Scenes initialScene;
 
+        private void Start()
+        {
+            QuestDataManager.instance.SaveBaseQuestData();
+        }
+
         public void NewGame()
         {
+            QuestDataManager.instance.LoadBaseQuestData();
+            QuestDataManager.instance.SaveQuestData();
             //Reset loadsettings/progress
             LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
@@ -27,6 +34,11 @@ namespace Necropanda.Interfaces
         {
             //locate save file
             //set load settings/progress
+            //load game
+
+            QuestDataManager.instance.LoadQuestData();
+            //Reset loadsettings/progress
+            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
         }
 

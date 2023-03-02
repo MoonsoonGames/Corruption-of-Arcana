@@ -13,22 +13,27 @@ MonoBehaviour:
   m_Name: ReleaseMadness
   m_EditorClassIdentifier: 
   spellName: Release Madness
+  nameImage: {fileID: 0}
   flavourText: 
-  spellDescription: 'This card deals 2 $perforation$ to every character
+  spellDescription: 'This card deals 2 $phantom$ to every character
 
 
-    An
-    enemy has placed this card on you to take up spaces in your hand
+    An enemy
+    has placed this card on you to take up spaces in your hand
 
 
-    Play it
-    to remove it'
+    Play it to remove
+    it'
   cardImage: {fileID: 0}
+  background: {fileID: 21300000, guid: f19634bd17ddbfe40b603fece6bb6f44, type: 3}
+  cardType: 1
   overrideColor: 0
   timelineColor: {r: 0, g: 0, b: 0, a: 255}
-  timelineIcon: {fileID: -1312889009, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0
+  timelineIcon: {fileID: 335509689, guid: f465a941178bb0d429d18de762a2632b, type: 3}
+  speed: 0.5
   arcanaCost: 0
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 1
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -42,7 +47,7 @@ MonoBehaviour:
   - target: 6
     effectType: 6
     value: 2
-    hitCount: 0
+    hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
@@ -51,8 +56,9 @@ MonoBehaviour:
   castObject: {fileID: 0}
   projectileObject: {fileID: 2083095811265704842, guid: f8c2fb7549481904c9a5f01aefbe65ef,
     type: 3}
-  projectileSpeed: 0.3
+  projectileSpeed: 0.6
   projectilePoints: 0000000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
+  idealTarget: 6

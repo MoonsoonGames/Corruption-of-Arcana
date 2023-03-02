@@ -27,6 +27,7 @@ namespace Necropanda
             }
             else if (instance != this)
             {
+                Debug.Log("destroying " + gameObject.name + ", singleton: " + instance.gameObject.name);
                 Destroy(gameObject);
             }
         }
