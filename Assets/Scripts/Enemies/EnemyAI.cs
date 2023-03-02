@@ -24,6 +24,7 @@ namespace Necropanda.AI
         [Header("Statistics")]
         public CharacterStats enemyStats;
         public bool boss;
+        public GameObject bossAI;
 
         //state variables
         [Header("AI State Variables")]
@@ -119,6 +120,7 @@ namespace Necropanda.AI
                     moduleManager.ChangeModuleState();
                     // Set the state to nothing.
                     currentState = AIState.Nothing;
+
                     // Check if the AI has been running for long enough for a state switch.
                     // probably also need to reset the timer here too.
                     if (timer > 5 && !doOverrideState)
@@ -145,6 +147,8 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
+
+
                     moduleManager.ChangeModuleState(1, true);
                     moduleManager.ChangeModuleState(2, false);
                     moduleManager.wander.WanderInRadius(blocked, hit);
@@ -153,6 +157,7 @@ namespace Necropanda.AI
                         Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
                         hasDebuggedWandering = true;
                     }
+
 
                     break;
 
@@ -163,6 +168,15 @@ namespace Necropanda.AI
                     {
                         Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
                         hasDebuggedPatrol = true;
+                    }
+                    break;
+
+                case AIState.Following:
+                    Debug.Log("test");
+                    if (GetBossDistance() >= 5)
+                    {
+
+                        agent.SetDestination(bossAI.transform.position);
                     }
                     break;
             }
@@ -186,6 +200,11 @@ namespace Necropanda.AI
         private void OnTriggerExit(Collider other)
         {
             currentState = AIState.Patrolling;
+        }
+
+        private float GetBossDistance()
+        {
+            return Vector3.Distance(transform.position, bossAI.transform.position);
         }
         #endregion
     }
