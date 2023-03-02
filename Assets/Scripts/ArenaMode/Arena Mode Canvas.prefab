@@ -1740,7 +1740,7 @@ PrefabInstance:
         type: 3}
       propertyPath: requireStates.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
+      objectReference: {fileID: 11400000, guid: f30abb7e0b070f14c98c688ae29e3ca5,
         type: 2}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -1774,6 +1774,17 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: eda8f1acd100e474e81f0f3aa5cbba1e,
+        type: 2}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c1e5b0d95ddcbf24780c0897c0e0392c,
         type: 2}
     - target: {fileID: 8042943126879092313, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -1913,13 +1924,19 @@ PrefabInstance:
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: requireStates.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: requireStates.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
+      objectReference: {fileID: 11400000, guid: c151f6a922fee0345bb2ca859f72e775,
+        type: 2}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].quest
+      value: 
+      objectReference: {fileID: 11400000, guid: 912ebb24b3b87404b9108ef021f6ea84,
         type: 2}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -1928,7 +1945,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
       propertyPath: requireStates.Array.data[0].states.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.data[0]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
@@ -2090,37 +2117,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].quest
-      value: 
-      objectReference: {fileID: 11400000, guid: 0fcecc14f7785ec41aba59ec4b0657f6,
-        type: 2}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[1].states.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.data[0]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[1].states.Array.data[0]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: enemies.Array.size
@@ -2277,13 +2273,19 @@ PrefabInstance:
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: requireStates.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: requireStates.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
+      objectReference: {fileID: 11400000, guid: c151f6a922fee0345bb2ca859f72e775,
+        type: 2}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].quest
+      value: 
+      objectReference: {fileID: 11400000, guid: 912ebb24b3b87404b9108ef021f6ea84,
         type: 2}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -2292,7 +2294,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
       propertyPath: requireStates.Array.data[0].states.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.data[0]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
@@ -2560,27 +2572,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].quest
-      value: 
-      objectReference: {fileID: 11400000, guid: 9fff2e73659f4de46ac510f852e28483,
-        type: 2}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.data[0]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: enemies.Array.size
@@ -2603,6 +2594,17 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: bab86f9503934224d91d2166ba62a0ee,
+        type: 2}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c151f6a922fee0345bb2ca859f72e775,
         type: 2}
     - target: {fileID: 8042943126879092313, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -2743,7 +2745,7 @@ PrefabInstance:
         type: 3}
       propertyPath: requireStates.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
+      objectReference: {fileID: 11400000, guid: c1e5b0d95ddcbf24780c0897c0e0392c,
         type: 2}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -2777,6 +2779,17 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 7a9156c9dc51db44f99e41f3f8201edb,
+        type: 2}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 168cb0c8d492ed34ab23df2c0ca9349a,
         type: 2}
     - target: {fileID: 8042943126879092313, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -2912,27 +2925,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].quest
-      value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
-        type: 2}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.data[0]
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -3087,27 +3079,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].quest
-      value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
-        type: 2}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.data[0]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
       propertyPath: enemies.Array.size
@@ -3130,6 +3101,17 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: eda8f1acd100e474e81f0f3aa5cbba1e,
+        type: 2}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f30abb7e0b070f14c98c688ae29e3ca5,
         type: 2}
     - target: {fileID: 8042943126879092313, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -3260,27 +3242,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].quest
-      value: 
-      objectReference: {fileID: 11400000, guid: 0fcecc14f7785ec41aba59ec4b0657f6,
-        type: 2}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
-        type: 3}
-      propertyPath: requireStates.Array.data[0].states.Array.data[0]
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -3444,7 +3405,13 @@ PrefabInstance:
         type: 3}
       propertyPath: requireStates.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 9fff2e73659f4de46ac510f852e28483,
+      objectReference: {fileID: 11400000, guid: c151f6a922fee0345bb2ca859f72e775,
+        type: 2}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].quest
+      value: 
+      objectReference: {fileID: 11400000, guid: c151f6a922fee0345bb2ca859f72e775,
         type: 2}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -3453,7 +3420,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
       propertyPath: requireStates.Array.data[0].states.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.data[0]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
@@ -3478,6 +3455,17 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 7a9156c9dc51db44f99e41f3f8201edb,
+        type: 2}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c39047a1fd301334c9728dfdafa367fc,
         type: 2}
     - target: {fileID: 8042943126879092313, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -3618,7 +3606,7 @@ PrefabInstance:
         type: 3}
       propertyPath: requireStates.Array.data[0].quest
       value: 
-      objectReference: {fileID: 11400000, guid: 0bcbbc524a450fa4dba09fd54fddc8df,
+      objectReference: {fileID: 11400000, guid: c1e5b0d95ddcbf24780c0897c0e0392c,
         type: 2}
     - target: {fileID: 6096976792828363666, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
@@ -3652,6 +3640,17 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 9ec8d7e3ff113c74a91540fc67a9dc95,
+        type: 2}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042943126879092312, guid: 6ce145fd98765f040b0bba3bbabb7a90,
+        type: 3}
+      propertyPath: progressQuest.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8058cbd199bbd36458aea3d2ed0d3967,
         type: 2}
     - target: {fileID: 8042943126879092313, guid: 6ce145fd98765f040b0bba3bbabb7a90,
         type: 3}
