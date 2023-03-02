@@ -6858,12 +6858,12 @@ PrefabInstance:
     - target: {fileID: 3796781839761751063, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00009184058
+      value: 0.000108331034
       objectReference: {fileID: 0}
     - target: {fileID: 4163235307477341055, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.000029563904
       objectReference: {fileID: 0}
     - target: {fileID: 4163235307896065018, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
@@ -7102,7 +7102,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 3578337a01447f54086e9042ed6eca0b, type: 3}
 --- !u!1 &602776023 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4163538849425837090, guid: 3578337a01447f54086e9042ed6eca0b,
+  m_CorrespondingSourceObject: {fileID: 6837982128144156748, guid: 3578337a01447f54086e9042ed6eca0b,
     type: 3}
   m_PrefabInstance: {fileID: 602776022}
   m_PrefabAsset: {fileID: 0}
@@ -22884,7 +22884,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 8558335525665944476}
   selectedCommands:
-  - {fileID: 8558335525665944475}
+  - {fileID: 8558335525665944489}
   variables:
   - {fileID: 7325196266404100600}
   description: 
@@ -23014,7 +23014,6 @@ GameObject:
   - component: {fileID: 8558335525665944478}
   - component: {fileID: 8558335525665944477}
   - component: {fileID: 8558335525665944476}
-  - component: {fileID: 8558335525665944475}
   - component: {fileID: 8558335525665944474}
   - component: {fileID: 8558335525665944473}
   - component: {fileID: 8558335525665944472}
@@ -23034,6 +23033,7 @@ GameObject:
   - component: {fileID: 8558335525665944484}
   - component: {fileID: 8558335525665944488}
   - component: {fileID: 8558335525665944487}
+  - component: {fileID: 8558335525665944489}
   m_Layer: 0
   m_Name: ArenaFlowchart
   m_TagString: Untagged
@@ -24302,27 +24302,6 @@ MonoBehaviour:
   - {fileID: 8558335525665944465}
   - {fileID: 8558335525665944470}
   suppressAllAutoSelections: 0
---- !u!114 &8558335525665944475
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2737734564324607994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 147
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 602776023}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
-  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &8558335525665944476
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -24348,7 +24327,7 @@ MonoBehaviour:
   description: If main quest is complete
   eventHandler: {fileID: 0}
   commandList:
-  - {fileID: 8558335525665944475}
+  - {fileID: 8558335525665944489}
   - {fileID: 8558335525665944487}
   - {fileID: 8558335525665944483}
   suppressAllAutoSelections: 0
@@ -24703,6 +24682,34 @@ MonoBehaviour:
       vector2Value: {x: 0, y: 0}
       vector3Value: {x: 0, y: 0, z: 0}
     variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &8558335525665944489
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737734564324607994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 170
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 602776023}
+  targetComponentAssemblyName: Necropanda.ArenaMode, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: ArenaMode
+  targetMethod: OpenArena
+  targetMethodText: 'OpenArena (): Void'
+  methodParameters: []
   saveReturnValue: 0
   returnValueVariableKey: 
   returnValueType: System.Void

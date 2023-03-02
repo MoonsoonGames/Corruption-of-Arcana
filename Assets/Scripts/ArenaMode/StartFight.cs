@@ -19,7 +19,7 @@ namespace Necropanda
         public TextMeshProUGUI text;
         public string overideDescription;
 
-        private void Start()
+        void Start()
         {
             if (text == null) return;
 
@@ -54,6 +54,12 @@ namespace Necropanda
             }
 
             text.text = description;
+        }
+
+        public void Check()
+        {
+            RequireQuestProgress requireQuestProgress = GetComponent<RequireQuestProgress>();
+            requireQuestProgress.CheckProgress();
         }
 
         public void FightButton()
