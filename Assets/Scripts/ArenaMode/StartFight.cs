@@ -60,16 +60,14 @@ namespace Necropanda
         {
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
-            LoadCombatManager.instance.LoadCombat(null, lastScene, enemies, progressQuest);
-        }
 
-        public void StartFightFromLevel()
-        {
-            GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
-
-            string sceneString = SceneManager.GetActiveScene().name;
-            E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
-            LoadCombatManager.instance.LoadCombat(player, lastScene, enemies, progressQuest);
+            if (GameObject.FindObjectOfType<Player.PlayerController>() == null)
+                LoadCombatManager.instance.LoadCombat(null, lastScene, enemies, progressQuest);
+            else
+            {
+                GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
+                LoadCombatManager.instance.LoadCombat(player, lastScene, enemies, progressQuest);
+            }
         }
     }
 }
