@@ -6820,11 +6820,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -46.19
       objectReference: {fileID: 0}
-    - target: {fileID: 2661791070816383036, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3217601205240888292, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -6863,12 +6858,12 @@ PrefabInstance:
     - target: {fileID: 3796781839761751063, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000108331034
+      value: -0.00022204143
       objectReference: {fileID: 0}
     - target: {fileID: 4163235307477341055, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000029563904
+      value: -0.00004196167
       objectReference: {fileID: 0}
     - target: {fileID: 4163235307896065018, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
@@ -6938,41 +6933,6 @@ PrefabInstance:
     - target: {fileID: 4663704977357311929, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513561449296944, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513562373411232, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513562835400309, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513562925514700, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513563020697718, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513563135489549, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5435513563141848629, guid: 3578337a01447f54086e9042ed6eca0b,
-        type: 3}
-      propertyPath: requireStates.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5976061221705537966, guid: 3578337a01447f54086e9042ed6eca0b,
@@ -23075,6 +23035,7 @@ GameObject:
   - component: {fileID: 8558335525665944487}
   - component: {fileID: 8558335525665944489}
   - component: {fileID: 8558335525665944490}
+  - component: {fileID: 8558335525665944491}
   m_Layer: 0
   m_Name: ArenaFlowchart
   m_TagString: Untagged
@@ -24428,6 +24389,7 @@ MonoBehaviour:
   - {fileID: 8558335525665944488}
   - {fileID: 8558335525665944460}
   - {fileID: 8558335525665944490}
+  - {fileID: 8558335525665944491}
   - {fileID: 8558335525665944462}
   suppressAllAutoSelections: 0
 --- !u!114 &8558335525665944479
@@ -24759,7 +24721,7 @@ MonoBehaviour:
   callMode: 0
 --- !u!114 &8558335525665944490
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -24792,6 +24754,68 @@ MonoBehaviour:
       gameObjectValue: {fileID: 0}
       materialValue: {fileID: 0}
       objectValue: {fileID: 11400000, guid: e354be13b3219514996149ec5653662d, type: 2}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 0, y: 0, z: 0}
+    variableKey: 
+  - objValue:
+      typeAssemblyname: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      typeFullname: System.String
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: Arena Custodian
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 0}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 0, y: 0, z: 0}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &8558335525665944491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737734564324607994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 172
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 2737734564324607994}
+  targetComponentAssemblyName: Necropanda.ProgressQuest, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: ProgressQuest
+  targetMethod: StartQuest
+  targetMethodText: 'StartQuest (Quest, String): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: Necropanda.Quest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      typeFullname: Necropanda.Quest
+      intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 11400000, guid: 912ebb24b3b87404b9108ef021f6ea84, type: 2}
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
