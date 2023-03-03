@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -276,6 +277,8 @@ namespace Necropanda
                     }
                 }
             }
+
+            PlayCardSound();
         }
 
         /// <summary>
@@ -371,6 +374,18 @@ namespace Necropanda
             open = !active;
             if (untargettableOverlay != null)
                 untargettableOverlay.SetOverlay(active, message);
+        }
+
+        #endregion
+
+        #region Sound Effects
+
+        [Header("Sound Effects")]
+        public EventReference cardPlacedSound;
+
+        public void PlayCardSound()
+        {
+            RuntimeManager.PlayOneShot(cardPlacedSound);
         }
 
         #endregion
