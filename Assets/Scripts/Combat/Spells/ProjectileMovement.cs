@@ -15,21 +15,37 @@ namespace Necropanda
         public float distanceAllowance = 0.5f;
 
         public Object impactEffect;
-        Image image;
-        TrailRenderer trailRenderer;
+        Image[] images;
+        TrailRenderer[] trailRenderers;
 
         bool moving = false;
         Vector2[] movePositions;
         int currentTarget = 0;
         float speed = 0;
 
-        public void Setup(Color color, Object effect)
+        public void Setup(Color color, Object impactEffect, Object projectileEffect)
         {
-            image = GetComponentInChildren<Image>();
-            trailRenderer = GetComponentInChildren<TrailRenderer>();
-            image.color = color;
-            trailRenderer.startColor = color;
-            impactEffect = effect;
+            images = GetComponentsInChildren<Image>();
+            trailRenderers = GetComponentsInChildren<TrailRenderer>();
+
+            foreach (var item in images)
+            {
+                if (projectileEffect != null)
+                {
+                    item.color = new Color(color.r, color.g, color.b, 0);
+
+                    Instantiate(projectileEffect, item.gameObject.transform);
+                }
+                else
+                    item.color = color;
+            }
+
+            foreach (var item in trailRenderers)
+            {
+                item.startColor = color;
+            }
+
+            this.impactEffect = impactEffect;
         }
 
         public void MoveToPositions(float newSpeed, Vector2[] newMovePositions)

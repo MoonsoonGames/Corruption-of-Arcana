@@ -17,6 +17,8 @@ namespace Necropanda
         public Spell spell;
 
         public TextMeshProUGUI nameText;
+        public Image nameImage;
+        public Image background;
         public SpawnArcanaSymbol arcanaSpawner;
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI descriptionText;
@@ -26,17 +28,31 @@ namespace Necropanda
 
         public void Setup()
         {
-            nameText.text = spell.spellName;
+            if (spell.nameImage != null)
+            {
+                nameImage.sprite = spell.nameImage;
+                nameText.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                nameImage.color = new Color(0, 0, 0, 0);
+                nameText.text = spell.spellName;
+            }
+            if (spell.background != null)
+                background.sprite = spell.background;
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
             cardFace.sprite = spell.cardImage;
+            ShowSymbols();
+            if (cardFace.sprite == null)
+                ShowArt(false);
             //SetupIcons();
 
             gameObject.name = spell.spellName;
 
             GetComponent<CardDrag2D>().Setup();
-            ShowUnavailableOverlay(0);
+            ShowUnavailableOverlay(3);
         }
 
         public void ShowArt(bool show)
@@ -50,13 +66,89 @@ namespace Necropanda
             color.a = canShow ? 1 : 0;
 
             cardFace.color = color;
+
+            //gridLayout.gameObject.SetActive(canShow);
+            gridLayout.gameObject.SetActive(false);
+        }
+
+
+        public Object imageObject;
+        public GridLayoutGroup gridLayout;
+
+        void ShowSymbols()
+        {
+            List<Sprite> sprites = new List<Sprite>();
+
+            foreach (var item in spell.spellModules)
+            {
+                Sprite newSprite = GetEffectObject(item.effectType);
+
+                if (!sprites.Contains(newSprite) && item.value > 0)
+                    sprites.Add(newSprite);
+
+                foreach (var status in item.statuses)
+                {
+                    Sprite statusSprite = status.status.iconSprite;
+
+                    if (!sprites.Contains(statusSprite))
+                        sprites.Add(statusSprite);
+
+                    foreach (var effect in status.status.effectModules)
+                    {
+                        Sprite effectSprite = GetEffectObject(effect.effectType);
+
+                        if (!sprites.Contains(effectSprite))
+                            sprites.Add(effectSprite);
+                    }
+                }
+            }
+
+            foreach (var item in sprites)
+            {
+                GameObject image = Instantiate(imageObject, gridLayout.gameObject.transform) as GameObject;
+
+                foreach (var imageObj in image.GetComponentsInChildren<Image>())
+                {
+                    imageObj.sprite = item;
+                }
+            }
+        }
+
+        public Sprite physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, randomIcon, healingIcon, shieldIcon, arcanaIcon;
+
+        public Sprite GetEffectObject(E_DamageTypes effectType)
+        {
+            switch (effectType)
+            {
+                case E_DamageTypes.Physical:
+                    return physicalIcon;
+                case E_DamageTypes.Ember:
+                    return emberIcon;
+                case E_DamageTypes.Bleak:
+                    return bleakIcon;
+                case E_DamageTypes.Static:
+                    return staticIcon;
+                case E_DamageTypes.Septic:
+                    return septicIcon;
+                case E_DamageTypes.Perforation:
+                    return perfotationIcon;
+                case E_DamageTypes.Random:
+                    return randomIcon;
+                case E_DamageTypes.Healing:
+                    return healingIcon;
+                case E_DamageTypes.Shield:
+                    return shieldIcon;
+                case E_DamageTypes.Arcana:
+                    return arcanaIcon;
+                default:
+                    return null;
+            }
         }
 
         public void ShowUnavailableOverlay(int availableArcana)
         {
-            //Debug.Log("Show arcana overlay");
-            bool unavailable = availableArcana < spell.arcanaCost ? true : false;
-            //Debug.Log(spell.spellName + " ||" + spell.arcanaCost + "/" + availableArcana + " || " + unavailable);
+            bool unavailable = availableArcana < spell.arcanaCost && spell.arcanaCost > 0 ? true : false;
+
             unavailableOverlay.SetActive(unavailable);
         }
 
@@ -92,7 +184,7 @@ namespace Necropanda
                 string title = parts[0];
                 string description = parts[1];
 
-                Debug.Log(title + " || " + description);
+                //Debug.Log(title + " || " + description);
                 TooltipManager.instance.ShowTooltip(true, title, description);
 
                 showing = true;
@@ -101,7 +193,7 @@ namespace Necropanda
             {
                 if (showing)
                 {
-                    Debug.Log("Close");
+                    //Debug.Log("Close");
                     TooltipManager.instance.ShowTooltip(false, "Error", "Should not be showing");
                     showing = false;
                 }

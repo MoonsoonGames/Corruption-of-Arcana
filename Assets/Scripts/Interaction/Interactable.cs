@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -25,8 +26,22 @@ namespace Necropanda.Interactable
         public string interactionPopupTitle;
         public string interactionPopupMessage;
 
+        bool setup = false;
+
         private void Start()
         {
+            Setup();
+        }
+
+        private void Awake()
+        {
+            Setup();
+        }
+
+        public void Setup()
+        {
+            if (LoadCombatManager.instance == null) return;
+
             Interactable[] allInteractables = FindObjectsOfType<Interactable>();
 
             for (int i = 0; i < allInteractables.Length; i++)
@@ -51,10 +66,16 @@ namespace Necropanda.Interactable
             }
 
             SetInteractMessage(null, null);
+            setup = true;
         }
 
         private void Update()
         {
+            if (!setup)
+            {
+                Setup();
+            }
+
             if (interactingCharacter != null && forceInteract == false)
             {
                 //Debug.Log("Can interact");
@@ -132,7 +153,7 @@ namespace Necropanda.Interactable
             SetInteractMessage(null, null);
 
             //Call interface function
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
             IInteractable[] interacts = GetComponents<IInteractable>();
             foreach (var item in interacts)
             {
@@ -149,7 +170,7 @@ namespace Necropanda.Interactable
         {
             SetInteractMessage(null, null);
             //Call interface function
-            Debug.Log("Interact");
+            //Debug.Log("Interact");
             ICancelInteractable[] interacts = GetComponents<ICancelInteractable>();
             foreach (var item in interacts)
             {

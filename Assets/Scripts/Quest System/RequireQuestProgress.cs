@@ -11,20 +11,45 @@ namespace Necropanda
 {
     public class RequireQuestProgress : MonoBehaviour
     {
+        public bool checkOnStart = true;
         public QuestHelperFuncions.QuestInstance[] requireStates;
 
+        public E_Operations operation = E_Operations.AND;
+
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            bool available = false;
+            if (checkOnStart)
+                CheckProgress();
+        }
+
+        public void CheckProgress()
+        {
+            bool or = false;
+            bool and = true;
 
             foreach (var item in requireStates)
             {
                 if (item.Available())
-                    available = true;
+                    or = true;
+                else
+                    and = false;
             }
 
-            gameObject.SetActive(available);
+            switch (operation)
+            {
+                case (E_Operations.AND):
+                    gameObject.SetActive(and);
+                    break;
+                case (E_Operations.OR):
+                    gameObject.SetActive(or);
+                    break;
+            }
         }
+    }
+
+    public enum E_Operations
+    {
+        OR, AND
     }
 }

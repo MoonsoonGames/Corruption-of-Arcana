@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: 21World
   m_EditorClassIdentifier: 
   spellName: The World
+  nameImage: {fileID: 21300000, guid: f23f2f85a979c4f42833208fd0c5b5ce, type: 3}
   flavourText: 
   spellDescription: Spells with random targets will be redirected to this character
     for 3 turns
   cardImage: {fileID: 0}
+  background: {fileID: 0}
+  cardType: 1
   overrideColor: 1
   timelineColor: {r: 0.54901963, g: 0.7921569, b: 0.7590447, a: 255}
   timelineIcon: {fileID: 1974263730, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0
   arcanaCost: 1
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -43,12 +48,13 @@ MonoBehaviour:
     statuses:
     - status: {fileID: 11400000, guid: 927fbcbfbd224d944ae4435269312b4e, type: 2}
       duration: 4
-      chance: 1
+      applyOverShield: 1
   castObject: {fileID: 0}
   projectileObject: {fileID: 2083095811265704842, guid: f766f29bc8549f44e9cdc675716182e5,
     type: 3}
-  projectileSpeed: 0.3
+  projectileSpeed: 0.6
   projectilePoints: 000000000700000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
+  idealTarget: 1

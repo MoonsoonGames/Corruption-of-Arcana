@@ -7,6 +7,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: offset.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[0].time
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[1].time
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[0].speed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[1].speed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[0].axes.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[1].axes.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[0].currentTime
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 64108165515616947, guid: 6d562640a40dcef45a1117fd6bd02d70,
+        type: 3}
+      propertyPath: utilityModules.Array.data[1].currentTime
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
         type: 3}
       propertyPath: m_Name
@@ -119,29 +169,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d562640a40dcef45a1117fd6bd02d70, type: 3}
---- !u!1 &220327949274887466 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1878610120171759927, guid: 6d562640a40dcef45a1117fd6bd02d70,
-    type: 3}
-  m_PrefabInstance: {fileID: 1809579437999791133}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3737961462800274395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220327949274887466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22021802ab006b441a026713fe22a0bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  utilityModules:
-  - type: 0
-    axes: {x: 0, y: 1, z: 0}
-    speed: 15
-    time: 0.1
-    currentTime: 0.04
-    forward: 0
-  offset: {x: 0, y: 0.05}

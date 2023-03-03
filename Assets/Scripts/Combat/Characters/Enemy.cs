@@ -18,9 +18,11 @@ namespace Necropanda
 
         public Object cardPrefab;
 
-        protected override void Start()
+        [ContextMenu("Setup References")]
+        public override void SetupReferences()
         {
-            base.Start();
+            base.SetupReferences();
+
             enemyManager = (EnemyManager)teamManager;
             SpellCastingAI = stats.ai;
             aISpells = new List<CombatHelperFunctions.AISpell>();
@@ -29,7 +31,7 @@ namespace Necropanda
             {
                 //Setup for the AI spells
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
-                
+
                 newSpell.spell = spell.spell;
                 newSpell.spawnAsCard = spell.spawnAsCard;
                 newSpell.targetSelf = spell.targetSelf;
@@ -122,7 +124,7 @@ namespace Necropanda
                     aISpells.Add(newSpell);
 
                     spawnCard = newSpell.spawnAsCard;
-                    Debug.Log(spawnCard + " 2");
+                    //Debug.Log(spawnCard + " 2");
                 }
 
                 if (spawnCard)

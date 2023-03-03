@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using Necropanda.SaveSystem.Serializables;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com & @mattordev
@@ -31,7 +32,7 @@ namespace Necropanda
     {
         public static E_Scenes StringToSceneEnum(string sceneString)
         {
-            Debug.Log(sceneString);
+            //Debug.Log(sceneString);
 
             E_Scenes scene = (E_Scenes)System.Enum.Parse(typeof(E_Scenes), sceneString);
             return scene;
@@ -58,6 +59,18 @@ namespace Necropanda
             }
 
             return outputList;
+        }
+
+        public static List<T> ArrayToList<T>(T[] array)
+        {
+            List<T> list = new List<T>();
+
+            foreach (var item in array)
+            {
+                list.Add(item);
+            }
+
+            return list;
         }
 
         /// <summary>
@@ -129,12 +142,25 @@ namespace Necropanda
             return Mathf.Abs(a - b) <= threshold;
         }
 
-        public static bool AlmostEqualVector3(Vector3 a, Vector3 b, float threshold)
+        public static bool AlmostEqualVector3(Vector3 a, Vector3 b, float threshold, Vector3 ignoreAxis)
         {
-            bool x = AlmostEqualFloat(a.x, b.x, threshold);
-            bool y = AlmostEqualFloat(a.y, b.y, threshold);
-            bool z = AlmostEqualFloat(a.z, b.z, threshold);
+            bool x = AlmostEqualFloat(a.x, b.x, threshold) || ignoreAxis.x == 1;
+            bool y = AlmostEqualFloat(a.y, b.y, threshold) || ignoreAxis.y == 1;
+            bool z = AlmostEqualFloat(a.z, b.z, threshold) || ignoreAxis.z == 1;
             return x && y && z;
+        }
+        
+        public static Vector3 ConvertSerializable(SerializableVector3 serializableVector3)
+        {
+            return new Vector3(serializableVector3.x, serializableVector3.y, serializableVector3.z);
+        }
+
+        public static Vector3 LerpVector3(Vector3 a, Vector3 b, float p)
+        {
+            float x = Mathf.Lerp(a.x, b.x, p);
+            float y = Mathf.Lerp(a.y, b.y, p);
+            float z = Mathf.Lerp(a.z, b.z, p);
+            return new Vector3(x, y, z);
         }
     }
 
@@ -229,12 +255,11 @@ namespace Necropanda
 
         #region Status Effects
 
-        public static bool ApplyChance(float chance)
+        public static bool ApplyEffect(Character target, StatusStruct status)
         {
             bool apply = false;
-            float roll = Random.Range(0f, 1f);
 
-            if (roll <= chance)
+            if (target.GetHealth().GetShield() <= 0 || status.applyOverShield)
             {
                 //Debug.Log("Apply success");
                 apply = true;
@@ -253,7 +278,7 @@ namespace Necropanda
         {
             public StatusEffects status;
             public int duration;
-            public float chance;
+            public bool applyOverShield;
         }
 
         [System.Serializable]
@@ -304,7 +329,7 @@ namespace Necropanda
                     Debug.Log("Redirect to target");
                     return CombatManager.instance.redirectedCharacter;
                 }
-                    
+
             }
 
             if (characters.Count > 0)
@@ -324,7 +349,7 @@ namespace Necropanda
                     int randomInt = Random.Range(0, targets.Count);
 
                     return targets[randomInt];
-                } 
+                }
             }
 
             return null;
@@ -377,7 +402,7 @@ namespace Necropanda
         public struct StatusIconConstruct
         {
             public StatusEffects effect;
-            public float chance;
+            public bool applyOverShield;
             public Object effectIcon;
             public int duration;
 
@@ -399,17 +424,18 @@ namespace Necropanda
         public struct QuestInstance
         {
             public Quest quest;
+            public bool invert;
             public E_QuestStates[] states;
 
             public bool Available()
             {
-                bool available = false;
+                bool available = invert;
 
                 foreach (E_QuestStates state in states)
                 {
                     if (quest.state == state)
                     {
-                        available = true;
+                        available = !invert;
                     }
                 }
 
@@ -428,7 +454,7 @@ namespace Necropanda
 
             public EventReference GetSound(float intensity)
             {
-                foreach(var sound in sounds)
+                foreach (var sound in sounds)
                 {
                     if (sound.intensityThreshold >= intensity)
                     {

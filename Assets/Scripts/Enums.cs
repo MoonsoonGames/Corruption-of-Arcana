@@ -44,7 +44,11 @@ public enum E_Scenes
     Tiertarock,
     PuzzleRoom,
     Thoth,
-    ArenaMode
+    Cave,
+    ArenaMode,
+    SplashScreen,
+    Navigation,
+    EastForest
 }
 
 public enum E_UtilityScripts

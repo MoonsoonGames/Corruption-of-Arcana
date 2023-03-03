@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: 9Hermit
   m_EditorClassIdentifier: 
   spellName: The Hermit
+  nameImage: {fileID: 21300000, guid: 8c9217cee8506a74688d10f225cd97fe, type: 3}
   flavourText: 
   spellDescription: Target cannot take their turn or be targeted by other characters
     for 1 turn
   cardImage: {fileID: 0}
+  background: {fileID: 0}
+  cardType: 1
   overrideColor: 1
   timelineColor: {r: 0.43676576, g: 0.5881653, b: 0.6132076, a: 1}
   timelineIcon: {fileID: -732566390, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0
   arcanaCost: 1
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -43,12 +48,13 @@ MonoBehaviour:
     statuses:
     - status: {fileID: 11400000, guid: 72827d3bbdfb6fc4e856070f43222d98, type: 2}
       duration: 2
-      chance: 1
+      applyOverShield: 1
   castObject: {fileID: 0}
   projectileObject: {fileID: 2083095811265704842, guid: f766f29bc8549f44e9cdc675716182e5,
     type: 3}
-  projectileSpeed: 0.3
+  projectileSpeed: 0.6
   projectilePoints: 000000000600000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
+  idealTarget: 6

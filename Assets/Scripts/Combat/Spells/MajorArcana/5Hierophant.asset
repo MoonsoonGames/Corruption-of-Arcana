@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: 5Hierophant
   m_EditorClassIdentifier: 
   spellName: The Hierophant
+  nameImage: {fileID: 21300000, guid: 862d6d24780ac484e831935107a3bcbc, type: 3}
   flavourText: 
   spellDescription: 'Deal 5 $static$ 3 times
 
 
-    Target''s team takes 2 $static$
-    at the end of the round for 2 turns'
+    If target has no shield, their
+    team takes 2 $static$ at the end of the round for 2 turns'
   cardImage: {fileID: 0}
+  background: {fileID: 0}
+  cardType: 1
   overrideColor: 1
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   timelineIcon: {fileID: -1117572714, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0.45
+  speed: 0.55
   arcanaCost: 2
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -55,13 +60,14 @@ MonoBehaviour:
     statuses:
     - status: {fileID: 11400000, guid: 1a66da312d3e2ab4ab4effe9ada7a53c, type: 2}
       duration: 3
-      chance: 1
+      applyOverShield: 1
   castObject: {fileID: 0}
-  projectileObject: {fileID: 2083095811265704842, guid: f8c2fb7549481904c9a5f01aefbe65ef,
+  projectileObject: {fileID: 6031179954722945327, guid: 4361a91694c972a4984ecc43791fbe3d,
     type: 3}
-  projectileSpeed: 0.3
+  projectileSpeed: 0.6
   projectilePoints: 0000000001000000
   impactObject: {fileID: 6441297445223667176, guid: c3de2173c0f41884da1878ebdb1eb46e,
     type: 3}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
+  idealTarget: 1

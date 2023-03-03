@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using FMODUnity;
+using Necropanda.Utils.Console;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -29,7 +31,7 @@ namespace Necropanda
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
-        protected int shield;
+        protected int shield; public int GetShield() { return shield; }
 
         //Damage Resistances
         Dictionary<E_DamageTypes, float> currentDamageResistances;
@@ -69,6 +71,7 @@ namespace Necropanda
         protected virtual void SetupHealth()
         {
             maxHealth = character.stats.maxHealth;
+            shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
             cursedMaxHealth = (int)(maxHealth * 0.8);
@@ -101,7 +104,8 @@ namespace Necropanda
         {
             //Decay shield
             //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
-            shield = shield / 2;
+            if (character.stats.decayShields)
+                shield = shield / 2;
             CheckCurseHealth();
         }
 
@@ -164,7 +168,7 @@ namespace Necropanda
 
             if (health <= 0)
             {
-                Kill();
+                Kill(type);
             }
             else
             {
@@ -262,19 +266,47 @@ namespace Necropanda
 
         public GameObject[] disableOnKill;
 
-        void Kill()
+        void Kill(E_DamageTypes type)
         {
+            // Get ref to the dev console
+            GameObject console = GameObject.FindGameObjectWithTag("Console");
+            if (console != null)
+            {
+                DeveloperConsoleBehaviour behaviour = console.GetComponent<DeveloperConsoleBehaviour>();
+
+                // Need to find a better way to do this
+                ToggleGodMode tgm = (ToggleGodMode)behaviour.commands[6];
+
+                if (tgm.GodMode == true)
+                {
+                    return;
+                }
+            }
+            
             dying = true;
             KillFX();
-            ActivateArt(false);
+            ActivateArt(false, true, type);
         }
 
-        public void ActivateArt(bool activate)
+        public void ActivateArt(bool activate, bool dissolve, E_DamageTypes type)
         {
             foreach (var item in disableOnKill)
             {
                 //Disable all art assets
                 item.SetActive(activate);
+            }
+
+            if (colorFlash != null)
+            {
+                if (dissolve)
+                {
+                    if (activate)
+                        colorFlash.ApplyDissolve(type, 0);
+                    else
+                        colorFlash.ApplyDissolve(type, 1);
+                }
+                else
+                    colorFlash.gameObject.SetActive(activate);
             }
         }
 
@@ -338,7 +370,7 @@ namespace Necropanda
         public void PlaySound(E_DamageTypes type, int value)
         {
             //Play sound from the damage type
-            foreach(var item in soundEffects)
+            foreach (var item in soundEffects)
             {
                 if (item.effectType == type)
                 {

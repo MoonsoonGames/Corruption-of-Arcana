@@ -28,6 +28,7 @@ namespace Necropanda.SaveSystem
 
         public void SaveSliders()
         {
+            UnityEngine.Debug.Log("Saved");
             PlayerPrefs.SetFloat("master", master.value);
             PlayerPrefs.SetFloat("music", music.value);
             PlayerPrefs.SetFloat("sfx", sfx.value);
@@ -36,6 +37,7 @@ namespace Necropanda.SaveSystem
 
         public void LoadSliders()
         {
+            UnityEngine.Debug.Log("Loaded");
             master.value = PlayerPrefs.GetFloat("master");
             music.value = PlayerPrefs.GetFloat("music");
             sfx.value = PlayerPrefs.GetFloat("sfx");

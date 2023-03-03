@@ -38,10 +38,10 @@ namespace Necropanda
                 {
                     if (currentScene == LoadCombatManager.instance.lastScene)
                     {
-                        Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                        //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
                         spawnPos = LoadCombatManager.instance.lastPos;
                         spawnRot = LoadCombatManager.instance.lastRot;
-                        Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                        //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
                     }
                 }
             }

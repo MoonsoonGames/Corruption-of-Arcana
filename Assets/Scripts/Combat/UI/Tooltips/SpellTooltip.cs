@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 /// <summary>
-/// Authored & Written by <NAME/TAG/SOCIAL LINK>
+/// Authored & Written by Andrew Scott andrewscott@icloud.com
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
@@ -16,20 +16,41 @@ namespace Necropanda
         public GameObject sections;
 
         public bool followMouse = false;
+        RectTransform bg;
+        public RectTransform canvas;
+        public float xMultiplier = 1.87f;
+        public float yMultiplier = 2.475f;
 
         private void Update()
         {
             if (followMouse)
             {
+                //https://www.youtube.com/watch?v=dzkFdkwzVhs
+
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 transform.position = mousePosition;
+
+                Vector2 tooltipPos = transform.GetComponent<RectTransform>().anchoredPosition;
+                float width = bg.rect.width * xMultiplier;
+                float height = bg.rect.height * yMultiplier;
+
+                if (tooltipPos.x + width > canvas.rect.width)
+                {
+                    tooltipPos.x = canvas.rect.width - width;
+                }
+                if (tooltipPos.y + height > canvas.rect.height)
+                {
+                    tooltipPos.y = canvas.rect.height - height;
+                }
+                transform.GetComponent<RectTransform>().anchoredPosition = tooltipPos;
             }
         }
 
         private void Start()
         {
             oldSections = new List<GameObject>();
+            bg = GetComponent<RectTransform>();
         }
 
         public void SetText(string titleText, Spell spell)
@@ -49,7 +70,7 @@ namespace Necropanda
         #region Icons
 
         public Object sectionPrefab;
-        List<GameObject> oldSections;
+        List<GameObject> oldSections = new List<GameObject>();
 
         public void DeleteOldIcons()
         {
@@ -77,6 +98,8 @@ namespace Necropanda
             if (sections == null)
                 return;
 
+            #region Spell Icons
+
             List<CombatHelperFunctions.SpellIconConstruct> spellConstructs = spell.SpellIcons();
 
             foreach (var item in spellConstructs)
@@ -91,6 +114,10 @@ namespace Necropanda
                 oldSections.Add(section);
             }
 
+            #endregion
+
+            #region Status Icons
+
             List<CombatHelperFunctions.StatusIconConstruct> statusConstructs = spell.EffectIcons();
 
             foreach (var item in statusConstructs)
@@ -100,10 +127,14 @@ namespace Necropanda
                 IconConstructor constructor = section.GetComponent<IconConstructor>();
 
                 if (constructor != null)
-                    constructor.ConstructStatus(item.chance, item.effectIcon, item.duration, GetTargetType(item.target), item.effect);
+                    constructor.ConstructStatus(item.applyOverShield, item.effectIcon, item.duration, GetTargetType(item.target), item.effect);
 
                 oldSections.Add(section);
             }
+
+            #endregion
+
+            #region Execute Icon
 
             CombatHelperFunctions.ExecuteIconConstruct executeConstruct = spell.ExecuteIcons();
 
@@ -118,6 +149,26 @@ namespace Necropanda
 
                 oldSections.Add(section);
             }
+
+            #endregion
+
+            #region Summon Icons
+
+            Dictionary<CharacterStats, int> summonConstructs = spell.SummonIcons();
+
+            foreach (var item in summonConstructs)
+            {
+                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
+                GameObject section = Instantiate(sectionPrefab, sections.transform) as GameObject;
+                IconConstructor constructor = section.GetComponent<IconConstructor>();
+
+                if (constructor != null)
+                    constructor.ConstructSummon(item.Key, item.Value);
+
+                oldSections.Add(section);
+            }
+
+            #endregion
         }
 
         public Object physicalIcon, emberIcon, bleakIcon, staticIcon, septicIcon, perfotationIcon, randomIcon, healingIcon, shieldIcon;
