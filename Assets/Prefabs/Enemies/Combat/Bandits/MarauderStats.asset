@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e306a5ff4f2a5e4a899426faa5a526a, type: 3}
+  m_Name: MarauderStats
+  m_EditorClassIdentifier: 
+  characterName: Bandit
+  characterObject: {fileID: 8579202517209450935, guid: e3370fbe153e0d1459cfb95069e66ee4,
+    type: 3}
+  characterSprite: {fileID: 21300000, guid: c22ee79c2f148b64d8c81efb45798df8, type: 3}
+  characterDescription: 
+  location: 
+  maxHealth: 60
+  startingShields: 0
+  decayShields: 0
+  baseDamageResistancesType: 
+  baseDamageResistancesModifier: []
+  timelineColor: {r: 0.5943396, g: 0.22178254, b: 0.19904771, a: 255}
+  spawnObject: {fileID: 6441297445223667176, guid: 3a675a191c219ee4ca59c084d80673a8,
+    type: 3}
+  ai: {fileID: 11400000, guid: 01324d18549c82248b3a834616aeae83, type: 2}
+  actions: 2
+  usesArcana: 0
+  aISpells:
+  - spell: {fileID: 11400000, guid: ba89b8bdbf6a7b245815580945faa7d6, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 0
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: ba4ba212587c173478c92e3d4462ac24, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 3
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 76704de43a143164186df821a6f31969, type: 2}
+    spawnAsCard: 0
+    targetSelf: 1
+    targetAllies: 0
+    targetEnemies: 0
+    timeCooldown: 3
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: b3a9e0e70e9c4a841846c853473bbca7, type: 2}
+    spawnAsCard: 1
+    targetSelf: 1
+    targetAllies: 0
+    targetEnemies: 0
+    timeCooldown: 3
+    lastUsed: 0
