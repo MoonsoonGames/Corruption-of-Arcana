@@ -4530,6 +4530,123 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe3e9994dbd84e641860f7d99be372e9, type: 3}
+--- !u!1 &68330555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68330556}
+  - component: {fileID: 68330560}
+  - component: {fileID: 68330559}
+  - component: {fileID: 68330558}
+  - component: {fileID: 68330557}
+  m_Layer: 13
+  m_Name: Music Shift / Entrance - Village
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &68330556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68330555}
+  m_LocalRotation: {x: -0, y: -0.053955346, z: -0, w: 0.9985434}
+  m_LocalPosition: {x: -0.097, y: 3.42, z: 0.5155}
+  m_LocalScale: {x: 0.67793, y: 5.4294, z: -0.031786}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 451938625}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: -6.186, z: 0}
+--- !u!114 &68330557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68330555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 827287202}
+    Params:
+    - Name: Thoth Music
+      Value: 1
+  TriggerEvent: 3
+--- !u!65 &68330558
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68330555}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &68330559
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68330555}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &68330560
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68330555}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &70450952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24493,6 +24610,7 @@ Transform:
   - {fileID: 1402024575}
   - {fileID: 1807963648}
   - {fileID: 902438726}
+  - {fileID: 68330556}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40620,6 +40738,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe3e9994dbd84e641860f7d99be372e9, type: 3}
+--- !u!114 &827287202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1937670266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &831509552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88905,6 +89035,7 @@ GameObject:
   - component: {fileID: 1859778102}
   - component: {fileID: 1859778101}
   - component: {fileID: 1859778103}
+  - component: {fileID: 1859778104}
   m_Layer: 0
   m_Name: Dolly Camera
   m_TagString: Untagged
@@ -88957,7 +89088,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859778100}
-  m_LocalRotation: {x: 0.6262838, y: 0.020882891, z: -0.01498848, w: 0.7791713}
+  m_LocalRotation: {x: 0.6262838, y: 0.020882906, z: -0.014988488, w: 0.7791713}
   m_LocalPosition: {x: 3.4327455, y: -4.442923, z: 21.879965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -88986,6 +89117,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1859778104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859778100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 827287202}
+    Params:
+    - Name: Thoth Music
+      Value: 1
+  TriggerEvent: 2
 --- !u!1001 &1860096291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93423,6 +93573,100 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9039dedf6fe22294c80c040b4a93e35b, type: 3}
+--- !u!1001 &1937670266
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Music/Thoth Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 600476593
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1264173346
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: 1837255859
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012126762059438741, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 450701464
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094980837896134752, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6618018498640154553, guid: 40c26cb536d236c498263c30810b75b2,
+        type: 3}
+      propertyPath: m_Name
+      value: Music System
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40c26cb536d236c498263c30810b75b2, type: 3}
 --- !u!1 &1938211470
 GameObject:
   m_ObjectHideFlags: 0
