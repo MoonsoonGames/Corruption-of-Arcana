@@ -14,8 +14,16 @@ namespace Necropanda
     {
         public E_Scenes initialScene;
 
+        public Quest arenaQuest;
+        public Quest firstObjective;
+
         public void Play()
         {
+            arenaQuest.StartQuest("Arena Custiodian", null);
+            firstObjective.QuestProgress();
+            SaveManager.instance.overideAllBaseData();
+            SaveManager.instance.saveAllData();
+
             //Reset loadsettings/progress
             SceneManager.LoadScene(initialScene.ToString());
             //load game
