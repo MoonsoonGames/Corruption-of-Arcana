@@ -23,7 +23,8 @@ namespace Necropanda.SaveSystem
         [SerializeField] private float health;
         [SerializeField] private int maxHealth;
         [SerializeField] private int gold;
-        [SerializeField] private int arcana;
+        [SerializeField] private int maxArcana;
+        [SerializeField] private List<UnityEngine.Object> curios;
 
         // Potions
         [Header("Potions")]
@@ -37,6 +38,10 @@ namespace Necropanda.SaveSystem
         [SerializeField] private int questStage = 0;
         [SerializeField] private int numberOfEnemiesDefeated = 0;
 
+        public GameObject player;
+
+
+
 
         /// <summary>
         /// Implemented class. Called when SavingLoading SAVES to disk.
@@ -46,15 +51,16 @@ namespace Necropanda.SaveSystem
         {
             return new SaveData
             {
-                position = position,
+                position = new SerializableVector3(player.transform.position),
                 health = health,
                 maxHealth = maxHealth,
                 gold = gold,
-                arcana = arcana,
+                maxArcana = maxArcana,
                 healthPotAmount = healthPotAmount,
                 ragePotAmount = ragePotAmount,
                 swiftPotAmount = swiftPotAmount,
                 arcanaPotAmount = arcanaPotAmount,
+                curios = curios,
                 questStage = questStage,
                 numberOfEnemiesDefeated = numberOfEnemiesDefeated
             };
@@ -69,16 +75,18 @@ namespace Necropanda.SaveSystem
             var saveData = (SaveData)state;
 
             // Player
-            position = saveData.position;
+            player.transform.position = HelperFunctions.ConvertSerializable(position);
             health = saveData.health;
             maxHealth = saveData.maxHealth;
             gold = saveData.gold;
-            arcana = saveData.arcana;
+            maxArcana = saveData.maxArcana;
             // Potions
             healthPotAmount = saveData.healthPotAmount;
             ragePotAmount = saveData.ragePotAmount;
             swiftPotAmount = saveData.swiftPotAmount;
             arcanaPotAmount = saveData.arcanaPotAmount;
+            // Inventory
+            curios.AddRange(saveData.curios);
             // Quests and enemies
             questStage = saveData.questStage;
             numberOfEnemiesDefeated = saveData.numberOfEnemiesDefeated;
@@ -94,15 +102,18 @@ namespace Necropanda.SaveSystem
             public float health;
             public int maxHealth;
             public int gold;
-            public int arcana;
+            public int maxArcana;
 
             public int healthPotAmount;
             public int ragePotAmount;
             public int swiftPotAmount;
             public int arcanaPotAmount;
+            public List<UnityEngine.Object> curios;
 
             public int questStage;
             public int numberOfEnemiesDefeated;
         }
+
+
     }
 }

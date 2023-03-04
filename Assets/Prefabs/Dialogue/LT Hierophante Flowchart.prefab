@@ -31,10 +31,6 @@ GameObject:
   - component: {fileID: 4463874599430004126}
   - component: {fileID: 4463874599430004127}
   - component: {fileID: 4463874599430004112}
-  - component: {fileID: 4463874599430004210}
-  - component: {fileID: 4463874599430004211}
-  - component: {fileID: 4463874599430004212}
-  - component: {fileID: 4463874599430004213}
   - component: {fileID: 5207330364560149844}
   - component: {fileID: 5207330364560149845}
   - component: {fileID: 5207330364560149846}
@@ -97,19 +93,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -233.77478, y: -323.1363}
+  scrollPos: {x: -147.53044, y: 233.71252}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 598
-  zoom: 0.73000026
+  zoom: 0.5800004
   scrollViewRect:
     serializedVersion: 2
     x: -343
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 8485584048317246668}
+  selectedBlocks: []
   selectedCommands: []
   variables:
   - {fileID: 2183409680124275756}
@@ -139,7 +134,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 319.86523
     y: 448.74814
-    width: 159.589
+    width: 156.89648
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -717,7 +712,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 627.1301
     y: 629.8408
-    width: 89.72601
+    width: 89.65514
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -928,7 +923,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 624.8612
     y: 412.90015
-    width: 89.72601
+    width: 89.65514
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1336,83 +1331,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &4463874599430004210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6781074877758362158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 57
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
---- !u!114 &4463874599430004211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6781074877758362158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff5d850a887844fe87ae7d366d3ab5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 4463874599430004212}
-  suppressBlockAutoSelect: 0
---- !u!114 &4463874599430004212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6781074877758362158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeRect:
-    serializedVersion: 2
-    x: 359.33646
-    y: 117.00719
-    width: 110.27396
-    height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
-  itemId: 56
-  blockName: New Block
-  description: Camera Stop
-  eventHandler: {fileID: 4463874599430004211}
-  commandList:
-  - {fileID: 4463874599430004210}
-  - {fileID: 4463874599430004213}
-  suppressAllAutoSelections: 0
---- !u!114 &4463874599430004213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6781074877758362158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cb9773f2ca04e2bbf7a68ccfc23267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 58
-  indentLevel: 0
 --- !u!114 &5207330364560149844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,7 +1801,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 583.23285
     y: 751.9672
-    width: 145.89038
+    width: 146.55167
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1959,7 +1877,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 621.10315
     y: 535.32056
-    width: 89.72601
+    width: 89.65514
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0

@@ -37,6 +37,11 @@ namespace Necropanda
         void Start()
         {
             Singleton();
+            SaveManager.instance.saveAllData += SaveQuestData;
+            SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
+            SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
+            SaveManager.instance.loadAllData += LoadQuestData;
+            SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
         }
 
         public List<Quest> questsToSave;
@@ -44,6 +49,7 @@ namespace Necropanda
         [ContextMenu("Save Quest Data")]
         public void SaveQuestData()
         {
+            Debug.Log("Saving quest data");
             foreach (Quest quest in questsToSave)
             {
                 quest.SaveQuestData();
@@ -53,6 +59,7 @@ namespace Necropanda
         [ContextMenu("Save Base Quest Data")]
         public void SaveBaseQuestData()
         {
+            Debug.Log("Saving base quest data");
             foreach (Quest quest in questsToSave)
             {
                 List<Quest> questList = new List<Quest> { quest };
@@ -62,9 +69,20 @@ namespace Necropanda
             }
         }
 
+        [ContextMenu("Overide Base Quest Data")]
+        public void OverideBaseQuestData()
+        {
+            Debug.Log("Saving base quest data");
+            foreach (Quest quest in questsToSave)
+            {
+                quest.SaveBaseQuestData();
+            }
+        }
+
         [ContextMenu("Load Quest Data")]
         public void LoadQuestData()
         {
+            Debug.Log("Loading quest data");
             foreach (Quest quest in questsToSave)
             {
                 quest.LoadQuestData();
@@ -74,6 +92,7 @@ namespace Necropanda
         [ContextMenu("Load Base Quest Data")]
         public void LoadBaseQuestData()
         {
+            Debug.Log("Loading base quest data");
             foreach (Quest quest in questsToSave)
             {
                 quest.LoadBaseQuestData();

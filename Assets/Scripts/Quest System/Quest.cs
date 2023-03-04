@@ -13,6 +13,10 @@ namespace Necropanda
     [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/Quest", order = 0)]
     public class Quest : ScriptableObject
     {
+        #region Setup
+
+        #region Variables
+
         public string questName;
         public int questNumber;
         [TextArea(3, 10)]
@@ -29,6 +33,8 @@ namespace Necropanda
 
         //public RewardsPool rewards
         //public int rewardNumber
+
+        #endregion
 
         [ContextMenu("Force Restart Quest")]
         public void ForceRestartQuest()
@@ -59,6 +65,10 @@ namespace Necropanda
             UpdateQuestInfo();
         }
 
+        #endregion
+
+        #region Quest Progress
+
         public void StartQuest(string questGiver, Quest parent)
         {
             if (state != E_QuestStates.NotStarted)
@@ -73,6 +83,7 @@ namespace Necropanda
             currentProgress = 0;
 
             EnableNextObjective();
+            EnableAllObjectives();
 
             UpdateQuestInfo();
         }
@@ -111,6 +122,19 @@ namespace Necropanda
                 if (linear)
                 {
                     subQuests[currentProgress].StartQuest(questGiver, this);
+                }
+            }
+
+            UpdateQuestInfo();
+        }
+
+        void EnableAllObjectives()
+        {
+            if (!linear)
+            {
+                for (int i = 0; i < subQuests.Length; i++)
+                {
+                    subQuests[i].StartQuest(questGiver, this);
                 }
             }
 
@@ -156,6 +180,8 @@ namespace Necropanda
 
             return quest;
         }
+
+        #endregion
 
         #region Saving and Loading
 

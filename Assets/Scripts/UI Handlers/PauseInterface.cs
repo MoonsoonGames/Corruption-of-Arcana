@@ -50,7 +50,7 @@ namespace Necropanda.Interfaces
         public void SaveGame()
         {
             //Maybe have a visual indicator for this
-            QuestDataManager.instance.SaveQuestData();
+            SaveManager.instance.SaveAllData();
         }
 
         public void QuitGame()
