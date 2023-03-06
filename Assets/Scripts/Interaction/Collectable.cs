@@ -17,6 +17,12 @@ namespace Necropanda
 
         private void Start()
         {
+            Setup();
+        }
+
+        [ContextMenu("Setup")]
+        private void Setup()
+        {
             sprite.sprite = spell.cardImage;
         }
 
@@ -27,7 +33,18 @@ namespace Necropanda
 
         public void Interacted(GameObject player)
         {
-            DeckManager.instance.collection.Add(spell);
+            if (spell != null)
+            {
+                if (spell.potionCost > 0)
+                {
+                    PotionManager.instance.ChangePotion(spell.potionType, 1);
+                }
+                else
+                {
+                    DeckManager.instance.collection.Add(spell);
+                }
+            }
+            
             Destroy(this.gameObject);
         }
     }

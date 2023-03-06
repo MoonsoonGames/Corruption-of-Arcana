@@ -15,6 +15,8 @@ namespace Necropanda
     /// </summary>
     public class FootstepsManager : MonoBehaviour
     {
+        public float soundFXDistance = 15f;
+
         private enum CURRENT_TERRAIN { Grass, Dirt,Stone, Wood,Crystal, Water }
 
         [SerializeField]
@@ -79,11 +81,14 @@ namespace Necropanda
         /// Each type has a number in FMOD</param>
         private void PlayFootstep (int terrainType, Vector3 pos)
         {
-            footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps");
-            footsteps.setParameterByName("Terrain", terrainType);
-            footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-            footsteps.start();
-            footsteps.release();
+            if (Vector3.Distance(LoadCombatManager.instance.mainCam.transform.position, gameObject.transform.position) < soundFXDistance)
+            {
+                footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps");
+                footsteps.setParameterByName("Terrain", terrainType);
+                footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                footsteps.start();
+                footsteps.release();
+            }
 
             footstepsFX.SpawnFootstepFX(terrainType, pos);
         }
@@ -133,6 +138,11 @@ namespace Necropanda
                 }
             }
             
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, soundFXDistance);
         }
     }
 }

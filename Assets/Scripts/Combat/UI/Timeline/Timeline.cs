@@ -101,6 +101,8 @@ namespace Necropanda
                 }
             }
 
+            StatusIcons();
+
             return apply;
         }
 
@@ -121,6 +123,8 @@ namespace Necropanda
 
             Debug.Log(remove.status.effectName + " has been removed");
             statuses.Remove(remove);
+
+            StatusIcons();
         }
 
         public void UpdateStatusDurations()
@@ -135,6 +139,31 @@ namespace Necropanda
             }
 
             statuses = newStatusList;
+
+            StatusIcons();
+        }
+
+        void StatusIcons()
+        {
+            List<Character> allCharacters = CombatManager.instance.GetAllCharacters();
+            foreach (var item in allCharacters)
+            {
+                StatusManager statusManager = item.GetStatusManager();
+
+                if (statusManager != null)
+                {
+                    statusManager.ClearIcons();
+                }
+                else
+                {
+                    Debug.LogWarning("No status manager");
+                }
+            }
+            foreach (var item in statuses)
+            {
+                if (item.target != null)
+                    item.target.GetStatusManager().AddStatus(item);
+            }
         }
 
         #endregion
@@ -238,6 +267,11 @@ namespace Necropanda
             {
                 item.spell.SimulateSpellValues(player, item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
             }
+
+            foreach (CombatHelperFunctions.StatusInstance item in statuses)
+            {
+                item.status.SimulateStatusValues(item.target);
+            }
         }
 
         #endregion
@@ -328,6 +362,17 @@ namespace Necropanda
                 if (item.target == target)
                 {
                     item.status.HitEffect(target, attacker);
+                }
+            }
+        }
+
+        public void SimulateHitStatuses(Character target, Character attacker)
+        {
+            foreach (CombatHelperFunctions.StatusInstance item in statuses)
+            {
+                if (item.target == target)
+                {
+                    item.status.SimulateHitValues(target, attacker);
                 }
             }
         }

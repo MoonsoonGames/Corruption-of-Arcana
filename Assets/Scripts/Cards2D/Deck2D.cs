@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -40,6 +41,7 @@ namespace Necropanda
         #region Cards
 
         CardDrag2D[] cards;
+        public List<E_CardTypes> availableCards;
         public int maxCards = 3;
         public int CurrentCardsLength()
         {
@@ -116,6 +118,9 @@ namespace Necropanda
             //Only fires logic when player is dragging a card into the deck
             if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
+                if (availableCards.Contains(dragManager.draggedCard.GetComponent<Card>().spell.cardType) == false)
+                    return;
+
                 if (cards.Length < maxCards)
                 {
                     //Debug.Log(cards.Length + " / " + maxCards);
@@ -238,6 +243,7 @@ namespace Necropanda
         public void AddCard(CardDrag2D card)
         {
             card.gameObject.transform.SetParent(group.transform);
+            card.gameObject.transform.position = gameObject.transform.position;
             card.deck = this;
             card.GetComponent<Card>().ShowArt(showArt);
 
@@ -271,6 +277,8 @@ namespace Necropanda
                     }
                 }
             }
+
+            PlayCardSound();
         }
 
         /// <summary>
@@ -324,6 +332,11 @@ namespace Necropanda
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
             }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                Debug.Break();
+            }
         }
 
         public void CheckOverlay()
@@ -364,5 +377,22 @@ namespace Necropanda
         }
 
         #endregion
+
+        #region Sound Effects
+
+        [Header("Sound Effects")]
+        public EventReference cardPlacedSound;
+
+        public void PlayCardSound()
+        {
+            RuntimeManager.PlayOneShot(cardPlacedSound);
+        }
+
+        #endregion
+    }
+
+    public enum E_CardTypes
+    {
+        All, Cards, Potions, Bombs, Weapons, Trinkets, None
     }
 }

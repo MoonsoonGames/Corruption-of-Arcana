@@ -15,6 +15,8 @@ namespace Necropanda
     public class EndTurn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Deck2D playerHandDeck; //Hand that player cards are drawn into
+        public Deck2D potionDeck; //Hand that potion cards are drawn into
+        public Spell[] potions;
         Deck2D[] decks;
         public GameObject cardPrefab; //Prefab of the parent card type
         Timeline timeline;
@@ -37,6 +39,19 @@ namespace Necropanda
             endTurnButton.image.color = buttonAvailable;
 
             Invoke("EndTurnButton", 0.1f);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (waitingForStartTurn == false)
+                {
+                    DisableButton();
+                    Debug.Log("End turn success");
+                    EndTurnButton();
+                }
+            }
         }
 
         public void EndTurnButton()
@@ -88,6 +103,8 @@ namespace Necropanda
                 PlayShuffleSound();
             }
 
+            RedrawPotions();
+
             timeline.ActivateTurnModifiers();
 
             foreach (TeamManager manager in teamManagers)
@@ -99,9 +116,33 @@ namespace Necropanda
             Invoke("EnableButton", 2f);
         }
 
+        void RedrawPotions()
+        {
+            potionDeck.RemoveAllCards(false);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (PotionManager.instance.PotionAvailable(potions[i].potionType, potions[i].potionCost))
+                {
+                    GameObject card = Instantiate(cardPrefab, potionDeck.transform) as GameObject;
+                    DrawCard drawCard = card.GetComponent<DrawCard>();
+                    drawCard.draw = false;
+                    drawCard.Setup(potions[i]);
+
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+
+                    //Add the card to the array
+                    potionDeck.AddCard(cardDrag);
+
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
+                }
+            }
+        }
+
         void DisableButton()
         {
-            waitingForStartTurn = false;
+            waitingForStartTurn = true;
             endTurnButton.image.color = buttonUnavailable;
             endTurnButton.interactable = false;
         }
@@ -174,12 +215,62 @@ namespace Necropanda
         #region UI
 
         public List<GameObject> disableUIElements;
+        Dictionary<GameObject, Vector3> disableUIElementsDictionary = new Dictionary<GameObject, Vector3>();
+
+        void SetupDictionary()
+        {
+            Deck2D[] decks = GameObject.FindObjectsOfType<Deck2D>();
+
+            ClearMissing();
+
+            foreach (var deck in decks)
+            {
+                bool duplicate = false;
+                foreach (var item in disableUIElements)
+                {
+                    if (item != null)
+                    {
+                        if (item.GetComponentInChildren<Deck2D>() == deck)
+                        {
+                            Debug.Log("Found copy");
+                            duplicate = true;
+                        }
+                    }
+                }
+
+                if (duplicate == false)
+                    disableUIElements.Add(deck.gameObject);
+            }
+
+            foreach(var item in disableUIElements)
+            {
+                if (!disableUIElementsDictionary.ContainsKey(item))
+                    disableUIElementsDictionary.Add(item, item.transform.position);
+            }
+        }
+
+        void ClearMissing()
+        {
+            List<GameObject> newDisableUIElements = new List<GameObject>();
+
+            foreach (var item in disableUIElements)
+            {
+                if (item != null)
+                {
+                    newDisableUIElements.Add(item);
+                }
+            }
+
+            disableUIElements = newDisableUIElements;
+        }
 
         void SetUIEnabled(bool enable)
         {
-            foreach (var item in disableUIElements)
+            SetupDictionary();
+            foreach (var item in disableUIElementsDictionary)
             {
-                item.SetActive(enable);
+                if (item.Key != null)
+                    item.Key.transform.position = enable ? item.Value : new Vector3(0, -500000000, 0);
             }
         }
 

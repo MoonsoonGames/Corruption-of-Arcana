@@ -16,6 +16,7 @@ namespace Necropanda
         public CharacterStats stats;
         protected TeamManager teamManager; public TeamManager GetManager() { return teamManager; }
         protected CharacterHealth health; public CharacterHealth GetHealth() { return health; }
+        protected StatusManager statusManager; public StatusManager GetStatusManager() { return statusManager; }
 
         [HideInInspector]
         public EnemySpawner spawner; //Unused for the player right now, but it might be used in the future
@@ -24,11 +25,23 @@ namespace Necropanda
 
         protected virtual void Start()
         {
+            SetupReferences();
+
+            SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = stats.characterSprite;
+        }
+
+        [ContextMenu("Setup References")]
+        public virtual void SetupReferences()
+        {
             health = GetComponent<CharacterHealth>();
             deck = GetComponentInChildren<Deck2D>();
             teamManager = GetComponentInParent<TeamManager>();
-            teamManager.Add(this);
+            if (teamManager != null)
+                teamManager.Add(this);
             simulateValues = GetComponentInChildren<SimulateValues>();
+
+            statusManager = GetComponentInChildren<StatusManager>();
         }
 
         #endregion
@@ -137,7 +150,7 @@ namespace Necropanda
                 //Negative Effects
                 case E_Statuses.Banish:
                     banish = apply;
-                    health.ActivateArt(!apply);
+                    health.ActivateArt(!apply, true, E_DamageTypes.Perforation);
                     break;
                 case E_Statuses.Charm:
                     charm = apply;
@@ -218,14 +231,16 @@ namespace Necropanda
 
         #region Simulating Turn
 
-        int damage = 0, healing = 0, shield = 0;
+        Vector2Int dmg = new Vector2Int(0, 0);
+        int shield = 0;
         float highestExecute = 0;
         SimulateValues simulateValues;
 
-        public void SimulateValues(int newDamage, int newHealing, int newShield, float newExecute)
+        public void SimulateValues(Vector2Int newDmg, int newShield, float newExecute)
         {
-            damage += newDamage;
-            healing += newHealing;
+            if (health.dying) return;
+
+            dmg += newDmg;
             shield += newShield;
 
             //Save only the highest execute value
@@ -239,26 +254,16 @@ namespace Necropanda
 
         void PreviewValues()
         {
-            bool kills = damage >= health.GetHealth() + healing + shield ||
-                        health.GetHealthPercentageFromDamage(damage - shield) < highestExecute;
-            
-            int damagePreview = damage;
-            int healingPreview = healing;
-            int shieldPreview = shield;
+            int mindmg = dmg.x < 0 ? Mathf.Abs(dmg.x) : 0;
+            bool kills = mindmg >= health.GetHealth() + shield ||
+                        health.GetHealthPercentageFromDamage(mindmg - shield) < highestExecute;
 
-            if (kills)
-            {
-                damagePreview = Mathf.Abs(Mathf.Clamp(damage, 0, health.GetHealth() - damage));
-                healingPreview = 0;
-                shieldPreview = 0;
-            }
-
-            simulateValues.DisplayValues(damagePreview, healingPreview, shieldPreview, kills);
+            simulateValues.DisplayValues(dmg, shield, kills);
         }
 
         public void ResetValues()
         {
-            damage = 0; healing = 0; shield = 0; highestExecute = 0;
+            dmg.x = 0; dmg.y = 0; shield = 0; highestExecute = 0;
             PreviewValues();
         }
 

@@ -23,14 +23,21 @@ namespace Necropanda
         int currentTarget = 0;
         float speed = 0;
 
-        public void Setup(Color color, Object effect)
+        public void Setup(Color color, Object impactEffect, Object projectileEffect)
         {
             images = GetComponentsInChildren<Image>();
             trailRenderers = GetComponentsInChildren<TrailRenderer>();
 
             foreach (var item in images)
             {
-                item.color = color;
+                if (projectileEffect != null)
+                {
+                    item.color = new Color(color.r, color.g, color.b, 0);
+
+                    Instantiate(projectileEffect, item.gameObject.transform);
+                }
+                else
+                    item.color = color;
             }
 
             foreach (var item in trailRenderers)
@@ -38,7 +45,7 @@ namespace Necropanda
                 item.startColor = color;
             }
 
-            impactEffect = effect;
+            this.impactEffect = impactEffect;
         }
 
         public void MoveToPositions(float newSpeed, Vector2[] newMovePositions)

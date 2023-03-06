@@ -18,7 +18,7 @@ namespace Necropanda
         public void Setup(CombatHelperFunctions.SpellInstance newspell)
         {
             spell = newspell.spell;
-            title = newspell.caster.stats.characterName;
+            title = newspell.spell.spellName + "(" + newspell.caster.stats.characterName + " -> " + newspell.target.stats.characterName + ")";
 
             description = newspell.caster.stats.characterName + " is casting " + newspell.spell.spellName + " on " + newspell.target.stats.characterName + " (" + newspell.spell.speed + ")";
 

@@ -102,5 +102,22 @@ namespace Necropanda
                 outTeam = playerTeamManager;
             return outTeam;
         }
+
+        public List<Character> GetAllCharacters()
+        {
+            List<Character> list = new List<Character>();
+
+            foreach (var item in playerTeamManager.team)
+            {
+                list.Add(item);
+            }
+
+            foreach (var item in enemyTeamManager.team)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
     }
 }
