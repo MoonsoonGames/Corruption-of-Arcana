@@ -314,7 +314,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1165
+  Length: 1075
 --- !u!114 &-8053159817058315108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,37 +587,6 @@ MonoBehaviour:
   - Wood
   - Water
   - Crystal
-  Exists: 1
---- !u!114 &-7214770631604761421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Thoth Music
-  m_EditorClassIdentifier: 
-  Name: Thoth Music
-  StudioPath: parameter:/Thoth Music
-  Min: 0
-  Max: 6
-  Default: 0
-  ID:
-    data1: 2062682416
-    data2: 3705960116
-  Type: 2
-  IsGlobal: 1
-  Labels:
-  - Entrance
-  - Village
-  - Village Expanded
-  - Fina lopp
-  - Enemy Close
-  - Battle Music
-  - Battle End
   Exists: 1
 --- !u!114 &-7174984059870051091
 MonoBehaviour:
@@ -961,7 +930,7 @@ MonoBehaviour:
     data1: 2062682416
     data2: 3705960116
   Type: 2
-  IsGlobal: 1
+  IsGlobal: 0
   Labels:
   - Entrance
   - Village
@@ -1290,6 +1259,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4207797816128848275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Card Placed/Card placed down
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Card Placed/Card placed down
+  Guid:
+    Data1: 971672856
+    Data2: 1135820981
+    Data3: -1808950359
+    Data4: 1025540801
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 437
 --- !u!114 &-4183867603249787024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1441,7 +1437,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638125859161013529
+  lastModified: 638136235782764815
   FileSizes: []
   Exists: 1
 --- !u!114 &-3385272441961079213
@@ -1686,7 +1682,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 1281
 --- !u!114 &-2666398774589749766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,10 +1986,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638125859161023508
+  lastModified: 638136235782764815
   FileSizes:
   - Name: 
-    Value: 4212
+    Value: 4278
   Exists: 1
 --- !u!114 &-1825881764341196921
 MonoBehaviour:
@@ -2326,14 +2322,14 @@ MonoBehaviour:
   - {fileID: -5046646585857783537}
   - {fileID: -7983490096734386687}
   - {fileID: -2666398774589749766}
+  - {fileID: -4207797816128848275}
   EditorParameters:
   - {fileID: -8572358270947847299}
-  - {fileID: -7214770631604761421}
   MasterBanks:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638125859161023508
+  cacheTime: 638136235782764815
   cacheVersion: 131591
 --- !u!114 &119436515826132346
 MonoBehaviour:
@@ -3549,7 +3545,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 1281
 --- !u!114 &4183737299756386549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4361,7 +4357,7 @@ MonoBehaviour:
   - {fileID: -8373017722276361879}
   MinDistance: 1
   MaxDistance: 20
-  Length: 169083
+  Length: 195750
 --- !u!114 &6744775575514386292
 MonoBehaviour:
   m_ObjectHideFlags: 0
