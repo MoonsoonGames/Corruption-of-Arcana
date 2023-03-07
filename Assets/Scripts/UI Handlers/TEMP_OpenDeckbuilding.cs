@@ -13,6 +13,7 @@ namespace Necropanda
     {
         public GameObject deckbuildingMenu;
         public GameObject weaponsMenu;
+        public GetWeapons getWeapons;
         GetAvailableCards getAvailableCards;
         BuildDeck buildDeck;
 
@@ -57,6 +58,8 @@ namespace Necropanda
                 menu.SetActive(true);
                 if (menu == deckbuildingMenu)
                     getAvailableCards.LoadCards();
+                else if (menu == weaponsMenu)
+                    getWeapons.OpenEquipment();
             }
             else
             {
