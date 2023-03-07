@@ -25,7 +25,12 @@ namespace Necropanda
             if (objects.Length > 0)
             {
                 foreach (MoveObject level in objects)
-                    level.AdjustPosition();
+                {
+                    if (setSpecificPos)
+                        level.AdjustPosition(targetPos);
+                    else
+                        level.AdjustPosition();
+                }
             }
             else
             {
@@ -33,5 +38,9 @@ namespace Necropanda
                 Debug.LogWarning("No object components have been set");
             }
         }
+
+        public bool setSpecificPos = false;
+
+        public Vector3 targetPos;
     }
 }
