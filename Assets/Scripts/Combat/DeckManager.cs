@@ -41,6 +41,8 @@ namespace Necropanda
         public List<Spell> collection;
 
         public Weapon weapon;
+        public List<Weapon> weapons;
+
         public List<Spell> majorArcana;
         public List<Spell> playerDeck;
 
@@ -125,7 +127,7 @@ namespace Necropanda
         /// <param name="start">Determines whether the cards appear at the start of the deck (meaning they get drawn first) or the end</param>
         public void DiscardPileToDeck(bool start, bool removeDiscardOnCast)
         {
-            foreach(Spell spell in discardPile)
+            foreach (Spell spell in discardPile)
             {
                 if (removeDiscardOnCast) break;
 
