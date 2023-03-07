@@ -35,6 +35,7 @@ namespace Necropanda
 
         public void SetDestination(Vector3 position)
         {
+            Debug.Log("moving to " + position);
             StartCoroutine(ISetDestination(position, defaultDelay));
         }
 

@@ -26,6 +26,7 @@ namespace Necropanda
             if (weapon.image != null) 
             { 
                 image.sprite = weapon.image;
+                image.preserveAspect = true;
                 text.gameObject.SetActive(false);
             }
             else { text.text = weapon.weaponName; }

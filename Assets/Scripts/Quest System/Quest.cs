@@ -83,6 +83,7 @@ namespace Necropanda
             currentProgress = 0;
 
             EnableNextObjective();
+            EnableAllObjectives();
 
             UpdateQuestInfo();
         }
@@ -121,6 +122,19 @@ namespace Necropanda
                 if (linear)
                 {
                     subQuests[currentProgress].StartQuest(questGiver, this);
+                }
+            }
+
+            UpdateQuestInfo();
+        }
+
+        void EnableAllObjectives()
+        {
+            if (!linear)
+            {
+                for (int i = 0; i < subQuests.Length; i++)
+                {
+                    subQuests[i].StartQuest(questGiver, this);
                 }
             }
 

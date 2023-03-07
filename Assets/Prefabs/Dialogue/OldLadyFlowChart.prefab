@@ -24,10 +24,6 @@ GameObject:
   - component: {fileID: 891036137877174698}
   - component: {fileID: 3453296738135995955}
   - component: {fileID: 1178138504115915656}
-  - component: {fileID: 1178138504115915737}
-  - component: {fileID: 1178138504115915736}
-  - component: {fileID: 1178138504115915743}
-  - component: {fileID: 1178138504115915742}
   - component: {fileID: 7345212209067629439}
   - component: {fileID: 7345212209067629438}
   - component: {fileID: 7345212209067629436}
@@ -89,10 +85,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 8198713351533339856}
-  selectedCommands:
-  - {fileID: 0}
+  selectedBlocks: []
+  selectedCommands: []
   variables:
   - {fileID: 3739763948398115335}
   description: 
@@ -1069,83 +1063,6 @@ MonoBehaviour:
     booleanRef: {fileID: 0}
     booleanVal: 0
   targetGameObjectOLD: {fileID: 0}
---- !u!114 &1178138504115915737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8336302936447304709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 57
-  indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  activeState:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  targetGameObjectOLD: {fileID: 0}
---- !u!114 &1178138504115915736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8336302936447304709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff5d850a887844fe87ae7d366d3ab5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 1178138504115915743}
-  suppressBlockAutoSelect: 0
---- !u!114 &1178138504115915743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8336302936447304709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeRect:
-    serializedVersion: 2
-    x: 359.33646
-    y: 117.00719
-    width: 107.81247
-    height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
-  itemId: 56
-  blockName: New Block
-  description: Camera Stop
-  eventHandler: {fileID: 1178138504115915736}
-  commandList:
-  - {fileID: 1178138504115915737}
-  - {fileID: 1178138504115915742}
-  suppressAllAutoSelections: 0
---- !u!114 &1178138504115915742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8336302936447304709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cb9773f2ca04e2bbf7a68ccfc23267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 58
-  indentLevel: 0
 --- !u!114 &7345212209067629439
 MonoBehaviour:
   m_ObjectHideFlags: 0

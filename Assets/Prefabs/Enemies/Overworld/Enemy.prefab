@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 5241160086420813956}
   - component: {fileID: -9213519895743310614}
   - component: {fileID: 7910239333138729321}
+  - component: {fileID: -3384882096750805312}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -544,11 +545,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d352368085911b948ab1f97ca8e655d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   timeToPatrol: 30
   patrol: 1
   originalPos: {x: 0, y: 0, z: 0}
   patrolPoints: []
-  patrolPointOffset: 2
 --- !u!95 &5241160086420813956
 Animator:
   serializedVersion: 4
@@ -601,6 +602,35 @@ MonoBehaviour:
   wood: {fileID: 6441297445223667176, guid: ef7c953fee4c76f408e245e605681566, type: 3}
   crystal: {fileID: 6913681875276513784, guid: 0edfb41e832d7df43898b17b841e9bb8, type: 3}
   water: {fileID: 6913681875276513784, guid: c5385e7b61a43a24c9d40eb5b3985085, type: 3}
+--- !u!114 &-3384882096750805312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510964414938246700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  TriggerEvent: 0
 --- !u!1001 &3332651844201392422
 PrefabInstance:
   m_ObjectHideFlags: 0

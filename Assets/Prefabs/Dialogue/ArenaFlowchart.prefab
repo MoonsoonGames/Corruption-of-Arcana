@@ -55,8 +55,6 @@ GameObject:
   - component: {fileID: 8552963138132767547}
   - component: {fileID: 412774912178100730}
   - component: {fileID: 8070228240240789154}
-  - component: {fileID: 4118169777282848926}
-  - component: {fileID: 655493646873387062}
   m_Layer: 0
   m_Name: ArenaFlowchart
   m_TagString: Untagged
@@ -92,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -608.2049, y: -38.287712}
+  scrollPos: {x: -415.79993, y: -38.287712}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 598
@@ -106,7 +104,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 8935538383996192766}
   selectedCommands:
-  - {fileID: 4118169777282848926}
+  - {fileID: 0}
   variables:
   - {fileID: 4088796174892332691}
   description: 
@@ -882,8 +880,7 @@ MonoBehaviour:
   - {fileID: 5074138726088072957}
   - {fileID: 8552963138132767547}
   - {fileID: 7479566086128322351}
-  - {fileID: 4118169777282848926}
-  - {fileID: 655493646873387062}
+  - {fileID: 0}
   - {fileID: 8282673212147308228}
   suppressAllAutoSelections: 0
 --- !u!114 &5074138726088072957
@@ -1553,7 +1550,7 @@ MonoBehaviour:
       colorValue: {r: 0, g: 0, b: 0, a: 0}
       gameObjectValue: {fileID: 0}
       materialValue: {fileID: 0}
-      objectValue: {fileID: 11400000, guid: bfab7f55b89e1be47aeac3891e0f10b3, type: 2}
+      objectValue: {fileID: 11400000, guid: 9a0dc074505f92149a75fd722f7b4563, type: 2}
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
@@ -1788,130 +1785,6 @@ MonoBehaviour:
   targetMethod: OpenArena
   targetMethodText: 'OpenArena (): Void'
   methodParameters: []
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Void
-  showInherited: 0
-  callMode: 0
---- !u!114 &4118169777282848926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193224249890731755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 171
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 193224249890731755}
-  targetComponentAssemblyName: Necropanda.ProgressQuest, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: ProgressQuest
-  targetMethod: StartQuest
-  targetMethodText: 'StartQuest (Quest, String): Void'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: Necropanda.Quest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: Necropanda.Quest
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 11400000, guid: e354be13b3219514996149ec5653662d, type: 2}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  - objValue:
-      typeAssemblyname: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      typeFullname: System.String
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: Arena Custodian
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  saveReturnValue: 0
-  returnValueVariableKey: 
-  returnValueType: System.Void
-  showInherited: 0
-  callMode: 0
---- !u!114 &655493646873387062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193224249890731755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 172
-  indentLevel: 0
-  description: 
-  targetObject: {fileID: 193224249890731755}
-  targetComponentAssemblyName: Necropanda.ProgressQuest, Assembly-CSharp, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  targetComponentFullname: UnityEngine.Component[]
-  targetComponentText: ProgressQuest
-  targetMethod: StartQuest
-  targetMethodText: 'StartQuest (Quest, String): Void'
-  methodParameters:
-  - objValue:
-      typeAssemblyname: Necropanda.Quest, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      typeFullname: Necropanda.Quest
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: 
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 11400000, guid: 912ebb24b3b87404b9108ef021f6ea84, type: 2}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
-  - objValue:
-      typeAssemblyname: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      typeFullname: System.String
-      intValue: 0
-      boolValue: 0
-      floatValue: 0
-      stringValue: Arena Custodian
-      colorValue: {r: 0, g: 0, b: 0, a: 0}
-      gameObjectValue: {fileID: 0}
-      materialValue: {fileID: 0}
-      objectValue: {fileID: 0}
-      spriteValue: {fileID: 0}
-      textureValue: {fileID: 0}
-      vector2Value: {x: 0, y: 0}
-      vector3Value: {x: 0, y: 0, z: 0}
-    variableKey: 
   saveReturnValue: 0
   returnValueVariableKey: 
   returnValueType: System.Void

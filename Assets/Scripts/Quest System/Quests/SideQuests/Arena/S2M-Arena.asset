@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdeda0f4898d3b644a67747e810ed059, type: 3}
   m_Name: S2M-Arena
   m_EditorClassIdentifier: 
-  questName: Arena Tutorial
+  questName: Champion of the Arena
   questNumber: 11
   questDescription: A statue in Thoth has challenged me to fight in an arena to claim
     glory
   state: 0
   currentProgress: -1
-  maxProgress: 1
+  maxProgress: 3
   parentQuest: {fileID: 0}
-  subQuests: []
+  subQuests:
+  - {fileID: 11400000, guid: 9a0dc074505f92149a75fd722f7b4563, type: 2}
+  - {fileID: 11400000, guid: f9eb10df4a503b8439724ca32c77c1d8, type: 2}
+  - {fileID: 11400000, guid: 1f0e4da275bfe474c93c02adce236600, type: 2}
   linear: 1

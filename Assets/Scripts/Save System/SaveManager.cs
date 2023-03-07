@@ -11,6 +11,9 @@ namespace Necropanda
 {
     public class SaveManager : MonoBehaviour
     {
+        //C:\Users\as243879\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
+        //C:\Users\mr232432\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
+
         #region Singleton
         //Code from last year
 
@@ -34,7 +37,7 @@ namespace Necropanda
         #endregion
 
         public delegate void Delegate();
-        public Delegate saveAllData, saveAllBaseData, loadAllData, loadAllBaseData;
+        public Delegate saveAllData, saveAllBaseData, overideAllBaseData, loadAllData, loadAllBaseData;
 
         private void Start()
         {
@@ -49,6 +52,11 @@ namespace Necropanda
         public void SaveAllBaseData()
         {
             saveAllBaseData();
+        }
+
+        public void OverideAllBaseData()
+        {
+            overideAllBaseData();
         }
 
         public void LoadAllData()
