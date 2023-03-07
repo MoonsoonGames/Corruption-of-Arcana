@@ -56,6 +56,16 @@ namespace Necropanda
             }
         }
 
+        public void AdjustPosition(int newPos)
+        {
+            //Set desired position of the object to the first value
+            desiredPos = positions[newPos];
+
+            moving = true;
+
+            currentIndex = newPos + 1;
+        }
+
         private void Update()
         {
             if (moving)

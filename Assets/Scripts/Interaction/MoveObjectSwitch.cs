@@ -26,7 +26,9 @@ namespace Necropanda
             {
                 foreach (MoveObject level in objects)
                 {
-                    if (setSpecificPos)
+                    if (setSpecificPosInt)
+                        level.AdjustPosition(positionCount);
+                    else if (setSpecificPosVector3)
                         level.AdjustPosition(targetPos);
                     else
                         level.AdjustPosition();
@@ -39,8 +41,9 @@ namespace Necropanda
             }
         }
 
-        public bool setSpecificPos = false;
-
+        public bool setSpecificPosInt = false;
+        public int positionCount;
+        public bool setSpecificPosVector3 = false;
         public Vector3 targetPos;
     }
 }
