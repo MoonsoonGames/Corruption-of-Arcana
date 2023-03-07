@@ -11,6 +11,9 @@ namespace Necropanda
 {
     public class QuestDataManager : MonoBehaviour
     {
+        //C:\Users\as243879\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
+        //C:\Users\mr232432\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
+
         #region Singleton
         //Code from last year
 
