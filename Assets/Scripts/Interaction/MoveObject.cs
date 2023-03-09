@@ -11,31 +11,59 @@ namespace Necropanda
 {
     public class MoveObject : MonoBehaviour
     {
-        public List<Vector3> positions;
+        public Vector3[] positions;
         public float scaleSpeed = 0.7f;
         public float accuracyThreshold = 0.2f;
 
         bool moving = false;
         Vector3 desiredPos;
 
+        int currentIndex = 0;
+
         public void AdjustPosition()
         {
-            if (positions.Count <= 0)
+            if (positions.Length <= 0)
             {
                 //There are positions set
                 Debug.LogWarning("No positions have been set");
                 return;
             }
 
-            //Set desired position of the object to the first value
-            desiredPos = positions[0];
+            if (currentIndex >= positions.Length)
+                currentIndex = 0;
 
-            //Dequeue and enqueue desired pos
-            positions.RemoveAt(0);
-            positions.Add(desiredPos);
+            //Set desired position of the object to the first value
+            desiredPos = positions[currentIndex];
+            currentIndex++;
 
             SoundFX(true);
             moving = true;
+        }
+
+        public void AdjustPosition(Vector3 newPos)
+        {
+            //Set desired position of the object to the first value
+            desiredPos = newPos;
+
+            moving = true;
+
+            for (int i = 0; i < positions.Length; i++)
+            {
+                if (newPos == positions[i])
+                {
+                    currentIndex = i + 1;
+                }
+            }
+        }
+
+        public void AdjustPosition(int newPos)
+        {
+            //Set desired position of the object to the first value
+            desiredPos = positions[newPos];
+
+            moving = true;
+
+            currentIndex = newPos + 1;
         }
 
         private void Update()
