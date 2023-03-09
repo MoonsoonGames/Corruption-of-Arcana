@@ -22,6 +22,7 @@ namespace Necropanda.Utils.Console.Commands
             DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
             developerConsoleBehaviour.UpdateOutputMessage();
 
+            Debugger.Debugger.instance.SendDebug($"Set god mode to {GodMode}");
             return true;
         }
     }

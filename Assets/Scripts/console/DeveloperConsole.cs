@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Necropanda.Utils.Console.Commands;
+using Necropanda.Utils.Debugger;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
@@ -15,7 +16,7 @@ namespace Necropanda.Utils.Console
     {
         // Readonly variables that aren't to change.
         private readonly string prefix;
-        private readonly IEnumerable<IConsoleCommand> commands;
+        public readonly IEnumerable<IConsoleCommand> commands;
 
         // Set up the prefix and commands
         public DeveloperConsole(string prefix, IEnumerable<IConsoleCommand> commands)
@@ -33,10 +34,10 @@ namespace Necropanda.Utils.Console
         public void ProcessCommand(string inputValue)
         {
             // If the passed in value doesn't start with the prefix, do nothing.
-            if (!inputValue.StartsWith(prefix)) { return;}
+            if (!inputValue.StartsWith(prefix)) { return; }
 
             // Remove the prefix
-            inputValue=inputValue.Remove(0, prefix.Length);
+            inputValue = inputValue.Remove(0, prefix.Length);
 
             // Split up the input at each space. Creates an array.
             string[] inputSplit = inputValue.Split(' ');
@@ -57,11 +58,12 @@ namespace Necropanda.Utils.Console
         /// <param name="args">Arguemnts that will be used.</param>
         public void ProcessCommand(string commandInput, string[] args)
         {
-            foreach(var command in commands)
+            foreach (var command in commands)
             {
                 // Check to make sure that there's a direct match regardless of case sensitivity.
                 if (!commandInput.Equals(command.CommandWord, System.StringComparison.OrdinalIgnoreCase))
                 {
+                    Debug.LogWarning($"No Command found with \"{commandInput}\" phrase!");
                     continue;
                 }
 
