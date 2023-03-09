@@ -21,6 +21,7 @@ namespace Necropanda.AI
 
         public CharacterStats enemyStats;
         public bool boss;
+        public bool endCombatIfKilled = false;
 
         //state variables
         [Header("AI State Variables")]

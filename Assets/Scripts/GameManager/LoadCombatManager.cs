@@ -54,6 +54,7 @@ namespace Necropanda
 
         public EnemyQueue queue;
         public List<CharacterStats> enemies;
+        public List<CharacterStats> enemiesEndCombat;
         public List<string> enemyIDs;
         public Sprite backdrop;
         bool loading = false;
@@ -74,15 +75,13 @@ namespace Necropanda
             {
                 if (enemy.GetActive() && Vector3.Distance(player.transform.position, enemy.transform.position) < combatRadius)
                 {
-                    if (enemy.boss)
+                    //If enemy is a boss, save them in the first space
+                    enemies.Insert(enemy.boss ? 0 : enemies.Count, enemy.enemyStats);
+
+                    if (enemy.endCombatIfKilled)
                     {
                         //If enemy is a boss, save them in the first space
-                        enemies.Insert(0, enemy.enemyStats);
-                    }
-                    else
-                    {
-                        //Else append them at the end of the list
-                        enemies.Insert(enemies.Count, enemy.enemyStats);
+                        enemiesEndCombat.Insert(enemy.boss ? 0 : enemiesEndCombat.Count, enemy.enemyStats);
                     }
 
                     if (enemy.GetComponentInChildren<LoadCombat>().progressQuests.Length > 0)

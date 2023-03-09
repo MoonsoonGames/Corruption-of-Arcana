@@ -20224,6 +20224,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75c4d6d64107db841bc74a378f17ea7b, type: 3}
+--- !u!114 &374046546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2871166755719551499, guid: 6184ce2a7e464e9498f71eeb6defa13a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1540057006973463994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871166755719551497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &374416250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53713,7 +53725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 1152471820}
+  selectedFlowchart: {fileID: 1540057006973463996}
 --- !u!4 &1088062023
 Transform:
   m_ObjectHideFlags: 1
@@ -57014,18 +57026,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 050fb9e6e72f442b3b883da8a965bdeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1152471820 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1226480020348845434, guid: 6184ce2a7e464e9498f71eeb6defa13a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1540057006973463994}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152471774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1155112163
@@ -72880,15 +72880,67 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[0].z
       value: 218.38
       objectReference: {fileID: 0}
+    - target: {fileID: 6906302413905249208, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7298192787311657921, guid: dd58bc28db5f18a4f9960f228dc6a689,
         type: 3}
       propertyPath: m_Name
       value: OV_BloatedRat
       objectReference: {fileID: 0}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.data[0].quest
+      value: 
+      objectReference: {fileID: 11400000, guid: 736e21c76e4a8284aa39f2d258e185e1,
+        type: 2}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].quest
+      value: 
+      objectReference: {fileID: 11400000, guid: 736e21c76e4a8284aa39f2d258e185e1,
+        type: 2}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.data[0].states.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.data[0].states.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647932399037264222, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: requireStates.Array.data[1].states.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8762746955952038152, guid: dd58bc28db5f18a4f9960f228dc6a689,
         type: 3}
       propertyPath: m_Radius
       value: 9.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805849177099797479, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: endCombatIfKilled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113824107937626155, guid: dd58bc28db5f18a4f9960f228dc6a689,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd58bc28db5f18a4f9960f228dc6a689, type: 3}
@@ -72930,6 +72982,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1519272552}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1519272557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6906302413905249208, guid: dd58bc28db5f18a4f9960f228dc6a689,
+    type: 3}
+  m_PrefabInstance: {fileID: 1519272552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1519272558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519272556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkOnStart: 1
+  requireStates:
+  - quest: {fileID: 11400000, guid: 736e21c76e4a8284aa39f2d258e185e1, type: 2}
+    invert: 0
+    states: 01000000
+  operation: 1
 --- !u!4 &1520131057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3936395391679126905, guid: 49e0071f07417474e97da52883d23689,
@@ -103624,6 +103700,21 @@ PrefabInstance:
       propertyPath: _targetGameObject.gameObjectVal
       value: 
       objectReference: {fileID: 357552242}
+    - target: {fileID: 7569893317634318498, guid: 6184ce2a7e464e9498f71eeb6defa13a,
+        type: 3}
+      propertyPath: commandList.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7569893317634318498, guid: 6184ce2a7e464e9498f71eeb6defa13a,
+        type: 3}
+      propertyPath: commandList.Array.data[8]
+      value: 
+      objectReference: {fileID: 2871166755719551554}
+    - target: {fileID: 7569893317634318498, guid: 6184ce2a7e464e9498f71eeb6defa13a,
+        type: 3}
+      propertyPath: commandList.Array.data[9]
+      value: 
+      objectReference: {fileID: 374046546}
     - target: {fileID: 7712900114888568009, guid: 6184ce2a7e464e9498f71eeb6defa13a,
         type: 3}
       propertyPath: nodeRect.y
@@ -103712,6 +103803,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1540057006973463994}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1540057006973463996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2099159528909683275, guid: 6184ce2a7e464e9498f71eeb6defa13a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1540057006973463994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871166755719551497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1540057006973463997 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4810332179353266007, guid: 6184ce2a7e464e9498f71eeb6defa13a,
@@ -103971,7 +104074,7 @@ MonoBehaviour:
   targetGameObjectOLD: {fileID: 0}
 --- !u!114 &2871166755719551553
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -103986,6 +104089,27 @@ MonoBehaviour:
   _targetGameObject:
     gameObjectRef: {fileID: 0}
     gameObjectVal: {fileID: 1453081561}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &2871166755719551554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871166755719551497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 122
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 1519272557}
   activeState:
     booleanRef: {fileID: 0}
     booleanVal: 1
