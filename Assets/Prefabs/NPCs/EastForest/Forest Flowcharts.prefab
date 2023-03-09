@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3117017487258621163}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4352640336188191224}
   - component: {fileID: 6083282081578978240}
   m_Layer: 0
-  m_Name: KnightFlowchart
+  m_Name: SergeantFlowchart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 5503167887984152182}
+  - {fileID: 4506915744106687274}
   selectedCommands: []
   variables:
   - {fileID: 1044499953693528225}
@@ -1514,6 +1514,7 @@ GameObject:
   - component: {fileID: 2679869054102769930}
   - component: {fileID: 6628282279161516048}
   - component: {fileID: 3044022281568276921}
+  - component: {fileID: 66413753}
   m_Layer: 0
   m_Name: ScoutFlowchart
   m_TagString: Untagged
@@ -1561,7 +1562,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 8951552808746068838}
+  - {fileID: 1988291286167111772}
   selectedCommands: []
   variables:
   - {fileID: 8342345191019146444}
@@ -2180,6 +2181,7 @@ MonoBehaviour:
   - {fileID: 2679869054102769930}
   - {fileID: 5693511964422925321}
   - {fileID: 6628282279161516048}
+  - {fileID: 66413753}
   - {fileID: 6330985081417603949}
   - {fileID: 3265210412709266303}
   suppressAllAutoSelections: 0
@@ -2890,7 +2892,7 @@ MonoBehaviour:
       colorValue: {r: 0, g: 0, b: 0, a: 0}
       gameObjectValue: {fileID: 0}
       materialValue: {fileID: 0}
-      objectValue: {fileID: 11400000, guid: 5929b10bb159fb04d82816c049fcaac5, type: 2}
+      objectValue: {fileID: 11400000, guid: 5d1fb1b421082ba49b991fdd69d4c917, type: 2}
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
@@ -3141,7 +3143,7 @@ MonoBehaviour:
       colorValue: {r: 0, g: 0, b: 0, a: 0}
       gameObjectValue: {fileID: 0}
       materialValue: {fileID: 0}
-      objectValue: {fileID: 11400000, guid: d58d605cf73e751458dfa9054b826547, type: 2}
+      objectValue: {fileID: 11400000, guid: 5929b10bb159fb04d82816c049fcaac5, type: 2}
       spriteValue: {fileID: 0}
       textureValue: {fileID: 0}
       vector2Value: {x: 0, y: 0}
@@ -3329,6 +3331,27 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &66413753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6201517325634075250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 129
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 0}
+  activeState:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  targetGameObjectOLD: {fileID: 0}
 --- !u!1001 &9155592516745441928
 PrefabInstance:
   m_ObjectHideFlags: 0
