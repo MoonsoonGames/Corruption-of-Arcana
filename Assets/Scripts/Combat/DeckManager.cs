@@ -41,6 +41,8 @@ namespace Necropanda
         public List<Spell> collection;
 
         public Weapon weapon;
+        public List<Weapon> unlockedWeapons;
+
         public List<Spell> majorArcana;
         public List<Spell> playerDeck;
 
