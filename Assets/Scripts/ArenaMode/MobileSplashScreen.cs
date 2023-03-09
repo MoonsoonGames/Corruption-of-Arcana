@@ -24,7 +24,6 @@ namespace Necropanda
 
         public void Play()
         {
-            SaveManager.instance.LoadAllBaseData();
             SaveManager.instance.SaveAllData();
             arenaQuest.StartQuest("Arena Custiodian", null);
             firstObjective.QuestProgress();
