@@ -19,13 +19,17 @@ namespace Necropanda
         public Image image;
         public TextMeshProUGUI text;
 
-        private void OnEnable()
+        public void Setup(Weapon newWeapon, SelectWeapon newSelectWeapon)
         {
+            weapon = newWeapon;
+            selectWeapon = newSelectWeapon;
+
             if (weapon == null) { return; }
 
             if (weapon.image != null) 
             { 
                 image.sprite = weapon.image;
+                image.preserveAspect = true;
                 text.gameObject.SetActive(false);
             }
             else { text.text = weapon.weaponName; }

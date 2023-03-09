@@ -33,6 +33,8 @@ namespace Necropanda
 
         public void SaveCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
+            return;
+
             if (spellRefTable == null) { return; }
             Debug.Log("Saving Cards");
 
@@ -53,15 +55,17 @@ namespace Necropanda
                 equippedSpellsSaved.Add(reference);
             }
 
-            GetComponentInChildren<SavingLoading>().Save();
+            //GetComponentInChildren<SavingLoading>().Save();
         }
 
         public void LoadCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
+            return;
+
             List<Spell> newCollection = new List<Spell>();
             List<Spell> newEquipped = new List<Spell>();
 
-            GetComponentInChildren<SavingLoading>().Load();
+            //GetComponentInChildren<SavingLoading>().Load();
 
             if (spellRefTable == null) { return; }
             Debug.Log("Loading Cards");

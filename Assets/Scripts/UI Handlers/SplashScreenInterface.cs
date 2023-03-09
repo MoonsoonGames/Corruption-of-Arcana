@@ -13,13 +13,13 @@ namespace Necropanda.Interfaces
 
         private void Start()
         {
-            QuestDataManager.instance.SaveBaseQuestData();
+            SaveManager.instance.SaveAllBaseData();
         }
 
         public void NewGame()
         {
-            QuestDataManager.instance.LoadBaseQuestData();
-            QuestDataManager.instance.SaveQuestData();
+            SaveManager.instance.LoadAllBaseData();
+            SaveManager.instance.SaveAllData();
             //Reset loadsettings/progress
             LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
@@ -36,7 +36,7 @@ namespace Necropanda.Interfaces
             //set load settings/progress
             //load game
 
-            QuestDataManager.instance.LoadQuestData();
+            SaveManager.instance.LoadAllData();
             //Reset loadsettings/progress
             LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game

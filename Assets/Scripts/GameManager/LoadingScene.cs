@@ -62,7 +62,7 @@ namespace Necropanda
                 SceneBackdrops.instance.SetBackdrop();
             }
 
-            QuestDataManager.instance.SaveQuestData();
+            SaveManager.instance.SaveAllData();
 
             //Save current player position if applicable
             Time.timeScale = 1;
@@ -79,7 +79,7 @@ namespace Necropanda
 
         public void SceneLoaded()
         {
-            QuestDataManager.instance.LoadQuestData();
+            SaveManager.instance.LoadAllData();
         }
     }
 }

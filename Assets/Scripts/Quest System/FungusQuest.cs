@@ -19,5 +19,19 @@ namespace Necropanda
             if (flowchart != null)
                 flowchart.SetIntegerVariable("QuestState", quest.currentProgress);
         }
+
+        public void SetMouseActive(bool active)
+        {
+            if (active)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
     }
 }

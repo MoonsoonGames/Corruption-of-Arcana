@@ -9,14 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4415307684541209905}
-  - component: {fileID: 4415307684541209904}
   - component: {fileID: 5181202587678652608}
   - component: {fileID: 7335189887903770136}
   - component: {fileID: 381482427967027085}
   - component: {fileID: 6265937370777209544}
   - component: {fileID: 747937194218677508}
   - component: {fileID: 370352225201231436}
-  - component: {fileID: 102021436237786214}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,20 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4415307684541209904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4415307684541209907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c55e01062d71804e922f867b7da0288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadLastPos: 0
-  navScene: 0
 --- !u!114 &5181202587678652608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +110,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7337a5103a10c41429dc6b18a599ce35, type: 2}
   - {fileID: 11400000, guid: 1813970156e34b847a9ecc1d0fdc38f3, type: 2}
   weapon: {fileID: 11400000, guid: 6f637ba1ec9613744afbbde0e259e161, type: 2}
+  unlockedWeapons:
+  - {fileID: 11400000, guid: 6f637ba1ec9613744afbbde0e259e161, type: 2}
+  - {fileID: 11400000, guid: 6ba9f426d6173a847853875a11213ea7, type: 2}
+  - {fileID: 11400000, guid: dc5977c197edf9c47ae1117781efa072, type: 2}
+  - {fileID: 11400000, guid: 18b1425dee8223a439a328563aadf3dc, type: 2}
+  - {fileID: 11400000, guid: b3031756185baca4c9e08b11609ff046, type: 2}
+  - {fileID: 11400000, guid: b9f218c6825c0f746ab03bcbe1c30819, type: 2}
   majorArcana: []
   playerDeck: []
   playedCards: []
@@ -194,21 +185,6 @@ MonoBehaviour:
   haste: 1
   fortitude: 2
   poison: 1
---- !u!114 &102021436237786214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4415307684541209907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d893b2f8e9bbb349a562c9f75c011a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questsToSave:
-  - {fileID: 11400000, guid: f87b483580c5c8241958d78036d7b9b2, type: 2}
-  - {fileID: 11400000, guid: 0fcecc14f7785ec41aba59ec4b0657f6, type: 2}
 --- !u!1 &8296228320225068966
 GameObject:
   m_ObjectHideFlags: 0
