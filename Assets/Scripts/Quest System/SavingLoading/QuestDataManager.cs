@@ -42,7 +42,7 @@ namespace Necropanda
             Singleton();
             SaveManager.instance.saveAllData += SaveQuestData;
             SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
-            SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
+            //SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
             SaveManager.instance.loadAllData += LoadQuestData;
             SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
         }
@@ -62,13 +62,17 @@ namespace Necropanda
         [ContextMenu("Save Base Quest Data")]
         public void SaveBaseQuestData()
         {
-            Debug.Log("Saving base quest data");
             foreach (Quest quest in questsToSave)
             {
                 List<Quest> questList = new List<Quest> { quest };
 
                 if (!QuestSaving.BaseDataExists(questList))
+                {
+                    Debug.Log("Base data does not exist, create new base data");
                     quest.SaveBaseQuestData();
+                }
+                else
+                    Debug.Log("Base data already exists, do not save");
             }
         }
 

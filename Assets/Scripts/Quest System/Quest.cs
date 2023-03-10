@@ -18,6 +18,7 @@ namespace Necropanda
         #region Variables
 
         public string questName;
+        public bool mainQuest;
         public int questNumber;
         [TextArea(3, 10)]
         public string questDescription;
@@ -63,6 +64,14 @@ namespace Necropanda
             }
 
             UpdateQuestInfo();
+        }
+
+        public Quest GetParent()
+        {
+            if (parentQuest == null)
+                return this;
+
+            return parentQuest.GetParent();
         }
 
         #endregion
@@ -164,19 +173,10 @@ namespace Necropanda
             if (state != E_QuestStates.InProgress)
                 return null;
 
-            Quest quest = null;
+            Quest quest = this;
 
-            if (subQuests.Length == 0)
-            {
-                if (state == E_QuestStates.InProgress)
-                {
-                    quest = this;
-                }
-            }
-            else
-            {
+            if (subQuests.Length > 0)
                 quest = subQuests[currentProgress].GetCurrentQuestProgress();
-            }
 
             return quest;
         }
@@ -218,31 +218,27 @@ namespace Necropanda
         [ContextMenu("Load Data")]
         public void LoadQuestData()
         {
+            Debug.Log("load the quest data from normal");
             QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
 
             if (questData == null) return;
 
             RLoadQuestData(questData);
-
-            foreach (var item in subQuests)
-            {
-                item.RLoadQuestData(questData);
-            }
         }
 
         [ContextMenu("Load Base Data")]
         public void LoadBaseQuestData()
         {
+            Debug.Log("Load the quest data from base");
             QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
 
-            if (questData == null) return;
+            if (questData == null)
+            {
+                Debug.LogError("Error with base quest data");
+                return;
+            }
 
             RLoadQuestData(questData);
-
-            foreach (var item in subQuests)
-            {
-                item.RLoadQuestData(questData);
-            }
         }
 
         void RLoadQuestData(QuestData questData)
@@ -255,6 +251,11 @@ namespace Necropanda
 
                     CheckProgress();
                 }
+            }
+
+            foreach (var item in subQuests)
+            {
+                item.RLoadQuestData(questData);
             }
         }
 
