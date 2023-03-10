@@ -65,7 +65,7 @@ namespace Necropanda.AI
         {
             player = playerRef;
             active = true;
-            Debugger.instance.SendDebug("Activate AI");
+            //Debugger.instance.SendDebug("Activate AI");
         }
 
         // Update is called once per frame
@@ -143,7 +143,7 @@ namespace Necropanda.AI
                     moduleManager.wander.WanderInRadius(blocked, hit);
                     if (!hasDebuggedWandering)
                     {
-                        Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
+                        //Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
                         hasDebuggedWandering = true;
                     }
 
@@ -154,7 +154,7 @@ namespace Necropanda.AI
                     moduleManager.ChangeModuleState(2, true);
                     if (!hasDebuggedPatrol)
                     {
-                        Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
+                        //Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
                         hasDebuggedPatrol = true;
                     }
                     break;
