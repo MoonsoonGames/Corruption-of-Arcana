@@ -24,9 +24,14 @@ namespace Necropanda.SaveSystem
         public Slider sfx;
         public Slider dialogue;
 
+        [Space]
+        [Header("Graphics UI")]
+        public Toggle fullScreenToggle;
+
+        [Space]
         [Header("Other")]
-        public Stopwatch stopwatch;
         [SerializeField] private string startId = string.Empty;
+        public Stopwatch stopwatch;
 
         /// <summary>
         /// Checks to see whether the game has been started before
@@ -57,9 +62,10 @@ namespace Necropanda.SaveSystem
         private void Start()
         {
             GenerateStartId();
-
+            LoadGraphics();
         }
 
+        #region Audio saving
         public void SaveSliders()
         {
             UnityEngine.Debug.Log("Saved");
@@ -72,12 +78,35 @@ namespace Necropanda.SaveSystem
 
         public void LoadSliders()
         {
-            UnityEngine.Debug.Log("Loaded");
+            UnityEngine.Debug.Log("Loaded Audio");
             master.value = PlayerPrefs.GetFloat("master");
             music.value = PlayerPrefs.GetFloat("music");
             sfx.value = PlayerPrefs.GetFloat("sfx");
             dialogue.value = PlayerPrefs.GetFloat("dialogue");
         }
+        #endregion
+
+        #region Graphics saving
+        public void SaveGraphics()
+        {
+            // Convert the int to a saveable bool
+            PlayerPrefs.SetInt("isFullScreen", BoolToInt(fullScreenToggle.isOn));
+            SaveSettings();
+        }
+
+        public void FullscreenButton()
+        {
+            Screen.fullScreen = fullScreenToggle.isOn;
+            SaveGraphics();
+        }
+
+        public void LoadGraphics()
+        {
+            fullScreenToggle.isOn = IntToBool(PlayerPrefs.GetInt("isFullScreen"));
+            // Apply the saved options
+            Screen.fullScreen = fullScreenToggle.isOn;
+        }
+        #endregion
 
         public void SaveSettings()
         {
@@ -110,6 +139,22 @@ namespace Necropanda.SaveSystem
         public void DeletePlayerPrefsData()
         {
             PlayerPrefs.DeleteAll();
+        }
+
+        bool IntToBool(int val)
+        {
+            if (val != 0)
+                return true;
+            else
+                return false;
+        }
+
+        int BoolToInt(bool val)
+        {
+            if (val)
+                return 1;
+            else
+                return 0;
         }
     }
 }
