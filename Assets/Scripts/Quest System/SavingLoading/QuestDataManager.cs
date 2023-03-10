@@ -42,7 +42,7 @@ namespace Necropanda
             Singleton();
             SaveManager.instance.saveAllData += SaveQuestData;
             SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
-            //SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
+            SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
             SaveManager.instance.loadAllData += LoadQuestData;
             SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
         }

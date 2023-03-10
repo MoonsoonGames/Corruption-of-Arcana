@@ -218,7 +218,6 @@ namespace Necropanda
         [ContextMenu("Load Data")]
         public void LoadQuestData()
         {
-            Debug.Log("load the quest data from normal");
             QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
 
             if (questData == null) return;
@@ -229,7 +228,6 @@ namespace Necropanda
         [ContextMenu("Load Base Data")]
         public void LoadBaseQuestData()
         {
-            Debug.Log("Load the quest data from base");
             QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
 
             if (questData == null)
