@@ -54,6 +54,9 @@ namespace Necropanda
 
         #endregion
 
+        // Console stuff (godmode)
+        private DeveloperConsole developerConsole;
+        private ToggleGodMode tgm;
         #endregion
 
         protected virtual void Start()
@@ -124,6 +127,11 @@ namespace Necropanda
         /// <returns>The true value (affected by resistances and shield) of the effect</returns>
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
+            if (CheckGodMode())
+            {
+                return 0;
+            }
+
             #region Damage Calculations
 
             int damageTaken = 0;
@@ -268,21 +276,8 @@ namespace Necropanda
 
         void Kill(E_DamageTypes type)
         {
-            // Get ref to the dev console
-            GameObject console = GameObject.FindGameObjectWithTag("Console");
-            if (console != null)
-            {
-                DeveloperConsoleBehaviour behaviour = console.GetComponent<DeveloperConsoleBehaviour>();
 
-                // Need to find a better way to do this
-                ToggleGodMode tgm = (ToggleGodMode)behaviour.commands[6];
 
-                if (tgm.GodMode == true)
-                {
-                    return;
-                }
-            }
-            
             dying = true;
             KillFX();
             ActivateArt(false, true, type);
@@ -457,6 +452,34 @@ namespace Necropanda
 
         #endregion
 
+        #endregion
+
+        #region Cheats
+        public bool CheckGodMode()
+        {
+            // Get ref to the dev console
+            GameObject console = GameObject.FindGameObjectWithTag("Console");
+            if (console != null)
+            {
+                DeveloperConsoleBehaviour behaviour = console.GetComponent<DeveloperConsoleBehaviour>();
+
+                foreach (IConsoleCommand command in behaviour.commands)
+                {
+                    if (command.CommandWord == "tgm")
+                    {
+                        tgm = (ToggleGodMode)command;
+                        Debug.Log(tgm);
+                    }
+                }
+
+                if (tgm.GodMode == true)
+                {
+                    Debug.Log("Godmode is enabled, player can't die!");
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }

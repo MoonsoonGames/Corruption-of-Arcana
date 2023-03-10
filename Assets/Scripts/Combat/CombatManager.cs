@@ -51,6 +51,15 @@ namespace Necropanda
 
         public void CharacterDied(Character character)
         {
+            if (LoadCombatManager.instance.enemiesEndCombat.Contains(character.stats))
+            {
+                LoadCombatManager.instance.enemiesEndCombat.Remove(character.stats);
+                if (LoadCombatManager.instance.enemiesEndCombat.Count <= 0)
+                {
+                    ShowEndScreen(true);
+                }
+            }
+
             if (redirectedCharacter == character)
             {
                 redirectedCharacter = null;

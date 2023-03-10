@@ -5,8 +5,16 @@ using Necropanda;
 
 public class JournalMainCode : MonoBehaviour
 {
+    QuestMenuUpdater questUpdater;
+
+    private void Start()
+    {
+        questUpdater = GetComponentInChildren<QuestMenuUpdater>(true);
+    }
+
+
     #region Game Objects 
-        public int currentPage = 0;
+    public int currentPage = 0;
 
         #region Sections
         [Header("Sections and SubTabs")]
@@ -384,12 +392,27 @@ public class JournalMainCode : MonoBehaviour
             Page.SetActive(true);
             */
         }
-        #endregion
+    #endregion
     #endregion
 
     /* ---------- Divider ---------- */
 
     #region Quests Tab
+
+    public void QuestsBTN()
+    {
+        //off all pages, on curios
+        TogglePages(JournalSections, false);
+        GameObject Page = JournalSections[3];
+        Page.SetActive(true);
+
+        //off all subtabs, on curios
+        TogglePages(Subtabs, false);
+        GameObject Tabs = Subtabs[1];
+        Tabs.SetActive(true);
+
+        questUpdater.OpenJournal();
+    }
 
     #endregion
 
