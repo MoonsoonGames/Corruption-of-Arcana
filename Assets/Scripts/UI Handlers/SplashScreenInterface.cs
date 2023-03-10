@@ -19,7 +19,7 @@ namespace Necropanda.Interfaces
         public void NewGame()
         {
             SaveManager.instance.LoadAllBaseData();
-            SaveManager.instance.SaveAllData();
+            //SaveManager.instance.SaveAllData();
             //Reset loadsettings/progress
             LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
