@@ -17,9 +17,31 @@ namespace Necropanda
         [ContextMenu("Quick Reset Quests")]
         public void QuestReset()
         {
-            foreach (Quest r in restart)
+            restartStatic = new Quest[restart.Length];
+
+            for (int i = 0; i < restart.Length; i++)
+            {
+                restart[i].ForceRestartQuest();
+                restartStatic[i] = restart[i];
+            }
+
+            resetStatic = new Quest[reset.Length];
+
+            for (int i = 0; i < reset.Length; i++)
+            {
+                reset[i].ForceRestartQuest();
+                resetStatic[i] = reset[i];
+            }
+        }
+
+        public static Quest[] restartStatic;
+        public static Quest[] resetStatic;
+
+        public static void QuestResetStatic()
+        {
+            foreach (Quest r in restartStatic)
                 r.ForceRestartQuest();
-            foreach (Quest r in reset)
+            foreach (Quest r in resetStatic)
                 r.ForceResetQuest();
         }
     }
