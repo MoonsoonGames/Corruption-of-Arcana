@@ -9,40 +9,31 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class QuestQuickReset : MonoBehaviour
+    public static class QuestQuickReset
     {
-        public Quest[] restart;
-        public Quest[] reset;
-
-        [ContextMenu("Quick Reset Quests")]
-        public void QuestReset()
-        {
-            restartStatic = new Quest[restart.Length];
-
-            for (int i = 0; i < restart.Length; i++)
-            {
-                restart[i].ForceRestartQuest();
-                restartStatic[i] = restart[i];
-            }
-
-            resetStatic = new Quest[reset.Length];
-
-            for (int i = 0; i < reset.Length; i++)
-            {
-                reset[i].ForceRestartQuest();
-                resetStatic[i] = reset[i];
-            }
-        }
-
-        public static Quest[] restartStatic;
-        public static Quest[] resetStatic;
+        public static List<string> restartStatic = new List<string>();
+        public static List<string> resetStatic = new List<string>();
 
         public static void QuestResetStatic()
         {
-            foreach (Quest r in restartStatic)
-                r.ForceRestartQuest();
-            foreach (Quest r in resetStatic)
-                r.ForceResetQuest();
+            restartStatic.Add("C1M");
+
+            resetStatic.Add("S1M-Apothecary");
+            resetStatic.Add("S2M-Apothecary");
+
+            Quest[] allQuests = Resources.FindObjectsOfTypeAll<Quest>();
+
+            foreach (var item in allQuests)
+            {
+                if (restartStatic.Contains(item.name))
+                {
+                    item.ForceRestartQuest();
+                }
+                if (resetStatic.Contains(item.name))
+                {
+                    item.ForceResetQuest();
+                }
+            }
         }
     }
 }
