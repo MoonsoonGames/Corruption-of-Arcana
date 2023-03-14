@@ -185,6 +185,16 @@ namespace Necropanda
 
             //Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
 
+            Enemy selfAI = self as Enemy;
+
+            if (selfAI != null)
+            {
+                if (selfAI.spellsThisTurn.Contains(spell.spell.spellName))
+                {
+                    spellUtility *= 0.6f;
+                }
+            }
+
             return spellUtility;
         }
 
