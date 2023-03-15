@@ -11,7 +11,7 @@ namespace Necropanda.Utils.Console.Commands
     public interface IConsoleCommand
     {
         // The word to trigger the command, cannot be changes at runtime
-        string CommandWord {get;}
+        string CommandWord { get; }
         // Returns true if the command was processed, false if not.
         bool Process(string[] args);
     }
