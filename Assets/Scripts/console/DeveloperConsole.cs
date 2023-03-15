@@ -16,13 +16,18 @@ namespace Necropanda.Utils.Console
     {
         // Readonly variables that aren't to change.
         private readonly string prefix;
-        public readonly IEnumerable<IConsoleCommand> commands;
+        public readonly Dictionary<string, IConsoleCommand> commands;
 
         // Set up the prefix and commands
-        public DeveloperConsole(string prefix, IEnumerable<IConsoleCommand> commands)
+        public DeveloperConsole(string prefix, IConsoleCommand[] commands)
         {
             this.prefix = prefix;
-            this.commands = commands;
+            this.commands = new Dictionary<string, IConsoleCommand>();
+
+            foreach (var command in commands)
+            {
+                this.commands.Add(command.CommandWord, command);
+            }
         }
 
         /// <summary>
@@ -58,20 +63,13 @@ namespace Necropanda.Utils.Console
         /// <param name="args">Arguemnts that will be used.</param>
         public void ProcessCommand(string commandInput, string[] args)
         {
-            foreach (var command in commands)
+            if (!commands.ContainsKey(commandInput))
             {
-                // Check to make sure that there's a direct match regardless of case sensitivity.
-                if (!commandInput.Equals(command.CommandWord, System.StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.LogWarning($"No Command found with \"{commandInput}\" phrase!");
-                    continue;
-                }
-
-                if (command.Process(args))
-                {
-                    return;
-                }
+                Debug.LogWarning($"No Command found with \"{commandInput}\" phrase!");
+                return;
             }
+
+            commands[commandInput].Process(args);
         }
     }
 }
