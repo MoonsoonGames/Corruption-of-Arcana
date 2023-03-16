@@ -122,7 +122,25 @@ namespace Necropanda.Utils.Console.Commands
 
         private void GiveToPlayer(string objectName)
         {
-            Debug.Log(objects[objectName].GetType() == typeof(Weapon));
+            if (objects[objectName].GetType() == typeof(Weapon))
+            {
+                // Add to deck manager list
+                DeckManager.instance.weapons.Add((Weapon)objects[objectName]);
+            }
+            else if (objects[objectName].GetType() == typeof(Spell))
+            {
+                Spell currentSpell = (Spell)objects[objectName];
+                switch (currentSpell.cardType)
+                {
+                    case E_CardTypes.Cards:
+                        // Add to deck manager list
+                        DeckManager.instance.collection.Add((Spell)objects[objectName]);
+                        break;
+                    case E_CardTypes.Potions:
+                        PotionManager.instance.ChangePotion(currentSpell.potionType, 1);
+                        break;
+                }
+            }
         }
 
 
