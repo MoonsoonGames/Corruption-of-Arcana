@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using Necropanda.Utils.Console;
 
 /// <summary>
 /// Authored & Written by @mattordev
@@ -56,15 +57,12 @@ namespace Necropanda.Utils.Console.Commands
         {
             // The first argument is the item to be given
             var objToGive = args[0];
-            // The second is the amount to be given
-            int amountToGive = int.Parse(args[1]);
-
-
 
             // Check that the argument is in the dictionary
             if (!IsValidObject(objToGive))
             {
                 // if its not we return an error to the console
+                Debug.Log("Not valid object!");
                 DeveloperConsoleBehaviour.OutputMessage = $"Object: \"{objToGive}\" isn't valid!";
             }
 
@@ -72,15 +70,30 @@ namespace Necropanda.Utils.Console.Commands
             if (CheckArgsAmount(args) == 1)
             {
                 // if it is, we output the correct message to the console
+                Debug.Log("Args = 1");
                 DeveloperConsoleBehaviour.OutputMessage = $"Giving the player a {objToGive}";
                 // Do stuff to add the item
+                // Check item type
+                GiveToPlayer(objToGive);
+
+                // DeckManager.instance.collection.Add()
             }
             else
             {
+                // The second is the amount to be given
+                int amountToGive = int.Parse(args[1]);
+
+                Debug.Log("Args > 1");
                 DeveloperConsoleBehaviour.OutputMessage = $"Giving the player [{amountToGive}] {objToGive}";
                 // Do stuff to add more than one item
+
+                for (int amt = 0; amt < amountToGive; amt++)
+                {
+                    GiveToPlayer(objToGive);
+                }
             }
-            throw new System.NotImplementedException();
+
+            return true;
         }
 
 
@@ -99,6 +112,11 @@ namespace Necropanda.Utils.Console.Commands
             {
                 return false;
             }
+        }
+
+        private void GiveToPlayer(string objectName)
+        {
+            Debug.Log(objects[objectName].GetType() == typeof(Weapon));
         }
 
 
@@ -136,6 +154,8 @@ namespace Necropanda.Utils.Console.Commands
                 Debug.Log(card.name);
             }
         }
+
+        // Need to create a function for giving the player potions(Might be able to add this to the above function) and currency.
 
         [ContextMenu("Log Dictionary Items")]
         private void LogGiveableItemsDictionary()
