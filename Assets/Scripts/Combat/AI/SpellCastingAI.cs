@@ -14,12 +14,17 @@ namespace Necropanda
     {
         public bool random = false;
 
+        [Header("Basic Utility Values")]
         public float damageUtility;
         public float controlUtility;
         public float supportSelfUtility;
         public float supportAllyUtility;
         public float spawnAllyUtility;
         public float spawnAllyHealthUtility;
+
+        [Header("Advanced Utility Values")]
+        public float duplicateEffectsUtility = 0.45f;
+        public float duplicateLastTurnUtility = 0.75f, duplicateThisTurnUtility = 0.2f;
 
         /// <summary>
         /// Determines which spell the AI will cast
@@ -202,18 +207,18 @@ namespace Necropanda
             {
                 if (selfAI.spellsThisTurn.Contains(spell.spell.spellName))
                 {
-                    spellUtility *= 0.2f;
+                    spellUtility *= duplicateThisTurnUtility;
                 }
 
                 if (selfAI.spellsLastTurn.Contains(spell.spell.spellName))
                 {
-                    spellUtility *= 0.75f;
+                    spellUtility *= duplicateLastTurnUtility;
                 }
 
                 foreach (var item in spell.spell.spellModules)
                 {
                     if (selfAI.effectsThisTurn.Contains(item.effectType))
-                        spellUtility *= 0.45f;
+                        spellUtility *= duplicateEffectsUtility;
                 }
 
             }
