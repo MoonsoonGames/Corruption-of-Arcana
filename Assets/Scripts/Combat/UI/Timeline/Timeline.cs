@@ -311,6 +311,8 @@ namespace Necropanda
             {
                 Timeline.instance.RemoveStatusesOnCharacter(character);
             }
+
+            clearStatusChars.Clear();
         }
 
         float CastSpells()
