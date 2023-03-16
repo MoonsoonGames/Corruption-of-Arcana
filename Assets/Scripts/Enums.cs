@@ -12,7 +12,7 @@ DO NOT ADD ANY ENUMS AT THE START OF THE LIST!!!
 
 public enum E_DamageTypes
 {
-    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana
+    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana, Summon
 }
 
 public enum E_SpellTargetType

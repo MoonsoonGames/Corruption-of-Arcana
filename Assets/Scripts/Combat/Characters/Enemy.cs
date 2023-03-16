@@ -19,6 +19,9 @@ namespace Necropanda
         public Object cardPrefab;
 
         public List<string> spellsThisTurn;
+        public List<string> spellsLastTurn;
+
+        public List<E_DamageTypes> effectsThisTurn;
 
         [ContextMenu("Setup References")]
         public override void SetupReferences()
@@ -54,7 +57,10 @@ namespace Necropanda
             }
             else
             {
-                spellsThisTurn.Clear();
+                spellsLastTurn = spellsThisTurn == null ? new List<string>() : spellsThisTurn;
+                spellsThisTurn = new List<string>();
+                effectsThisTurn.Clear();
+
                 for (int i = 0; i < stats.actions; i++)
                 {
                     //In future, determine target depending on spell so it can cast support spells on allies/self
@@ -79,7 +85,12 @@ namespace Necropanda
                         Debug.Log(stats.characterName + " is skipping their turn");
                     }
 
-                    spellsThisTurn[i] = newSpellInstance.spell.spellName;
+                    spellsThisTurn.Add(newSpellInstance.spell.spellName);
+
+                    foreach(var item in newSpellInstance.spell.spellModules)
+                    {
+                        effectsThisTurn.Add(item.effectType);
+                    }
                 }
             }
 

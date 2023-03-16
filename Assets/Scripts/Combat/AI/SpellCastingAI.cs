@@ -19,6 +19,7 @@ namespace Necropanda
         public float supportSelfUtility;
         public float supportAllyUtility;
         public float spawnAllyUtility;
+        public float spawnAllyHealthUtility;
 
         /// <summary>
         /// Determines which spell the AI will cast
@@ -145,6 +146,15 @@ namespace Necropanda
                         targetUtility = targetMaxHealth - targetHealth;
                     }
 
+                    if (module.effectType == E_DamageTypes.Summon && module.summon != null)
+                    {
+                        float spawnUtility = spawnAllyUtility * module.value;
+
+                        spawnUtility += module.summon.maxHealth * spawnAllyHealthUtility * module.value;
+
+                        spellUtility += spawnUtility;
+                    }
+
                     moduleUtility += (module.value + targetUtility) * supportSelfUtility;
                 }
                 else if (self.banish == false && target.banish == false && target != self)
@@ -158,6 +168,15 @@ namespace Necropanda
                             int targetHealth = target.GetHealth().GetHealth();
                             int targetMaxHealth = target.GetHealth().GetMaxHealth();
                             targetUtility = targetMaxHealth - targetHealth;
+                        }
+
+                        if (module.effectType == E_DamageTypes.Summon && module.summon != null)
+                        {
+                            float spawnUtility = spawnAllyUtility * module.value;
+
+                            spawnUtility += module.summon.maxHealth * spawnAllyHealthUtility * module.value;
+
+                            spellUtility += spawnUtility;
                         }
 
                         moduleUtility += (module.value + targetUtility) * supportAllyUtility;
@@ -175,14 +194,6 @@ namespace Necropanda
                 }
             }
 
-            if (spell.spell.spawnEnemies != null)
-            {
-                //Debug.Log("Spell spawns allies, increase priority");
-
-                float spawnUtility = spawnAllyUtility * spell.spell.spawnEnemies.Length;
-                spellUtility += spawnUtility;
-            }
-
             //Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
 
             Enemy selfAI = self as Enemy;
@@ -191,8 +202,20 @@ namespace Necropanda
             {
                 if (selfAI.spellsThisTurn.Contains(spell.spell.spellName))
                 {
-                    spellUtility *= 0.6f;
+                    spellUtility *= 0.2f;
                 }
+
+                if (selfAI.spellsLastTurn.Contains(spell.spell.spellName))
+                {
+                    spellUtility *= 0.75f;
+                }
+
+                foreach (var item in spell.spell.spellModules)
+                {
+                    if (selfAI.effectsThisTurn.Contains(item.effectType))
+                        spellUtility *= 0.45f;
+                }
+
             }
 
             return spellUtility;
