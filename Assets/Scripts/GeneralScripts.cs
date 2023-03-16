@@ -250,6 +250,13 @@ namespace Necropanda
             public int lastUsed;
         }
 
+        [System.Serializable]
+        public struct StatusUtility
+        {
+            public E_Statuses status;
+            public float utility;
+        }
+
         #endregion
 
         #endregion

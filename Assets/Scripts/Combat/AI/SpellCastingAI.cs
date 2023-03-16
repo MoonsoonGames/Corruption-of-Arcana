@@ -12,6 +12,8 @@ namespace Necropanda
     [CreateAssetMenu(fileName = "NewSpellcastingAI", menuName = "Combat/Spell-casting AI", order = 3)]
     public class SpellCastingAI : ScriptableObject
     {
+        #region Setup
+
         public bool random = false;
 
         [Header("Basic Utility Values")]
@@ -23,8 +25,12 @@ namespace Necropanda
         public float spawnAllyHealthUtility;
 
         [Header("Advanced Utility Values")]
-        public float duplicateEffectsUtility = 0.45f;
-        public float duplicateLastTurnUtility = 0.75f, duplicateThisTurnUtility = 0.2f;
+        public CombatHelperFunctions.StatusUtility[] statusUtilities;
+        public float duplicateEffectsUtility = 0.45f, duplicateLastTurnUtility = 0.75f, duplicateThisTurnUtility = 0.2f;
+
+        #endregion
+
+        #region Utility Calculators
 
         /// <summary>
         /// Determines which spell the AI will cast
@@ -138,6 +144,8 @@ namespace Necropanda
             //Loop through all of the spell modules
             foreach (CombatHelperFunctions.SpellModule module in spell.spell.spellModules)
             {
+                float statusUtility = StatusUtility(module);
+
                 float moduleUtility = 0;
 
                 if (spell.targetSelf && target == self)
@@ -161,6 +169,7 @@ namespace Necropanda
                     }
 
                     moduleUtility += (module.value + targetUtility) * supportSelfUtility;
+                    moduleUtility += statusUtility;
                 }
                 else if (self.banish == false && target.banish == false && target != self)
                 {
@@ -185,6 +194,7 @@ namespace Necropanda
                         }
 
                         moduleUtility += (module.value + targetUtility) * supportAllyUtility;
+                        moduleUtility += statusUtility;
                     }
                     else if (spell.targetEnemies && enemyTeam.Contains(target))
                     {
@@ -193,6 +203,7 @@ namespace Necropanda
                         float targetUtility = targetMaxHealth - targetHealth;
 
                         moduleUtility += module.value * damageUtility;
+                        moduleUtility -= statusUtility;
                     }
 
                     spellUtility += moduleUtility;
@@ -225,6 +236,34 @@ namespace Necropanda
 
             return spellUtility;
         }
+
+        float StatusUtility(CombatHelperFunctions.SpellModule spell)
+        {
+            float effect = 0;
+
+            foreach (var module in spell.statuses)
+            {
+                foreach (var status in module.status.effectModules)
+                {
+                    if (status.effectType == E_DamageTypes.Healing || status.effectType == E_DamageTypes.Shield)
+                        effect += (float)status.value * supportSelfUtility;
+                    else
+                        effect -= (float)status.value * damageUtility;
+
+                    foreach (var item in this.statusUtilities)
+                    {
+                        if (item.status == status.status)
+                            effect += item.utility;
+                    }
+
+                    break;
+                }
+            }
+            Debug.Log(effect);
+            return effect;
+        }
+
+        #endregion
 
         /// <summary>
         /// Determines if the spell can be cast on the character

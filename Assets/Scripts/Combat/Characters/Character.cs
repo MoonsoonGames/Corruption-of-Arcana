@@ -104,14 +104,14 @@ namespace Necropanda
         #region Statuses
 
         //Positive Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool enlightened;
         //Neutral Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
-        [HideInInspector]
-        public bool banish, charm, silence, stun, curse, confuse;
+        //[HideInInspector]
+        public bool banish, charm, silence, stun, curse, confuse, blinded;
 
         /// <summary>
         /// Apply or remove a status effect from the character
@@ -174,6 +174,9 @@ namespace Necropanda
                     break;
                 case E_Statuses.Confuse:
                     confuse = apply;
+                    break;
+                case E_Statuses.Blinded:
+                    blinded = apply;
                     break;
                 default:
                     break;

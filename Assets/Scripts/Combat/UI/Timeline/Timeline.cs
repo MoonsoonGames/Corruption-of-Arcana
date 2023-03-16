@@ -15,7 +15,7 @@ namespace Necropanda
 
         public static Timeline instance;
 
-        public bool showAllspells = false; public bool ShowSpells(Character caster) { return player == caster || player.enlightened || showAllspells; }
+        public bool showAllspells = false; public bool ShowSpells(Character caster) { return player == caster || player.blinded == false; }
         public float initialDelay = 2f;
 
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
@@ -193,28 +193,31 @@ namespace Necropanda
                 foreach (var item in spells)
                 {
                     bool revealed = ShowSpells(item.caster);
-                    string text = item.caster.stats.characterName + " is casting a spell (" + item.spell.speed + ")";
-
                     if (revealed)
-                        text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+                    {
+                        string text = item.caster.stats.characterName + " is casting a spell (" + item.spell.speed + ")";
 
-                    Color color = item.caster.stats.timelineColor;
+                        if (revealed)
+                            text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
 
-                    if (item.spell.overrideColor)
-                        color = item.spell.timelineColor;
+                        Color color = item.caster.stats.timelineColor;
 
-                    //Creates spell block game object
-                    GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
-                    spellBlockObject.transform.SetParent(transform, false);
+                        if (item.spell.overrideColor)
+                            color = item.spell.timelineColor;
 
-                    //Sets spell block values
-                    //Sets spell block values
-                    SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
+                        //Creates spell block game object
+                        GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
+                        spellBlockObject.transform.SetParent(transform, false);
 
-                    spellBlock.SetInfo(item);
+                        //Sets spell block values
+                        //Sets spell block values
+                        SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
 
-                    //Adds spell block to layout group
-                    spellBlocks.Add(spellBlock);
+                        spellBlock.SetInfo(item);
+
+                        //Adds spell block to layout group
+                        spellBlocks.Add(spellBlock);
+                    }
 
                     if (item.caster.stats.usesArcana)
                     {
