@@ -64,6 +64,7 @@ namespace Necropanda.Utils.Console.Commands
                 // if its not we return an error to the console
                 Debug.Log("Not valid object!");
                 DeveloperConsoleBehaviour.OutputMessage = $"Object: \"{objToGive}\" isn't valid!";
+                return false;
             }
 
             // Check to see what message we need to pass to the console, and what next action we need to take
@@ -72,11 +73,15 @@ namespace Necropanda.Utils.Console.Commands
                 // if it is, we output the correct message to the console
                 Debug.Log("Args = 1");
                 DeveloperConsoleBehaviour.OutputMessage = $"Giving the player a {objToGive}";
+
+                DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+                developerConsoleBehaviour.UpdateOutputMessage();
+
                 // Do stuff to add the item
                 // Check item type
                 GiveToPlayer(objToGive);
 
-                // DeckManager.instance.collection.Add()
+                return true;
             }
             else
             {
@@ -85,15 +90,16 @@ namespace Necropanda.Utils.Console.Commands
 
                 Debug.Log("Args > 1");
                 DeveloperConsoleBehaviour.OutputMessage = $"Giving the player [{amountToGive}] {objToGive}";
+                DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+                developerConsoleBehaviour.UpdateOutputMessage();
                 // Do stuff to add more than one item
 
                 for (int amt = 0; amt < amountToGive; amt++)
                 {
                     GiveToPlayer(objToGive);
                 }
+                return true;
             }
-
-            return true;
         }
 
 
