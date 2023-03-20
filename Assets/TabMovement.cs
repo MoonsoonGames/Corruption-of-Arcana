@@ -6,25 +6,21 @@ using UnityEngine.EventSystems;
 public class TabMovement : MonoBehaviour
 {
     Vector3 originalPos = new Vector3();
+    public float tabOutAmount = 6f;
+
+    private void Start()
+    {
+        originalPos = transform.position;
+    }
 
     public void OnMouseEnter()
     {
-        //Debug.Log("Hovering Over");
-        originalPos = transform.position;
-        Vector3 newPos = new Vector3();
-        newPos.x = originalPos.x + 50f;
-        newPos.y = originalPos.y;
-        newPos.z = originalPos.z;
+        Vector3 newPos = new Vector3(originalPos.x - tabOutAmount, originalPos.y, originalPos.z);
         transform.position = newPos;
     }
 
     public void OnMouseExit()
     {
-        //Debug.Log("Moved Off");
-        Vector3 newPos = new Vector3();
-        newPos.x = originalPos.x;
-        newPos.y = originalPos.y;
-        newPos.z = originalPos.z;
-        transform.position = newPos;
+        transform.position = originalPos;
     }
 }
