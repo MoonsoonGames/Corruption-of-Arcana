@@ -56,6 +56,10 @@ namespace Necropanda
                 LoadCombatManager.instance.enemiesEndCombat.Remove(character.stats);
                 if (LoadCombatManager.instance.enemiesEndCombat.Count <= 0)
                 {
+                    foreach(var enemy in enemyTeamManager.team)
+                    {
+                        enemy.GetHealth().ChangeHealth(E_DamageTypes.Physical, 99999999, null);
+                    }
                     ShowEndScreen(true);
                 }
             }

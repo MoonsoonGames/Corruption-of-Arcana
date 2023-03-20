@@ -78,7 +78,7 @@ namespace Necropanda
                     //If enemy is a boss, save them in the first space
                     enemies.Insert(enemy.boss ? 0 : enemies.Count, enemy.enemyStats);
 
-                    if (enemy.endCombatIfKilled)
+                    if (enemy.enemyStats.endCombatOnKill || enemy.endCombatIfKilled)
                     {
                         //If enemy is a boss, save them in the first space
                         enemiesEndCombat.Insert(enemy.boss ? 0 : enemiesEndCombat.Count, enemy.enemyStats);
