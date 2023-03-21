@@ -204,6 +204,7 @@ namespace Necropanda
             public float valueScalingDamageTaken;
             public int valueScalingPerDiscard;
             public int valueScalingPerStatus;
+            public CharacterStats summon;
             public StatusStruct[] statuses;
 
             public void SetSpellInstance(E_SpellTargetType newTarget, E_DamageTypes newEffectType, int newValue, int newHitCount, float newExecuteThreshold, int newValueScalingPerDiscard, StatusStruct[] newStatusStructs)
@@ -247,6 +248,13 @@ namespace Necropanda
             public int timeCooldown;
             //[HideInInspector]
             public int lastUsed;
+        }
+
+        [System.Serializable]
+        public struct StatusUtility
+        {
+            public E_Statuses status;
+            public float utility;
         }
 
         #endregion

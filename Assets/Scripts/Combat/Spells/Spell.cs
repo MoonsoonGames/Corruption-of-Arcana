@@ -51,7 +51,6 @@ namespace Necropanda
         public bool discardAfterCasting = false;
         public bool discardAfterTurn = false;
         public Spell drawCard;
-        public CharacterStats[] spawnEnemies;
         public bool discardCards = false;
         public bool returnDiscardPile = false;
         public bool removeStatuses = false;
@@ -150,17 +149,6 @@ namespace Necropanda
                     module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters);
 
                     time += moduleDelay;
-                }
-            }
-
-            if (spawnEnemies != null)
-            {
-                if (spawnEnemies.Length > 0)
-                {
-                    bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
-                    Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
-                    foreach (var item in spawnEnemies)
-                        LoadCombatManager.instance.AddEnemy(item, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                 }
             }
 
@@ -304,6 +292,17 @@ namespace Necropanda
                 value = EmpowerWeakenValue(value, empowered, weakened);
 
                 target.GetHealth().ChangeHealth(effectType, value, caster);
+
+                if (spell.summon != null)
+                {
+                    if (spell.value > 0)
+                    {
+                        //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
+                        Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
+                        for (int i = 0; i < spell.value; i++)
+                            LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                    }
+                }
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
@@ -585,15 +584,11 @@ namespace Necropanda
 
             Dictionary<CharacterStats, int> moduleDictionary = new Dictionary<CharacterStats, int>();
 
-            foreach (var item in spawnEnemies)
+            foreach (var module in spellModules)
             {
-                if (moduleDictionary.ContainsKey(item))
+                if (module.effectType == E_DamageTypes.Summon)
                 {
-                    moduleDictionary[item]++;
-                }
-                else
-                {
-                    moduleDictionary.Add(item, 1);
+                    moduleDictionary.Add(module.summon, module.value);
                 }
             }
 

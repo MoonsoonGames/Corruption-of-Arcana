@@ -29,20 +29,29 @@ MonoBehaviour:
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
-  spawnEnemies:
-  - {fileID: 11400000, guid: 3c70e9f8ffa97fe4a996ef49cbc24cf2, type: 2}
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
   multihitDelay: 0.1
   moduleDelay: 0
-  spellModules: []
+  spellModules:
+  - target: 0
+    effectType: 10
+    value: 1
+    hitCount: 0
+    executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
+    summon: {fileID: 11400000, guid: 3c70e9f8ffa97fe4a996ef49cbc24cf2, type: 2}
+    statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   projectileSpeed: 0.6
   projectilePoints: 0200000000000000
   impactObject: {fileID: 0}
+  projectileFXObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
   idealTarget: 1
