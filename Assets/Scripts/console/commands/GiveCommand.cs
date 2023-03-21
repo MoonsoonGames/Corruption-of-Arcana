@@ -64,6 +64,8 @@ namespace Necropanda.Utils.Console.Commands
                 // if its not we return an error to the console
                 Debug.Log("Not valid object!");
                 DeveloperConsoleBehaviour.OutputMessage = $"Object: \"{objToGive}\" isn't valid!";
+                DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+                developerConsoleBehaviour.UpdateOutputMessage();
                 return false;
             }
 
