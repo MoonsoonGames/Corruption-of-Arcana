@@ -258,6 +258,17 @@ namespace Necropanda
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
                 caster.GetHealth().ChangeHealth(effectType, value, caster);
 
+                if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
+                {
+                    if (spell.value > 0)
+                    {
+                        //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
+                        Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
+                        for (int i = 0; i < spell.value; i++)
+                            LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                    }
+                }
+
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
                     if (CombatHelperFunctions.ApplyEffect(caster, spell.statuses[i]))
@@ -293,12 +304,12 @@ namespace Necropanda
 
                 target.GetHealth().ChangeHealth(effectType, value, caster);
 
-                if (spell.summon != null)
+                if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
                 {
                     if (spell.value > 0)
                     {
                         //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
-                        Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, target);
+                        Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
                         for (int i = 0; i < spell.value; i++)
                             LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
