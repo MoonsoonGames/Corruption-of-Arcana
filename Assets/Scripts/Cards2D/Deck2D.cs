@@ -40,7 +40,17 @@ namespace Necropanda
 
         #region Cards
 
-        CardDrag2D[] cards;
+        CardDrag2D[] cards; public List<GameObject> GetCards()
+        {
+            List<GameObject> cardObjects = new List<GameObject>();
+            foreach (var item in cards)
+            {
+                cardObjects.Add(item.gameObject);
+            }
+            Debug.Log(cards.Length + " cards in hand || " + cardObjects.Count + " objects in list");
+            return cardObjects;
+        }
+
         public List<E_CardTypes> availableCards;
         public int maxCards = 3;
         public int CurrentCardsLength()

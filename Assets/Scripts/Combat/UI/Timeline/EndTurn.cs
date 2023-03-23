@@ -31,12 +31,16 @@ namespace Necropanda
 
         public float endTurndelay = 2f;
 
+        ArcanaManager arcanaManager;
+
         private void Start()
         {
             timeline = GameObject.FindObjectOfType<Timeline>();
             teamManagers = GameObject.FindObjectsOfType<TeamManager>();
             endTurnButton = GetComponent<Button>();
             endTurnButton.image.color = buttonAvailable;
+
+            arcanaManager = timeline.GetArcanaManager();
 
             Invoke("EndTurnButton", 0.1f);
         }
@@ -114,6 +118,8 @@ namespace Necropanda
             DisableButton();
             waitingForStartTurn = true;
             Invoke("EnableButton", 2f);
+
+            arcanaManager.CheckArcana(0);
         }
 
         void RedrawPotions()
