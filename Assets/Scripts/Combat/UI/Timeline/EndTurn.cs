@@ -32,6 +32,7 @@ namespace Necropanda
         public float endTurndelay = 2f;
 
         ArcanaManager arcanaManager;
+        DeckTab deckTab;
 
         private void Start()
         {
@@ -41,6 +42,7 @@ namespace Necropanda
             endTurnButton.image.color = buttonAvailable;
 
             arcanaManager = timeline.GetArcanaManager();
+            deckTab = GetComponentInParent<DeckTab>();
 
             Invoke("EndTurnButton", 0.1f);
         }
@@ -63,6 +65,8 @@ namespace Necropanda
             DisableButton();
             DragManager.instance.canDrag = false;
             PressSound();
+
+            deckTab.SelectHand();
 
             decks = GameObject.FindObjectsOfType<Deck2D>();
             foreach (Deck2D deck in decks)

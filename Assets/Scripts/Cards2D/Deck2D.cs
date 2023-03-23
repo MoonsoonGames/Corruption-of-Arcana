@@ -40,9 +40,15 @@ namespace Necropanda
 
         #region Cards
 
-        CardDrag2D[] cards; public List<GameObject> GetCards()
+        CardDrag2D[] cards;
+        
+        public List<GameObject> GetCards()
         {
             List<GameObject> cardObjects = new List<GameObject>();
+
+            if (cards.Length <= 0)
+                return cardObjects;
+
             foreach (var item in cards)
             {
                 cardObjects.Add(item.gameObject);

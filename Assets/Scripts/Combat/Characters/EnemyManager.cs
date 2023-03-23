@@ -17,7 +17,7 @@ namespace Necropanda
 
         protected override void Start()
         {
-            enemyQueue = GetComponentInChildren<EnemyQueue>();
+            enemyQueue = GameObject.FindObjectOfType<EnemyQueue>();
             enemyQueue.Setup();
             base.Start();
         }
