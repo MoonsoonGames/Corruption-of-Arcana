@@ -24,7 +24,7 @@ namespace Necropanda
 
         void Setup()
         {
-            cam = LoadCombatManager.instance.mainCam;
+            cam = Camera.main;
         }
 
         // Update is called once per frame

@@ -41,8 +41,6 @@ namespace Necropanda
             interacted = new List<string>();
         }
 
-        public Camera mainCam;
-
         public E_Scenes combatScene;
         public E_Scenes lastScene;
         public Vector3 lastPos;
