@@ -17,6 +17,7 @@ namespace Necropanda
 
         #region Variables
 
+        [Header("Basic Info")]
         public string questName;
         public bool mainQuest;
         public int questNumber;
@@ -24,6 +25,7 @@ namespace Necropanda
         public string questDescription;
         string questGiver = "";
 
+        [Header("Advanced Info")]
         public E_QuestStates state;
         public int currentProgress = -1;
         public int maxProgress = 1;
