@@ -46,7 +46,7 @@ namespace Necropanda
         {
             List<GameObject> cardObjects = new List<GameObject>();
 
-            if (cards.Length <= 0)
+            if (cards == null)
                 return cardObjects;
 
             foreach (var item in cards)
@@ -115,7 +115,7 @@ namespace Necropanda
             if (timeline != null)
                 player = timeline.player;
 
-            untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
+            untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
 
             buildDeck = GetComponentInParent<BuildDeck>();
@@ -143,6 +143,7 @@ namespace Necropanda
                     CardDrag2D currentCard = dragManager.draggedCard;
                     currentCard.newDeck = this;
                     currentCard.ScaleCard(currentCard.hoverScale, true);
+                    currentCard.placeholder.transform.SetParent(this.transform);
                     Highlight(true);
                 }
             }

@@ -23,6 +23,8 @@ namespace Necropanda
         [HideInInspector]
         public Deck2D newDeck;
 
+        public GameObject placeholder = null;
+
         Card card;
 
         public bool playerCard = true;
@@ -132,6 +134,17 @@ namespace Necropanda
                 ScaleCard(pickupScale, true);
                 ShowArt(false);
 
+                //Create a space where this card was
+                placeholder = new GameObject();
+                placeholder.transform.SetParent(this.transform.parent);
+                LayoutElement le = placeholder.AddComponent<LayoutElement>();
+                le.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
+                le.preferredHeight = this.GetComponent<LayoutElement>().preferredHeight;
+                le.flexibleHeight = 0;
+                le.flexibleWidth = 0;
+
+                placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
+
                 lastDeck = deck;
                 deck.RemoveCard(this);
 
@@ -177,6 +190,30 @@ namespace Necropanda
                 transform.position += new Vector3(0, 0, -50);
 
                 lastPos = newPos;
+
+                Deck2D deck = lastDeck;
+                if (newDeck != null)
+                    deck = newDeck;
+
+                int newSibIndex = deck.transform.childCount;
+
+                //Move cards out of the way to make room for this one
+                for(int i = 0; i < deck.transform.childCount; i++)
+                {
+                    if (this.transform.position.x < deck.transform.GetChild(i).position.x)
+                    {
+                        newSibIndex = i;
+
+                        if (placeholder.transform.GetSiblingIndex() < newSibIndex)
+                        {
+                            newSibIndex--;
+                        }
+
+                        break;
+                    }
+                }
+
+                placeholder.transform.SetSiblingIndex(newSibIndex);
             }
         }
 
@@ -208,6 +245,14 @@ namespace Necropanda
 
                 dragManager.canDrag = true;
                 dragManager.StartDragging(null);
+            }
+
+            if (placeholder != null)
+            {
+                this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+                //TODO - If in new deck, ignore sibling index
+                Destroy(placeholder);
+                placeholder = null;
             }
         }
 

@@ -329,7 +329,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3626117949360328245}
-  - component: {fileID: 366992832279587631}
   - component: {fileID: 6340122642719762941}
   - component: {fileID: 3339354522276066346}
   m_Layer: 5
@@ -366,33 +365,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 69.3612}
   m_SizeDelta: {x: 260.63, y: 267.6455}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &366992832279587631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2257918834246738367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189404465d9c59c43a05bf3aa7ea0325, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  group: {fileID: 2356830973585653326}
-  collection: 0
-  showArt: 1
-  availableCards: 0100000002000000
-  maxCards: 3
-  deckScale: 0.5
-  highlightColor: {r: 0, g: 1, b: 0.14668608, a: 0}
-  highlightSpeed: 0.2
-  cardPlacedSound:
-    Guid:
-      Data1: 971672856
-      Data2: 1135820981
-      Data3: -1808950359
-      Data4: 1025540801
-    Path: event:/UI/Card Placed/Card placed down
 --- !u!222 &6340122642719762941
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -415,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -521,6 +493,7 @@ GameObject:
   - component: {fileID: 9094344175882188261}
   - component: {fileID: 6321982774283659498}
   - component: {fileID: 280307144790387983}
+  - component: {fileID: 5597177905596452453}
   m_Layer: 5
   m_Name: DeckGroup
   m_TagString: Untagged
@@ -610,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 1, b: 0.11372549, a: 0}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
@@ -646,6 +619,33 @@ MonoBehaviour:
     currentTime: 0
     forward: 0
   offset: {x: 0, y: 0.5}
+--- !u!114 &5597177905596452453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2356830973585653326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189404465d9c59c43a05bf3aa7ea0325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  group: {fileID: 2356830973585653326}
+  collection: 0
+  showArt: 1
+  availableCards: 0100000002000000
+  maxCards: 3
+  deckScale: 0.5
+  highlightColor: {r: 0, g: 1, b: 0.14668608, a: 0}
+  highlightSpeed: 0.2
+  cardPlacedSound:
+    Guid:
+      Data1: 971672856
+      Data2: 1135820981
+      Data3: -1808950359
+      Data4: 1025540801
+    Path: event:/UI/Card Placed/Card placed down
 --- !u!1 &2727653126329589496
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,7 +126,7 @@ namespace Necropanda
                 case E_Statuses.Reflect:
                     if (deck != null)
                     {
-                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
+                        GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
                     }
                     break;
                 case E_Statuses.Enlightened:
@@ -137,14 +137,14 @@ namespace Necropanda
                     empowerDeck = apply;
                     if (deck != null)
                     {
-                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
+                        GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
                     }
                     break;
                 case E_Statuses.WeakenDeck:
                     weakenDeck = apply;
                     if (deck != null)
                     {
-                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
+                        GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
                     }
                     break;
                 //Negative Effects

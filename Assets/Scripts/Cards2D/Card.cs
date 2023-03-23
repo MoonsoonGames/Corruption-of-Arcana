@@ -151,9 +151,12 @@ namespace Necropanda
 
         public void ShowUnavailableOverlay(int availableArcana)
         {
-            bool unavailable = availableArcana < spell.arcanaCost && spell.arcanaCost > 0 ? true : false;
+            if (spell != null)
+            {
+                bool unavailable = availableArcana < spell.arcanaCost && spell.arcanaCost > 0 ? true : false;
 
-            unavailableOverlay.SetActive(unavailable);
+                unavailableOverlay.SetActive(unavailable);
+            }
         }
 
         public void CastSpell(Character target, Character caster)
