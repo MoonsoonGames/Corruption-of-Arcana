@@ -77,7 +77,7 @@ namespace Necropanda
             shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
-            cursedMaxHealth = (int)(maxHealth * 0.8);
+            cursedMaxHealth = (int)(maxHealth * 0.75);
 
             healthSlider.Setup(maxHealth);
             healthSlider.SetSliderValue(health);
