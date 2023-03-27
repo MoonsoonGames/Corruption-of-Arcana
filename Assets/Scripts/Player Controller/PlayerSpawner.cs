@@ -25,7 +25,7 @@ namespace Necropanda
             cmBrain = GetComponentInChildren<CinemachineBrain>();
             freeLook = GetComponentInChildren<CinemachineFreeLook>();
             SpawnPlayer();
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
 
         void SpawnPlayer()
@@ -65,8 +65,8 @@ namespace Necropanda
             //Setting up cam free look
             Vector3 localPos = freeLook.transform.localPosition;
 
-            cmBrain.gameObject.transform.parent = controller.gameObject.transform;
-            freeLook.gameObject.transform.parent = controller.gameObject.transform;
+            //cmBrain.gameObject.transform.parent = controller.gameObject.transform;
+            //freeLook.gameObject.transform.parent = controller.gameObject.transform;
 
             freeLook.transform.localPosition = localPos;
 
