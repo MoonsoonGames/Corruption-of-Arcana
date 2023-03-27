@@ -105,5 +105,11 @@ namespace Necropanda
                 quest.LoadBaseQuestData();
             }
         }
+
+        [ContextMenu("Reset Quest Data")]
+        public void ResetQuestData()
+        {
+            QuestQuickReset.QuestResetStatic();
+        }
     }
 }

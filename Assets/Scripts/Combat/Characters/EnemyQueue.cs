@@ -25,7 +25,7 @@ namespace Necropanda
 
         public void UpdateUI()
         {
-            countText.text = loadCombatManager.enemies.Count.ToString();
+            countText.text = "x " + loadCombatManager.enemies.Count.ToString();
 
             if (loadCombatManager.enemies.Count > 0)
             {

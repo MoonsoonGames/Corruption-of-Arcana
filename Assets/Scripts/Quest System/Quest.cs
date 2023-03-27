@@ -17,6 +17,7 @@ namespace Necropanda
 
         #region Variables
 
+        [Header("Basic Info")]
         public string questName;
         public bool mainQuest;
         public int questNumber;
@@ -24,6 +25,7 @@ namespace Necropanda
         public string questDescription;
         string questGiver = "";
 
+        [Header("Advanced Info")]
         public E_QuestStates state;
         public int currentProgress = -1;
         public int maxProgress = 1;
@@ -80,8 +82,7 @@ namespace Necropanda
 
         public void StartQuest(string questGiver, Quest parent)
         {
-            if (state != E_QuestStates.NotStarted)
-                return;
+            Debug.Log("Start quest " + questName);
 
             if (parent != null)
                 parentQuest = parent;
@@ -100,8 +101,7 @@ namespace Necropanda
         [ContextMenu("Quest Progress")]
         public void QuestProgress()
         {
-            //currently this only allows quests with a linear progression, so no choices yet
-            if (state != E_QuestStates.InProgress && linear)
+            if (state != E_QuestStates.InProgress)
                 return;
 
             currentProgress++;

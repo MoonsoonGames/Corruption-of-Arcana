@@ -12,7 +12,7 @@ DO NOT ADD ANY ENUMS AT THE START OF THE LIST!!!
 
 public enum E_DamageTypes
 {
-    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana
+    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana, Summon
 }
 
 public enum E_SpellTargetType
@@ -27,7 +27,7 @@ public enum E_StatusTargetType
 
 public enum E_Statuses
 {
-    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse, Enlightened
+    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse, Enlightened, Blinded
 }
 
 public enum E_ProjectilePoints

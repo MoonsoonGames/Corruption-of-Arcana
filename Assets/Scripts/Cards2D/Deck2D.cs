@@ -41,6 +41,22 @@ namespace Necropanda
         #region Cards
 
         CardDrag2D[] cards;
+        
+        public List<GameObject> GetCards()
+        {
+            List<GameObject> cardObjects = new List<GameObject>();
+
+            if (cards == null)
+                return cardObjects;
+
+            foreach (var item in cards)
+            {
+                cardObjects.Add(item.gameObject);
+            }
+            Debug.Log(cards.Length + " cards in hand || " + cardObjects.Count + " objects in list");
+            return cardObjects;
+        }
+
         public List<E_CardTypes> availableCards;
         public int maxCards = 3;
         public int CurrentCardsLength()
@@ -99,7 +115,7 @@ namespace Necropanda
             if (timeline != null)
                 player = timeline.player;
 
-            untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
+            untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
 
             buildDeck = GetComponentInParent<BuildDeck>();
@@ -127,6 +143,7 @@ namespace Necropanda
                     CardDrag2D currentCard = dragManager.draggedCard;
                     currentCard.newDeck = this;
                     currentCard.ScaleCard(currentCard.hoverScale, true);
+                    currentCard.placeholder.transform.SetParent(this.transform);
                     Highlight(true);
                 }
             }

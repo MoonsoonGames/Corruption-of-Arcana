@@ -77,7 +77,7 @@ namespace Necropanda
             shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
-            cursedMaxHealth = (int)(maxHealth * 0.8);
+            cursedMaxHealth = (int)(maxHealth * 0.75);
 
             healthSlider.Setup(maxHealth);
             healthSlider.SetSliderValue(health);
@@ -127,7 +127,7 @@ namespace Necropanda
         /// <returns>The true value (affected by resistances and shield) of the effect</returns>
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
-            if (CheckGodMode())
+            if (CheckGodMode() && character.stats.characterName == "Taro")
             {
                 return 0;
             }

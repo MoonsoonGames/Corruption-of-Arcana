@@ -22,7 +22,7 @@ namespace Necropanda
         public SpawnArcanaSymbol arcanaSpawner;
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI descriptionText;
-        public Image cardBackground;
+        public Image cardFaceLowOpacity;
         public Image cardFace;
         public GameObject unavailableOverlay;
 
@@ -40,9 +40,13 @@ namespace Necropanda
             }
             if (spell.background != null)
                 background.sprite = spell.background;
+            cardFace.sprite = spell.cardImage;
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
+
+            cardFaceLowOpacity.sprite = spell.cardImage;
+            cardFaceLowOpacity.gameObject.SetActive(spell.cardImage != null);
             cardFace.sprite = spell.cardImage;
             ShowSymbols();
             if (cardFace.sprite == null)
@@ -147,9 +151,12 @@ namespace Necropanda
 
         public void ShowUnavailableOverlay(int availableArcana)
         {
-            bool unavailable = availableArcana < spell.arcanaCost && spell.arcanaCost > 0 ? true : false;
+            if (spell != null)
+            {
+                bool unavailable = availableArcana < spell.arcanaCost && spell.arcanaCost > 0 ? true : false;
 
-            unavailableOverlay.SetActive(unavailable);
+                unavailableOverlay.SetActive(unavailable);
+            }
         }
 
         public void CastSpell(Character target, Character caster)
