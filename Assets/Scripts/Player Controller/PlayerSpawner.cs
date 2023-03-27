@@ -63,18 +63,32 @@ namespace Necropanda
 
 
             //Setting up cam free look
-            Vector3 localPos = freeLook.transform.localPosition;
+            //Vector3 localPos = freeLook.transform.localPosition;
 
             //cmBrain.gameObject.transform.parent = controller.gameObject.transform;
             //freeLook.gameObject.transform.parent = controller.gameObject.transform;
 
-            freeLook.transform.localPosition = localPos;
+            //rotation should look at player
+
+            Vector3 dir = spawnRot.eulerAngles.normalized * 3;
+
+            Vector3 camPos = spawnPos + dir;
+
+            Quaternion camRot = Quaternion.FromToRotation(camPos, spawnPos);
+
+            freeLook.ForceCameraPosition(spawnPos, camRot);
+
+            //freeLook.transform.localPosition = localPos;
 
             controller.cam = Camera.main;
             controller.cmBrain = cmBrain;
 
             freeLook.Follow = controller.lookAtTarget.transform;
+            freeLook.ResolveFollow(freeLook.Follow);
             freeLook.LookAt = controller.lookAtTarget.transform;
+            freeLook.ResolveLookAt(freeLook.LookAt);
+
+            freeLook.ForceCameraPosition(spawnPos, camRot);
         }
 
         private void OnDrawGizmos()
