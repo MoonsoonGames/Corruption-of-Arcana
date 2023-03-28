@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -18,6 +19,8 @@ namespace Necropanda
             base.Start();
 
             buildDeck = GetComponentInParent<BuildDeck>();
+
+            Invoke("ResetArrays", 0.5f);
         }
 
         public override void RemoveCard(CardDrag2D card)
@@ -60,6 +63,38 @@ namespace Necropanda
             {
                 Debug.LogError("No build deck");
             }
+        }
+
+        protected override void ResetArrays()
+        {
+            base.ResetArrays();
+            int cost = 0;
+
+            foreach (CardDrag2D card in cards)
+            {
+                Spell spell = card.GetComponent<Card>().spell;
+
+                if (spell != null)
+                    cost += spell.loadoutCost;
+            }
+
+            currentLoadout = cost;
+            UpdateText();
+        }
+
+        public int maxLoadoutCost = 7;
+        int currentLoadout = 0;
+
+        public TextMeshProUGUI costText;
+
+        private void UpdateText()
+        {
+            costText.text = "Space: " + currentLoadout + " / " + maxLoadoutCost;
+        }
+
+        public bool AvailableSpaces()
+        {
+            return currentLoadout <= maxLoadoutCost;
         }
     }
 }

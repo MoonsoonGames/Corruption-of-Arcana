@@ -204,7 +204,7 @@ namespace Necropanda
         /// Needs to be called whenever a card is removed or added to this deck
         /// Clears the array and resets it to what is currently in the deck
         /// </summary>
-        protected void ResetArrays()
+        protected virtual void ResetArrays()
         {
             Highlight(false);
 

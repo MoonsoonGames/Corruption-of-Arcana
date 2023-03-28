@@ -43,6 +43,7 @@ namespace Necropanda
 
         [Header("Spell Logic")]
         public float speed;
+        public int loadoutCost;
         public int arcanaCost;
         public int potionCost;
         public E_PotionType potionType;

@@ -27,13 +27,13 @@ MonoBehaviour:
   timelineColor: {r: 0.6132076, g: 0.47865456, b: 0.19958171, a: 255}
   timelineIcon: {fileID: -1117572714, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0.55
+  loadoutCost: 1
   arcanaCost: 2
   potionCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
-  spawnEnemies: []
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
+    summon: {fileID: 0}
     statuses: []
   - target: 1
     effectType: 2
@@ -57,6 +58,7 @@ MonoBehaviour:
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
+    summon: {fileID: 0}
     statuses:
     - status: {fileID: 11400000, guid: 1a66da312d3e2ab4ab4effe9ada7a53c, type: 2}
       duration: 3
@@ -68,6 +70,7 @@ MonoBehaviour:
   projectilePoints: 0000000001000000
   impactObject: {fileID: 6441297445223667176, guid: c3de2173c0f41884da1878ebdb1eb46e,
     type: 3}
+  projectileFXObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
   idealTarget: 1

@@ -61,5 +61,9 @@ namespace Necropanda
                 Debug.LogError("No build deck");
             }
         }
+
+        public int maxLoadoutCost = 7;
+
+
     }
 }
