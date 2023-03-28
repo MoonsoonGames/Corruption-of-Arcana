@@ -15,11 +15,8 @@ MonoBehaviour:
   spellName: Strength
   nameImage: {fileID: 21300000, guid: 626689df0d6571041ab69a981dcdb985, type: 3}
   flavourText: 
-  spellDescription: 'Deal 10 $physical$
-
-
-    Increase max $arcana$ by 2 points for
-    1 turns'
+  spellDescription: Sacrifice half of your shield to deal damage equal to twice the
+    amount of shield discarded
   cardImage: {fileID: 0}
   background: {fileID: 0}
   cardType: 1
@@ -30,6 +27,7 @@ MonoBehaviour:
   loadoutCost: 1
   arcanaCost: 1
   potionCost: 0
+  shieldCost: 0.5
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -42,27 +40,15 @@ MonoBehaviour:
   spellModules:
   - target: 1
     effectType: 0
-    value: 10
-    hitCount: 1
-    executeThreshold: 0
-    valueScalingDamageTaken: 0
-    valueScalingPerDiscard: 0
-    valueScalingPerStatus: 0
-    summon: {fileID: 0}
-    statuses: []
-  - target: 0
-    effectType: 0
     value: 0
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 2
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
-    statuses:
-    - status: {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
-      duration: 2
-      applyOverShield: 1
+    statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
