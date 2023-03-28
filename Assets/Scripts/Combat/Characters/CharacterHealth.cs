@@ -203,6 +203,20 @@ namespace Necropanda
         /// <returns>Character's health percentage affected by the damage</returns>
         public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
 
+        public int GetShieldRemovedPercentage(float percentage)
+        {
+            int currentShield = shield;
+            int newShield = (int)(shield * percentage);
+
+            return currentShield - newShield;
+        }
+
+        public void SetShieldPercentage(float percentage)
+        {
+            shield = (int)(shield * percentage);
+            UpdateHealthUI();
+        }
+
         #endregion
 
         #region UI

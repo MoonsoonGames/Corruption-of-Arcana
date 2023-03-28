@@ -71,11 +71,11 @@ namespace Necropanda
                     {
                         if (spellUtility.spell.spawnAsCard)
                         {
-                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
                         }
                         else
                         {
-                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
                         }
 
                         enemyManager.AddSpellInstance(newSpellInstance);
