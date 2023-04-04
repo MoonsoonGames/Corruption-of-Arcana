@@ -139,6 +139,11 @@ namespace Necropanda
 
         protected Deck2D[] decks;
 
+        public virtual bool CanEndTurn()
+        {
+            return true;
+        }
+
         public virtual float EndTurn(float endTurnDelay)
         {
             decks = GameObject.FindObjectsOfType<Deck2D>();

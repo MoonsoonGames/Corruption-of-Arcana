@@ -52,6 +52,9 @@ namespace Necropanda
 
         public void EndTurnButton()
         {
+            if (enabled == false || CombatManager.instance.CanEndTurn() == false)
+                return;
+
             DisableButton();
             DragManager.instance.canDrag = false;
             PressSound();

@@ -469,6 +469,8 @@ namespace Necropanda
 
         #endregion
 
+        #region Statuses
+
         public void RemoveStatusesOnCharacter(Character target)
         {
             List<CombatHelperFunctions.StatusInstance> statusesToRemove = new List<CombatHelperFunctions.StatusInstance>();
@@ -500,6 +502,28 @@ namespace Necropanda
             }
 
             return statusCount;
+        }
+
+        #endregion
+
+        public bool CheckTarget(Spell spell, Character character)
+        {
+            bool found = false;
+
+            foreach (var item in spells)
+            {
+                if (item.spell == spell && item.target == character)
+                {
+                    Debug.Log("Found " + spell.spellName + " targetting " + character.name);
+                    found = true;
+                }
+                else
+                {
+                    Debug.Log("Did not find " + spell.spellName + " targetting " + character.name);
+                }
+            }
+
+            return found;
         }
     }
 }

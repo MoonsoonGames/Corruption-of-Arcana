@@ -15,16 +15,51 @@ namespace Necropanda
 
         public TutorialCards[] tutorialCards;
 
+        bool setup = false;
+
+        public override bool CanEndTurn()
+        {
+            if (!setup)
+            {
+                setup = true;
+                return true;
+            }
+
+            bool success = true;
+
+            if (currentTurn < tutorialCards.Length)
+            {
+                foreach (var spellTarget in tutorialCards[currentTurn].spellTargets)
+                {
+                    Character target = spellTarget.target < 0 ? player : enemyTeamManager.team[spellTarget.target];
+
+                    if (Timeline.instance.CheckTarget(spellTarget.spell, target) == false)
+                        success = false;
+                }
+            }
+
+            return success;
+        }
+
+        public override float EndTurn(float endTurnDelay)
+        {
+            float delay = base.EndTurn(endTurnDelay);
+
+            currentTurn++;
+
+            return delay;
+        }
+
         public override void StartNextTurn()
         {
             if (currentTurn < tutorialCards.Length)
             {
-                foreach(var card in tutorialCards[currentTurn].spells)
+                foreach(var spellTarget in tutorialCards[currentTurn].spellTargets)
                 {
-                    DeckManager.instance.AddToStart(card);
+                    DeckManager.instance.AddToStart(spellTarget.spell);
                 }
 
-                for (int i = 0; i < tutorialCards[currentTurn].spells.Count; i++)
+                for (int i = 0; i < tutorialCards[currentTurn].spellTargets.Count; i++)
                 {
                     GameObject card = Instantiate(cardPrefab, playerHandDeck.transform) as GameObject;
                     CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
@@ -66,14 +101,19 @@ namespace Necropanda
             Timeline.instance.ActivateTurnModifiers();
 
             playerTeamManager.StartTurn(); enemyTeamManager.StartTurn();
-
-            currentTurn++;
         }
     }
 
     [System.Serializable]
     public struct TutorialCards
     {
-        public List<Spell> spells;
+        public List<SpellTarget> spellTargets;
+    }
+
+    [System.Serializable]
+    public struct SpellTarget
+    {
+        public Spell spell;
+        public int target;
     }
 }
