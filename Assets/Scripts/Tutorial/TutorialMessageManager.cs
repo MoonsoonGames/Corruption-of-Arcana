@@ -38,10 +38,10 @@ namespace Necropanda
             }
         }
 
-        [ContextMenu("Next step")]
-        public void NextStep()
+        public void ProgressStep(bool advance)
         {
-            step++;
+            step = advance ? step + 1 : step - 1;
+            step = Mathf.Clamp(step, 0, turnMessages[turn].stepMessages.Length);
             ShowMessage();
         }
 
