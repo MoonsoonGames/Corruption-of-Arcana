@@ -11,8 +11,6 @@ namespace Necropanda
 {
     public class TutorialCombatManager : CombatManager
     {
-        int currentTurn = 0;
-
         public TutorialCards[] tutorialCards;
 
         bool setup = false;
@@ -39,15 +37,6 @@ namespace Necropanda
             }
 
             return success;
-        }
-
-        public override float EndTurn(float endTurnDelay)
-        {
-            float delay = base.EndTurn(endTurnDelay);
-
-            currentTurn++;
-
-            return delay;
         }
 
         public override void StartNextTurn()

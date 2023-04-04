@@ -13,6 +13,8 @@ namespace Necropanda
 {
     public class CombatManager : MonoBehaviour
     {
+        public int currentTurn = 0;
+
         public Character player;
         public TeamManager playerTeamManager;
         public TeamManager enemyTeamManager;
@@ -157,6 +159,7 @@ namespace Necropanda
 
             float delay = Timeline.instance.PlayTimeline() + endTurnDelay;
 
+            currentTurn++;
             Invoke("StartNextTurn", delay);
             return delay;
         }
