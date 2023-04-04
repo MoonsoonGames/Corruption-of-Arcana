@@ -48,7 +48,7 @@ namespace Necropanda
                     DeckManager.instance.AddToStart(spellTarget.spell);
                 }
 
-                for (int i = 0; i < tutorialCards[currentTurn].spellTargets.Count; i++)
+                for (int i = 0; i < tutorialCards[currentTurn].spellTargets.Length; i++)
                 {
                     GameObject card = Instantiate(cardPrefab, playerHandDeck.transform) as GameObject;
                     CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
@@ -90,13 +90,15 @@ namespace Necropanda
             Timeline.instance.ActivateTurnModifiers();
 
             playerTeamManager.StartTurn(); enemyTeamManager.StartTurn();
+
+            TutorialMessageManager.instance.ShowMessageTurn(currentTurn);
         }
     }
 
     [System.Serializable]
     public struct TutorialCards
     {
-        public List<SpellTarget> spellTargets;
+        public SpellTarget[] spellTargets;
     }
 
     [System.Serializable]
