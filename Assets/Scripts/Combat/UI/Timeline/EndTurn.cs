@@ -14,14 +14,6 @@ namespace Necropanda
 {
     public class EndTurn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Deck2D playerHandDeck; //Hand that player cards are drawn into
-        public Deck2D potionDeck; //Hand that potion cards are drawn into
-        public Spell[] potions;
-        Deck2D[] decks;
-        public GameObject cardPrefab; //Prefab of the parent card type
-        Timeline timeline;
-        TeamManager[] teamManagers;
-
         Button endTurnButton;
         public Color buttonAvailable = new Color(0, 0, 0, 255);
         public Color buttonUnavailable = new Color(0, 0, 0, 255);
@@ -29,19 +21,17 @@ namespace Necropanda
         bool waitingForStartTurn = false;
         bool waitingForSound = false;
 
-        public float endTurndelay = 2f;
+        public float endTurnDelay = 1f;
 
         ArcanaManager arcanaManager;
         DeckTab deckTab;
 
         private void Start()
         {
-            timeline = GameObject.FindObjectOfType<Timeline>();
-            teamManagers = GameObject.FindObjectsOfType<TeamManager>();
             endTurnButton = GetComponent<Button>();
             endTurnButton.image.color = buttonAvailable;
 
-            arcanaManager = timeline.GetArcanaManager();
+            arcanaManager = Timeline.instance.GetArcanaManager();
             deckTab = GetComponentInParent<DeckTab>();
 
             Invoke("EndTurnButton", 0.1f);
@@ -68,16 +58,7 @@ namespace Necropanda
 
             deckTab.SelectHand();
 
-            decks = GameObject.FindObjectsOfType<Deck2D>();
-            foreach (Deck2D deck in decks)
-            {
-                if (deck != playerHandDeck)
-                {
-                    deck.RemoveAllCards(false);
-                }
-            }
-
-            float delay = timeline.PlayTimeline() + endTurndelay;
+            float delay = CombatManager.instance.EndTurn(endTurnDelay);
 
             SetUIEnabled(false);
             Invoke("StartNextTurn", delay);
@@ -89,65 +70,11 @@ namespace Necropanda
             DragManager.instance.canDrag = true;
             //Debug.Log("New Turn");
 
-            //Only give cards if player's hand isn't full
-            if (playerHandDeck.CurrentCardsLength() < playerHandDeck.maxCards)
-            {
-                //Get the difference between the current and max cards to determine how many need to be drawn in
-                float difference = playerHandDeck.maxCards - playerHandDeck.CurrentCardsLength();
-
-                for (int i = 0; i < difference; i++)
-                {
-                    GameObject card = Instantiate(cardPrefab, playerHandDeck.transform) as GameObject;
-                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
-
-                    //Add the card to the array
-                    playerHandDeck.AddCard(cardDrag);
-
-                    //Reset card scales
-                    cardDrag.ScaleCard(1, false);
-                }
-
-                //Spawn sound effect for cards
-                PlayShuffleSound();
-            }
-
-            RedrawPotions();
-
-            timeline.ActivateTurnModifiers();
-
-            foreach (TeamManager manager in teamManagers)
-            {
-                manager.StartTurn();
-            }
             DisableButton();
             waitingForStartTurn = true;
             Invoke("EnableButton", 2f);
 
             arcanaManager.CheckArcana(0);
-        }
-
-        void RedrawPotions()
-        {
-            potionDeck.RemoveAllCards(false);
-
-            for (int i = 0; i < 4; i++)
-            {
-                if (PotionManager.instance.PotionAvailable(potions[i].potionType, potions[i].potionCost))
-                {
-                    GameObject card = Instantiate(cardPrefab, potionDeck.transform) as GameObject;
-                    DrawCard drawCard = card.GetComponent<DrawCard>();
-                    drawCard.draw = false;
-                    drawCard.Setup(potions[i]);
-
-                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
-
-                    //Add the card to the array
-                    potionDeck.AddCard(cardDrag);
-
-                    //Reset card scales
-                    cardDrag.ScaleCard(1, false);
-                }
-            }
         }
 
         void DisableButton()
@@ -176,12 +103,6 @@ namespace Necropanda
 
         public StudioEventEmitter hoverEmitter;
         public StudioParameterTrigger pressTrigger;
-        public EventReference cardShuffle;
-
-        void PlayShuffleSound()
-        {
-            RuntimeManager.PlayOneShot(cardShuffle);
-        }
 
         void PlayHoverSound()
         {

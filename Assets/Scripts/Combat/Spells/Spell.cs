@@ -88,6 +88,8 @@ namespace Necropanda
 
         #region Spellcasting
 
+        #region Cast Time
+
         /// <summary>
         /// Checks the delay between casting the spell and the visual projectile(s) hitting the target
         /// </summary>
@@ -113,6 +115,8 @@ namespace Necropanda
 
             return time;
         }
+
+        #endregion
 
         #region Casting Spell
 
@@ -245,6 +249,8 @@ namespace Necropanda
             }
         }
 
+        #endregion
+
         #region Affect Characters
 
         /// <summary>
@@ -372,8 +378,6 @@ namespace Necropanda
             int value = (int)Mathf.Round(floatValue);
             return value;
         }
-
-        #endregion
 
         #endregion
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -25,7 +26,7 @@ namespace Necropanda
         public Image backdropImage;
         public GameObject loadingImage;
 
-        private void Start()
+        protected void Start()
         {
             instance = this;
             Cursor.lockState = CursorLockMode.Confined;
@@ -36,7 +37,7 @@ namespace Necropanda
             Invoke("Setup", 0.1f);
         }
 
-        void Setup()
+        protected void Setup()
         {
             loadingImage.SetActive(false);
 
@@ -90,7 +91,7 @@ namespace Necropanda
             }
         }
 
-        void ShowEndScreen(bool victory)
+        protected void ShowEndScreen(bool victory)
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
@@ -132,5 +133,96 @@ namespace Necropanda
 
             return list;
         }
+
+        public Deck2D playerHandDeck; //Hand that player cards are drawn into
+        public Deck2D potionDeck; //Hand that potion cards are drawn into
+
+        protected Deck2D[] decks;
+
+        public virtual float EndTurn(float endTurnDelay)
+        {
+            decks = GameObject.FindObjectsOfType<Deck2D>();
+            foreach (Deck2D deck in decks)
+            {
+                if (deck != playerHandDeck)
+                {
+                    deck.RemoveAllCards(false);
+                }
+            }
+
+            float delay = Timeline.instance.PlayTimeline() + endTurnDelay;
+
+            Invoke("StartNextTurn", delay);
+            return delay;
+        }
+
+        public virtual void StartNextTurn()
+        {
+            //Only give cards if player's hand isn't full
+            if (playerHandDeck.CurrentCardsLength() < playerHandDeck.maxCards)
+            {
+                //Get the difference between the current and max cards to determine how many need to be drawn in
+                float difference = playerHandDeck.maxCards - playerHandDeck.CurrentCardsLength();
+
+                for (int i = 0; i < difference; i++)
+                {
+                    GameObject card = Instantiate(cardPrefab, playerHandDeck.transform) as GameObject;
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+
+                    //Add the card to the array
+                    playerHandDeck.AddCard(cardDrag);
+
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
+                }
+
+                //Spawn sound effect for cards
+                PlayShuffleSound();
+            }
+
+            RedrawPotions();
+
+            Timeline.instance.ActivateTurnModifiers();
+
+            playerTeamManager.StartTurn(); enemyTeamManager.StartTurn();
+        }
+
+        public GameObject cardPrefab; //Prefab of the parent card type
+        public Spell[] potions;
+
+        protected void RedrawPotions()
+        {
+            potionDeck.RemoveAllCards(false);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (PotionManager.instance.PotionAvailable(potions[i].potionType, potions[i].potionCost))
+                {
+                    GameObject card = Instantiate(cardPrefab, potionDeck.transform) as GameObject;
+                    DrawCard drawCard = card.GetComponent<DrawCard>();
+                    drawCard.draw = false;
+                    drawCard.Setup(potions[i]);
+
+                    CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
+
+                    //Add the card to the array
+                    potionDeck.AddCard(cardDrag);
+
+                    //Reset card scales
+                    cardDrag.ScaleCard(1, false);
+                }
+            }
+        }
+
+        #region Sound Effects
+
+        public EventReference cardShuffle;
+
+        protected void PlayShuffleSound()
+        {
+            RuntimeManager.PlayOneShot(cardShuffle);
+        }
+
+        #endregion
     }
 }

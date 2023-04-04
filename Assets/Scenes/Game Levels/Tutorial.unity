@@ -589,19 +589,19 @@ PrefabInstance:
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: enemies.Array.size
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: cd092a6db8a9e4a4097af2acdf435e03,
+      objectReference: {fileID: 11400000, guid: 3fceb2a2ea726a949a3d6e1263f0cd96,
         type: 2}
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: enemies.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 9ec8d7e3ff113c74a91540fc67a9dc95,
+      objectReference: {fileID: 11400000, guid: 3fceb2a2ea726a949a3d6e1263f0cd96,
         type: 2}
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
@@ -2234,6 +2234,11 @@ PrefabInstance:
       objectReference: {fileID: 946320890}
     - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
         type: 3}
+      propertyPath: potionDeck
+      value: 
+      objectReference: {fileID: 537079864}
+    - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+        type: 3}
       propertyPath: defeatScreen
       value: 
       objectReference: {fileID: 1368257370}
@@ -2254,6 +2259,11 @@ PrefabInstance:
       objectReference: {fileID: 1191858132}
     - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
         type: 3}
+      propertyPath: playerHandDeck
+      value: 
+      objectReference: {fileID: 379032218}
+    - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+        type: 3}
       propertyPath: enemyTeamManager
       value: 
       objectReference: {fileID: 1729430396}
@@ -2262,5 +2272,60 @@ PrefabInstance:
       propertyPath: playerTeamManager
       value: 
       objectReference: {fileID: 922119378}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 82a2ec8d3a1d483459d6629f6edbec52, type: 3}
+--- !u!1 &4589516989559181451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4589516989826584664, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+    type: 3}
+  m_PrefabInstance: {fileID: 4589516989559181450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4589516989559181452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589516989559181451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19135905177c31646b85a06b2c890672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 946320890}
+  playerTeamManager: {fileID: 922119378}
+  enemyTeamManager: {fileID: 1729430396}
+  redirectedCharacter: {fileID: 0}
+  victoryScreen: {fileID: 1191858132}
+  defeatScreen: {fileID: 1368257370}
+  backdropImage: {fileID: 1118964786}
+  loadingImage: {fileID: 364030213}
+  playerHandDeck: {fileID: 379032218}
+  potionDeck: {fileID: 537079864}
+  cardPrefab: {fileID: 8893594556894244930, guid: 7c3598002ffd17845abf4026f27f5c10,
+    type: 3}
+  potions:
+  - {fileID: 11400000, guid: d15283461dc1ebc41a91b29c339f3041, type: 2}
+  - {fileID: 11400000, guid: c7f0589e943c785449f76b3bc30fbbcd, type: 2}
+  - {fileID: 11400000, guid: 05eb97bc0bc2d104f9b3a8f75ea2a7d9, type: 2}
+  - {fileID: 11400000, guid: 62efdae5e83c5be49aab4fed788c7f7d, type: 2}
+  cardShuffle:
+    Guid:
+      Data1: 1247719785
+      Data2: 1087473341
+      Data3: 1888519096
+      Data4: 460011053
+    Path: event:/UI/Card Shuffle/Card Shuffle Randomised
+  tutorialCards:
+  - spells:
+    - {fileID: 11400000, guid: f1d5ff832fb527343a3a28f226dba3d3, type: 2}
+    - {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
+  - spells:
+    - {fileID: 11400000, guid: 39c886e3104ac7441b667a904776b425, type: 2}
+    - {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
+  - spells:
+    - {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
+    - {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
+    - {fileID: 11400000, guid: 0862782c0418ebb4c896bf24dc95fd4c, type: 2}
+    - {fileID: 11400000, guid: eee1c554563d8114091ba9b77553b299, type: 2}
