@@ -230,18 +230,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cd3fe53340e34c4886a48d6bf15fd5d, type: 3}
---- !u!114 &457921197 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6808516004782810323, guid: 6cd3fe53340e34c4886a48d6bf15fd5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 457921196}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &457921198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4393746935410581822, guid: 6cd3fe53340e34c4886a48d6bf15fd5d,
@@ -851,6 +839,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3731661797055633548}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1331180129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6630529245985135101, guid: 6cd3fe53340e34c4886a48d6bf15fd5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 457921196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1368257370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3731661797852736470, guid: 93fcb1b03dd625240b642e42f4a5e61b,
@@ -1770,9 +1770,14 @@ PrefabInstance:
       objectReference: {fileID: 457921198}
     - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
+      propertyPath: pressEmitter
+      value: 
+      objectReference: {fileID: 1331180129}
+    - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
       propertyPath: pressTrigger
       value: 
-      objectReference: {fileID: 457921197}
+      objectReference: {fileID: 0}
     - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: playerHandDeck

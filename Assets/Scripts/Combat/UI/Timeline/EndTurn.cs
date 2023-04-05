@@ -105,7 +105,7 @@ namespace Necropanda
         #region Sound Effects
 
         public StudioEventEmitter hoverEmitter;
-        public StudioParameterTrigger pressTrigger;
+        public StudioEventEmitter pressEmitter;
 
         void PlayHoverSound()
         {
@@ -119,7 +119,8 @@ namespace Necropanda
 
         void PressSound()
         {
-            pressTrigger.TriggerParameters();
+            //hoverEmitter.Stop();
+            pressEmitter.Play();
         }
 
         #endregion
