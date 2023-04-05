@@ -18,29 +18,27 @@ namespace Necropanda
 
         #region References
 
-        Character player;
-        Character character;
-        Timeline timeline;
-        BuildDeck buildDeck;
-        DeckManager manager;
+        protected Character player;
+        protected Character character;
+        protected Timeline timeline;
+        protected DeckManager manager;
 
         public GameObject group;
-        HorizontalLayoutGroup layout;
+        protected HorizontalLayoutGroup layout;
 
-        GeneralDragArea dragArea;
-        DragManager dragManager;
+        protected GeneralDragArea dragArea;
+        protected DragManager dragManager;
 
-        bool open = true;
-        UntargettableOverlay untargettableOverlay;
+        protected bool open = true;
+        protected UntargettableOverlay untargettableOverlay;
 
-        public bool collection = true;
         public bool showArt = false;
 
         #endregion
 
         #region Cards
 
-        CardDrag2D[] cards;
+        protected CardDrag2D[] cards;
         
         public List<GameObject> GetCards()
         {
@@ -88,14 +86,14 @@ namespace Necropanda
         #endregion
 
         #region Highlight Values
-        Image deckBackground;
-        Color baseColor;
+        protected Image deckBackground;
+        protected Color baseColor;
         public Color highlightColor;
         public float highlightSpeed = 0.2f;
-        Color desiredColor;
+        protected Color desiredColor;
         #endregion
 
-        private void Start()
+        protected virtual void Start()
         {
             //Sets up base values
             ResetArrays();
@@ -109,16 +107,8 @@ namespace Necropanda
 
             layout = GetComponent<HorizontalLayoutGroup>();
 
-            character = GetComponentInParent<Character>();
-
-            timeline = GameObject.FindObjectOfType<Timeline>();
-            if (timeline != null)
-                player = timeline.player;
-
             untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
-
-            buildDeck = GetComponentInParent<BuildDeck>();
         }
 
         #endregion
@@ -173,80 +163,21 @@ namespace Necropanda
         /// Called when player drags a card away from the deck
         /// </summary>
         /// <param name="card"></param>
-        public void RemoveCard(CardDrag2D card)
+        public virtual void RemoveCard(CardDrag2D card)
         {
-            bool empower = false;
-            bool weaken = false;
-
-            if (character != null)
-            {
-                empower = character.empowerDeck;
-                weaken = character.weakenDeck;
-            }
-
             card.gameObject.transform.SetParent(dragArea.transform);
             card.deck = null;
 
             ResetArrays();
-
-            CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-            newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, empower, weaken, character, player);
-
-            if (timeline != null)
-            {
-                timeline.RemoveSpellInstance(newSpellInstance);
-                timeline.SimulateSpellEffects();
-            }
-
-            if (buildDeck != null)
-            {
-                if (collection)
-                {
-                    buildDeck.collectedSpells.Remove(newSpellInstance.spell);
-                }
-                else
-                {
-                    buildDeck.equippedSpells.Remove(newSpellInstance.spell);
-                }
-            }
         }
 
         /// <summary>
         /// Removes all cards from the deck without taking them from the timeline
         /// </summary>
-        public void RemoveAllCards(bool discard)
+        public virtual void RemoveAllCards(bool discard)
         {
+            //Overrided in most children, this is the base behaviour
             ResetArrays();
-            foreach (CardDrag2D card in cards)
-            {
-                DrawCard drawCard = card.GetComponent<DrawCard>();
-                if (drawCard != null)
-                {
-                    if (discard)
-                    {
-                        drawCard.DiscardCard();
-                    }
-                    else
-                    {
-                        drawCard.ReturnToDeck();
-                    }
-                }
-
-                if (buildDeck != null)
-                {
-                    Spell spell = card.GetComponent<Card>().spell;
-                    if (collection)
-                    {
-                        buildDeck.collectedSpells.Remove(spell);
-                    }
-                    else
-                    {
-                        buildDeck.equippedSpells.Remove(spell);
-                    }
-                }
-
-                Destroy(card.gameObject);
-            }
 
             cards = new CardDrag2D[0];
             if (timeline != null)
@@ -257,7 +188,7 @@ namespace Necropanda
         /// Called when player drops a card onto this deck
         /// </summary>
         /// <param name="card"></param>
-        public void AddCard(CardDrag2D card)
+        public virtual void AddCard(CardDrag2D card)
         {
             card.gameObject.transform.SetParent(group.transform);
             card.gameObject.transform.position = gameObject.transform.position;
@@ -266,35 +197,6 @@ namespace Necropanda
 
             ResetArrays();
 
-            if (character != null && card.playerCard)
-            {
-                CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                newSpellInstance.SetSpellInstance(card.GetComponent<Card>().spell, character.empowerDeck, character.weakenDeck, character, player);
-
-                if (timeline != null)
-                    timeline.AddSpellInstance(newSpellInstance);
-            }
-
-            if (timeline != null)
-                timeline.SimulateSpellEffects();
-
-            if (buildDeck != null)
-            {
-                Spell spell = card.GetComponent<Card>().spell;
-
-                if (spell != null)
-                {
-                    if (collection)
-                    {
-                        buildDeck.collectedSpells.Add(spell);
-                    }
-                    else
-                    {
-                        buildDeck.equippedSpells.Add(spell);
-                    }
-                }
-            }
-
             PlayCardSound();
         }
 
@@ -302,7 +204,7 @@ namespace Necropanda
         /// Needs to be called whenever a card is removed or added to this deck
         /// Clears the array and resets it to what is currently in the deck
         /// </summary>
-        void ResetArrays()
+        protected virtual void ResetArrays()
         {
             Highlight(false);
 

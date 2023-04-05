@@ -129,6 +129,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3731661797055633548}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &379032218 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8111347359234500263, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731661797055633548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c5826e9aab8fb48b2ddb1da389b118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &457921196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,6 +252,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &537079864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1950031426398141043, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731661797055633548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c5826e9aab8fb48b2ddb1da389b118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &708327446 stripped
@@ -565,19 +589,19 @@ PrefabInstance:
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: enemies.Array.size
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: cd092a6db8a9e4a4097af2acdf435e03,
+      objectReference: {fileID: 11400000, guid: 7325fc1f578787041803c7f68f6a2a0d,
         type: 2}
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: enemies.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 9ec8d7e3ff113c74a91540fc67a9dc95,
+      objectReference: {fileID: 11400000, guid: 3fceb2a2ea726a949a3d6e1263f0cd96,
         type: 2}
     - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
@@ -827,18 +851,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3731661797055633548}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1357028471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3731661797279335977, guid: 93fcb1b03dd625240b642e42f4a5e61b,
-    type: 3}
-  m_PrefabInstance: {fileID: 3731661797055633548}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189404465d9c59c43a05bf3aa7ea0325, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1368257370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3731661797852736470, guid: 93fcb1b03dd625240b642e42f4a5e61b,
@@ -1391,6 +1403,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spaces
       objectReference: {fileID: 0}
+    - target: {fileID: 3731661797599787377, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 379032218}
     - target: {fileID: 3731661797901933072, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_Name
@@ -1675,7 +1692,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerHand
       value: 
-      objectReference: {fileID: 1357028471}
+      objectReference: {fileID: 379032218}
     - target: {fileID: 4245882890734696237, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1743,6 +1760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
+      propertyPath: potionDeck
+      value: 
+      objectReference: {fileID: 537079864}
+    - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
       propertyPath: hoverEmitter
       value: 
       objectReference: {fileID: 457921198}
@@ -1751,6 +1773,11 @@ PrefabInstance:
       propertyPath: pressTrigger
       value: 
       objectReference: {fileID: 457921197}
+    - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: playerHandDeck
+      value: 
+      objectReference: {fileID: 379032218}
     - target: {fileID: 5040793171933236453, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: disableUIElements.Array.data[3]
@@ -1881,6 +1908,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4589516989559181455}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ProgressStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Necropanda.TutorialMessageManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907720943295486779, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6045265163123505180, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2006,6 +2073,41 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4589516989559181455}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ProgressStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Necropanda.TutorialMessageManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045193168641506650, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8317385993101935219, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2080,6 +2182,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -76.80008
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049344289683690527, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -62.199997
       objectReference: {fileID: 0}
     - target: {fileID: 9070904653610739265, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
@@ -2207,6 +2314,11 @@ PrefabInstance:
       objectReference: {fileID: 946320890}
     - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
         type: 3}
+      propertyPath: potionDeck
+      value: 
+      objectReference: {fileID: 537079864}
+    - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+        type: 3}
       propertyPath: defeatScreen
       value: 
       objectReference: {fileID: 1368257370}
@@ -2227,6 +2339,11 @@ PrefabInstance:
       objectReference: {fileID: 1191858132}
     - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
         type: 3}
+      propertyPath: playerHandDeck
+      value: 
+      objectReference: {fileID: 379032218}
+    - target: {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+        type: 3}
       propertyPath: enemyTeamManager
       value: 
       objectReference: {fileID: 1729430396}
@@ -2235,5 +2352,126 @@ PrefabInstance:
       propertyPath: playerTeamManager
       value: 
       objectReference: {fileID: 922119378}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4589516989826584671, guid: 82a2ec8d3a1d483459d6629f6edbec52, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 82a2ec8d3a1d483459d6629f6edbec52, type: 3}
+--- !u!1 &4589516989559181451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4589516989826584664, guid: 82a2ec8d3a1d483459d6629f6edbec52,
+    type: 3}
+  m_PrefabInstance: {fileID: 4589516989559181450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4589516989559181452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589516989559181451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19135905177c31646b85a06b2c890672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTurn: 0
+  player: {fileID: 946320890}
+  playerTeamManager: {fileID: 922119378}
+  enemyTeamManager: {fileID: 1729430396}
+  redirectedCharacter: {fileID: 0}
+  victoryScreen: {fileID: 1191858132}
+  defeatScreen: {fileID: 1368257370}
+  backdropImage: {fileID: 1118964786}
+  loadingImage: {fileID: 364030213}
+  playerHandDeck: {fileID: 379032218}
+  potionDeck: {fileID: 537079864}
+  cardPrefab: {fileID: 8893594556894244930, guid: 7c3598002ffd17845abf4026f27f5c10,
+    type: 3}
+  potions:
+  - {fileID: 11400000, guid: d15283461dc1ebc41a91b29c339f3041, type: 2}
+  - {fileID: 11400000, guid: c7f0589e943c785449f76b3bc30fbbcd, type: 2}
+  - {fileID: 11400000, guid: 05eb97bc0bc2d104f9b3a8f75ea2a7d9, type: 2}
+  - {fileID: 11400000, guid: 62efdae5e83c5be49aab4fed788c7f7d, type: 2}
+  cardShuffle:
+    Guid:
+      Data1: 1247719785
+      Data2: 1087473341
+      Data3: 1888519096
+      Data4: 460011053
+    Path: event:/UI/Card Shuffle/Card Shuffle Randomised
+  tutorialCards:
+  - spellTargets: []
+  - spellTargets:
+    - spell: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
+      target: 0
+    - spell: {fileID: 11400000, guid: f1d5ff832fb527343a3a28f226dba3d3, type: 2}
+      target: -1
+  - spellTargets:
+    - spell: {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
+      target: -1
+    - spell: {fileID: 11400000, guid: 39c886e3104ac7441b667a904776b425, type: 2}
+      target: 0
+  - spellTargets:
+    - spell: {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c, type: 2}
+      target: -1
+    - spell: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
+      target: 0
+    - spell: {fileID: 11400000, guid: eee1c554563d8114091ba9b77553b299, type: 2}
+      target: 0
+    - spell: {fileID: 11400000, guid: 0862782c0418ebb4c896bf24dc95fd4c, type: 2}
+      target: 0
+--- !u!114 &4589516989559181455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589516989559181451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16590e3332b2e8b40b63161d2ced2238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnMessages:
+  - stepMessages: []
+  - stepMessages:
+    - Ok Taro, to defeat enemies, you'll need to use your deck of cards.
+    - 'These are your cards, you can place them on either yourself or on Enemies
+      during your turn. Take your 2 of Swords card and drag it into the box below
+      the middle enemy. '
+    - "Great, you\u2019ll notice an icon next to the enemy indicating how much damage
+      they\u2019ll take. "
+    - "Whenever you hover over a card it\u2019ll cause a glowing effect to appear,
+      a Green glow on yourself indicates a card should be used on you."
+    - 'A red glow on the enemy indicates it should be used on them. '
+    - And a yellow glow means it can be used for both.
+    - 'Now take your 1 of Cups Card and place it in the box below yourself on the
+      left. '
+    - "You\u2019ll notice a small shield icon has appeared next to your character,
+      this is how much damage you\u2019ll protect yourself from. Shields stay with
+      you if they\u2019re not broken, but you lose half your shield points on the
+      next turn."
+    - "That\u2019s great, you\u2019ll notice an End Turn button right above where
+      you keep your cards, this is where you end your turn, since you\u2019ve used
+      all your cards you should do that now "
+  - stepMessages:
+    - "Oh no! It seems as though our foe has summoned allies to their side! Luckily
+      we\u2019ve drawn the Magician. "
+    - 'These are special cards called Major Arcana, you can tell which cards are
+      Major arcana by the art they have. These cards are powerful and unique in how
+      they work.   The magician sends lightning to strike a main foe and all those
+      who surround them. Place it below the middle enemy. '
+    - "You\u2019ll notice below your health is a Blue bar, you currently have 2 points
+      in this bar because you\u2019ve used the Magician, which has 1 mana cost, you
+      typically cannot spend more mana on cards then you have in a turn."
+    - "That\u2019s great, you\u2019ll notice an End Turn button right above where
+      you keep your cards, this is where you end your turn, since you\u2019ve used
+      all your cards you should do that now."
+  - stepMessages:
+    - "You\u2019ll notice that there are 4 types of card with no background art associated
+      with them. These are the Minor Arcana, they cost no mana so they can be used
+      a lot more in a turn. Each has a different effect, use these to the best of
+      your advantage to defeat the enemy. "
+    - "You\u2019ll notice that there are 4 types of card with no background art associated
+      with them. These are the Minor Arcana, they cost no mana so they can be used
+      a lot more in a turn. Each has a different effect, use these to the best of
+      your advantage to defeat the enemy. "

@@ -268,7 +268,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
-                item.spell.SimulateSpellValues(player, item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
+                item.spell.SimulateSpellValues(player, item.target, item.caster, cardsDiscarded);
             }
 
             foreach (CombatHelperFunctions.StatusInstance item in statuses)
@@ -336,12 +336,12 @@ namespace Necropanda
             return i;
         }
 
-        public void StartSpellCoroutine(Spell spell, Character target, Character caster, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
-            CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
+        public void StartSpellCoroutine(Spell spell, Character target, Character caster, Deck2D hand, int cardsInHand,
+            CombatHelperFunctions.SpellModule module, int removedStatusCount, int shieldRemoved, float time, float hitDelay,
             TeamManager targetTeamManager, List<Character> allCharacters)
         {
-            StartCoroutine(spell.IDetermineTarget(target, caster, empowered, weakened, hand, cardsInHand,
-                module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters));
+            StartCoroutine(spell.IDetermineTarget(target, caster, hand, cardsInHand,
+                module, removedStatusCount, shieldRemoved, time, hitDelay, targetTeamManager, allCharacters));
         }
 
         void ActivateStatuses()
@@ -421,7 +421,7 @@ namespace Necropanda
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, hand, cardsDiscarded);
             }
 
             if (spellInstance.spell.drawCard != null)
@@ -469,6 +469,8 @@ namespace Necropanda
 
         #endregion
 
+        #region Statuses
+
         public void RemoveStatusesOnCharacter(Character target)
         {
             List<CombatHelperFunctions.StatusInstance> statusesToRemove = new List<CombatHelperFunctions.StatusInstance>();
@@ -500,6 +502,28 @@ namespace Necropanda
             }
 
             return statusCount;
+        }
+
+        #endregion
+
+        public bool CheckTarget(Spell spell, Character character)
+        {
+            bool found = false;
+
+            foreach (var item in spells)
+            {
+                if (item.spell == spell && item.target == character)
+                {
+                    Debug.Log("Found " + spell.spellName + " targetting " + character.name);
+                    found = true;
+                }
+                else
+                {
+                    Debug.Log("Did not find " + spell.spellName + " targetting " + character.name);
+                }
+            }
+
+            return found;
         }
     }
 }

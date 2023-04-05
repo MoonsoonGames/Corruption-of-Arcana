@@ -13,7 +13,8 @@ namespace Necropanda
     {
         //[HideInInspector]
         public List<Spell> collectedSpells, equippedSpells;
-        public Deck2D collectedDeck, equippedDeck;
+        public DeckCollection collectedDeck;
+        public DeckLoadout equippedDeck;
 
         // Start is called before the first frame update
         void Start()
@@ -39,10 +40,13 @@ namespace Necropanda
 
         public void SaveCards()
         {
-            DeckManager.instance.collection = collectedSpells;
-            DeckManager.instance.majorArcana = equippedSpells;
+            if (equippedDeck.AvailableSpaces())
+            {
+                DeckManager.instance.collection = collectedSpells;
+                DeckManager.instance.majorArcana = equippedSpells;
 
-            DeckManager.instance.SaveDeck();
+                DeckManager.instance.SaveDeck();
+            }
         }
     }
 }

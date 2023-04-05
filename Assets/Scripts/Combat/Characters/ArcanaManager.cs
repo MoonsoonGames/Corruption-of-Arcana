@@ -13,7 +13,7 @@ namespace Necropanda
 {
     public class ArcanaManager : MonoBehaviour
     {
-        public Deck2D playerHand;
+        public DeckHand playerHand;
         public int arcanaMaxBase = 3;
         int arcanaMax = 3; public int GetMaxArcana() { return arcanaMax; }
 
