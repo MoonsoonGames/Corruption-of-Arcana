@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1753489427603209550}
   - component: {fileID: 3414930193278366167}
   - component: {fileID: 4198329192740926673}
+  - component: {fileID: 6627427529174784082}
   m_Layer: 0
   m_Name: LocalVolume
   m_TagString: Untagged
@@ -63,6 +64,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6627427529174784082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4441590083428212619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 0}
+    Params: []
+  TriggerEvent: 7
 --- !u!1 &5462158175484587964
 GameObject:
   m_ObjectHideFlags: 0
