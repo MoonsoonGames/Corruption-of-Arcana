@@ -62,7 +62,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 3.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6627427529174784082
 MonoBehaviour:
@@ -79,7 +79,9 @@ MonoBehaviour:
   CollisionTag: 
   Emitters:
   - Target: {fileID: 0}
-    Params: []
+    Params:
+    - Name: Crystal VFX Sound
+      Value: 1
   TriggerEvent: 7
 --- !u!1 &5462158175484587964
 GameObject:

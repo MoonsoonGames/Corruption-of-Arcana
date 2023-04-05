@@ -1099,30 +1099,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1506
---- !u!114 &-5596739754917964745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/Healthbar
-  m_EditorClassIdentifier: 
-  Name: Healthbar
-  StudioPath: 
-  Min: 0
-  Max: 4
-  Default: 0
-  ID:
-    data1: 3597231001
-    data2: 1681809175
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-5428489377796063176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,6 +1340,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2500
+--- !u!114 &-4975535874337531469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Crystal VFX Sound
+  m_EditorClassIdentifier: 
+  Name: Crystal VFX Sound
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 471008925
+    data2: 1766474434
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-4953736239263577033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,7 +1895,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638162867689538786
+  lastModified: 638162896655318051
   FileSizes: []
   Exists: 1
 --- !u!114 &-3385272441961079213
@@ -1979,35 +1979,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
---- !u!114 &-3138131622060463115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Main Menu Music
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Main Menu Music
-  Guid:
-    Data1: -2002392299
-    Data2: 1326034325
-    Data3: -480529492
-    Data4: -1636748660
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 326988105525669977}
-  - {fileID: -5596739754917964745}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 166000
 --- !u!114 &-3053542360527846427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2635,10 +2606,10 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638162867689548788
+  lastModified: 638162896655668123
   FileSizes:
   - Name: 
-    Value: 4278
+    Value: 4230
   Exists: 1
 --- !u!114 &-2059457947105293132
 MonoBehaviour:
@@ -3184,14 +3155,13 @@ MonoBehaviour:
   - {fileID: -7983490096734386687}
   - {fileID: -2666398774589749766}
   - {fileID: 7610555111433770429}
-  - {fileID: -3138131622060463115}
   EditorParameters:
   - {fileID: -8572358270947847299}
   MasterBanks:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638162867689548788
+  cacheTime: 638162896655668123
   cacheVersion: 131591
 --- !u!114 &20207744223286295
 MonoBehaviour:
@@ -3298,30 +3268,6 @@ MonoBehaviour:
   - Enemy Close
   - Battle Music
   - Battle End
-  Exists: 1
---- !u!114 &326988105525669977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/Combat Switch
-  m_EditorClassIdentifier: 
-  Name: Combat Switch
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1032635727
-    data2: 2169746850
-  Type: 1
-  IsGlobal: 0
-  Labels: []
   Exists: 1
 --- !u!114 &356394875340898591
 MonoBehaviour:
@@ -5884,6 +5830,7 @@ MonoBehaviour:
   - {fileID: 8372865748723905896}
   - {fileID: -5083295025266608706}
   - {fileID: -8373017722276361879}
+  - {fileID: -4975535874337531469}
   MinDistance: 1
   MaxDistance: 20
   Length: 195750
