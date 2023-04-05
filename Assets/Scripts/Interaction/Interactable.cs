@@ -28,6 +28,8 @@ namespace Necropanda.Interactable
 
         bool setup = false;
 
+        public EventReference interactionSound;
+
         public void Setup()
         {
             if (LoadCombatManager.instance == null) return;
@@ -126,6 +128,9 @@ namespace Necropanda.Interactable
         void Interact(GameObject playerRef)
         {
             SetInteractMessage(null, null);
+
+            // // Call audio oneshot
+            RuntimeManager.PlayOneShot(interactionSound, transform.position);
 
             //Call interface function
             //Debug.Log("Interact");
