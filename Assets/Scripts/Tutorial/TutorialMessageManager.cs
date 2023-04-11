@@ -13,6 +13,7 @@ namespace Necropanda
     public class TutorialMessageManager : MonoBehaviour
     {
         public static TutorialMessageManager instance;
+        public Button advanceButton;
         public RectTransform boxTransform;
         public Vector3 defaultPosition;
         public Vector3 defaultScale;
@@ -63,6 +64,16 @@ namespace Necropanda
 
                 boxTransform.position = turnMessages[turn].stepMessages[step].position;
                 boxTransform.localScale = turnMessages[turn].stepMessages[step].scale;
+
+                bool showButton = turnMessages[turn].stepMessages[step].advanceOnEndTurn == false && turnMessages[turn].stepMessages[step].advanceOnTarget == false && turnMessages[turn].stepMessages[step].advanceOnPickup == null;
+
+                advanceButton.gameObject.SetActive(showButton);
+
+                Vector3 pos = boxTransform.position;
+                pos.x += boxTransform.transform.localScale.x * 25f;
+                pos.y -= boxTransform.transform.localScale.y * 25f;
+
+                advanceButton.gameObject.transform.position = pos;
             }
             else
             {
@@ -159,6 +170,7 @@ namespace Necropanda
         public Vector3 position;
         public Vector3 scale;
 
+        public bool advanceOnEndTurn;
         public Spell advanceOnPickup;
         public bool advanceOnTarget;
         public int target;

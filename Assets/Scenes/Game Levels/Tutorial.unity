@@ -254,6 +254,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c5826e9aab8fb48b2ddb1da389b118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &630871915 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7679676912199172210, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731661797055633548}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &708327446 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6963371159659730763, guid: 93fcb1b03dd625240b642e42f4a5e61b,
@@ -1319,6 +1331,27 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1724021745635771958, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 081a6315bb0ceba4c90b426ba0506c1f,
+        type: 3}
+    - target: {fileID: 1724021745635771958, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724021745635771958, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724021745635771958, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1798033894118792871, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1348,6 +1381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091093715741082938, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -46.911804
       objectReference: {fileID: 0}
     - target: {fileID: 2102488850946174509, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
@@ -2059,6 +2097,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7679676912199172210, guid: 93fcb1b03dd625240b642e42f4a5e61b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4589516989559181455}
     - target: {fileID: 7905692182400616558, guid: 93fcb1b03dd625240b642e42f4a5e61b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2442,6 +2485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16590e3332b2e8b40b63161d2ced2238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  advanceButton: {fileID: 630871915}
   boxTransform: {fileID: 1854450233}
   defaultPosition: {x: 0, y: 0, z: 0}
   defaultScale: {x: 20, y: 20, z: 20}
@@ -2449,8 +2493,9 @@ MonoBehaviour:
   - stepMessages: []
   - stepMessages:
     - message: Ok Taro, to defeat enemies, you'll need to use your deck of cards.
-      position: {x: -1000, y: 0, z: 0}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: -228.74, y: 96.46, z: 0}
+      scale: {x: 4.76, y: 2.06, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2459,6 +2504,7 @@ MonoBehaviour:
         box below the middle enemy. '
       position: {x: 105, y: -129, z: 0}
       scale: {x: 9.394583, y: 2.53, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655,
         type: 2}
       advanceOnTarget: 0
@@ -2466,6 +2512,7 @@ MonoBehaviour:
     - message: Now drop the card on the enemy's deck.
       position: {x: 111, y: 25, z: 0}
       scale: {x: 3, y: 2, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 1
       target: 0
@@ -2473,25 +2520,29 @@ MonoBehaviour:
         much damage they\u2019ll take. "
       position: {x: 60.7, y: 134.4, z: 0}
       scale: {x: 1.1, y: 0.92, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
     - message: "Whenever you hover over a card it\u2019ll cause a glowing effect
         to appear, a Green glow on yourself indicates a card should be used on you."
-      position: {x: 0, y: 0, z: 0}
-      scale: {x: 20, y: 20, z: 20}
+      position: {x: -228.74, y: 96.46, z: 0}
+      scale: {x: 4.76, y: 2.06, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
     - message: 'A red glow on the enemy indicates it should be used on them. '
-      position: {x: 0, y: 0, z: 0}
-      scale: {x: 20, y: 20, z: 20}
+      position: {x: -228.74, y: 96.46, z: 0}
+      scale: {x: 4.76, y: 2.06, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
     - message: And a yellow glow means it can be used for both.
-      position: {x: 0, y: 0, z: 0}
-      scale: {x: 20, y: 20, z: 20}
+      position: {x: -228.74, y: 96.46, z: 0}
+      scale: {x: 4.76, y: 2.06, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2499,6 +2550,7 @@ MonoBehaviour:
         on the left. '
       position: {x: 105, y: -129, z: 0}
       scale: {x: 9.394583, y: 2.53, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 11400000, guid: f1d5ff832fb527343a3a28f226dba3d3,
         type: 2}
       advanceOnTarget: 0
@@ -2506,6 +2558,7 @@ MonoBehaviour:
     - message: Drop your card on your deck.
       position: {x: -235.8, y: -129.8, z: 0}
       scale: {x: 4.1, y: 2.27, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 1
       target: -1
@@ -2515,6 +2568,7 @@ MonoBehaviour:
         on the next turn."
       position: {x: -195, y: 40, z: 0}
       scale: {x: 1.1, y: 0.92, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2523,6 +2577,7 @@ MonoBehaviour:
         used all your cards you should do that now "
       position: {x: 105.27, y: -55.89, z: 0}
       scale: {x: 1.51, y: 0.7, z: 20}
+      advanceOnEndTurn: 1
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2531,6 +2586,7 @@ MonoBehaviour:
         Luckily we\u2019ve drawn the Magician. "
       position: {x: -1000, y: 0, z: 0}
       scale: {x: 1, y: 1, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2540,6 +2596,7 @@ MonoBehaviour:
         all those who surround them. Pick up the magician card. '
       position: {x: 105, y: -129, z: 0}
       scale: {x: 9.394583, y: 2.53, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 11400000, guid: 39c886e3104ac7441b667a904776b425,
         type: 2}
       advanceOnTarget: 0
@@ -2547,6 +2604,7 @@ MonoBehaviour:
     - message: Now place it below the middle enemy.
       position: {x: 111, y: 25, z: 0}
       scale: {x: 3, y: 2, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 1
       target: 0
@@ -2556,6 +2614,7 @@ MonoBehaviour:
         in a turn."
       position: {x: 0, y: 0, z: 0}
       scale: {x: 20, y: 20, z: 20}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2563,6 +2622,7 @@ MonoBehaviour:
         on the left. '
       position: {x: 105, y: -129, z: 0}
       scale: {x: 9.394583, y: 2.53, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 11400000, guid: 3fb765f618e5360448d01199ab0eec0c,
         type: 2}
       advanceOnTarget: 0
@@ -2570,6 +2630,7 @@ MonoBehaviour:
     - message: Drop your card on your deck.
       position: {x: -235.8, y: -129.8, z: 0}
       scale: {x: 4.1, y: 2.27, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 1
       target: -1
@@ -2578,6 +2639,7 @@ MonoBehaviour:
         used all your cards you should do that now "
       position: {x: 105.27, y: -55.89, z: 0}
       scale: {x: 1.51, y: 0.7, z: 20}
+      advanceOnEndTurn: 1
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2587,6 +2649,7 @@ MonoBehaviour:
         they can be used a lot more in a turn."
       position: {x: 105, y: -129, z: 0}
       scale: {x: 9.394583, y: 2.53, z: 1}
+      advanceOnEndTurn: 0
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
@@ -2594,6 +2657,7 @@ MonoBehaviour:
         to defeat the enemy. '
       position: {x: 0, y: 0, z: 0}
       scale: {x: 20, y: 20, z: 20}
+      advanceOnEndTurn: 1
       advanceOnPickup: {fileID: 0}
       advanceOnTarget: 0
       target: 0
