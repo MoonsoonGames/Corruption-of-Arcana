@@ -39,6 +39,13 @@ namespace Necropanda
             return success;
         }
 
+        public override float EndTurn(float endTurnDelay)
+        {
+            TutorialMessageManager.instance.EndTurn();
+
+            return base.EndTurn(endTurnDelay);
+        }
+
         public override void StartNextTurn()
         {
             if (currentTurn < tutorialCards.Length)

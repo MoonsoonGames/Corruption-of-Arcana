@@ -19,7 +19,7 @@ namespace Necropanda
         #region References
 
         protected Character player;
-        protected Character character;
+        protected Character character; public Character GetCharacter() { return character; }
         protected Timeline timeline;
         protected DeckManager manager;
 

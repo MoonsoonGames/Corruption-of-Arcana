@@ -20,12 +20,16 @@ namespace Necropanda
         private void Start()
         {
             instance = this;
+            DragManager.instance.StartDragging += StartDragging;
+            DragManager.instance.StopDragging += StopDragging;
         }
 
         int turn = 0;
         int step = 0;
 
         public TutorialMessages[] turnMessages;
+
+        #region Showing Messages
 
         public void ShowMessageTurn(int turn)
         {
@@ -62,11 +66,84 @@ namespace Necropanda
             }
             else
             {
+                //TooltipManager.instance.ShowTutorialTooltip(false, "Tutorial", "");
                 //Remove box/ keep last one
                 boxTransform.position = defaultPosition;
                 boxTransform.localScale = defaultScale;
             }
         }
+
+        public void EndTurn()
+        {
+            TooltipManager.instance.ShowTutorialTooltip(false, "Tutorial", "");
+
+            //Remove box/ keep last one
+            boxTransform.position = defaultPosition;
+            boxTransform.localScale = defaultScale;
+        }
+
+        #endregion
+
+        #region Dragging Cards
+
+        public void StartDragging(CardDrag2D cardDrag)
+        {
+            if (cardDrag == null)
+                return;
+
+            if (turn >= turnMessages.Length || step >= turnMessages[turn].stepMessages.Length)
+                return;
+
+            Spell advanceOnPickup = turnMessages[turn].stepMessages[step].advanceOnPickup;
+
+            if (advanceOnPickup == null)
+                return;
+
+            Card card = cardDrag.GetComponent<Card>();
+
+            if (card.spell == advanceOnPickup)
+            {
+                Debug.Log("Tutorial checks true for " + cardDrag.name);
+                ProgressStep(true);
+            }
+            else
+            {
+                Debug.Log("Tutorial checks false for " + cardDrag.name);
+            }
+        }
+
+        public void StopDragging(CardDrag2D cardDrag, Character target)
+        {
+            if (target == null)
+                return;
+
+            if (turn >= turnMessages.Length || step >= turnMessages[turn].stepMessages.Length)
+                return;
+
+            bool advanceOnTarget = turnMessages[turn].stepMessages[step].advanceOnTarget;
+
+            if (!advanceOnTarget)
+                return;
+
+            int targetCount = turnMessages[turn].stepMessages[step].target;
+
+            Character check = targetCount < 0 ? CombatManager.instance.player : CombatManager.instance.enemyTeamManager.team[targetCount];
+
+            if (check == null)
+                return;
+
+            if (target == check)
+            {
+                Debug.Log("Tutorial checks true for " + target.stats.characterName);
+                ProgressStep(true);
+            }
+            else
+            {
+                Debug.Log("Tutorial checks false for " + target.stats.characterName);
+            }
+        }
+
+        #endregion
     }
 
     [System.Serializable]
@@ -81,5 +158,9 @@ namespace Necropanda
         public string message;
         public Vector3 position;
         public Vector3 scale;
+
+        public Spell advanceOnPickup;
+        public bool advanceOnTarget;
+        public int target;
     }
 }
