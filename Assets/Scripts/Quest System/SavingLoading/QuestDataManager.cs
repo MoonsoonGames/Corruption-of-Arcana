@@ -62,13 +62,17 @@ namespace Necropanda
         [ContextMenu("Save Base Quest Data")]
         public void SaveBaseQuestData()
         {
-            Debug.Log("Saving base quest data");
             foreach (Quest quest in questsToSave)
             {
                 List<Quest> questList = new List<Quest> { quest };
 
                 if (!QuestSaving.BaseDataExists(questList))
+                {
+                    Debug.Log("Base data does not exist, create new base data");
                     quest.SaveBaseQuestData();
+                }
+                else
+                    Debug.Log("Base data already exists, do not save");
             }
         }
 
@@ -100,6 +104,12 @@ namespace Necropanda
             {
                 quest.LoadBaseQuestData();
             }
+        }
+
+        [ContextMenu("Reset Quest Data")]
+        public void ResetQuestData()
+        {
+            QuestQuickReset.QuestResetStatic();
         }
     }
 }

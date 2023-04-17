@@ -56,6 +56,7 @@ namespace Necropanda
 
         public static void SaveBaseQuestData(List<Quest> questsToSave)
         {
+            Debug.Log("saving base data");
             CreateDirectory(savePath);
 
             QuestData questData = new QuestData(questsToSave);

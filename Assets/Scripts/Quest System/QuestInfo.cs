@@ -18,20 +18,32 @@ namespace Necropanda
         {
             instance = this;
 
+            SetTrackingQuest(baseQuest);
             UpdateQuestInfo();
         }
 
-        public Quest trackingQuest;
+        public Quest baseQuest;
+        Quest trackingQuest;
 
         public TextMeshProUGUI title, number, description;
+
+        public void SetTrackingQuest(Quest quest)
+        {
+            trackingQuest = quest.GetParent();
+            UpdateQuestInfo();
+        }
 
         public void UpdateQuestInfo()
         {
             if (trackingQuest != null)
             {
-                title.text = trackingQuest.questName;
-                number.text = trackingQuest.currentProgress.ToString();
-                description.text = trackingQuest.GetCurrentQuestProgress().questDescription;
+                Quest sub = trackingQuest.GetCurrentQuestProgress();
+                if (sub != null)
+                {
+                    title.text = sub.questName;
+                    number.text = sub.currentProgress.ToString();
+                    description.text = sub.questDescription;
+                }
             }
         }
     }

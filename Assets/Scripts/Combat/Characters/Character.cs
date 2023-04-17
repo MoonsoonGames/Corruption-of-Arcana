@@ -104,14 +104,14 @@ namespace Necropanda
         #region Statuses
 
         //Positive Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool enlightened;
         //Neutral Statuses
-        [HideInInspector]
+        //[HideInInspector]
         public bool empowerDeck, weakenDeck;
         //Negative Statuses
-        [HideInInspector]
-        public bool banish, charm, silence, stun, curse, confuse;
+        //[HideInInspector]
+        public bool banish, charm, silence, stun, curse, confuse, blinded;
 
         /// <summary>
         /// Apply or remove a status effect from the character
@@ -126,7 +126,7 @@ namespace Necropanda
                 case E_Statuses.Reflect:
                     if (deck != null)
                     {
-                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
+                        GetComponentInChildren<EmpowerWeakenManager>().DisplayReflect(apply);
                     }
                     break;
                 case E_Statuses.Enlightened:
@@ -137,14 +137,14 @@ namespace Necropanda
                     empowerDeck = apply;
                     if (deck != null)
                     {
-                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
+                        GetComponentInChildren<EmpowerWeakenManager>().DisplayEmpower(apply);
                     }
                     break;
                 case E_Statuses.WeakenDeck:
                     weakenDeck = apply;
                     if (deck != null)
                     {
-                        deck.GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
+                        GetComponentInChildren<EmpowerWeakenManager>().DisplayWeaken(apply);
                     }
                     break;
                 //Negative Effects
@@ -174,6 +174,9 @@ namespace Necropanda
                     break;
                 case E_Statuses.Confuse:
                     confuse = apply;
+                    break;
+                case E_Statuses.Blinded:
+                    blinded = apply;
                     break;
                 default:
                     break;

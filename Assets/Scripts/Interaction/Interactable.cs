@@ -28,36 +28,13 @@ namespace Necropanda.Interactable
 
         bool setup = false;
 
-        private void Start()
-        {
-            Setup();
-        }
-
-        private void Awake()
-        {
-            Setup();
-        }
+        public EventReference interactionSound;
 
         public void Setup()
         {
             if (LoadCombatManager.instance == null) return;
 
-            Interactable[] allInteractables = FindObjectsOfType<Interactable>();
-
-            for (int i = 0; i < allInteractables.Length; i++)
-            {
-                if (allInteractables[i] == this)
-                {
-                    //interactID = allInteractables[i].name + "-" + i + "-" + SceneManager.GetActiveScene().name;
-                }
-            }
-            foreach (var item in allInteractables)
-            {
-                if (item == this)
-                {
-                    interactID = item.name + "-" + item.transform.position + "-" + SceneManager.GetActiveScene().name;
-                }
-            }
+            interactID = name + "-" + transform.position + "-" + SceneManager.GetActiveScene().name;
 
             if (LoadCombatManager.instance.interacted.Contains(interactID))
             {
@@ -151,6 +128,9 @@ namespace Necropanda.Interactable
         void Interact(GameObject playerRef)
         {
             SetInteractMessage(null, null);
+
+            // // Call audio oneshot
+            RuntimeManager.PlayOneShot(interactionSound, transform.position);
 
             //Call interface function
             //Debug.Log("Interact");
