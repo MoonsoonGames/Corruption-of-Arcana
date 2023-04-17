@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0.3679245, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.04
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.25
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: c57115dfa3b2f76408489215009db630, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a201312fac7f26040b4ec538f6d768ff, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &4867512
 Transform:
@@ -297,6 +297,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5370643154020255858, guid: 3578337a01447f54086e9042ed6eca0b,
+        type: 3}
+      propertyPath: backdrops.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 287fc5df7b3a76f4aa6d7889957c321d,
+        type: 3}
     - target: {fileID: 6576177783100473247, guid: 3578337a01447f54086e9042ed6eca0b,
         type: 3}
       propertyPath: m_RenderPostProcessing
@@ -1300,6 +1306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: e6007bd52eefcef4cb788372d8666d11,
         type: 3}
+      propertyPath: boss
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805849177099797479, guid: e6007bd52eefcef4cb788372d8666d11,
+        type: 3}
       propertyPath: startState
       value: 3
       objectReference: {fileID: 0}
@@ -1391,6 +1402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OV_Wolf (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762746955952038152, guid: e419090af2387ff4cb0729fe0725eead,
+        type: 3}
+      propertyPath: m_Radius
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e419090af2387ff4cb0729fe0725eead, type: 3}
@@ -1664,6 +1680,7 @@ GameObject:
   - component: {fileID: 716109151}
   - component: {fileID: 716109150}
   - component: {fileID: 716109149}
+  - component: {fileID: 716109152}
   m_Layer: 0
   m_Name: Terrain6
   m_TagString: Untagged
@@ -1731,6 +1748,22 @@ Transform:
   m_Father: {fileID: 488344454}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &716109152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716109148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 1
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &723940765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 19aded94267ada74ea35a8e9cf94aaa7,
@@ -2189,6 +2222,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OV_AlphaWolf
       objectReference: {fileID: 0}
+    - target: {fileID: 8762746955952038152, guid: d1dc0b724e1b95b408d06ed287c2268d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1dc0b724e1b95b408d06ed287c2268d, type: 3}
 --- !u!1001 &887488282
@@ -2536,6 +2574,7 @@ GameObject:
   - component: {fileID: 1100105076}
   - component: {fileID: 1100105075}
   - component: {fileID: 1100105074}
+  - component: {fileID: 1100105077}
   m_Layer: 0
   m_Name: Terrain4
   m_TagString: Untagged
@@ -2603,6 +2642,22 @@ Transform:
   m_Father: {fileID: 488344454}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100105077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100105073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 1
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1103618553 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4634495050974075080, guid: 2af6c3e99733dda41925c45baa1b7ed6,
@@ -2651,6 +2706,7 @@ GameObject:
   - component: {fileID: 1141384968}
   - component: {fileID: 1141384967}
   - component: {fileID: 1141384966}
+  - component: {fileID: 1141384969}
   m_Layer: 0
   m_Name: Terrain5
   m_TagString: Untagged
@@ -2718,6 +2774,22 @@ Transform:
   m_Father: {fileID: 488344454}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1141384969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141384965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 1
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!4 &1257227877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4649591987382613254, guid: cf23d9cee1858eb41be56a5abc59fb38,
@@ -3411,6 +3483,7 @@ GameObject:
   - component: {fileID: 1783331860}
   - component: {fileID: 1783331859}
   - component: {fileID: 1783331858}
+  - component: {fileID: 1783331861}
   m_Layer: 0
   m_Name: Terrain3
   m_TagString: Untagged
@@ -3478,6 +3551,22 @@ Transform:
   m_Father: {fileID: 488344454}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1783331861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783331857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 1
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1823856970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 19aded94267ada74ea35a8e9cf94aaa7,
@@ -3525,6 +3614,7 @@ GameObject:
   - component: {fileID: 1832844362}
   - component: {fileID: 1832844361}
   - component: {fileID: 1832844360}
+  - component: {fileID: 1832844363}
   m_Layer: 0
   m_Name: Terrain2
   m_TagString: Untagged
@@ -3592,6 +3682,22 @@ Transform:
   m_Father: {fileID: 488344454}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1832844363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832844359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 1
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1850476438
 GameObject:
   m_ObjectHideFlags: 0
@@ -3793,6 +3899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OV_Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762746955952038152, guid: e419090af2387ff4cb0729fe0725eead,
+        type: 3}
+      propertyPath: m_Radius
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e419090af2387ff4cb0729fe0725eead, type: 3}
@@ -4161,7 +4272,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 7c02536241d8d1542aaf177760993564,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.69
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 7c02536241d8d1542aaf177760993564,
         type: 3}
@@ -4171,7 +4282,7 @@ PrefabInstance:
     - target: {fileID: 6139340425227324991, guid: 7c02536241d8d1542aaf177760993564,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.63
+      value: 30.24
       objectReference: {fileID: 0}
     - target: {fileID: 6139340425227324991, guid: 7c02536241d8d1542aaf177760993564,
         type: 3}
@@ -4341,7 +4452,7 @@ PrefabInstance:
     - target: {fileID: 8805849177099797479, guid: 7c02536241d8d1542aaf177760993564,
         type: 3}
       propertyPath: startState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805849177099797479, guid: 7c02536241d8d1542aaf177760993564,
         type: 3}
