@@ -42,6 +42,8 @@ namespace Necropanda
         }
 
         public E_Scenes combatScene;
+        public E_Scenes tutorialScene;
+
         public E_Scenes lastScene;
         public Vector3 lastPos;
         public Quaternion lastRot;
@@ -140,6 +142,30 @@ namespace Necropanda
             Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+        }
+
+        public void LoadTutorial(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
+        {
+            if (loading || newEnemies.Count == 0) return;
+            loading = true;
+
+            //Get enemies within radius of player and save them in a list
+            enemies.Clear();
+            enemies = newEnemies;
+            enemyIDs.Clear();
+
+            //Saving last scene
+            if (lastScene != E_Scenes.Null && player != null)
+            {
+                lastPos = player.transform.position;
+                lastRot = player.transform.rotation;
+            }
+
+            progressQuestUponCombatVictory = quests;
+
+            Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
+            loading = false;
+            LoadingScene.instance.LoadScene(tutorialScene, lastScene, false);
         }
 
         public void AddEnemy(CharacterStats enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Object projectileFXObject, Color trailColor)
