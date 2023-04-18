@@ -243,8 +243,7 @@ namespace Necropanda
                 ShowArt(deck.showArt);
                 transform.eulerAngles = baseRot;
 
-                dragManager.canDrag = true;
-                dragManager.StartDragging(null);
+                dragManager.StopDragging(this, deck.GetCharacter());
             }
 
             if (placeholder != null)

@@ -284,6 +284,8 @@ namespace Necropanda
             public StatusEffects status;
             public int duration;
             public bool applyOverShield;
+            public bool remove;
+            public int valueSuccess;
         }
 
         [System.Serializable]
