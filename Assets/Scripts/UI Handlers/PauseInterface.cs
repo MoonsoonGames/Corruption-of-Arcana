@@ -12,12 +12,9 @@ namespace Necropanda.Interfaces
         public GameObject MainHUD;
         public GameObject Pausemenu;
         public PlayerController player;
+        public GameObject savedText;
         //public GameObject AchievementScreen;
 
-        private void Start()
-        {
-
-        }
 
         public void Resume()
         {
@@ -41,16 +38,13 @@ namespace Necropanda.Interfaces
 
         }
 
-        public void Achievements()
-        {
-            //AchievementScreen.SetActive(true);
-            //Pausemenu.SetActive(false);
-        }
-
         public void SaveGame()
         {
             //Maybe have a visual indicator for this
+            savedText.SetActive(true);
             SaveManager.instance.SaveAllData();
+            new WaitForSecondsRealtime(2f);
+            savedText.SetActive(false);
         }
 
         public void QuitGame()
