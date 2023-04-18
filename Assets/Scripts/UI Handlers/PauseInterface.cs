@@ -13,6 +13,7 @@ namespace Necropanda.Interfaces
         public GameObject Pausemenu;
         public PlayerController player;
         public GameObject savedText;
+        public GameObject CreditsScreen;
         //public GameObject AchievementScreen;
 
 
@@ -37,6 +38,11 @@ namespace Necropanda.Interfaces
         {
 
         }
+        
+        public void Credits()
+        {
+            CreditsScreen.SetActive(true);
+        }
 
         public void SaveGame()
         {
@@ -51,6 +57,11 @@ namespace Necropanda.Interfaces
         {
             //ConfirmationScreen.SetActive(true);
             Application.Quit();
+        }
+
+        public void CloseCredits()
+        {
+            CreditsScreen.SetActive(false);
         }
     }
 }
