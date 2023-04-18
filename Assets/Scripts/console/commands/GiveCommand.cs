@@ -181,14 +181,14 @@ namespace Necropanda.Utils.Console.Commands
             }
         }
 
-        // Need to create a function for giving the player potions(Might be able to add this to the above function) and currency.
+        // Need to create a function for giving the player currency(Might be able to add this to the above function).
 
         [ContextMenu("Log Dictionary Items")]
         private void LogGiveableItemsDictionary()
         {
             foreach (KeyValuePair<string, UnityEngine.Object> items in objects)
             {
-                Debug.Log("You have " + items.Value + " " + items.Key);
+                Debug.Log("You have " + items.Value + ": " + items.Key);
             }
         }
 
