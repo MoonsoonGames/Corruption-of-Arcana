@@ -16,7 +16,7 @@ namespace Necropanda
     /// could be converted to load any scene. Would just need a few
     /// tweaks.
     /// </summary>
-    public class LoadTiertarock : MonoBehaviour, IInteractable
+    public class LoadScene : MonoBehaviour, IInteractable
     {
         public E_Scenes scene;
         public string ID;
@@ -29,10 +29,18 @@ namespace Necropanda
         // Start is called before the first frame update
         public void Interacted(GameObject player)
         {
-            LoadScene();
+            LoadDefaultScene();
         }
 
-        public void LoadScene()
+        public void LoadDefaultScene()
+        {
+            string sceneString = SceneManager.GetActiveScene().name;
+            E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
+
+            LoadingScene.instance.LoadScene(scene, lastScene, false);
+        }
+
+        public void LoadSetScene(E_Scenes scene)
         {
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);

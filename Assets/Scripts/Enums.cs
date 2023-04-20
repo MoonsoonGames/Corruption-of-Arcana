@@ -49,7 +49,9 @@ public enum E_Scenes
     SplashScreen,
     Navigation,
     EastForest,
-    Tutorial
+    Tutorial,
+    [InspectorName("Intro Cutscene")]
+    IntroCutscene
 }
 
 public enum E_UtilityScripts
