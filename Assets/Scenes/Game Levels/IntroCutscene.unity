@@ -1267,6 +1267,9 @@ GameObject:
   - component: {fileID: 303477440}
   - component: {fileID: 303477438}
   - component: {fileID: 303477441}
+  - component: {fileID: 303477443}
+  - component: {fileID: 303477444}
+  - component: {fileID: 303477442}
   m_Layer: 0
   m_Name: Intro Cutscene Brain
   m_TagString: Untagged
@@ -1300,7 +1303,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 303477383}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 303477442}
   variables:
   - {fileID: 303477431}
   description: 
@@ -2115,6 +2119,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 303477441}
   commandList:
+  - {fileID: 303477442}
   - {fileID: 303477428}
   - {fileID: 303477420}
   - {fileID: 303477418}
@@ -2258,6 +2263,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 303477435}
   - {fileID: 303477429}
+  - {fileID: 303477444}
   suppressAllAutoSelections: 0
 --- !u!114 &303477394
 MonoBehaviour:
@@ -2977,13 +2983,14 @@ MonoBehaviour:
   staticEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 303477430}
-        m_TargetAssemblyTypeName: Necropanda.StartFight, Assembly-CSharp
-        m_MethodName: Tutorial
-        m_Mode: 1
+      - m_Target: {fileID: 303477443}
+        m_TargetAssemblyTypeName: Necropanda.SetCharacter, Assembly-CSharp
+        m_MethodName: SetCurrentCharacter
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 1ee1f10eaeeac0a46a5da9ff11812493,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Necropanda.CharacterStats, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3604,7 +3611,7 @@ MonoBehaviour:
   fadeTweenType: 4
 --- !u!114 &303477441
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -3618,6 +3625,131 @@ MonoBehaviour:
   suppressBlockAutoSelect: 0
   keyPressType: 0
   keyCode: 8
+--- !u!114 &303477442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303477345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d9ff288f3904c05ada7ac9c9a075bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 90
+  indentLevel: 0
+  description: 
+  delay: 0
+  invokeType: 0
+  staticEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 303477443}
+        m_TargetAssemblyTypeName: Necropanda.SetCharacter, Assembly-CSharp
+        m_MethodName: SetCurrentCharacter
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: f86170c03c8dddc408e666bf1976c774,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Necropanda.CharacterStats, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  booleanParameter:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  booleanEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  integerParameter:
+    integerRef: {fileID: 0}
+    integerVal: 0
+  integerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  floatParameter:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  floatEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  stringParameter:
+    stringRef: {fileID: 0}
+    stringVal: 
+  stringEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &303477443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303477345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfc8b1fb8690e842a12c0816175ceeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &303477444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303477345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d9ff288f3904c05ada7ac9c9a075bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 89
+  indentLevel: 0
+  description: 
+  delay: 0
+  invokeType: 0
+  staticEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 303477430}
+        m_TargetAssemblyTypeName: Necropanda.StartFight, Assembly-CSharp
+        m_MethodName: Tutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  booleanParameter:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  booleanEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  integerParameter:
+    integerRef: {fileID: 0}
+    integerVal: 0
+  integerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  floatParameter:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  floatEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  stringParameter:
+    stringRef: {fileID: 0}
+    stringVal: 
+  stringEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &339766982
 GameObject:
   m_ObjectHideFlags: 0

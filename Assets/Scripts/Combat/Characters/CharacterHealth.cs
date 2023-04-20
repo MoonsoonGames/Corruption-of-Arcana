@@ -59,7 +59,7 @@ namespace Necropanda
         private ToggleGodMode tgm;
         #endregion
 
-        protected virtual void Start()
+        public virtual void Setup()
         {
             character = GetComponent<Character>();
             SetupHealth();

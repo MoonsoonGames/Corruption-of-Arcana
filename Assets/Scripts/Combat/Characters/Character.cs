@@ -35,6 +35,7 @@ namespace Necropanda
         public virtual void SetupReferences()
         {
             health = GetComponent<CharacterHealth>();
+            health.Setup();
             deck = GetComponentInChildren<Deck2D>();
             teamManager = GetComponentInParent<TeamManager>();
             if (teamManager != null)

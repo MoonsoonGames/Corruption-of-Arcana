@@ -41,6 +41,8 @@ namespace Necropanda
             interacted = new List<string>();
         }
 
+        public CharacterStats character;
+
         public E_Scenes combatScene;
         public E_Scenes tutorialScene;
 
