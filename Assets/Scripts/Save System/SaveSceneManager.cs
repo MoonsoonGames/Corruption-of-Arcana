@@ -51,20 +51,23 @@ namespace Necropanda
         public void SaveSceneData()
         {
             //SaveScene
-            LoadingScene.instance.SaveScene();
+            if (LoadingScene.instance != null)
+                LoadingScene.instance.SaveScene();
         }
 
         [ContextMenu("Save Base Quest Data")]
         public void SaveBaseQuestData()
         {
             //SaveBaseSceneData
-            LoadingScene.instance.SaveScene();
+            if (LoadingScene.instance != null)
+                LoadingScene.instance.SaveScene();
         }
 
         [ContextMenu("Overide Base Quest Data")]
         public void OverideBaseQuestData()
         {
-            LoadingScene.instance.SaveScene();
+            if (LoadingScene.instance != null)
+                LoadingScene.instance.SaveScene();
         }
 
         [ContextMenu("Load Quest Data")]
