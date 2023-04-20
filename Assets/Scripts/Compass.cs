@@ -12,28 +12,21 @@ namespace Necropanda
 {
     public class Compass : MonoBehaviour
     {
-        
-        public float Offset = 90f;
+        public float offset = 22.5f;
         public RawImage compassHeadings;
         public Transform player;
 
-        float compassUnit;
 
         private void Start()
         {
             if (player == null)
             {
-                player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+                player = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
             }
         }
-        private void Update()
+        public void Update()
         {
-            UpdateCompassRotation();
-        }
-
-        void UpdateCompassRotation()
-        {
-            compassHeadings.uvRect = new Rect((player.localEulerAngles.y / 360f) + Offset, 1f, 1f, 1f);
+            compassHeadings.uvRect = new Rect((player.localEulerAngles.y / 360f) + offset, 1f, 1f, 1f);
         }
     }
 }
