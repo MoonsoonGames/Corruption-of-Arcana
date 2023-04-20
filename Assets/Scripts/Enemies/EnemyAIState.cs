@@ -14,6 +14,7 @@ namespace Necropanda.AI
         Nothing,
         Wandering,
         Chasing,
-        Patrolling
+        Patrolling,
+        Following
     }
 }

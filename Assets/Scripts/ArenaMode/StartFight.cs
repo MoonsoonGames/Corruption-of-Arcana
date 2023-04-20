@@ -75,5 +75,19 @@ namespace Necropanda
                 LoadCombatManager.instance.LoadCombat(player, lastScene, enemies, progressQuest);
             }
         }
+
+        public void Tutorial()
+        {
+            string sceneString = SceneManager.GetActiveScene().name;
+            E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
+
+            if (GameObject.FindObjectOfType<Player.PlayerController>() == null)
+                LoadCombatManager.instance.LoadTutorial(null, lastScene, enemies, progressQuest);
+            else
+            {
+                GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
+                LoadCombatManager.instance.LoadTutorial(player, lastScene, enemies, progressQuest);
+            }
+        }
     }
 }

@@ -15,11 +15,11 @@ MonoBehaviour:
   spellName: Death
   nameImage: {fileID: 21300000, guid: b78d8ef0503db7047bd12637239c83aa, type: 3}
   flavourText: 
-  spellDescription: 'Max health is reduced by 25% 2 turns
+  spellDescription: 'Target''s max health is reduced by 25% 2 turns
 
 
-    Draw The Harvest
-    Card next turn'
+    Draw The
+    Harvest Card next turn'
   cardImage: {fileID: 21300000, guid: d12299ada4914a84893798f6f5bd81bf, type: 3}
   background: {fileID: 0}
   cardType: 1
@@ -30,6 +30,7 @@ MonoBehaviour:
   loadoutCost: 1
   arcanaCost: 2
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
@@ -53,6 +55,8 @@ MonoBehaviour:
     - status: {fileID: 11400000, guid: d28df654110da8a4dab027a5f7ae3d07, type: 2}
       duration: 3
       applyOverShield: 1
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 6031179954722945327, guid: c5fae0a25c1f7aa4daf8a1d379738803,
     type: 3}

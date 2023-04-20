@@ -26,10 +26,11 @@ MonoBehaviour:
   overrideColor: 1
   timelineColor: {r: 0.4996875, g: 0.33459416, b: 0.6886792, a: 1}
   timelineIcon: {fileID: 165245985, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0
+  speed: 0.05
   loadoutCost: 1
   arcanaCost: -2
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -46,13 +47,21 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
     statuses:
+    - status: {fileID: 11400000, guid: 8961b0799f6ee7741b8d85767e4afa53, type: 2}
+      duration: 1
+      applyOverShield: 1
+      remove: 1
+      valueSuccess: 0
     - status: {fileID: 11400000, guid: 27ca1b3af8b88bf4fad48ae900b853fd, type: 2}
       duration: 3
       applyOverShield: 1
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
