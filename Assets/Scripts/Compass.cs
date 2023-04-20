@@ -12,17 +12,20 @@ namespace Necropanda
 {
     public class Compass : MonoBehaviour
     {
+        
+        public float Offset = 90f;
         public RawImage compassHeadings;
-        public GameObject player;
+        public Transform player;
+
+        float compassUnit;
 
         private void Start()
         {
             if (player == null)
             {
-                player = GameObject.FindGameObjectWithTag("Player");
+                player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             }
         }
-
         private void Update()
         {
             UpdateCompassRotation();
@@ -30,7 +33,7 @@ namespace Necropanda
 
         void UpdateCompassRotation()
         {
-            compassHeadings.uvRect = new Rect((player.transform.localEulerAngles.y) + 90f / 360f, 0f, 1f, 1f);
+            compassHeadings.uvRect = new Rect((player.localEulerAngles.y / 360f) + Offset, 1f, 1f, 1f);
         }
     }
 }
