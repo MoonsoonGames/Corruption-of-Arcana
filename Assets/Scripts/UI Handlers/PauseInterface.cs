@@ -56,7 +56,7 @@ namespace Necropanda.Interfaces
         public void QuitGame()
         {
             //ConfirmationScreen.SetActive(true);
-            Application.Quit();
+            LoadingScene.instance.LoadScene(E_Scenes.SplashScreen, E_Scenes.Null, false);
         }
     }
 }

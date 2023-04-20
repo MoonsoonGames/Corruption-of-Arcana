@@ -1266,6 +1266,7 @@ GameObject:
   - component: {fileID: 303477439}
   - component: {fileID: 303477440}
   - component: {fileID: 303477438}
+  - component: {fileID: 303477441}
   m_Layer: 0
   m_Name: Intro Cutscene Brain
   m_TagString: Untagged
@@ -2112,7 +2113,7 @@ MonoBehaviour:
   itemId: 38
   blockName: Scene 8
   description: 
-  eventHandler: {fileID: 0}
+  eventHandler: {fileID: 303477441}
   commandList:
   - {fileID: 303477428}
   - {fileID: 303477420}
@@ -3535,7 +3536,7 @@ MonoBehaviour:
   ID: 
 --- !u!114 &303477438
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -3583,7 +3584,7 @@ MonoBehaviour:
   suppressAllAutoSelections: 0
 --- !u!114 &303477440
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -3601,6 +3602,22 @@ MonoBehaviour:
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeTexture: {fileID: 0}
   fadeTweenType: 4
+--- !u!114 &303477441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303477345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000864f8e9e1748a39807861d0e60e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 303477383}
+  suppressBlockAutoSelect: 0
+  keyPressType: 0
+  keyCode: 8
 --- !u!1 &339766982
 GameObject:
   m_ObjectHideFlags: 0
