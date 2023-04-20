@@ -751,6 +751,36 @@ MonoBehaviour:
   - Water
   - Crystal
   Exists: 1
+--- !u!114 &-7214770631604761421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music
+  m_EditorClassIdentifier: 
+  Name: Thoth Music
+  StudioPath: parameter:/Thoth Music
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 2062682416
+    data2: 3705960116
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Entrance
+  - Village
+  - Fina lopp
+  - Enemy Close
+  - Battle Music
+  - Battle End
+  Exists: 1
 --- !u!114 &-7174984059870051091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1975,7 +2005,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638162956879240142
+  lastModified: 638175883643909640
   FileSizes: []
   Exists: 1
 --- !u!114 &-3385272441961079213
@@ -2686,7 +2716,7 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638162956879510051
+  lastModified: 638175883643929585
   FileSizes:
   - Name: 
     Value: 4442
@@ -3261,19 +3291,19 @@ MonoBehaviour:
   - {fileID: -5046646585857783537}
   - {fileID: -7983490096734386687}
   - {fileID: -2666398774589749766}
-  - {fileID: 7610555111433770429}
-  - {fileID: -6639860567454967542}
-  - {fileID: -809682600653163416}
-  - {fileID: -7934654081610579912}
-  - {fileID: -7449322859772474515}
+  - {fileID: 4393321171065538103}
+  - {fileID: 549318080988691021}
+  - {fileID: 263759341840515848}
+  - {fileID: 8444639517803672004}
+  - {fileID: 590503432823728852}
   EditorParameters:
   - {fileID: -8572358270947847299}
-  - {fileID: 7184053722860241245}
+  - {fileID: -7214770631604761421}
   MasterBanks:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638162956879510051
+  cacheTime: 638175883643929585
   cacheVersion: 131591
 --- !u!114 &20207744223286295
 MonoBehaviour:
@@ -3381,6 +3411,33 @@ MonoBehaviour:
   - Battle Music
   - Battle End
   Exists: 1
+--- !u!114 &263759341840515848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Victory Defeat/Victory Screen
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Victory Defeat/Victory Screen
+  Guid:
+    Data1: 173782927
+    Data2: 1148605371
+    Data3: -1743163512
+    Data4: -719056020
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &356394875340898591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,6 +3520,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 179422
+--- !u!114 &549318080988691021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Crystal Destruction
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Crystal Destruction
+  Guid:
+    Data1: 487135031
+    Data2: 1174135072
+    Data3: -250059128
+    Data4: 2145284251
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2250
 --- !u!114 &550204392674149586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3487,6 +3571,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &590503432823728852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Combat/End Turn Button Press
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Combat/End Turn Button Press
+  Guid:
+    Data1: 2091137278
+    Data2: 1335076716
+    Data3: -705080441
+    Data4: -812362080
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 812
 --- !u!114 &753188867848532654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3836,35 +3947,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &1417876652609343105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Main Menu Music
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Main Menu Music
-  Guid:
-    Data1: -2002392299
-    Data2: 1326034325
-    Data3: -480529492
-    Data4: -1636748660
-  Banks:
-  - {fileID: -3478392790158526990}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 5911034783406514063}
-  - {fileID: 4713348463486247231}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 166000
 --- !u!114 &1444557015618952959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,6 +4107,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3082
+--- !u!114 &1887687591381253085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Thoth Music/Crystal VFX Sound
+  m_EditorClassIdentifier: 
+  Name: Crystal VFX Sound
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 471008925
+    data2: 1766474434
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1906485783347035940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4917,6 +5023,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 252
+--- !u!114 &4393321171065538103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Card Placed/Card placed down
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Card Placed/Card placed down
+  Guid:
+    Data1: 971672856
+    Data2: 1135820981
+    Data3: -1808950359
+    Data4: 1025540801
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 437
 --- !u!114 &4435278545853322349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5053,30 +5186,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
---- !u!114 &4713348463486247231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/Healthbar
-  m_EditorClassIdentifier: 
-  Name: Healthbar
-  StudioPath: 
-  Min: 0
-  Max: 4
-  Default: 0
-  ID:
-    data1: 3597231001
-    data2: 1681809175
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &4758745273483031362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5615,30 +5724,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
---- !u!114 &5911034783406514063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Main Menu Music/Combat Switch
-  m_EditorClassIdentifier: 
-  Name: Combat Switch
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1032635727
-    data2: 2169746850
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &6022887027082449268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5942,7 +6027,7 @@ MonoBehaviour:
   - {fileID: 8372865748723905896}
   - {fileID: -5083295025266608706}
   - {fileID: -8373017722276361879}
-  - {fileID: -4975535874337531469}
+  - {fileID: 1887687591381253085}
   MinDistance: 1
   MaxDistance: 20
   Length: 195750
@@ -6726,6 +6811,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 191
+--- !u!114 &8444639517803672004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Victory Defeat/Defeat Screen
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Victory Defeat/Defeat Screen
+  Guid:
+    Data1: -1543243031
+    Data2: 1158338654
+    Data3: -26234491
+    Data4: -1857141924
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &8504364592673507861
 MonoBehaviour:
   m_ObjectHideFlags: 0
