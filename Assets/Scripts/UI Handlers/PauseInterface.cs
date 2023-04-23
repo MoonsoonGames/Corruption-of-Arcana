@@ -12,12 +12,10 @@ namespace Necropanda.Interfaces
         public GameObject MainHUD;
         public GameObject Pausemenu;
         public PlayerController player;
+        public GameObject savedText;
+        public GameObject CreditsScreen;
         //public GameObject AchievementScreen;
 
-        private void Start()
-        {
-
-        }
 
         public void Resume()
         {
@@ -40,23 +38,30 @@ namespace Necropanda.Interfaces
         {
 
         }
-
-        public void Achievements()
+        
+        public void Credits()
         {
-            //AchievementScreen.SetActive(true);
-            //Pausemenu.SetActive(false);
+            CreditsScreen.SetActive(true);
         }
 
         public void SaveGame()
         {
             //Maybe have a visual indicator for this
+            savedText.SetActive(true);
             SaveManager.instance.SaveAllData();
+            new WaitForSecondsRealtime(2f);
+            savedText.SetActive(false);
         }
 
         public void QuitGame()
         {
             //ConfirmationScreen.SetActive(true);
             LoadingScene.instance.LoadScene(E_Scenes.SplashScreen, E_Scenes.Null, false);
+        }
+
+        public void CloseCredits()
+        {
+            CreditsScreen.SetActive(false);
         }
     }
 }
