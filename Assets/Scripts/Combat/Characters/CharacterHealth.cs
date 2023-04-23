@@ -59,7 +59,7 @@ namespace Necropanda
         private ToggleGodMode tgm;
         #endregion
 
-        protected virtual void Start()
+        public virtual void Setup()
         {
             character = GetComponent<Character>();
             SetupHealth();
@@ -77,7 +77,7 @@ namespace Necropanda
             shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
-            cursedMaxHealth = (int)(maxHealth * 0.8);
+            cursedMaxHealth = (int)(maxHealth * 0.75);
 
             healthSlider.Setup(maxHealth);
             healthSlider.SetSliderValue(health);
@@ -127,7 +127,7 @@ namespace Necropanda
         /// <returns>The true value (affected by resistances and shield) of the effect</returns>
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
-            if (CheckGodMode())
+            if (CheckGodMode() && character.stats.characterName == "Taro")
             {
                 return 0;
             }
@@ -202,6 +202,20 @@ namespace Necropanda
         /// <param name="damage">The damage the target will take to thier health</param>
         /// <returns>Character's health percentage affected by the damage</returns>
         public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
+
+        public int GetShieldRemovedPercentage(float percentage)
+        {
+            int currentShield = shield;
+            int newShield = (int)(shield * percentage);
+
+            return currentShield - newShield;
+        }
+
+        public void SetShieldPercentage(float percentage)
+        {
+            shield = (int)(shield * percentage);
+            UpdateHealthUI();
+        }
 
         #endregion
 

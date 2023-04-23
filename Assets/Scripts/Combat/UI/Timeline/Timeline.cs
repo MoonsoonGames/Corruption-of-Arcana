@@ -15,7 +15,7 @@ namespace Necropanda
 
         public static Timeline instance;
 
-        public bool showAllspells = false; public bool ShowSpells(Character caster) { return player == caster || player.enlightened || showAllspells; }
+        public bool showAllspells = false; public bool ShowSpells(Character caster) { return player == caster || player.blinded == false; }
         public float initialDelay = 2f;
 
         List<CombatHelperFunctions.SpellInstance> spells = new List<CombatHelperFunctions.SpellInstance>();
@@ -193,28 +193,31 @@ namespace Necropanda
                 foreach (var item in spells)
                 {
                     bool revealed = ShowSpells(item.caster);
-                    string text = item.caster.stats.characterName + " is casting a spell (" + item.spell.speed + ")";
-
                     if (revealed)
-                        text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
+                    {
+                        string text = item.caster.stats.characterName + " is casting a spell (" + item.spell.speed + ")";
 
-                    Color color = item.caster.stats.timelineColor;
+                        if (revealed)
+                            text = item.caster.stats.characterName + " is casting " + item.spell.spellName + " on " + item.target.stats.characterName + " (" + item.spell.speed + ")";
 
-                    if (item.spell.overrideColor)
-                        color = item.spell.timelineColor;
+                        Color color = item.caster.stats.timelineColor;
 
-                    //Creates spell block game object
-                    GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
-                    spellBlockObject.transform.SetParent(transform, false);
+                        if (item.spell.overrideColor)
+                            color = item.spell.timelineColor;
 
-                    //Sets spell block values
-                    //Sets spell block values
-                    SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
+                        //Creates spell block game object
+                        GameObject spellBlockObject = Instantiate(spellBlockPrefab) as GameObject;
+                        spellBlockObject.transform.SetParent(transform, false);
 
-                    spellBlock.SetInfo(item);
+                        //Sets spell block values
+                        //Sets spell block values
+                        SpellBlock spellBlock = spellBlockObject.GetComponent<SpellBlock>();
 
-                    //Adds spell block to layout group
-                    spellBlocks.Add(spellBlock);
+                        spellBlock.SetInfo(item);
+
+                        //Adds spell block to layout group
+                        spellBlocks.Add(spellBlock);
+                    }
 
                     if (item.caster.stats.usesArcana)
                     {
@@ -265,7 +268,7 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellInstance item in spells)
             {
-                item.spell.SimulateSpellValues(player, item.target, item.caster, item.empowered, item.weakened, cardsDiscarded);
+                item.spell.SimulateSpellValues(player, item.target, item.caster, cardsDiscarded);
             }
 
             foreach (CombatHelperFunctions.StatusInstance item in statuses)
@@ -311,6 +314,8 @@ namespace Necropanda
             {
                 Timeline.instance.RemoveStatusesOnCharacter(character);
             }
+
+            clearStatusChars.Clear();
         }
 
         float CastSpells()
@@ -331,12 +336,12 @@ namespace Necropanda
             return i;
         }
 
-        public void StartSpellCoroutine(Spell spell, Character target, Character caster, bool empowered, bool weakened, Deck2D hand, int cardsInHand,
-            CombatHelperFunctions.SpellModule module, int removedStatusCount, float time, float hitDelay,
+        public void StartSpellCoroutine(Spell spell, Character target, Character caster, Deck2D hand, int cardsInHand,
+            CombatHelperFunctions.SpellModule module, int removedStatusCount, int shieldRemoved, float time, float hitDelay,
             TeamManager targetTeamManager, List<Character> allCharacters)
         {
-            StartCoroutine(spell.IDetermineTarget(target, caster, empowered, weakened, hand, cardsInHand,
-                module, removedStatusCount, time, hitDelay, targetTeamManager, allCharacters));
+            StartCoroutine(spell.IDetermineTarget(target, caster, hand, cardsInHand,
+                module, removedStatusCount, shieldRemoved, time, hitDelay, targetTeamManager, allCharacters));
         }
 
         void ActivateStatuses()
@@ -416,7 +421,7 @@ namespace Necropanda
             else
             {
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, spellInstance.empowered, spellInstance.weakened, hand, cardsDiscarded);
+                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, hand, cardsDiscarded);
             }
 
             if (spellInstance.spell.drawCard != null)
@@ -464,6 +469,8 @@ namespace Necropanda
 
         #endregion
 
+        #region Statuses
+
         public void RemoveStatusesOnCharacter(Character target)
         {
             List<CombatHelperFunctions.StatusInstance> statusesToRemove = new List<CombatHelperFunctions.StatusInstance>();
@@ -495,6 +502,48 @@ namespace Necropanda
             }
 
             return statusCount;
+        }
+
+        #endregion
+
+        public bool CheckSpellAgainstTarget(Spell spell, Character character)
+        {
+            bool found = false;
+
+            foreach (var item in spells)
+            {
+                if (item.spell == spell && item.target == character)
+                {
+                    Debug.Log("Found " + spell.spellName + " targetting " + character.name);
+                    found = true;
+                }
+                else
+                {
+                    Debug.Log("Did not find " + spell.spellName + " targetting " + character.name);
+                }
+            }
+
+            return found;
+        }
+
+        public bool CheckStatusAgainstTarget(StatusEffects status, Character character)
+        {
+            bool found = false;
+
+            foreach (var item in statuses)
+            {
+                if (item.status == status && item.target == character)
+                {
+                    Debug.Log("Found " + status.effectName + " targetting " + character.name);
+                    found = true;
+                }
+                else
+                {
+                    Debug.Log("Did not find " + status.effectName + " targetting " + character.name);
+                }
+            }
+
+            return found;
         }
     }
 }

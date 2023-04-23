@@ -13,6 +13,7 @@ namespace Necropanda
 {
     public class ArcanaManager : MonoBehaviour
     {
+        public DeckHand playerHand;
         public int arcanaMaxBase = 3;
         int arcanaMax = 3; public int GetMaxArcana() { return arcanaMax; }
 
@@ -61,8 +62,9 @@ namespace Necropanda
             CheckCardOverlays(arcana);
         }
 
-        void CheckCardOverlays(int arcana)
+        void CheckCardOverlays(int arcanaUsed)
         {
+            List<GameObject> handObjects = playerHand.GetCards();
             GameObject[] cardObjects = GameObject.FindGameObjectsWithTag("Card");
             //Debug.Log("Length is " + cardObjects.Length);
             foreach (var item in cardObjects)
@@ -70,7 +72,16 @@ namespace Necropanda
                 Card itemCard = item.GetComponent<Card>();
 
                 if (itemCard != null)
-                    itemCard.ShowUnavailableOverlay(arcanaMax - arcana);
+                {
+                    if (handObjects.Contains(item) == false && arcanaUsed <= arcanaMax)
+                    {
+                        itemCard.ShowUnavailableOverlay(20);
+                    }
+                    else
+                    {
+                        itemCard.ShowUnavailableOverlay(arcanaMax - arcanaUsed);
+                    }
+                }
                 else
                 {
                     Debug.Log("Invalid");

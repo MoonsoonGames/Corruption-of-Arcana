@@ -38,8 +38,11 @@ namespace Necropanda.Interfaces
 
             SaveManager.instance.LoadAllData();
             //Reset loadsettings/progress
-            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
-            //load game
+
+            if (LoadingScene.instance.loadScene != E_Scenes.Null)
+                LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, true);
+            else
+                NewGame();
         }
 
         public void Settings()
