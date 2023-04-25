@@ -15,19 +15,21 @@ MonoBehaviour:
   spellName: The Chariot
   nameImage: {fileID: 21300000, guid: 50017d4e6c973344695e2426737ae7fd, type: 3}
   flavourText: 
-  spellDescription: 'Provide 25 $shield$
+  spellDescription: 'Provide 40 $shield$
 
 
     Increase max $arcana$ by 2 points
-    for 2 turns'
+    for 3 turns'
   cardImage: {fileID: 0}
   background: {fileID: 0}
   cardType: 1
+  previousTier: {fileID: 11400000, guid: ce4fa1980419e1f4fbbe561217eef348, type: 2}
+  nextTier: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.5502006, g: 0.7921569, b: 0.54901963, a: 255}
   timelineIcon: {fileID: -346350385, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0.1
-  loadoutCost: 2
+  loadoutCost: 3
   arcanaCost: 1
   potionCost: 0
   shieldCost: 0
@@ -43,7 +45,7 @@ MonoBehaviour:
   spellModules:
   - target: 1
     effectType: 8
-    value: 25
+    value: 40
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
@@ -63,15 +65,15 @@ MonoBehaviour:
     valueScalingPerStatus: 0
     summon: {fileID: 0}
     statuses:
+    - status: {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
+      duration: 3
+      applyOverShield: 1
+      remove: 0
+      valueSuccess: 0
     - status: {fileID: 11400000, guid: 0acb6b34b647c8b4eabfda6cf3a52280, type: 2}
       duration: 1
       applyOverShield: 1
       remove: 1
-      valueSuccess: 0
-    - status: {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
-      duration: 2
-      applyOverShield: 1
-      remove: 0
       valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 6031179954722945327, guid: c5fae0a25c1f7aa4daf8a1d379738803,
@@ -83,5 +85,3 @@ MonoBehaviour:
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
   idealTarget: 0
-  previousTier: {fileID: 0}
-  nextTier: {fileID: 0}
