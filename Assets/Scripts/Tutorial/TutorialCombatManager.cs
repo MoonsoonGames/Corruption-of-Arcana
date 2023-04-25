@@ -27,16 +27,26 @@ namespace Necropanda
 
             if (currentTurn < tutorialCards.Length)
             {
+                if (tutorialCards[currentTurn].ignore)
+                    return true;
+
                 foreach (var spellTarget in tutorialCards[currentTurn].spellTargets)
                 {
                     Character target = spellTarget.target < 0 ? player : enemyTeamManager.team[spellTarget.target];
 
-                    if (Timeline.instance.CheckTarget(spellTarget.spell, target) == false)
+                    if (Timeline.instance.CheckSpellAgainstTarget(spellTarget.spell, target) == false)
                         success = false;
                 }
             }
 
             return success;
+        }
+
+        public override float EndTurn(float endTurnDelay)
+        {
+            TutorialMessageManager.instance.EndTurn();
+
+            return base.EndTurn(endTurnDelay);
         }
 
         public override void StartNextTurn()
@@ -99,6 +109,7 @@ namespace Necropanda
     public struct TutorialCards
     {
         public SpellTarget[] spellTargets;
+        public bool ignore;
     }
 
     [System.Serializable]

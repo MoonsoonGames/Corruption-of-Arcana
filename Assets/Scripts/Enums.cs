@@ -17,7 +17,7 @@ public enum E_DamageTypes
 
 public enum E_SpellTargetType
 {
-    Caster, Target, Cleave, Chain, RandomEnemyTeam, RandomAll, All
+    Caster, Target, Cleave, Chain, RandomEnemyTeam, RandomAll, All, AllEnemies
 }
 
 public enum E_StatusTargetType
@@ -48,7 +48,10 @@ public enum E_Scenes
     ArenaMode,
     SplashScreen,
     Navigation,
-    EastForest
+    EastForest,
+    Tutorial,
+    [InspectorName("Intro Cutscene")]
+    IntroCutscene
 }
 
 public enum E_UtilityScripts

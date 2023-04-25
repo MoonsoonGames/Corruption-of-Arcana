@@ -506,7 +506,7 @@ namespace Necropanda
 
         #endregion
 
-        public bool CheckTarget(Spell spell, Character character)
+        public bool CheckSpellAgainstTarget(Spell spell, Character character)
         {
             bool found = false;
 
@@ -520,6 +520,26 @@ namespace Necropanda
                 else
                 {
                     Debug.Log("Did not find " + spell.spellName + " targetting " + character.name);
+                }
+            }
+
+            return found;
+        }
+
+        public bool CheckStatusAgainstTarget(StatusEffects status, Character character)
+        {
+            bool found = false;
+
+            foreach (var item in statuses)
+            {
+                if (item.status == status && item.target == character)
+                {
+                    Debug.Log("Found " + status.effectName + " targetting " + character.name);
+                    found = true;
+                }
+                else
+                {
+                    Debug.Log("Did not find " + status.effectName + " targetting " + character.name);
                 }
             }
 

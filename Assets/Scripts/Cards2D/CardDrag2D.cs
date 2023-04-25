@@ -240,11 +240,11 @@ namespace Necropanda
 
                 ScaleCard(1, false);
                 Highlight(false);
+                StopHighlightTarget();
                 ShowArt(deck.showArt);
                 transform.eulerAngles = baseRot;
 
-                dragManager.canDrag = true;
-                dragManager.StartDragging(null);
+                dragManager.StopDragging(this, deck.GetCharacter());
             }
 
             if (placeholder != null)
