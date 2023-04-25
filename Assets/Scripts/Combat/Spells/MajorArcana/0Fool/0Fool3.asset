@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 6Lovers
+  m_Name: 0Fool3
   m_EditorClassIdentifier: 
-  spellName: The Lovers
-  nameImage: {fileID: 21300000, guid: c804d3c59719d3c4f92fe3b83b243fac, type: 3}
+  spellName: The Fool
+  nameImage: {fileID: 21300000, guid: e86db558a478c8a4e912ba889ee45857, type: 3}
   flavourText: 
-  spellDescription: If target has no shield, they will consider allies as enemies
-    and enemies as allies for 2 turns
-  cardImage: {fileID: 0}
+  spellDescription: Target's spells are redirected to random targets for 4 turns
+  cardImage: {fileID: 21300000, guid: 6217cc171629a4048bdd8fb7bf6b975a, type: 3}
   background: {fileID: 0}
   cardType: 1
   overrideColor: 1
-  timelineColor: {r: 0.5451835, g: 0.21568626, b: 0.74509805, a: 255}
-  timelineIcon: {fileID: -1222757763, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 1
-  loadoutCost: 1
-  arcanaCost: 2
+  timelineColor: {r: 0.5502006, g: 0.7921569, b: 0.54901963, a: 255}
+  timelineIcon: {fileID: -1854375458, guid: f465a941178bb0d429d18de762a2632b, type: 3}
+  speed: 0.1
+  loadoutCost: 3
+  arcanaCost: 1
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -43,13 +43,16 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
     statuses:
-    - status: {fileID: 11400000, guid: 3243fa674bc14a14185f0f5b593a7409, type: 2}
-      duration: 3
-      applyOverShield: 0
+    - status: {fileID: 11400000, guid: da47ebee77da15a4f89f59d87c52318a, type: 2}
+      duration: 2
+      applyOverShield: 1
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 2083095811265704842, guid: f766f29bc8549f44e9cdc675716182e5,
     type: 3}
@@ -60,3 +63,5 @@ MonoBehaviour:
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
   idealTarget: 1
+  previousTier: {fileID: 11400000, guid: 79cd54bb5f0737e40b87d4e7facaf894, type: 2}
+  nextTier: {fileID: 0}

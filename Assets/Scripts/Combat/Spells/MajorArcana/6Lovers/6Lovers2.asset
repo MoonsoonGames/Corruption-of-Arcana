@@ -10,25 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 1Magician
+  m_Name: 6Lovers2
   m_EditorClassIdentifier: 
-  spellName: The Magician
-  nameImage: {fileID: 21300000, guid: f07bd3de40d5a0b40890d662248a68a5, type: 3}
+  spellName: The Lovers
+  nameImage: {fileID: 21300000, guid: c804d3c59719d3c4f92fe3b83b243fac, type: 3}
   flavourText: 
-  spellDescription: 'Deal 8 $static$
-
-
-    Deal 4 $static$ to target''s allies'
-  cardImage: {fileID: 21300000, guid: 510d3fec46a7b7143ae09609512d50c7, type: 3}
+  spellDescription: If target has no shield, they will consider allies as enemies
+    and enemies as allies for 3 turns
+  cardImage: {fileID: 0}
   background: {fileID: 0}
   cardType: 1
   overrideColor: 1
-  timelineColor: {r: 0.29067284, g: 0.5288418, b: 0.8679245, a: 255}
-  timelineIcon: {fileID: -426040575, guid: f465a941178bb0d429d18de762a2632b, type: 3}
-  speed: 0.5
-  loadoutCost: 1
+  timelineColor: {r: 0.5451835, g: 0.21568626, b: 0.74509805, a: 255}
+  timelineIcon: {fileID: -1222757763, guid: f465a941178bb0d429d18de762a2632b, type: 3}
+  speed: 1
+  loadoutCost: 2
   arcanaCost: 2
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -36,37 +35,34 @@ MonoBehaviour:
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
-  multihitDelay: 0.15
+  multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
   - target: 1
-    effectType: 2
-    value: 4
+    effectType: 6
+    value: 0
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
-    statuses: []
-  - target: 3
-    effectType: 2
-    value: 4
-    hitCount: 1
-    executeThreshold: 0
-    valueScalingDamageTaken: 0
-    valueScalingPerDiscard: 0
-    valueScalingPerStatus: 0
-    summon: {fileID: 0}
-    statuses: []
+    statuses:
+    - status: {fileID: 11400000, guid: 3243fa674bc14a14185f0f5b593a7409, type: 2}
+      duration: 4
+      applyOverShield: 0
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
-  projectileObject: {fileID: 6031179954722945327, guid: 4361a91694c972a4984ecc43791fbe3d,
+  projectileObject: {fileID: 2083095811265704842, guid: f766f29bc8549f44e9cdc675716182e5,
     type: 3}
   projectileSpeed: 0.6
-  projectilePoints: 000000000700000001000000
-  impactObject: {fileID: 6441297445223667176, guid: c3de2173c0f41884da1878ebdb1eb46e,
-    type: 3}
+  projectilePoints: 000000000600000001000000
+  impactObject: {fileID: 0}
   projectileFXObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 0
   idealTarget: 1
+  previousTier: {fileID: 0}
+  nextTier: {fileID: 0}

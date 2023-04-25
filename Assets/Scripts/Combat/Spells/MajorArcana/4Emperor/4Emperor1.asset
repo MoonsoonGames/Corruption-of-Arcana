@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: 4Emperor
+  m_Name: 4Emperor1
   m_EditorClassIdentifier: 
   spellName: The Emperor
   nameImage: {fileID: 21300000, guid: b8519792094837042b7fa46795e568e5, type: 3}
@@ -30,6 +30,7 @@ MonoBehaviour:
   loadoutCost: 1
   arcanaCost: 1
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
@@ -53,6 +55,8 @@ MonoBehaviour:
     - status: {fileID: 11400000, guid: 72af2937fdae48340b79c8edfd79d1c8, type: 2}
       duration: 3
       applyOverShield: 1
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 6031179954722945327, guid: 4a0fe9e214fa7154190edd48b144dc5e,
     type: 3}
@@ -63,3 +67,5 @@ MonoBehaviour:
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
   idealTarget: 0
+  previousTier: {fileID: 0}
+  nextTier: {fileID: 0}

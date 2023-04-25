@@ -13,6 +13,7 @@ namespace Necropanda
     public class LootPool
     {
         public List<Object> items;
+        public Vector2Int gold;
 
         public void RewardAllItems()
         {
@@ -20,6 +21,8 @@ namespace Necropanda
             {
                 GiveItem(item);
             }
+
+            GiveGold();
         }
 
         public void RewardRandomItem()
@@ -27,6 +30,12 @@ namespace Necropanda
             int randInt = Random.Range(0, items.Count);
 
             GiveItem(items[randInt]);
+            GiveGold();
+        }
+
+        void GiveGold()
+        {
+            //Add gold to player
         }
 
         void GiveItem(Object item)
