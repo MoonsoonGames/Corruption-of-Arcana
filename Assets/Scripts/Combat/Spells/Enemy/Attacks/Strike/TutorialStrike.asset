@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
-  m_Name: SpawnWisps
+  m_Name: TutorialStrike
   m_EditorClassIdentifier: 
-  spellName: Summon Wisps
+  spellName: Strike
   nameImage: {fileID: 0}
   flavourText: 
-  spellDescription: Spawns 2 wisps on the enemy team
+  spellDescription: Deal 6 $physical$
   cardImage: {fileID: 0}
   background: {fileID: 21300000, guid: f19634bd17ddbfe40b603fece6bb6f44, type: 3}
   cardType: 1
-  overrideColor: 1
-  timelineColor: {r: 0.31181023, g: 0.8584906, b: 0.50465035, a: 255}
-  timelineIcon: {fileID: 1873486079, guid: 9bea2b9472fbb12409c79a0ec3e75ae9, type: 3}
-  speed: 0.8
+  overrideColor: 0
+  timelineColor: {r: 0.509434, g: 0, b: 0, a: 1}
+  timelineIcon: {fileID: -1679210112, guid: 9bea2b9472fbb12409c79a0ec3e75ae9, type: 3}
+  speed: 0.45
   loadoutCost: 0
-  arcanaCost: 1
+  arcanaCost: 0
   potionCost: 0
   shieldCost: 0
   potionType: 0
@@ -37,24 +37,24 @@ MonoBehaviour:
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
-  - target: 0
-    effectType: 10
-    value: 2
+  - target: 7
+    effectType: 0
+    value: 6
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
     valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
-    summon: {fileID: 11400000, guid: 9ec8d7e3ff113c74a91540fc67a9dc95, type: 2}
+    summon: {fileID: 0}
     statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
   projectileSpeed: 0.6
-  projectilePoints: 060000000b000000
+  projectilePoints: 0000000001000000
   impactObject: {fileID: 0}
   projectileFXObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
-  screenShake: 1
+  screenShake: 0
   idealTarget: 1
