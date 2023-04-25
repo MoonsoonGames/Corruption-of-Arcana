@@ -125,9 +125,6 @@ namespace Necropanda
 
         public void StopDragging(CardDrag2D cardDrag, Character target)
         {
-            if (target == null)
-                return;
-
             if (turn >= turnMessages.Length || step >= turnMessages[turn].stepMessages.Length)
                 return;
 
@@ -136,21 +133,30 @@ namespace Necropanda
             if (!advanceOnTarget)
                 return;
 
-            int targetCount = turnMessages[turn].stepMessages[step].target;
-
-            Character check = targetCount < 0 ? CombatManager.instance.player : CombatManager.instance.enemyTeamManager.team[targetCount];
-
-            if (check == null)
-                return;
-
-            if (target == check)
+            if (target == null)
             {
-                Debug.Log("Tutorial checks true for " + target.stats.characterName);
-                ProgressStep(true);
+                //Check if it needs to go to previous message
+
+                ProgressStep(false);
             }
             else
             {
-                Debug.Log("Tutorial checks false for " + target.stats.characterName);
+                int targetCount = turnMessages[turn].stepMessages[step].target;
+
+                Character check = targetCount < 0 ? CombatManager.instance.player : CombatManager.instance.enemyTeamManager.team[targetCount];
+
+                if (check == null)
+                    return;
+
+                if (target == check)
+                {
+                    Debug.Log("Tutorial checks true for " + target.stats.characterName);
+                    ProgressStep(true);
+                }
+                else
+                {
+                    Debug.Log("Tutorial checks false for " + target.stats.characterName);
+                }
             }
         }
 
