@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using Necropanda.Player;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -24,7 +25,15 @@ namespace Necropanda
         {
             if (flowChart != null)
             {
+                Debug.Log("EndDialogue");
+                PlayerController controller = player.GetComponent<PlayerController>();
+
                 flowChart.SetActive(true);
+
+                controller.canMove = false;
+
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
             }
         }
 

@@ -240,6 +240,7 @@ namespace Necropanda
 
                 ScaleCard(1, false);
                 Highlight(false);
+                StopHighlightTarget();
                 ShowArt(deck.showArt);
                 transform.eulerAngles = baseRot;
 

@@ -29,6 +29,7 @@ namespace Necropanda.Player
         public float groundDistance = 0.4f; // The distance of the player to the ground.
         public LayerMask groundMask; // Used for telling the controller what ground is.
         public bool paused = false; // Defines whether the game is paused, this might not be needed.
+        public bool canMove = true;
 
         Vector3 velocity; // The velocity(speed) of the player.
         bool isGrounded; // Tells us whether the player is grounded.
@@ -47,6 +48,7 @@ namespace Necropanda.Player
         private void Start()
         {
             paused = true;
+            canMove = true;
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
@@ -90,18 +92,16 @@ namespace Necropanda.Player
                 speed = walkSpeed;
             }
 
-            if (!paused)
+            cmBrain.enabled = !paused;
+
+            if (!paused && canMove)
             {
                 GetInput();
-                cmBrain.enabled = true;
-                return;
             }
             else
             {
                 HandleAnimations(new Vector3(0, 0, 0), false);
             }
-            // Disable camera input
-            cmBrain.enabled = false;
 
         }
 
