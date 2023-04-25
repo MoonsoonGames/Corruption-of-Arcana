@@ -17,6 +17,14 @@ namespace Necropanda.Interfaces
         //public GameObject AchievementScreen;
 
 
+        private void Start()
+        {
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            }
+        }
+
         public void Resume()
         {
             Debug.Log("resuming");
@@ -38,7 +46,7 @@ namespace Necropanda.Interfaces
         {
 
         }
-        
+
         public void Credits()
         {
             CreditsScreen.SetActive(true);

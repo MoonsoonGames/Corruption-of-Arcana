@@ -83,7 +83,7 @@ namespace Necropanda.Interfaces
             {
                 Pausemenu.SetActive(true);
                 mainHUD.SetActive(false);
-                // Time.timeScale = 0;
+                Time.timeScale = 0;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 player.paused = true;
