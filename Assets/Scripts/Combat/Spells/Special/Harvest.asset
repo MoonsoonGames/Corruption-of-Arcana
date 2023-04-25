@@ -19,7 +19,7 @@ MonoBehaviour:
 
 
     Instantly kill your target if their health
-    percentage is less than 30%
+    percentage is less than 25%
 
 
     This card gets discarded after use'
@@ -36,7 +36,6 @@ MonoBehaviour:
   discardAfterCasting: 1
   discardAfterTurn: 0
   drawCard: {fileID: 0}
-  spawnEnemies: []
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
@@ -47,10 +46,11 @@ MonoBehaviour:
     effectType: 6
     value: 5
     hitCount: 1
-    executeThreshold: 0.3
+    executeThreshold: 0.25
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
+    summon: {fileID: 0}
     statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 6031179954722945327, guid: c5fae0a25c1f7aa4daf8a1d379738803,
@@ -58,6 +58,7 @@ MonoBehaviour:
   projectileSpeed: 0.6
   projectilePoints: 0000000001000000
   impactObject: {fileID: 0}
+  projectileFXObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
   screenShake: 1
   idealTarget: 1

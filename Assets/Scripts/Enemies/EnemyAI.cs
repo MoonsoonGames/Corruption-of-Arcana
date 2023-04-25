@@ -18,9 +18,14 @@ namespace Necropanda.AI
         GameObject player;
         public NavMeshAgent agent;
         Vector3 startPos;
+        private Animator animator;
+        public bool debugMode = false;
 
+        [Header("Statistics")]
         public CharacterStats enemyStats;
         public bool boss;
+        public GameObject bossAI;
+		public bool endCombatIfKilled = false;
 
         //state variables
         [Header("AI State Variables")]
@@ -36,9 +41,10 @@ namespace Necropanda.AI
         [Header("Wandering Variables")]
         public float wanderingCoolDown;
         public float wanderRadius;
+        public bool returnHomeAfterWander = true; // This defines whether the AI should return home after wandering.
+
         private NavMeshHit hit; // Used for determining where the AI moves to.
         private bool blocked = false; // Internal true/false for checking whether the current AI path is blocked.
-        private Animator animator;
 
 
         #region Checking Variables
@@ -58,13 +64,18 @@ namespace Necropanda.AI
             startPos = transform.position;
 
             wanderRadius = gameObject.GetComponent<SphereCollider>().radius;
+
+            if (debugMode)
+            {
+                Debugger.instance.SendDebug($"Debug mode enabled on {gameObject.name}!", 2);
+            }
         }
 
         public void ActivateAI(GameObject playerRef)
         {
             player = playerRef;
             active = true;
-            Debugger.instance.SendDebug("Activate AI");
+            //Debugger.instance.SendDebug("Activate AI");
         }
 
         // Update is called once per frame
@@ -76,7 +87,6 @@ namespace Necropanda.AI
             }
             else
             {
-
                 HFSM();
             }
 
@@ -111,6 +121,7 @@ namespace Necropanda.AI
                     moduleManager.ChangeModuleState();
                     // Set the state to nothing.
                     currentState = AIState.Nothing;
+
                     // Check if the AI has been running for long enough for a state switch.
                     // probably also need to reset the timer here too.
                     if (timer > 5 && !doOverrideState)
@@ -137,14 +148,17 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
+
+
                     moduleManager.ChangeModuleState(1, true);
                     moduleManager.ChangeModuleState(2, false);
                     moduleManager.wander.WanderInRadius(blocked, hit);
                     if (!hasDebuggedWandering)
                     {
-                        Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
+                        //Debugger.instance.SendDebug("Enabled Wandering module on Enemy AI " + gameObject.name);
                         hasDebuggedWandering = true;
                     }
+
 
                     break;
 
@@ -153,8 +167,17 @@ namespace Necropanda.AI
                     moduleManager.ChangeModuleState(2, true);
                     if (!hasDebuggedPatrol)
                     {
-                        Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
+                        //Debugger.instance.SendDebug("Enabled Patrolling module on Enemy AI " + gameObject.name);
                         hasDebuggedPatrol = true;
+                    }
+                    break;
+
+                case AIState.Following:
+                    Debug.Log("test");
+                    if (GetBossDistance() >= 5)
+                    {
+
+                        agent.SetDestination(bossAI.transform.position);
                     }
                     break;
             }
@@ -178,6 +201,11 @@ namespace Necropanda.AI
         private void OnTriggerExit(Collider other)
         {
             currentState = AIState.Patrolling;
+        }
+
+        private float GetBossDistance()
+        {
+            return Vector3.Distance(transform.position, bossAI.transform.position);
         }
         #endregion
     }

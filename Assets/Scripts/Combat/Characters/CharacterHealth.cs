@@ -54,9 +54,12 @@ namespace Necropanda
 
         #endregion
 
+        // Console stuff (godmode)
+        private DeveloperConsole developerConsole;
+        private ToggleGodMode tgm;
         #endregion
 
-        protected virtual void Start()
+        public virtual void Setup()
         {
             character = GetComponent<Character>();
             SetupHealth();
@@ -74,7 +77,7 @@ namespace Necropanda
             shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
-            cursedMaxHealth = (int)(maxHealth * 0.8);
+            cursedMaxHealth = (int)(maxHealth * 0.75);
 
             healthSlider.Setup(maxHealth);
             healthSlider.SetSliderValue(health);
@@ -124,6 +127,11 @@ namespace Necropanda
         /// <returns>The true value (affected by resistances and shield) of the effect</returns>
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
+            if (CheckGodMode() && character.stats.characterName == "Taro")
+            {
+                return 0;
+            }
+
             #region Damage Calculations
 
             int damageTaken = 0;
@@ -194,6 +202,20 @@ namespace Necropanda
         /// <param name="damage">The damage the target will take to thier health</param>
         /// <returns>Character's health percentage affected by the damage</returns>
         public float GetHealthPercentageFromDamage(int damage) { return (float)(health - damage) / (float)maxHealth; }
+
+        public int GetShieldRemovedPercentage(float percentage)
+        {
+            int currentShield = shield;
+            int newShield = (int)(shield * percentage);
+
+            return currentShield - newShield;
+        }
+
+        public void SetShieldPercentage(float percentage)
+        {
+            shield = (int)(shield * percentage);
+            UpdateHealthUI();
+        }
 
         #endregion
 
@@ -268,21 +290,8 @@ namespace Necropanda
 
         void Kill(E_DamageTypes type)
         {
-            // Get ref to the dev console
-            GameObject console = GameObject.FindGameObjectWithTag("Console");
-            if (console != null)
-            {
-                DeveloperConsoleBehaviour behaviour = console.GetComponent<DeveloperConsoleBehaviour>();
 
-                // Need to find a better way to do this
-                ToggleGodMode tgm = (ToggleGodMode)behaviour.commands[6];
 
-                if (tgm.GodMode == true)
-                {
-                    return;
-                }
-            }
-            
             dying = true;
             KillFX();
             ActivateArt(false, true, type);
@@ -457,6 +466,34 @@ namespace Necropanda
 
         #endregion
 
+        #endregion
+
+        #region Cheats
+        public bool CheckGodMode()
+        {
+            // Get ref to the dev console
+            GameObject console = GameObject.FindGameObjectWithTag("Console");
+            if (console != null)
+            {
+                DeveloperConsoleBehaviour behaviour = console.GetComponent<DeveloperConsoleBehaviour>();
+
+                foreach (IConsoleCommand command in behaviour.commands)
+                {
+                    if (command.CommandWord == "tgm")
+                    {
+                        tgm = (ToggleGodMode)command;
+                        Debug.Log(tgm);
+                    }
+                }
+
+                if (tgm.GodMode == true)
+                {
+                    Debug.Log("Godmode is enabled, player can't die!");
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }

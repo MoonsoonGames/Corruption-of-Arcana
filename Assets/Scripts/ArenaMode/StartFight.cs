@@ -19,7 +19,7 @@ namespace Necropanda
         public TextMeshProUGUI text;
         public string overideDescription;
 
-        private void Start()
+        void Start()
         {
             if (text == null) return;
 
@@ -56,20 +56,38 @@ namespace Necropanda
             text.text = description;
         }
 
+        public void Check()
+        {
+            RequireQuestProgress requireQuestProgress = GetComponent<RequireQuestProgress>();
+            requireQuestProgress.CheckProgress();
+        }
+
         public void FightButton()
         {
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
-            LoadCombatManager.instance.LoadCombat(null, lastScene, enemies, progressQuest);
+
+            if (GameObject.FindObjectOfType<Player.PlayerController>() == null)
+                LoadCombatManager.instance.LoadCombat(null, lastScene, enemies, progressQuest);
+            else
+            {
+                GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
+                LoadCombatManager.instance.LoadCombat(player, lastScene, enemies, progressQuest);
+            }
         }
 
-        public void StartFightFromLevel()
+        public void Tutorial()
         {
-            GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
-
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
-            LoadCombatManager.instance.LoadCombat(player, lastScene, enemies, progressQuest);
+
+            if (GameObject.FindObjectOfType<Player.PlayerController>() == null)
+                LoadCombatManager.instance.LoadTutorial(null, lastScene, enemies, progressQuest);
+            else
+            {
+                GameObject player = GameObject.FindObjectOfType<Player.PlayerController>().gameObject;
+                LoadCombatManager.instance.LoadTutorial(player, lastScene, enemies, progressQuest);
+            }
         }
     }
 }

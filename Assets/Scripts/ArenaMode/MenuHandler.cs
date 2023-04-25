@@ -37,5 +37,12 @@ namespace Necropanda
             Page1.SetActive(true);
             Page2.SetActive(false);
         }
+
+        public void CloseMenu()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            this.gameObject.SetActive(false);
+        }
     }
 }

@@ -81,7 +81,7 @@ namespace Necropanda
         /// Each type has a number in FMOD</param>
         private void PlayFootstep (int terrainType, Vector3 pos)
         {
-            if (Vector3.Distance(LoadCombatManager.instance.mainCam.transform.position, gameObject.transform.position) < soundFXDistance)
+            if (Vector3.Distance(Camera.main.transform.position, gameObject.transform.position) < soundFXDistance)
             {
                 footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Footsteps");
                 footsteps.setParameterByName("Terrain", terrainType);

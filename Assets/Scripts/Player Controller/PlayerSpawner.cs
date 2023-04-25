@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -15,11 +16,16 @@ namespace Necropanda
     {
         public Object playerRef;
 
+        CinemachineBrain cmBrain;
+        CinemachineFreeLook freeLook;
+
         // Start is called before the first frame update
         void Start()
         {
+            cmBrain = GetComponentInChildren<CinemachineBrain>();
+            freeLook = GetComponentInChildren<CinemachineFreeLook>();
             SpawnPlayer();
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
 
         void SpawnPlayer()
@@ -46,18 +52,43 @@ namespace Necropanda
                 }
             }
 
+            transform.position = spawnPos;
+            transform.rotation = spawnRot;
+
             GameObject player = Instantiate(playerRef, spawnPos, spawnRot) as GameObject;
             Player.PlayerController controller = player.GetComponent<Player.PlayerController>();
 
             Interfaces.HUDInterface hud = GameObject.FindObjectOfType<Interfaces.HUDInterface>();
             hud.player = controller;
 
-            //Setting Up camera stack
-            Camera cam = player.GetComponentInChildren<Camera>();
-            Camera.SetupCurrent(cam);
-            UniversalAdditionalCameraData cameraData = cam.GetUniversalAdditionalCameraData();
-            cameraData.cameraStack.Add(GameObject.Find("UICamera").GetComponent<Camera>());
-            LoadCombatManager.instance.mainCam = cam;
+
+            //Setting up cam free look
+            //Vector3 localPos = freeLook.transform.localPosition;
+
+            //cmBrain.gameObject.transform.parent = controller.gameObject.transform;
+            //freeLook.gameObject.transform.parent = controller.gameObject.transform;
+
+            //rotation should look at player
+
+            Vector3 dir = spawnRot.eulerAngles.normalized * 3;
+
+            Vector3 camPos = spawnPos + dir;
+
+            Quaternion camRot = Quaternion.FromToRotation(camPos, spawnPos);
+
+            freeLook.ForceCameraPosition(spawnPos, camRot);
+
+            //freeLook.transform.localPosition = localPos;
+
+            controller.cam = Camera.main;
+            controller.cmBrain = cmBrain;
+
+            freeLook.Follow = controller.lookAtTarget.transform;
+            freeLook.ResolveFollow(freeLook.Follow);
+            freeLook.LookAt = controller.lookAtTarget.transform;
+            freeLook.ResolveLookAt(freeLook.LookAt);
+
+            freeLook.ForceCameraPosition(spawnPos, camRot);
         }
 
         private void OnDrawGizmos()

@@ -104,14 +104,18 @@ namespace Necropanda
 
             foreach (var item in spellConstructs)
             {
-                //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
-                GameObject section = Instantiate(sectionPrefab, sections.transform) as GameObject;
-                IconConstructor constructor = section.GetComponent<IconConstructor>();
+                Object effectObject = GetEffectObject(item.effectType);
+                if (effectObject != null)
+                {
+                    //Debug.Log("Module: " + item.value + " X " + item.hitCount + " " + item.effectType + " on " + item.target.ToString());
+                    GameObject section = Instantiate(sectionPrefab, sections.transform) as GameObject;
+                    IconConstructor constructor = section.GetComponent<IconConstructor>();
 
-                if (constructor != null)
-                    constructor.ConstructSpell(item.value, GetEffectObject(item.effectType), item.hitCount, GetTargetType(item.target));
+                    if (constructor != null)
+                        constructor.ConstructSpell(item.value, effectObject, item.hitCount, GetTargetType(item.target));
 
-                oldSections.Add(section);
+                    oldSections.Add(section);
+                }
             }
 
             #endregion
@@ -195,6 +199,8 @@ namespace Necropanda
                     return healingIcon;
                 case E_DamageTypes.Shield:
                     return shieldIcon;
+                case E_DamageTypes.Summon:
+                    return null;
                 default:
                     return null;
             }

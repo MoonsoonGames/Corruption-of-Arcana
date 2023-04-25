@@ -17,7 +17,7 @@ namespace Necropanda
 
         protected override void Start()
         {
-            enemyQueue = GetComponentInChildren<EnemyQueue>();
+            enemyQueue = GameObject.FindObjectOfType<EnemyQueue>();
             enemyQueue.Setup();
             base.Start();
         }
@@ -55,14 +55,15 @@ namespace Necropanda
                 {
                     if (LoadCombatManager.instance.enemies.Count != 0)
                     {
-                        CharacterStats enemyObject = LoadCombatManager.instance.enemies[0];
+                        CharacterStats stats = LoadCombatManager.instance.enemies[0];
                         LoadCombatManager.instance.enemies.RemoveAt(0);
 
-                        if (enemyObject != null)
+                        if (stats != null)
                         {
-                            GameObject enemyRef = Instantiate(enemyObject.characterObject, spawners[i].gameObject.transform) as GameObject;
+                            GameObject enemyRef = Instantiate(stats.characterObject, spawners[i].gameObject.transform) as GameObject;
 
                             Character enemyCharacter = enemyRef.GetComponent<Character>();
+                            enemyCharacter.stats = stats;
 
                             //Debug.Log("Spawned " + enemyCharacter.stats.characterName + " at spawner " + i);
                             //team.Add(enemyCharacter);

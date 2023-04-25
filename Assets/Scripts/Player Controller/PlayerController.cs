@@ -19,7 +19,9 @@ namespace Necropanda.Player
         public CharacterController controller; // Ref to the Character Controller Component.
 
         bool sprinting = false;
-        public float speed = 12f; // The speed at which the player moves.
+        float speed;
+        public float walkSpeed = 6f; // The speed at which the player moves.
+        public float sprintSpeed = 12f;
         public float gravity = -9.81f; // The amount of gravity that the is applied.
         public float moveDeadzone = 0.6f;
 
@@ -27,6 +29,7 @@ namespace Necropanda.Player
         public float groundDistance = 0.4f; // The distance of the player to the ground.
         public LayerMask groundMask; // Used for telling the controller what ground is.
         public bool paused = false; // Defines whether the game is paused, this might not be needed.
+        public bool canMove = true;
 
         Vector3 velocity; // The velocity(speed) of the player.
         bool isGrounded; // Tells us whether the player is grounded.
@@ -34,19 +37,18 @@ namespace Necropanda.Player
         // Animator vairables
         public Animator animator;
 
-        Camera cam;
+        public Camera cam;
         public CinemachineBrain cmBrain;
 
         Vector3 right;
         Vector3 forward;
 
+        public GameObject lookAtTarget;
+
         private void Start()
         {
             paused = true;
-
-            cam = Camera.main;
-            cmBrain = FindObjectOfType<CinemachineBrain>();
-            //mouseLook = GetComponentInChildren<MouseLook>();
+            canMove = true;
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
@@ -56,6 +58,8 @@ namespace Necropanda.Player
 
         void SetupMovement()
         {
+            speed = walkSpeed;
+
             string currentSceneString = SceneManager.GetActiveScene().name;
             E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
 
@@ -77,14 +81,28 @@ namespace Necropanda.Player
         /// </summary>
         void Update()
         {
-            if (!paused)
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                sprinting = true;
+                speed = sprintSpeed;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                sprinting = false;
+                speed = walkSpeed;
+            }
+
+            cmBrain.enabled = !paused;
+
+            if (!paused && canMove)
             {
                 GetInput();
-                cmBrain.enabled = true;
-                return;
             }
-            // Disable camera input
-            cmBrain.enabled = false;
+            else
+            {
+                HandleAnimations(new Vector3(0, 0, 0), false);
+            }
+
         }
 
         /// <summary>
@@ -115,18 +133,6 @@ namespace Necropanda.Player
 
             // Move using the controller component
             controller.Move(moveVector * speed * Time.deltaTime);
-
-            // Input checks
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                sprinting = true;
-                speed = speed * 2f;
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                sprinting = false;
-                speed = speed / 2f;
-            }
 
             // Calculate and apply gravity
             velocity.y += gravity * Time.deltaTime;

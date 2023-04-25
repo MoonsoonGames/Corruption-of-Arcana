@@ -29,12 +29,12 @@ namespace Necropanda
 
         #region Spell Logic
 
-        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
+        public void AffectSelfDelay(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, int shieldRemoved, float delay)
         {
-            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, effectType, cardsDiscarded, removedStatuses, delay, empowered, weakened));
+            StartCoroutine(IDelayAffectSelf(spellRef, caster, spell, effectType, cardsDiscarded, removedStatuses, shieldRemoved, delay));
         }
 
-        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
+        IEnumerator IDelayAffectSelf(Spell spellRef, Character caster, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, int shieldRemoved, float delay)
         {
             yield return new WaitForSeconds(delay);
             Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, caster);
@@ -43,15 +43,15 @@ namespace Necropanda
             VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, spellRef.projectileFXObject, effectType);
             SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
-            spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
+            spellRef.AffectSelf(caster, spell, effectType, cardsDiscarded, removedStatuses, shieldRemoved);
         }
 
-        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
+        public void AffectTargetDelay(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, int shieldRemoved, float delay)
         {
-            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, effectType, cardsDiscarded, removedStatuses, delay, empowered, weakened));
+            StartCoroutine(IDelayAffectTarget(spellRef, caster, target, spell, effectType, cardsDiscarded, removedStatuses, shieldRemoved, delay));
         }
 
-        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, float delay, bool empowered, bool weakened)
+        IEnumerator IDelayAffectTarget(Spell spellRef, Character caster, Character target, CombatHelperFunctions.SpellModule spell, E_DamageTypes effectType, int cardsDiscarded, int removedStatuses, int shieldRemoved, float delay)
         {
             yield return new WaitForSeconds(delay);
             Vector2[] points = GetProjectilePoints(spellRef.projectilePoints, caster, target);
@@ -60,7 +60,7 @@ namespace Necropanda
             VFXManager.instance.SpawnProjectile(points, spellRef.projectileObject, spellRef.projectileSpeed, spellRef.trailColor, spellRef.impactObject, spellRef.projectileFXObject, effectType);
             SpawnCastEffect(points, spellRef.castObject);
             yield return new WaitForSeconds(effectDelay);
-            spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, empowered, weakened);
+            spellRef.AffectTarget(caster, target, spell, effectType, cardsDiscarded, removedStatuses, shieldRemoved);
         }
 
         public float QueryTime(Vector2[] points, float projectileSpeed)

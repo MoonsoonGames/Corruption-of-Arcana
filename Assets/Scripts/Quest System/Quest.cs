@@ -13,12 +13,19 @@ namespace Necropanda
     [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/Quest", order = 0)]
     public class Quest : ScriptableObject
     {
+        #region Setup
+
+        #region Variables
+
+        [Header("Basic Info")]
         public string questName;
+        public bool mainQuest;
         public int questNumber;
         [TextArea(3, 10)]
         public string questDescription;
         string questGiver = "";
 
+        [Header("Advanced Info")]
         public E_QuestStates state;
         public int currentProgress = -1;
         public int maxProgress = 1;
@@ -27,8 +34,12 @@ namespace Necropanda
         public Quest[] subQuests;
         public bool linear = true;
 
-        //public RewardsPool rewards
-        //public int rewardNumber
+        public LootPool rewards;
+        public bool rewardAll = true;
+        public int rewardCount = 1;
+        public bool overrideParentRewards = false;
+
+        #endregion
 
         [ContextMenu("Force Restart Quest")]
         public void ForceRestartQuest()
@@ -59,10 +70,21 @@ namespace Necropanda
             UpdateQuestInfo();
         }
 
+        public Quest GetParent()
+        {
+            if (parentQuest == null)
+                return this;
+
+            return parentQuest.GetParent();
+        }
+
+        #endregion
+
+        #region Quest Progress
+
         public void StartQuest(string questGiver, Quest parent)
         {
-            if (state != E_QuestStates.NotStarted)
-                return;
+            Debug.Log("Start quest " + questName);
 
             if (parent != null)
                 parentQuest = parent;
@@ -73,6 +95,7 @@ namespace Necropanda
             currentProgress = 0;
 
             EnableNextObjective();
+            EnableAllObjectives();
 
             UpdateQuestInfo();
         }
@@ -80,8 +103,7 @@ namespace Necropanda
         [ContextMenu("Quest Progress")]
         public void QuestProgress()
         {
-            //currently this only allows quests with a linear progression, so no choices yet
-            if (state != E_QuestStates.InProgress && linear)
+            if (state != E_QuestStates.InProgress)
                 return;
 
             currentProgress++;
@@ -117,11 +139,48 @@ namespace Necropanda
             UpdateQuestInfo();
         }
 
+        void EnableAllObjectives()
+        {
+            if (!linear)
+            {
+                for (int i = 0; i < subQuests.Length; i++)
+                {
+                    subQuests[i].StartQuest(questGiver, this);
+                }
+            }
+
+            UpdateQuestInfo();
+        }
+
         void GiveRewards()
         {
             UpdateQuestInfo();
-            //could have this depend on how the quest was finished
-            //rewards.GiveRewards
+
+            if (overrideParentRewards)
+            {
+                OverrideRewards(rewards);
+                return;
+            }
+
+            for (int i = 0; i < rewardCount; i++)
+            {
+                if (rewardAll)
+                    rewards.RewardAllItems();
+                else
+                    rewards.RewardRandomItem();
+            }
+        }
+
+        public void OverrideRewards(LootPool newRewards)
+        {
+            if (parentQuest == null)
+            {
+                rewards = newRewards;
+            }
+            else
+            {
+                parentQuest.OverrideRewards(newRewards);
+            }
         }
 
         void UpdateQuestInfo()
@@ -140,22 +199,15 @@ namespace Necropanda
             if (state != E_QuestStates.InProgress)
                 return null;
 
-            Quest quest = null;
+            Quest quest = this;
 
-            if (subQuests.Length == 0)
-            {
-                if (state == E_QuestStates.InProgress)
-                {
-                    quest = this;
-                }
-            }
-            else
-            {
+            if (subQuests.Length > 0)
                 quest = subQuests[currentProgress].GetCurrentQuestProgress();
-            }
 
             return quest;
         }
+
+        #endregion
 
         #region Saving and Loading
 
@@ -197,11 +249,6 @@ namespace Necropanda
             if (questData == null) return;
 
             RLoadQuestData(questData);
-
-            foreach (var item in subQuests)
-            {
-                item.RLoadQuestData(questData);
-            }
         }
 
         [ContextMenu("Load Base Data")]
@@ -209,14 +256,13 @@ namespace Necropanda
         {
             QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
 
-            if (questData == null) return;
+            if (questData == null)
+            {
+                Debug.LogError("Error with base quest data");
+                return;
+            }
 
             RLoadQuestData(questData);
-
-            foreach (var item in subQuests)
-            {
-                item.RLoadQuestData(questData);
-            }
         }
 
         void RLoadQuestData(QuestData questData)
@@ -229,6 +275,11 @@ namespace Necropanda
 
                     CheckProgress();
                 }
+            }
+
+            foreach (var item in subQuests)
+            {
+                item.RLoadQuestData(questData);
             }
         }
 

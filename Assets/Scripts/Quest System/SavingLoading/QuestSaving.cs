@@ -13,10 +13,14 @@ namespace Necropanda
 {
     public static class QuestSaving
     {
-        static string savePath = Application.persistentDataPath;
+        //C:\Users\as243879\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
+        //C:\Users\mr232432\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
+        static string savePath = Application.persistentDataPath + "/Quests";
 
         public static void SaveQuestData(List<Quest> questsToSave)
         {
+            CreateDirectory(savePath);
+
             QuestData questData = new QuestData(questsToSave);
             string localPath = savePath + "/" + questData.fileName + "_quest.dat";
 
@@ -30,6 +34,8 @@ namespace Necropanda
 
         public static QuestData LoadQuestData(string localPath)
         {
+            CreateDirectory(savePath);
+
             string fullPath = savePath + localPath;
             if (File.Exists(fullPath))
             {
@@ -43,13 +49,16 @@ namespace Necropanda
             }
             else
             {
-                Debug.LogError("Save file not found in " + fullPath);
+                Debug.LogWarning("Save file not found in " + fullPath);
                 return null;
             }
         }
 
         public static void SaveBaseQuestData(List<Quest> questsToSave)
         {
+            Debug.Log("saving base data");
+            CreateDirectory(savePath);
+
             QuestData questData = new QuestData(questsToSave);
             string localPath = savePath + "/" + questData.fileName + "_questBase.dat";
 
@@ -66,6 +75,20 @@ namespace Necropanda
             QuestData questData = new QuestData(questsToSave);
             string localPath = savePath + "/" + questData.fileName + "_questBase.dat";
             return File.Exists(localPath);
+        }
+
+        static void CreateDirectory(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                Debug.Log("Directory exists");
+            }
+            else
+            {
+                Debug.Log("Directory does not exist -> Creating directory");
+                Directory.CreateDirectory(path);
+            }
+            
         }
     }
 }

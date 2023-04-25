@@ -41,9 +41,11 @@ namespace Necropanda
             interacted = new List<string>();
         }
 
-        public Camera mainCam;
+        public CharacterStats character;
 
         public E_Scenes combatScene;
+        public E_Scenes tutorialScene;
+
         public E_Scenes lastScene;
         public Vector3 lastPos;
         public Quaternion lastRot;
@@ -54,6 +56,7 @@ namespace Necropanda
 
         public EnemyQueue queue;
         public List<CharacterStats> enemies;
+        public List<CharacterStats> enemiesEndCombat;
         public List<string> enemyIDs;
         public Sprite backdrop;
         bool loading = false;
@@ -74,15 +77,13 @@ namespace Necropanda
             {
                 if (enemy.GetActive() && Vector3.Distance(player.transform.position, enemy.transform.position) < combatRadius)
                 {
-                    if (enemy.boss)
+                    //If enemy is a boss, save them in the first space
+                    enemies.Insert(enemy.boss ? 0 : enemies.Count, enemy.enemyStats);
+
+                    if (enemy.enemyStats.endCombatOnKill || enemy.endCombatIfKilled)
                     {
                         //If enemy is a boss, save them in the first space
-                        enemies.Insert(0, enemy.enemyStats);
-                    }
-                    else
-                    {
-                        //Else append them at the end of the list
-                        enemies.Insert(enemies.Count, enemy.enemyStats);
+                        enemiesEndCombat.Insert(enemy.boss ? 0 : enemiesEndCombat.Count, enemy.enemyStats);
                     }
 
                     if (enemy.GetComponentInChildren<LoadCombat>().progressQuests.Length > 0)
@@ -143,6 +144,30 @@ namespace Necropanda
             Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
             LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+        }
+
+        public void LoadTutorial(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
+        {
+            if (loading || newEnemies.Count == 0) return;
+            loading = true;
+
+            //Get enemies within radius of player and save them in a list
+            enemies.Clear();
+            enemies = newEnemies;
+            enemyIDs.Clear();
+
+            //Saving last scene
+            if (lastScene != E_Scenes.Null && player != null)
+            {
+                lastPos = player.transform.position;
+                lastRot = player.transform.rotation;
+            }
+
+            progressQuestUponCombatVictory = quests;
+
+            Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
+            loading = false;
+            LoadingScene.instance.LoadScene(tutorialScene, lastScene, false);
         }
 
         public void AddEnemy(CharacterStats enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Object projectileFXObject, Color trailColor)
