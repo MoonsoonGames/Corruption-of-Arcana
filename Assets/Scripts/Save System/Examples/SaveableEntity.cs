@@ -9,27 +9,41 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda.SaveSystem
 {
+    /// <summary>
+    /// Defines whether an entity is saveable or not.
+    /// Holds one public variable, the item ID which NEEDS to be generated
+    /// </summary>
     public class SaveableEntity : MonoBehaviour
     {
         [SerializeField] private string id = string.Empty;
 
         public string Id => id;
 
+        // Generatable ID through the context menu.
         [ContextMenu("Generate Id")]
         private void GenerateId() => id = Guid.NewGuid().ToString();
 
+        /// <summary>
+        /// Finds each saveable
+        /// </summary>
+        /// <returns></returns>
         public object CaptureState()
         {
             var state = new Dictionary<string, object>();
 
             foreach (var saveable in GetComponents<ISaveable>())
             {
+                // set the dict, call the capture state on that item.
                 state[saveable.GetType().ToString()] = saveable.CaptureState();
             }
 
             return state;
         }
 
+        /// <summary>
+        /// Finds each loadable
+        /// </summary>
+        /// <param name="state"></param>
         public void RestoreState(object state)
         {
             var stateDictionary = (Dictionary<string, object>)state;
@@ -40,6 +54,7 @@ namespace Necropanda.SaveSystem
 
                 if (stateDictionary.TryGetValue(typeName, out object value))
                 {
+                    // set the dict, call the restore state on that item.
                     saveable.RestoreState(value);
                 }
             }

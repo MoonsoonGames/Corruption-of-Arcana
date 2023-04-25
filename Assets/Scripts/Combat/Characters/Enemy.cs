@@ -18,9 +18,16 @@ namespace Necropanda
 
         public Object cardPrefab;
 
-        protected override void Start()
+        public List<string> spellsThisTurn;
+        public List<string> spellsLastTurn;
+
+        public List<E_DamageTypes> effectsThisTurn;
+
+        [ContextMenu("Setup References")]
+        public override void SetupReferences()
         {
-            base.Start();
+            base.SetupReferences();
+
             enemyManager = (EnemyManager)teamManager;
             SpellCastingAI = stats.ai;
             aISpells = new List<CombatHelperFunctions.AISpell>();
@@ -29,7 +36,7 @@ namespace Necropanda
             {
                 //Setup for the AI spells
                 CombatHelperFunctions.AISpell newSpell = new CombatHelperFunctions.AISpell();
-                
+
                 newSpell.spell = spell.spell;
                 newSpell.spawnAsCard = spell.spawnAsCard;
                 newSpell.targetSelf = spell.targetSelf;
@@ -50,26 +57,40 @@ namespace Necropanda
             }
             else
             {
-                //In future, determine target depending on spell so it can cast support spells on allies/self
-                CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
-                CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
+                spellsLastTurn = spellsThisTurn == null ? new List<string>() : spellsThisTurn;
+                spellsThisTurn = new List<string>();
+                effectsThisTurn.Clear();
 
-                if (spellUtility.utility >= 0)
+                for (int i = 0; i < stats.actions; i++)
                 {
-                    if (spellUtility.spell.spawnAsCard)
+                    //In future, determine target depending on spell so it can cast support spells on allies/self
+                    CombatHelperFunctions.SpellInstance newSpellInstance = new CombatHelperFunctions.SpellInstance();
+                    CombatHelperFunctions.SpellUtility spellUtility = PrepareSpell();
+
+                    if (spellUtility.utility >= 0)
                     {
-                        newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                        if (spellUtility.spell.spawnAsCard)
+                        {
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                        }
+                        else
+                        {
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                        }
+
+                        enemyManager.AddSpellInstance(newSpellInstance);
                     }
                     else
                     {
-                        newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                        Debug.Log(stats.characterName + " is skipping their turn");
                     }
 
-                    enemyManager.AddSpellInstance(newSpellInstance);
-                }
-                else
-                {
-                    Debug.Log(stats.characterName + " is skipping their turn");
+                    spellsThisTurn.Add(newSpellInstance.spell.spellName);
+
+                    foreach(var item in newSpellInstance.spell.spellModules)
+                    {
+                        effectsThisTurn.Add(item.effectType);
+                    }
                 }
             }
 
@@ -119,7 +140,7 @@ namespace Necropanda
                     aISpells.Add(newSpell);
 
                     spawnCard = newSpell.spawnAsCard;
-                    Debug.Log(spawnCard + " 2");
+                    //Debug.Log(spawnCard + " 2");
                 }
 
                 if (spawnCard)

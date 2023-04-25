@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -11,9 +12,19 @@ namespace Necropanda
 {
     public class LoadCombat : MonoBehaviour, IInteractable
     {
+        public string ID;
+        public Quest[] progressQuests;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject player)
         {
-            LoadCombatManager.instance.LoadCombat(player);
+            string sceneString = SceneManager.GetActiveScene().name;
+            E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
+            LoadCombatManager.instance.LoadCombat(player, lastScene);
         }
     }
 }

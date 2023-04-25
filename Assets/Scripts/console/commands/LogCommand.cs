@@ -20,6 +20,10 @@ namespace Necropanda.Utils.Console.Commands
 
             // Log the passed in text.
             Debug.Log(logText);
+            DeveloperConsoleBehaviour.OutputMessage = $"Logged: {logText}";
+            // get ref, call the function to update the message
+            DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+            developerConsoleBehaviour.UpdateOutputMessage();
 
             return true;
         }

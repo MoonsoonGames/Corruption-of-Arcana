@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -11,29 +13,44 @@ namespace Necropanda.Interactable
 {
     public class Interactable : MonoBehaviour
     {
+        public string interactID;
+        public bool multipleInteractions = true;
+
+        public bool lockInteractions = false;
+        Collider player;
+
         public bool forceInteract;
         GameObject interactingCharacter;
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                //Debug.Log(other.name + " has entered collision");
+        static TooltipBox interactionPopup;
+        public string interactionPopupTitle;
+        public string interactionPopupMessage;
 
-                if (forceInteract)
-                {
-                    Interact(other.gameObject);
-                }
-                else
-                {
-                    //Open interact message
-                    interactingCharacter = other.gameObject;
-                }
+        bool setup = false;
+
+        public void Setup()
+        {
+            if (LoadCombatManager.instance == null) return;
+
+            interactID = name + "-" + transform.position + "-" + SceneManager.GetActiveScene().name;
+
+            if (LoadCombatManager.instance.interacted.Contains(interactID))
+            {
+                Debug.Log("Contains, destroy");
+                Destroy(gameObject);
             }
+
+            SetInteractMessage(null, null);
+            setup = true;
         }
 
         private void Update()
         {
+            if (!setup)
+            {
+                Setup();
+            }
+
             if (interactingCharacter != null && forceInteract == false)
             {
                 //Debug.Log("Can interact");
@@ -45,36 +62,115 @@ namespace Necropanda.Interactable
             }
         }
 
+
+        public void UnlockInteraction()
+        {
+            lockInteractions = false;
+            if (player != null)
+            {
+                CheckInteraction(player.gameObject);
+            }
+        }
+
+        void CheckInteraction(GameObject playerObj)
+        {
+            if (forceInteract)
+            {
+                Interact(playerObj);
+            }
+            else
+            {
+                //Open interact message
+                interactingCharacter = playerObj;
+                SetInteractMessage(interactionPopupTitle, interactionPopupMessage);
+            }
+        }
+
+        void CheckCancelInteraction(GameObject playerObj)
+        {
+            if (forceInteract)
+            {
+                CancelInteract(playerObj);
+            }
+            else
+            {
+                //Close interact message
+                interactingCharacter = null;
+                SetInteractMessage(null, null);
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                //Debug.Log(other.name + " has entered collision");
+                player = other;
+                if (lockInteractions) return;
+
+                CheckInteraction(other.gameObject);
+            }
+        }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 //Debug.Log(other.name + " has left collision");
+                player = null;
+                if (lockInteractions) return;
 
-                if (forceInteract)
-                {
-                    CancelInteract(other.gameObject);
-                }
-                else
-                {
-                    //Close interact message
-                    interactingCharacter = null;
-                }
+                CheckCancelInteraction(other.gameObject);
             }
         }
 
         void Interact(GameObject playerRef)
         {
+            SetInteractMessage(null, null);
+
             //Call interface function
-            Debug.Log("Interact");
-            GetComponent<IInteractable>().Interacted(playerRef);
+            //Debug.Log("Interact");
+            IInteractable[] interacts = GetComponents<IInteractable>();
+            foreach (var item in interacts)
+            {
+                item.Interacted(playerRef);
+            }
+
+            if (multipleInteractions == false)
+            {
+                LoadCombatManager.instance.interacted.Add(interactID);
+            }
         }
 
         void CancelInteract(GameObject playerRef)
         {
+            SetInteractMessage(null, null);
             //Call interface function
-            Debug.Log("Interact");
-            GetComponent<ICancelInteractable>().CancelInteraction(playerRef);
+            //Debug.Log("Interact");
+            ICancelInteractable[] interacts = GetComponents<ICancelInteractable>();
+            foreach (var item in interacts)
+            {
+                item.CancelInteraction(playerRef);
+            }
+        }
+
+        void SetInteractMessage(string title, string message)
+        {
+            if (interactionPopup == null)
+            {
+                interactionPopup = GameObject.FindGameObjectWithTag("InteractPopup").GetComponent<TooltipBox>();
+            }
+
+            if (interactionPopup == null) return;
+
+            if (title != null && message != null)
+            {
+                interactionPopup.gameObject.SetActive(true);
+                interactionPopup.SetText(interactionPopupTitle, interactionPopupMessage);
+            }
+            else
+            {
+                interactionPopup.gameObject.SetActive(false);
+            }
         }
     }
 }

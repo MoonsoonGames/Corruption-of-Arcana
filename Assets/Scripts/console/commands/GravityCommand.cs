@@ -1,4 +1,5 @@
 using UnityEngine;
+using Necropanda.Utils.Console;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
@@ -15,17 +16,25 @@ namespace Necropanda.Utils.Console.Commands
     {
         public override bool Process(string[] args)
         {
+            DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+
             // Check to make sure that an arguemnt is passed in, if not return false (do nothing)
             if (args.Length != 1) { return false; }
 
             // If the argument passed in can't be parsed as false, return false and reset the gravity to default.
             if (!float.TryParse(args[0], out float value))
             {
-                Debug.Log("invalid argument passed, resetting gravity");
+                DeveloperConsoleBehaviour.OutputMessage = $"invalid argument passed, resetting gravity";
+                // get ref, call the function to update the message
+                developerConsoleBehaviour.UpdateOutputMessage();
+
                 Physics.gravity = new Vector3(Physics.gravity.x, -9.81f, Physics.gravity.z);
                 return false;
             }
 
+            DeveloperConsoleBehaviour.OutputMessage = $"Setting gravity to {value}";
+            // get ref, call the function to update the message
+            developerConsoleBehaviour.UpdateOutputMessage();
             // If the arg does get parsed as a usable float, set Unitys gravity to that value.
             Physics.gravity = new Vector3(Physics.gravity.x, value, Physics.gravity.z);
 

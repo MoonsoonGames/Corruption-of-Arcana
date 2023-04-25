@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMODUnity;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -33,16 +34,53 @@ namespace Necropanda
         UntargettableOverlay untargettableOverlay;
 
         public bool collection = true;
+        public bool showArt = false;
 
         #endregion
 
         #region Cards
 
         CardDrag2D[] cards;
+        
+        public List<GameObject> GetCards()
+        {
+            List<GameObject> cardObjects = new List<GameObject>();
+
+            if (cards == null)
+                return cardObjects;
+
+            foreach (var item in cards)
+            {
+                cardObjects.Add(item.gameObject);
+            }
+            Debug.Log(cards.Length + " cards in hand || " + cardObjects.Count + " objects in list");
+            return cardObjects;
+        }
+
+        public List<E_CardTypes> availableCards;
         public int maxCards = 3;
         public int CurrentCardsLength()
         {
+            if (cards == null) return 0;
             return cards.Length;
+        }
+
+        public List<Spell> GetSpells()
+        {
+            List<Spell> spells = new List<Spell>();
+
+            if (cards.Length <= 0) return spells;
+
+            foreach (CardDrag2D card in cards)
+            {
+                Card cardInstance = card.GetComponent<Card>();
+
+                Spell spellInstance = cardInstance.spell;
+
+                spells.Add(spellInstance);
+            }
+
+            return spells;
         }
 
         public float deckScale = 1;
@@ -72,12 +110,12 @@ namespace Necropanda
             layout = GetComponent<HorizontalLayoutGroup>();
 
             character = GetComponentInParent<Character>();
-            
+
             timeline = GameObject.FindObjectOfType<Timeline>();
             if (timeline != null)
                 player = timeline.player;
 
-            untargettableOverlay = GetComponentInChildren<UntargettableOverlay>();
+            untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
 
             buildDeck = GetComponentInParent<BuildDeck>();
@@ -96,12 +134,16 @@ namespace Necropanda
             //Only fires logic when player is dragging a card into the deck
             if (eventData.dragging == true && dragManager.draggedCard != null && open)
             {
+                if (availableCards.Contains(dragManager.draggedCard.GetComponent<Card>().spell.cardType) == false)
+                    return;
+
                 if (cards.Length < maxCards)
                 {
                     //Debug.Log(cards.Length + " / " + maxCards);
                     CardDrag2D currentCard = dragManager.draggedCard;
                     currentCard.newDeck = this;
                     currentCard.ScaleCard(currentCard.hoverScale, true);
+                    currentCard.placeholder.transform.SetParent(this.transform);
                     Highlight(true);
                 }
             }
@@ -174,6 +216,7 @@ namespace Necropanda
         /// </summary>
         public void RemoveAllCards(bool discard)
         {
+            ResetArrays();
             foreach (CardDrag2D card in cards)
             {
                 DrawCard drawCard = card.GetComponent<DrawCard>();
@@ -206,7 +249,8 @@ namespace Necropanda
             }
 
             cards = new CardDrag2D[0];
-            timeline.SimulateSpellEffects();
+            if (timeline != null)
+                timeline.SimulateSpellEffects();
         }
 
         /// <summary>
@@ -216,7 +260,9 @@ namespace Necropanda
         public void AddCard(CardDrag2D card)
         {
             card.gameObject.transform.SetParent(group.transform);
+            card.gameObject.transform.position = gameObject.transform.position;
             card.deck = this;
+            card.GetComponent<Card>().ShowArt(showArt);
 
             ResetArrays();
 
@@ -248,6 +294,8 @@ namespace Necropanda
                     }
                 }
             }
+
+            PlayCardSound();
         }
 
         /// <summary>
@@ -301,6 +349,11 @@ namespace Necropanda
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
             }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                Debug.Break();
+            }
         }
 
         public void CheckOverlay()
@@ -341,5 +394,22 @@ namespace Necropanda
         }
 
         #endregion
+
+        #region Sound Effects
+
+        [Header("Sound Effects")]
+        public EventReference cardPlacedSound;
+
+        public void PlayCardSound()
+        {
+            RuntimeManager.PlayOneShot(cardPlacedSound);
+        }
+
+        #endregion
+    }
+
+    public enum E_CardTypes
+    {
+        All, Cards, Potions, Bombs, Weapons, Trinkets, None
     }
 }

@@ -13,12 +13,26 @@ namespace Necropanda
     {
         public MoveObject[] objects;
 
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
+
         public void Interacted(GameObject player)
         {
             if (objects.Length > 0)
             {
                 foreach (MoveObject level in objects)
-                    level.AdjustPosition();
+                {
+                    if (setSpecificPosInt)
+                        level.AdjustPosition(positionCount);
+                    else if (setSpecificPosVector3)
+                        level.AdjustPosition(targetPos);
+                    else
+                        level.AdjustPosition();
+                }
             }
             else
             {
@@ -26,5 +40,10 @@ namespace Necropanda
                 Debug.LogWarning("No object components have been set");
             }
         }
+
+        public bool setSpecificPosInt = false;
+        public int positionCount;
+        public bool setSpecificPosVector3 = false;
+        public Vector3 targetPos;
     }
 }

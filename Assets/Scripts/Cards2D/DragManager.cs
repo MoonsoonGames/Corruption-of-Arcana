@@ -27,6 +27,7 @@ namespace Necropanda
             }
             else if (instance != this)
             {
+                Debug.Log("destroying " + gameObject.name + ", singleton: " + instance.gameObject.name);
                 Destroy(gameObject);
             }
         }
@@ -34,6 +35,7 @@ namespace Necropanda
         #endregion
 
         public Canvas canvas;
+        public Camera UICam;
         public CardDrag2D draggedCard;
 
         private void Awake()

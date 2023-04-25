@@ -13,28 +13,36 @@ namespace Necropanda
     {
         public float baseDuration = 0.2f;
         public float intensityMultiplier = 0.005f;
+        float shakeOffset = 0.05f;
 
-        public void CharacterShake(float duration, float intensity)
+        public void CharacterShake(float duration, float intensity, int shakeCount)
         {
-            Debug.Log("Character shake");
-            Vector3 originalPos = gameObject.transform.position;
+            //Debug.Log("Character shake");
 
-            float randx = transform.position.x + Random.Range(-intensity, intensity);
-            float randy = transform.position.y + Random.Range(-intensity, intensity);
+            for (int i = 0; i < shakeCount; i++)
+            {
+                Vector2 randMove = new Vector2();
+                randMove.x = Random.Range(-intensity, intensity);
+                randMove.y = Random.Range(-intensity, intensity);
 
-            Vector3 newPos = new Vector3(randx, randy, transform.position.z);
+                Vector3 newPos = new Vector3(randMove.x, randMove.y, 0);
 
-            //Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
-            transform.position = newPos;
+                //Debug.Log(name + " shakes from " + transform.position + " to " + newPos);
 
-            StartCoroutine(ResetShake(originalPos, duration));
+                if (gameObject.activeSelf)
+                    StartCoroutine(MoveShake(randMove, i * shakeOffset));
+
+                if (gameObject.activeSelf)
+                    StartCoroutine(MoveShake(-randMove, duration + (i * shakeOffset)));
+            }
         }
 
-        IEnumerator ResetShake(Vector3 originalPosition, float delay)
+        IEnumerator MoveShake(Vector2 offset, float delay)
         {
             yield return new WaitForSeconds(delay);
-            //Debug.Log(name + " returns from " + transform.position + " to " + originalPosition);
-            transform.position = originalPosition;
+            Vector3 newPos = new Vector3(offset.x, offset.y, 0);
+            //Debug.Log(name + " returns from " + transform.position + " to " + newPos);
+            transform.position += newPos;
         }
     }
 }

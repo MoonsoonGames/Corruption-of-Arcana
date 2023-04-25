@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SlasherStats
   m_EditorClassIdentifier: 
   characterName: Slasher
+  characterObject: {fileID: 2611122861618082293, guid: 1c339c0dbdc88d0499d5f72bcb5f93f5,
+    type: 3}
   characterSprite: {fileID: 21300000, guid: 96be4bd65026838408fd13986c3739c8, type: 3}
   characterDescription: 
   location: 
@@ -23,18 +25,26 @@ MonoBehaviour:
   spawnObject: {fileID: 6441297445223667176, guid: d5df6c669791dc048bdd83028ac63f26,
     type: 3}
   ai: {fileID: 11400000, guid: 42fee354ff546e3448b00d40523c6c36, type: 2}
+  actions: 1
   aISpells:
-  - spell: {fileID: 11400000, guid: 5034baaf01e90a34dabb422e4fc9b655, type: 2}
+  - spell: {fileID: 11400000, guid: 5ea616b9066b32345a79b67411f70154, type: 2}
     spawnAsCard: 0
     targetSelf: 0
     targetAllies: 0
     targetEnemies: 1
     timeCooldown: 0
     lastUsed: 0
-  - spell: {fileID: 11400000, guid: dbe2a4ac08b6d8a47afd473fdf025276, type: 2}
+  - spell: {fileID: 11400000, guid: ba89b8bdbf6a7b245815580945faa7d6, type: 2}
     spawnAsCard: 0
     targetSelf: 0
     targetAllies: 0
     targetEnemies: 1
-    timeCooldown: 1
+    timeCooldown: 2
+    lastUsed: 0
+  - spell: {fileID: 11400000, guid: 3a7fd58c8d2199f43af62835f7f1e0e9, type: 2}
+    spawnAsCard: 0
+    targetSelf: 0
+    targetAllies: 0
+    targetEnemies: 1
+    timeCooldown: 2
     lastUsed: 0

@@ -13,17 +13,23 @@ MonoBehaviour:
   m_Name: 20Judgement
   m_EditorClassIdentifier: 
   spellName: Judgement
+  nameImage: {fileID: 21300000, guid: d0f41d7ed8d7a78419c2423572140854, type: 3}
   flavourText: 
   spellDescription: 'Returns cards in discard pile to your deck
 
 
-    Apply $empower$
-    for 2 turns'
-  cardImage: {fileID: 21300000, guid: 989d4add15666f14f96f619366642915, type: 3}
+    Cards played
+    on the target have 50% increased effect for 2 turns'
+  cardImage: {fileID: 0}
+  background: {fileID: 0}
+  cardType: 1
   overrideColor: 1
   timelineColor: {r: 0.33333334, g: 0.68298405, b: 0.6901961, a: 1}
+  timelineIcon: {fileID: 848248653, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0
   arcanaCost: 1
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -45,9 +51,13 @@ MonoBehaviour:
     statuses:
     - status: {fileID: 11400000, guid: 27ca1b3af8b88bf4fad48ae900b853fd, type: 2}
       duration: 3
-      chance: 1
+      applyOverShield: 1
   castObject: {fileID: 0}
-  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+  projectileObject: {fileID: 6031179954722945327, guid: c5fae0a25c1f7aa4daf8a1d379738803,
     type: 3}
+  projectileSpeed: 0.6
+  projectilePoints: 0800000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
+  screenShake: 0
+  idealTarget: 6

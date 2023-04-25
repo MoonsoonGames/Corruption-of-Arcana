@@ -12,13 +12,25 @@ namespace Necropanda
     [CreateAssetMenu(fileName = "NewSpellcastingAI", menuName = "Combat/Spell-casting AI", order = 3)]
     public class SpellCastingAI : ScriptableObject
     {
+        #region Setup
+
         public bool random = false;
 
+        [Header("Basic Utility Values")]
         public float damageUtility;
         public float controlUtility;
         public float supportSelfUtility;
         public float supportAllyUtility;
         public float spawnAllyUtility;
+        public float spawnAllyHealthUtility;
+
+        [Header("Advanced Utility Values")]
+        public CombatHelperFunctions.StatusUtility[] statusUtilities;
+        public float duplicateEffectsUtility = 0.45f, duplicateLastTurnUtility = 0.75f, duplicateThisTurnUtility = 0.2f;
+
+        #endregion
+
+        #region Utility Calculators
 
         /// <summary>
         /// Determines which spell the AI will cast
@@ -50,6 +62,15 @@ namespace Necropanda
 
             //Debug.Log(self.stats.characterName + " is planning to cast " + spellUtility.spell.spell.spellName + " on " + spellUtility.target + " with a utility: " + spellUtility.utility);
 
+            if (spellUtility.target == null)
+            {
+                Debug.Log("target is null");
+            }
+            else if (spellUtility.target.GetHealth().dying)
+            {
+                Debug.Log(spellUtility.target + " is dying");
+            }
+
             return spellUtility;
         }
 
@@ -70,6 +91,9 @@ namespace Necropanda
 
             foreach (Character target in allTargets)
             {
+                if (!target.CanBeTargetted())
+                    break;
+
                 foreach (CombatHelperFunctions.AISpell spell in spellList)
                 {
                     if (self.charm == false && CanCastSpell(spell, self, target, allyTeam, enemyTeam))
@@ -120,6 +144,8 @@ namespace Necropanda
             //Loop through all of the spell modules
             foreach (CombatHelperFunctions.SpellModule module in spell.spell.spellModules)
             {
+                float statusUtility = StatusUtility(module);
+
                 float moduleUtility = 0;
 
                 if (spell.targetSelf && target == self)
@@ -133,7 +159,17 @@ namespace Necropanda
                         targetUtility = targetMaxHealth - targetHealth;
                     }
 
+                    if (module.effectType == E_DamageTypes.Summon && module.summon != null)
+                    {
+                        float spawnUtility = spawnAllyUtility * module.value;
+
+                        spawnUtility += module.summon.maxHealth * spawnAllyHealthUtility * module.value;
+
+                        spellUtility += spawnUtility;
+                    }
+
                     moduleUtility += (module.value + targetUtility) * supportSelfUtility;
+                    moduleUtility += statusUtility;
                 }
                 else if (self.banish == false && target.banish == false && target != self)
                 {
@@ -148,7 +184,17 @@ namespace Necropanda
                             targetUtility = targetMaxHealth - targetHealth;
                         }
 
+                        if (module.effectType == E_DamageTypes.Summon && module.summon != null)
+                        {
+                            float spawnUtility = spawnAllyUtility * module.value;
+
+                            spawnUtility += module.summon.maxHealth * spawnAllyHealthUtility * module.value;
+
+                            spellUtility += spawnUtility;
+                        }
+
                         moduleUtility += (module.value + targetUtility) * supportAllyUtility;
+                        moduleUtility += statusUtility;
                     }
                     else if (spell.targetEnemies && enemyTeam.Contains(target))
                     {
@@ -157,24 +203,67 @@ namespace Necropanda
                         float targetUtility = targetMaxHealth - targetHealth;
 
                         moduleUtility += module.value * damageUtility;
+                        moduleUtility -= statusUtility;
                     }
 
                     spellUtility += moduleUtility;
                 }
             }
 
-            if (spell.spell.spawnEnemies != null)
-            {
-                //Debug.Log("Spell spawns allies, increase priority");
-
-                float spawnUtility = spawnAllyUtility * spell.spell.spawnEnemies.Length;
-                spellUtility += spawnUtility;
-            }
-
             //Debug.Log(self.stats.characterName + " casting " + spell.spell.spellName + " on " + target.stats.characterName + " has utility: " + spellUtility);
+
+            Enemy selfAI = self as Enemy;
+
+            if (selfAI != null)
+            {
+                if (selfAI.spellsThisTurn.Contains(spell.spell.spellName))
+                {
+                    spellUtility *= duplicateThisTurnUtility;
+                }
+
+                if (selfAI.spellsLastTurn.Contains(spell.spell.spellName))
+                {
+                    spellUtility *= duplicateLastTurnUtility;
+                }
+
+                foreach (var item in spell.spell.spellModules)
+                {
+                    if (selfAI.effectsThisTurn.Contains(item.effectType))
+                        spellUtility *= duplicateEffectsUtility;
+                }
+
+            }
 
             return spellUtility;
         }
+
+        float StatusUtility(CombatHelperFunctions.SpellModule spell)
+        {
+            float effect = 0;
+
+            foreach (var module in spell.statuses)
+            {
+                foreach (var status in module.status.effectModules)
+                {
+                    if (status.effectType == E_DamageTypes.Healing || status.effectType == E_DamageTypes.Shield)
+                        effect += (float)status.value * supportSelfUtility;
+                    else
+                        effect -= (float)status.value * damageUtility;
+
+                    foreach (var item in this.statusUtilities)
+                    {
+                        if (item.status == status.status)
+                            effect += item.utility;
+                    }
+
+                    break;
+                }
+            }
+            Debug.Log(effect);
+            return effect;
+        }
+
+        #endregion
 
         /// <summary>
         /// Determines if the spell can be cast on the character

@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: 10WheelOfFortune
   m_EditorClassIdentifier: 
   spellName: The Wheel of Fortune
+  nameImage: {fileID: 21300000, guid: 32856990d275ee344ab97ea98b18c080, type: 3}
   flavourText: 
   spellDescription: Deal 2 random damage 10 times to random targets
-  cardImage: {fileID: 21300000, guid: 12f1801d4d142cd4bbc4072389f1394e, type: 3}
+  cardImage: {fileID: 0}
+  background: {fileID: 0}
+  cardType: 1
   overrideColor: 1
   timelineColor: {r: 0.47833228, g: 0.7169812, b: 0.23335709, a: 255}
+  timelineIcon: {fileID: 560437722, guid: f465a941178bb0d429d18de762a2632b, type: 3}
   speed: 0.8
   arcanaCost: 2
+  potionCost: 0
+  potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -33,7 +39,7 @@ MonoBehaviour:
   - target: 4
     effectType: 5
     value: 2
-    hitCount: 16
+    hitCount: 10
     executeThreshold: 0
     valueScalingDamageTaken: 0
     valueScalingPerDiscard: 0
@@ -42,5 +48,9 @@ MonoBehaviour:
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
     type: 3}
+  projectileSpeed: 0.4
+  projectilePoints: 000000000a00000001000000
   impactObject: {fileID: 0}
   trailColor: {r: 0, g: 0, b: 0, a: 0}
+  screenShake: 0
+  idealTarget: 1

@@ -17,12 +17,15 @@ namespace Necropanda
 
         #region Variables
 
-        [HideInInspector]
         public Deck2D deck;
         [HideInInspector]
         public Deck2D lastDeck;
         [HideInInspector]
         public Deck2D newDeck;
+
+        public GameObject placeholder = null;
+
+        Card card;
 
         public bool playerCard = true;
 
@@ -50,6 +53,9 @@ namespace Necropanda
         public float rotationScale = 0.1f;
         public float rotateDeadZone = 5;
 
+        public CharacterHealth casterHealth;
+        public List<CharacterHealth> targetHealths;
+
         #endregion
 
         public void Setup()
@@ -62,6 +68,13 @@ namespace Necropanda
             baseColor = cardBackground.color;
             desiredColor = baseColor;
             baseRot = transform.rotation.eulerAngles;
+
+            card = GetComponent<Card>();
+
+            ScaleCard(1, false);
+
+            if (CombatManager.instance != null)
+                casterHealth = CombatManager.instance.player.GetHealth();
         }
 
         #endregion
@@ -79,6 +92,8 @@ namespace Necropanda
                 //Debug.Log("Pointer Enter");
                 ScaleCard(hoverScale, false);
                 Highlight(true);
+                ShowArt(false);
+                HighlightTarget();
             }
         }
 
@@ -93,6 +108,15 @@ namespace Necropanda
                 //Debug.Log("Pointer Exit");
                 ScaleCard(1, false);
                 Highlight(false);
+                if (deck != null)
+                {
+                    ShowArt(deck.showArt);
+                }
+                else
+                {
+                    ShowArt(false);
+                }
+                StopHighlightTarget();
             }
         }
 
@@ -108,6 +132,18 @@ namespace Necropanda
 
                 Highlight(false);
                 ScaleCard(pickupScale, true);
+                ShowArt(false);
+
+                //Create a space where this card was
+                placeholder = new GameObject();
+                placeholder.transform.SetParent(this.transform.parent);
+                LayoutElement le = placeholder.AddComponent<LayoutElement>();
+                le.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
+                le.preferredHeight = this.GetComponent<LayoutElement>().preferredHeight;
+                le.flexibleHeight = 0;
+                le.flexibleWidth = 0;
+
+                placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
 
                 lastDeck = deck;
                 deck.RemoveCard(this);
@@ -151,8 +187,33 @@ namespace Necropanda
                 }
 
                 transform.position = dragManager.canvas.transform.TransformPoint(newPos);
+                transform.position += new Vector3(0, 0, -50);
 
                 lastPos = newPos;
+
+                Deck2D deck = lastDeck;
+                if (newDeck != null)
+                    deck = newDeck;
+
+                int newSibIndex = deck.transform.childCount;
+
+                //Move cards out of the way to make room for this one
+                for(int i = 0; i < deck.transform.childCount; i++)
+                {
+                    if (this.transform.position.x < deck.transform.GetChild(i).position.x)
+                    {
+                        newSibIndex = i;
+
+                        if (placeholder.transform.GetSiblingIndex() < newSibIndex)
+                        {
+                            newSibIndex--;
+                        }
+
+                        break;
+                    }
+                }
+
+                placeholder.transform.SetSiblingIndex(newSibIndex);
             }
         }
 
@@ -179,10 +240,19 @@ namespace Necropanda
 
                 ScaleCard(1, false);
                 Highlight(false);
+                ShowArt(deck.showArt);
                 transform.eulerAngles = baseRot;
 
                 dragManager.canDrag = true;
                 dragManager.StartDragging(null);
+            }
+
+            if (placeholder != null)
+            {
+                this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+                //TODO - If in new deck, ignore sibling index
+                Destroy(placeholder);
+                placeholder = null;
             }
         }
 
@@ -200,6 +270,104 @@ namespace Necropanda
         #endregion
 
         #region Visual Feedback
+
+        [ColorUsage(true, true)]
+        public Color greenColour = Color.green;
+        [ColorUsage(true, true)]
+        public Color redColour = Color.red;
+        [ColorUsage(true, true)]
+        public Color yellowColour = Color.yellow;
+
+        public void HighlightTarget()
+        {
+            if (CombatManager.instance == null) return;
+
+            targetHealths = new List<CharacterHealth>();
+
+            foreach (var item in CombatManager.instance.enemyTeamManager.team)
+            {
+                targetHealths.Add(item.GetHealth());
+            }
+
+            switch (card.spell.idealTarget)
+            {
+                case E_SpellTargetType.Caster:
+                    //Debug.Log("Highlight caster for " + card.spell.spellName);
+                    if (casterHealth.dying == false)
+                        casterHealth.GetColorFlash().Highlight(greenColour);
+                    break;
+                case E_SpellTargetType.Target:
+                    //Debug.Log("Highlight targets for " + card.spell.spellName);
+                    foreach (var item in targetHealths)
+                    {
+                        if (item.dying == false)
+                            item.GetColorFlash().Highlight(redColour);
+                    }
+                    break;
+                case E_SpellTargetType.All:
+                    //Debug.Log("Highlight all characters for " + card.spell.spellName);
+                    casterHealth.GetColorFlash().Highlight(yellowColour);
+                    foreach (var item in targetHealths)
+                    {
+                        if (item.dying == false)
+                            item.GetColorFlash().Highlight(yellowColour);
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Ideal target is not valid for " + card.spell.spellName);
+                    break;
+            }
+        }
+
+        public void StopHighlightTarget()
+        {
+            if (CombatManager.instance == null) return;
+
+            targetHealths = new List<CharacterHealth>();
+
+            foreach (var item in CombatManager.instance.enemyTeamManager.team)
+            {
+                targetHealths.Add(item.GetHealth());
+            }
+
+            switch (card.spell.idealTarget)
+            {
+                case E_SpellTargetType.Caster:
+                    //Debug.Log("Highlight caster for " + card.spell.spellName);
+                    if (casterHealth != null)
+                    {
+                        if (casterHealth.dying == false)
+                            casterHealth.GetColorFlash().RemoveHighlightColour();
+                    }
+                    break;
+                case E_SpellTargetType.Target:
+                    //Debug.Log("Highlight targets for " + card.spell.spellName);
+                    foreach (var item in targetHealths)
+                    {
+                        if (item != null)
+                        {
+                            if (item.dying == false)
+                                item.GetColorFlash().RemoveHighlightColour();
+                        }
+                    }
+                    break;
+                case E_SpellTargetType.All:
+                    //Debug.Log("Highlight all characters for " + card.spell.spellName);
+                    casterHealth.GetColorFlash().RemoveHighlightColour();
+                    foreach (var item in targetHealths)
+                    {
+                        if (item != null)
+                        {
+                            if (item.dying == false)
+                                item.GetColorFlash().RemoveHighlightColour();
+                        }
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Ideal target is not valid for " + card.spell.spellName);
+                    break;
+            }
+        }
 
         /// <summary>
         /// Turns the highlight colour on or off
@@ -233,6 +401,11 @@ namespace Necropanda
             {
                 desiredScale = baseScale * scaleFactor * deck.deckScale;
             }
+        }
+
+        void ShowArt(bool show)
+        {
+            card.ShowArt(show);
         }
 
         private void FixedUpdate()

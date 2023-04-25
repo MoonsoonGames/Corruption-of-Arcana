@@ -12,7 +12,7 @@ DO NOT ADD ANY ENUMS AT THE START OF THE LIST!!!
 
 public enum E_DamageTypes
 {
-    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana
+    Physical, Ember, Static, Bleak, Septic, Random, Perforation, Healing, Shield, Arcana, Summon
 }
 
 public enum E_SpellTargetType
@@ -27,19 +27,36 @@ public enum E_StatusTargetType
 
 public enum E_Statuses
 {
-    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse, Enlightened
+    None, Banish, Charm, Silence, Stun, Curse, EmpowerDeck, WeakenDeck, Reflect, Redirect, Confuse, Enlightened, Blinded
+}
+
+public enum E_ProjectilePoints
+{
+    Caster, Target, Ground, OpponentGround, Backstab, BackstabOpponent, Above, AboveOpponents, Sky, TimeBlock, Wheel, SpawnEnemy
 }
 
 public enum E_Scenes
 {
+    Null,
     [InspectorName("Dev Room")]
     DevRoom,
     Combat,
     Tiertarock,
-    PuzzleRoom
+    PuzzleRoom,
+    Thoth,
+    Cave,
+    ArenaMode,
+    SplashScreen,
+    Navigation,
+    EastForest
 }
 
 public enum E_UtilityScripts
 {
     Position, Rotation, Scale
+}
+
+public enum E_QuestStates
+{
+    NotStarted, InProgress, Completed
 }

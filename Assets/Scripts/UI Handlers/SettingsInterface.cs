@@ -9,42 +9,24 @@ namespace Necropanda.Interfaces
     {
         public GameObject Pausemenu;
         public GameObject SettingsScreen;
-        public Slider MasterVolume;
-        public Slider MusicVolume;
-        public Slider SEVolume;
-        public Slider DialogueVolume; //This might be scraped due to timeframe
-        public bool SettingsOpen = false;
-
-        void Start()
-        {
-            SettingsOpen = false;
-            SettingsScreen.SetActive(false);
-        }
-
-        void Update()
-        {
-            //opening settings
-            if(SettingsOpen == false)
-            {
-                Debug.Log("Open Settings");
-                SettingsScreen.SetActive(true);
-                SettingsOpen = true;
-                Pausemenu.SetActive(false);
-            }
-
-            //closing settings
-            else if (SettingsOpen == true)
-            {
-                Close();
-            }
-        }
+        // public Slider MasterVolume;
+        // public Slider MusicVolume;
+        // public Slider SEVolume;
+        // public Slider DialogueVolume; //This might be scraped due to timeframe
 
         public void Close()
         {
             Debug.Log("Close Settings");
             SettingsScreen.SetActive(false);
-            SettingsOpen = false;
-            Pausemenu.SetActive(true);
+            if (Pausemenu != null)
+            {
+                Pausemenu.SetActive(true);
+            }
+        }
+
+        public void SplashClose()
+        {
+            SettingsScreen.SetActive(false);
         }
     }
 }

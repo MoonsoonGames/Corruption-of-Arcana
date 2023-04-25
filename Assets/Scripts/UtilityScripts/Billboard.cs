@@ -19,6 +19,11 @@ namespace Necropanda
         // Start is called before the first frame update
         void Start()
         {
+            Invoke("Setup", 0.5f);
+        }
+
+        void Setup()
+        {
             cam = Camera.main;
         }
 

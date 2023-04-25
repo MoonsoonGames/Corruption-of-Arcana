@@ -11,6 +11,12 @@ namespace Necropanda.Utils.Audio
     public class PlaySoundOnKeyPress : MonoBehaviour, IInteractable
     {
         public EventReference sound;
+        public string ID;
+
+        public void SetID(string newID)
+        {
+            ID = newID;
+        }
 
         public void Interacted(GameObject player)
         {

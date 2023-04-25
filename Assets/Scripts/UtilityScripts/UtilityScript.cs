@@ -17,12 +17,43 @@ namespace Necropanda
 
         private void Start()
         {
+            List<HelperFunctions.UtilityModule> newList = new List<HelperFunctions.UtilityModule>();
+
+            foreach (var module in utilityModules)
+            {
+                HelperFunctions.UtilityModule moduleCopy = new HelperFunctions.UtilityModule();
+
+                moduleCopy.type = module.type;
+                moduleCopy.axes = module.axes;
+                moduleCopy.speed = module.speed;
+                moduleCopy.time = module.time;
+                moduleCopy.currentTime = module.currentTime + Random.Range(offset.x, offset.y);
+                moduleCopy.forward = module.forward;
+
+                newList.Add(moduleCopy);
+            }
+
+            for (int i = 0; i < newList.Count; i++)
+            {
+                utilityModules[i] = newList[i];
+            }
+
+            newList.Clear();
+
             float offsetFloat = Random.Range(offset.x, offset.y);
             Invoke("StartScript", offsetFloat);
         }
 
         void StartScript()
         {
+            for (int i = 0; i < utilityModules.Length; i++)
+            {
+                if (utilityModules[i].time <= 0)
+                {
+                    utilityModules[i].time = Mathf.Infinity;
+                }
+            }
+
             moving = true;
         }
 

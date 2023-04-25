@@ -22,7 +22,7 @@ namespace Necropanda
             if (instance == null)
             {
                 instance = this;
-
+                
                 DontDestroyOnLoad(this);
             }
             else if (instance != this)
@@ -36,13 +36,49 @@ namespace Necropanda
         // Start is called before the first frame update
         void Start()
         {
+            SceneLoaded();
             Singleton();
         }
 
-        public void LoadScene(E_Scenes scene)
+        public bool loadLastPos;
+        public E_Scenes navScene;
+
+        public void LoadScene(E_Scenes scene, E_Scenes lastScene, bool loadLastPos)
         {
+            if (scene == E_Scenes.Navigation)
+            {
+                navScene = lastScene;
+            }
+
+            this.loadLastPos = loadLastPos;
+            if (lastScene != E_Scenes.Null)
+            {
+                LoadCombatManager.instance.lastScene = lastScene;
+            }
+
+            if (SceneBackdrops.instance != null)
+            {
+                SceneBackdrops.instance.SetBackdrop();
+            }
+
+            SaveManager.instance.SaveAllData();
+
             //Save current player position if applicable
+            Time.timeScale = 1;
             SceneManager.LoadScene(scene.ToString());
+        }
+
+        public void LoadLastScene(E_Scenes lastScene, bool loadLastPos)
+        {
+            E_Scenes scene = LoadCombatManager.instance.lastScene;
+
+            //Save current player position if applicable
+            LoadScene(scene, lastScene, loadLastPos);
+        }
+
+        public void SceneLoaded()
+        {
+            SaveManager.instance.LoadAllData();
         }
     }
 }

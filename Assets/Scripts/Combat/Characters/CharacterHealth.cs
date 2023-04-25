@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using FMODUnity;
+using Necropanda.Utils.Console;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -29,7 +31,7 @@ namespace Necropanda
         protected int cursedMaxHealth;
         protected int tempMaxHealth;
         protected int health; public int GetHealth() { return health; }
-        protected int shield;
+        protected int shield; public int GetShield() { return shield; }
 
         //Damage Resistances
         Dictionary<E_DamageTypes, float> currentDamageResistances;
@@ -39,19 +41,22 @@ namespace Necropanda
         #region UI
 
         [Header("UI")]
-        public Image healthIcon;
-        public TextMeshProUGUI healthText;
+        public SliderValue healthSlider;
+        public ShieldUI shieldUI;
         public Color shieldColor;
         public Color healthColor;
         public Color lowHealthColor;
         public float lowHealthThresholdPercentage;
-        public GameObject curseOverlay;
+        //public GameObject curseOverlay;
         UShake shake;
-        UColorFlash colorFlash;
+        UColorFlash colorFlash; public UColorFlash GetColorFlash() { return colorFlash; }
         public UColorFlash screenFlash;
 
         #endregion
 
+        // Console stuff (godmode)
+        private DeveloperConsole developerConsole;
+        private ToggleGodMode tgm;
         #endregion
 
         protected virtual void Start()
@@ -69,9 +74,14 @@ namespace Necropanda
         protected virtual void SetupHealth()
         {
             maxHealth = character.stats.maxHealth;
+            shield = character.stats.startingShields;
             tempMaxHealth = maxHealth;
             health = maxHealth;
-            cursedMaxHealth = (int)(maxHealth * 0.8);
+            cursedMaxHealth = (int)(maxHealth * 0.75);
+
+            healthSlider.Setup(maxHealth);
+            healthSlider.SetSliderValue(health);
+            shieldUI.Setup(shield);
 
             CheckCurseHealth();
         }
@@ -97,7 +107,8 @@ namespace Necropanda
         {
             //Decay shield
             //Debug.Log("Decay shield: " + shield + " --> " + shield / 2);
-            shield = shield / 2;
+            if (character.stats.decayShields)
+                shield = shield / 2;
             CheckCurseHealth();
         }
 
@@ -116,6 +127,11 @@ namespace Necropanda
         /// <returns>The true value (affected by resistances and shield) of the effect</returns>
         public int ChangeHealth(E_DamageTypes type, int value, Character attacker)
         {
+            if (CheckGodMode() && character.stats.characterName == "Taro")
+            {
+                return 0;
+            }
+
             #region Damage Calculations
 
             int damageTaken = 0;
@@ -142,8 +158,8 @@ namespace Necropanda
                     health = Mathf.Clamp(health - damageOverShield, 0, tempMaxHealth);
                     if (attacker != null)
                         Timeline.instance.HitStatuses(character, attacker);
-                    damageTaken = damageOverShield;
-                    if (damageTaken > 0)
+                    damageTaken = trueValue;
+                    if (damageOverShield > 0)
                         ScreenFlash(type);
                     break;
             }
@@ -160,7 +176,7 @@ namespace Necropanda
 
             if (health <= 0)
             {
-                Kill();
+                Kill(type);
             }
             else
             {
@@ -196,40 +212,34 @@ namespace Necropanda
         /// </summary>
         void UpdateHealthUI()
         {
+            if (healthSlider == null)
+                return;
+
+            healthSlider.SetSliderValue(health);
+            shieldUI.SetShield(shield);
+
             if (shield > 0)
             {
                 //Shield overlay
-                if (healthIcon != null)
-                {
-                    healthIcon.color = shieldColor;
-                }
+                healthSlider.standardFill.color = shieldColor;
 
                 //Set shield value
-                if (healthText != null)
-                {
-                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString() + " + " + shield.ToString();
-                }
+                //healthText.text = health.ToString() + "/" + tempMaxHealth.ToString() + " + " + shield.ToString();
             }
             else
             {
                 //Health overlay
-                if (healthIcon != null)
+                if ((float)((float)health / (float)tempMaxHealth) < lowHealthThresholdPercentage)
                 {
-                    if ((float)((float)health / (float)tempMaxHealth) < lowHealthThresholdPercentage)
-                    {
-                        healthIcon.color = lowHealthColor;
-                    }
-                    else
-                    {
-                        healthIcon.color = healthColor;
-                    }
+                    healthSlider.standardFill.color = lowHealthColor;
+                }
+                else
+                {
+                    healthSlider.standardFill.color = healthColor;
                 }
 
                 //Set health value
-                if (healthText != null)
-                {
-                    healthText.text = health.ToString() + "/" + tempMaxHealth.ToString();
-                }
+                //healthText.text = health.ToString() + "/" + tempMaxHealth.ToString();
             }
         }
 
@@ -246,13 +256,13 @@ namespace Necropanda
                 //Activate the overlay, set the temp max health to the curse value and clamp the current health value to the new max
                 tempMaxHealth = cursedMaxHealth;
                 health = Mathf.Clamp(health, 0, tempMaxHealth);
-                curseOverlay.SetActive(true);
+                //curseOverlay.SetActive(true);
             }
             else
             {
                 //Resets the overlay and max health
                 tempMaxHealth = maxHealth;
-                curseOverlay.SetActive(false);
+                //curseOverlay.SetActive(false);
             }
 
             UpdateHealthUI();
@@ -264,19 +274,34 @@ namespace Necropanda
 
         public GameObject[] disableOnKill;
 
-        void Kill()
+        void Kill(E_DamageTypes type)
         {
-            dying = true;
 
-            ActivateArt(false);
+
+            dying = true;
+            KillFX();
+            ActivateArt(false, true, type);
         }
 
-        public void ActivateArt(bool activate)
+        public void ActivateArt(bool activate, bool dissolve, E_DamageTypes type)
         {
             foreach (var item in disableOnKill)
             {
                 //Disable all art assets
                 item.SetActive(activate);
+            }
+
+            if (colorFlash != null)
+            {
+                if (dissolve)
+                {
+                    if (activate)
+                        colorFlash.ApplyDissolve(type, 0);
+                    else
+                        colorFlash.ApplyDissolve(type, 1);
+                }
+                else
+                    colorFlash.gameObject.SetActive(activate);
             }
         }
 
@@ -340,7 +365,7 @@ namespace Necropanda
         public void PlaySound(E_DamageTypes type, int value)
         {
             //Play sound from the damage type
-            foreach(var item in soundEffects)
+            foreach (var item in soundEffects)
             {
                 if (item.effectType == type)
                 {
@@ -390,8 +415,8 @@ namespace Necropanda
         {
             if (shake != null && damage > 0)
             {
-                float intensity = HelperFunctions.Remap(damage, 0, 20, 15, 30);
-                shake.CharacterShake(shake.baseDuration, intensity);
+                float intensity = HelperFunctions.Remap(damage, 0, 20, 7, 14);
+                shake.CharacterShake(shake.baseDuration, intensity, 3);
             }
         }
 
@@ -401,6 +426,8 @@ namespace Necropanda
             {
                 colorFlash.Flash(type);
             }
+
+            //VFXManager.instance.ScreenShake();
         }
 
         void ScreenFlash(E_DamageTypes type)
@@ -411,8 +438,48 @@ namespace Necropanda
             }
         }
 
+        public Object killFX;
+
+        void KillFX()
+        {
+            if (killFX == null) { return; }
+
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            spawnPos.z = VFXManager.instance.transform.position.z;
+            VFXManager.instance.SpawnImpact(killFX, spawnPos);
+            VFXManager.instance.ScreenShake();
+        }
+
         #endregion
 
+        #endregion
+
+        #region Cheats
+        public bool CheckGodMode()
+        {
+            // Get ref to the dev console
+            GameObject console = GameObject.FindGameObjectWithTag("Console");
+            if (console != null)
+            {
+                DeveloperConsoleBehaviour behaviour = console.GetComponent<DeveloperConsoleBehaviour>();
+
+                foreach (IConsoleCommand command in behaviour.commands)
+                {
+                    if (command.CommandWord == "tgm")
+                    {
+                        tgm = (ToggleGodMode)command;
+                        Debug.Log(tgm);
+                    }
+                }
+
+                if (tgm.GodMode == true)
+                {
+                    Debug.Log("Godmode is enabled, player can't die!");
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }
