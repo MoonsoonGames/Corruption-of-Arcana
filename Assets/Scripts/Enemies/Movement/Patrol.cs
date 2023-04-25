@@ -113,6 +113,14 @@ namespace Necropanda.AI.Movement
             // close to the current one.
             if (patrol)
             {
+                if (patrolPoints.Count == 0)
+                {
+                    // Log that the patrol list is empty. Might want to generate some basic points if thise is the case but erroring is the safest
+                    Debugger.instance.SendDebug("No Patrol points setup! returning out of patrol state");
+                    // Set patrol to false, this stops the patrol script.
+                    patrol = false;
+                }
+
                 if (!agent.pathPending && agent.remainingDistance < 0.5f)
                     GotoNextPoint();
             }

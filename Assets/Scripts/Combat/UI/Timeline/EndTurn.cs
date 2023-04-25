@@ -37,16 +37,23 @@ namespace Necropanda
             Invoke("EndTurnButton", 0.1f);
         }
 
+        bool input = false;
+
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && input == false)
             {
+                input = true;
+
                 if (waitingForStartTurn == false)
                 {
-                    DisableButton();
                     Debug.Log("End turn success");
                     EndTurnButton();
                 }
+            }
+            else
+            {
+                input = false;
             }
         }
 

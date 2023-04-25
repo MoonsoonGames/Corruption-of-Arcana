@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3702093925428361593}
+  - component: {fileID: 6098411234466520967}
   - component: {fileID: 3702093925428361595}
   - component: {fileID: 3702093925428361592}
   - component: {fileID: 4211181404541985285}
@@ -42,6 +43,20 @@ RectTransform:
   m_AnchoredPosition: {x: 144, y: 147.55}
   m_SizeDelta: {x: 165.50952, y: 79.95169}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6098411234466520967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702093925428361590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b20dfe5163a89499a74a12be616d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3702093925428361595}
+  defaultStats: {fileID: 11400000, guid: f86170c03c8dddc408e666bf1976c774, type: 2}
 --- !u!114 &3702093925428361595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b1c5a14c8fb5649886f5198ecfd5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: f86170c03c8dddc408e666bf1976c774, type: 2}
+  stats: {fileID: 0}
   spawner: {fileID: 0}
   damageTakenThisTurn: 0
   enlightened: 0

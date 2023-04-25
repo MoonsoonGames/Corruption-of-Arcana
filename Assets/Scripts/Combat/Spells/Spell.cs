@@ -193,6 +193,7 @@ namespace Necropanda
             yield return new WaitForSeconds(hitDelay + time);
 
             Character randTarget;
+            TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
             E_DamageTypes trueEffectType = CombatHelperFunctions.ReplaceRandomDamageType(module.effectType);
             float delay;
 
@@ -223,7 +224,6 @@ namespace Necropanda
                     }
                     break;
                 case E_SpellTargetType.RandomEnemyTeam:
-                    TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
                     randTarget = CombatHelperFunctions.ReplaceRandomTarget(opposingTeam.team);
                     if (randTarget != null && randTarget.GetHealth().dying == false)
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, shieldRemoved, 0f);
@@ -236,6 +236,14 @@ namespace Necropanda
                 case E_SpellTargetType.All:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in allCharacters)
+                    {
+                        if (character.GetHealth().dying == false)
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, shieldRemoved, delay);
+                    }
+                    break;
+                case E_SpellTargetType.AllEnemies:
+                    delay = targetTeamManager.team.Count * this.multihitDelay;
+                    foreach (Character character in opposingTeam.team)
                     {
                         if (character.GetHealth().dying == false)
                             VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, shieldRemoved, delay);
@@ -267,11 +275,7 @@ namespace Necropanda
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingShieldCost * shieldRemoved) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
-                value = EmpowerWeakenValue(value, caster.empowerDeck, caster.weakenDeck);
-
-                //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
-                //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-                caster.GetHealth().ChangeHealth(effectType, value, caster);
+                value = EmpowerWeakenValue(caster.stats, value, caster.empowerDeck, caster.weakenDeck);
 
                 if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
                 {
@@ -283,13 +287,35 @@ namespace Necropanda
                             LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
                 }
+                else
+                {
+                    //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
+                    //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+                    caster.GetHealth().ChangeHealth(effectType, value, caster);
+                }
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
-                    if (CombatHelperFunctions.ApplyEffect(caster, spell.statuses[i]))
+                    int statusValue = spell.statuses[i].valueSuccess;
+                    statusValue = EmpowerWeakenValue(caster.stats, statusValue, caster.empowerDeck, caster.weakenDeck);
+
+                    if (spell.statuses[i].remove)
                     {
-                        //apply status i on target
-                        spell.statuses[i].status.Apply(caster, spell.statuses[i].duration);
+                        if (Timeline.instance.CheckStatusAgainstTarget(spell.statuses[i].status, caster))
+                        {
+                            //remove status i on target
+                            spell.statuses[i].status.Remove(caster);
+                            caster.GetHealth().ChangeHealth(effectType, statusValue, caster);
+                        }
+                    }
+                    else 
+                    {
+                        if (CombatHelperFunctions.ApplyEffect(caster, spell.statuses[i]))
+                        {
+                            //apply status i on target
+                            spell.statuses[i].status.Apply(caster, spell.statuses[i].duration);
+                            caster.GetHealth().ChangeHealth(effectType, statusValue, caster);
+                        }
                     }
                 }
 
@@ -315,9 +341,7 @@ namespace Necropanda
             {
                 //Modifies the value if the spell is empowered or scales with how many cards are discarded
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingShieldCost * shieldRemoved) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
-                value = EmpowerWeakenValue(value, target.empowerDeck, target.weakenDeck);
-
-                target.GetHealth().ChangeHealth(effectType, value, caster);
+                value = EmpowerWeakenValue(caster.stats, value, target.empowerDeck, target.weakenDeck);
 
                 if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
                 {
@@ -329,13 +353,33 @@ namespace Necropanda
                             LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
                 }
+                else
+                {
+                    target.GetHealth().ChangeHealth(effectType, value, caster);
+                }
 
                 for (int i = 0; i < spell.statuses.Length; i++)
                 {
-                    if (CombatHelperFunctions.ApplyEffect(target, spell.statuses[i]))
+                    int statusValue = spell.statuses[i].valueSuccess;
+                    statusValue = EmpowerWeakenValue(caster.stats, statusValue, target.empowerDeck, target.weakenDeck);
+
+                    if (spell.statuses[i].remove)
                     {
-                        //apply status i on target
-                        spell.statuses[i].status.Apply(target, spell.statuses[i].duration);
+                        if (Timeline.instance.CheckStatusAgainstTarget(spell.statuses[i].status, target))
+                        {
+                            //remove status i on target
+                            spell.statuses[i].status.Remove(target);
+                            target.GetHealth().ChangeHealth(effectType, statusValue, caster);
+                        }
+                    }
+                    else
+                    {
+                        if (CombatHelperFunctions.ApplyEffect(target, spell.statuses[i]))
+                        {
+                            //apply status i on target
+                            spell.statuses[i].status.Apply(target, spell.statuses[i].duration);
+                            target.GetHealth().ChangeHealth(effectType, statusValue, caster);
+                        }
                     }
                 }
 
@@ -361,21 +405,26 @@ namespace Necropanda
         /// <param name="empowered">Whether the spell is empowered</param>
         /// <param name="weakened">Whether the spell is weakened</param>
         /// <returns>The empowered or weakened value</returns>
-        int EmpowerWeakenValue(int originalValue, bool empowered, bool weakened)
+        int EmpowerWeakenValue(CharacterStats caster, int originalValue, bool empowered, bool weakened)
         {
             float floatValue = originalValue;
-            if (empowered && !weakened)
+            int value = originalValue;
+
+            if (caster.usesArcana)
             {
-                Debug.Log(spellName + " is empowered " + floatValue + " to " + (floatValue * 1.5f));
-                floatValue = (floatValue * 1.5f);
-            }
-            else if (weakened && !empowered)
-            {
-                Debug.Log(spellName + " is weakened " + floatValue + " to " + (floatValue * 0.5f));
-                floatValue = (floatValue * 0.5f);
+                if (empowered && !weakened)
+                {
+                    Debug.Log(spellName + " is empowered " + floatValue + " to " + (floatValue * 1.5f));
+                    floatValue = (floatValue * 1.5f);
+                }
+                else if (weakened && !empowered)
+                {
+                    Debug.Log(spellName + " is weakened " + floatValue + " to " + (floatValue * 0.5f));
+                    floatValue = (floatValue * 0.5f);
+                }
+                value = (int)Mathf.Round(floatValue);
             }
 
-            int value = (int)Mathf.Round(floatValue);
             return value;
         }
 
@@ -403,6 +452,9 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
+                if (module.effectType == E_DamageTypes.Summon)
+                    break;
+
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
                 List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
@@ -472,7 +524,7 @@ namespace Necropanda
             if (target != null && target.GetHealth().dying == false)
             {
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * statusesCleared) + (int)(spell.valueScalingShieldCost * shieldRemoved) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
-                value = EmpowerWeakenValue(value, target.empowerDeck, target.weakenDeck);
+                value = EmpowerWeakenValue(caster.stats, value, target.empowerDeck, target.weakenDeck);
 
                 //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
                 //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
@@ -509,6 +561,91 @@ namespace Necropanda
                                 Timeline.instance.SimulateHitStatuses(target, caster);
                         }
                         break;
+                }
+
+                for (int i = 0; i < spell.statuses.Length; i++)
+                {
+                    int statusValue = spell.statuses[i].valueSuccess;
+                    statusValue = EmpowerWeakenValue(caster.stats, statusValue, target.empowerDeck, target.weakenDeck);
+
+                    if (spell.statuses[i].remove)
+                    {
+                        if (Timeline.instance.CheckStatusAgainstTarget(spell.statuses[i].status, target))
+                            switch (spell.effectType)
+                            {
+                                case E_DamageTypes.Healing:
+                                    if (rand)
+                                    {
+                                        damage.x += statusValue;
+                                    }
+                                    else
+                                    {
+                                        damage.x += statusValue;
+                                        damage.y += statusValue;
+                                    }
+                                    break;
+                                case E_DamageTypes.Shield:
+                                    shield += statusValue;
+                                    break;
+                                case E_DamageTypes.Arcana:
+                                    break;
+                                default:
+                                    if (rand)
+                                    {
+                                        damage.y -= statusValue;
+                                    }
+                                    else
+                                    {
+                                        damage.x -= statusValue;
+                                        damage.y -= statusValue;
+
+                                        if (statusValue > 0)
+                                            Timeline.instance.SimulateHitStatuses(target, caster);
+                                    }
+                                    break;
+                            }
+                    }
+                    else
+                    {
+                        if (CombatHelperFunctions.ApplyEffect(target, spell.statuses[i]))
+                        {
+                            //apply status i on target
+                            spell.statuses[i].status.SimulateStatusValues(target);
+                            switch (spell.effectType)
+                            {
+                                case E_DamageTypes.Healing:
+                                    if (rand)
+                                    {
+                                        damage.x += statusValue;
+                                    }
+                                    else
+                                    {
+                                        damage.x += statusValue;
+                                        damage.y += statusValue;
+                                    }
+                                    break;
+                                case E_DamageTypes.Shield:
+                                    shield += statusValue;
+                                    break;
+                                case E_DamageTypes.Arcana:
+                                    break;
+                                default:
+                                    if (rand)
+                                    {
+                                        damage.y -= statusValue;
+                                    }
+                                    else
+                                    {
+                                        damage.x -= statusValue;
+                                        damage.y -= statusValue;
+
+                                        if (statusValue > 0)
+                                            Timeline.instance.SimulateHitStatuses(target, caster);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 foreach (var item in spell.statuses)

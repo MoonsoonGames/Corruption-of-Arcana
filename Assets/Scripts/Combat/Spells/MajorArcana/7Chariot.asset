@@ -30,6 +30,7 @@ MonoBehaviour:
   loadoutCost: 1
   arcanaCost: 1
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
@@ -56,13 +58,21 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
     statuses:
+    - status: {fileID: 11400000, guid: 0acb6b34b647c8b4eabfda6cf3a52280, type: 2}
+      duration: 1
+      applyOverShield: 1
+      remove: 1
+      valueSuccess: 0
     - status: {fileID: 11400000, guid: 54d3d451fb71fa945b18562a3d6ce414, type: 2}
       duration: 2
       applyOverShield: 1
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 6031179954722945327, guid: c5fae0a25c1f7aa4daf8a1d379738803,
     type: 3}
