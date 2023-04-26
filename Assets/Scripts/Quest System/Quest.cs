@@ -35,8 +35,6 @@ namespace Necropanda
         public bool linear = true;
 
         public LootPool rewards;
-        public bool rewardAll = true;
-        public int rewardCount = 1;
         public bool overrideParentRewards = false;
 
         #endregion
@@ -161,14 +159,8 @@ namespace Necropanda
                 OverrideRewards(rewards);
                 return;
             }
-
-            for (int i = 0; i < rewardCount; i++)
-            {
-                if (rewardAll)
-                    rewards.RewardAllItems();
-                else
-                    rewards.RewardRandomItem();
-            }
+            else
+                rewards.RewardItems();
         }
 
         public void OverrideRewards(LootPool newRewards)
