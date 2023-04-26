@@ -193,6 +193,7 @@ namespace Necropanda
             yield return new WaitForSeconds(hitDelay + time);
 
             Character randTarget;
+            TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
             E_DamageTypes trueEffectType = CombatHelperFunctions.ReplaceRandomDamageType(module.effectType);
             float delay;
 
@@ -223,7 +224,6 @@ namespace Necropanda
                     }
                     break;
                 case E_SpellTargetType.RandomEnemyTeam:
-                    TeamManager opposingTeam = CombatManager.instance.GetOpposingTeam(caster.GetManager());
                     randTarget = CombatHelperFunctions.ReplaceRandomTarget(opposingTeam.team);
                     if (randTarget != null && randTarget.GetHealth().dying == false)
                         VFXManager.instance.AffectTargetDelay(this, caster, randTarget, module, trueEffectType, cardsInHand, removedStatusCount, shieldRemoved, 0f);
@@ -236,6 +236,14 @@ namespace Necropanda
                 case E_SpellTargetType.All:
                     delay = targetTeamManager.team.Count * this.multihitDelay;
                     foreach (Character character in allCharacters)
+                    {
+                        if (character.GetHealth().dying == false)
+                            VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, shieldRemoved, delay);
+                    }
+                    break;
+                case E_SpellTargetType.AllEnemies:
+                    delay = targetTeamManager.team.Count * this.multihitDelay;
+                    foreach (Character character in opposingTeam.team)
                     {
                         if (character.GetHealth().dying == false)
                             VFXManager.instance.AffectTargetDelay(this, caster, character, module, trueEffectType, cardsInHand, removedStatusCount, shieldRemoved, delay);
@@ -269,10 +277,6 @@ namespace Necropanda
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingShieldCost * shieldRemoved) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(caster.stats, value, caster.empowerDeck, caster.weakenDeck);
 
-                //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
-                //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
-                caster.GetHealth().ChangeHealth(effectType, value, caster);
-
                 if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
                 {
                     if (spell.value > 0)
@@ -282,6 +286,12 @@ namespace Necropanda
                         for (int i = 0; i < spell.value; i++)
                             LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
+                }
+                else
+                {
+                    //Debug.Log("Spell cast: " + spellName + " at " + caster.stats.characterName);
+                    //Debug.Log("Affect " + target.characterName + " with " + value + " " + effectType);
+                    caster.GetHealth().ChangeHealth(effectType, value, caster);
                 }
 
                 for (int i = 0; i < spell.statuses.Length; i++)
@@ -333,8 +343,6 @@ namespace Necropanda
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingShieldCost * shieldRemoved) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(caster.stats, value, target.empowerDeck, target.weakenDeck);
 
-                target.GetHealth().ChangeHealth(effectType, value, caster);
-
                 if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
                 {
                     if (spell.value > 0)
@@ -344,6 +352,10 @@ namespace Necropanda
                         for (int i = 0; i < spell.value; i++)
                             LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
+                }
+                else
+                {
+                    target.GetHealth().ChangeHealth(effectType, value, caster);
                 }
 
                 for (int i = 0; i < spell.statuses.Length; i++)
@@ -440,6 +452,9 @@ namespace Necropanda
 
             foreach (CombatHelperFunctions.SpellModule module in spellModules)
             {
+                if (module.effectType == E_DamageTypes.Summon)
+                    break;
+
                 TeamManager targetTeamManager = target.GetManager();
                 TeamManager casterTeamManager = caster.GetManager();
                 List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
