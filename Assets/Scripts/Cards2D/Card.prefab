@@ -296,7 +296,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8893594557818198159}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -417,6 +417,60 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7017932035899089304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3458779957816901803}
+  - component: {fileID: 1291023102070592687}
+  m_Layer: 5
+  m_Name: LoadoutCost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3458779957816901803
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017932035899089304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.7854, y: 2.7854, z: 2.7854}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8893594557818198159}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -56.3}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1291023102070592687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017932035899089304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de7d2c8454a969409828d4096cf03b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcanaSymbols:
+  - {fileID: 3813388294334668698, guid: 42039ea99472e84498ae6b03fc54e61e, type: 3}
+  - {fileID: 3813388294334668698, guid: f7847adf1dc90f646bd89446b06c3d74, type: 3}
+  - {fileID: 3813388294334668698, guid: a429929a4405c194bb0873485c5c7411, type: 3}
+  - {fileID: 3813388294334668698, guid: 71c9c528f69aeb7499136419c1b57cb7, type: 3}
 --- !u!1 &7875975785748984831
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +503,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8893594557818198159}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -701,7 +755,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8893594557818198159}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -967,8 +1021,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.2416}
-  m_SizeDelta: {x: 140.4236, y: 132.4735}
+  m_AnchoredPosition: {x: 0, y: 14.7051}
+  m_SizeDelta: {x: 140.4236, y: 107.5466}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8893594556885050113
 CanvasRenderer:
@@ -1029,7 +1083,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.45
+  m_fontSize: 15.6
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1092,7 +1146,7 @@ MonoBehaviour:
   ObjectStats: 'Characters: 87   Words: 16   Spaces: 16   Sprites: 0   Links: 0
 
     Lines:
-    7   Pages: 1'
+    6   Pages: 1'
   m_TextComponent: {fileID: 8893594556885050112}
 --- !u!114 &1509471899258261524
 MonoBehaviour:
@@ -1165,6 +1219,7 @@ MonoBehaviour:
   deck: {fileID: 0}
   lastDeck: {fileID: 0}
   newDeck: {fileID: 0}
+  placeholder: {fileID: 0}
   playerCard: 1
   hoverScale: 1.2
   pickupScale: 2
@@ -1229,6 +1284,7 @@ MonoBehaviour:
   nameImage: {fileID: 4400215476211639667}
   background: {fileID: 7229636845155869732}
   arcanaSpawner: {fileID: 5062347929429748648}
+  loadoutSpawner: {fileID: 1291023102070592687}
   speedText: {fileID: 5676639625990843206}
   descriptionText: {fileID: 8893594556885050112}
   cardFaceLowOpacity: {fileID: 6664729671365820577}
@@ -1305,6 +1361,7 @@ RectTransform:
   - {fileID: 4663105526806447077}
   - {fileID: 8893594556885050115}
   - {fileID: 918002795278995269}
+  - {fileID: 3458779957816901803}
   - {fileID: 8277935245843327821}
   - {fileID: 1558307009157092167}
   - {fileID: 3178309378989908127}
