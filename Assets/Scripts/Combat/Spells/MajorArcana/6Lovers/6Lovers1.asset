@@ -15,11 +15,12 @@ MonoBehaviour:
   spellName: The Lovers
   nameImage: {fileID: 21300000, guid: c804d3c59719d3c4f92fe3b83b243fac, type: 3}
   flavourText: 
-  spellDescription: If target has no shield, they will consider allies as enemies
-    and enemies as allies for 2 turns
+  spellDescription: If target has no shield, apply $charm$ to target for 2 turns
   cardImage: {fileID: 0}
   background: {fileID: 0}
   cardType: 1
+  previousTier: {fileID: 0}
+  nextTier: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.5451835, g: 0.21568626, b: 0.74509805, a: 255}
   timelineIcon: {fileID: -1222757763, guid: f465a941178bb0d429d18de762a2632b, type: 3}
@@ -27,6 +28,7 @@ MonoBehaviour:
   loadoutCost: 1
   arcanaCost: 2
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -43,6 +45,7 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
     summon: {fileID: 0}
@@ -50,6 +53,8 @@ MonoBehaviour:
     - status: {fileID: 11400000, guid: 3243fa674bc14a14185f0f5b593a7409, type: 2}
       duration: 3
       applyOverShield: 0
+      remove: 0
+      valueSuccess: 0
   castObject: {fileID: 0}
   projectileObject: {fileID: 2083095811265704842, guid: f766f29bc8549f44e9cdc675716182e5,
     type: 3}

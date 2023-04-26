@@ -775,8 +775,11 @@ namespace Necropanda
         [ContextMenu("SetupTiers")]
         public void SetupOtherTiers()
         {
+            loadoutCost = 2;
             previousTier.nextTier = this;
+            previousTier.loadoutCost = 1;
             nextTier.previousTier = this;
+            nextTier.loadoutCost = 3;
         }
 
         #endregion
