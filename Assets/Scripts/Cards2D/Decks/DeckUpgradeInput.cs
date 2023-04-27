@@ -13,6 +13,7 @@ namespace Necropanda
     {
         BuildDeck buildDeck;
         public DeckUpgradeOutput outputDeck;
+        public int combineRequire = 3;
 
         protected override void Start()
         {
@@ -41,14 +42,26 @@ namespace Necropanda
 
         private void CheckUpgrade()
         {
-            if (cards.Length != 3 || outputDeck == null)
+            if (outputDeck == null)
                 return;
+
+            if (cards.Length != combineRequire)
+            {
+                foreach (var item in outputDeck.GetCards())
+                {
+                    outputDeck.RemoveCard(item.GetComponent<CardDrag2D>());
+                    Destroy(item);
+                }
+
+                outputDeck.RemoveAllCards(false);
+                return;
+            }
 
             Spell currentSpell = null;
 
             foreach (var item in cards)
             {
-                Spell spell = item.GetComponent<Spell>();
+                Spell spell = item.GetComponent<Card>().spell;
                 if (currentSpell == null)
                 {
                     currentSpell = spell;
@@ -63,6 +76,7 @@ namespace Necropanda
             if (currentSpell != null)
             {
                 //Can upgrade, spawn highter tier in output deck
+                Debug.Log("Spawning spell:" + currentSpell.nextTier.name);
                 outputDeck.SpawnUpgradeCard(currentSpell.nextTier);
             }
         }

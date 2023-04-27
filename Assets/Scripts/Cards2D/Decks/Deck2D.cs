@@ -33,6 +33,7 @@ namespace Necropanda
         protected UntargettableOverlay untargettableOverlay;
 
         public bool showArt = false;
+        public bool useSibIndex = true;
 
         #endregion
 
@@ -109,6 +110,8 @@ namespace Necropanda
 
             untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
+
+            useSibIndex = layout != null;
         }
 
         #endregion

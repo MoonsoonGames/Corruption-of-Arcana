@@ -29,6 +29,7 @@ namespace Necropanda
             if (spell == null)
                 return;
 
+            Debug.Log("Spawning spell: " + spell.name);
             GameObject card = Instantiate(cardPrefab, transform) as GameObject;
             CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
             DrawCard drawCard = card.GetComponent<DrawCard>();
@@ -38,6 +39,8 @@ namespace Necropanda
 
             drawCard.draw = false;
             drawCard.Setup(spell);
+
+            AddCard(cardDrag);
         }
 
         /// <summary>
@@ -47,12 +50,24 @@ namespace Necropanda
         public override void OnPointerEnter(PointerEventData eventData)
         {
             //Override function so player cannot drag a card into the deck
+            base.OnPointerEnter(eventData);
         }
 
         public override void RemoveCard(CardDrag2D card)
         {
+            Debug.Log("remove all cards from input deck");
             base.RemoveCard(card);
-            inputDeck.RemoveAllCards(true);
+
+            if (inputDeck.CurrentCardsLength() == inputDeck.combineRequire)
+            {
+                foreach (var item in inputDeck.GetCards())
+                {
+                    inputDeck.RemoveCard(item.GetComponent<CardDrag2D>());
+                    Destroy(item);
+                }
+
+                inputDeck.RemoveAllCards(false);
+            }
         }
     }
 }

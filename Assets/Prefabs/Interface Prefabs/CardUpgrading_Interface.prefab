@@ -709,7 +709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000025570393, y: 0}
   m_SizeDelta: {x: 0, y: 339.5807}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8053373160475002477
@@ -801,6 +801,7 @@ MonoBehaviour:
       Data4: 1025540801
     Path: event:/UI/Card Placed/Card placed down
   outputDeck: {fileID: 0}
+  combineRequire: 3
 --- !u!1 &4479942979863296233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4722478674403775269}
-  - component: {fileID: 5810381919550690089}
   - component: {fileID: 615407021853725188}
   - component: {fileID: 6956149797818524181}
   - component: {fileID: 2941981403990221771}
@@ -1404,22 +1404,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5810381919550690089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4722478674403774682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6bafb3b321ae59489298ef0d475ddcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  UICam: {fileID: 0}
-  draggedCard: {fileID: 0}
-  canDrag: 1
 --- !u!114 &615407021853725188
 MonoBehaviour:
   m_ObjectHideFlags: 0
