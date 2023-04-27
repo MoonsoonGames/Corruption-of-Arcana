@@ -35,7 +35,7 @@ namespace Necropanda
             if (upgradeDeckMenu != null)
             {
                 upgradeAvailableCards = upgradeDeckMenu.GetComponent<GetAvailableCards>();
-                upgradeBuildDeck = deckbuildingMenu.GetComponent<BuildDeck>();
+                upgradeBuildDeck = upgradeDeckMenu.GetComponent<UpgradeDeck>();
                 upgradeDeckMenu.SetActive(false);
             }
 
@@ -74,9 +74,15 @@ namespace Necropanda
                 Cursor.visible = true;
                 menu.SetActive(true);
                 if (menu == deckbuildingMenu)
+                {
+                    buildDeck.OpenMenu();
                     getAvailableCards.LoadCards();
+                }
                 else if (menu == upgradeDeckMenu)
+                {
+                    upgradeBuildDeck.OpenMenu();
                     upgradeAvailableCards.LoadCards();
+                }
                 else if (menu == weaponsMenu)
                     getWeapons.OpenEquipment();
             }

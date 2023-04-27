@@ -11,7 +11,7 @@ namespace Necropanda
 {
     public class UpgradeDeck : BuildDeck
     {
-        protected override void Start()
+        public override void OpenMenu()
         {
             if (collectedDeck.CurrentCardsLength() > 0)
             {
@@ -25,11 +25,14 @@ namespace Necropanda
 
         public override void SaveCards()
         {
+            Debug.Log("Upgrade menu saves cards");
+            DeckManager.instance.collection = collectedSpells;
+
             if (true /*Check that player has not left an upgraded card in the output*/)
             {
-                DeckManager.instance.collection = collectedSpells;
+                //DeckManager.instance.collection = collectedSpells;
 
-                DeckManager.instance.SaveDeck();
+                //DeckManager.instance.SaveDeck();
             }
         }
     }

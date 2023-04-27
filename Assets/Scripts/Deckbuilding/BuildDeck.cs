@@ -17,7 +17,7 @@ namespace Necropanda
         public DeckLoadout equippedDeck;
 
         // Start is called before the first frame update
-        protected virtual void Start()
+        public virtual void OpenMenu()
         {
             if (collectedDeck != null)
             {
@@ -46,6 +46,8 @@ namespace Necropanda
 
         public virtual void SaveCards()
         {
+            Debug.Log("Deck menu saves cards");
+
             if (equippedDeck.AvailableSpaces())
             {
                 DeckManager.instance.collection = collectedSpells;
