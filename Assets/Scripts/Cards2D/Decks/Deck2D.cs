@@ -24,7 +24,7 @@ namespace Necropanda
         protected DeckManager manager;
 
         public GameObject group;
-        protected HorizontalLayoutGroup layout;
+        protected LayoutGroup layout;
 
         protected GeneralDragArea dragArea;
         protected DragManager dragManager;
@@ -106,7 +106,7 @@ namespace Necropanda
             baseColor = deckBackground.color;
             desiredColor = baseColor;
 
-            layout = GetComponent<HorizontalLayoutGroup>();
+            layout = GetComponent<LayoutGroup>();
 
             untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
