@@ -28,6 +28,9 @@ namespace Necropanda
         public Sprite background;
         public E_CardTypes cardType = E_CardTypes.Cards;
 
+        public Spell previousTier;
+        public Spell nextTier;
+
         #endregion
 
         #region Timeline Icon
@@ -755,6 +758,28 @@ namespace Necropanda
             }
 
             return moduleDictionary;
+        }
+
+        #endregion
+
+        #region Upgrading
+
+        public Spell GetUpgrade()
+        {
+            if (nextTier == null)
+                return this;
+            else
+                return nextTier;
+        }
+
+        [ContextMenu("SetupTiers")]
+        public void SetupOtherTiers()
+        {
+            loadoutCost = 2;
+            previousTier.nextTier = this;
+            previousTier.loadoutCost = 1;
+            nextTier.previousTier = this;
+            nextTier.loadoutCost = 3;
         }
 
         #endregion

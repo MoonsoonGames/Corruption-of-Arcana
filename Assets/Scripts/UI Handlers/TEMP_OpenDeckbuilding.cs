@@ -11,20 +11,32 @@ namespace Necropanda
 {
     public class TEMP_OpenDeckbuilding : MonoBehaviour
     {
+        public static TEMP_OpenDeckbuilding instance;
+
         public GameObject deckbuildingMenu;
+        public GameObject upgradeDeckMenu;
         public GameObject weaponsMenu;
         public GetWeapons getWeapons;
-        GetAvailableCards getAvailableCards;
-        BuildDeck buildDeck;
+        GetAvailableCards getAvailableCards, upgradeAvailableCards;
+        BuildDeck buildDeck, upgradeBuildDeck;
 
         // Start is called before the first frame update
         void Start()
         {
+            instance = this;
+
             if (deckbuildingMenu != null)
             {
                 getAvailableCards = deckbuildingMenu.GetComponent<GetAvailableCards>();
                 buildDeck = deckbuildingMenu.GetComponent<BuildDeck>();
                 deckbuildingMenu.SetActive(false);
+            }
+
+            if (upgradeDeckMenu != null)
+            {
+                upgradeAvailableCards = upgradeDeckMenu.GetComponent<GetAvailableCards>();
+                upgradeBuildDeck = upgradeDeckMenu.GetComponent<UpgradeDeck>();
+                upgradeDeckMenu.SetActive(false);
             }
 
             if (weaponsMenu != null)
@@ -43,6 +55,11 @@ namespace Necropanda
                 OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
             }
 
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
+            }
+
             if (Input.GetKeyDown(KeyCode.L))
             {
                 OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
@@ -57,7 +74,15 @@ namespace Necropanda
                 Cursor.visible = true;
                 menu.SetActive(true);
                 if (menu == deckbuildingMenu)
+                {
+                    buildDeck.OpenMenu();
                     getAvailableCards.LoadCards();
+                }
+                else if (menu == upgradeDeckMenu)
+                {
+                    upgradeBuildDeck.OpenMenu();
+                    upgradeAvailableCards.LoadCards();
+                }
                 else if (menu == weaponsMenu)
                     getWeapons.OpenEquipment();
             }
@@ -67,6 +92,8 @@ namespace Necropanda
                 Cursor.visible = false;
                 if (menu == deckbuildingMenu)
                     buildDeck.SaveCards();
+                if (menu == upgradeDeckMenu)
+                    upgradeBuildDeck.SaveCards();
                 menu.SetActive(false);
             }
         }

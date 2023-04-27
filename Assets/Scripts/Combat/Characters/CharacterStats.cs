@@ -32,5 +32,12 @@ namespace Necropanda
         public int actions = 1;
         public bool usesArcana;
         public List<CombatHelperFunctions.AISpell> aISpells = new List<CombatHelperFunctions.AISpell>();
+
+        public LootPool rewards;
+
+        public void GiveRewards()
+        {
+            rewards.RewardItems();
+        }
     }
 }
