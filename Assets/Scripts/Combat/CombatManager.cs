@@ -86,6 +86,7 @@ namespace Necropanda
             {
                 //Debug.Log("Character Killed on enemy team");
                 enemyTeamManager.Remove(character);
+                killedEnemies.Add(character.stats);
                 if (enemyTeamManager.team.Count + LoadCombatManager.instance.enemies.Count == 0)
                 {
                     ShowEndScreen(true);
@@ -97,6 +98,19 @@ namespace Necropanda
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
+
+            if (victory)
+                GiveRewards();
+        }
+
+        List<CharacterStats> killedEnemies = new List<CharacterStats>();
+
+        void GiveRewards()
+        {
+            foreach(CharacterStats stats in killedEnemies)
+            {
+                stats.GiveRewards();
+            }
         }
 
         public TeamManager GetCharacterTeam(TeamManager teamManager)

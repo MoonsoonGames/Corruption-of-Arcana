@@ -24,7 +24,7 @@ namespace Necropanda
         protected DeckManager manager;
 
         public GameObject group;
-        protected HorizontalLayoutGroup layout;
+        protected LayoutGroup layout;
 
         protected GeneralDragArea dragArea;
         protected DragManager dragManager;
@@ -33,6 +33,7 @@ namespace Necropanda
         protected UntargettableOverlay untargettableOverlay;
 
         public bool showArt = false;
+        public bool useSibIndex = true;
 
         #endregion
 
@@ -105,10 +106,12 @@ namespace Necropanda
             baseColor = deckBackground.color;
             desiredColor = baseColor;
 
-            layout = GetComponent<HorizontalLayoutGroup>();
+            layout = GetComponent<LayoutGroup>();
 
             untargettableOverlay = transform.parent.GetComponentInChildren<UntargettableOverlay>();
             SetOverlay(false, " ");
+
+            useSibIndex = layout != null;
         }
 
         #endregion
@@ -119,7 +122,7 @@ namespace Necropanda
         /// Called when mouse hovers over deck
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card into the deck
             if (eventData.dragging == true && dragManager.draggedCard != null && open)

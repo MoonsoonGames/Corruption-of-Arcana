@@ -17,7 +17,7 @@ public enum E_DamageTypes
 
 public enum E_SpellTargetType
 {
-    Caster, Target, Cleave, Chain, RandomEnemyTeam, RandomAll, All
+    Caster, Target, Cleave, Chain, RandomEnemyTeam, RandomAll, All, AllEnemies
 }
 
 public enum E_StatusTargetType

@@ -27,6 +27,9 @@ namespace Necropanda
 
             if (currentTurn < tutorialCards.Length)
             {
+                if (tutorialCards[currentTurn].ignore)
+                    return true;
+
                 foreach (var spellTarget in tutorialCards[currentTurn].spellTargets)
                 {
                     Character target = spellTarget.target < 0 ? player : enemyTeamManager.team[spellTarget.target];
@@ -106,6 +109,7 @@ namespace Necropanda
     public struct TutorialCards
     {
         public SpellTarget[] spellTargets;
+        public bool ignore;
     }
 
     [System.Serializable]

@@ -34,8 +34,8 @@ namespace Necropanda
         public Quest[] subQuests;
         public bool linear = true;
 
-        //public RewardsPool rewards
-        //public int rewardNumber
+        public LootPool rewards;
+        public bool overrideParentRewards = false;
 
         #endregion
 
@@ -153,8 +153,26 @@ namespace Necropanda
         void GiveRewards()
         {
             UpdateQuestInfo();
-            //could have this depend on how the quest was finished
-            //rewards.GiveRewards
+
+            if (overrideParentRewards)
+            {
+                OverrideRewards(rewards);
+                return;
+            }
+            else
+                rewards.RewardItems();
+        }
+
+        public void OverrideRewards(LootPool newRewards)
+        {
+            if (parentQuest == null)
+            {
+                rewards = newRewards;
+            }
+            else
+            {
+                parentQuest.OverrideRewards(newRewards);
+            }
         }
 
         void UpdateQuestInfo()
