@@ -119,7 +119,7 @@ namespace Necropanda
         /// Called when mouse hovers over deck
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             //Only fires logic when player is dragging a card into the deck
             if (eventData.dragging == true && dragManager.draggedCard != null && open)

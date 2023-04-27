@@ -12,7 +12,6 @@ namespace Necropanda
     public class GetAvailableCards : MonoBehaviour
     {
         public GameObject collectionContent, equipContent;
-        Deck2D collectionDeck, equipDeck;
         BuildDeck buildDeck;
         public Object cardPrefab;
 
@@ -26,18 +25,28 @@ namespace Necropanda
 
             DeckManager.instance.LoadDeck();
 
-            if (collectionContent == null) return;
-            collectionDeck = collectionContent.GetComponentInParent<Deck2D>();
-
-            if (equipContent == null) return;
-            equipDeck = equipContent.GetComponentInParent<Deck2D>();
-
             buildDeck = GetComponent<BuildDeck>();
 
-            foreach (Spell spell in DeckManager.instance.collection)
+            if (collectionContent != null)
+            {
+                SetupDeck(collectionContent, DeckManager.instance.collection, buildDeck.collectedSpells);
+            }
+
+            if (equipContent != null)
+            {
+                SetupDeck(equipContent, DeckManager.instance.majorArcana, buildDeck.equippedSpells);
+            }
+        }
+
+        void SetupDeck(GameObject content, List<Spell> collection, List<Spell> buildDeckSpells)
+        {
+            if (content == null) return;
+            Deck2D collectionDeck = content.GetComponentInParent<Deck2D>();
+
+            foreach (Spell spell in collection)
             {
                 Debug.Log(spell.spellName + " should be in collection");
-                GameObject card = Instantiate(cardPrefab, collectionContent.transform) as GameObject;
+                GameObject card = Instantiate(cardPrefab, content.transform) as GameObject;
                 CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
                 DrawCard drawCard = card.GetComponent<DrawCard>();
                 //Add the card to the array
@@ -49,24 +58,7 @@ namespace Necropanda
                 drawCard.draw = false;
                 drawCard.Setup(spell);
 
-                buildDeck.collectedSpells.Add(spell);
-            }
-
-            foreach (Spell spell in DeckManager.instance.majorArcana)
-            {
-                GameObject card = Instantiate(cardPrefab, equipContent.transform) as GameObject;
-                CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
-                DrawCard drawCard = card.GetComponent<DrawCard>();
-                //Add the card to the array
-                equipDeck.AddCard(cardDrag);
-
-                //Reset card scales
-                cardDrag.ScaleCard(1, false);
-
-                drawCard.draw = false;
-                drawCard.Setup(spell);
-
-                buildDeck.equippedSpells.Add(spell);
+                buildDeckSpells.Add(spell);
             }
         }
     }

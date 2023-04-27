@@ -9,15 +9,9 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class BuildDeck : MonoBehaviour
+    public class UpgradeDeck : BuildDeck
     {
-        //[HideInInspector]
-        public List<Spell> collectedSpells, equippedSpells;
-        public DeckCollection collectedDeck;
-        public DeckLoadout equippedDeck;
-
-        // Start is called before the first frame update
-        protected virtual void Start()
+        protected override void Start()
         {
             if (collectedDeck.CurrentCardsLength() > 0)
             {
@@ -27,23 +21,13 @@ namespace Necropanda
             {
                 collectedSpells = new List<Spell>();
             }
-
-            if (equippedDeck.CurrentCardsLength() > 0)
-            {
-                equippedSpells = equippedDeck.GetSpells();
-            }
-            else
-            {
-                equippedSpells = new List<Spell>();
-            }
         }
 
-        public virtual void SaveCards()
+        public override void SaveCards()
         {
-            if (equippedDeck.AvailableSpaces())
+            if (true /*Check that player has not left an upgraded card in the output*/)
             {
                 DeckManager.instance.collection = collectedSpells;
-                DeckManager.instance.majorArcana = equippedSpells;
 
                 DeckManager.instance.SaveDeck();
             }
