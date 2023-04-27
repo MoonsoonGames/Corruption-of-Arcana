@@ -10,8 +10,13 @@ using Necropanda.Player;
 /// </summary>
 namespace Necropanda
 {
-    public class EndDialogueLogic : MonoBehaviour
+    public class GeneralDialogueLogic : MonoBehaviour
     {
+        public void OpenUpgradingMenu()
+        {
+            TEMP_OpenDeckbuilding.instance.OpenCloseMenu(true, TEMP_OpenDeckbuilding.instance.upgradeDeckMenu);
+        }
+
         public void EndDialogue()
         {
             Debug.Log("EndDialogue");

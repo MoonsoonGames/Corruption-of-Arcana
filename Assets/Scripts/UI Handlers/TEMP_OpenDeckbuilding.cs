@@ -11,6 +11,8 @@ namespace Necropanda
 {
     public class TEMP_OpenDeckbuilding : MonoBehaviour
     {
+        public static TEMP_OpenDeckbuilding instance;
+
         public GameObject deckbuildingMenu;
         public GameObject upgradeDeckMenu;
         public GameObject weaponsMenu;
@@ -21,6 +23,8 @@ namespace Necropanda
         // Start is called before the first frame update
         void Start()
         {
+            instance = this;
+
             if (deckbuildingMenu != null)
             {
                 getAvailableCards = deckbuildingMenu.GetComponent<GetAvailableCards>();
