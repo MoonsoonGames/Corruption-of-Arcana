@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: WalkerStats
   m_EditorClassIdentifier: 
   characterName: Walker
+  endCombatOnKill: 0
   characterObject: {fileID: 2611122861618082293, guid: 2122f3c45f163874084befda975f1e7c,
     type: 3}
   characterSprite: {fileID: 21300000, guid: 55573552f78726f48bb7d092440429cb, type: 3}
   characterDescription: 
   location: 
   maxHealth: 10
+  startingShields: 0
+  decayShields: 0
   baseDamageResistancesType: 
   baseDamageResistancesModifier: []
   timelineColor: {r: 0.8773585, g: 0.3517711, b: 0.81624365, a: 255}
@@ -26,6 +29,7 @@ MonoBehaviour:
     type: 3}
   ai: {fileID: 11400000, guid: 42fee354ff546e3448b00d40523c6c36, type: 2}
   actions: 1
+  usesArcana: 0
   aISpells:
   - spell: {fileID: 11400000, guid: fae8a9aaf91ddea4b8252ba0d412f710, type: 2}
     spawnAsCard: 0
@@ -34,3 +38,13 @@ MonoBehaviour:
     targetEnemies: 1
     timeCooldown: 0
     lastUsed: 0
+  rewards:
+    lootPools:
+    - objects:
+      - {fileID: 11400000, guid: d15283461dc1ebc41a91b29c339f3041, type: 2}
+      - {fileID: 11400000, guid: c7f0589e943c785449f76b3bc30fbbcd, type: 2}
+      - {fileID: 11400000, guid: 05eb97bc0bc2d104f9b3a8f75ea2a7d9, type: 2}
+      - {fileID: 11400000, guid: 62efdae5e83c5be49aab4fed788c7f7d, type: 2}
+      count: 1
+      rewardAll: 0
+    gold: {x: 0, y: 0}

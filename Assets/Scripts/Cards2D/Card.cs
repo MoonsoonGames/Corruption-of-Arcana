@@ -20,6 +20,7 @@ namespace Necropanda
         public Image nameImage;
         public Image background;
         public SpawnArcanaSymbol arcanaSpawner;
+        public SpawnArcanaSymbol loadoutSpawner;
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI descriptionText;
         public Image cardFaceLowOpacity;
@@ -42,6 +43,7 @@ namespace Necropanda
                 background.sprite = spell.background;
             cardFace.sprite = spell.cardImage;
             arcanaSpawner.SpawnArcanaSymbols(spell.arcanaCost);
+            loadoutSpawner.SpawnArcanaSymbols(spell.loadoutCost);
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
 

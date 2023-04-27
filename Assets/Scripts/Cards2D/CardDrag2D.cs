@@ -195,25 +195,28 @@ namespace Necropanda
                 if (newDeck != null)
                     deck = newDeck;
 
-                int newSibIndex = deck.transform.childCount;
-
-                //Move cards out of the way to make room for this one
-                for(int i = 0; i < deck.transform.childCount; i++)
+                if (deck.useSibIndex)
                 {
-                    if (this.transform.position.x < deck.transform.GetChild(i).position.x)
+                    int newSibIndex = deck.transform.childCount;
+
+                    //Move cards out of the way to make room for this one
+                    for (int i = 0; i < deck.transform.childCount; i++)
                     {
-                        newSibIndex = i;
-
-                        if (placeholder.transform.GetSiblingIndex() < newSibIndex)
+                        if (this.transform.position.x < deck.transform.GetChild(i).position.x)
                         {
-                            newSibIndex--;
+                            newSibIndex = i;
+
+                            if (placeholder.transform.GetSiblingIndex() < newSibIndex)
+                            {
+                                newSibIndex--;
+                            }
+
+                            break;
                         }
-
-                        break;
                     }
-                }
 
-                placeholder.transform.SetSiblingIndex(newSibIndex);
+                    placeholder.transform.SetSiblingIndex(newSibIndex);
+                }
             }
         }
 

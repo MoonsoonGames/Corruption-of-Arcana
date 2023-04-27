@@ -17,28 +17,34 @@ namespace Necropanda
         public DeckLoadout equippedDeck;
 
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
-            if (collectedDeck.CurrentCardsLength() > 0)
+            if (collectedDeck != null)
             {
-                collectedSpells = collectedDeck.GetSpells();
-            }
-            else
-            {
-                collectedSpells = new List<Spell>();
+                if (collectedDeck.CurrentCardsLength() > 0)
+                {
+                    collectedSpells = collectedDeck.GetSpells();
+                }
+                else
+                {
+                    collectedSpells = new List<Spell>();
+                }
             }
 
-            if (equippedDeck.CurrentCardsLength() > 0)
+            if (equippedDeck != null)
             {
-                equippedSpells = equippedDeck.GetSpells();
-            }
-            else
-            {
-                equippedSpells = new List<Spell>();
+                if (equippedDeck.CurrentCardsLength() > 0)
+                {
+                    equippedSpells = equippedDeck.GetSpells();
+                }
+                else
+                {
+                    equippedSpells = new List<Spell>();
+                }
             }
         }
 
-        public void SaveCards()
+        public virtual void SaveCards()
         {
             if (equippedDeck.AvailableSpaces())
             {

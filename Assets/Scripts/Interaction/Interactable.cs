@@ -104,6 +104,11 @@ namespace Necropanda.Interactable
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!setup)
+            {
+                return;
+            }
+
             if (other.CompareTag("Player"))
             {
                 //Debug.Log(other.name + " has entered collision");
@@ -115,6 +120,11 @@ namespace Necropanda.Interactable
         }
         private void OnTriggerExit(Collider other)
         {
+            if (!setup)
+            {
+                return;
+            }
+
             if (other.CompareTag("Player"))
             {
                 //Debug.Log(other.name + " has left collision");

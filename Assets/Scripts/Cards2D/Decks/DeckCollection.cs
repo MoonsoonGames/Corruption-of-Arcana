@@ -63,7 +63,5 @@ namespace Necropanda
         }
 
         public int maxLoadoutCost = 7;
-
-
     }
 }
