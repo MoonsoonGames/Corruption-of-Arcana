@@ -263,10 +263,13 @@ namespace Necropanda
                     else
                         effect -= (float)status.value * damageUtility;
 
-                    foreach (var item in this.statusUtilities)
+                    if (statusUtilities != null)
                     {
-                        if (item.status == status.status)
-                            effect += item.utility;
+                        foreach (var item in this.statusUtilities)
+                        {
+                            if (item.status == status.status)
+                                effect += item.utility;
+                        }
                     }
 
                     break;

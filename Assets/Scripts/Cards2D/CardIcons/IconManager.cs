@@ -28,7 +28,10 @@ namespace Necropanda
 
             foreach (var icon in iconTooltips)
             {
-                newText = newText.Replace("$" + icon.replaceText + "$", "<link=\"" + icon.title + "$split$" + icon.description + "\"><sprite index= " + icon.imageID + "></link>");
+                if (icon.replaceWithText)
+                    newText = newText.Replace("$" + icon.replaceText + "$", "<link=\"" + icon.title + "$split$" + icon.description + "\"><color=#00FFFF>" + icon.title + "</color></link>");
+                else
+                    newText = newText.Replace("$" + icon.replaceText + "$", "<link=\"" + icon.title + "$split$" + icon.description + "\"><sprite index= " + icon.imageID + "></link>");
             }
 
             return newText;

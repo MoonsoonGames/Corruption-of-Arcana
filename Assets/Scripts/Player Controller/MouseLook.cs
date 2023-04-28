@@ -32,14 +32,8 @@ namespace Necropanda.Player
         void Update()
         {
             // Checks to see if the game or controller is suspended. If so, the script won't do anything
-            if (playerController.paused)
-            {
-                return;
-            }
-            else
-            {
+            if (!playerController.paused && playerController.canMove)
                 DoLook();
-            }
         }
 
         /// <summary>

@@ -391,6 +391,7 @@ namespace Necropanda
             public string replaceText;
             public string description;
             public int imageID;
+            public bool replaceWithText;
         }
 
         public struct SpellIconConstruct
