@@ -45,24 +45,30 @@ namespace Necropanda
             }
         }
 
+        bool cooldown = true;
+        float cooldownTime = 0.2f;
+
         // Update is called once per frame
         void Update()
         {
             if (deckbuildingMenu == null) return;
 
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.K) && cooldown)
             {
-                OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+                if (!weaponsMenu.activeSelf && !upgradeDeckMenu.activeSelf)
+                    OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
             }
 
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.J) && cooldown)
             {
-                OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
+                if (!weaponsMenu.activeSelf && !deckbuildingMenu.activeSelf)
+                    OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L) && cooldown)
             {
-                OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
+                if (!upgradeDeckMenu.activeSelf && !deckbuildingMenu.activeSelf)
+                    OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
             }
         }
 
@@ -70,18 +76,20 @@ namespace Necropanda
         {
             if (open)
             {
+                cooldown = false;
+                Invoke("StartCooldownTimer", cooldownTime);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 menu.SetActive(true);
                 if (menu == deckbuildingMenu)
                 {
-                    buildDeck.OpenMenu();
                     getAvailableCards.LoadCards();
+                    StartCoroutine(buildDeck.OpenMenu(0.25f));
                 }
                 else if (menu == upgradeDeckMenu)
                 {
-                    upgradeBuildDeck.OpenMenu();
                     upgradeAvailableCards.LoadCards();
+                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f));
                 }
                 else if (menu == weaponsMenu)
                     getWeapons.OpenEquipment();
@@ -96,6 +104,11 @@ namespace Necropanda
                     upgradeBuildDeck.SaveCards();
                 menu.SetActive(false);
             }
+        }
+
+        void StartCooldownTimer()
+        {
+            cooldown = true;
         }
     }
 }
