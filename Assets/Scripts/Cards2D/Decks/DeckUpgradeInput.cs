@@ -76,7 +76,7 @@ namespace Necropanda
             if (currentSpell != null)
             {
                 //Can upgrade, spawn highter tier in output deck
-                Debug.Log("Spawning spell:" + currentSpell.nextTier.name);
+                Debug.Log("Upgrading spell:" + currentSpell.name);
                 outputDeck.SpawnUpgradeCard(currentSpell.nextTier);
             }
         }
