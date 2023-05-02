@@ -1327,7 +1327,7 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: 
   Min: 0
-  Max: 5
+  Max: 7
   Default: 0
   ID:
     data1: 2062682416
@@ -1341,6 +1341,8 @@ MonoBehaviour:
   - Enemy Close
   - Battle Music
   - Battle End
+  - Forest Entrance
+  - Forest Expanded
   Exists: 1
 --- !u!114 &-5124406496997275583
 MonoBehaviour:
@@ -1975,7 +1977,7 @@ MonoBehaviour:
   Path: Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638174295384946801
+  lastModified: 638186350918693795
   FileSizes: []
   Exists: 1
 --- !u!114 &-3385272441961079213
@@ -2686,7 +2688,7 @@ MonoBehaviour:
   Path: Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638174295384962288
+  lastModified: 638186350641015874
   FileSizes:
   - Name: 
     Value: 4442
@@ -3263,9 +3265,9 @@ MonoBehaviour:
   - {fileID: -2666398774589749766}
   - {fileID: 7610555111433770429}
   - {fileID: -6639860567454967542}
-  - {fileID: -809682600653163416}
-  - {fileID: -7934654081610579912}
-  - {fileID: -7449322859772474515}
+  - {fileID: 4085554706926998402}
+  - {fileID: 7909963349171421946}
+  - {fileID: 3226333858644920515}
   EditorParameters:
   - {fileID: -8572358270947847299}
   - {fileID: 7184053722860241245}
@@ -3273,7 +3275,7 @@ MonoBehaviour:
   - {fileID: -3478392790158526990}
   StringsBanks:
   - {fileID: -2122709412123504311}
-  cacheTime: 638174295384962288
+  cacheTime: 638186350918693795
   cacheVersion: 131591
 --- !u!114 &20207744223286295
 MonoBehaviour:
@@ -4593,6 +4595,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &3226333858644920515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Victory Defeat/Defeat Screen
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Victory Defeat/Defeat Screen
+  Guid:
+    Data1: -1543243031
+    Data2: 1158338654
+    Data3: -26234491
+    Data4: -1857141924
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &3233547439089446652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4836,6 +4865,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 360
+--- !u!114 &4085554706926998402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Overworld/Thoth/Crystal Destruction
+  m_EditorClassIdentifier: 
+  Path: event:/Overworld/Thoth/Crystal Destruction
+  Guid:
+    Data1: 487135031
+    Data2: 1174135072
+    Data3: -250059128
+    Data4: 2145284251
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2250
 --- !u!114 &4176232882561752938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5945,7 +6001,7 @@ MonoBehaviour:
   - {fileID: -4975535874337531469}
   MinDistance: 1
   MaxDistance: 20
-  Length: 195750
+  Length: 323750
 --- !u!114 &6744775575514386292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6117,7 +6173,7 @@ MonoBehaviour:
   Name: Thoth Music
   StudioPath: parameter:/Thoth Music
   Min: 0
-  Max: 5
+  Max: 7
   Default: 0
   ID:
     data1: 2062682416
@@ -6131,6 +6187,8 @@ MonoBehaviour:
   - Enemy Close
   - Battle Music
   - Battle End
+  - Forest Entrance
+  - Forest Expanded
   Exists: 1
 --- !u!114 &7185877301869318698
 MonoBehaviour:
@@ -6483,6 +6541,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 571
+--- !u!114 &7909963349171421946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Combat/Victory Defeat/Victory Screen
+  m_EditorClassIdentifier: 
+  Path: event:/Combat/Victory Defeat/Victory Screen
+  Guid:
+    Data1: 173782927
+    Data2: 1148605371
+    Data3: -1743163512
+    Data4: -719056020
+  Banks:
+  - {fileID: -3478392790158526990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3750
 --- !u!114 &7928118025060391943
 MonoBehaviour:
   m_ObjectHideFlags: 0
