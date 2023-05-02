@@ -17,7 +17,7 @@ namespace Necropanda
         {
             get 
             {
-                return new Vector2 (transform.position.x, transform.position.y);
+                return new Vector2 (transform.position.x, transform.position.z);
             }
         }
     }
