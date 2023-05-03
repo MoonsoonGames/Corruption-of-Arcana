@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEditor;
 
 /// <summary>
-/// Authored & Written by Hayley Davies https://linktr.ee/cdgamedev
-/// Supported by @mattordev
+/// Authored & Written by @mattordev
+/// Supported by 
 /// 
 /// Use by NPS is allowed as a collective, for external use, please contact me directly
 /// </summary>
@@ -41,8 +41,12 @@ namespace Necropanda.AI.Movement
         [Range(-1, 1)]
         private int surfaceRayCastDirection;
         public bool gridSnap = false;
+        public bool snapToFirstPatrolPoint = false;
         public Vector3 snapAmount = new Vector3(0.5f, 0.5f, 0.5f);
 
+        private void OnEnable() {
+        }
+        
         /// <summary>
         /// When the object is deselected in the scene view of the Unity Editor
         /// </summary>
@@ -59,6 +63,8 @@ namespace Necropanda.AI.Movement
             // Get target and cast to Patrol
             patrol = (Patrol)target;
 
+            
+
             // Set the patrolPoints to be the patrolPoints contained in the Patrol class
             patrolPoints = patrol.patrolPoints;
 
@@ -74,7 +80,6 @@ namespace Necropanda.AI.Movement
         /// </summary>
         private void PreviewPatrol()
         {
-
             // Get the transform of the patrol
             Transform transform = patrol.transform;
 
@@ -135,6 +140,7 @@ namespace Necropanda.AI.Movement
             GUILayout.Space(2f);
             snapToGround = GUILayout.Toggle(snapToGround, "Snap to Ground?");
             gridSnap = GUILayout.Toggle(gridSnap, "Grid Snapping?");
+            snapToFirstPatrolPoint = GUILayout.Toggle(snapToFirstPatrolPoint, "Snap to First Patrol Point? (Experimental)");
         }
 
         private void SetOptions()
@@ -272,7 +278,8 @@ namespace Necropanda.AI.Movement
             // set the mode to none
             mode = Mode.None;
             // set the transform to be located at the initial point
-            patrol.transform.position = patrol.patrolPoints[0];
+            if (snapToFirstPatrolPoint)
+                patrol.transform.position = patrol.patrolPoints[0];
             // clear the event system for EditorApplication update
             EditorApplication.update = null;
         }

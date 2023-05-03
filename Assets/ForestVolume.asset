@@ -28,24 +28,7 @@ MonoBehaviour:
   saturation:
     m_OverrideState: 1
     m_Value: 52
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: ForestVolume
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: 1378439902104468090}
-  - {fileID: -4577142963447300931}
-  - {fileID: 3477138343172506415}
-  - {fileID: 7121960508735835186}
---- !u!114 &1378439902104468090
+--- !u!114 &-1216175502274194330
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,7 +46,7 @@ MonoBehaviour:
     m_Value: 1.02
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 18.78
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -72,7 +55,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 0
-    m_Value: {r: 0.81617355, g: 0, b: 1, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -85,6 +68,23 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: ForestVolume
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -4577142963447300931}
+  - {fileID: 3477138343172506415}
+  - {fileID: 7121960508735835186}
+  - {fileID: -1216175502274194330}
 --- !u!114 &3477138343172506415
 MonoBehaviour:
   m_ObjectHideFlags: 3
