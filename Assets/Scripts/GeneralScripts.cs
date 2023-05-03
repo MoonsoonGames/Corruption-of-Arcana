@@ -178,16 +178,12 @@ namespace Necropanda
         public struct SpellInstance
         {
             public Spell spell;
-            public bool empowered;
-            public bool weakened;
             public Character caster;
             public Character target;
 
-            public void SetSpellInstance(Spell newSpell, bool newEmpowered, bool newWeakened, Character newTarget, Character newCaster)
+            public void SetSpellInstance(Spell newSpell, Character newTarget, Character newCaster)
             {
                 spell = newSpell;
-                empowered = newEmpowered;
-                weakened = newWeakened;
                 target = newTarget;
                 caster = newCaster;
             }
@@ -202,6 +198,7 @@ namespace Necropanda
             public int hitCount;
             public float executeThreshold;
             public float valueScalingDamageTaken;
+            public float valueScalingShieldCost;
             public int valueScalingPerDiscard;
             public int valueScalingPerStatus;
             public CharacterStats summon;
@@ -287,6 +284,8 @@ namespace Necropanda
             public StatusEffects status;
             public int duration;
             public bool applyOverShield;
+            public bool remove;
+            public int valueSuccess;
         }
 
         [System.Serializable]
@@ -392,6 +391,7 @@ namespace Necropanda
             public string replaceText;
             public string description;
             public int imageID;
+            public bool replaceWithText;
         }
 
         public struct SpellIconConstruct

@@ -28,6 +28,8 @@ namespace Necropanda.Interactable
 
         bool setup = false;
 
+        public EventReference interactionSound;
+
         public void Setup()
         {
             if (LoadCombatManager.instance == null) return;
@@ -102,6 +104,11 @@ namespace Necropanda.Interactable
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!setup)
+            {
+                return;
+            }
+
             if (other.CompareTag("Player"))
             {
                 //Debug.Log(other.name + " has entered collision");
@@ -113,6 +120,11 @@ namespace Necropanda.Interactable
         }
         private void OnTriggerExit(Collider other)
         {
+            if (!setup)
+            {
+                return;
+            }
+
             if (other.CompareTag("Player"))
             {
                 //Debug.Log(other.name + " has left collision");
@@ -126,6 +138,9 @@ namespace Necropanda.Interactable
         void Interact(GameObject playerRef)
         {
             SetInteractMessage(null, null);
+
+            // // Call audio oneshot
+            RuntimeManager.PlayOneShot(interactionSound, transform.position);
 
             //Call interface function
             //Debug.Log("Interact");

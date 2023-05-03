@@ -30,14 +30,11 @@ namespace Necropanda
             if (loadCombatManager.enemies.Count > 0)
             {
                 CharacterStats nextEnemy = loadCombatManager.enemies[0];
-                GameObject objectRef = Instantiate(nextEnemy.characterObject, gameObject.transform) as GameObject;
-                Character character = objectRef.GetComponent<Character>();
-                Sprite newSprite = character.stats.characterSprite;
+                Sprite newSprite = nextEnemy.characterSprite;
                 enemyImage.sprite = newSprite;
                 Color color = enemyImage.color;
                 color.a = 255;
                 enemyImage.color = color;
-                Destroy(objectRef);
             }
             else
             {

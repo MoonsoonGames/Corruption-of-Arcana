@@ -71,25 +71,29 @@ namespace Necropanda
                     {
                         if (spellUtility.spell.spawnAsCard)
                         {
-                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, empowerDeck, weakenDeck, spellUtility.target, this);
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
                         }
                         else
                         {
-                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, false, false, spellUtility.target, this);
+                            newSpellInstance.SetSpellInstance(spellUtility.spell.spell, spellUtility.target, this);
                         }
 
-                        enemyManager.AddSpellInstance(newSpellInstance);
+                        if (newSpellInstance.spell != null)
+                            enemyManager.AddSpellInstance(newSpellInstance);
                     }
                     else
                     {
                         Debug.Log(stats.characterName + " is skipping their turn");
                     }
 
-                    spellsThisTurn.Add(newSpellInstance.spell.spellName);
-
-                    foreach(var item in newSpellInstance.spell.spellModules)
+                    if (newSpellInstance.spell != null)
                     {
-                        effectsThisTurn.Add(item.effectType);
+                        spellsThisTurn.Add(newSpellInstance.spell.spellName);
+
+                        foreach (var item in newSpellInstance.spell.spellModules)
+                        {
+                            effectsThisTurn.Add(item.effectType);
+                        }
                     }
                 }
             }

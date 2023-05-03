@@ -13,36 +13,50 @@ namespace Necropanda
     {
         //[HideInInspector]
         public List<Spell> collectedSpells, equippedSpells;
-        public Deck2D collectedDeck, equippedDeck;
+        public DeckCollection collectedDeck;
+        public DeckLoadout equippedDeck;
 
         // Start is called before the first frame update
-        void Start()
+        public virtual IEnumerator OpenMenu(float delay)
         {
-            if (collectedDeck.CurrentCardsLength() > 0)
+            yield return new WaitForSeconds(delay);
+
+            if (collectedDeck != null)
             {
-                collectedSpells = collectedDeck.GetSpells();
-            }
-            else
-            {
-                collectedSpells = new List<Spell>();
+                if (collectedDeck.CurrentCardsLength() > 0)
+                {
+                    collectedSpells = collectedDeck.GetSpells();
+                }
+                else
+                {
+                    collectedSpells = new List<Spell>();
+                }
             }
 
-            if (equippedDeck.CurrentCardsLength() > 0)
+            if (equippedDeck != null)
             {
-                equippedSpells = equippedDeck.GetSpells();
-            }
-            else
-            {
-                equippedSpells = new List<Spell>();
+                if (equippedDeck.CurrentCardsLength() > 0)
+                {
+                    equippedSpells = equippedDeck.GetSpells();
+                }
+                else
+                {
+                    equippedSpells = new List<Spell>();
+                }
             }
         }
 
-        public void SaveCards()
+        public virtual void SaveCards()
         {
-            DeckManager.instance.collection = collectedSpells;
-            DeckManager.instance.majorArcana = equippedSpells;
+            Debug.Log("Deck menu saves cards");
 
-            DeckManager.instance.SaveDeck();
+            if (equippedDeck.AvailableSpaces())
+            {
+                DeckManager.instance.collection = collectedSpells;
+                DeckManager.instance.majorArcana = equippedSpells;
+
+                DeckManager.instance.SaveDeck();
+            }
         }
     }
 }

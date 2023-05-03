@@ -15,6 +15,7 @@ namespace Necropanda
         #region Setup
 
         public bool random = false;
+        public bool ordered = false;
 
         [Header("Basic Utility Values")]
         public float damageUtility;
@@ -54,6 +55,18 @@ namespace Necropanda
                 spellUtility.spell = spellList[Random.Range(0, spellList.Count)];
                 spellUtility.target = allTargets[Random.Range(0, allTargets.Count)];
                 spellUtility.utility = 0f;
+            }
+            else if (ordered && CombatManager.instance.currentTurn < spellList.Count)
+            {
+                for (int i = 0; i < spellList.Count; i++)
+                {
+                    if (i == CombatManager.instance.currentTurn)
+                    {
+                        spellUtility.spell = spellList[i];
+                        spellUtility.target = allTargets[Random.Range(0, allTargets.Count)];
+                        spellUtility.utility = 0f;
+                    }
+                }
             }
             else
             {
@@ -250,10 +263,13 @@ namespace Necropanda
                     else
                         effect -= (float)status.value * damageUtility;
 
-                    foreach (var item in this.statusUtilities)
+                    if (statusUtilities != null)
                     {
-                        if (item.status == status.status)
-                            effect += item.utility;
+                        foreach (var item in this.statusUtilities)
+                        {
+                            if (item.status == status.status)
+                                effect += item.utility;
+                        }
                     }
 
                     break;

@@ -50,8 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f205e12edaf6ea8429a05d581edc7358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
+  character: {fileID: 11400000, guid: f86170c03c8dddc408e666bf1976c774, type: 2}
   combatScene: 2
+  tutorialScene: 11
   lastScene: 0
   lastPos: {x: 0, y: 0, z: 0}
   lastRot: {x: 0, y: 0, z: 0, w: 0}
@@ -59,6 +60,7 @@ MonoBehaviour:
   combatRadius: 20
   queue: {fileID: 0}
   enemies: []
+  enemiesEndCombat: []
   enemyIDs: []
   backdrop: {fileID: 0}
   progressQuestUponCombatVictory: []
@@ -181,10 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaa14671196f024ba15176447bad955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healing: 2
-  haste: 1
-  fortitude: 2
-  poison: 1
+  healing: 0
+  haste: 0
+  fortitude: 0
+  poison: 0
 --- !u!1 &8296228320225068966
 GameObject:
   m_ObjectHideFlags: 0

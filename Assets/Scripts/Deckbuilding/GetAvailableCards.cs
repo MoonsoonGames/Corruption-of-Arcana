@@ -12,32 +12,56 @@ namespace Necropanda
     public class GetAvailableCards : MonoBehaviour
     {
         public GameObject collectionContent, equipContent;
-        Deck2D collectionDeck, equipDeck;
         BuildDeck buildDeck;
         public Object cardPrefab;
 
-        bool setup = false;
-
         public void LoadCards()
         {
-            if (setup) return;
-
-            setup = true;
-
             DeckManager.instance.LoadDeck();
-
-            if (collectionContent == null) return;
-            collectionDeck = collectionContent.GetComponentInParent<Deck2D>();
-
-            if (equipContent == null) return;
-            equipDeck = equipContent.GetComponentInParent<Deck2D>();
 
             buildDeck = GetComponent<BuildDeck>();
 
-            foreach (Spell spell in DeckManager.instance.collection)
+            if (collectionContent != null)
+            {
+                buildDeck.collectedSpells = new List<Spell>();
+                StartCoroutine(SetupDeck(collectionContent, DeckManager.instance.collection, buildDeck.collectedSpells, 0.05f));
+            }
+
+            if (equipContent != null)
+            {
+                buildDeck.equippedSpells = new List<Spell>();
+                StartCoroutine(SetupDeck(equipContent, DeckManager.instance.majorArcana, buildDeck.equippedSpells, 0.05f));
+            }
+        }
+
+        IEnumerator SetupDeck(GameObject content, List<Spell> collection, List<Spell> buildDeckSpells, float delay)
+        {
+            Debug.Log("Open menu");
+            if (content == null)
+            {
+                Debug.Log("Null content");
+                yield break;
+            }
+            Deck2D collectionDeck = content.GetComponentInParent<Deck2D>();
+
+            List<Spell> collectionCopy = new List<Spell>();
+
+            foreach (var item in collection)
+                collectionCopy.Add(item);
+
+            buildDeckSpells.Clear();
+
+            for (int i = 0; i < content.transform.childCount; i++)
+            {
+                Destroy(content.transform.GetChild(i).gameObject);
+            }
+
+            yield return new WaitForSeconds(delay);
+
+            foreach (Spell spell in collectionCopy)
             {
                 Debug.Log(spell.spellName + " should be in collection");
-                GameObject card = Instantiate(cardPrefab, collectionContent.transform) as GameObject;
+                GameObject card = Instantiate(cardPrefab, content.transform) as GameObject;
                 CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
                 DrawCard drawCard = card.GetComponent<DrawCard>();
                 //Add the card to the array
@@ -49,24 +73,7 @@ namespace Necropanda
                 drawCard.draw = false;
                 drawCard.Setup(spell);
 
-                buildDeck.collectedSpells.Add(spell);
-            }
-
-            foreach (Spell spell in DeckManager.instance.majorArcana)
-            {
-                GameObject card = Instantiate(cardPrefab, equipContent.transform) as GameObject;
-                CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
-                DrawCard drawCard = card.GetComponent<DrawCard>();
-                //Add the card to the array
-                equipDeck.AddCard(cardDrag);
-
-                //Reset card scales
-                cardDrag.ScaleCard(1, false);
-
-                drawCard.draw = false;
-                drawCard.Setup(spell);
-
-                buildDeck.equippedSpells.Add(spell);
+                buildDeckSpells.Add(spell);
             }
         }
     }

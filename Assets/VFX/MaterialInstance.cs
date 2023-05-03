@@ -27,30 +27,46 @@ namespace Necropanda
         // Update is called once per frame
         void Update()
         {
-            mat.SetFloat("_Disolve_amount", dissolveAmount);
+            if (mat != null)
+                mat.SetFloat("_Disolve_amount", dissolveAmount);
+            else
+                mat = spriteRenderer.material;
         }
 
         public void SetColour(Color color)
         {
-            mat.SetVector("_Color", color);
+            if (mat != null)
+                mat.SetVector("_Color", color);
+            else
+                mat = spriteRenderer.material;
         }
 
         public void SetEdgeColour(Color color)
         {
             //color *= 100f;
-            mat.SetVector("_EdgeColor", color);
+            if (mat != null)
+                mat.SetVector("_EdgeColor", color);
+            else
+                mat = spriteRenderer.material;
         }
 
         public void SetDissolveColor(Color color)
         {
             //color *= 8f;
-            mat.SetVector("_Disolve_Colour", color);
+            if (mat != null)
+                mat.SetVector("_Disolve_Colour", color);
+            else
+                mat = spriteRenderer.material;
         }
 
         public void SetDissolve(float dissolveAmount)
         {
             this.dissolveAmount = dissolveAmount;
-            mat.SetFloat("_Disolve_amount", dissolveAmount);
+            if (mat != null)
+                mat.SetFloat("_Disolve_amount", dissolveAmount);
+
+            else
+                mat = spriteRenderer.material;
         }
 
         [ContextMenu("Blue")]

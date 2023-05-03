@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RatStats
   m_EditorClassIdentifier: 
   characterName: Rat
+  endCombatOnKill: 0
   characterObject: {fileID: 2611122861618082293, guid: b1325222814895e4c96e1cd3eec55d2a,
     type: 3}
   characterSprite: {fileID: 21300000, guid: d39b537d1357c2247b888ce2b990eb8d, type: 3}
@@ -36,3 +37,13 @@ MonoBehaviour:
     targetEnemies: 1
     timeCooldown: 0
     lastUsed: 0
+  rewards:
+    lootPools:
+    - objects:
+      - {fileID: 11400000, guid: d15283461dc1ebc41a91b29c339f3041, type: 2}
+      - {fileID: 11400000, guid: c7f0589e943c785449f76b3bc30fbbcd, type: 2}
+      - {fileID: 11400000, guid: 05eb97bc0bc2d104f9b3a8f75ea2a7d9, type: 2}
+      - {fileID: 11400000, guid: 62efdae5e83c5be49aab4fed788c7f7d, type: 2}
+      number: {x: 0, y: 1}
+      rewardAll: 0
+    gold: {x: 0, y: 0}

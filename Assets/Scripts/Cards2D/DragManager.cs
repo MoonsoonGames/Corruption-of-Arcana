@@ -41,15 +41,29 @@ namespace Necropanda
         private void Awake()
         {
             Singleton();
+            StartDragging = StartDraggingLogic;
+            StopDragging = StopDraggingLogic;
         }
 
-        public void StartDragging(CardDrag2D drag)
+        public delegate void DragDelegate(CardDrag2D card);
+        public DragDelegate StartDragging;
+
+        public void StartDraggingLogic(CardDrag2D drag)
         {
             draggedCard = drag;
 
             if (TooltipManager.instance == null) return;
 
             TooltipManager.instance.EnableTooltips(draggedCard == null);
+        }
+
+        public delegate void DragTargetDelegate(CardDrag2D card, Character target);
+        public DragTargetDelegate StopDragging;
+
+        public void StopDraggingLogic(CardDrag2D drag, Character target)
+        {
+            canDrag = true;
+            StartDragging(null);
         }
 
         public bool canDrag;
