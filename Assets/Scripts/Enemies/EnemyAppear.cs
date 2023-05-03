@@ -21,6 +21,7 @@ namespace Necropanda
         GameObject player;
 
         public bool activateOnStart = false;
+        public bool hideOnStart = false;
 
         float height;
 
@@ -38,9 +39,15 @@ namespace Necropanda
             {
                 fx = null;
                 active = true;
-                aiScript.ActivateAI(player);
             }
 
+            Invoke("DelayHide", 0.1f);
+        }
+
+        void DelayHide()
+        {
+            aiScript.ActivateAI(player);
+            gameObject.SetActive(!hideOnStart);
         }
 
         public string ID;
