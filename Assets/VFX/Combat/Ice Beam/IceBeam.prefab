@@ -81,11 +81,23 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 2
+        m_Name: Beam lifetime
+        m_Overridden: 1
+      - m_Value: 40
+        m_Name: Beam end
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 3.88, y: 0, z: 0}
+        m_Name: Impact Position
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: Beam rotation
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -95,7 +107,51 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 600
+            outSlope: 600
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.1
+            value: 60
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.9
+            value: 60
+            inSlope: -0.14848705
+            outSlope: -4.999999
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: -599.9999
+            outSlope: -599.9999
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Beam Length Curve
+        m_Overridden: 0
     m_Gradient:
       m_Array: []
     m_NamedObject:
