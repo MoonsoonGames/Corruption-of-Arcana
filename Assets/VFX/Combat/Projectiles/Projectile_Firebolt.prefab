@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 457778578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 21.491001, y: 21.491001, z: 21.491001}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1887940063}
@@ -220,13 +220,19 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 5
+      - m_Value: 20
         m_Name: Sparks spawn size
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 1, y: 1, z: 0}
+        m_Name: Spark velocity MAX
+        m_Overridden: 1
+      - m_Value: {x: -1, y: -0.2, z: 0}
+        m_Name: Spark velocity MIN
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -295,7 +301,7 @@ GameObject:
   - component: {fileID: 3417186769512463150}
   - component: {fileID: 5032918422145470113}
   m_Layer: 5
-  m_Name: Firebolt
+  m_Name: Projectile_Firebolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,7 +326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 30.6, y: -50}
   m_SizeDelta: {x: 48.2475, y: 48.2475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3417186769512463150
@@ -352,6 +358,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2220106004606753263}
     m_Modifications:
+    - target: {fileID: 5141633029826950941, guid: 1439d7e8c61c5874b9eed1b4aa412148,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5141633029826950941, guid: 1439d7e8c61c5874b9eed1b4aa412148,
         type: 3}
       propertyPath: m_Parameters.colorGradient.atime1
@@ -586,6 +597,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745890808279253966, guid: 1439d7e8c61c5874b9eed1b4aa412148,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1439d7e8c61c5874b9eed1b4aa412148, type: 3}
