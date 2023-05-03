@@ -35,9 +35,28 @@ namespace Necropanda
             PageDesc.text = Item.Description;
         }
 
-        void Update()
+        public void StrangeObjectBTN()
         {
-            
+            Curios_Object Item = (Curios_Object)Trinkets[2];
+            PageName.text = Item.Name;
+            PageImg.sprite = Item.Artwork;
+            PageDesc.text = Item.Description;
+        }
+
+        public void CrystalBallBTN()
+        {
+            Curios_Object Item = (Curios_Object)Trinkets[3];
+            PageName.text = Item.Name;
+            PageImg.sprite = Item.Artwork;
+            PageDesc.text = Item.Description;
+        }
+
+        public void AnOldFriendBTN()
+        {
+            Curios_Object Item = (Curios_Object)Trinkets[4];
+            PageName.text = Item.Name;
+            PageImg.sprite = Item.Artwork;
+            PageDesc.text = Item.Description;
         }
     }
 }

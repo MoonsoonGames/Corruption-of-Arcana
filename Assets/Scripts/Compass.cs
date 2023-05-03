@@ -16,6 +16,7 @@ namespace Necropanda
         public RawImage compassHeadings;
         public Image MarkerHolder;
         public Transform player;
+        public float MaxDistance = 300f; 
 
         public GameObject iconPrefab;
         List<QuestMarker> questMarkers = new List<QuestMarker>();
@@ -23,10 +24,12 @@ namespace Necropanda
         float compassUnit;
 
 
-        ///TEMP///
+        /* 
+                TEMP 
         public QuestMarker one;
         public QuestMarker two;
         public QuestMarker three;
+        */
 
         private void Start()
         {
@@ -37,9 +40,13 @@ namespace Necropanda
 
             compassUnit = MarkerHolder.rectTransform.rect.width / 360f;
 
+            /* 
+                    TEMP 
             AddQuestMarker(one);
             AddQuestMarker(two);
             AddQuestMarker(three);
+            */
+
         }
         public void Update()
         {
@@ -48,6 +55,15 @@ namespace Necropanda
             foreach(QuestMarker marker in questMarkers)
             {
                 marker.image.rectTransform.anchoredPosition = GetPosOnCompass(marker);
+
+                float dst = Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.z), marker.position);
+                float scale = .25f;
+
+                if (dst < MaxDistance)
+                {
+                    scale = 1f - (dst / MaxDistance);
+                }
+                marker.image.rectTransform.localScale = Vector3.one * scale;
             }
         }
 
