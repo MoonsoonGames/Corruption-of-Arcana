@@ -23,11 +23,19 @@ namespace Necropanda
 
         Deck2D deck;
 
+        public bool ignoreHitScale = false;
+
         protected virtual void Start()
         {
             SetupReferences();
 
             SetupSprite();
+
+            if (!ignoreHitScale)
+            {
+                hitPos.Scale(new Vector3(0.444605f, 0.444605f, 0.444605f));
+                castPos.Scale(new Vector3(0.444605f, 0.444605f, 0.444605f));
+            }
         }
 
         [ContextMenu("Setup Sprite")]

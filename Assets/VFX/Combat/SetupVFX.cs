@@ -30,7 +30,7 @@ namespace Necropanda
             float distance = Vector3.Distance(casterPos, targetPos)/2.35f;
 
             visualEffect.SetFloat("Beam end", distance);
-
+            
             Vector3 add = new Vector3(300, 300, 0);
 
             casterPos += add;
@@ -40,7 +40,8 @@ namespace Necropanda
             targetPos.z = 0;
 
             Vector3 rotation = Quaternion.FromToRotation(casterPos, targetPos).eulerAngles;
-            rotation.z += 62f;
+            //Vector3 rotation = targetPos - casterPos;
+            rotation.z += 45f;
             visualEffect.SetVector3("Beam rotation", rotation);
         }
     }
