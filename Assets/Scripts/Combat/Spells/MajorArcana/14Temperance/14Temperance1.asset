@@ -23,6 +23,8 @@ MonoBehaviour:
   cardImage: {fileID: 0}
   background: {fileID: 0}
   cardType: 1
+  previousTier: {fileID: 0}
+  nextTier: {fileID: 11400000, guid: 487aff06c21e7ac4da91c380f1f55a08, type: 2}
   overrideColor: 1
   timelineColor: {r: 0.07355818, g: 0.6975845, b: 0.8207547, a: 255}
   timelineIcon: {fileID: -1349185291, guid: f465a941178bb0d429d18de762a2632b, type: 3}
@@ -30,6 +32,7 @@ MonoBehaviour:
   loadoutCost: 1
   arcanaCost: 1
   potionCost: 0
+  shieldCost: 0
   potionType: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
@@ -46,6 +49,7 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 4
     summon: {fileID: 0}
