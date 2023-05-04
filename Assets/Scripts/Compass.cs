@@ -73,6 +73,7 @@ namespace Necropanda
             if (!questMarkers.Contains(marker))
                 return;
             questMarkers.Remove(marker);
+            Destroy(marker.image);
         }
 
         Vector2 GetPosOnCompass (QuestMarker marker)
