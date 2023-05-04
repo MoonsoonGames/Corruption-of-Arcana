@@ -19,6 +19,7 @@ public class EquipmentFunctionality : MonoBehaviour
     }
     public void Start()
     {
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
     }
     public void WeaponBTN(Weapon weapon)

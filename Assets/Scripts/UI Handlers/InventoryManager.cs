@@ -55,14 +55,4 @@ public class InventoryManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    public void Update()
-    {
-        while(InventoryScreen.activeSelf == true)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            return;
-        }
-    }
 }

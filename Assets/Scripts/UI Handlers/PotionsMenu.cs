@@ -15,6 +15,7 @@ namespace Necropanda
         InventoryManager inventoryManager;
         public void Start()
         {
+            inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
             openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
         }
         public void Close()
