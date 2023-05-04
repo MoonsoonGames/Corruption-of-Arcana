@@ -20,6 +20,7 @@ namespace Necropanda
 
         bool waitingForStartTurn = false;
         bool waitingForSound = false;
+        public bool canEndTurn = true;
 
         public float endTurnDelay = 1f;
 
@@ -45,7 +46,7 @@ namespace Necropanda
             {
                 input = true;
 
-                if (waitingForStartTurn == false)
+                if (waitingForStartTurn == false && canEndTurn)
                 {
                     Debug.Log("End turn success");
                     EndTurnButton();
