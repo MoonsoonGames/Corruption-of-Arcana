@@ -23,13 +23,7 @@ namespace Necropanda
 
         float compassUnit;
 
-
-        /* 
-                TEMP 
-        public QuestMarker one;
-        public QuestMarker two;
-        public QuestMarker three;
-        */
+        QuestMarkers[] markers;
 
         private void Start()
         {
@@ -40,14 +34,10 @@ namespace Necropanda
 
             compassUnit = MarkerHolder.rectTransform.rect.width / 360f;
 
-            /* 
-                    TEMP 
-            AddQuestMarker(one);
-            AddQuestMarker(two);
-            AddQuestMarker(three);
-            */
-
+            markers = GameObject.FindObjectsOfType<QuestMarkers>(true);
+            CheckQuestMarkers();
         }
+
         public void Update()
         {
             compassHeadings.uvRect = new Rect((player.localEulerAngles.y / 360f) + offset, 1f, 1f, 1f);
@@ -69,11 +59,20 @@ namespace Necropanda
 
         public void AddQuestMarker(QuestMarker marker)
         {
+            if (questMarkers.Contains(marker))
+                return;
             GameObject newMarker = Instantiate(iconPrefab, MarkerHolder.transform);
             marker.image = newMarker.GetComponent<Image>();
             marker.image.sprite = marker.icon;
 
             questMarkers.Add(marker);
+        }
+
+        public void RemoveQuestMarker(QuestMarker marker)
+        {
+            if (!questMarkers.Contains(marker))
+                return;
+            questMarkers.Remove(marker);
         }
 
         Vector2 GetPosOnCompass (QuestMarker marker)
@@ -84,6 +83,15 @@ namespace Necropanda
             float angle = Vector2.SignedAngle (marker.position - playerPos, playerFwd);
 
             return new Vector2(compassUnit * angle, 0f);
+        }
+
+        public void CheckQuestMarkers()
+        {
+            foreach (var item in markers)
+            {
+                item.Setup();
+                item.CheckProgress();
+            }
         }
     }
 }
