@@ -23,6 +23,7 @@ namespace Necropanda.Player
         public float walkSpeed = 6f; // The speed at which the player moves.
         public float sprintSpeed = 12f;
         public float gravity = -9.81f; // The amount of gravity that the is applied.
+        public float fallMultiplyer = 1.25f;
         public float moveDeadzone = 0.6f;
 
         public Transform groundCheck; // Transform for checking whether the player is grounded.
@@ -32,7 +33,7 @@ namespace Necropanda.Player
         public bool canMove = true;
 
         Vector3 velocity; // The velocity(speed) of the player.
-        bool isGrounded; // Tells us whether the player is grounded.
+        public bool isGrounded; // Tells us whether the player is grounded.
 
         // Animator vairables
         public Animator animator;
@@ -81,6 +82,14 @@ namespace Necropanda.Player
         /// </summary>
         void Update()
         {
+            controller.Move(velocity);
+
+            if (!isGrounded)
+            {
+                Debug.Log(velocity.y);
+                velocity.y = Physics.gravity.y * (fallMultiplyer - 1) * Time.deltaTime;
+            }
+
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 sprinting = true;
@@ -114,10 +123,6 @@ namespace Necropanda.Player
             // Check to see if the player is grounded
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-            if (isGrounded && velocity.y < 0)
-            {
-                velocity.y = -2f;
-            }
 
             // Get the movement axis
             float x = Input.GetAxis("Horizontal");
@@ -131,12 +136,14 @@ namespace Necropanda.Player
             // Combine into one variable which gets used later
             Vector3 moveVector = right * x + forward * z;
 
+            moveVector.Normalize();
+
             // Move using the controller component
             controller.Move(moveVector * speed * Time.deltaTime);
 
             // Calculate and apply gravity
-            velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
+            // velocity.y += gravity;
+
 
             bool moving = moveVector != new Vector3(0, 0, 0);
 
