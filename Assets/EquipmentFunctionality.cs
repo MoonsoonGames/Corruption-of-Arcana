@@ -8,6 +8,7 @@ public class EquipmentFunctionality : MonoBehaviour
     public GameObject WeaponsMenu;
     public GameObject[] WeaponPages;  
     public InventoryManager inventoryManager;
+    TEMP_OpenDeckbuilding openDeckbuilding;
 
     void TogglePage(GameObject[] pages, bool state)
     {
@@ -15,6 +16,10 @@ public class EquipmentFunctionality : MonoBehaviour
         {
             obj.SetActive(state);
         }
+    }
+    public void Start()
+    {
+        openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
     }
     public void WeaponBTN(Weapon weapon)
     {
@@ -54,6 +59,8 @@ public class EquipmentFunctionality : MonoBehaviour
     public void Close()
     {
         inventoryManager.InventoryScreen.SetActive(true);
-        WeaponsMenu.SetActive(false);
+        openDeckbuilding.OpenCloseMenu(false, openDeckbuilding.weaponsMenu);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

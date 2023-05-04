@@ -11,17 +11,14 @@ public class InventoryManager : MonoBehaviour
     public GameObject MainHUD;
     public GameObject InventoryScreen;
     public GameObject Journal;
-    //public GameObject PotionScreen;
-    //public GameObject WeaponsMenu;
-    //public GameObject DeckBuildingScreen;
-
+    public GameObject PotionsMenu;
+    TEMP_OpenDeckbuilding openDeckbuilding;
     public PlayerController Player;
 
-    private void Start()
+    public void Start()
     {
-
+        openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
     }
-
     public void JournalBTN()
     {
         InventoryScreen.SetActive(false);
@@ -30,20 +27,22 @@ public class InventoryManager : MonoBehaviour
 
     public void PotionsBTN()
     {
-        //InventoryScreen.SetActive(false);
-        //PotionScreen.SetActive(true);
+        InventoryScreen.SetActive(false);
+        openDeckbuilding.OpenCloseMenu(true, PotionsMenu);
+        Debug.Log("open potions menu");
     }
 
     public void WeaponsBTN()
     {
-        //InventoryScreen.SetActive(false);
-        //WeaponsMenu.SetActive(true);
+        InventoryScreen.SetActive(false);
+        openDeckbuilding.OpenCloseMenu(true, openDeckbuilding.weaponsMenu);
+        Debug.Log("open weapons menu");
     }
 
     public void DeckBuildingBTN()
     {
-        //InventoryScreen.SetActive(false);
-        //DeckBuildingScreen.SetActive(true);
+        InventoryScreen.SetActive(false);
+        openDeckbuilding.OpenCloseMenu(true, openDeckbuilding.deckbuildingMenu);
     }
 
     public void CloseBTN()
@@ -55,5 +54,15 @@ public class InventoryManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void Update()
+    {
+        while(InventoryScreen.activeSelf == true)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            return;
+        }
     }
 }

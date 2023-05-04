@@ -11,16 +11,16 @@ namespace Necropanda
 {
     public class PotionsMenu : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        TEMP_OpenDeckbuilding openDeckbuilding;
+        InventoryManager inventoryManager;
+        public void Start()
         {
-            
+            openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
         }
-
-        // Update is called once per frame
-        void Update()
+        public void Close()
         {
-            
+            inventoryManager.InventoryScreen.SetActive(true);
+            openDeckbuilding.OpenCloseMenu(false, openDeckbuilding.weaponsMenu);
         }
     }
 }
