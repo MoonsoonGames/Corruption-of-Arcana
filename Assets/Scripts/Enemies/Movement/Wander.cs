@@ -93,7 +93,10 @@ namespace Necropanda.AI.Movement
                 Debug.DrawLine(transform.position, newPos, blocked ? Color.red : Color.green);
                 if (!blocked)
                 {
-                    aiController.agent.SetDestination(newPos);
+                    if (aiController.agent.isOnNavMesh)
+                        aiController.agent.SetDestination(newPos);
+                    else
+                        Debug.LogWarning(gameObject.name + " is not on nav mesh");
                     StartCoroutine(Cooldown(.1f));
                     timer = 0;
                 }
@@ -154,7 +157,10 @@ namespace Necropanda.AI.Movement
             // after a set amount of time return to the home point
             if (aiController.returnHomeAfterWander == true)
             {
-                aiController.agent.SetDestination(homePoint);
+                if (aiController.agent.isOnNavMesh)
+                    aiController.agent.SetDestination(homePoint);
+                else
+                    Debug.LogWarning(gameObject.name + " is not on nav mesh");
             }
             this.enabled = false;
         }

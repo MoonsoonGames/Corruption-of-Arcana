@@ -86,7 +86,7 @@ namespace Necropanda.Player
 
             if (!isGrounded)
             {
-                Debug.Log(velocity.y);
+                //Debug.Log(velocity.y);
                 velocity.y = Physics.gravity.y * (fallMultiplyer - 1) * Time.deltaTime;
             }
 
