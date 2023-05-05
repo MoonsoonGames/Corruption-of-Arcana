@@ -22,6 +22,8 @@ namespace Necropanda
             {
                 item.Setup(selectWeapon);
             }
+
+            selectWeapon.PreviewWeapon(DeckManager.instance.weapon);
         }
     }
 }
