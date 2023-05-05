@@ -17,8 +17,10 @@ namespace Necropanda
         public DeckLoadout equippedDeck;
 
         // Start is called before the first frame update
-        public virtual void OpenMenu()
+        public virtual IEnumerator OpenMenu(float delay)
         {
+            yield return new WaitForSeconds(delay);
+
             if (collectedDeck != null)
             {
                 if (collectedDeck.CurrentCardsLength() > 0)

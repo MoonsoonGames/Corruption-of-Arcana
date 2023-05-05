@@ -104,8 +104,14 @@ namespace Necropanda
                 return;
             }
 
-            
             effectObject.transform.position = points[0];
+
+            SetupVFX setupVFX = effectObject.GetComponent<SetupVFX>();
+
+            if (setupVFX != null)
+            {
+                setupVFX.Setup(points[0], points[points.Length-1]);
+            }
 
             Debug.Log("Cast Effect: Game object spawned at " + effectObject.transform.position);
         }
@@ -214,11 +220,11 @@ namespace Necropanda
                 {
                     case E_ProjectilePoints.Caster:
                         if (caster != null)
-                            projectilePoints[i] = caster.transform.position;
+                            projectilePoints[i] = caster.transform.position + caster.castPos;
                         break;
                     case E_ProjectilePoints.Target:
                         if (target != null)
-                            projectilePoints[i] = target.transform.position;
+                            projectilePoints[i] = target.transform.position + target.hitPos;
                         break;
                     case E_ProjectilePoints.TimeBlock:
                         //TODO: Not implemented Properly

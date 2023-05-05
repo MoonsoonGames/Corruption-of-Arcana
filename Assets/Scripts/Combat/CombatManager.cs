@@ -21,6 +21,7 @@ namespace Necropanda
         public Character redirectedCharacter;
 
         public GameObject victoryScreen;
+        public Object rewardItem;
         public GameObject defeatScreen;
 
         public static CombatManager instance;
@@ -107,9 +108,21 @@ namespace Necropanda
 
         void GiveRewards()
         {
+            GridLayoutGroup grid = victoryScreen.GetComponentInChildren<GridLayoutGroup>();
+
             foreach(CharacterStats stats in killedEnemies)
             {
-                stats.GiveRewards();
+                List<Object> enemyRewards = stats.GiveRewards();
+
+                if (rewardItem != null)
+                {
+                    foreach(Object item in enemyRewards)
+                    {
+                        GameObject rewardObj = Instantiate(rewardItem, grid.transform) as GameObject;
+
+                        rewardObj.GetComponent<RewardItem>().Setup(item);
+                    }
+                }
             }
         }
 

@@ -60,7 +60,8 @@ GameObject:
   - component: {fileID: 4390305137771092325}
   - component: {fileID: 3096234740499755975}
   - component: {fileID: 6878776693471758415}
-  - component: {fileID: 9026562866833385342}
+  - component: {fileID: 8104395579624622}
+  - component: {fileID: 3600428806162299470}
   m_Layer: 0
   m_Name: gold quest start
   m_TagString: Untagged
@@ -156,7 +157,7 @@ MonoBehaviour:
     currentTime: 0
     forward: 0
   offset: {x: 0, y: 3}
---- !u!114 &9026562866833385342
+--- !u!114 &8104395579624622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,12 +166,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2518386598512567244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 767382d6433505a4dadcfbcffec98e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkOnStart: 1
   requireStates: []
   operation: 1
+--- !u!114 &3600428806162299470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518386598512567244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9d3d9a764a71f48bfc80b9ebb3f3e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  image: {fileID: 0}
 --- !u!1 &3142319793514134228
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +244,13 @@ MonoBehaviour:
   forceInteract: 0
   interactionPopupTitle: Interact
   interactionPopupMessage: Press F to Interact
+  interactionSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!135 &956704510280359649
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -390,7 +412,8 @@ GameObject:
   - component: {fileID: 9195116112325447364}
   - component: {fileID: 8006057909511348564}
   - component: {fileID: 1185179867936354603}
-  - component: {fileID: 5313549067369768731}
+  - component: {fileID: 633904963043076479}
+  - component: {fileID: 413905299347900190}
   m_Layer: 0
   m_Name: gold quest finish
   m_TagString: Untagged
@@ -486,7 +509,7 @@ MonoBehaviour:
     currentTime: 0
     forward: 0
   offset: {x: 0, y: 1}
---- !u!114 &5313549067369768731
+--- !u!114 &633904963043076479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -495,12 +518,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 7398785179489702358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 767382d6433505a4dadcfbcffec98e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkOnStart: 1
   requireStates: []
   operation: 1
+--- !u!114 &413905299347900190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7398785179489702358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9d3d9a764a71f48bfc80b9ebb3f3e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  image: {fileID: 0}
 --- !u!1 &8433251129639511173
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +655,8 @@ GameObject:
   - component: {fileID: 8961200610171724502}
   - component: {fileID: 8843517963745432583}
   - component: {fileID: 3545074081444920570}
-  - component: {fileID: 540715882804239328}
+  - component: {fileID: 4863802797430256109}
+  - component: {fileID: 3295283200340125625}
   m_Layer: 0
   m_Name: gold quest step
   m_TagString: Untagged
@@ -714,7 +752,7 @@ MonoBehaviour:
     currentTime: 0
     forward: 0
   offset: {x: 0, y: 1}
---- !u!114 &540715882804239328
+--- !u!114 &4863802797430256109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -723,12 +761,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 8470900446769269664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab19ad01a8c2e7548b9708f16dac94f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 767382d6433505a4dadcfbcffec98e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkOnStart: 1
   requireStates: []
   operation: 1
+--- !u!114 &3295283200340125625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8470900446769269664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9d3d9a764a71f48bfc80b9ebb3f3e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  image: {fileID: 0}
 --- !u!1001 &8649092783814042977
 PrefabInstance:
   m_ObjectHideFlags: 0
