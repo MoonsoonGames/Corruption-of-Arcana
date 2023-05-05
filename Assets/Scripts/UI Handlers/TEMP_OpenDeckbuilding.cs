@@ -91,8 +91,13 @@ namespace Necropanda
                     upgradeAvailableCards.LoadCards();
                     StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f));
                 }
+                /*
                 else if (menu == weaponsMenu)
+                {
                     getWeapons.OpenEquipment();
+                }
+                */
+
             }
             else
             {
