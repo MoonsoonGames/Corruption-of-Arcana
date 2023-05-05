@@ -15,8 +15,7 @@ namespace Necropanda
     {
         public Weapon previewWeapon;
 
-        public TextMeshProUGUI nameText, descriptionText;
-        public Image image;
+        public GameObject equipButton, equippedText;
 
         public Deck2D deck;
 
@@ -35,10 +34,11 @@ namespace Necropanda
 
             previewWeapon = weapon;
 
-            nameText.text = weapon.weaponName + " (Card Strength:" + weapon.power + ")";
-            descriptionText.text = weapon.description;
-            image.sprite = previewWeapon.image;
+            //nameText.text = weapon.weaponName + " (Card Strength:" + weapon.power + ")";
+            //descriptionText.text = weapon.description;
+            //image.sprite = previewWeapon.image;
 
+            /*
             foreach (var item in weapon.spells)
             {
                 if (item == null)
@@ -59,6 +59,11 @@ namespace Necropanda
                 cardDrag.Setup();
                 cardDrag.ScaleCard(1, false);
             }
+            */
+
+            //enable equip button or equip text if it is currently equipped
+            equippedText.SetActive(DeckManager.instance.weapon == weapon);
+            equipButton.SetActive(DeckManager.instance.weapon != weapon);
         }
 
         public void EquipWeapon()
@@ -66,6 +71,8 @@ namespace Necropanda
             if (previewWeapon == null) { return; }
 
             previewWeapon.Equip();
+
+            PreviewWeapon(previewWeapon);
         }
     }
 }

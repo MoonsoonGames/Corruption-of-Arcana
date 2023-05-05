@@ -12,22 +12,15 @@ namespace Necropanda
 {
     public class GetWeapons : MonoBehaviour
     {
-        public GridLayoutGroup grid;
         public SelectWeapon selectWeapon;
-        public Object weaponPrefab;
 
         public void OpenEquipment()
         {
-            for (int i = 0; i < grid.transform.childCount; i++)
-            {
-                Destroy(grid.transform.GetChild(i).gameObject);
-            }
+            PreviewWeapon[] previewWeapons = GetComponentsInChildren<PreviewWeapon>(true);
 
-            foreach(var item in DeckManager.instance.unlockedWeapons)
+            foreach (var item in previewWeapons)
             {
-                GameObject weaponObj = GameObject.Instantiate(weaponPrefab, grid.transform) as GameObject;
-
-                weaponObj.GetComponent<PreviewWeapon>().Setup(item, selectWeapon);
+                item.Setup(selectWeapon);
             }
         }
     }
