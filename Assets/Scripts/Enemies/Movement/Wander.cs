@@ -29,9 +29,15 @@ namespace Necropanda.AI.Movement
         // Variable used for the RandomNav Function
         Vector3 newPos;
 
+        public GameObject wanderSphere;
+        private bool attachedRadius = false;
+
         private void OnEnable()
         {
+            attachedRadius = false;
             aiController = gameObject.GetComponent<EnemyAI>();
+
+            SetupWanderRadius();
             if (aiController.returnHomeAfterWander == true)
             {
                 homePoint = transform.position;
@@ -55,6 +61,8 @@ namespace Necropanda.AI.Movement
         /// </summary>
         private void OnDisable()
         {
+            attachedRadius = true;
+            SetupWanderRadius();
             StopCoroutine(disableScript);
             StopCoroutine(Cooldown(.1f));
             timer = 0f;
@@ -72,6 +80,25 @@ namespace Necropanda.AI.Movement
             timeLeftTillScriptCleanup -= (timeLeftTillScriptCleanup > 0) ? Time.deltaTime : 0;
         }
 
+        private void SetupWanderRadius()
+        {
+            // Set the size of the wander sphere to be the correct size
+            SphereCollider sCol = wanderSphere.GetComponent<SphereCollider>();
+            sCol.radius = aiController.wanderRadius;
+
+            // Unparent it if false, this unlocks the radius from the AI (meaning it only wanders in place, and won't stray too far)
+            if (attachedRadius == true)
+            {
+                // Make sure it's parented
+                wanderSphere.transform.parent = this.gameObject.transform;
+                // Reset the pos
+                wanderSphere.transform.localPosition = new Vector3(0, 0, 0);
+                return;
+            }
+
+            wanderSphere.transform.parent = null;
+        }
+
         /// <summary>
         /// This function handles the wandering for the AI.
         /// Uses the Navmesh and picks a point on it to move to. If the point is blocked by something, go to a new point.
@@ -85,10 +112,15 @@ namespace Necropanda.AI.Movement
         /// <param name="agent">The navmesh agent, passed in from controller.</param>
         public void WanderInRadius(bool blocked, NavMeshHit hit)
         {
+            if (aiController == null)
+            {
+                aiController = gameObject.GetComponent<EnemyAI>();
+            }
+
             aiController.wanderingCoolDown = wanderCooldown;
             if (timer >= wanderCooldown)
             {
-                newPos = RandomWanderPoint(transform.position, aiController.wanderRadius, -1);
+                newPos = RandomWanderPoint(wanderSphere.transform.position, aiController.wanderRadius, -1);
                 blocked = NavMesh.Raycast(transform.position, newPos, out hit, NavMesh.AllAreas);
                 Debug.DrawLine(transform.position, newPos, blocked ? Color.red : Color.green);
                 if (!blocked)
