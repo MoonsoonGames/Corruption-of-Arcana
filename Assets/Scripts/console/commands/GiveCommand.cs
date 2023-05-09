@@ -58,11 +58,6 @@ namespace Necropanda.Utils.Console.Commands
             // The first argument is the item to be given
             var objToGive = args[0];
 
-            if (objToGive == "Gold")
-            {
-                GoldManager.instance.AddGold(int.Parse(args[2]));
-            }
-
             // Check that the argument is in the dictionary
             if (!IsValidObject(objToGive))
             {
@@ -92,6 +87,12 @@ namespace Necropanda.Utils.Console.Commands
             }
             else
             {
+                if (objToGive == "Gold")
+                {
+                    GoldManager.instance.AddGold(int.Parse(args[1]));
+                }
+
+
                 // The second is the amount to be given
                 int amountToGive = int.Parse(args[1]);
 
@@ -118,6 +119,10 @@ namespace Necropanda.Utils.Console.Commands
         private bool IsValidObject(string objectToCheckName)
         {
             if (objects.ContainsKey(objectToCheckName))
+            {
+                return true;
+            }
+            else if (objectToCheckName == "Gold")
             {
                 return true;
             }

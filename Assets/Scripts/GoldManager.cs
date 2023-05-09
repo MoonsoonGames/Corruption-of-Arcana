@@ -34,6 +34,7 @@ namespace Necropanda
         #endregion
 
         public int goldCount;
+        public int maxGoldAmt = 2147483647;
 
         // Start is called before the first frame update
         void Start()
@@ -44,7 +45,10 @@ namespace Necropanda
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(goldCount);
+            if (goldCount > maxGoldAmt)
+            {
+                goldCount = maxGoldAmt;
+            }
         }
 
         public void AddGold(int amtToAdd)
