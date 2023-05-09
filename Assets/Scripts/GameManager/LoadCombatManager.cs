@@ -55,7 +55,7 @@ namespace Necropanda
         public float combatRadius = 15f;
 
         public EnemyQueue queue;
-        public List<CharacterStats> enemies;
+        public List<EnemySpawn> enemies;
         public List<CharacterStats> enemiesEndCombat;
         public List<string> enemyIDs;
         public Sprite backdrop;
@@ -78,7 +78,11 @@ namespace Necropanda
                 if (enemy.GetActive() && Vector3.Distance(player.transform.position, enemy.transform.position) < combatRadius)
                 {
                     //If enemy is a boss, save them in the first space
-                    enemies.Insert(enemy.boss ? 0 : enemies.Count, enemy.enemyStats);
+                    EnemySpawn enemySpawn = new EnemySpawn();
+                    enemySpawn.stats = enemy.enemyStats;
+                    enemySpawn.spawner = null;
+
+                    enemies.Insert(enemy.boss ? 0 : enemies.Count, enemySpawn);
 
                     if (enemy.enemyStats.endCombatOnKill || enemy.endCombatIfKilled)
                     {
@@ -129,7 +133,19 @@ namespace Necropanda
 
             //Get enemies within radius of player and save them in a list
             enemies.Clear();
-            enemies = newEnemies;
+
+            List<EnemySpawn> enemySpawnList = new List<EnemySpawn>();
+
+            foreach (var item in newEnemies)
+            {
+                EnemySpawn enemySpawn = new EnemySpawn();
+                enemySpawn.stats = item;
+                enemySpawn.spawner = null;
+
+                enemySpawnList.Add(enemySpawn);
+            }
+
+            enemies = enemySpawnList;
             enemyIDs.Clear();
 
             //Saving last scene
@@ -153,7 +169,18 @@ namespace Necropanda
 
             //Get enemies within radius of player and save them in a list
             enemies.Clear();
-            enemies = newEnemies;
+            List<EnemySpawn> enemySpawnList = new List<EnemySpawn>();
+
+            foreach (var item in newEnemies)
+            {
+                EnemySpawn enemySpawn = new EnemySpawn();
+                enemySpawn.stats = item;
+                enemySpawn.spawner = null;
+
+                enemySpawnList.Add(enemySpawn);
+            }
+
+            enemies = enemySpawnList;
             enemyIDs.Clear();
 
             //Saving last scene
@@ -170,14 +197,19 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(tutorialScene, lastScene, false);
         }
 
-        public void AddEnemy(CharacterStats enemy, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Object projectileFXObject, Color trailColor)
+        public void AddEnemy(CharacterStats enemy, Character caster, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Object projectileFXObject, Color trailColor)
         {
             List<Vector2> targetPositions = new List<Vector2>();
             //targetPositions.Add(midPos);
             targetPositions.Add(queue.transform.position);
 
             VFXManager.instance.SpawnProjectile(points, projectileObject, projectileSpeed, trailColor, impactObject, projectileFXObject, E_DamageTypes.Physical);
-            enemies.Add(enemy);
+
+            EnemySpawn enemySpawn = new EnemySpawn();
+            enemySpawn.stats = enemy;
+            enemySpawn.spawner = caster;
+
+            enemies.Add(enemySpawn);
             queue.UpdateUI();
         }
 
@@ -207,5 +239,13 @@ namespace Necropanda
         public List<Quest> progressQuestUponCombatVictory;
 
         #endregion
+    }
+
+    [System.Serializable]
+    public struct EnemySpawn
+    {
+        public CharacterStats stats;
+        public Character spawner;
+        public bool endCombatOnKill;
     }
 }

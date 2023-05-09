@@ -17,7 +17,7 @@ namespace Necropanda
 
         public Character player;
         public TeamManager playerTeamManager;
-        public TeamManager enemyTeamManager;
+        public EnemyManager enemyTeamManager;
         public Character redirectedCharacter;
 
         public GameObject victoryScreen;
@@ -85,6 +85,29 @@ namespace Necropanda
             }
             else
             {
+                List<EnemySpawn> enemySpawnList = new List<EnemySpawn>();
+
+                //Remove enemies this character spawned
+                foreach (var item in LoadCombatManager.instance.enemies)
+                {
+                    if (item.spawner != character)
+                    {
+                        Debug.Log("This character " + character.name + " didn't spawn me, keep");
+                        EnemySpawn enemySpawn = new EnemySpawn();
+                        enemySpawn.stats = item.stats;
+                        enemySpawn.spawner = item.spawner;
+
+                        enemySpawnList.Add(enemySpawn);
+                    }
+                    else
+                    {
+                        Debug.Log("This character " + character.name + " spawned me, delete");
+                    }
+                }
+
+                LoadCombatManager.instance.enemies = enemySpawnList;
+                enemyTeamManager.enemyQueue.UpdateUI();
+
                 //Debug.Log("Character Killed on enemy team");
                 enemyTeamManager.Remove(character);
                 killedEnemies.Add(character.stats);
