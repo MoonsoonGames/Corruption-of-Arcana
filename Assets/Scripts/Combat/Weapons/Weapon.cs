@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -18,12 +19,24 @@ namespace Necropanda
         public Sprite image;
         public int power;
         public List<Spell> spells;
+        public List<Spell> upgradeSpells;
 
         public void Equip()
         {
             if (DeckManager.instance == null) { return; }
 
             DeckManager.instance.weapon = this;
+        }
+
+        [ContextMenu("Upgrade1Tier")]
+        public void UpgradeCards()
+        {
+            upgradeSpells.Clear();
+
+            foreach(var item in spells)
+            {
+                upgradeSpells.Add(item.GetUpgrade());
+            }
         }
     }
 }

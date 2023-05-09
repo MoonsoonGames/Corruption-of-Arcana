@@ -13,6 +13,7 @@ namespace Necropanda
 {
     public class ArcanaManager : MonoBehaviour
     {
+        EndTurn endTurn;
         public DeckHand playerHand;
         public int arcanaMaxBase = 3;
         int arcanaMax = 3; public int GetMaxArcana() { return arcanaMax; }
@@ -27,6 +28,7 @@ namespace Necropanda
 
         private void Start()
         {
+            endTurn = GameObject.FindObjectOfType<EndTurn>();
             arcanaSlider.Setup(arcanaMax);
             CheckCardOverlays(arcanaMax);
         }
@@ -50,6 +52,7 @@ namespace Necropanda
                 //Can cast, disable message and enable end turn
                 buttonOverlay.SetActive(false);
                 arcanaSlider.standardFill.color = enableColor;
+                endTurn.canEndTurn = true;
             }
             else
             {
@@ -57,6 +60,7 @@ namespace Necropanda
                 //Can't cast, enable message and disable end turn
                 buttonOverlay.SetActive(true);
                 arcanaSlider.standardFill.color = disableColor;
+                endTurn.canEndTurn = false;
             }
 
             CheckCardOverlays(arcana);

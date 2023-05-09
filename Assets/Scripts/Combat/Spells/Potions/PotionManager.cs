@@ -57,6 +57,10 @@ namespace Necropanda
             Debug.Log("Potion of " + type.ToString() + " requires " + cost + " we have " + potions[type]);
             return (potions[type] >= cost);
         }
+
+        public int GetPotionCount(E_PotionType type){
+            return potions[type];
+        }
     }
 
     public enum E_PotionType

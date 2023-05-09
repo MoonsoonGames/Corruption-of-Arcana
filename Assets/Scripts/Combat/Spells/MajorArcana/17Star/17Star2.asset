@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f013f3edd73c1246ae039e274dca4a2, type: 3}
+  m_Name: 17Star2
+  m_EditorClassIdentifier: 
+  spellName: The Star
+  nameImage: {fileID: 21300000, guid: 14fe5f2f08dada545a789bd00aba5771, type: 3}
+  flavourText: 
+  spellDescription: If target has no shield, apply $stun$ for 2 turns
+  cardImage: {fileID: 21300000, guid: 84fe2079743aba64b92a605a5c9a7130, type: 3}
+  background: {fileID: 0}
+  cardType: 1
+  previousTier: {fileID: 11400000, guid: 0d52bca105e517a46a7f1120f28c6e63, type: 2}
+  nextTier: {fileID: 11400000, guid: ab3aefbb75d6ce54197954ce5c23ac40, type: 2}
+  overrideColor: 1
+  timelineColor: {r: 0.7917997, g: 0.6552599, b: 0.8962264, a: 255}
+  timelineIcon: {fileID: -820211141, guid: f465a941178bb0d429d18de762a2632b, type: 3}
+  speed: 0.6
+  loadoutCost: 2
+  arcanaCost: 2
+  potionCost: 0
+  shieldCost: 0
+  potionType: 0
+  discardAfterCasting: 0
+  discardAfterTurn: 0
+  drawCard: {fileID: 0}
+  discardCards: 0
+  returnDiscardPile: 0
+  removeStatuses: 0
+  multihitDelay: 0.1
+  moduleDelay: 0
+  spellModules:
+  - target: 1
+    effectType: 3
+    value: 0
+    hitCount: 1
+    executeThreshold: 0
+    valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
+    valueScalingPerDiscard: 0
+    valueScalingPerStatus: 0
+    summon: {fileID: 0}
+    statuses:
+    - status: {fileID: 11400000, guid: 5d8bd9cbe47f8fc46849a83176e79d69, type: 2}
+      duration: 3
+      applyOverShield: 0
+      remove: 0
+      valueSuccess: 0
+  castObject: {fileID: 3701420362090848910, guid: 6b4f789b5243d864eb9fd88dfff14973,
+    type: 3}
+  projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
+    type: 3}
+  projectileSpeed: 0.2
+  projectilePoints: 0000000001000000
+  impactObject: {fileID: 0}
+  projectileFXObject: {fileID: 0}
+  trailColor: {r: 1, g: 1, b: 1, a: 0}
+  screenShake: 0
+  idealTarget: 1

@@ -17,27 +17,28 @@ namespace Necropanda
         public SelectWeapon selectWeapon;
 
         public Image image;
-        public TextMeshProUGUI text;
 
-        public void Setup(Weapon newWeapon, SelectWeapon newSelectWeapon)
+        public void Setup(SelectWeapon selectWeapon)
         {
-            weapon = newWeapon;
-            selectWeapon = newSelectWeapon;
+            this.selectWeapon = selectWeapon;
 
-            if (weapon == null) { return; }
+            if (weapon == null) 
+            { 
+                image.color = new Color(0, 0, 0, 0);
+                return;
+            }
 
             if (weapon.image != null) 
-            { 
+            {
                 image.sprite = weapon.image;
-                image.preserveAspect = true;
-                text.gameObject.SetActive(false);
+                image.color = DeckManager.instance.unlockedWeapons.Contains(weapon) ? new Color(255, 255, 255, 255) : new Color(0, 0, 0, 255);
             }
-            else { text.text = weapon.weaponName; }
         }
 
         public void ShowPreviewWeapon()
         {
-            selectWeapon.PreviewWeapon(weapon);
+            if (DeckManager.instance.unlockedWeapons.Contains(weapon))
+                selectWeapon.PreviewWeapon(weapon);
         }
     }
 }

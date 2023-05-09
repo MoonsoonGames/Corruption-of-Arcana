@@ -11,20 +11,32 @@ namespace Necropanda
 {
     public class TEMP_OpenDeckbuilding : MonoBehaviour
     {
+        public static TEMP_OpenDeckbuilding instance;
+
         public GameObject deckbuildingMenu;
+        public GameObject upgradeDeckMenu;
         public GameObject weaponsMenu;
         public GetWeapons getWeapons;
-        GetAvailableCards getAvailableCards;
-        BuildDeck buildDeck;
+        GetAvailableCards getAvailableCards, upgradeAvailableCards;
+        BuildDeck buildDeck, upgradeBuildDeck;
 
         // Start is called before the first frame update
         void Start()
         {
+            instance = this;
+
             if (deckbuildingMenu != null)
             {
                 getAvailableCards = deckbuildingMenu.GetComponent<GetAvailableCards>();
                 buildDeck = deckbuildingMenu.GetComponent<BuildDeck>();
                 deckbuildingMenu.SetActive(false);
+            }
+
+            if (upgradeDeckMenu != null)
+            {
+                upgradeAvailableCards = upgradeDeckMenu.GetComponent<GetAvailableCards>();
+                upgradeBuildDeck = upgradeDeckMenu.GetComponent<UpgradeDeck>();
+                upgradeDeckMenu.SetActive(false);
             }
 
             if (weaponsMenu != null)
@@ -33,19 +45,30 @@ namespace Necropanda
             }
         }
 
+        bool cooldown = true;
+        float cooldownTime = 0.2f;
+
         // Update is called once per frame
         void Update()
         {
             if (deckbuildingMenu == null) return;
 
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.K) && cooldown)
             {
-                OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+                if (!weaponsMenu.activeSelf && !upgradeDeckMenu.activeSelf)
+                    OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.J) && cooldown)
             {
-                OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
+                if (!weaponsMenu.activeSelf && !deckbuildingMenu.activeSelf)
+                    OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
+            }
+
+            if (Input.GetKeyDown(KeyCode.L) && cooldown)
+            {
+                if (!upgradeDeckMenu.activeSelf && !deckbuildingMenu.activeSelf)
+                    OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
             }
         }
 
@@ -53,13 +76,26 @@ namespace Necropanda
         {
             if (open)
             {
+                cooldown = false;
+                Invoke("StartCooldownTimer", cooldownTime);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 menu.SetActive(true);
                 if (menu == deckbuildingMenu)
+                {
                     getAvailableCards.LoadCards();
+                    StartCoroutine(buildDeck.OpenMenu(0.25f));
+                }
+                else if (menu == upgradeDeckMenu)
+                {
+                    upgradeAvailableCards.LoadCards();
+                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f));
+                }
                 else if (menu == weaponsMenu)
+                {
                     getWeapons.OpenEquipment();
+                }
+
             }
             else
             {
@@ -67,8 +103,15 @@ namespace Necropanda
                 Cursor.visible = false;
                 if (menu == deckbuildingMenu)
                     buildDeck.SaveCards();
+                if (menu == upgradeDeckMenu)
+                    upgradeBuildDeck.SaveCards();
                 menu.SetActive(false);
             }
+        }
+
+        void StartCooldownTimer()
+        {
+            cooldown = true;
         }
     }
 }

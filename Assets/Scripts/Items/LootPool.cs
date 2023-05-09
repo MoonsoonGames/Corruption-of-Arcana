@@ -12,21 +12,46 @@ namespace Necropanda
     [System.Serializable]
     public class LootPool
     {
-        public List<Object> items;
+        public List<LootPools> lootPools;
+        public Vector2Int gold;
 
-        public void RewardAllItems()
+        public List<Object> RewardItems()
         {
-            foreach (Object item in items)
+            List<Object> items = new List<Object>();
+
+            foreach (var pool in lootPools)
             {
-                GiveItem(item);
+                if (pool.rewardAll)
+                {
+                    Debug.Log("Reward all items");
+                    foreach(Object item in pool.objects)
+                    {
+                        items.Add(item);
+                        GiveItem(item);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Reward item - called");
+                    int count = Random.Range(pool.number.x, pool.number.y);
+                    for (int i = 0; i < count; i++)
+                    {
+                        Debug.Log("Reward one item");
+                        int randInt = Random.Range(0, pool.objects.Count);
+                        items.Add(pool.objects[randInt]);
+                        GiveItem(pool.objects[randInt]);
+                    }
+                }
             }
+
+            GiveGold();
+
+            return items;
         }
 
-        public void RewardRandomItem()
+        void GiveGold()
         {
-            int randInt = Random.Range(0, items.Count);
-
-            GiveItem(items[randInt]);
+            //Add gold to player
         }
 
         void GiveItem(Object item)
@@ -51,5 +76,13 @@ namespace Necropanda
                 }
             }
         }
+    }
+
+    [System.Serializable]
+    public struct LootPools
+    {
+        public List<Object> objects;
+        public Vector2Int number;
+        public bool rewardAll;
     }
 }

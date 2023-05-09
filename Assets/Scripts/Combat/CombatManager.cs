@@ -21,6 +21,7 @@ namespace Necropanda
         public Character redirectedCharacter;
 
         public GameObject victoryScreen;
+        public Object rewardItem;
         public GameObject defeatScreen;
 
         public static CombatManager instance;
@@ -86,6 +87,7 @@ namespace Necropanda
             {
                 //Debug.Log("Character Killed on enemy team");
                 enemyTeamManager.Remove(character);
+                killedEnemies.Add(character.stats);
                 if (enemyTeamManager.team.Count + LoadCombatManager.instance.enemies.Count == 0)
                 {
                     ShowEndScreen(true);
@@ -97,6 +99,31 @@ namespace Necropanda
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
+
+            if (victory)
+                GiveRewards();
+        }
+
+        List<CharacterStats> killedEnemies = new List<CharacterStats>();
+
+        void GiveRewards()
+        {
+            GridLayoutGroup grid = victoryScreen.GetComponentInChildren<GridLayoutGroup>();
+
+            foreach(CharacterStats stats in killedEnemies)
+            {
+                List<Object> enemyRewards = stats.GiveRewards();
+
+                if (rewardItem != null)
+                {
+                    foreach(Object item in enemyRewards)
+                    {
+                        GameObject rewardObj = Instantiate(rewardItem, grid.transform) as GameObject;
+
+                        rewardObj.GetComponent<RewardItem>().Setup(item);
+                    }
+                }
+            }
         }
 
         public TeamManager GetCharacterTeam(TeamManager teamManager)

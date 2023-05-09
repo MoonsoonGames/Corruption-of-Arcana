@@ -17,14 +17,20 @@ namespace Necropanda
         public E_Operations operation = E_Operations.AND;
 
         // Start is called before the first frame update
-        private void Start()
+        protected virtual void Start()
         {
             if (checkOnStart)
                 CheckProgress();
         }
 
-        public void CheckProgress()
+        public virtual void CheckProgress()
         {
+            if (requireStates.Length == 0)
+            {
+                SetMarker(false);
+                return;
+            }
+
             bool or = false;
             bool and = true;
 
@@ -39,12 +45,17 @@ namespace Necropanda
             switch (operation)
             {
                 case (E_Operations.AND):
-                    gameObject.SetActive(and);
+                    SetMarker(and);
                     break;
                 case (E_Operations.OR):
-                    gameObject.SetActive(or);
+                    SetMarker(or);
                     break;
             }
+        }
+
+        protected virtual void SetMarker(bool active)
+        {
+            gameObject.SetActive(active);
         }
     }
 
