@@ -122,30 +122,34 @@ namespace Necropanda
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
-
-            if (victory)
-                GiveRewards();
         }
 
         List<CharacterStats> killedEnemies = new List<CharacterStats>();
 
-        void GiveRewards()
+        public void GiveRewards()
         {
-            GridLayoutGroup grid = victoryScreen.GetComponentInChildren<GridLayoutGroup>();
+            GridLayoutGroup grid = victoryScreen.transform.parent.GetComponentInChildren<GridLayoutGroup>();
 
-            foreach(CharacterStats stats in killedEnemies)
+            Dictionary<Object, int> rewardItems = new Dictionary<Object, int>();
+            
+            foreach (CharacterStats stats in killedEnemies)
             {
                 List<Object> enemyRewards = stats.GiveRewards();
 
-                if (rewardItem != null)
+                foreach (Object item in enemyRewards)
                 {
-                    foreach(Object item in enemyRewards)
-                    {
-                        GameObject rewardObj = Instantiate(rewardItem, grid.transform) as GameObject;
-
-                        rewardObj.GetComponent<RewardItem>().Setup(item);
-                    }
+                    if (rewardItems.ContainsKey(item))
+                        rewardItems[item]++;
+                    else
+                        rewardItems.Add(item, 1);
                 }
+            }
+
+            foreach (var item in rewardItems)
+            {
+                GameObject rewardObj = Instantiate(rewardItem, grid.transform) as GameObject;
+
+                rewardObj.GetComponent<RewardItem>().Setup(item.Key, item.Value);
             }
         }
 

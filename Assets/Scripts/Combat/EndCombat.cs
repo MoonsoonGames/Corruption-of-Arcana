@@ -14,6 +14,11 @@ namespace Necropanda
         //public E_Scenes victoryScene;
         //public E_Scenes defeatScene;
 
+        public void LoadRewards()
+        {
+            CombatManager.instance.GiveRewards();
+        }
+
         public void LoadVictoryScene()
         {
             DeckManager.instance.ResetDecks();
