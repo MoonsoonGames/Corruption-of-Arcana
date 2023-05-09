@@ -25,7 +25,7 @@ namespace Necropanda.AI
         public CharacterStats enemyStats;
         public bool boss;
         public GameObject bossAI;
-		public bool endCombatIfKilled = false;
+        public bool endCombatIfKilled = false;
 
         //state variables
         [Header("AI State Variables")]
@@ -148,8 +148,6 @@ namespace Necropanda.AI
                     break;
 
                 case AIState.Wandering:
-
-
                     moduleManager.ChangeModuleState(1, true);
                     moduleManager.ChangeModuleState(2, false);
                     moduleManager.wander.WanderInRadius(blocked, hit);
