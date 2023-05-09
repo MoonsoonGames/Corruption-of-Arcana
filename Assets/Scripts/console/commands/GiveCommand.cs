@@ -132,7 +132,7 @@ namespace Necropanda.Utils.Console.Commands
             if (objects[objectName].GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
-                DeckManager.instance.weapons.Add((Weapon)objects[objectName]);
+                DeckManager.instance.unlockedWeapons.Add((Weapon)objects[objectName]);
             }
             else if (objects[objectName].GetType() == typeof(Spell))
             {
