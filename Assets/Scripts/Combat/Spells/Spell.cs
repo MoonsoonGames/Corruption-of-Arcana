@@ -287,7 +287,7 @@ namespace Necropanda
                         //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
                         Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
                         for (int i = 0; i < spell.value; i++)
-                            LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                            LoadCombatManager.instance.AddEnemy(spell.summon, caster, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
                 }
                 else
@@ -353,7 +353,7 @@ namespace Necropanda
                         //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
                         Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
                         for (int i = 0; i < spell.value; i++)
-                            LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                            LoadCombatManager.instance.AddEnemy(spell.summon, caster, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
                 }
                 else
