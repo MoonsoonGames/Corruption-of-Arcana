@@ -42,8 +42,8 @@ namespace Necropanda
                         break;
                 }
             }
-
-            if (amount.text != null)
+            
+            if (amount != null)
                 amount.text = "X " + count.ToString();
             else
                 Debug.Log("no text");
