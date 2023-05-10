@@ -30,9 +30,13 @@ namespace Necropanda.Interactable
 
         public EventReference interactionSound;
 
-        public void Setup()
+        public void Start()
         {
-            if (LoadCombatManager.instance == null) return;
+            if (LoadCombatManager.instance == null)
+            {
+                Debug.Log("no load instance");
+                return;
+            }
 
             interactID = name + "-" + transform.position + "-" + SceneManager.GetActiveScene().name;
 
@@ -50,7 +54,7 @@ namespace Necropanda.Interactable
         {
             if (!setup)
             {
-                Setup();
+                return;
             }
 
             if (interactingCharacter != null && forceInteract == false)
@@ -106,6 +110,7 @@ namespace Necropanda.Interactable
         {
             if (!setup)
             {
+                Debug.Log("Not setup");
                 return;
             }
 
@@ -118,6 +123,7 @@ namespace Necropanda.Interactable
                 CheckInteraction(other.gameObject);
             }
         }
+
         private void OnTriggerExit(Collider other)
         {
             if (!setup)
