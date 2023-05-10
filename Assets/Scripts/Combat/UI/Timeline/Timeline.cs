@@ -410,24 +410,28 @@ namespace Necropanda
                 //Debug.Log("Dead, skip spell");
                 //Effect for fumbling spell
             }
-            else if (caster.banish && caster != target)
+            else if (caster.banish)
             {
                 //Debug.Log("Caster is banished, skip spell");
             }
-            else if (target.banish && caster != target)
-            {
-                //Debug.Log("Target is banished, skip spell");
-            }
             else
             {
+                if (caster.confuse)
+                {
+                    List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
+                    target = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
+                }
+
                 //Debug.Log(spellInstance.caster.characterName + " played " + spellInstance.spell.spellName + " on " + spellInstance.target.characterName + " at time " + spellInstance.spell.speed);
-                spellInstance.spell.CastSpell(spellInstance.target, spellInstance.caster, hand, cardsDiscarded);
+                spellInstance.spell.CastSpell(target, caster, hand, cardsDiscarded);
+
+                if (spellInstance.spell.drawCard != null)
+                {
+                    if (caster.stats.usesArcana || target.stats.usesArcana)
+                        DeckManager.instance.AddToStart(spellInstance.spell.drawCard);
+                }
             }
 
-            if (spellInstance.spell.drawCard != null)
-            {
-                DeckManager.instance.AddToStart(spellInstance.spell.drawCard);
-            }
 
             yield return new WaitForSeconds(spellInstance.spell.QuerySpellCastTime(spellInstance.target, spellInstance.caster, spellInstance.spell.projectileSpeed));
 

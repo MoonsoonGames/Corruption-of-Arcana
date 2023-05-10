@@ -53,6 +53,7 @@ namespace Necropanda
         public E_PotionType potionType;
 
         [Header("Advanced Logic")]
+        public bool burnOnDiscard = false;
         public bool discardAfterCasting = false;
         public bool discardAfterTurn = false;
         public Spell drawCard;
@@ -138,10 +139,7 @@ namespace Necropanda
                 return;
 
             List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
-            if (caster.confuse)
-            {
-                target = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
-            }
+            
             int removedStatusCount = Timeline.instance.StatusCount(target);
             float time = 0;
 
