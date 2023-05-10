@@ -13,7 +13,7 @@ namespace Necropanda
     {
         public Character player;
         public EnemySpawner[] spawners;
-        EnemyQueue enemyQueue;
+        public EnemyQueue enemyQueue { get; private set; }
 
         protected override void Start()
         {
@@ -55,7 +55,7 @@ namespace Necropanda
                 {
                     if (LoadCombatManager.instance.enemies.Count != 0)
                     {
-                        CharacterStats stats = LoadCombatManager.instance.enemies[0];
+                        CharacterStats stats = LoadCombatManager.instance.enemies[0].stats;
                         LoadCombatManager.instance.enemies.RemoveAt(0);
 
                         if (stats != null)

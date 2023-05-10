@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -13,10 +14,12 @@ namespace Necropanda
     public class RewardItem : MonoBehaviour
     {
         Image image;
+        TextMeshProUGUI amount;
 
-        public void Setup(Object item)
+        public void Setup(Object item, int count)
         {
             image = GetComponentInChildren<Image>();
+            amount = GetComponentInChildren<TextMeshProUGUI>();
 
             if (item.GetType() == typeof(Weapon))
             {
@@ -39,6 +42,8 @@ namespace Necropanda
                         break;
                 }
             }
+
+            amount.text = "X " + count.ToString();
         }
     }
 }

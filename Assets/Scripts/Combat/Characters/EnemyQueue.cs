@@ -29,7 +29,9 @@ namespace Necropanda
 
             if (loadCombatManager.enemies.Count > 0)
             {
-                CharacterStats nextEnemy = loadCombatManager.enemies[0];
+
+
+                CharacterStats nextEnemy = loadCombatManager.enemies[0].stats;
                 Sprite newSprite = nextEnemy.characterSprite;
                 enemyImage.sprite = newSprite;
                 Color color = enemyImage.color;
