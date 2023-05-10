@@ -15,5 +15,6 @@ namespace Necropanda
         public string Name;
         public Sprite Artwork;
         public string Description;
+        public bool isCollected;
     }
 }

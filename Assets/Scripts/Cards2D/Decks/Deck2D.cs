@@ -26,6 +26,9 @@ namespace Necropanda
         public GameObject group;
         protected LayoutGroup layout;
 
+        public Object cardSpace;
+        GameObject currentCardSpace;
+
         protected GeneralDragArea dragArea;
         protected DragManager dragManager;
 
@@ -218,6 +221,25 @@ namespace Necropanda
                 card.deck = this;
 
                 card.gameObject.transform.SetParent(group.transform);
+            }
+
+            if (cardSpace == null)
+                return;
+
+            if (cards.Length == 0)
+            {
+                if (currentCardSpace == null)
+                {
+                    currentCardSpace = Instantiate(cardSpace, transform) as GameObject;
+                }
+            }
+            else
+            {
+                if (currentCardSpace != null)
+                {
+                    Destroy(currentCardSpace);
+                    currentCardSpace = null;
+                }
             }
         }
 

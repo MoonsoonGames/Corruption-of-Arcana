@@ -90,8 +90,11 @@ namespace Necropanda
         {
             foreach (var item in markers)
             {
-                item.Setup();
-                item.CheckProgress();
+                if (item != null)
+                {
+                    item.Setup();
+                    item.CheckProgress();
+                }
             }
         }
     }

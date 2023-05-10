@@ -17,7 +17,7 @@ namespace Necropanda
 
         public Character player;
         public TeamManager playerTeamManager;
-        public TeamManager enemyTeamManager;
+        public EnemyManager enemyTeamManager;
         public Character redirectedCharacter;
 
         public GameObject victoryScreen;
@@ -85,6 +85,29 @@ namespace Necropanda
             }
             else
             {
+                List<EnemySpawn> enemySpawnList = new List<EnemySpawn>();
+
+                //Remove enemies this character spawned
+                foreach (var item in LoadCombatManager.instance.enemies)
+                {
+                    if (item.spawner != character)
+                    {
+                        Debug.Log("This character " + character.name + " didn't spawn me, keep");
+                        EnemySpawn enemySpawn = new EnemySpawn();
+                        enemySpawn.stats = item.stats;
+                        enemySpawn.spawner = item.spawner;
+
+                        enemySpawnList.Add(enemySpawn);
+                    }
+                    else
+                    {
+                        Debug.Log("This character " + character.name + " spawned me, delete");
+                    }
+                }
+
+                LoadCombatManager.instance.enemies = enemySpawnList;
+                enemyTeamManager.enemyQueue.UpdateUI();
+
                 //Debug.Log("Character Killed on enemy team");
                 enemyTeamManager.Remove(character);
                 killedEnemies.Add(character.stats);
@@ -99,30 +122,34 @@ namespace Necropanda
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
-
-            if (victory)
-                GiveRewards();
         }
 
         List<CharacterStats> killedEnemies = new List<CharacterStats>();
 
-        void GiveRewards()
+        public void GiveRewards()
         {
-            GridLayoutGroup grid = victoryScreen.GetComponentInChildren<GridLayoutGroup>();
+            GridLayoutGroup grid = victoryScreen.transform.parent.GetComponentInChildren<GridLayoutGroup>();
 
-            foreach(CharacterStats stats in killedEnemies)
+            Dictionary<Object, int> rewardItems = new Dictionary<Object, int>();
+            
+            foreach (CharacterStats stats in killedEnemies)
             {
                 List<Object> enemyRewards = stats.GiveRewards();
 
-                if (rewardItem != null)
+                foreach (Object item in enemyRewards)
                 {
-                    foreach(Object item in enemyRewards)
-                    {
-                        GameObject rewardObj = Instantiate(rewardItem, grid.transform) as GameObject;
-
-                        rewardObj.GetComponent<RewardItem>().Setup(item);
-                    }
+                    if (rewardItems.ContainsKey(item))
+                        rewardItems[item]++;
+                    else
+                        rewardItems.Add(item, 1);
                 }
+            }
+
+            foreach (var item in rewardItems)
+            {
+                GameObject rewardObj = Instantiate(rewardItem, grid.transform) as GameObject;
+
+                rewardObj.GetComponent<RewardItem>().Setup(item.Key, item.Value);
             }
         }
 

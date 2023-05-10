@@ -58,18 +58,19 @@ namespace Necropanda
 
         #endregion
 
-        public void Setup()
+        public void Setup(Card card)
         {
+            this.card = card;
+
             dragManager = DragManager.instance;
 
             //Sets base scales and colours
+            Debug.Log(card.spell.name + " | " + card.name + ": " + transform.localScale);
             baseScale = transform.localScale;
             desiredScale = baseScale;
             baseColor = cardBackground.color;
             desiredColor = baseColor;
             baseRot = transform.rotation.eulerAngles;
-
-            card = GetComponent<Card>();
 
             ScaleCard(1, false);
 

@@ -51,7 +51,8 @@ public enum E_Scenes
     EastForest,
     Tutorial,
     [InspectorName("Intro Cutscene")]
-    IntroCutscene
+    IntroCutscene,
+    MobileSplashScreen
 }
 
 public enum E_UtilityScripts
