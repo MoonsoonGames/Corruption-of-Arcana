@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Necropanda.AI;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -10,7 +11,7 @@ using Necropanda.AI;
 /// </summary>
 namespace Necropanda
 {
-    public class LoadCombatManager : MonoBehaviour
+    public class LoadCombatManager : MonoBehaviour, ISaveable
     {
         #region Singleton
         //Code from last year
@@ -61,6 +62,32 @@ namespace Necropanda
         public Sprite backdrop;
         bool loading = false;
 
+        [Space]
+
+        // Player
+        [Header("Player")]
+        [SerializeField] private float posX, posY, posZ;
+        [SerializeField] private float health;
+        // [SerializeField] private int maxHealth;
+        // [SerializeField] private int gold;
+        // [SerializeField] private int maxArcana;
+        // [SerializeField] private List<UnityEngine.Object> curios;
+
+        // Potions
+        [Header("Potions")]
+        // [SerializeField] private int healthPotAmount;
+        // [SerializeField] private int ragePotAmount;
+        // [SerializeField] private int swiftPotAmount;
+        // [SerializeField] private int arcanaPotAmount;
+
+        // Quest Saving vars // Enemy stat stuff
+        [Header("Quest and Enemies")]
+        // [SerializeField] private int numberOfEnemiesDefeated = 0;
+
+        [Header("Other Savables")]
+        [SerializeField] private string sceneName;
+
+
         public void LoadCombat(GameObject player, E_Scenes lastScene)
         {
             if (loading) return;
@@ -107,7 +134,7 @@ namespace Necropanda
 
             if (enemies.Count <= 0) return;
 
-            foreach(var item in quests)
+            foreach (var item in quests)
             {
                 Debug.Log(item.questName);
             }
@@ -233,6 +260,103 @@ namespace Necropanda
         {
             Gizmos.DrawWireSphere(transform.position, combatRadius);
         }
+
+        /// <summary>
+        /// Implemented class. Called when SavingLoading SAVES to disk.
+        /// </summary>
+        /// <returns></returns>
+        public object CaptureState()
+        {
+            Debug.Log("Saving Player");
+            return new SaveData
+            {
+                posX = LoadCombatManager.instance.lastPos.x,
+                posY = LoadCombatManager.instance.lastPos.y,
+                posZ = LoadCombatManager.instance.lastPos.x,
+
+                health = health,
+
+                sceneName = LoadingScene.instance.loadScene.ToString(),
+                // maxHealth = maxHealth,
+                // gold = gold,
+                // maxArcana = maxArcana,
+                // healthPotAmount = healthPotAmount,
+                // ragePotAmount = ragePotAmount,
+                // swiftPotAmount = swiftPotAmount,
+                // arcanaPotAmount = arcanaPotAmount,
+                // curios = curios,
+                // questStage = questStage,
+                // numberOfEnemiesDefeated = numberOfEnemiesDefeated
+            };
+        }
+
+        /// <summary>
+        /// Implemented class. Called when SavingLoading LOADS from disk.
+        /// </summary>
+        /// <returns></returns>
+        public void RestoreState(object state)
+        {
+            var saveData = (SaveData)state;
+
+            // Player
+            Vector3 pos = new Vector3(saveData.posX, saveData.posY, saveData.posZ);
+            LoadCombatManager.instance.lastPos = pos;
+            health = saveData.health;
+
+            E_Scenes scene = E_Scenes.Null;
+
+            if (LoadingScene.instance == null)
+            {
+                Debug.Log("No instance to load");
+            }
+            else
+            {
+                scene = HelperFunctions.StringToSceneEnum(saveData.sceneName);
+            }
+
+            if (scene == E_Scenes.Null)
+            {
+                Debug.Log("scene = null");
+            }
+            LoadingScene.instance.loadScene = scene;
+            // maxHealth = saveData.maxHealth;
+            // gold = saveData.gold;
+            // maxArcana = saveData.maxArcana;
+            // // Potions
+            // healthPotAmount = saveData.healthPotAmount;
+            // ragePotAmount = saveData.ragePotAmount;
+            // swiftPotAmount = saveData.swiftPotAmount;
+            // arcanaPotAmount = saveData.arcanaPotAmount;
+            // // Inventory
+            // curios.AddRange(saveData.curios);
+            // // Quests and enemies
+            // questStage = saveData.questStage;
+            // numberOfEnemiesDefeated = saveData.numberOfEnemiesDefeated;
+        }
+
+        /// <summary>
+        /// Savedata data structure
+        /// </summary>
+        [System.Serializable]
+        private struct SaveData
+        {
+            public float posX, posY, posZ;
+            public float health;
+            public string sceneName;
+            // public int maxHealth;
+            // public int gold;
+            // public int maxArcana;
+
+            // public int healthPotAmount;
+            // public int ragePotAmount;
+            // public int swiftPotAmount;
+            // public int arcanaPotAmount;
+            // public List<UnityEngine.Object> curios;
+
+            // public int questStage;
+            // public int numberOfEnemiesDefeated;
+        }
+
 
         #region Quest Data
 
