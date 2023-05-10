@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryScreen;
     public GameObject Journal;
     public GameObject PotionsMenu;
+    //public GameObject MapScreen;
     TEMP_OpenDeckbuilding openDeckbuilding;
     public PlayerController Player;
 
@@ -43,6 +44,12 @@ public class InventoryManager : MonoBehaviour
     {
         InventoryScreen.SetActive(false);
         openDeckbuilding.OpenCloseMenu(true, openDeckbuilding.deckbuildingMenu);
+    }
+
+    public void MapBTN()
+    {
+        //InventoryScreen.SetActive(false);
+        //openDeckbuilding.OpenCloseMenu(true, MapScreen);
     }
 
     public void CloseBTN()
