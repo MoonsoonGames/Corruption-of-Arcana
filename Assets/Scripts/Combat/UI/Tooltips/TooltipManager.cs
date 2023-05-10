@@ -45,6 +45,9 @@ namespace Necropanda
             }
         }
 
+        public float delay = 1f;
+        GameObject currentTooltip = null;
+
         public void ShowTooltip(bool active, string titleText, string descText)
         {
             //Debug.Log("show tooltip - manager");
@@ -57,22 +60,33 @@ namespace Necropanda
                 return;
             }
 
-            toolTipObject.SetActive(active);
-
             if (active)
             {
                 toolTip.SetText(titleText, descText);
+                StartCoroutine(IDelayTooltip(toolTipObject, delay));
+            }
+            else
+            {
+                toolTipObject.SetActive(false);
+                currentTooltip = null;
+                StopAllCoroutines();
             }
         }
 
         public void ShowTutorialTooltip(bool active, string titleText, string descText)
         {
-            tutorialToolTipObject.SetActive(active);
-
             if (active)
             {
                 Debug.Log(titleText + " || " + descText);
                 tutorialToolTip.SetText(titleText, descText);
+
+                StartCoroutine(IDelayTooltip(tutorialToolTipObject, delay));
+            }
+            else
+            {
+                tutorialToolTipObject.SetActive(false);
+                currentTooltip = null;
+                StopAllCoroutines();
             }
         }
 
@@ -87,11 +101,16 @@ namespace Necropanda
                 return;
             }
 
-            spellToolTipObject.SetActive(active);
-
             if (active)
             {
                 spellToolTip.SetText(titleText, spell);
+                StartCoroutine(IDelayTooltip(spellToolTipObject, delay));
+            }
+            else
+            {
+                spellToolTipObject.SetActive(false);
+                currentTooltip = null;
+                StopAllCoroutines();
             }
         }
 
@@ -106,6 +125,13 @@ namespace Necropanda
             {
                 item.EnableRaycasting(active);
             }
+        }
+
+        IEnumerator IDelayTooltip(GameObject tooltip, float delay)
+        {
+            this.currentTooltip = tooltip;
+            yield return new WaitForSeconds(delay);
+            tooltip.SetActive(this.currentTooltip == tooltip);
         }
     }
 }

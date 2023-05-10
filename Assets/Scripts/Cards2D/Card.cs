@@ -51,8 +51,8 @@ namespace Necropanda
             speedText.text = spell.speed.ToString();
             descriptionText.text = IconManager.instance.ReplaceText(spell.spellDescription);
 
-            cardFaceLowOpacity.sprite = spell.cardImage;
-            cardFaceLowOpacity.gameObject.SetActive(spell.cardImage != null);
+            cardFaceLowOpacity.sprite = spell.cardImageLowOpacity;
+            cardFaceLowOpacity.gameObject.SetActive(spell.cardImageLowOpacity != null);
             cardFace.sprite = spell.cardImage;
             ShowSymbols();
             if (cardFace.sprite == null)
