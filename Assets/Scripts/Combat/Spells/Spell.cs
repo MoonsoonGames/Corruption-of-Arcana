@@ -25,6 +25,7 @@ namespace Necropanda
         [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
+        public Sprite cardImageLowOpacity;
         public Sprite background;
         public E_CardTypes cardType = E_CardTypes.Cards;
 
@@ -53,6 +54,7 @@ namespace Necropanda
         public E_PotionType potionType;
 
         [Header("Advanced Logic")]
+        public bool burnOnDiscard = false;
         public bool discardAfterCasting = false;
         public bool discardAfterTurn = false;
         public Spell drawCard;
@@ -138,10 +140,7 @@ namespace Necropanda
                 return;
 
             List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
-            if (caster.confuse)
-            {
-                target = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
-            }
+            
             int removedStatusCount = Timeline.instance.StatusCount(target);
             float time = 0;
 

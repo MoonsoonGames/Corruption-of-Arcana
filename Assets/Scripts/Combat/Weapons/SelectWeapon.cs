@@ -61,7 +61,7 @@ namespace Necropanda
 
                     //Reset card scales
                     //cardDrag.transform.localScale *= 0.6f;
-                    cardDrag.Setup();
+                    cardDrag.Setup(cardDrag.GetComponent<Card>());
                     cardDrag.ScaleCard(1, false);
                 }
             }

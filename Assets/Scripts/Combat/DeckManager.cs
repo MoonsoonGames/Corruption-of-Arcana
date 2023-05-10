@@ -118,7 +118,8 @@ namespace Necropanda
         /// <param name="spell"></param>
         public void DiscardCard(Spell spell)
         {
-            discardPile.Add(spell);
+            if (!spell.burnOnDiscard)
+                discardPile.Add(spell);
         }
 
         /// <summary>
