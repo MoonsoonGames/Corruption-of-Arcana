@@ -12,7 +12,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryScreen;
     public GameObject Journal;
     public GameObject PotionsMenu;
-    //public GameObject MapScreen;
+    public GameObject MapScreen;
+    public MapSelector mapSelector;
     TEMP_OpenDeckbuilding openDeckbuilding;
     public PlayerController Player;
 
@@ -48,8 +49,14 @@ public class InventoryManager : MonoBehaviour
 
     public void MapBTN()
     {
-        //InventoryScreen.SetActive(false);
-        //openDeckbuilding.OpenCloseMenu(true, MapScreen);
+        if (mapSelector == null)
+        {
+            mapSelector = FindObjectOfType<MapSelector>();
+        }
+
+        InventoryScreen.SetActive(false);
+        openDeckbuilding.OpenCloseMenu(true, MapScreen);
+        mapSelector.UpdateMapImage();
     }
 
     public void CloseBTN()

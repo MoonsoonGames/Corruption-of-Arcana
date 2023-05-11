@@ -87,6 +87,11 @@ namespace Necropanda
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = !Cursor.visible;
+
+
+            // Set the timescale back to 1 - this is because if we don't have it, after close the map from the
+            // inventory the games timescale isn't set properly and this is easier for me.
+            Time.timeScale = 1;
         }
     }
 }
