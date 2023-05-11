@@ -16,8 +16,7 @@ namespace Necropanda
         public void Setup(Spell spell)
         {
             card = GetComponent<Card>();
-            card.spell = spell;
-            card.Setup();
+            card.Setup(spell);
         }
     }
 }

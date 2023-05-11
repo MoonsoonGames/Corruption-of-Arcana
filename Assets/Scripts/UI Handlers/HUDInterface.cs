@@ -17,7 +17,7 @@ namespace Necropanda.Interfaces
         public GameObject Journal;
         public GameObject Settings;
 
-        public static bool gameIsPaused;
+        public bool gameIsPaused;
 
         // Start is called before the first frame update
         void Start()

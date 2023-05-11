@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -43,7 +44,7 @@ namespace Necropanda
             SaveManager.instance.saveAllData += SaveSceneData;
             SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
             SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
-            SaveManager.instance.loadAllData += LoadQuestData;
+            SaveManager.instance.loadAllData += LoadSceneData;
             SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
         }
 
@@ -53,6 +54,18 @@ namespace Necropanda
             //SaveScene
             if (LoadingScene.instance != null)
                 LoadingScene.instance.SaveScene();
+
+
+
+            // Saving stuff
+
+            // Save scene name, pos, rot
+            SavingLoading.instance.Save();
+
+            // Save player position
+
+
+            // Save player rotation
         }
 
         [ContextMenu("Save Base Quest Data")]
@@ -70,10 +83,12 @@ namespace Necropanda
                 LoadingScene.instance.SaveScene();
         }
 
-        [ContextMenu("Load Quest Data")]
-        public void LoadQuestData()
+        [ContextMenu("Load Scene Data")]
+        public void LoadSceneData()
         {
             //LoadingScene.instance.loadScene = GetData();
+            SavingLoading.instance.Load();
+
         }
 
         [ContextMenu("Load Base Quest Data")]
