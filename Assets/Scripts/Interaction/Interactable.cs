@@ -68,7 +68,6 @@ namespace Necropanda.Interactable
             }
         }
 
-
         public void UnlockInteraction()
         {
             lockInteractions = false;
@@ -78,7 +77,7 @@ namespace Necropanda.Interactable
             }
         }
 
-        void CheckInteraction(GameObject playerObj)
+        public void CheckInteraction(GameObject playerObj)
         {
             if (forceInteract)
             {
@@ -92,7 +91,7 @@ namespace Necropanda.Interactable
             }
         }
 
-        void CheckCancelInteraction(GameObject playerObj)
+        public void CheckCancelInteraction(GameObject playerObj)
         {
             if (forceInteract)
             {

@@ -36,6 +36,5 @@ namespace Necropanda
                 Cursor.visible = true;
             }
         }
-
     }
 }
