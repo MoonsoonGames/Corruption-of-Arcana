@@ -48,6 +48,9 @@ namespace Necropanda
                 playerController.canMove = !playerController.canMove;
                 hudInterface.gameIsPaused = !hudInterface.gameIsPaused;
 
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = !Cursor.visible;
+
                 UpdateMapImage();
             }
         }
