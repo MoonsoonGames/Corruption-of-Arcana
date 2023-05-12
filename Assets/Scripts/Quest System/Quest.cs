@@ -193,9 +193,7 @@ namespace Necropanda
 
         void CheckQuestMarkers()
         {
-            Compass compass = GameObject.FindObjectOfType<Compass>();
-            if (compass != null)
-                compass.CheckQuestMarkers();
+            Compass.instance.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
