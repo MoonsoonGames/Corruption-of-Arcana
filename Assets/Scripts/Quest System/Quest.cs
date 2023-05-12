@@ -188,7 +188,14 @@ namespace Necropanda
             }
 
             if (Application.isPlaying && updateMarkers)
-                GeneralDialogueLogic.instance.CheckQuestMarkers();
+                CheckQuestMarkers();
+        }
+
+        void CheckQuestMarkers()
+        {
+            Compass compass = GameObject.FindObjectOfType<Compass>();
+            if (compass != null)
+                compass.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -315,7 +322,7 @@ namespace Necropanda
             RForceSetQuestProgress(progress, 0);
 
             if (Application.isPlaying)
-                GeneralDialogueLogic.instance.CheckQuestMarkers();
+                UpdateQuestInfo(true);
         }
 
         public int RForceSetQuestProgress(int progress, int count)
