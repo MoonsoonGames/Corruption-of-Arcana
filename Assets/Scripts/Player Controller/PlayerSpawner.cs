@@ -38,11 +38,11 @@ namespace Necropanda
             string currentSceneString = SceneManager.GetActiveScene().name;
             E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
 
-            if (LoadingScene.instance.loadLastPos && LoadCombatManager.instance != null)
+            if (LoadingScene.instance.loadLastPos)
             {
-                if (LoadCombatManager.instance.lastScene != E_Scenes.Null)
+                if (LoadingScene.instance.loadScene != E_Scenes.Null)
                 {
-                    if (currentScene == LoadCombatManager.instance.lastScene)
+                    if (currentScene == LoadingScene.instance.loadScene)
                     {
                         //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
                         spawnPos = LoadCombatManager.instance.lastPos;

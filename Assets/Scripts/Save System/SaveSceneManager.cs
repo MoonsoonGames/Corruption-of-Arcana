@@ -102,5 +102,8 @@ namespace Necropanda
         {
             //LoadingScene.instance.loadScene = GetData();
         }
+
+        public E_Scenes sceneToLoad;
+        public Vector3 playerPos;
     }
 }

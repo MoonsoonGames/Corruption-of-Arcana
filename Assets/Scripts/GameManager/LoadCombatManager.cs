@@ -142,7 +142,7 @@ namespace Necropanda
             progressQuestUponCombatVictory = quests;
 
             //Saving last scene
-            if (lastScene != E_Scenes.Null && player != null)
+            if (player != null)
             {
                 lastPos = player.transform.position;
                 lastRot = player.transform.rotation;
@@ -176,7 +176,7 @@ namespace Necropanda
             enemyIDs.Clear();
 
             //Saving last scene
-            if (lastScene != E_Scenes.Null && player != null)
+            if (player != null)
             {
                 lastPos = player.transform.position;
                 lastRot = player.transform.rotation;
@@ -211,7 +211,7 @@ namespace Necropanda
             enemyIDs.Clear();
 
             //Saving last scene
-            if (lastScene != E_Scenes.Null && player != null)
+            if (player != null)
             {
                 lastPos = player.transform.position;
                 lastRot = player.transform.rotation;
@@ -270,9 +270,9 @@ namespace Necropanda
             Debug.Log("Saving Player");
             return new SaveData
             {
-                posX = LoadCombatManager.instance.lastPos.x,
-                posY = LoadCombatManager.instance.lastPos.y,
-                posZ = LoadCombatManager.instance.lastPos.x,
+                posX = lastPos.x,
+                posY = lastPos.y,
+                posZ = lastPos.z,
 
                 health = health,
 
@@ -300,25 +300,17 @@ namespace Necropanda
 
             // Player
             Vector3 pos = new Vector3(saveData.posX, saveData.posY, saveData.posZ);
-            LoadCombatManager.instance.lastPos = pos;
+            lastPos = pos;
             health = saveData.health;
 
             E_Scenes scene = E_Scenes.Null;
 
-            if (LoadingScene.instance == null)
-            {
-                Debug.Log("No instance to load");
-            }
-            else
-            {
-                scene = HelperFunctions.StringToSceneEnum(saveData.sceneName);
-            }
+            scene = HelperFunctions.StringToSceneEnum(saveData.sceneName);
 
-            if (scene == E_Scenes.Null)
+            if (scene != E_Scenes.Null)
             {
-                Debug.Log("scene = null");
+                GameObject.FindObjectOfType<LoadingScene>().loadScene = scene;
             }
-            LoadingScene.instance.loadScene = scene;
             // maxHealth = saveData.maxHealth;
             // gold = saveData.gold;
             // maxArcana = saveData.maxArcana;

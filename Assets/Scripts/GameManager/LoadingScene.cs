@@ -69,6 +69,7 @@ namespace Necropanda
             }
 
             this.loadLastPos = loadLastPos;
+
             if (lastScene != E_Scenes.Null)
             {
                 LoadCombatManager.instance.lastScene = lastScene;

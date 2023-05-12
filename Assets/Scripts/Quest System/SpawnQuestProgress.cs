@@ -29,7 +29,7 @@ namespace Necropanda
                 if (requireStates[i].Available())
                 {
                     transform.position = positions[i];
-                    Debug.Log(positions[i] + " || " + transform.position);
+                    //Debug.Log(positions[i] + " || " + transform.position);
                     
                     if (agent != null)
                     {
