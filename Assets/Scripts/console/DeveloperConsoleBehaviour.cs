@@ -119,7 +119,6 @@ namespace Necropanda.Utils.Console
             // Check to see if the Developer UI Canvas is active in the scene
             if (devUICanvas.activeInHierarchy)
             {
-                Debug.Log("test");
                 // If the Console is enabled, disable UI scripts
                 hudInterface.enabled = false;
                 inventoryManager.enabled = false;

@@ -33,15 +33,6 @@ namespace Necropanda
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
-
-            CheckQuestMarkers();
-        }
-
-        public void CheckQuestMarkers()
-        {
-            Compass compass = GameObject.FindObjectOfType<Compass>();
-            if (compass != null)
-                compass.CheckQuestMarkers();
         }
     }
 }

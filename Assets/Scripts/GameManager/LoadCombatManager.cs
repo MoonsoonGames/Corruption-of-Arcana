@@ -252,7 +252,7 @@ namespace Necropanda
             if (progressQuestUponCombatVictory.Count > 0)
             {
                 foreach (var item in progressQuestUponCombatVictory)
-                    item.QuestProgress();
+                    item.QuestProgress(false);
             }
         }
 

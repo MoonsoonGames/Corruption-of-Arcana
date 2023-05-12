@@ -44,14 +44,14 @@ namespace Necropanda
         {
             ForceResetQuest();
             StartQuest("Mama R", null);
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         [ContextMenu("Force Start Quest")]
         public void ForceStartQuest()
         {
             StartQuest("Mama R", null);
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         [ContextMenu("Force Reset Quest")]
@@ -65,7 +65,7 @@ namespace Necropanda
                 quest.ForceResetQuest();
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         public Quest GetParent()
@@ -95,11 +95,16 @@ namespace Necropanda
             EnableNextObjective();
             EnableAllObjectives();
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         [ContextMenu("Quest Progress")]
-        public void QuestProgress()
+        public void QuestProgressContext()
+        {
+            QuestProgress(true);
+        }
+
+        public void QuestProgress(bool updateMarkers)
         {
             if (state != E_QuestStates.InProgress)
                 return;
@@ -110,7 +115,7 @@ namespace Necropanda
             {
                 if (parentQuest != null)
                 {
-                    parentQuest.QuestProgress();
+                    parentQuest.QuestProgress(updateMarkers);
                 }
 
                 state = E_QuestStates.Completed;
@@ -121,7 +126,7 @@ namespace Necropanda
                 EnableNextObjective();
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         void EnableNextObjective()
@@ -134,7 +139,7 @@ namespace Necropanda
                 }
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         void EnableAllObjectives()
@@ -147,12 +152,12 @@ namespace Necropanda
                 }
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         void GiveRewards()
         {
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
 
             if (overrideParentRewards)
             {
@@ -175,15 +180,22 @@ namespace Necropanda
             }
         }
 
-        void UpdateQuestInfo()
+        void UpdateQuestInfo(bool updateMarkers)
         {
             if (QuestInfo.instance != null)
             {
                 QuestInfo.instance.UpdateQuestInfo();
             }
 
-            if (Application.isPlaying)
-                GeneralDialogueLogic.instance.CheckQuestMarkers();
+            if (Application.isPlaying && updateMarkers)
+                CheckQuestMarkers();
+        }
+
+        void CheckQuestMarkers()
+        {
+            Compass compass = GameObject.FindObjectOfType<Compass>();
+            if (compass != null)
+                compass.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -308,6 +320,9 @@ namespace Necropanda
             ForceRestartQuest();
 
             RForceSetQuestProgress(progress, 0);
+
+            if (Application.isPlaying)
+                UpdateQuestInfo(true);
         }
 
         public int RForceSetQuestProgress(int progress, int count)
@@ -317,7 +332,7 @@ namespace Necropanda
                 while (count < progress && currentProgress < maxProgress)
                 {
                     Debug.Log(questName + " is progressing " + count);
-                    QuestProgress();
+                    QuestProgress(false);
                     count++;
                 }
                 return count;  
