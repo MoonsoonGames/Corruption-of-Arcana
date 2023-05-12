@@ -29,7 +29,7 @@ namespace Necropanda
         {
             if (mat != null)
                 mat.SetFloat("_Disolve_amount", dissolveAmount);
-            else
+            else if (spriteRenderer != null)
                 mat = spriteRenderer.material;
         }
 
@@ -37,7 +37,7 @@ namespace Necropanda
         {
             if (mat != null)
                 mat.SetVector("_Color", color);
-            else
+            else if (spriteRenderer != null)
                 mat = spriteRenderer.material;
         }
 
@@ -46,7 +46,7 @@ namespace Necropanda
             //color *= 100f;
             if (mat != null)
                 mat.SetVector("_EdgeColor", color);
-            else
+            else if (spriteRenderer != null)
                 mat = spriteRenderer.material;
         }
 
@@ -55,7 +55,7 @@ namespace Necropanda
             //color *= 8f;
             if (mat != null)
                 mat.SetVector("_Disolve_Colour", color);
-            else
+            else if (spriteRenderer != null)
                 mat = spriteRenderer.material;
         }
 
@@ -65,7 +65,7 @@ namespace Necropanda
             if (mat != null)
                 mat.SetFloat("_Disolve_amount", dissolveAmount);
 
-            else
+            else if (spriteRenderer != null)
                 mat = spriteRenderer.material;
         }
 

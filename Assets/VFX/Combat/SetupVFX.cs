@@ -27,7 +27,7 @@ namespace Necropanda
 
             visualEffect.SetVector3("Impact Position", targetPos);
 
-            float distance = Vector3.Distance(casterPos, targetPos)/2.35f;
+            float distance = Vector3.Distance(casterPos, targetPos)/5.5f;
 
             visualEffect.SetFloat("Beam end", distance);
             

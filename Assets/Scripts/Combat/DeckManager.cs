@@ -118,7 +118,8 @@ namespace Necropanda
         /// <param name="spell"></param>
         public void DiscardCard(Spell spell)
         {
-            discardPile.Add(spell);
+            if (!spell.burnOnDiscard)
+                discardPile.Add(spell);
         }
 
         /// <summary>
@@ -127,7 +128,7 @@ namespace Necropanda
         /// <param name="start">Determines whether the cards appear at the start of the deck (meaning they get drawn first) or the end</param>
         public void DiscardPileToDeck(bool start, bool removeDiscardOnCast)
         {
-            foreach(Spell spell in discardPile)
+            foreach (Spell spell in discardPile)
             {
                 if (removeDiscardOnCast) break;
 

@@ -13,8 +13,7 @@ namespace Necropanda
 {
     public class Card : MonoBehaviour
     {
-        [HideInInspector]
-        public Spell spell;
+        public Spell spell { get; private set; }
 
         public TextMeshProUGUI nameText;
         public Image nameImage;
@@ -27,8 +26,13 @@ namespace Necropanda
         public Image cardFace;
         public GameObject unavailableOverlay;
 
-        public void Setup()
+        public void Setup(Spell spell)
         {
+            if (spell == null)
+                return;
+
+            this.spell = spell;
+
             if (spell.nameImage != null)
             {
                 nameImage.sprite = spell.nameImage;
@@ -57,7 +61,7 @@ namespace Necropanda
 
             gameObject.name = spell.spellName;
 
-            GetComponent<CardDrag2D>().Setup();
+            GetComponent<CardDrag2D>().Setup(this);
             ShowUnavailableOverlay(3);
         }
 

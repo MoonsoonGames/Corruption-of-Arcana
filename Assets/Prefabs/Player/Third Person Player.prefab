@@ -72,8 +72,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1940659339934191093}
-  speed: 6
-  gravity: -6
+  walkSpeed: 6
+  sprintSpeed: 12
+  gravity: -9
+  fallMultiplyer: 1.25
   moveDeadzone: 0.1
   groundCheck: {fileID: 1940659340735814523}
   groundDistance: 0.4
@@ -81,7 +83,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   paused: 0
+  canMove: 1
+  isGrounded: 0
   animator: {fileID: 6611967239967125590}
+  cam: {fileID: 0}
   cmBrain: {fileID: 0}
   lookAtTarget: {fileID: 8519582550508498728}
 --- !u!95 &6611967239967125590
