@@ -182,7 +182,8 @@ namespace Necropanda
                 QuestInfo.instance.UpdateQuestInfo();
             }
 
-            //SaveQuestData();
+            if (Application.isPlaying)
+                GeneralDialogueLogic.instance.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -288,6 +289,12 @@ namespace Necropanda
         #endregion
 
         #region Dev Command
+
+        [ContextMenu("Force Quest - Cave Start")]
+        public void TestQuestCommand13()
+        {
+            DevForceSetQuestProgress(13);
+        }
 
         public void DevForceSetQuestProgress(int progress)
         {
