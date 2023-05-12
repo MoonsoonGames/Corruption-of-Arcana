@@ -68,7 +68,7 @@ namespace Necropanda
                 {
                     case E_CardTypes.Cards:
                         // Add to deck manager list
-                        DeckManager.instance.collection.Add((Spell)item);
+                        DeckManager.instance.collection.Add(currentSpell);
                         break;
                     case E_CardTypes.Potions:
                         PotionManager.instance.ChangePotion(currentSpell.potionType, 1);
