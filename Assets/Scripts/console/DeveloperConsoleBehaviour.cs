@@ -24,7 +24,7 @@ namespace Necropanda.Utils.Console
 
         // UI Stuff, self explanatory.
         [Header("UI")]
-        [SerializeField] private GameObject uiCanvas = null;
+        [SerializeField] private GameObject devUICanvas = null;
         [SerializeField] private TMP_InputField inputField = null;
         [SerializeField] private TMP_Text consoleText = null;
 
@@ -32,6 +32,7 @@ namespace Necropanda.Utils.Console
         [SerializeField] private HUDInterface hudInterface;
         [SerializeField] private JournalMainCode journalMainCode;
         [SerializeField] private InventoryManager inventoryManager;
+        [SerializeField] private MapSelector mapSelector;
 
 
         private float pausedTimeScale;  // Float for holding the paused time scale.
@@ -108,46 +109,37 @@ namespace Necropanda.Utils.Console
         {
 
             inputField.text = string.Empty;
-            hudInterface = GameObject.FindObjectOfType<HUDInterface>();
-            inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-            journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
+            // hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+            // inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+            // journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
 
-            if (uiCanvas.activeSelf)
+
+            devUICanvas.SetActive(!devUICanvas.activeInHierarchy);
+
+            // Check to see if the Developer UI Canvas is active in the scene
+            if (devUICanvas.activeInHierarchy)
             {
-                if (hudInterface != null)
-                {
-                    hudInterface.enabled = true;
-                }
-                else if (inventoryManager != null)
-                {
-                    inventoryManager.enabled = true;
-                }
-                else if (journalMainCode != null)
-                {
-                    journalMainCode.enabled = true;
-                }
-
+                Debug.Log("test");
+                // If the Console is enabled, disable UI scripts
+                hudInterface.enabled = false;
+                inventoryManager.enabled = false;
+                journalMainCode.enabled = false;
+                mapSelector.enabled = false;
+                TEMP_OpenDeckbuilding.instance.enabled = false;
 
                 Time.timeScale = pausedTimeScale;
-                uiCanvas.SetActive(false);
             }
             else
             {
-                if (hudInterface != null)
-                {
-                    hudInterface.enabled = false;
-                }
-                else if (inventoryManager != null)
-                {
-                    inventoryManager.enabled = false;
-                }
-                else if (journalMainCode != null)
-                {
-                    journalMainCode.enabled = false;
-                }
+                // If the Console is disabled, enable UI scripts
+                hudInterface.enabled = true;
+                inventoryManager.enabled = true;
+                journalMainCode.enabled = true;
+                mapSelector.enabled = true;
+                TEMP_OpenDeckbuilding.instance.enabled = true;
+
                 pausedTimeScale = Time.timeScale;
                 Time.timeScale = 0;
-                uiCanvas.SetActive(true);
                 inputField.ActivateInputField();
             }
         }
