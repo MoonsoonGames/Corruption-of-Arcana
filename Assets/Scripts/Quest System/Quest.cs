@@ -181,9 +181,6 @@ namespace Necropanda
             {
                 QuestInfo.instance.UpdateQuestInfo();
             }
-
-            if (Application.isPlaying)
-                GeneralDialogueLogic.instance.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -308,6 +305,9 @@ namespace Necropanda
             ForceRestartQuest();
 
             RForceSetQuestProgress(progress, 0);
+
+            if (Application.isPlaying)
+                GeneralDialogueLogic.instance.CheckQuestMarkers();
         }
 
         public int RForceSetQuestProgress(int progress, int count)
