@@ -82,7 +82,7 @@ namespace Necropanda
 
         public void StartQuest(string questGiver, Quest parent)
         {
-            Debug.Log("Start quest " + questName);
+            //Debug.Log("Start quest " + questName);
 
             if (parent != null)
                 parentQuest = parent;
@@ -283,6 +283,49 @@ namespace Necropanda
                 state = E_QuestStates.Completed;
             else
                 state = E_QuestStates.InProgress;
+        }
+
+        #endregion
+
+        #region Dev Command
+
+        public void DevForceSetQuestProgress(int progress)
+        {
+            if (parentQuest != null)
+            {
+                parentQuest.DevForceSetQuestProgress(progress);
+                return;
+            }
+
+            Debug.Log(questName + " is the parent for quest resetting");
+            ForceRestartQuest();
+
+            RForceSetQuestProgress(progress, 0);
+        }
+
+        public int RForceSetQuestProgress(int progress, int count)
+        {
+            if (subQuests.Length == 0)
+            {
+                while (count < progress && currentProgress < maxProgress)
+                {
+                    Debug.Log(questName + " is progressing " + count);
+                    QuestProgress();
+                    count++;
+                }
+                return count;  
+            }
+
+            foreach (var item in subQuests)
+            {
+                if (count < progress)
+                {
+                    Debug.Log(questName + " is progressing children (recursive) " + count);
+                    count = item.RForceSetQuestProgress(progress, count);
+                }
+            }
+
+            return count;
         }
 
         #endregion
