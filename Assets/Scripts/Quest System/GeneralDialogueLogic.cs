@@ -40,8 +40,8 @@ namespace Necropanda
         public void CheckQuestMarkers()
         {
             Compass compass = GameObject.FindObjectOfType<Compass>();
-
-            compass.CheckQuestMarkers();
+            if (compass != null)
+                compass.CheckQuestMarkers();
         }
     }
 }
