@@ -16,7 +16,8 @@ namespace Necropanda
     public class MapSelector : MonoBehaviour
     {
         public Sprite[] maps;
-        public Image currentMap;
+        public GameObject currentMap;
+        private Image currentMapImage;
 
         [Space]
         public KeyCode mapKey = KeyCode.M;
@@ -28,8 +29,8 @@ namespace Necropanda
         // Start is called before the first frame update
         void Start()
         {
-            currentMap.enabled = false;
-
+            currentMap.SetActive(false);
+            currentMapImage = currentMap.GetComponent<Image>();
         }
 
         private void Update()
@@ -43,18 +44,15 @@ namespace Necropanda
         {
             if (Input.GetKeyDown(mapKey))
             {
-                currentMap.enabled = !currentMap.enabled;
-                playerController.paused = !playerController.paused;
-                playerController.canMove = !playerController.canMove;
-                hudInterface.gameIsPaused = !hudInterface.gameIsPaused;
-
-                UpdateMapImage();
+                ToggleMap();
             }
         }
 
-        public void CloseMap()
+        public void ToggleMap()
         {
-            currentMap.enabled = false;
+            currentMap.SetActive(!currentMap.activeInHierarchy);
+            SetVariables();
+            UpdateMapImage();
         }
 
         public void UpdateMapImage()
@@ -64,21 +62,36 @@ namespace Necropanda
             switch (scene.name)
             {
                 case "Thoth":
-                    currentMap.sprite = maps[1];
+                    currentMapImage.sprite = maps[1];
                     break;
                 case "EastForest":
-                    currentMap.sprite = maps[2];
+                    currentMapImage.sprite = maps[2];
                     break;
                 case "Cave":
-                    currentMap.sprite = maps[3];
+                    currentMapImage.sprite = maps[3];
                     break;
 
                 default:
                     // If the scene isn't recognized, set the image to the main map.
-                    currentMap.sprite = maps[0];
+                    currentMapImage.sprite = maps[0];
                     break;
 
             }
+        }
+
+        private void SetVariables()
+        {
+            playerController.paused = !playerController.paused;
+            playerController.canMove = !playerController.canMove;
+            hudInterface.gameIsPaused = !hudInterface.gameIsPaused;
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = !Cursor.visible;
+
+
+            // Set the timescale back to 1 - this is because if we don't have it, after close the map from the
+            // inventory the games timescale isn't set properly and this is easier for me.
+            Time.timeScale = 1;
         }
     }
 }

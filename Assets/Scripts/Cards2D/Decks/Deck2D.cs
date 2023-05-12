@@ -43,7 +43,7 @@ namespace Necropanda
         #region Cards
 
         protected CardDrag2D[] cards;
-        
+
         public List<GameObject> GetCards()
         {
             List<GameObject> cardObjects = new List<GameObject>();
@@ -275,11 +275,6 @@ namespace Necropanda
                 float lerpA = Mathf.Lerp(deckBackground.color.a, desiredColor.a, highlightSpeed);
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                Debug.Break();
             }
         }
 
