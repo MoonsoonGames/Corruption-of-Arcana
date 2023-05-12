@@ -56,6 +56,9 @@ namespace Necropanda
 
         void GiveItem(Object item)
         {
+            if (!Application.isPlaying)
+                return;
+
             if (item.GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
