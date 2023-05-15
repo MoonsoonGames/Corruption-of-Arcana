@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using UnityEngine;
 using Necropanda.AI;
@@ -343,11 +343,41 @@ namespace Necropanda
 
             foreach (string card in splitCollection)
             {
+
+                if (!giveCommand.IsValidObject(card))
+                {
+                    Debug.Log("NOT VALID, ATTEMPTING FIX");
+                    try
+                    {
+                        string newCard = RemoveNonPrintableChars(card);
+                        giveCommand.GiveToPlayer(newCard);
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        Debug.Log("FIX FAILED");
+                        throw new KeyNotFoundException();
+                    }
+                }
                 giveCommand.GiveToPlayer(card);
             }
 
             foreach (string card in splitMajorArcana)
             {
+                Debug.Log(card);
+                if (!giveCommand.IsValidObject(card))
+                {
+                    Debug.Log("NOT VALID, ATTEMPTING FIX");
+                    try
+                    {
+                        string newCard = RemoveNonPrintableChars(card);
+                        giveCommand.GiveToPlayer(newCard);
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        Debug.Log("FIX FAILED");
+                        throw new KeyNotFoundException();
+                    }
+                }
                 giveCommand.GiveToPlayer(card);
             }
 
@@ -404,6 +434,17 @@ namespace Necropanda
             string[] splitStrings = processedString.Split(',');
 
             return new List<string>(splitStrings);
+        }
+
+        public static string RemoveNonPrintableChars(string input)
+        {
+            // Define a regular expression pattern to match non-printable characters
+            string pattern = @"[^\u0020-\u007E]"; // Matches any character outside the range of printable ASCII characters (decimal 32 to 126)
+
+            // Use Regex.Replace to replace all non-printable characters with an empty string
+            string output = Regex.Replace(input, pattern, "");
+
+            return output;
         }
     }
 
