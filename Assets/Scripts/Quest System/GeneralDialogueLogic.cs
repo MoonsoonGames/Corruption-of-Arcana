@@ -40,7 +40,7 @@ namespace Necropanda
         void UpdateQuestMarkers()
         {
             if (Compass.instance != null)
-                Compass.instance.Invoke("CheckQuestMarkers", 0.5f);
+                Compass.instance.CheckQuestMarkers();
         }
     }
 }
