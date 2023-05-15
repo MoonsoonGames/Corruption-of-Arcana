@@ -109,6 +109,7 @@ namespace Necropanda.Utils.Console
         {
 
             inputField.text = string.Empty;
+            inputField.ActivateInputField();
             // hudInterface = GameObject.FindObjectOfType<HUDInterface>();
             // inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
             // journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
@@ -120,22 +121,52 @@ namespace Necropanda.Utils.Console
             if (devUICanvas.activeInHierarchy)
             {
                 // If the Console is enabled, disable UI scripts
-                hudInterface.enabled = false;
-                inventoryManager.enabled = false;
-                journalMainCode.enabled = false;
-                mapSelector.enabled = false;
-                TEMP_OpenDeckbuilding.instance.enabled = false;
+                if (hudInterface)
+                {
+                    hudInterface.enabled = false;
+                }
+                if (inventoryManager)
+                {
+                    inventoryManager.enabled = false;
+                }
+                if (journalMainCode)
+                {
+                    journalMainCode.enabled = false;
+                }
+                if (mapSelector)
+                {
+                    mapSelector.enabled = false;
+                }
+                if (TEMP_OpenDeckbuilding.instance)
+                {
+                    TEMP_OpenDeckbuilding.instance.enabled = false;
+                }
 
                 Time.timeScale = pausedTimeScale;
             }
             else
             {
                 // If the Console is disabled, enable UI scripts
-                hudInterface.enabled = true;
-                inventoryManager.enabled = true;
-                journalMainCode.enabled = true;
-                mapSelector.enabled = true;
-                TEMP_OpenDeckbuilding.instance.enabled = true;
+                if (hudInterface)
+                {
+                    hudInterface.enabled = true;
+                }
+                if (inventoryManager)
+                {
+                    inventoryManager.enabled = true;
+                }
+                if (journalMainCode)
+                {
+                    journalMainCode.enabled = true;
+                }
+                if (mapSelector)
+                {
+                    mapSelector.enabled = true;
+                }
+                if (TEMP_OpenDeckbuilding.instance)
+                {
+                    TEMP_OpenDeckbuilding.instance.enabled = true;
+                }
 
                 pausedTimeScale = Time.timeScale;
                 Time.timeScale = 0;
