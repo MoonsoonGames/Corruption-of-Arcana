@@ -24,6 +24,7 @@ namespace Necropanda.Interfaces
         {
             mainHUD.SetActive(true);
             Pausemenu.SetActive(false);
+            JournalCode = Journal.GetComponentInChildren<JournalMainCode>();
         }
 
         // Update is called once per frame

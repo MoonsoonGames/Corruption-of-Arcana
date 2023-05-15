@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Authored & Written by @mrobertscgd
@@ -18,6 +19,17 @@ namespace Necropanda.Utils.Console.Commands
             // not needed
             // // Check to make sure that an arguemnt is passed in, if not return false (do nothing)
             // if (args.Length != 1) { return false; }
+            DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+
+
+            if (SceneManager.GetActiveScene().name == "SplashScreen")
+            {
+                DeveloperConsoleBehaviour.OutputMessage = $"ERROR: NO UI TO TOGGLE IN THIS SCENE.";
+
+                // Update console message
+                developerConsoleBehaviour.UpdateOutputMessage();
+                return false;
+            }
 
             // Get ref to all of the UI
             Canvas allUI = GameObject.FindGameObjectWithTag("AllUI").GetComponent<Canvas>();
@@ -26,7 +38,7 @@ namespace Necropanda.Utils.Console.Commands
 
             DeveloperConsoleBehaviour.OutputMessage = $"Toggled the UI, state is {allUI.isActiveAndEnabled}";
             // get ref, call the function to update the message
-            DeveloperConsoleBehaviour developerConsoleBehaviour = GameObject.FindObjectOfType<DeveloperConsoleBehaviour>();
+
             developerConsoleBehaviour.UpdateOutputMessage();
 
             return true;

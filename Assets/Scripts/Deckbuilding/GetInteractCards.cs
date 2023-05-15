@@ -30,9 +30,14 @@ namespace Necropanda
 
             DeckManager.instance.LoadDeck();
 
-            for (int i = 0; i < interactContent.transform.childCount; i++)
+            for (int i = 0; i < content.transform.childCount; i++)
             {
                 Destroy(content.transform.GetChild(i).gameObject);
+            }
+
+            for (int i = 0; i < interactContent.transform.childCount; i++)
+            {
+                Destroy(interactContent.transform.GetChild(i).gameObject);
             }
 
             if (content != null)
