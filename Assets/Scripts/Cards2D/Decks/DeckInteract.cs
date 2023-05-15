@@ -59,7 +59,8 @@ namespace Necropanda
             }
 
             //Enable/disable button
-            getInteractCards.SuccessfulInteract();
+            if (success)
+                getInteractCards.SuccessfulInteract();
         }
     }
 }
