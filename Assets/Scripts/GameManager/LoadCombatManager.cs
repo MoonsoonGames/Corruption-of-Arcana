@@ -274,6 +274,11 @@ namespace Necropanda
                 posY = lastPos.y,
                 posZ = lastPos.z,
 
+                rotX = lastRot.x,
+                rotY = lastRot.y,
+                rotZ = lastRot.z,
+                rotW = lastRot.w,
+
                 health = health,
 
                 sceneName = LoadingScene.instance.loadScene.ToString(),
@@ -300,6 +305,7 @@ namespace Necropanda
 
             // Player
             Vector3 pos = new Vector3(saveData.posX, saveData.posY, saveData.posZ);
+            Quaternion rot = new Quaternion(saveData.rotX, saveData.rotY, saveData.rotZ, saveData.rotW);
             lastPos = pos;
             health = saveData.health;
 
@@ -314,6 +320,7 @@ namespace Necropanda
             // maxHealth = saveData.maxHealth;
             // gold = saveData.gold;
             // maxArcana = saveData.maxArcana;
+
             // // Potions
             // healthPotAmount = saveData.healthPotAmount;
             // ragePotAmount = saveData.ragePotAmount;
@@ -321,8 +328,8 @@ namespace Necropanda
             // arcanaPotAmount = saveData.arcanaPotAmount;
             // // Inventory
             // curios.AddRange(saveData.curios);
-            // // Quests and enemies
-            // questStage = saveData.questStage;
+            // // enemies
+
             // numberOfEnemiesDefeated = saveData.numberOfEnemiesDefeated;
         }
 
@@ -333,6 +340,7 @@ namespace Necropanda
         private struct SaveData
         {
             public float posX, posY, posZ;
+            public float rotX, rotY, rotZ, rotW;
             public float health;
             public string sceneName;
             // public int maxHealth;
@@ -345,7 +353,6 @@ namespace Necropanda
             // public int arcanaPotAmount;
             // public List<UnityEngine.Object> curios;
 
-            // public int questStage;
             // public int numberOfEnemiesDefeated;
         }
 
