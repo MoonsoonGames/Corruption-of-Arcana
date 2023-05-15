@@ -86,8 +86,8 @@ namespace Necropanda
         [SerializeField] private string sceneName;
         [SerializeField] private GiveCommand giveCommand;
 
-        private List<string> splitCollection = new List<string>();
-        private List<string> splitMajorArcana = new List<string>();
+        [SerializeField] private List<string> splitCollection = new List<string>();
+        [SerializeField] private List<string> splitMajorArcana = new List<string>();
 
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)

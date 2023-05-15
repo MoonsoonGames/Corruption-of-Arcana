@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -892,6 +892,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &550562822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3062148610300386413, guid: 1c069109dbb592348bf9be3c5c9688cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2415256330350371705}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26faed7128c10fd4c8066b51627034f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &616681485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,7 +2100,7 @@ PrefabInstance:
     - target: {fileID: 2134294613875847491, guid: c264c1a3a0d6b564bae6f4c7ea31191c,
         type: 3}
       propertyPath: commands.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2134294613875847491, guid: c264c1a3a0d6b564bae6f4c7ea31191c,
         type: 3}
@@ -2113,6 +2125,12 @@ PrefabInstance:
       propertyPath: commands.Array.data[6]
       value: 
       objectReference: {fileID: 11400000, guid: 449b9993121a132418109be1e6b06c38,
+        type: 2}
+    - target: {fileID: 2134294613875847491, guid: c264c1a3a0d6b564bae6f4c7ea31191c,
+        type: 3}
+      propertyPath: commands.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 243d2c48413a5f2488cc80477595a46d,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c264c1a3a0d6b564bae6f4c7ea31191c, type: 3}
@@ -2411,6 +2429,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 550562822}
+        m_TargetAssemblyTypeName: Necropanda.SaveSystem.SavingLoading, Assembly-CSharp
+        m_MethodName: DeleteSaveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1176875934}
         m_TargetAssemblyTypeName: Necropanda.Interfaces.SplashScreenInterface, Assembly-CSharp
         m_MethodName: NewGame
@@ -2926,6 +2956,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5181202587678652608, guid: 9b95e2084a81d8944866456a1dfead65,
+        type: 3}
+      propertyPath: giveCommand
+      value: 
+      objectReference: {fileID: 11400000, guid: 449b9993121a132418109be1e6b06c38,
+        type: 2}
     - target: {fileID: 6265937370777209544, guid: 9b95e2084a81d8944866456a1dfead65,
         type: 3}
       propertyPath: baseCollection.Array.size
