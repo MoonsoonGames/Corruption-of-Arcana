@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 using Necropanda.AI;
 using Necropanda.SaveSystem;
+using Necropanda.Utils.Console.Commands;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -68,10 +70,6 @@ namespace Necropanda
         [Header("Player")]
         [SerializeField] private float posX, posY, posZ;
         [SerializeField] private float health;
-        // [SerializeField] private int maxHealth;
-        // [SerializeField] private int gold;
-        // [SerializeField] private int maxArcana;
-        // [SerializeField] private List<UnityEngine.Object> curios;
 
         // Potions
         [Header("Potions")]
@@ -82,10 +80,14 @@ namespace Necropanda
 
         // Quest Saving vars // Enemy stat stuff
         [Header("Quest and Enemies")]
-        // [SerializeField] private int numberOfEnemiesDefeated = 0;
+
 
         [Header("Other Savables")]
         [SerializeField] private string sceneName;
+        [SerializeField] private GiveCommand giveCommand;
+
+        private List<string> splitCollection = new List<string>();
+        private List<string> splitMajorArcana = new List<string>();
 
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
@@ -224,7 +226,7 @@ namespace Necropanda
             LoadingScene.instance.LoadScene(tutorialScene, lastScene, false);
         }
 
-        public void AddEnemy(CharacterStats enemy, Character caster, Vector2[] points, Object projectileObject, float projectileSpeed, Object impactObject, Object projectileFXObject, Color trailColor)
+        public void AddEnemy(CharacterStats enemy, Character caster, Vector2[] points, UnityEngine.Object projectileObject, float projectileSpeed, UnityEngine.Object impactObject, UnityEngine.Object projectileFXObject, Color trailColor)
         {
             List<Vector2> targetPositions = new List<Vector2>();
             //targetPositions.Add(midPos);
@@ -268,6 +270,8 @@ namespace Necropanda
         public object CaptureState()
         {
             Debug.Log("Saving Player");
+
+
             return new SaveData
             {
                 posX = lastPos.x,
@@ -282,6 +286,17 @@ namespace Necropanda
                 health = health,
 
                 sceneName = LoadingScene.instance.loadScene.ToString(),
+
+                interactedWith = interacted,
+
+                savedCollection = string.Join(", ", (object[])DeckManager.instance.collection.ToArray()),
+                savedMajorArcana = string.Join(", ", (object[])DeckManager.instance.majorArcana.ToArray()),
+
+
+
+
+                // savedCollection = DeckManager.instance.collection,
+                // savedMajorArcana = DeckManager.instance.majorArcana,
                 // maxHealth = maxHealth,
                 // gold = gold,
                 // maxArcana = maxArcana,
@@ -317,6 +332,26 @@ namespace Necropanda
             {
                 GameObject.FindObjectOfType<LoadingScene>().loadScene = scene;
             }
+
+            // Clear any interactions for sanitary purposes, then load the save data into it.
+            interacted = new List<string>(saveData.interactedWith);
+
+
+            // Use give command to add them to the inventory
+            splitCollection = ListifyString(saveData.savedCollection);
+            splitMajorArcana = ListifyString(saveData.savedMajorArcana);
+
+            foreach (string card in splitCollection)
+            {
+                giveCommand.GiveToPlayer(card);
+            }
+
+            foreach (string card in splitMajorArcana)
+            {
+                giveCommand.GiveToPlayer(card);
+            }
+
+
             // maxHealth = saveData.maxHealth;
             // gold = saveData.gold;
             // maxArcana = saveData.maxArcana;
@@ -328,9 +363,6 @@ namespace Necropanda
             // arcanaPotAmount = saveData.arcanaPotAmount;
             // // Inventory
             // curios.AddRange(saveData.curios);
-            // // enemies
-
-            // numberOfEnemiesDefeated = saveData.numberOfEnemiesDefeated;
         }
 
         /// <summary>
@@ -343,6 +375,10 @@ namespace Necropanda
             public float rotX, rotY, rotZ, rotW;
             public float health;
             public string sceneName;
+
+            public List<string> interactedWith;
+            public string savedCollection;
+            public string savedMajorArcana;
             // public int maxHealth;
             // public int gold;
             // public int maxArcana;
@@ -352,8 +388,6 @@ namespace Necropanda
             // public int swiftPotAmount;
             // public int arcanaPotAmount;
             // public List<UnityEngine.Object> curios;
-
-            // public int numberOfEnemiesDefeated;
         }
 
 
@@ -362,7 +396,18 @@ namespace Necropanda
         public List<Quest> progressQuestUponCombatVictory;
 
         #endregion
+
+        public List<string> ListifyString(string stringToProcess)
+        {
+            string thingToReplace = "(Necropanda.Spell)";
+            string processedString = stringToProcess.Replace(thingToReplace, "");
+            string[] splitStrings = processedString.Split(',');
+
+            return new List<string>(splitStrings);
+        }
     }
+
+
 
     [System.Serializable]
     public struct EnemySpawn

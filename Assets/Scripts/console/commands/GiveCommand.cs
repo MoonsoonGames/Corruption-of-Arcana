@@ -132,7 +132,7 @@ namespace Necropanda.Utils.Console.Commands
             }
         }
 
-        private void GiveToPlayer(string objectName)
+        public void GiveToPlayer(string objectName)
         {
             if (objects[objectName].GetType() == typeof(Weapon))
             {
