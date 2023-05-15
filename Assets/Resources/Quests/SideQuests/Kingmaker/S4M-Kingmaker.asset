@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeda0f4898d3b644a67747e810ed059, type: 3}
+  m_Name: S4M-Kingmaker
+  m_EditorClassIdentifier: 
+  questName: Kingmaker
+  mainQuest: 0
+  questNumber: 14
+  questDescription: A spirit in the lake has challenged you to prove yourself to
+    hunt down powerful creatures in Arcana
+  state: 0
+  currentProgress: -1
+  maxProgress: 4
+  parentQuest: {fileID: 0}
+  subQuests:
+  - {fileID: 11400000, guid: 9a83359d6abe83748807a39b5394ada8, type: 2}
+  - {fileID: 11400000, guid: 00befb2016a650047824b6e1594a24ad, type: 2}
+  - {fileID: 11400000, guid: c1a4d2ad55239dd4fb438618cf4c075e, type: 2}
+  - {fileID: 11400000, guid: f7c17b9519ebc9d4da83d77b0ab2f299, type: 2}
+  linear: 1
+  rewards:
+    lootPools:
+    - objects:
+      - {fileID: 11400000, guid: e65637876afb91d4a9a6bcf038e97cae, type: 2}
+      number: {x: 1, y: 1}
+      rewardAll: 1
+    gold: {x: 0, y: 0}
+  overrideParentRewards: 0
