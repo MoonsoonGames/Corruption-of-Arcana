@@ -87,6 +87,7 @@ namespace Necropanda
 
         [SerializeField] private List<string> splitCollection = new List<string>();
         [SerializeField] private List<string> splitMajorArcana = new List<string>();
+        // [SerializeField] private GiveCommand giveCommand;
 
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
@@ -333,6 +334,32 @@ namespace Necropanda
             // Clear any interactions for sanitary purposes, then load the save data into it.
             interacted = new List<string>(saveData.interactedWith);
 
+            // // Use give command to add them to the inventory
+            // splitCollection = ListifyString(saveData.savedCollection);
+            // splitMajorArcana = ListifyString(saveData.savedMajorArcana);
+
+            // DeckManager.instance.collection.Clear();
+            // DeckManager.instance.majorArcana.Clear();
+
+            // foreach (string card in splitCollection)
+            // {
+            //     Debug.Log(card);
+            //     giveCommand.GiveToPlayer(card);
+            // }
+
+            // foreach (string card in splitMajorArcana)
+            // {
+            //     //Instead of this, add it to the 
+            //     Debug.Log(card);
+
+            //     if (giveCommand != null)
+            //     {
+            //         giveCommand.EquipToPlayer(card);
+            //     }
+            //     else
+            //         Debug.Log("no give command");
+            // }
+
             // maxHealth = saveData.maxHealth;
             // gold = saveData.gold;
             // maxArcana = saveData.maxArcana;
@@ -386,6 +413,7 @@ namespace Necropanda
 
             List<string> newString = new List<string>();
 
+            //Check to make sure each item is bigger than 1 character.
             foreach (var item in splitStrings)
             {
                 if (item.Length > 1)
