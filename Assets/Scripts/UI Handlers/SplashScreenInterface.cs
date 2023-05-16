@@ -27,7 +27,7 @@ namespace Necropanda.Interfaces
             }
 
             if (LoadingScene.instance == null)
-                Debug.LogWarning("TF is this null");
+                Debug.LogWarning("Loading instance is null");
 
             LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
