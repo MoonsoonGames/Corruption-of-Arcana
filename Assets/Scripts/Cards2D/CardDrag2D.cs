@@ -17,6 +17,8 @@ namespace Necropanda
 
         #region Variables
 
+        bool setup = false;
+
         public Deck2D deck;
         [HideInInspector]
         public Deck2D lastDeck;
@@ -76,6 +78,8 @@ namespace Necropanda
 
             if (CombatManager.instance != null)
                 casterHealth = CombatManager.instance.player.GetHealth();
+
+            setup = true;
         }
 
         #endregion
@@ -414,6 +418,9 @@ namespace Necropanda
 
         private void Update()
         {
+            if (!setup)
+                return;
+
             //Lerps scale and color to smoothen transitions
 
             if (transform.localScale != desiredScale)
