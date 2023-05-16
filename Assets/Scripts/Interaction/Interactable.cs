@@ -30,6 +30,11 @@ namespace Necropanda.Interactable
 
         public EventReference interactionSound;
 
+        private void Awake()
+        {
+            interactID = name + "-" + transform.position + "-" + SceneManager.GetActiveScene().name;
+        }
+
         public void Start()
         {
             if (LoadCombatManager.instance == null)
@@ -37,8 +42,6 @@ namespace Necropanda.Interactable
                 Debug.Log("no load instance");
                 return;
             }
-
-            interactID = name + "-" + transform.position + "-" + SceneManager.GetActiveScene().name;
 
             if (LoadCombatManager.instance.interacted.Contains(interactID))
             {

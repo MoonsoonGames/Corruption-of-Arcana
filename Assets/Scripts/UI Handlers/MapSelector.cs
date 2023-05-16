@@ -31,12 +31,12 @@ namespace Necropanda
         {
             currentMap.SetActive(false);
             currentMapImage = currentMap.GetComponent<Image>();
+            playerController = GameObject.FindObjectOfType<PlayerController>();
+            hudInterface = GameObject.FindObjectOfType<HUDInterface>();
         }
 
         private void Update()
         {
-            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            hudInterface = FindObjectOfType<HUDInterface>();
             CheckInput();
         }
 

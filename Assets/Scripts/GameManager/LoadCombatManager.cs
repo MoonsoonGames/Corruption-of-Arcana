@@ -340,12 +340,12 @@ namespace Necropanda
 
             foreach (string card in splitCollection)
             {
-                giveCommand.GiveToPlayer(card);
+                //giveCommand.GiveToPlayer(card);
             }
 
             foreach (string card in splitMajorArcana)
             {
-                giveCommand.GiveToPlayer(card);
+                //giveCommand.GiveToPlayer(card);
             }
 
 
