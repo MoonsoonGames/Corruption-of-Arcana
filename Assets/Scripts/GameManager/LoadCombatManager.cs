@@ -269,7 +269,7 @@ namespace Necropanda
         /// <returns></returns>
         public object CaptureState()
         {
-            Debug.Log("Saving Player");
+            //Debug.Log("Saving Player");
 
 
             return new SaveData
@@ -313,6 +313,7 @@ namespace Necropanda
         /// <returns></returns>
         public void RestoreState(object state)
         {
+            //Debug.Log("Restoring");
             var saveData = (SaveData)state;
 
             // Player
@@ -333,7 +334,6 @@ namespace Necropanda
             // Clear any interactions for sanitary purposes, then load the save data into it.
             interacted = new List<string>(saveData.interactedWith);
 
-
             // Use give command to add them to the inventory
             splitCollection = ListifyString(saveData.savedCollection);
             splitMajorArcana = ListifyString(saveData.savedMajorArcana);
@@ -343,13 +343,21 @@ namespace Necropanda
 
             foreach (string card in splitCollection)
             {
+                Debug.Log(card);
                 giveCommand.GiveToPlayer(card);
             }
 
             foreach (string card in splitMajorArcana)
             {
                 //Instead of this, add it to the 
-                giveCommand.EquipToPlayer(card);
+                Debug.Log(card);
+
+                if (giveCommand != null)
+                {
+                    giveCommand.EquipToPlayer(card);
+                }
+                else
+                    Debug.Log("no give command");
             }
 
 
@@ -405,7 +413,15 @@ namespace Necropanda
             processedString = processedString.Replace(" ", string.Empty);
             string[] splitStrings = processedString.Split(',');
 
-            return new List<string>(splitStrings);
+            List<string> newString = new List<string>();
+
+            foreach (var item in splitStrings)
+            {
+                if (item.Length > 1)
+                    newString.Add(item);
+            }
+
+            return newString;
         }
     }
 

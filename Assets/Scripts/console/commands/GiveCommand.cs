@@ -134,6 +134,7 @@ namespace Necropanda.Utils.Console.Commands
 
         public void GiveToPlayer(string objectName)
         {
+            Debug.Log(objectName);
             if (objects[objectName].GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
@@ -142,6 +143,7 @@ namespace Necropanda.Utils.Console.Commands
             else if (objects[objectName].GetType() == typeof(Spell))
             {
                 Spell currentSpell = (Spell)objects[objectName];
+                Debug.Log(currentSpell.name);
                 switch (currentSpell.cardType)
                 {
                     case E_CardTypes.Cards:

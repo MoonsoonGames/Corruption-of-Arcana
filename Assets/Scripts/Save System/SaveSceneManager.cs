@@ -74,6 +74,10 @@ namespace Necropanda
             //SaveBaseSceneData
             if (LoadingScene.instance != null)
                 LoadingScene.instance.SaveScene();
+
+            Debug.Log("Save");
+            
+            SavingLoading.instance.Save();
         }
 
         [ContextMenu("Overide Base Quest Data")]
@@ -81,6 +85,10 @@ namespace Necropanda
         {
             if (LoadingScene.instance != null)
                 LoadingScene.instance.SaveScene();
+
+            Debug.Log("Overide");
+
+            SavingLoading.instance.Save();
         }
 
         [ContextMenu("Load Scene Data")]

@@ -13,13 +13,18 @@ namespace Necropanda.Interfaces
 
         private void Start()
         {
+            Invoke("DelaySaveBaseData", 0.1f);
+        }
+
+        void DelaySaveBaseData()
+        {
             SaveManager.instance.SaveAllBaseData();
         }
 
         public void NewGame()
         {
             SaveManager.instance.LoadAllBaseData();
-            //SaveManager.instance.SaveAllData();
+            SaveManager.instance.SaveAllData();
             //Reset loadsettings/progress
             if (initialScene == E_Scenes.Null)
             {
