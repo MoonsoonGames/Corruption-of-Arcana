@@ -85,7 +85,7 @@ namespace Necropanda.SaveSystem
         /// Deletes the save file
         /// </summary>
         [ContextMenu("Delete Save Data")]
-        private void DeleteSaveData()
+        public void DeleteSaveData()
         {
             if (File.Exists(SavePath))
             {
