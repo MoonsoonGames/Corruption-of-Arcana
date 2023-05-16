@@ -13,11 +13,6 @@ namespace Necropanda.Interfaces
 
         private void Start()
         {
-            Invoke("DelaySaveBaseData", 0.1f);
-        }
-
-        void DelaySaveBaseData()
-        {
             SaveManager.instance.SaveAllBaseData();
         }
 
