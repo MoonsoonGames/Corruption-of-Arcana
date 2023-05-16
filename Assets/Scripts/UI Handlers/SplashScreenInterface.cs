@@ -21,6 +21,14 @@ namespace Necropanda.Interfaces
             SaveManager.instance.LoadAllBaseData();
             //SaveManager.instance.SaveAllData();
             //Reset loadsettings/progress
+            if (initialScene == E_Scenes.Null)
+            {
+                Debug.LogWarning("no initial scene");
+            }
+
+            if (LoadingScene.instance == null)
+                Debug.LogWarning("TF is this null");
+
             LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
             //load game
         }

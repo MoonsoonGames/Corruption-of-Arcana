@@ -24,7 +24,7 @@ namespace Necropanda.Utils.Console
 
         // UI Stuff, self explanatory.
         [Header("UI")]
-        [SerializeField] private GameObject uiCanvas = null;
+        [SerializeField] private GameObject devUICanvas = null;
         [SerializeField] private TMP_InputField inputField = null;
         [SerializeField] private TMP_Text consoleText = null;
 
@@ -32,6 +32,7 @@ namespace Necropanda.Utils.Console
         [SerializeField] private HUDInterface hudInterface;
         [SerializeField] private JournalMainCode journalMainCode;
         [SerializeField] private InventoryManager inventoryManager;
+        [SerializeField] private MapSelector mapSelector;
 
 
         private float pausedTimeScale;  // Float for holding the paused time scale.
@@ -108,46 +109,67 @@ namespace Necropanda.Utils.Console
         {
 
             inputField.text = string.Empty;
-            hudInterface = GameObject.FindObjectOfType<HUDInterface>();
-            inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-            journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
+            inputField.ActivateInputField();
+            // hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+            // inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+            // journalMainCode = GameObject.FindObjectOfType<JournalMainCode>();
 
-            if (uiCanvas.activeSelf)
+
+            devUICanvas.SetActive(!devUICanvas.activeInHierarchy);
+
+            // Check to see if the Developer UI Canvas is active in the scene
+            if (devUICanvas.activeInHierarchy)
             {
-                if (hudInterface != null)
-                {
-                    hudInterface.enabled = true;
-                }
-                else if (inventoryManager != null)
-                {
-                    inventoryManager.enabled = true;
-                }
-                else if (journalMainCode != null)
-                {
-                    journalMainCode.enabled = true;
-                }
-
-
-                Time.timeScale = pausedTimeScale;
-                uiCanvas.SetActive(false);
-            }
-            else
-            {
-                if (hudInterface != null)
+                // If the Console is enabled, disable UI scripts
+                if (hudInterface)
                 {
                     hudInterface.enabled = false;
                 }
-                else if (inventoryManager != null)
+                if (inventoryManager)
                 {
                     inventoryManager.enabled = false;
                 }
-                else if (journalMainCode != null)
+                if (journalMainCode)
                 {
                     journalMainCode.enabled = false;
                 }
+                if (mapSelector)
+                {
+                    mapSelector.enabled = false;
+                }
+                if (TEMP_OpenDeckbuilding.instance)
+                {
+                    TEMP_OpenDeckbuilding.instance.enabled = false;
+                }
+
+                Time.timeScale = pausedTimeScale;
+            }
+            else
+            {
+                // If the Console is disabled, enable UI scripts
+                if (hudInterface)
+                {
+                    hudInterface.enabled = true;
+                }
+                if (inventoryManager)
+                {
+                    inventoryManager.enabled = true;
+                }
+                if (journalMainCode)
+                {
+                    journalMainCode.enabled = true;
+                }
+                if (mapSelector)
+                {
+                    mapSelector.enabled = true;
+                }
+                if (TEMP_OpenDeckbuilding.instance)
+                {
+                    TEMP_OpenDeckbuilding.instance.enabled = true;
+                }
+
                 pausedTimeScale = Time.timeScale;
                 Time.timeScale = 0;
-                uiCanvas.SetActive(true);
                 inputField.ActivateInputField();
             }
         }

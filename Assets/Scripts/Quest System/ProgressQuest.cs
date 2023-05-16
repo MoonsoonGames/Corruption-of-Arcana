@@ -18,7 +18,7 @@ namespace Necropanda
 
         public void Progress(Quest quest)
         {
-            quest.QuestProgress();
+            quest.QuestProgress(true);
         }
     }
 }

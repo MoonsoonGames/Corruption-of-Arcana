@@ -364,37 +364,9 @@ public class JournalMainCode : MonoBehaviour
         GameObject Page = JournalSections[2];
         Page.SetActive(true);
 
-        //off all subtabs, on curios
+        //off all subtabs
         TogglePages(Subtabs, false);
-        GameObject Tabs = Subtabs[1];
-        Tabs.SetActive(true);
     }
-    #endregion
-
-    #region Curios Subtabs
-
-    #region Trinkets 
-    public void TrinketsBTN()
-    {
-        /*
-        TogglePages(CurioTypes, false);
-        GameObject Page = CurioTypes[0];
-        Page.SetActive(true);
-        */
-    }
-    #endregion
-
-    #region Scrolls 
-    public void ScrollsBTN()
-    {
-        /*
-        TogglePages(CurioTypes, false);
-        GameObject Page = CurioTypes[1];
-        Page.SetActive(true);
-        */
-    }
-    #endregion
-
     #endregion
 
     /* ---------- Divider ---------- */
@@ -408,10 +380,8 @@ public class JournalMainCode : MonoBehaviour
         GameObject Page = JournalSections[3];
         Page.SetActive(true);
 
-        //off all subtabs, on curios
+        //off all subtabs
         TogglePages(Subtabs, false);
-        GameObject Tabs = Subtabs[1];
-        Tabs.SetActive(true);
 
         questUpdater.OpenJournal();
     }

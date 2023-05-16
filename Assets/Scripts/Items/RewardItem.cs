@@ -44,7 +44,13 @@ namespace Necropanda
             }
             
             if (amount != null)
+            {
                 amount.text = "X " + count.ToString();
+
+                if (count == 1)
+                    amount.color = new Color(0, 0, 0, 0);
+            }
+                
             else
                 Debug.Log("no text");
         }

@@ -17,6 +17,8 @@ namespace Necropanda
 
         #region Variables
 
+        bool setup = false;
+
         public Deck2D deck;
         [HideInInspector]
         public Deck2D lastDeck;
@@ -76,6 +78,8 @@ namespace Necropanda
 
             if (CombatManager.instance != null)
                 casterHealth = CombatManager.instance.player.GetHealth();
+
+            setup = true;
         }
 
         #endregion
@@ -412,25 +416,28 @@ namespace Necropanda
             card.ShowArt(show);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            if (!setup)
+                return;
+
             //Lerps scale and color to smoothen transitions
 
             if (transform.localScale != desiredScale)
             {
-                float lerpX = Mathf.Lerp(transform.localScale.x, desiredScale.x, scaleSpeed);
-                float lerpY = Mathf.Lerp(transform.localScale.y, desiredScale.y, scaleSpeed);
-                float lerpZ = Mathf.Lerp(transform.localScale.z, desiredScale.z, scaleSpeed);
+                float lerpX = Mathf.Lerp(transform.localScale.x, desiredScale.x, scaleSpeed * Time.unscaledDeltaTime);
+                float lerpY = Mathf.Lerp(transform.localScale.y, desiredScale.y, scaleSpeed * Time.unscaledDeltaTime);
+                float lerpZ = Mathf.Lerp(transform.localScale.z, desiredScale.z, scaleSpeed * Time.unscaledDeltaTime);
 
                 transform.localScale = new Vector3(lerpX, lerpY, lerpZ);
             }
 
             if (cardBackground.color != desiredColor)
             {
-                float lerpR = Mathf.Lerp(cardBackground.color.r, desiredColor.r, highlightSpeed);
-                float lerpG = Mathf.Lerp(cardBackground.color.g, desiredColor.g, highlightSpeed);
-                float lerpB = Mathf.Lerp(cardBackground.color.b, desiredColor.b, highlightSpeed);
-                float lerpA = Mathf.Lerp(cardBackground.color.a, desiredColor.a, highlightSpeed);
+                float lerpR = Mathf.Lerp(cardBackground.color.r, desiredColor.r, highlightSpeed * Time.unscaledDeltaTime);
+                float lerpG = Mathf.Lerp(cardBackground.color.g, desiredColor.g, highlightSpeed * Time.unscaledDeltaTime);
+                float lerpB = Mathf.Lerp(cardBackground.color.b, desiredColor.b, highlightSpeed * Time.unscaledDeltaTime);
+                float lerpA = Mathf.Lerp(cardBackground.color.a, desiredColor.a, highlightSpeed * Time.unscaledDeltaTime);
 
                 cardBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
             }

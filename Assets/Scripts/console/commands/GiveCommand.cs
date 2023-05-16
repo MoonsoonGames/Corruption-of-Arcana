@@ -116,7 +116,7 @@ namespace Necropanda.Utils.Console.Commands
             return args.Length;
         }
 
-        private bool IsValidObject(string objectToCheckName)
+        public bool IsValidObject(string objectToCheckName)
         {
             if (objects.ContainsKey(objectToCheckName))
             {
@@ -132,7 +132,7 @@ namespace Necropanda.Utils.Console.Commands
             }
         }
 
-        private void GiveToPlayer(string objectName)
+        public void GiveToPlayer(string objectName)
         {
             if (objects[objectName].GetType() == typeof(Weapon))
             {
@@ -190,8 +190,6 @@ namespace Necropanda.Utils.Console.Commands
                 Debug.Log(card.name);
             }
         }
-
-        // Need to create a function for giving the player currency(Might be able to add this to the above function).
 
         [ContextMenu("Log Dictionary Items")]
         private void LogGiveableItemsDictionary()
