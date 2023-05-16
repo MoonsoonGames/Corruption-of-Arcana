@@ -292,9 +292,6 @@ namespace Necropanda
                 savedCollection = string.Join(", ", (object[])DeckManager.instance.collection.ToArray()),
                 savedMajorArcana = string.Join(", ", (object[])DeckManager.instance.majorArcana.ToArray()),
 
-
-
-
                 // savedCollection = DeckManager.instance.collection,
                 // savedMajorArcana = DeckManager.instance.majorArcana,
                 // maxHealth = maxHealth,
@@ -343,41 +340,11 @@ namespace Necropanda
 
             foreach (string card in splitCollection)
             {
-
-                if (!giveCommand.IsValidObject(card))
-                {
-                    Debug.Log("NOT VALID, ATTEMPTING FIX");
-                    try
-                    {
-                        string newCard = RemoveNonPrintableChars(card);
-                        giveCommand.GiveToPlayer(newCard);
-                    }
-                    catch (KeyNotFoundException)
-                    {
-                        Debug.Log("FIX FAILED");
-                        throw new KeyNotFoundException();
-                    }
-                }
                 giveCommand.GiveToPlayer(card);
             }
 
             foreach (string card in splitMajorArcana)
             {
-                Debug.Log(card);
-                if (!giveCommand.IsValidObject(card))
-                {
-                    Debug.Log("NOT VALID, ATTEMPTING FIX");
-                    try
-                    {
-                        string newCard = RemoveNonPrintableChars(card);
-                        giveCommand.GiveToPlayer(newCard);
-                    }
-                    catch (KeyNotFoundException)
-                    {
-                        Debug.Log("FIX FAILED");
-                        throw new KeyNotFoundException();
-                    }
-                }
                 giveCommand.GiveToPlayer(card);
             }
 
@@ -429,22 +396,12 @@ namespace Necropanda
 
         public List<string> ListifyString(string stringToProcess)
         {
-            string thingToReplace = "(Necropanda.Spell)";
+            string thingToReplace = " (Necropanda.Spell)";
             string processedString = stringToProcess.Replace(thingToReplace, "");
+            processedString = processedString.Replace(" ", string.Empty);
             string[] splitStrings = processedString.Split(',');
 
             return new List<string>(splitStrings);
-        }
-
-        public static string RemoveNonPrintableChars(string input)
-        {
-            // Define a regular expression pattern to match non-printable characters
-            string pattern = @"[^\u0020-\u007E]"; // Matches any character outside the range of printable ASCII characters (decimal 32 to 126)
-
-            // Use Regex.Replace to replace all non-printable characters with an empty string
-            string output = Regex.Replace(input, pattern, "");
-
-            return output;
         }
     }
 
