@@ -338,14 +338,18 @@ namespace Necropanda
             splitCollection = ListifyString(saveData.savedCollection);
             splitMajorArcana = ListifyString(saveData.savedMajorArcana);
 
+            DeckManager.instance.collection.Clear();
+            DeckManager.instance.majorArcana.Clear();
+
             foreach (string card in splitCollection)
             {
-                //giveCommand.GiveToPlayer(card);
+                giveCommand.GiveToPlayer(card);
             }
 
             foreach (string card in splitMajorArcana)
             {
-                //giveCommand.GiveToPlayer(card);
+                //Instead of this, add it to the 
+                giveCommand.EquipToPlayer(card);
             }
 
 

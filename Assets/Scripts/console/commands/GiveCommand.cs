@@ -155,6 +155,28 @@ namespace Necropanda.Utils.Console.Commands
             }
         }
 
+        public void EquipToPlayer(string objectName)
+        {
+            if (objects[objectName].GetType() == typeof(Weapon))
+            {
+                // Add to deck manager list
+                DeckManager.instance.weapon = (Weapon)objects[objectName];
+            }
+            else if (objects[objectName].GetType() == typeof(Spell))
+            {
+                Spell currentSpell = (Spell)objects[objectName];
+                switch (currentSpell.cardType)
+                {
+                    case E_CardTypes.Cards:
+                        // Add to deck manager list
+                        DeckManager.instance.majorArcana.Add((Spell)objects[objectName]);
+                        break;
+                    case E_CardTypes.Potions:
+                        PotionManager.instance.ChangePotion(currentSpell.potionType, 1);
+                        break;
+                }
+            }
+        }
 
         [ContextMenu("Find Givable Items")]
         /// <summary>
