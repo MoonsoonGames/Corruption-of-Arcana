@@ -33,6 +33,14 @@ namespace Necropanda
 
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
+
+            UpdateQuestMarkers();
+        }
+
+        void UpdateQuestMarkers()
+        {
+            if (Compass.instance != null)
+                Compass.instance.CheckQuestMarkers();
         }
     }
 }

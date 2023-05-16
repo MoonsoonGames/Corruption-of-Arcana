@@ -19,7 +19,10 @@ namespace Necropanda
             restartStatic.Add("C1M");
 
             resetStatic.Add("S1M-Apothecary");
-            resetStatic.Add("S2M-Apothecary");
+            resetStatic.Add("S2M-TheElixir");
+            resetStatic.Add("S2M-Arena");
+            resetStatic.Add("S3M-FakeFortunes");
+            resetStatic.Add("S4M-Kingmaker");
 
             Quest[] allQuests = Resources.FindObjectsOfTypeAll<Quest>();
 

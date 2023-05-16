@@ -90,13 +90,8 @@ namespace Necropanda
             return new Vector2(compassUnit * angle, 0f);
         }
 
-        bool cooldown = false;
-
         public void CheckQuestMarkers()
         {
-            if (cooldown)
-                return;
-            
             foreach (var item in markers)
             {
                 if (item != null)
@@ -105,16 +100,6 @@ namespace Necropanda
                     item.CheckProgress();
                 }
             }
-
-            cooldown = true;
-            StartCoroutine(IDelayMarkersCooldown(0.5f));
-        }
-
-        IEnumerator IDelayMarkersCooldown(float delay)
-        {
-            yield return new WaitForSecondsRealtime(delay);
-
-            cooldown = false;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Necropanda
             //SelectQuest(activeQuest);
         }
 
-        Quest selectedQuest;
+        static Quest selectedQuest;
         public TextMeshProUGUI nameText, stateText, descriptionText, objName, objDescText;
 
         public void SelectQuest(Quest quest)

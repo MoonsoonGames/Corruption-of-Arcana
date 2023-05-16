@@ -126,7 +126,7 @@ namespace Necropanda
                 EnableNextObjective();
             }
 
-            UpdateQuestInfo(true);
+            UpdateQuestInfo(updateMarkers);
         }
 
         void EnableNextObjective()
@@ -188,12 +188,16 @@ namespace Necropanda
             }
 
             if (Application.isPlaying && updateMarkers)
+            {
+                Debug.Log("updating quest markers");
                 CheckQuestMarkers();
+            }
         }
 
         void CheckQuestMarkers()
         {
-            Compass.instance.CheckQuestMarkers();
+            if (Compass.instance != null)
+                Compass.instance.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
