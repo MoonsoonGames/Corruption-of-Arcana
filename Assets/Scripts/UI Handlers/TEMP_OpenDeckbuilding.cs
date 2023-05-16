@@ -75,6 +75,7 @@ namespace Necropanda
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 menu.SetActive(true);
+
                 if (menu == deckbuildingMenu)
                 {
                     getAvailableCards.LoadCards();

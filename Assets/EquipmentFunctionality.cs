@@ -19,8 +19,8 @@ public class EquipmentFunctionality : MonoBehaviour
     }
     public void Start()
     {
-        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-        openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager>(true);
+        openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>(true);
     }
 
     public void AxeTab()
@@ -56,7 +56,7 @@ public class EquipmentFunctionality : MonoBehaviour
     {
         inventoryManager.InventoryScreen.SetActive(true);
         openDeckbuilding.OpenCloseMenu(false, openDeckbuilding.weaponsMenu);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
