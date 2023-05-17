@@ -15,7 +15,6 @@ public class InventoryManager : MonoBehaviour
     public GameObject MapScreen;
     public MapSelector mapSelector;
     TEMP_OpenDeckbuilding openDeckbuilding;
-    public PlayerController Player;
 
     public void Start()
     {
@@ -64,7 +63,7 @@ public class InventoryManager : MonoBehaviour
         InventoryScreen.SetActive(false);
         MainHUD.SetActive(true);
 
-        Player.paused = false;
+        HUDScript.player.paused = false;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
