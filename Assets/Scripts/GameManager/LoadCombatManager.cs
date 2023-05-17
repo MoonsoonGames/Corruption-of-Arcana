@@ -84,10 +84,10 @@ namespace Necropanda
 
         [Header("Other Savables")]
         [SerializeField] private string sceneName;
-        [SerializeField] private GiveCommand giveCommand;
 
         [SerializeField] private List<string> splitCollection = new List<string>();
         [SerializeField] private List<string> splitMajorArcana = new List<string>();
+        // [SerializeField] private GiveCommand giveCommand;
 
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
@@ -269,7 +269,7 @@ namespace Necropanda
         /// <returns></returns>
         public object CaptureState()
         {
-            Debug.Log("Saving Player");
+            //Debug.Log("Saving Player");
 
 
             return new SaveData
@@ -313,6 +313,7 @@ namespace Necropanda
         /// <returns></returns>
         public void RestoreState(object state)
         {
+            //Debug.Log("Restoring");
             var saveData = (SaveData)state;
 
             // Player
@@ -333,21 +334,31 @@ namespace Necropanda
             // Clear any interactions for sanitary purposes, then load the save data into it.
             interacted = new List<string>(saveData.interactedWith);
 
+            // // Use give command to add them to the inventory
+            // splitCollection = ListifyString(saveData.savedCollection);
+            // splitMajorArcana = ListifyString(saveData.savedMajorArcana);
 
-            // Use give command to add them to the inventory
-            splitCollection = ListifyString(saveData.savedCollection);
-            splitMajorArcana = ListifyString(saveData.savedMajorArcana);
+            // DeckManager.instance.collection.Clear();
+            // DeckManager.instance.majorArcana.Clear();
 
-            foreach (string card in splitCollection)
-            {
-                //giveCommand.GiveToPlayer(card);
-            }
+            // foreach (string card in splitCollection)
+            // {
+            //     Debug.Log(card);
+            //     giveCommand.GiveToPlayer(card);
+            // }
 
-            foreach (string card in splitMajorArcana)
-            {
-                //giveCommand.GiveToPlayer(card);
-            }
+            // foreach (string card in splitMajorArcana)
+            // {
+            //     //Instead of this, add it to the 
+            //     Debug.Log(card);
 
+            //     if (giveCommand != null)
+            //     {
+            //         giveCommand.EquipToPlayer(card);
+            //     }
+            //     else
+            //         Debug.Log("no give command");
+            // }
 
             // maxHealth = saveData.maxHealth;
             // gold = saveData.gold;
@@ -387,7 +398,6 @@ namespace Necropanda
             // public List<UnityEngine.Object> curios;
         }
 
-
         #region Quest Data
 
         public List<Quest> progressQuestUponCombatVictory;
@@ -401,7 +411,16 @@ namespace Necropanda
             processedString = processedString.Replace(" ", string.Empty);
             string[] splitStrings = processedString.Split(',');
 
-            return new List<string>(splitStrings);
+            List<string> newString = new List<string>();
+
+            //Check to make sure each item is bigger than 1 character.
+            foreach (var item in splitStrings)
+            {
+                if (item.Length > 1)
+                    newString.Add(item);
+            }
+
+            return newString;
         }
     }
 

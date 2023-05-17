@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
 
     public void Start()
     {
-        openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
+        openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>(true);
     }
     public void JournalBTN()
     {
