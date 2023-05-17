@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Necropanda.Interfaces
 {
@@ -61,6 +62,18 @@ namespace Necropanda.Interfaces
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void Hover(TextMeshProUGUI text)
+        {
+            Debug.Log("Hover");
+            text.color = new Color(1, 0.2f, 0.8f, 1);
+        }
+
+        public void StopHover(TextMeshProUGUI text)
+        {
+            Debug.Log("Stop Hover");
+            text.color = Color.white;
         }
     }
 }
