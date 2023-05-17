@@ -152,7 +152,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat");
             loading = false;
-            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+            LoadingScene.instance.LoadScene(combatScene, lastScene, 0);
         }
 
         public void LoadCombat(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
@@ -188,7 +188,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
-            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+            LoadingScene.instance.LoadScene(combatScene, lastScene, 0);
         }
 
         public void LoadTutorial(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
@@ -223,7 +223,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
-            LoadingScene.instance.LoadScene(tutorialScene, lastScene, false);
+            LoadingScene.instance.LoadScene(tutorialScene, lastScene, 0);
         }
 
         public void AddEnemy(CharacterStats enemy, Character caster, Vector2[] points, UnityEngine.Object projectileObject, float projectileSpeed, UnityEngine.Object impactObject, UnityEngine.Object projectileFXObject, Color trailColor)

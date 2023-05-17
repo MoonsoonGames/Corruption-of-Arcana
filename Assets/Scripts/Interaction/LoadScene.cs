@@ -19,6 +19,7 @@ namespace Necropanda
     public class LoadScene : MonoBehaviour, IInteractable
     {
         public E_Scenes scene;
+        public int loadEntrance;
         public string ID;
 
         public void SetID(string newID)
@@ -37,7 +38,7 @@ namespace Necropanda
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
 
-            LoadingScene.instance.LoadScene(scene, lastScene, false);
+            LoadingScene.instance.LoadScene(scene, lastScene, 0);
         }
 
         public void LoadSetScene(E_Scenes scene)
@@ -45,7 +46,7 @@ namespace Necropanda
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
 
-            LoadingScene.instance.LoadScene(scene, lastScene, false);
+            LoadingScene.instance.LoadScene(scene, lastScene, 0);
         }
     }
 }

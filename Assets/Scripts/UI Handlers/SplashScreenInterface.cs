@@ -29,13 +29,13 @@ namespace Necropanda.Interfaces
             if (LoadingScene.instance == null)
                 Debug.LogWarning("Loading instance is null");
 
-            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
+            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, 0);
             //load game
         }
 
         public void ArenaMode()
         {
-            LoadingScene.instance.LoadScene(E_Scenes.ArenaMode, E_Scenes.Null, false);
+            LoadingScene.instance.LoadScene(E_Scenes.ArenaMode, E_Scenes.Null, 0);
         }
 
         public void LoadGame()
@@ -48,7 +48,7 @@ namespace Necropanda.Interfaces
             //Reset loadsettings/progress
 
             if (LoadingScene.instance.loadScene != E_Scenes.Null)
-                LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, true);
+                LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, -1);
             else
                 NewGame();
         }

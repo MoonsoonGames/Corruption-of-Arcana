@@ -15,6 +15,8 @@ namespace Necropanda
     public class PlayerSpawner : MonoBehaviour
     {
         public Object playerRef;
+        public Vector3[] spawnPositions;
+        public Quaternion[] spawnRotations;
 
         CinemachineBrain cmBrain;
         CinemachineFreeLook freeLook;
@@ -38,17 +40,24 @@ namespace Necropanda
             string currentSceneString = SceneManager.GetActiveScene().name;
             E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
 
-            if (LoadingScene.instance.loadLastPos)
+            if (LoadingScene.instance.loadPos <= 0 && LoadingScene.instance.loadPos < spawnPositions.Length)
             {
-                if (LoadingScene.instance.loadScene != E_Scenes.Null)
+                spawnPos = spawnPositions[LoadingScene.instance.loadPos];
+                spawnRot = spawnRotations[LoadingScene.instance.loadPos];
+            }
+            else if(LoadingScene.instance.loadScene != E_Scenes.Null)
+            {
+                if (currentScene == LoadingScene.instance.loadScene)
                 {
-                    if (currentScene == LoadingScene.instance.loadScene)
-                    {
-                        //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
-                        spawnPos = LoadCombatManager.instance.lastPos;
-                        spawnRot = LoadCombatManager.instance.lastRot;
-                        //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
-                    }
+                    //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                    spawnPos = LoadCombatManager.instance.lastPos;
+                    spawnRot = LoadCombatManager.instance.lastRot;
+                    //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                }
+                else
+                {
+                    spawnPos = spawnPositions[0];
+                    spawnRot = spawnRotations[0];
                 }
             }
 

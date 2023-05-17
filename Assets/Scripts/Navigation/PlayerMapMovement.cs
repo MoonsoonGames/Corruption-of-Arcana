@@ -74,7 +74,7 @@ namespace Necropanda
             {
                 if (Input.GetButton("Interact"))
                 {
-                    LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, false);
+                    LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, 0);
                 }
             }
 
