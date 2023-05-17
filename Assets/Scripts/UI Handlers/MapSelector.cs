@@ -27,12 +27,17 @@ namespace Necropanda
         public HUDInterface hudInterface;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             currentMap.SetActive(false);
+            Invoke("Setup", 0.1f);
+        }
+
+        void Setup()
+        {
             currentMapImage = currentMap.GetComponent<Image>();
-            playerController = GameObject.FindObjectOfType<PlayerController>();
-            hudInterface = GameObject.FindObjectOfType<HUDInterface>();
+            playerController = GameObject.FindObjectOfType<PlayerController>(true);
+            hudInterface = GameObject.FindObjectOfType<HUDInterface>(true);
         }
 
         private void Update()
@@ -81,8 +86,11 @@ namespace Necropanda
 
         private void SetVariables()
         {
-            playerController.paused = !playerController.paused;
-            playerController.canMove = !playerController.canMove;
+            if (playerController != null)
+            {
+                playerController.paused = !playerController.paused;
+                playerController.canMove = !playerController.canMove;
+            }
             hudInterface.gameIsPaused = !hudInterface.gameIsPaused;
 
             Cursor.lockState = CursorLockMode.Confined;
