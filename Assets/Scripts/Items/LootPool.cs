@@ -56,6 +56,9 @@ namespace Necropanda
 
         void GiveItem(Object item)
         {
+            if (!Application.isPlaying)
+                return;
+
             if (item.GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
@@ -68,7 +71,7 @@ namespace Necropanda
                 {
                     case E_CardTypes.Cards:
                         // Add to deck manager list
-                        DeckManager.instance.collection.Add((Spell)item);
+                        DeckManager.instance.collection.Add(currentSpell);
                         break;
                     case E_CardTypes.Potions:
                         PotionManager.instance.ChangePotion(currentSpell.potionType, 1);

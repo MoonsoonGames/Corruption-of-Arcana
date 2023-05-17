@@ -59,13 +59,7 @@ namespace Necropanda
                     OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
             }
 
-            if (Input.GetKeyDown(KeyCode.J) && cooldown)
-            {
-                if (!weaponsMenu.activeSelf && !deckbuildingMenu.activeSelf)
-                    OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
-            }
-
-            if (Input.GetKeyDown(KeyCode.L) && cooldown)
+            if (Input.GetKeyDown(KeyCode.E) && cooldown)
             {
                 if (!upgradeDeckMenu.activeSelf && !deckbuildingMenu.activeSelf)
                     OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
@@ -81,6 +75,7 @@ namespace Necropanda
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 menu.SetActive(true);
+
                 if (menu == deckbuildingMenu)
                 {
                     getAvailableCards.LoadCards();

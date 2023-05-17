@@ -58,5 +58,10 @@ namespace Necropanda
                 DeckManager.instance.SaveDeck();
             }
         }
+
+        public void CloseMenu()
+        {
+            TEMP_OpenDeckbuilding.instance.OpenCloseMenu(false, this.gameObject);
+        }
     }
 }

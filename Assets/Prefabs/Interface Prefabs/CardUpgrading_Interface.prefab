@@ -1227,6 +1227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 4452522178550316304}
+  cardSpace: {fileID: 0}
   showArt: 0
   useSibIndex: 1
   availableCards: 01000000
@@ -1723,7 +1724,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 247141050281167385}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2237,9 +2238,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Necropanda.BuildDeck, Assembly-CSharp
+      - m_Target: {fileID: 7986892618867139641}
+        m_TargetAssemblyTypeName: Necropanda.UpgradeDeck, Assembly-CSharp
         m_MethodName: SaveCards
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7986892618867139641}
+        m_TargetAssemblyTypeName: Necropanda.BuildDeck, Assembly-CSharp
+        m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2370,8 +2383,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7975841265680974263}
   m_HandleRect: {fileID: 6313630108169266257}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2492,6 +2505,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 6859608618842774444}
+  cardSpace: {fileID: 8893594556894244930, guid: 4c212961c6e0b4a4ba6634a1c7657465,
+    type: 3}
   showArt: 0
   useSibIndex: 1
   availableCards: 01000000
@@ -2520,7 +2535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
-  m_VerticalFit: 2
+  m_VerticalFit: 1
 --- !u!1 &7234435932121506746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 7234435932121506746}
+  cardSpace: {fileID: 0}
   showArt: 0
   useSibIndex: 1
   availableCards: 01000000

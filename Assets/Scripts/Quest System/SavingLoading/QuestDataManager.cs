@@ -30,7 +30,7 @@ namespace Necropanda
             }
             else if (instance != this)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
 

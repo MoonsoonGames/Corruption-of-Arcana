@@ -56,7 +56,7 @@ namespace Necropanda
                 Destroy(content.transform.GetChild(i).gameObject);
             }
 
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
 
             foreach (Spell spell in collectionCopy)
             {

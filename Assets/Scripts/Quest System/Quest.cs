@@ -44,14 +44,14 @@ namespace Necropanda
         {
             ForceResetQuest();
             StartQuest("Mama R", null);
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         [ContextMenu("Force Start Quest")]
         public void ForceStartQuest()
         {
             StartQuest("Mama R", null);
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         [ContextMenu("Force Reset Quest")]
@@ -65,7 +65,7 @@ namespace Necropanda
                 quest.ForceResetQuest();
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         public Quest GetParent()
@@ -82,7 +82,7 @@ namespace Necropanda
 
         public void StartQuest(string questGiver, Quest parent)
         {
-            Debug.Log("Start quest " + questName);
+            //Debug.Log("Start quest " + questName);
 
             if (parent != null)
                 parentQuest = parent;
@@ -95,11 +95,16 @@ namespace Necropanda
             EnableNextObjective();
             EnableAllObjectives();
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         [ContextMenu("Quest Progress")]
-        public void QuestProgress()
+        public void QuestProgressContext()
+        {
+            QuestProgress(true);
+        }
+
+        public void QuestProgress(bool updateMarkers)
         {
             if (state != E_QuestStates.InProgress)
                 return;
@@ -110,7 +115,7 @@ namespace Necropanda
             {
                 if (parentQuest != null)
                 {
-                    parentQuest.QuestProgress();
+                    parentQuest.QuestProgress(updateMarkers);
                 }
 
                 state = E_QuestStates.Completed;
@@ -121,7 +126,7 @@ namespace Necropanda
                 EnableNextObjective();
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(updateMarkers);
         }
 
         void EnableNextObjective()
@@ -134,7 +139,7 @@ namespace Necropanda
                 }
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         void EnableAllObjectives()
@@ -147,12 +152,12 @@ namespace Necropanda
                 }
             }
 
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
         }
 
         void GiveRewards()
         {
-            UpdateQuestInfo();
+            UpdateQuestInfo(true);
 
             if (overrideParentRewards)
             {
@@ -175,14 +180,24 @@ namespace Necropanda
             }
         }
 
-        void UpdateQuestInfo()
+        void UpdateQuestInfo(bool updateMarkers)
         {
             if (QuestInfo.instance != null)
             {
                 QuestInfo.instance.UpdateQuestInfo();
             }
 
-            //SaveQuestData();
+            if (Application.isPlaying && updateMarkers)
+            {
+                Debug.Log("updating quest markers");
+                CheckQuestMarkers();
+            }
+        }
+
+        void CheckQuestMarkers()
+        {
+            if (Compass.instance != null)
+                Compass.instance.CheckQuestMarkers();
         }
 
         public Quest GetCurrentQuestProgress()
@@ -283,6 +298,58 @@ namespace Necropanda
                 state = E_QuestStates.Completed;
             else
                 state = E_QuestStates.InProgress;
+        }
+
+        #endregion
+
+        #region Dev Command
+
+        [ContextMenu("Force Quest - Cave Start")]
+        public void TestQuestCommand13()
+        {
+            DevForceSetQuestProgress(13);
+        }
+
+        public void DevForceSetQuestProgress(int progress)
+        {
+            if (parentQuest != null)
+            {
+                parentQuest.DevForceSetQuestProgress(progress);
+                return;
+            }
+
+            Debug.Log(questName + " is the parent for quest resetting");
+            ForceRestartQuest();
+
+            RForceSetQuestProgress(progress, 0);
+
+            if (Application.isPlaying)
+                UpdateQuestInfo(true);
+        }
+
+        public int RForceSetQuestProgress(int progress, int count)
+        {
+            if (subQuests.Length == 0)
+            {
+                while (count < progress && currentProgress < maxProgress)
+                {
+                    Debug.Log(questName + " is progressing " + count);
+                    QuestProgress(false);
+                    count++;
+                }
+                return count;  
+            }
+
+            foreach (var item in subQuests)
+            {
+                if (count < progress)
+                {
+                    Debug.Log(questName + " is progressing children (recursive) " + count);
+                    count = item.RForceSetQuestProgress(progress, count);
+                }
+            }
+
+            return count;
         }
 
         #endregion

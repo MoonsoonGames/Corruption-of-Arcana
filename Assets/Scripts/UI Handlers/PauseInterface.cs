@@ -42,11 +42,6 @@ namespace Necropanda.Interfaces
             Pausemenu.SetActive(false);
         }
 
-        public void Help()
-        {
-
-        }
-
         public void Credits()
         {
             CreditsScreen.SetActive(true);

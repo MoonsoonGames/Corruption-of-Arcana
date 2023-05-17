@@ -12,6 +12,8 @@ namespace Necropanda
 {
     public class Compass : MonoBehaviour
     {
+        public static Compass instance;
+
         public float offset = 22.5f;
         public RawImage compassHeadings;
         public Image MarkerHolder;
@@ -27,6 +29,8 @@ namespace Necropanda
 
         private void Start()
         {
+            instance = this;
+
             if (player == null)
             {
                 player = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();

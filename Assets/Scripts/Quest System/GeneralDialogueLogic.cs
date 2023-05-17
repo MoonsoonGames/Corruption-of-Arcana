@@ -12,6 +12,13 @@ namespace Necropanda
 {
     public class GeneralDialogueLogic : MonoBehaviour
     {
+        public static GeneralDialogueLogic instance { get; private set; }
+
+        private void Start()
+        {
+            instance = this;
+        }
+
         public void OpenUpgradingMenu()
         {
             TEMP_OpenDeckbuilding.instance.OpenCloseMenu(true, TEMP_OpenDeckbuilding.instance.upgradeDeckMenu);
@@ -27,14 +34,13 @@ namespace Necropanda
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
 
-            CheckQuestMarkers();
+            UpdateQuestMarkers();
         }
 
-        void CheckQuestMarkers()
+        void UpdateQuestMarkers()
         {
-            Compass compass = GameObject.FindObjectOfType<Compass>();
-
-            compass.CheckQuestMarkers();
+            if (Compass.instance != null)
+                Compass.instance.CheckQuestMarkers();
         }
     }
 }
