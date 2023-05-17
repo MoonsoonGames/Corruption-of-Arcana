@@ -40,7 +40,7 @@ namespace Necropanda
             Singleton();
         }
 
-        public int loadPos;
+        public static int loadPos;
         public E_Scenes navScene;
         public E_Scenes loadScene;
 
@@ -61,14 +61,14 @@ namespace Necropanda
                 loadScene = sceneEnum;
         }
 
-        public void LoadScene(E_Scenes scene, E_Scenes lastScene, int loadPos)
+        public void LoadScene(E_Scenes scene, E_Scenes lastScene, int newLoadPos)
         {
             if (scene == E_Scenes.Navigation)
             {
                 navScene = lastScene;
             }
 
-            this.loadPos = loadPos;
+            loadPos = newLoadPos;
 
             if (lastScene != E_Scenes.Null)
             {

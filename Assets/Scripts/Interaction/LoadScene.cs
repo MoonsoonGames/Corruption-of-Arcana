@@ -38,15 +38,17 @@ namespace Necropanda
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
 
-            LoadingScene.instance.LoadScene(scene, lastScene, 0);
+            if (LoadingScene.instance != null)
+                LoadingScene.instance.LoadScene(scene, lastScene, loadEntrance);
         }
 
-        public void LoadSetScene(E_Scenes scene)
+        public void LoadSetScene(E_Scenes scene, int entrance)
         {
             string sceneString = SceneManager.GetActiveScene().name;
             E_Scenes lastScene = HelperFunctions.StringToSceneEnum(sceneString);
 
-            LoadingScene.instance.LoadScene(scene, lastScene, 0);
+            if (LoadingScene.instance != null)
+                LoadingScene.instance.LoadScene(scene, lastScene, entrance);
         }
     }
 }

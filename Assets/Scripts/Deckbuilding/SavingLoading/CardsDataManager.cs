@@ -104,6 +104,9 @@ namespace Necropanda
 
         void LoadData(CardData collectionData, CardData equipData)
         {
+            if (giveCommand == null)
+                return;
+
             DeckManager.instance.collection.Clear();
             DeckManager.instance.majorArcana.Clear();
 

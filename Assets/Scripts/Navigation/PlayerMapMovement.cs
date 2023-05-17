@@ -65,7 +65,11 @@ namespace Necropanda
 
             text.text = str;
         }
-        E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
+
+        E_Scenes enterLevel = E_Scenes.Null;
+        int entrance = 0;
+
+        public void SetLevel(E_Scenes scene, int entrance) { enterLevel = scene; this.entrance = entrance; }
 
         void FixedUpdate()
         {
