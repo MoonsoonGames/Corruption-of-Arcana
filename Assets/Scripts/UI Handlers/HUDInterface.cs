@@ -25,6 +25,12 @@ namespace Necropanda.Interfaces
             mainHUD.SetActive(true);
             Pausemenu.SetActive(false);
             JournalCode = Journal.GetComponentInChildren<JournalMainCode>(true);
+            QuestMenuUpdater updater = GetComponentInChildren<QuestMenuUpdater>(true);
+
+            if (updater != null)
+            {
+                updater.Setup();
+            }
         }
 
         // Update is called once per frame
