@@ -17,7 +17,7 @@ namespace Necropanda
         public WaypointNodes[] paths;
         //public RandomEvent[] events;
         public E_Scenes loadScene;
-        int entrance = 0;
+        public int entrance = 0;
 
         private void Start()
         {
