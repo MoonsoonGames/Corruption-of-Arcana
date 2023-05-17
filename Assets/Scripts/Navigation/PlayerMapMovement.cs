@@ -25,6 +25,7 @@ namespace Necropanda
         bool setup = false;
 
         public TextMeshProUGUI text;
+        public bool show;
 
         private void Start()
         {
@@ -64,6 +65,8 @@ namespace Necropanda
             setup = true;
 
             text.text = str;
+
+            text.gameObject.SetActive(show);
         }
         E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
 
