@@ -45,7 +45,7 @@ namespace Necropanda.SaveSystem
             }
             else if (instance != this)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
 
@@ -64,7 +64,7 @@ namespace Necropanda.SaveSystem
         [ContextMenu("Save")]
         public void Save()
         {
-            Debug.Log("saving");
+            //Debug.Log("saving");
             var state = LoadFile();
             CaptureState(state);
             SaveFile(state);
@@ -76,7 +76,7 @@ namespace Necropanda.SaveSystem
         [ContextMenu("Load")]
         public void Load()
         {
-            Debug.Log("loading");
+            //Debug.Log("loading");
             var state = LoadFile();
             RestoreState(state);
         }

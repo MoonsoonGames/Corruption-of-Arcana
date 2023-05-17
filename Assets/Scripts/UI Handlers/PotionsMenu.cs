@@ -15,13 +15,15 @@ namespace Necropanda
         InventoryManager inventoryManager;
         public void Start()
         {
-            inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-            openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>();
+            inventoryManager = GameObject.FindObjectOfType<InventoryManager>(true);
+            openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>(true);
         }
         public void Close()
         {
             inventoryManager.InventoryScreen.SetActive(true);
-            openDeckbuilding.OpenCloseMenu(false, openDeckbuilding.weaponsMenu);
+            openDeckbuilding.OpenCloseMenu(false, this.gameObject);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 }
