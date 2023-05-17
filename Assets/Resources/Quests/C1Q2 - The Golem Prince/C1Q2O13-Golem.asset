@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdeda0f4898d3b644a67747e810ed059, type: 3}
-  m_Name: C1Q2O13-Trapped
+  m_Name: C1Q2O13-Golem
   m_EditorClassIdentifier: 
   questName: The Golem Prince
   mainQuest: 1
   questNumber: 2
-  questDescription: The golem has blocked you off from the way you entered, use the
-    <b>TOWER</b> card to destroy the crystal barrier
+  questDescription: Delve deeper into the cave
   state: 2
   currentProgress: 1
   maxProgress: 1
@@ -24,6 +23,10 @@ MonoBehaviour:
   subQuests: []
   linear: 1
   rewards:
-    lootPools: []
+    lootPools:
+    - objects:
+      - {fileID: 11400000, guid: 8a61732549a6e5e438ba0fb5c82caa3e, type: 2}
+      number: {x: 1, y: 1}
+      rewardAll: 1
     gold: {x: 0, y: 0}
   overrideParentRewards: 0
