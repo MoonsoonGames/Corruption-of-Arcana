@@ -23,7 +23,7 @@ namespace Necropanda
         {
             DeckManager.instance.ResetDecks();
             LoadCombatManager.instance.EnemiesDefeated();
-            LoadingScene.instance.LoadLastScene(E_Scenes.Null, true);
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null, -1);
         }
 
         public void LoadDefeatScene()
@@ -31,7 +31,7 @@ namespace Necropanda
             DeckManager.instance.ResetDecks();
             LoadCombatManager.instance.enemyIDs.Clear();
             LoadCombatManager.instance.progressQuestUponCombatVictory = null;
-            LoadingScene.instance.LoadLastScene(E_Scenes.Null, false);
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null, 0);
         }
     }
 }

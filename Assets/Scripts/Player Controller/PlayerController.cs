@@ -87,7 +87,7 @@ namespace Necropanda.Player
             if (!isGrounded)
             {
                 //Debug.Log(velocity.y);
-                velocity.y = Physics.gravity.y * (fallMultiplyer - 1) * Time.deltaTime;
+                velocity.y = gravity * (fallMultiplyer - 1) * Time.deltaTime;
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -137,7 +137,7 @@ namespace Necropanda.Player
             Vector3 moveVector = right * x + forward * z;
 
             moveVector.Normalize();
-
+            moveVector.y = 0;
             // Move using the controller component
             controller.Move(moveVector * speed * Time.deltaTime);
 

@@ -172,6 +172,7 @@ namespace Necropanda
     [System.Serializable]
     public struct TutorialMessagesTransform
     {
+        [TextArea(3, 10)]
         public string message;
         public Vector3 position;
         public Vector3 scale;

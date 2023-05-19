@@ -134,7 +134,7 @@ namespace Necropanda.Utils.Console.Commands
 
         public void GiveToPlayer(string objectName)
         {
-            Debug.Log(objectName);
+            //Debug.Log(objectName);
             if (objects[objectName].GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
