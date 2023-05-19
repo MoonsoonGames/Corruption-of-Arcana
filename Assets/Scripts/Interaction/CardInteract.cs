@@ -12,6 +12,7 @@ namespace Necropanda
     public class CardInteract : MonoBehaviour, IInteractable
     {
         public string ID;
+        public string message;
 
         public void SetID(string newID)
         {
@@ -26,7 +27,7 @@ namespace Necropanda
         {
             GetInteractCards interactCards = GameObject.FindObjectOfType<GetInteractCards>(true);
             interactCards.gameObject.SetActive(true);
-            interactCards.LoadCards(spells, operation, interactable);
+            interactCards.LoadCards(spells, operation, interactable, message);
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Necropanda.Interactable;
+using TMPro;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -15,11 +16,13 @@ namespace Necropanda
         public GameObject content, interactContent;
         public Object cardPrefab;
 
+        public TextMeshProUGUI messageText;
+
         public List<Spell> requireSpells { get; private set; }
         public E_Operations operation = E_Operations.AND;
         public Interactable.Interactable interactable;
 
-        public void LoadCards(List<Spell> spells, E_Operations operation, Interactable.Interactable interactable)
+        public void LoadCards(List<Spell> spells, E_Operations operation, Interactable.Interactable interactable, string message)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
@@ -45,6 +48,9 @@ namespace Necropanda
                 List<Spell> allSpells = HelperFunctions.CombineLists<Spell>(DeckManager.instance.collection, DeckManager.instance.majorArcana);
                 StartCoroutine(SetupDeck(content, allSpells, 0.05f));
             }
+
+            messageText.text = message;
+            messageText.gameObject.SetActive(message != null);
         }
 
         IEnumerator SetupDeck(GameObject content, List<Spell> collection, float delay)

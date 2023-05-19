@@ -59,7 +59,8 @@ namespace Necropanda
         public void Check()
         {
             RequireQuestProgress requireQuestProgress = GetComponent<RequireQuestProgress>();
-            requireQuestProgress.CheckProgress();
+            if (requireQuestProgress != null)
+                requireQuestProgress.CheckProgress();
         }
 
         public void FightButton()

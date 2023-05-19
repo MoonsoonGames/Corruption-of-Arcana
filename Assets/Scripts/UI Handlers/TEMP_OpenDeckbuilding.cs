@@ -70,8 +70,9 @@ namespace Necropanda
         {
             if (open)
             {
+                Time.timeScale = 0;
                 cooldown = false;
-                Invoke("StartCooldownTimer", cooldownTime);
+                StartCoroutine(Cooldown(cooldownTime));
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 menu.SetActive(true);
@@ -94,6 +95,7 @@ namespace Necropanda
             }
             else
             {
+                Time.timeScale = 1;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = false;
                 if (menu == deckbuildingMenu)
@@ -104,8 +106,9 @@ namespace Necropanda
             }
         }
 
-        void StartCooldownTimer()
+        IEnumerator Cooldown(float delay)
         {
+            yield return new WaitForSecondsRealtime(delay);
             cooldown = true;
         }
     }

@@ -40,7 +40,7 @@ namespace Necropanda
             Singleton();
         }
 
-        public bool loadLastPos;
+        public static int loadPos;
         public E_Scenes navScene;
         public E_Scenes loadScene;
 
@@ -61,14 +61,14 @@ namespace Necropanda
                 loadScene = sceneEnum;
         }
 
-        public void LoadScene(E_Scenes scene, E_Scenes lastScene, bool loadLastPos)
+        public void LoadScene(E_Scenes scene, E_Scenes lastScene, int newLoadPos)
         {
             if (scene == E_Scenes.Navigation)
             {
                 navScene = lastScene;
             }
 
-            this.loadLastPos = loadLastPos;
+            loadPos = newLoadPos;
 
             if (lastScene != E_Scenes.Null)
             {
@@ -87,12 +87,12 @@ namespace Necropanda
             SceneManager.LoadScene(scene.ToString());
         }
 
-        public void LoadLastScene(E_Scenes lastScene, bool loadLastPos)
+        public void LoadLastScene(E_Scenes lastScene, int loadPos)
         {
             E_Scenes scene = LoadCombatManager.instance.lastScene;
 
             //Save current player position if applicable
-            LoadScene(scene, lastScene, loadLastPos);
+            LoadScene(scene, lastScene, loadPos);
         }
 
         public void SceneLoaded()

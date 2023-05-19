@@ -108,6 +108,22 @@ namespace Necropanda
             equippedSpellsSaved = saveData.equippedSpells;
         }
 
+        public List<Spell> defaultSpells;
+
+        public void ResetState()
+        {
+            //TODO: Reset all values to default and then save them
+            collectedSpellsSaved = new List<string>();
+            equippedSpellsSaved = new List<string>();
+
+            foreach (var item in defaultSpells)
+            {
+                equippedSpellsSaved.Add(spellRefTable.GetReferenceDataFromSpell(item));
+            }
+
+            CaptureState();
+        }
+
         [System.Serializable]
         private struct SaveData
         {

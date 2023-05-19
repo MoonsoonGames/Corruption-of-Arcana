@@ -152,7 +152,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat");
             loading = false;
-            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+            LoadingScene.instance.LoadScene(combatScene, lastScene, 0);
         }
 
         public void LoadCombat(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
@@ -188,7 +188,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
-            LoadingScene.instance.LoadScene(combatScene, lastScene, false);
+            LoadingScene.instance.LoadScene(combatScene, lastScene, 0);
         }
 
         public void LoadTutorial(GameObject player, E_Scenes lastScene, List<CharacterStats> newEnemies, List<Quest> quests)
@@ -223,7 +223,7 @@ namespace Necropanda
 
             Debug.Log("Interacted - Load Combat from Arena/Dialogue with quests");
             loading = false;
-            LoadingScene.instance.LoadScene(tutorialScene, lastScene, false);
+            LoadingScene.instance.LoadScene(tutorialScene, lastScene, 0);
         }
 
         public void AddEnemy(CharacterStats enemy, Character caster, Vector2[] points, UnityEngine.Object projectileObject, float projectileSpeed, UnityEngine.Object impactObject, UnityEngine.Object projectileFXObject, Color trailColor)
@@ -371,6 +371,19 @@ namespace Necropanda
             // arcanaPotAmount = saveData.arcanaPotAmount;
             // // Inventory
             // curios.AddRange(saveData.curios);
+        }
+
+        public void ResetState()
+        {
+            //TODO: Reset all values to default and then save them
+            lastPos = Vector3.negativeInfinity;
+
+            GameObject.FindObjectOfType<LoadingScene>().loadScene = E_Scenes.Null;
+
+            // Clear any interactions for sanitary purposes, then load the save data into it.
+            interacted = new List<string>();
+
+            CaptureState();
         }
 
         /// <summary>

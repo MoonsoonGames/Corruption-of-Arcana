@@ -25,6 +25,7 @@ namespace Necropanda
         bool setup = false;
 
         public TextMeshProUGUI text;
+        public bool show;
 
         private void Start()
         {
@@ -64,8 +65,14 @@ namespace Necropanda
             setup = true;
 
             text.text = str;
+
+            text.gameObject.SetActive(show);
         }
-        E_Scenes enterLevel = E_Scenes.Null; public void SetLevel(E_Scenes scene) { enterLevel = scene; }
+
+        E_Scenes enterLevel = E_Scenes.Null;
+        int entrance = 0;
+
+        public void SetLevel(E_Scenes scene, int entrance) { enterLevel = scene; this.entrance = entrance; }
 
         void FixedUpdate()
         {
@@ -74,7 +81,8 @@ namespace Necropanda
             {
                 if (Input.GetButton("Interact"))
                 {
-                    LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, false);
+                    if (LoadingScene.instance != null)
+                        LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, entrance);
                 }
             }
 
