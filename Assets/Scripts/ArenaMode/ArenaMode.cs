@@ -25,6 +25,8 @@ namespace Necropanda
 
         public void OpenArena()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             canvas.SetActive(true);
             foreach(var item in fightButtons)
             {

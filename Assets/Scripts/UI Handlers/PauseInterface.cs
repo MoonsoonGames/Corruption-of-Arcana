@@ -42,11 +42,6 @@ namespace Necropanda.Interfaces
             Pausemenu.SetActive(false);
         }
 
-        public void Help()
-        {
-
-        }
-
         public void Credits()
         {
             CreditsScreen.SetActive(true);
@@ -64,7 +59,7 @@ namespace Necropanda.Interfaces
         public void QuitGame()
         {
             //ConfirmationScreen.SetActive(true);
-            LoadingScene.instance.LoadScene(E_Scenes.SplashScreen, E_Scenes.Null, false);
+            LoadingScene.instance.LoadScene(E_Scenes.SplashScreen, E_Scenes.Null, 0);
         }
 
         public void CloseCredits()

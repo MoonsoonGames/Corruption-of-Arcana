@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -30,7 +31,7 @@ namespace Necropanda
             }
             else if (instance != this)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
 
@@ -41,10 +42,8 @@ namespace Necropanda
         {
             Singleton();
             SaveManager.instance.saveAllData += SaveSceneData;
-            SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
-            SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
-            SaveManager.instance.loadAllData += LoadQuestData;
-            SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
+            SaveManager.instance.loadAllData += LoadSceneData;
+            SaveManager.instance.loadAllBaseData += ResetSceneData;
         }
 
         [ContextMenu("Save Quest Data")]
@@ -53,39 +52,27 @@ namespace Necropanda
             //SaveScene
             if (LoadingScene.instance != null)
                 LoadingScene.instance.SaveScene();
+
+            // Save scene name, pos, rot
+            SavingLoading.instance.Save();
         }
 
-        [ContextMenu("Save Base Quest Data")]
-        public void SaveBaseQuestData()
-        {
-            //SaveBaseSceneData
-            if (LoadingScene.instance != null)
-                LoadingScene.instance.SaveScene();
-        }
-
-        [ContextMenu("Overide Base Quest Data")]
-        public void OverideBaseQuestData()
-        {
-            if (LoadingScene.instance != null)
-                LoadingScene.instance.SaveScene();
-        }
-
-        [ContextMenu("Load Quest Data")]
-        public void LoadQuestData()
+        [ContextMenu("Load Scene Data")]
+        public void LoadSceneData()
         {
             //LoadingScene.instance.loadScene = GetData();
+            SavingLoading.instance.Load();
+
         }
 
         [ContextMenu("Load Base Quest Data")]
-        public void LoadBaseQuestData()
+        public void ResetSceneData()
         {
             //LoadingScene.instance.loadScene = GetData();
+            SavingLoading.instance.ResetData();
         }
 
-        [ContextMenu("Reset Quest Data")]
-        public void ResetQuestData()
-        {
-            //LoadingScene.instance.loadScene = GetData();
-        }
+        public E_Scenes sceneToLoad;
+        public Vector3 playerPos;
     }
 }

@@ -17,8 +17,10 @@ namespace Necropanda
         public DeckLoadout equippedDeck;
 
         // Start is called before the first frame update
-        public virtual void OpenMenu()
+        public virtual IEnumerator OpenMenu(float delay)
         {
+            yield return new WaitForSeconds(delay);
+
             if (collectedDeck != null)
             {
                 if (collectedDeck.CurrentCardsLength() > 0)
@@ -55,6 +57,11 @@ namespace Necropanda
 
                 DeckManager.instance.SaveDeck();
             }
+        }
+
+        public void CloseMenu()
+        {
+            TEMP_OpenDeckbuilding.instance.OpenCloseMenu(false, this.gameObject);
         }
     }
 }

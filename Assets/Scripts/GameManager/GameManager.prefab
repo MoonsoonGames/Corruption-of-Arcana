@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6265937370777209544}
   - component: {fileID: 747937194218677508}
   - component: {fileID: 370352225201231436}
+  - component: {fileID: 4904587321842262530}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -33,8 +34,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3837750563838812880}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63,6 +63,14 @@ MonoBehaviour:
   enemiesEndCombat: []
   enemyIDs: []
   backdrop: {fileID: 0}
+  posX: 0
+  posY: 0
+  posZ: 0
+  health: 0
+  sceneName: 
+  giveCommand: {fileID: 0}
+  splitCollection: []
+  splitMajorArcana: []
   progressQuestUponCombatVictory: []
 --- !u!114 &7335189887903770136
 MonoBehaviour:
@@ -115,10 +123,10 @@ MonoBehaviour:
   unlockedWeapons:
   - {fileID: 11400000, guid: 6f637ba1ec9613744afbbde0e259e161, type: 2}
   - {fileID: 11400000, guid: 6ba9f426d6173a847853875a11213ea7, type: 2}
-  - {fileID: 11400000, guid: dc5977c197edf9c47ae1117781efa072, type: 2}
+  - {fileID: 11400000, guid: fc11f688641664048bb0f2c93c3c36d9, type: 2}
   - {fileID: 11400000, guid: 18b1425dee8223a439a328563aadf3dc, type: 2}
   - {fileID: 11400000, guid: b3031756185baca4c9e08b11609ff046, type: 2}
-  - {fileID: 11400000, guid: b9f218c6825c0f746ab03bcbe1c30819, type: 2}
+  - {fileID: 11400000, guid: 97ae65617cb03c14ba98444b697dc453, type: 2}
   majorArcana: []
   playerDeck: []
   playedCards: []
@@ -187,47 +195,16 @@ MonoBehaviour:
   haste: 0
   fortitude: 0
   poison: 0
---- !u!1 &8296228320225068966
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3837750563838812880}
-  - component: {fileID: 3126634773956409731}
-  m_Layer: 0
-  m_Name: SavingLoading
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3837750563838812880
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296228320225068966}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4415307684541209905}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3126634773956409731
+--- !u!114 &4904587321842262530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296228320225068966}
+  m_GameObject: {fileID: 4415307684541209907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26faed7128c10fd4c8066b51627034f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 228d0cf0cb8781c41bc5cc5f8e540824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: e91cad69-8dc8-40db-aac8-377c9e920db9

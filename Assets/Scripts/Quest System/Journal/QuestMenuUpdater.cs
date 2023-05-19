@@ -39,11 +39,13 @@ namespace Necropanda
             //SelectQuest(activeQuest);
         }
 
-        Quest selectedQuest;
+        static Quest selectedQuest;
         public TextMeshProUGUI nameText, stateText, descriptionText, objName, objDescText;
 
         public void SelectQuest(Quest quest)
         {
+            if (quest == null) return;
+            Debug.Log("Select quest " + quest.questName);
             selectedQuest = quest;
 
             nameText.text = selectedQuest.questName;
@@ -71,6 +73,12 @@ namespace Necropanda
             //Set active quest as current quest
             QuestInfo.instance.SetTrackingQuest(selectedQuest);
             QuestInfo.instance.UpdateQuestInfo();
+        }
+
+        public void Setup()
+        {
+            Debug.Log("Select Quest (Start)");
+            SelectQuest(selectedQuest);
         }
     }
 }

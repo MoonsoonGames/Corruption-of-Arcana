@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Necropanda.Interfaces
 {
@@ -19,15 +20,23 @@ namespace Necropanda.Interfaces
         public void NewGame()
         {
             SaveManager.instance.LoadAllBaseData();
-            //SaveManager.instance.SaveAllData();
+            SaveManager.instance.SaveAllData();
             //Reset loadsettings/progress
-            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, false);
+            if (initialScene == E_Scenes.Null)
+            {
+                Debug.LogWarning("no initial scene");
+            }
+
+            if (LoadingScene.instance == null)
+                Debug.LogWarning("Loading instance is null");
+
+            LoadingScene.instance.LoadScene(initialScene, E_Scenes.Null, 0);
             //load game
         }
 
         public void ArenaMode()
         {
-            LoadingScene.instance.LoadScene(E_Scenes.ArenaMode, E_Scenes.Null, false);
+            LoadingScene.instance.LoadScene(E_Scenes.ArenaMode, E_Scenes.Null, 0);
         }
 
         public void LoadGame()
@@ -40,7 +49,7 @@ namespace Necropanda.Interfaces
             //Reset loadsettings/progress
 
             if (LoadingScene.instance.loadScene != E_Scenes.Null)
-                LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, true);
+                LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, -1);
             else
                 NewGame();
         }
@@ -53,6 +62,18 @@ namespace Necropanda.Interfaces
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void Hover(TextMeshProUGUI text)
+        {
+            Debug.Log("Hover");
+            text.color = new Color(1, 0.2f, 0.8f, 1);
+        }
+
+        public void StopHover(TextMeshProUGUI text)
+        {
+            Debug.Log("Stop Hover");
+            text.color = Color.white;
         }
     }
 }

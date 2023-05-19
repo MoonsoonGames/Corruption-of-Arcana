@@ -15,35 +15,50 @@ namespace Necropanda
         BuildDeck buildDeck;
         public Object cardPrefab;
 
-        bool setup = false;
-
         public void LoadCards()
         {
-            if (setup) return;
-
-            setup = true;
-
             DeckManager.instance.LoadDeck();
 
             buildDeck = GetComponent<BuildDeck>();
 
             if (collectionContent != null)
             {
-                SetupDeck(collectionContent, DeckManager.instance.collection, buildDeck.collectedSpells);
+                buildDeck.collectedSpells = new List<Spell>();
+                StartCoroutine(SetupDeck(collectionContent, DeckManager.instance.collection, buildDeck.collectedSpells, 0.05f));
             }
 
             if (equipContent != null)
             {
-                SetupDeck(equipContent, DeckManager.instance.majorArcana, buildDeck.equippedSpells);
+                buildDeck.equippedSpells = new List<Spell>();
+                StartCoroutine(SetupDeck(equipContent, DeckManager.instance.majorArcana, buildDeck.equippedSpells, 0.05f));
             }
         }
 
-        void SetupDeck(GameObject content, List<Spell> collection, List<Spell> buildDeckSpells)
+        IEnumerator SetupDeck(GameObject content, List<Spell> collection, List<Spell> buildDeckSpells, float delay)
         {
-            if (content == null) return;
+            Debug.Log("Open menu");
+            if (content == null)
+            {
+                Debug.Log("Null content");
+                yield break;
+            }
             Deck2D collectionDeck = content.GetComponentInParent<Deck2D>();
 
-            foreach (Spell spell in collection)
+            List<Spell> collectionCopy = new List<Spell>();
+
+            foreach (var item in collection)
+                collectionCopy.Add(item);
+
+            buildDeckSpells.Clear();
+
+            for (int i = 0; i < content.transform.childCount; i++)
+            {
+                Destroy(content.transform.GetChild(i).gameObject);
+            }
+
+            yield return new WaitForSecondsRealtime(delay);
+
+            foreach (Spell spell in collectionCopy)
             {
                 Debug.Log(spell.spellName + " should be in collection");
                 GameObject card = Instantiate(cardPrefab, content.transform) as GameObject;

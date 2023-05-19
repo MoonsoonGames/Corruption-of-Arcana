@@ -26,6 +26,9 @@ namespace Necropanda
         public GameObject group;
         protected LayoutGroup layout;
 
+        public Object cardSpace;
+        GameObject currentCardSpace;
+
         protected GeneralDragArea dragArea;
         protected DragManager dragManager;
 
@@ -40,7 +43,7 @@ namespace Necropanda
         #region Cards
 
         protected CardDrag2D[] cards;
-        
+
         public List<GameObject> GetCards()
         {
             List<GameObject> cardObjects = new List<GameObject>();
@@ -219,6 +222,25 @@ namespace Necropanda
 
                 card.gameObject.transform.SetParent(group.transform);
             }
+
+            if (cardSpace == null)
+                return;
+
+            if (cards.Length == 0)
+            {
+                if (currentCardSpace == null)
+                {
+                    currentCardSpace = Instantiate(cardSpace, transform) as GameObject;
+                }
+            }
+            else
+            {
+                if (currentCardSpace != null)
+                {
+                    Destroy(currentCardSpace);
+                    currentCardSpace = null;
+                }
+            }
         }
 
         #endregion
@@ -253,11 +275,6 @@ namespace Necropanda
                 float lerpA = Mathf.Lerp(deckBackground.color.a, desiredColor.a, highlightSpeed);
 
                 deckBackground.color = new Color(lerpR, lerpG, lerpB, lerpA);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                Debug.Break();
             }
         }
 

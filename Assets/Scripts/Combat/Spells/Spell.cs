@@ -25,6 +25,7 @@ namespace Necropanda
         [TextArea(2, 10)]
         public string spellDescription; // Basic desciption of spell effect
         public Sprite cardImage;
+        public Sprite cardImageLowOpacity;
         public Sprite background;
         public E_CardTypes cardType = E_CardTypes.Cards;
 
@@ -53,6 +54,7 @@ namespace Necropanda
         public E_PotionType potionType;
 
         [Header("Advanced Logic")]
+        public bool burnOnDiscard = false;
         public bool discardAfterCasting = false;
         public bool discardAfterTurn = false;
         public Spell drawCard;
@@ -138,10 +140,7 @@ namespace Necropanda
                 return;
 
             List<Character> allCharacters = HelperFunctions.CombineLists(CombatManager.instance.playerTeamManager.team, CombatManager.instance.enemyTeamManager.team);
-            if (caster.confuse)
-            {
-                target = CombatHelperFunctions.ReplaceRandomTarget(allCharacters);
-            }
+            
             int removedStatusCount = Timeline.instance.StatusCount(target);
             float time = 0;
 
@@ -287,7 +286,7 @@ namespace Necropanda
                         //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
                         Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
                         for (int i = 0; i < spell.value; i++)
-                            LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                            LoadCombatManager.instance.AddEnemy(spell.summon, caster, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
                 }
                 else
@@ -353,7 +352,7 @@ namespace Necropanda
                         //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
                         Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
                         for (int i = 0; i < spell.value; i++)
-                            LoadCombatManager.instance.AddEnemy(spell.summon, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                            LoadCombatManager.instance.AddEnemy(spell.summon, caster, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
                     }
                 }
                 else

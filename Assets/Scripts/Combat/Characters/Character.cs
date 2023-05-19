@@ -23,12 +23,28 @@ namespace Necropanda
 
         Deck2D deck;
 
+        public bool ignoreHitScale = false;
+
         protected virtual void Start()
         {
             SetupReferences();
 
+            SetupSprite();
+
+            if (!ignoreHitScale)
+            {
+                hitPos.Scale(new Vector3(0.444605f, 0.444605f, 0.444605f));
+                castPos.Scale(new Vector3(0.444605f, 0.444605f, 0.444605f));
+            }
+        }
+
+        [ContextMenu("Setup Sprite")]
+        public void SetupSprite()
+        {
             SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            spriteRenderer.sprite = stats.characterSprite;
+
+            if (spriteRenderer != null)
+                spriteRenderer.sprite = stats.characterSprite;
         }
 
         [ContextMenu("Setup References")]
@@ -272,5 +288,14 @@ namespace Necropanda
         }
 
         #endregion
+
+        public Vector3 hitPos;
+        public Vector3 castPos;
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawSphere(transform.position + hitPos, 5f);
+            Gizmos.DrawSphere(transform.position + castPos, 5f);
+        }
     }
 }

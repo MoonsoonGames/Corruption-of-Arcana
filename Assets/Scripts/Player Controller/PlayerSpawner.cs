@@ -15,6 +15,8 @@ namespace Necropanda
     public class PlayerSpawner : MonoBehaviour
     {
         public Object playerRef;
+        public Vector3[] spawnPositions;
+        public Vector3[] spawnRotations;
 
         CinemachineBrain cmBrain;
         CinemachineFreeLook freeLook;
@@ -38,20 +40,34 @@ namespace Necropanda
             string currentSceneString = SceneManager.GetActiveScene().name;
             E_Scenes currentScene = HelperFunctions.StringToSceneEnum(currentSceneString);
 
-            if (LoadingScene.instance.loadLastPos && LoadCombatManager.instance != null)
+            if (LoadingScene.instance != null)
             {
-                if (LoadCombatManager.instance.lastScene != E_Scenes.Null)
+                if (LoadingScene.loadPos >= 0 && LoadingScene.loadPos < spawnPositions.Length)
                 {
-                    if (currentScene == LoadCombatManager.instance.lastScene)
+                    Debug.Log("Loadposition " + LoadingScene.loadPos);
+                    spawnPos = spawnPositions[LoadingScene.loadPos];
+                    spawnRot = Quaternion.Euler(spawnRotations[LoadingScene.loadPos]);
+                }
+                else if (LoadingScene.instance.loadScene != E_Scenes.Null)
+                {
+                    if (!HelperFunctions.AlmostEqualVector3(LoadCombatManager.instance.lastPos, Vector3.negativeInfinity, 100f, new Vector3(0, 0, 0)))
                     {
-                        //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
-                        spawnPos = LoadCombatManager.instance.lastPos;
-                        spawnRot = LoadCombatManager.instance.lastRot;
-                        //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                        if (currentScene == LoadingScene.instance.loadScene)
+                        {
+                            Debug.Log("Loadposition last pos");
+                            //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                            spawnPos = LoadCombatManager.instance.lastPos;
+                            spawnRot = LoadCombatManager.instance.lastRot;
+                            //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                        }
+                        else
+                        {
+                            Debug.Log("loadposition default pos");
+                        }
                     }
                 }
             }
-
+            
             transform.position = spawnPos;
             transform.rotation = spawnRot;
 
@@ -95,7 +111,15 @@ namespace Necropanda
         {
             // Draw a yellow sphere at the transform's position
             Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(transform.position, 1);
+            Gizmos.DrawSphere(transform.position, 0.5f);
+
+            for (int i = 0; i < spawnPositions.Length; i++)
+            {
+                //Vector3 end = spawnRotations[i] * spawnPositions[i];
+                //end = end * 2f;
+                //Gizmos.DrawLine(spawnPositions[i], end);
+                Gizmos.DrawSphere(spawnPositions[i], 1);
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Necropanda
         {
             SaveManager.instance.SaveAllData();
             arenaQuest.StartQuest("Arena Custiodian", null);
-            firstObjective.QuestProgress();
+            firstObjective.QuestProgress(false);
 
             //Reset loadsettings/progress
             SceneManager.LoadScene(initialScene.ToString());

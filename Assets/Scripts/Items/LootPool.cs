@@ -15,28 +15,38 @@ namespace Necropanda
         public List<LootPools> lootPools;
         public Vector2Int gold;
 
-        public void RewardItems()
+        public List<Object> RewardItems()
         {
+            List<Object> items = new List<Object>();
+
             foreach (var pool in lootPools)
             {
                 if (pool.rewardAll)
                 {
+                    Debug.Log("Reward all items");
                     foreach(Object item in pool.objects)
                     {
+                        items.Add(item);
                         GiveItem(item);
                     }
                 }
                 else
                 {
-                    for (int i = 0; i < pool.objects.Count; i++)
+                    Debug.Log("Reward item - called");
+                    int count = Random.Range(pool.number.x, pool.number.y);
+                    for (int i = 0; i < count; i++)
                     {
+                        Debug.Log("Reward one item");
                         int randInt = Random.Range(0, pool.objects.Count);
+                        items.Add(pool.objects[randInt]);
                         GiveItem(pool.objects[randInt]);
                     }
                 }
             }
 
             GiveGold();
+
+            return items;
         }
 
         void GiveGold()
@@ -46,6 +56,9 @@ namespace Necropanda
 
         void GiveItem(Object item)
         {
+            if (!Application.isPlaying)
+                return;
+
             if (item.GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
@@ -58,7 +71,7 @@ namespace Necropanda
                 {
                     case E_CardTypes.Cards:
                         // Add to deck manager list
-                        DeckManager.instance.collection.Add((Spell)item);
+                        DeckManager.instance.collection.Add(currentSpell);
                         break;
                     case E_CardTypes.Potions:
                         PotionManager.instance.ChangePotion(currentSpell.potionType, 1);
@@ -72,7 +85,7 @@ namespace Necropanda
     public struct LootPools
     {
         public List<Object> objects;
-        public int count;
+        public Vector2Int number;
         public bool rewardAll;
     }
 }

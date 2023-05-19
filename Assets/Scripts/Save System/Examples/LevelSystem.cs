@@ -34,6 +34,11 @@ namespace Necropanda.SaveSystem
             xp = saveData.xp;
         }
 
+        public void ResetState()
+        {
+            //TODO: Reset all values to default and then save them
+        }
+
         [System.Serializable]
         private struct SaveData
         {

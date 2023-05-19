@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   spawner: {fileID: 0}
+  ignoreHitScale: 0
   damageTakenThisTurn: 0
   enlightened: 0
   empowerDeck: 0
@@ -237,6 +238,8 @@ MonoBehaviour:
   curse: 0
   confuse: 0
   blinded: 0
+  hitPos: {x: 13.3, y: 106.3, z: -10}
+  castPos: {x: 13.3, y: 106.3, z: -10}
   aISpells: []
   cardPrefab: {fileID: 6784197025413656440, guid: cb1f490c005a4f048a23fcc4a23fdf8e,
     type: 3}
@@ -519,7 +522,7 @@ PrefabInstance:
     - target: {fileID: 336424452854963172, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 229.79999
       objectReference: {fileID: 0}
     - target: {fileID: 336424452854963172, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}
@@ -654,12 +657,22 @@ PrefabInstance:
     - target: {fileID: 2476909395283622567, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2476909395283622567, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903593090275224442, guid: 08612368791bb8f4fbbccc6e84b37a3f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0012817
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903593090275224442, guid: 08612368791bb8f4fbbccc6e84b37a3f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -85.4
       objectReference: {fileID: 0}
     - target: {fileID: 6966884812590945054, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}
@@ -679,7 +692,7 @@ PrefabInstance:
     - target: {fileID: 6966884812590945054, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 139.9
       objectReference: {fileID: 0}
     - target: {fileID: 6966884812590945054, guid: 08612368791bb8f4fbbccc6e84b37a3f,
         type: 3}

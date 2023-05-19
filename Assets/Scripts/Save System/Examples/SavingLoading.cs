@@ -45,7 +45,7 @@ namespace Necropanda.SaveSystem
             }
             else if (instance != this)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
 
@@ -64,7 +64,7 @@ namespace Necropanda.SaveSystem
         [ContextMenu("Save")]
         public void Save()
         {
-            Debug.Log("saving");
+            //Debug.Log("saving");
             var state = LoadFile();
             CaptureState(state);
             SaveFile(state);
@@ -76,16 +76,24 @@ namespace Necropanda.SaveSystem
         [ContextMenu("Load")]
         public void Load()
         {
-            Debug.Log("loading");
+            //Debug.Log("loading");
             var state = LoadFile();
             RestoreState(state);
+        }
+
+        public void ResetData()
+        {
+            Debug.Log("Reset data called");
+            DeleteSaveData();
+
+            ResetState();
         }
 
         /// <summary>
         /// Deletes the save file
         /// </summary>
         [ContextMenu("Delete Save Data")]
-        private void DeleteSaveData()
+        public void DeleteSaveData()
         {
             if (File.Exists(SavePath))
             {
@@ -148,6 +156,14 @@ namespace Necropanda.SaveSystem
                 {
                     saveable.RestoreState(value);
                 }
+            }
+        }
+
+        private void ResetState()
+        {
+            foreach (var saveable in FindObjectsOfType<SaveableEntity>())
+            {
+                saveable.ResetState();
             }
         }
     }

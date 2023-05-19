@@ -18,26 +18,33 @@ namespace Necropanda
         public TMPro.TMP_Text PageName;
         public Image PageImg;
         public TMPro.TMP_Text PageDesc;
+        public Sprite DefaultImg;
 
-        public void SpiceCrystalBTN()
+        public void SetText(Curios_Object item)
         {
-            Curios_Object Item = (Curios_Object)Trinkets[0];
-            PageName.text = Item.Name;
-            PageImg.sprite = Item.Artwork;
-            PageDesc.text = Item.Description;
+            PageName.text = item.Name;
+            PageImg.sprite = item.Artwork;
+            PageDesc.text = item.Description;
         }
 
-        public void ForbiddenRingBTN()
+        public void DefultPage()
         {
-            Curios_Object Item = (Curios_Object)Trinkets[1];
-            PageName.text = Item.Name;
-            PageImg.sprite = Item.Artwork;
-            PageDesc.text = Item.Description;
+            PageName.text = "???";
+            PageImg.sprite = DefaultImg;
+            PageDesc.text = "You have yet to collect this trinket".ToString();
         }
 
-        void Update()
+        public void TrinketBTN(int TrinketNumber)
         {
-            
+            Curios_Object Item = (Curios_Object)Trinkets[TrinketNumber];
+            if(Item.isCollected == true)
+            {
+                SetText(Item);       
+            }
+            else 
+            {
+                DefultPage();
+            }
         }
     }
 }

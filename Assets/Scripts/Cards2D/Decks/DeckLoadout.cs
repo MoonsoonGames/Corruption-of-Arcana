@@ -89,7 +89,7 @@ namespace Necropanda
 
         private void UpdateText()
         {
-            costText.text = "Space: " + currentLoadout + " / " + maxLoadoutCost;
+            costText.text = "Available Space: " + currentLoadout + " / " + maxLoadoutCost;
         }
 
         public bool AvailableSpaces()

@@ -35,9 +35,9 @@ namespace Necropanda
 
         public LootPool rewards;
 
-        public void GiveRewards()
+        public List<Object> GiveRewards()
         {
-            rewards.RewardItems();
+            return rewards.RewardItems();
         }
     }
 }

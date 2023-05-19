@@ -11,8 +11,10 @@ namespace Necropanda
 {
     public class UpgradeDeck : BuildDeck
     {
-        public override void OpenMenu()
+        public override IEnumerator OpenMenu(float delay)
         {
+            yield return new WaitForSeconds(delay);
+
             if (collectedDeck.CurrentCardsLength() > 0)
             {
                 collectedSpells = collectedDeck.GetSpells();

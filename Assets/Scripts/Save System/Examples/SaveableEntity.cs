@@ -59,5 +59,13 @@ namespace Necropanda.SaveSystem
                 }
             }
         }
+
+        public void ResetState()
+        {
+            foreach (var saveable in GetComponents<ISaveable>())
+            {
+                saveable.ResetState();
+            }
+        }
     }
 }
