@@ -373,6 +373,19 @@ namespace Necropanda
             // curios.AddRange(saveData.curios);
         }
 
+        public void ResetState()
+        {
+            //TODO: Reset all values to default and then save them
+            lastPos = Vector3.negativeInfinity;
+
+            GameObject.FindObjectOfType<LoadingScene>().loadScene = E_Scenes.Null;
+
+            // Clear any interactions for sanitary purposes, then load the save data into it.
+            interacted = new List<string>();
+
+            CaptureState();
+        }
+
         /// <summary>
         /// Savedata data structure
         /// </summary>

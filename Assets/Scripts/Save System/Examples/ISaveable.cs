@@ -13,5 +13,6 @@ namespace Necropanda.SaveSystem
         // Saves the state. Object is used to keep it serializable
         object CaptureState();
         void RestoreState(object state);
+        void ResetState();
     }
 }

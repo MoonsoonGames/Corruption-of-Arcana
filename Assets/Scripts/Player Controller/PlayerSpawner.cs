@@ -50,21 +50,24 @@ namespace Necropanda
                 }
                 else if (LoadingScene.instance.loadScene != E_Scenes.Null)
                 {
-                    if (currentScene == LoadingScene.instance.loadScene)
+                    if (!HelperFunctions.AlmostEqualVector3(LoadCombatManager.instance.lastPos, Vector3.negativeInfinity, 100f, new Vector3(0, 0, 0)))
                     {
-                        Debug.Log("Loadposition last pos");
-                        //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
-                        spawnPos = LoadCombatManager.instance.lastPos;
-                        spawnRot = LoadCombatManager.instance.lastRot;
-                        //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
-                    }
-                    else
-                    {
-                        Debug.Log("loadposition default pos");
+                        if (currentScene == LoadingScene.instance.loadScene)
+                        {
+                            Debug.Log("Loadposition last pos");
+                            //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                            spawnPos = LoadCombatManager.instance.lastPos;
+                            spawnRot = LoadCombatManager.instance.lastRot;
+                            //Debug.Log("2" + transform.position + " || " + LoadCombatManager.instance.lastPos);
+                        }
+                        else
+                        {
+                            Debug.Log("loadposition default pos");
+                        }
                     }
                 }
             }
-
+            
             transform.position = spawnPos;
             transform.rotation = spawnRot;
 

@@ -42,10 +42,8 @@ namespace Necropanda
         {
             Singleton();
             SaveManager.instance.saveAllData += SaveSceneData;
-            SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
-            SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
             SaveManager.instance.loadAllData += LoadSceneData;
-            SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
+            SaveManager.instance.loadAllBaseData += ResetSceneData;
         }
 
         [ContextMenu("Save Quest Data")]
@@ -55,39 +53,7 @@ namespace Necropanda
             if (LoadingScene.instance != null)
                 LoadingScene.instance.SaveScene();
 
-
-
-            // Saving stuff
-
             // Save scene name, pos, rot
-            SavingLoading.instance.Save();
-
-            // Save player position
-
-
-            // Save player rotation
-        }
-
-        [ContextMenu("Save Base Quest Data")]
-        public void SaveBaseQuestData()
-        {
-            //SaveBaseSceneData
-            if (LoadingScene.instance != null)
-                LoadingScene.instance.SaveScene();
-
-            Debug.Log("Save");
-            
-            SavingLoading.instance.Save();
-        }
-
-        [ContextMenu("Overide Base Quest Data")]
-        public void OverideBaseQuestData()
-        {
-            if (LoadingScene.instance != null)
-                LoadingScene.instance.SaveScene();
-
-            Debug.Log("Overide");
-
             SavingLoading.instance.Save();
         }
 
@@ -100,15 +66,10 @@ namespace Necropanda
         }
 
         [ContextMenu("Load Base Quest Data")]
-        public void LoadBaseQuestData()
+        public void ResetSceneData()
         {
             //LoadingScene.instance.loadScene = GetData();
-        }
-
-        [ContextMenu("Reset Quest Data")]
-        public void ResetQuestData()
-        {
-            //LoadingScene.instance.loadScene = GetData();
+            SavingLoading.instance.ResetData();
         }
 
         public E_Scenes sceneToLoad;

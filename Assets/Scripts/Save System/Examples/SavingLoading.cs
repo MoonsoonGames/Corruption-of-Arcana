@@ -81,6 +81,14 @@ namespace Necropanda.SaveSystem
             RestoreState(state);
         }
 
+        public void ResetData()
+        {
+            Debug.Log("Reset data called");
+            DeleteSaveData();
+
+            ResetState();
+        }
+
         /// <summary>
         /// Deletes the save file
         /// </summary>
@@ -148,6 +156,14 @@ namespace Necropanda.SaveSystem
                 {
                     saveable.RestoreState(value);
                 }
+            }
+        }
+
+        private void ResetState()
+        {
+            foreach (var saveable in FindObjectsOfType<SaveableEntity>())
+            {
+                saveable.ResetState();
             }
         }
     }
