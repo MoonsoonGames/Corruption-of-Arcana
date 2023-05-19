@@ -157,6 +157,38 @@ namespace Necropanda.Utils.Console.Commands
             }
         }
 
+        /// <summary>
+        /// Second implementation used in saving and loading to avoid duplicate giving of cards.
+        /// DO NOT USE FOR ANYTHING ELSE
+        /// </summary>
+        /// <param name="objectName"></param>
+        /// <param name="s"></param>
+        // public void GiveToPlayer(string objectName, string s)
+        // {
+        //     if (objects[objectName].GetType() == typeof(Weapon))
+        //     {
+        //         // Add to deck manager list
+        //         DeckManager.instance.unlockedWeapons.Add((Weapon)objects[objectName]);
+        //     }
+        //     else if (objects[objectName].GetType() == typeof(Spell))
+        //     {
+        //         // CHECK TO SEE IF CARD IS ALREAY THERE.
+        //         // IF IT IS, RETURN.
+        //         Spell currentSpell = (Spell)objects[objectName];
+        //         switch (currentSpell.cardType)
+        //         {
+        //             case E_CardTypes.Cards:
+        //                 // Add to deck manager list
+
+        //                 DeckManager.instance.collection.Add((Spell)objects[objectName]);
+        //                 break;
+        //             case E_CardTypes.Potions:
+        //                 PotionManager.instance.ChangePotion(currentSpell.potionType, 1);
+        //                 break;
+        //         }
+        //     }
+        // }
+
         public void EquipToPlayer(string objectName)
         {
             if (objects[objectName].GetType() == typeof(Weapon))

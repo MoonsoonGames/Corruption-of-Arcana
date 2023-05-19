@@ -335,8 +335,8 @@ namespace Necropanda
             interacted = new List<string>(saveData.interactedWith);
 
             // // Use give command to add them to the inventory
-            // splitCollection = ListifyString(saveData.savedCollection);
-            // splitMajorArcana = ListifyString(saveData.savedMajorArcana);
+            splitCollection = ListifyString(saveData.savedCollection);
+            splitMajorArcana = ListifyString(saveData.savedMajorArcana);
 
             // DeckManager.instance.collection.Clear();
             // DeckManager.instance.majorArcana.Clear();
@@ -424,16 +424,22 @@ namespace Necropanda
             processedString = processedString.Replace(" ", string.Empty);
             string[] splitStrings = processedString.Split(',');
 
-            List<string> newString = new List<string>();
+            List<string> cleanedList = new List<string>();
 
-            //Check to make sure each item is bigger than 1 character.
-            foreach (var item in splitStrings)
+            foreach (string str in splitStrings)
             {
-                if (item.Length > 1)
-                    newString.Add(item);
+                if (!string.IsNullOrEmpty(str))
+                {
+                    cleanedList.Add(str);
+                }
+                else
+                {
+                    // Log the empty string to the console
+                    Debug.Log("Empty string found.");
+                }
             }
 
-            return newString;
+            return cleanedList;
         }
     }
 
