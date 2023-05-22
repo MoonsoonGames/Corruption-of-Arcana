@@ -38,13 +38,11 @@ namespace Necropanda
             {
                 if (collectedSpells.Contains(item))
                 {
-                    Debug.Log(item.spellName + " should be saving in collection");
                     collectedSpellsSaved.Add(item.name);
                 }
 
                 if (equippedSpells.Contains(item))
                 {
-                    Debug.Log(item.spellName + " should be saving in equiped");
                     equippedSpellsSaved.Add(item.name);
                 }
             }
@@ -59,7 +57,6 @@ namespace Necropanda
             {
                 if (DeckManager.instance.unlockedWeapons.Contains(item))
                 {
-                    Debug.Log(item.weaponName + " should be loaded in collection");
                     collectedWeaponsSaved.Add(item.name);
                 }
 
@@ -85,13 +82,11 @@ namespace Necropanda
             {
                 if (collectedSpellsSaved.Contains(item.name))
                 {
-                    Debug.Log(item.spellName + " should be loaded in collection");
                     newCollection.Add(item);
                 }
 
                 if (equippedSpellsSaved.Contains(item.name))
                 {
-                    Debug.Log(item.spellName + " should be loaded in equiped");
                     newEquipped.Add(item);
                 }
             }
@@ -101,13 +96,11 @@ namespace Necropanda
 
             foreach(var item in newCollection)
             {
-                Debug.Log("Trying to load: " + item.spellName);
                 DeckManager.instance.collection.Add(item);
             }
 
             foreach(var item in newEquipped)
             {
-                Debug.Log("Trying to load: " + item.spellName);
                 DeckManager.instance.majorArcana.Add(item);
             }
 
@@ -166,7 +159,6 @@ namespace Necropanda
 
         public void RestoreState(object state)
         {
-            Debug.Log("Loading Cards");
             var saveData = (SaveData)state;
 
             collectedSpellsSaved = saveData.collectedSpells;
@@ -179,7 +171,6 @@ namespace Necropanda
 
         public void ResetState()
         {
-            Debug.Log("Resetting Cards");
             //TODO: Reset all values to default and then save them
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();
