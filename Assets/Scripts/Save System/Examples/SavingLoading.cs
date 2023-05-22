@@ -166,5 +166,10 @@ namespace Necropanda.SaveSystem
                 saveable.ResetState();
             }
         }
+
+        public bool SaveDataExists()
+        {
+            return true;
+        }
     }
 }

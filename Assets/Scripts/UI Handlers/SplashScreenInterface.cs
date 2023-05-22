@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Necropanda.SaveSystem;
 
 namespace Necropanda.Interfaces
 {
@@ -40,11 +41,13 @@ namespace Necropanda.Interfaces
             //set load settings/progress
             //load game
 
-            SaveManager.instance.LoadAllData();
             //Reset loadsettings/progress
 
-            if (LoadingScene.instance.loadScene != E_Scenes.Null)
+            if (SavingLoading.instance.SaveDataExists())
+            {
+                SaveManager.instance.LoadAllData();
                 LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, -1);
+            }
             else
                 NewGame();
         }
