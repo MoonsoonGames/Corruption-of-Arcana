@@ -58,7 +58,7 @@ namespace Necropanda
         public void ResetAllData()
         {
             //Reverts all data to their base values and deletes the save file
-            ResetAllData();
+            resetAllData();
         }
     }
 }
