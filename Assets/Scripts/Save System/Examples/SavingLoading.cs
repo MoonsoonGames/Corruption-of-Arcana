@@ -169,7 +169,7 @@ namespace Necropanda.SaveSystem
 
         public bool SaveDataExists()
         {
-            return true;
+            return File.Exists(SavePath);
         }
     }
 }
