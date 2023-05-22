@@ -4,23 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Necropanda.SaveSystem;
 
 namespace Necropanda.Interfaces
 {
     public class SplashScreenInterface : MonoBehaviour
     {
         public GameObject SettingsMenu;
+        public GameObject noLoadDataMenu;
         public E_Scenes initialScene;
-
-        private void Start()
-        {
-            SaveManager.instance.SaveAllBaseData();
-        }
 
         public void NewGame()
         {
-            SaveManager.instance.LoadAllBaseData();
-            SaveManager.instance.SaveAllData();
+            SaveManager.instance.ResetAllData();
+
             //Reset loadsettings/progress
             if (initialScene == E_Scenes.Null)
             {
@@ -45,13 +42,24 @@ namespace Necropanda.Interfaces
             //set load settings/progress
             //load game
 
-            SaveManager.instance.LoadAllData();
             //Reset loadsettings/progress
 
-            if (LoadingScene.instance.loadScene != E_Scenes.Null)
+            Debug.Log("Save Data Exists: " + SavingLoading.instance.SaveDataExists());
+            if (SavingLoading.instance.SaveDataExists())
+            {
+                SaveManager.instance.LoadAllData();
                 LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, -1);
+            }
             else
-                NewGame();
+            {
+                noLoadDataMenu.SetActive(true);
+            }
+        }
+
+        IEnumerator IDelayLoadScene(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, -1);
         }
 
         public void Settings()
@@ -66,13 +74,13 @@ namespace Necropanda.Interfaces
 
         public void Hover(TextMeshProUGUI text)
         {
-            Debug.Log("Hover");
+            //Debug.Log("Hover");
             text.color = new Color(1, 0.2f, 0.8f, 1);
         }
 
         public void StopHover(TextMeshProUGUI text)
         {
-            Debug.Log("Stop Hover");
+            //Debug.Log("Stop Hover");
             text.color = Color.white;
         }
     }

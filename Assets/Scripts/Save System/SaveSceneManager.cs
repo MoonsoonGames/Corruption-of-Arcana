@@ -41,35 +41,6 @@ namespace Necropanda
         void Start()
         {
             Singleton();
-            SaveManager.instance.saveAllData += SaveSceneData;
-            SaveManager.instance.loadAllData += LoadSceneData;
-            SaveManager.instance.loadAllBaseData += ResetSceneData;
-        }
-
-        [ContextMenu("Save Quest Data")]
-        public void SaveSceneData()
-        {
-            //SaveScene
-            if (LoadingScene.instance != null)
-                LoadingScene.instance.SaveScene();
-
-            // Save scene name, pos, rot
-            SavingLoading.instance.Save();
-        }
-
-        [ContextMenu("Load Scene Data")]
-        public void LoadSceneData()
-        {
-            //LoadingScene.instance.loadScene = GetData();
-            SavingLoading.instance.Load();
-
-        }
-
-        [ContextMenu("Load Base Quest Data")]
-        public void ResetSceneData()
-        {
-            //LoadingScene.instance.loadScene = GetData();
-            SavingLoading.instance.ResetData();
         }
 
         public E_Scenes sceneToLoad;

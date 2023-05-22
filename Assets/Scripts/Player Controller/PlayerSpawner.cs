@@ -44,7 +44,7 @@ namespace Necropanda
             {
                 if (LoadingScene.loadPos >= 0 && LoadingScene.loadPos < spawnPositions.Length)
                 {
-                    Debug.Log("Loadposition " + LoadingScene.loadPos);
+                    //Debug.Log("Loadposition " + LoadingScene.loadPos);
                     spawnPos = spawnPositions[LoadingScene.loadPos];
                     spawnRot = Quaternion.Euler(spawnRotations[LoadingScene.loadPos]);
                 }
@@ -54,7 +54,7 @@ namespace Necropanda
                     {
                         if (currentScene == LoadingScene.instance.loadScene)
                         {
-                            Debug.Log("Loadposition last pos");
+                            //Debug.Log("Loadposition last pos");
                             //Debug.Log("1" + transform.position + " || " + LoadCombatManager.instance.lastPos);
                             spawnPos = LoadCombatManager.instance.lastPos;
                             spawnRot = LoadCombatManager.instance.lastRot;
@@ -62,7 +62,7 @@ namespace Necropanda
                         }
                         else
                         {
-                            Debug.Log("loadposition default pos");
+                            //Debug.Log("loadposition default pos");
                         }
                     }
                 }

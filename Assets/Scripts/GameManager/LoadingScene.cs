@@ -33,10 +33,13 @@ namespace Necropanda
 
         #endregion
 
+        public bool loadOnStart = true;
+
         // Start is called before the first frame update
         void Start()
         {
-            SceneLoaded();
+            if (loadOnStart)
+                SceneLoaded();
             Singleton();
         }
 

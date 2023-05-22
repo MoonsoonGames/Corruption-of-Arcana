@@ -64,7 +64,7 @@ namespace Necropanda.SaveSystem
         [ContextMenu("Save")]
         public void Save()
         {
-            //Debug.Log("saving");
+            Debug.Log("saving");
             var state = LoadFile();
             CaptureState(state);
             SaveFile(state);
@@ -165,6 +165,11 @@ namespace Necropanda.SaveSystem
             {
                 saveable.ResetState();
             }
+        }
+
+        public bool SaveDataExists()
+        {
+            return File.Exists(SavePath);
         }
     }
 }
