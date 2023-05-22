@@ -64,7 +64,7 @@ namespace Necropanda.SaveSystem
         [ContextMenu("Save")]
         public void Save()
         {
-            //Debug.Log("saving");
+            Debug.Log("saving");
             var state = LoadFile();
             CaptureState(state);
             SaveFile(state);

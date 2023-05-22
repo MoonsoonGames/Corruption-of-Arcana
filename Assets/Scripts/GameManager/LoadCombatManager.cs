@@ -270,7 +270,7 @@ namespace Necropanda
         public object CaptureState()
         {
             //Debug.Log("Saving Player");
-
+            LoadingScene.instance.SaveScene();
 
             return new SaveData
             {
@@ -289,13 +289,6 @@ namespace Necropanda
                 sceneName = LoadingScene.instance.loadScene.ToString(),
 
                 interactedWith = interacted,
-                #endregion
-
-                #region CARD SAVING
-
-                savedCollection = string.Join(", ", (object[])DeckManager.instance.collection.ToArray()),
-                savedMajorArcana = string.Join(", ", (object[])DeckManager.instance.majorArcana.ToArray()),
-
                 #endregion
             };
         }
@@ -325,39 +318,6 @@ namespace Necropanda
 
             // Clear any interactions for sanitary purposes, then load the save data into it.
             interacted = new List<string>(saveData.interactedWith);
-
-            #region CARD LOADING
-            // CARD LOADING
-
-            // // Use give command to add them to the inventory
-            splitCollection = ListifyString(saveData.savedCollection);
-            splitMajorArcana = ListifyString(saveData.savedMajorArcana);
-
-            DeckManager.instance.collection.Clear();
-            DeckManager.instance.majorArcana.Clear();
-
-            foreach (string card in splitCollection)
-            {
-                Debug.Log(card);
-                giveCommand.GiveToPlayer(card);
-            }
-
-            foreach (string card in splitMajorArcana)
-            {
-                //Instead of this, add it to the 
-                Debug.Log(card);
-
-                if (giveCommand != null)
-                {
-                    giveCommand.EquipToPlayer(card);
-                }
-                else
-                    Debug.Log("no give command");
-            }
-            #endregion
-
-
-
         }
 
         public void ResetState()
@@ -369,8 +329,6 @@ namespace Necropanda
 
             // Clear any interactions for sanitary purposes, then load the save data into it.
             interacted = new List<string>();
-
-            CaptureState();
         }
 
         /// <summary>
@@ -385,10 +343,6 @@ namespace Necropanda
             public string sceneName;
 
             public List<string> interactedWith;
-            public string savedCollection;
-            public string savedMajorArcana;
-
-            public Dictionary<string, int> quests;
         }
 
         #region Quest Data
@@ -396,31 +350,6 @@ namespace Necropanda
         public List<Quest> progressQuestUponCombatVictory;
 
         #endregion
-
-        public List<string> ListifyString(string stringToProcess)
-        {
-            string thingToReplace = " (Necropanda.Spell)";
-            string processedString = stringToProcess.Replace(thingToReplace, "");
-            processedString = processedString.Replace(" ", string.Empty);
-            string[] splitStrings = processedString.Split(',');
-
-            List<string> cleanedList = new List<string>();
-
-            foreach (string str in splitStrings)
-            {
-                if (!string.IsNullOrEmpty(str))
-                {
-                    cleanedList.Add(str);
-                }
-                else
-                {
-                    // Log the empty string to the console
-                    Debug.Log("Empty string found.");
-                }
-            }
-
-            return cleanedList;
-        }
     }
 
     [System.Serializable]

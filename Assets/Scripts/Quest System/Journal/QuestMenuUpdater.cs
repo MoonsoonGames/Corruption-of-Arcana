@@ -45,7 +45,7 @@ namespace Necropanda
         public void SelectQuest(Quest quest)
         {
             if (quest == null) return;
-            Debug.Log("Select quest " + quest.questName);
+            //Debug.Log("Select quest " + quest.questName);
             selectedQuest = quest;
 
             nameText.text = selectedQuest.questName;
@@ -77,7 +77,7 @@ namespace Necropanda
 
         public void Setup()
         {
-            Debug.Log("Select Quest (Start)");
+            //Debug.Log("Select Quest (Start)");
             SelectQuest(selectedQuest);
         }
     }

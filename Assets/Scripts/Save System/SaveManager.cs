@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -36,9 +37,6 @@ namespace Necropanda
 
         #endregion
 
-        public delegate void Delegate();
-        public Delegate saveAllData, loadAllData, resetAllData;
-
         private void Start()
         {
             Singleton();
@@ -47,18 +45,18 @@ namespace Necropanda
         public void SaveAllData()
         {
             //Saves data
-            saveAllData();
+            SavingLoading.instance.Save();
         }
         public void LoadAllData()
         {
             //Loads data
-            loadAllData();
+            SavingLoading.instance.Load();
         }
 
         public void ResetAllData()
         {
             //Reverts all data to their base values and deletes the save file
-            resetAllData();
+            SavingLoading.instance.ResetData();
         }
     }
 }

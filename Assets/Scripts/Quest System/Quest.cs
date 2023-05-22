@@ -189,7 +189,7 @@ namespace Necropanda
 
             if (Application.isPlaying && updateMarkers)
             {
-                Debug.Log("updating quest markers");
+                //Debug.Log("updating quest markers");
                 CheckQuestMarkers();
             }
         }

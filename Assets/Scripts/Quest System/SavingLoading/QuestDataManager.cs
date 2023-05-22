@@ -47,7 +47,7 @@ namespace Necropanda
 
         private Dictionary<string, int> SaveQuestData()
         {
-            Debug.Log("Saving quest data");
+            //Debug.Log("Saving quest data");
 
             Dictionary<string, int> allStates = new Dictionary<string, int>();
 

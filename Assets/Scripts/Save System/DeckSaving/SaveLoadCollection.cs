@@ -33,35 +33,34 @@ namespace Necropanda
 
         public void SaveCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
-            return;
-
             if (spellRefTable == null) { return; }
             Debug.Log("Saving Cards");
 
             collectedSpellsSaved.Clear();
             equippedSpellsSaved.Clear();
 
-            foreach (var item in collectedSpells)
-            {
-                string reference = spellRefTable.GetReferenceDataFromSpell(item);
-                Debug.Log(reference + " is being saved");
-                collectedSpellsSaved.Add(reference);
-            }
+            var spells = Resources.LoadAll("Spells", typeof(Spell));
 
-            foreach (var item in equippedSpells)
+            Spell[] allSpells = Resources.FindObjectsOfTypeAll<Spell>();
+            
+            foreach (var item in allSpells)
             {
-                string reference = spellRefTable.GetReferenceDataFromSpell(item);
-                Debug.Log(reference + " is being saved");
-                equippedSpellsSaved.Add(reference);
-            }
+                if (collectedSpells.Contains(item))
+                {
+                    Debug.Log(item.spellName + " should be saving in collection");
+                    collectedSpellsSaved.Add(item.name);
+                }
 
-            //GetComponentInChildren<SavingLoading>().Save();
+                if (equippedSpells.Contains(item))
+                {
+                    Debug.Log(item.spellName + " should be saving in equiped");
+                    equippedSpellsSaved.Add(item.name);
+                }
+            }
         }
 
         public void LoadCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
-            return;
-
             List<Spell> newCollection = new List<Spell>();
             List<Spell> newEquipped = new List<Spell>();
 
@@ -70,22 +69,39 @@ namespace Necropanda
             if (spellRefTable == null) { return; }
             Debug.Log("Loading Cards");
 
-            foreach (var item in collectedSpellsSaved)
+            var spells = Resources.LoadAll("Spells", typeof(Spell));
+
+            Spell[] allSpells = Resources.FindObjectsOfTypeAll<Spell>();
+            
+            foreach (var item in allSpells)
             {
-                Spell reference = spellRefTable.GetSpellFromReferenceData(item);
-                Debug.Log(reference.spellName + " has been loaded");
-                newCollection.Add(reference);
+                if (collectedSpellsSaved.Contains(item.name))
+                {
+                    Debug.Log(item.spellName + " should be loaded in collection");
+                    newCollection.Add(item);
+                }
+
+                if (equippedSpellsSaved.Contains(item.name))
+                {
+                    Debug.Log(item.spellName + " should be loaded in equiped");
+                    newEquipped.Add(item);
+                }
             }
 
-            foreach (var item in equippedSpellsSaved)
+            DeckManager.instance.collection = new List<Spell>();
+            DeckManager.instance.majorArcana = new List<Spell>();
+
+            foreach(var item in newCollection)
             {
-                Spell reference = spellRefTable.GetSpellFromReferenceData(item);
-                Debug.Log(reference.spellName + " has been loaded");
-                newEquipped.Add(reference);
+                Debug.Log("Trying to load: " + item.spellName);
+                DeckManager.instance.collection.Add(item);
             }
 
-            collectedSpells = newCollection;
-            equippedSpells = newEquipped;
+            foreach(var item in newEquipped)
+            {
+                Debug.Log("Trying to load: " + item.spellName);
+                DeckManager.instance.majorArcana.Add(item);
+            }
         }
 
         List<string> collectedSpellsSaved;
@@ -93,6 +109,8 @@ namespace Necropanda
 
         public object CaptureState()
         {
+            SaveCards(DeckManager.instance.collection, DeckManager.instance.majorArcana);
+
             return new SaveData 
             { 
                 collectedSpells = this.collectedSpellsSaved,
@@ -102,26 +120,32 @@ namespace Necropanda
 
         public void RestoreState(object state)
         {
+            Debug.Log("Loading Cards");
             var saveData = (SaveData)state;
 
             collectedSpellsSaved = saveData.collectedSpells;
             equippedSpellsSaved = saveData.equippedSpells;
+
+            LoadCards(DeckManager.instance.collection, DeckManager.instance.majorArcana);
         }
 
         public List<Spell> defaultSpells;
 
         public void ResetState()
         {
+            Debug.Log("Resetting Cards");
             //TODO: Reset all values to default and then save them
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();
 
+            DeckManager.instance.collection.Clear();
+            DeckManager.instance.majorArcana.Clear();
+            DeckManager.instance.unlockedWeapons.Clear();
+
             foreach (var item in defaultSpells)
             {
-                equippedSpellsSaved.Add(spellRefTable.GetReferenceDataFromSpell(item));
+                DeckManager.instance.majorArcana.Add(item);
             }
-
-            CaptureState();
         }
 
         [System.Serializable]
@@ -129,6 +153,31 @@ namespace Necropanda
         {
             public List<string> collectedSpells;
             public List<string> equippedSpells;
+        }
+
+        public List<string> ListifyString(string stringToProcess)
+        {
+            string thingToReplace = " (Necropanda.Spell)";
+            string processedString = stringToProcess.Replace(thingToReplace, "");
+            processedString = processedString.Replace(" ", string.Empty);
+            string[] splitStrings = processedString.Split(',');
+
+            List<string> cleanedList = new List<string>();
+
+            foreach (string str in splitStrings)
+            {
+                if (!string.IsNullOrEmpty(str))
+                {
+                    cleanedList.Add(str);
+                }
+                else
+                {
+                    // Log the empty string to the console
+                    Debug.Log("Empty string found.");
+                }
+            }
+
+            return cleanedList;
         }
     }
 }
