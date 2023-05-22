@@ -37,7 +37,7 @@ namespace Necropanda
         #endregion
 
         public delegate void Delegate();
-        public Delegate saveAllData, saveAllBaseData, overideAllBaseData, loadAllData, loadAllBaseData;
+        public Delegate saveAllData, loadAllData, resetAllData;
 
         private void Start()
         {
@@ -46,27 +46,19 @@ namespace Necropanda
 
         public void SaveAllData()
         {
+            //Saves data
             saveAllData();
         }
-
-        public void SaveAllBaseData()
-        {
-            saveAllBaseData();
-        }
-
-        public void OverideAllBaseData()
-        {
-            overideAllBaseData();
-        }
-
         public void LoadAllData()
         {
+            //Loads data
             loadAllData();
         }
 
-        public void LoadAllBaseData()
+        public void ResetAllData()
         {
-            loadAllBaseData();
+            //Reverts all data to their base values and deletes the save file
+            ResetAllData();
         }
     }
 }
