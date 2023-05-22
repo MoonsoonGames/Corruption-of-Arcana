@@ -50,10 +50,8 @@ namespace Necropanda.Interfaces
         public void SaveGame()
         {
             //Maybe have a visual indicator for this
-            savedText.SetActive(true);
             SaveManager.instance.SaveAllData();
-            new WaitForSecondsRealtime(2f);
-            savedText.SetActive(false);
+            StartCoroutine(IDelaySaveText());
         }
 
         public void QuitGame()
@@ -61,6 +59,13 @@ namespace Necropanda.Interfaces
             //ConfirmationScreen.SetActive(true);
             LoadingScene.instance.LoadScene(E_Scenes.SplashScreen, E_Scenes.Null, 0);
         }
+
+        IEnumerator IDelaySaveText(float delay = 2)
+        {
+            savedText.SetActive(true);
+            yield return new WaitForSecondsRealtime(delay);
+            savedText.SetActive(false);
+        } 
 
         public void CloseCredits()
         {
