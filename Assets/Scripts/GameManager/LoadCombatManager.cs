@@ -87,7 +87,7 @@ namespace Necropanda
 
         [SerializeField] private List<string> splitCollection = new List<string>();
         [SerializeField] private List<string> splitMajorArcana = new List<string>();
-        // [SerializeField] private GiveCommand giveCommand;
+        [SerializeField] private GiveCommand giveCommand;
 
 
         public void LoadCombat(GameObject player, E_Scenes lastScene)
@@ -274,6 +274,7 @@ namespace Necropanda
 
             return new SaveData
             {
+                #region PLAYER SAVING
                 posX = lastPos.x,
                 posY = lastPos.y,
                 posZ = lastPos.z,
@@ -288,22 +289,14 @@ namespace Necropanda
                 sceneName = LoadingScene.instance.loadScene.ToString(),
 
                 interactedWith = interacted,
+                #endregion
+
+                #region CARD SAVING
 
                 savedCollection = string.Join(", ", (object[])DeckManager.instance.collection.ToArray()),
                 savedMajorArcana = string.Join(", ", (object[])DeckManager.instance.majorArcana.ToArray()),
 
-                // savedCollection = DeckManager.instance.collection,
-                // savedMajorArcana = DeckManager.instance.majorArcana,
-                // maxHealth = maxHealth,
-                // gold = gold,
-                // maxArcana = maxArcana,
-                // healthPotAmount = healthPotAmount,
-                // ragePotAmount = ragePotAmount,
-                // swiftPotAmount = swiftPotAmount,
-                // arcanaPotAmount = arcanaPotAmount,
-                // curios = curios,
-                // questStage = questStage,
-                // numberOfEnemiesDefeated = numberOfEnemiesDefeated
+                #endregion
             };
         }
 
@@ -313,7 +306,6 @@ namespace Necropanda
         /// <returns></returns>
         public void RestoreState(object state)
         {
-            //Debug.Log("Restoring");
             var saveData = (SaveData)state;
 
             // Player
@@ -334,43 +326,38 @@ namespace Necropanda
             // Clear any interactions for sanitary purposes, then load the save data into it.
             interacted = new List<string>(saveData.interactedWith);
 
+            #region CARD LOADING
+            // CARD LOADING
+
             // // Use give command to add them to the inventory
-            // splitCollection = ListifyString(saveData.savedCollection);
-            // splitMajorArcana = ListifyString(saveData.savedMajorArcana);
+            splitCollection = ListifyString(saveData.savedCollection);
+            splitMajorArcana = ListifyString(saveData.savedMajorArcana);
 
-            // DeckManager.instance.collection.Clear();
-            // DeckManager.instance.majorArcana.Clear();
+            DeckManager.instance.collection.Clear();
+            DeckManager.instance.majorArcana.Clear();
 
-            // foreach (string card in splitCollection)
-            // {
-            //     Debug.Log(card);
-            //     giveCommand.GiveToPlayer(card);
-            // }
+            foreach (string card in splitCollection)
+            {
+                Debug.Log(card);
+                giveCommand.GiveToPlayer(card);
+            }
 
-            // foreach (string card in splitMajorArcana)
-            // {
-            //     //Instead of this, add it to the 
-            //     Debug.Log(card);
+            foreach (string card in splitMajorArcana)
+            {
+                //Instead of this, add it to the 
+                Debug.Log(card);
 
-            //     if (giveCommand != null)
-            //     {
-            //         giveCommand.EquipToPlayer(card);
-            //     }
-            //     else
-            //         Debug.Log("no give command");
-            // }
+                if (giveCommand != null)
+                {
+                    giveCommand.EquipToPlayer(card);
+                }
+                else
+                    Debug.Log("no give command");
+            }
+            #endregion
 
-            // maxHealth = saveData.maxHealth;
-            // gold = saveData.gold;
-            // maxArcana = saveData.maxArcana;
 
-            // // Potions
-            // healthPotAmount = saveData.healthPotAmount;
-            // ragePotAmount = saveData.ragePotAmount;
-            // swiftPotAmount = saveData.swiftPotAmount;
-            // arcanaPotAmount = saveData.arcanaPotAmount;
-            // // Inventory
-            // curios.AddRange(saveData.curios);
+
         }
 
         public void ResetState()
@@ -400,15 +387,8 @@ namespace Necropanda
             public List<string> interactedWith;
             public string savedCollection;
             public string savedMajorArcana;
-            // public int maxHealth;
-            // public int gold;
-            // public int maxArcana;
 
-            // public int healthPotAmount;
-            // public int ragePotAmount;
-            // public int swiftPotAmount;
-            // public int arcanaPotAmount;
-            // public List<UnityEngine.Object> curios;
+            public Dictionary<string, int> quests;
         }
 
         #region Quest Data
@@ -424,20 +404,24 @@ namespace Necropanda
             processedString = processedString.Replace(" ", string.Empty);
             string[] splitStrings = processedString.Split(',');
 
-            List<string> newString = new List<string>();
+            List<string> cleanedList = new List<string>();
 
-            //Check to make sure each item is bigger than 1 character.
-            foreach (var item in splitStrings)
+            foreach (string str in splitStrings)
             {
-                if (item.Length > 1)
-                    newString.Add(item);
+                if (!string.IsNullOrEmpty(str))
+                {
+                    cleanedList.Add(str);
+                }
+                else
+                {
+                    // Log the empty string to the console
+                    Debug.Log("Empty string found.");
+                }
             }
 
-            return newString;
+            return cleanedList;
         }
     }
-
-
 
     [System.Serializable]
     public struct EnemySpawn

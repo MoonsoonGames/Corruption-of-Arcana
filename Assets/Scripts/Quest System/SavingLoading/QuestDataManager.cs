@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Necropanda.SaveSystem;
 
 /// <summary>
 /// Authored & Written by <NAME/TAG/SOCIAL LINK>
@@ -9,7 +10,7 @@ using UnityEngine;
 /// </summary>
 namespace Necropanda
 {
-    public class QuestDataManager : MonoBehaviour
+    public class QuestDataManager : MonoBehaviour, ISaveable
     {
         //C:\Users\as243879\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
         //C:\Users\mr232432\AppData\LocalLow\Necropanda Studios\CoA 2_ Reshuffled
@@ -40,76 +41,101 @@ namespace Necropanda
         void Start()
         {
             Singleton();
-            SaveManager.instance.saveAllData += SaveQuestData;
-            SaveManager.instance.saveAllBaseData += SaveBaseQuestData;
-            SaveManager.instance.overideAllBaseData += OverideBaseQuestData;
-            SaveManager.instance.loadAllData += LoadQuestData;
-            SaveManager.instance.loadAllBaseData += LoadBaseQuestData;
         }
 
         public List<Quest> questsToSave;
 
-        [ContextMenu("Save Quest Data")]
-        public void SaveQuestData()
+        private Dictionary<string, int> SaveQuestData()
         {
             Debug.Log("Saving quest data");
-            foreach (Quest quest in questsToSave)
+
+            Dictionary<string, int> allStates = new Dictionary<string, int>();
+
+            foreach (var quest in questsToSave)
             {
-                quest.SaveQuestData();
+                HelperFunctions.CombineDictionaries(allStates, quest.SaveQuestData());
             }
+
+            return allStates;
         }
 
-        [ContextMenu("Save Base Quest Data")]
-        public void SaveBaseQuestData()
+        private void LoadQuestData(Dictionary<string, int> allStates)
         {
-            foreach (Quest quest in questsToSave)
-            {
-                List<Quest> questList = new List<Quest> { quest };
+            var quests = Resources.LoadAll("Quests", typeof(Quest));
 
-                if (!QuestSaving.BaseDataExists(questList))
+            // Find the items
+            Quest[] questList = Resources.FindObjectsOfTypeAll<Quest>();
+
+            foreach (Quest quest in questList)
+            {
+                if (allStates.ContainsKey(quest.name))
                 {
-                    Debug.Log("Base data does not exist, create new base data");
-                    quest.SaveBaseQuestData();
+                    quest.LoadQuestData(allStates[quest.name]);
                 }
-                else
-                    Debug.Log("Base data already exists, do not save");
             }
         }
 
-        [ContextMenu("Overide Base Quest Data")]
-        public void OverideBaseQuestData()
-        {
-            Debug.Log("Saving base quest data");
-            foreach (Quest quest in questsToSave)
-            {
-                quest.SaveBaseQuestData();
-            }
-        }
-
-        [ContextMenu("Load Quest Data")]
-        public void LoadQuestData()
-        {
-            Debug.Log("Loading quest data");
-            foreach (Quest quest in questsToSave)
-            {
-                quest.LoadQuestData();
-            }
-        }
-
-        [ContextMenu("Load Base Quest Data")]
-        public void LoadBaseQuestData()
-        {
-            Debug.Log("Loading base quest data");
-            foreach (Quest quest in questsToSave)
-            {
-                quest.LoadBaseQuestData();
-            }
-        }
-
-        [ContextMenu("Reset Quest Data")]
-        public void ResetQuestData()
+        private void ResetQuestData()
         {
             QuestQuickReset.QuestResetStatic();
+            //TODO: delete save data
+        }
+
+        public object CaptureState()
+        {
+            Dictionary<string, int> states = SaveQuestData();
+
+            return new SaveData
+            {
+                #region QUEST SAVING
+                quests = states
+                #endregion
+            };
+        }
+
+        public void RestoreState(object state)
+        {
+            var saveData = (SaveData)state;
+
+            #region QUEST LOADING
+            // QUEST LOADING
+            LoadQuestData(saveData.quests);
+            #endregion
+        }
+
+        /// <summary>
+        /// Savedata data structure
+        /// </summary>
+        [System.Serializable]
+        private struct SaveData
+        {
+            public float posX, posY, posZ;
+            public float rotX, rotY, rotZ, rotW;
+            public float health;
+            public string sceneName;
+
+            public List<string> interactedWith;
+            public string savedCollection;
+            public string savedMajorArcana;
+
+            public Dictionary<string, int> quests;
+        }
+
+        public void ResetState()
+        {
+            ResetQuestData();
+        }
+
+        public Dictionary<Quest, int> ConvertStringToQuest(Dictionary<string, int> stringDict)
+        {
+            Dictionary<Quest, int> questDict = new Dictionary<Quest, int>();
+
+            //Convert string dict to quest dict
+
+            // Find all quests in the project
+
+
+            return questDict;
         }
     }
 }

@@ -12,15 +12,10 @@ namespace Necropanda.Interfaces
         public GameObject SettingsMenu;
         public E_Scenes initialScene;
 
-        private void Start()
-        {
-            SaveManager.instance.SaveAllBaseData();
-        }
-
         public void NewGame()
         {
-            SaveManager.instance.LoadAllBaseData();
-            SaveManager.instance.SaveAllData();
+            SaveManager.instance.ResetAllData();
+
             //Reset loadsettings/progress
             if (initialScene == E_Scenes.Null)
             {

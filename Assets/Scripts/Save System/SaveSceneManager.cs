@@ -43,7 +43,7 @@ namespace Necropanda
             Singleton();
             SaveManager.instance.saveAllData += SaveSceneData;
             SaveManager.instance.loadAllData += LoadSceneData;
-            SaveManager.instance.loadAllBaseData += ResetSceneData;
+            SaveManager.instance.resetAllData += ResetSceneData;
         }
 
         [ContextMenu("Save Quest Data")]

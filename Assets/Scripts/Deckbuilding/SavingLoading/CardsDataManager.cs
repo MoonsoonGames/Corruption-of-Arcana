@@ -44,10 +44,8 @@ namespace Necropanda
         {
             Singleton();
             SaveManager.instance.saveAllData += SaveCardsData;
-            SaveManager.instance.saveAllBaseData += SaveBaseCardsData;
-            SaveManager.instance.overideAllBaseData += OverideBaseCardsData;
             SaveManager.instance.loadAllData += LoadCardsData;
-            SaveManager.instance.loadAllBaseData += LoadBaseCardsData;
+            SaveManager.instance.resetAllData += ResetCardsData;
         }
 
         [ContextMenu("Save Cards Data")]
@@ -59,23 +57,6 @@ namespace Necropanda
             CardSaving.SaveCardsData(DeckManager.instance.majorArcana, "MajorArcana");
         }
 
-        [ContextMenu("Save Base Cards Data")]
-        public void SaveBaseCardsData()
-        {
-            Debug.Log("Saving Cards data");
-
-            CardSaving.SaveBaseCardsData(DeckManager.instance.collection, "Collection");
-            CardSaving.SaveBaseCardsData(DeckManager.instance.majorArcana, "MajorArcana");
-        }
-
-        [ContextMenu("Overide Base Cards Data")]
-        public void OverideBaseCardsData()
-        {
-            Debug.Log("Saving base Cards data");
-            CardSaving.SaveBaseCardsData(DeckManager.instance.collection, "Collection");
-            CardSaving.SaveBaseCardsData(DeckManager.instance.majorArcana, "MajorArcana");
-        }
-
         [ContextMenu("Load Cards Data")]
         public void LoadCardsData()
         {
@@ -83,19 +64,6 @@ namespace Necropanda
 
             CardData collectionData = CardSaving.LoadCardData("/Collection_cards.dat");
             CardData equipData = CardSaving.LoadCardData("/MajorArcana_cards.dat");
-
-            if (collectionData == null || equipData == null) return;
-
-            LoadData(collectionData, equipData);
-        }
-
-        [ContextMenu("Load Base Cards Data")]
-        public void LoadBaseCardsData()
-        {
-            Debug.Log("Loading base Cards data");
-
-            CardData collectionData = CardSaving.LoadCardData("/Collection_cardBase.dat");
-            CardData equipData = CardSaving.LoadCardData("/MajorArcana_cardBase.dat");
 
             if (collectionData == null || equipData == null) return;
 
@@ -136,7 +104,7 @@ namespace Necropanda
         [ContextMenu("Reset Cards Data")]
         public void ResetCardsData()
         {
-            
+
         }
     }
 }

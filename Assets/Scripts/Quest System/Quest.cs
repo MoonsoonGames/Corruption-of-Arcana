@@ -219,75 +219,35 @@ namespace Necropanda
         #region Saving and Loading
 
         [ContextMenu("Save Data")]
-        public void SaveQuestData()
+        public Dictionary<string, int> SaveQuestData()
         {
-            QuestSaving.SaveQuestData(RSaveQuestData());
+            return RSaveQuestData();
         }
 
-        [ContextMenu("Save Base Data")]
-        public void SaveBaseQuestData()
+        /// <summary>
+        /// Loads quest data recursively
+        /// </summary>
+        /// <returns>loaded quests & states</returns>
+        Dictionary<string, int> RSaveQuestData()
         {
-            QuestSaving.SaveBaseQuestData(RSaveQuestData());
-        }
+            Dictionary<string, int> state = new Dictionary<string, int>();
 
-
-        List<Quest> RSaveQuestData()
-        {
-            List<Quest> state = new List<Quest>();
-
-            state.Add(this);
+            state.Add(this.name, currentProgress);
 
             foreach (var item in subQuests)
             {
-                List<Quest> newStates = item.RSaveQuestData();
+                Dictionary<string, int> substates = item.RSaveQuestData();
 
-                foreach (var stateItem in newStates)
-                    state.Add(stateItem);
+                state = HelperFunctions.CombineDictionaries(state, substates, true);
             }
 
             return state;
         }
 
-        [ContextMenu("Load Data")]
-        public void LoadQuestData()
+        public void LoadQuestData(int progress)
         {
-            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_quest.dat");
-
-            if (questData == null) return;
-
-            RLoadQuestData(questData);
-        }
-
-        [ContextMenu("Load Base Data")]
-        public void LoadBaseQuestData()
-        {
-            QuestData questData = QuestSaving.LoadQuestData("/" + questName + "_questBase.dat");
-
-            if (questData == null)
-            {
-                Debug.LogError("Error with base quest data");
-                return;
-            }
-
-            RLoadQuestData(questData);
-        }
-
-        void RLoadQuestData(QuestData questData)
-        {
-            foreach (var item in questData.questDict)
-            {
-                if (item.Key == this.name)
-                {
-                    currentProgress = item.Value;
-
-                    CheckProgress();
-                }
-            }
-
-            foreach (var item in subQuests)
-            {
-                item.RLoadQuestData(questData);
-            }
+            currentProgress = progress;
+            CheckProgress();
         }
 
         void CheckProgress()
@@ -337,7 +297,7 @@ namespace Necropanda
                     QuestProgress(false);
                     count++;
                 }
-                return count;  
+                return count;
             }
 
             foreach (var item in subQuests)
