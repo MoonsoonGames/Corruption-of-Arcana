@@ -43,9 +43,9 @@ namespace Necropanda
         void Start()
         {
             Singleton();
-            SaveManager.instance.saveAllData += SaveCardsData;
-            SaveManager.instance.loadAllData += LoadCardsData;
-            SaveManager.instance.resetAllData += ResetCardsData;
+            //SaveManager.instance.saveAllData += SaveCardsData;
+            //SaveManager.instance.loadAllData += LoadCardsData;
+            //SaveManager.instance.resetAllData += ResetCardsData;
         }
 
         [ContextMenu("Save Cards Data")]

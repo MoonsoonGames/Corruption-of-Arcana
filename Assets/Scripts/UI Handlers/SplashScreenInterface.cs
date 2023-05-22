@@ -11,6 +11,7 @@ namespace Necropanda.Interfaces
     public class SplashScreenInterface : MonoBehaviour
     {
         public GameObject SettingsMenu;
+        public GameObject noLoadDataMenu;
         public E_Scenes initialScene;
 
         public void NewGame()
@@ -49,7 +50,9 @@ namespace Necropanda.Interfaces
                 LoadingScene.instance.LoadScene(LoadingScene.instance.loadScene, E_Scenes.Null, -1);
             }
             else
-                NewGame();
+            {
+                noLoadDataMenu.SetActive(true);
+            }
         }
 
         public void Settings()
