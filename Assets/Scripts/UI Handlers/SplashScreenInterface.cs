@@ -44,6 +44,7 @@ namespace Necropanda.Interfaces
 
             //Reset loadsettings/progress
 
+            Debug.Log("Save Data Exists: " + SavingLoading.instance.SaveDataExists());
             if (SavingLoading.instance.SaveDataExists())
             {
                 SaveManager.instance.LoadAllData();
