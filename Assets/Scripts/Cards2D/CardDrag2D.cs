@@ -67,7 +67,7 @@ namespace Necropanda
             dragManager = DragManager.instance;
 
             //Sets base scales and colours
-            Debug.Log(card.spell.name + " | " + card.name + ": " + transform.localScale);
+            //Debug.Log(card.spell.name + " | " + card.name + ": " + transform.localScale);
             baseScale = transform.localScale;
             desiredScale = baseScale;
             baseColor = cardBackground.color;

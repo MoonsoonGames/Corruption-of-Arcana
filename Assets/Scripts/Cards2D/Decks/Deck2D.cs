@@ -27,7 +27,8 @@ namespace Necropanda
         protected LayoutGroup layout;
 
         public Object cardSpace;
-        GameObject currentCardSpace;
+        public int minCardCount;
+        List<GameObject> currentCardSpaces = new List<GameObject>();
 
         protected GeneralDragArea dragArea;
         protected DragManager dragManager;
@@ -42,7 +43,7 @@ namespace Necropanda
 
         #region Cards
 
-        protected CardDrag2D[] cards;
+        protected CardDrag2D[] cards = new CardDrag2D[0];
 
         public List<GameObject> GetCards()
         {
@@ -115,6 +116,13 @@ namespace Necropanda
             SetOverlay(false, " ");
 
             useSibIndex = layout != null;
+
+            CheckCardSpace();
+        }
+
+        private void OnEnable()
+        {
+            CheckCardSpace();
         }
 
         #endregion
@@ -223,23 +231,26 @@ namespace Necropanda
                 card.gameObject.transform.SetParent(group.transform);
             }
 
+            CheckCardSpace();
+        }
+
+        protected void CheckCardSpace()
+        {
             if (cardSpace == null)
                 return;
 
-            if (cards.Length == 0)
+            foreach(var item in currentCardSpaces)
             {
-                if (currentCardSpace == null)
-                {
-                    currentCardSpace = Instantiate(cardSpace, transform) as GameObject;
-                }
+                Destroy(item.gameObject);
             }
-            else
+
+            currentCardSpaces.Clear();
+
+            int cardDiff = minCardCount - cards.Length;
+
+            for(int i = 0; i < cardDiff; i++)
             {
-                if (currentCardSpace != null)
-                {
-                    Destroy(currentCardSpace);
-                    currentCardSpace = null;
-                }
+                currentCardSpaces.Add(Instantiate(cardSpace, transform) as GameObject);
             }
         }
 

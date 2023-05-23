@@ -48,7 +48,7 @@ namespace Necropanda
 
         public virtual void SaveCards()
         {
-            Debug.Log("Deck menu saves cards");
+            //Debug.Log("Deck menu saves cards");
 
             if (equippedDeck.AvailableSpaces())
             {
