@@ -95,14 +95,20 @@ namespace Necropanda
             }
             else
             {
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = false;
+                bool closeSuccess = true;
+
                 if (menu == deckbuildingMenu)
-                    buildDeck.SaveCards();
+                    closeSuccess = buildDeck.SaveCards();
                 if (menu == upgradeDeckMenu)
-                    upgradeBuildDeck.SaveCards();
-                menu.SetActive(false);
+                    closeSuccess = upgradeBuildDeck.SaveCards();
+
+                if (closeSuccess)
+                {
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = false;
+                    menu.SetActive(false);
+                }
             }
         }
 

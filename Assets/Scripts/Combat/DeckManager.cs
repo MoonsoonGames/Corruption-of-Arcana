@@ -39,11 +39,33 @@ namespace Necropanda
         #region Decks
 
         public List<Spell> collection;
+        public void AddCollection(Spell spell)
+        {
+            collection.Add(spell);
+            SaveManager.instance.SaveAllData();
+        }
 
         public Weapon weapon;
+        public void EquipWeapon(Weapon weapon)
+        {
+            this.weapon = weapon;
+            SaveManager.instance.SaveAllData();
+        }
+
         public List<Weapon> unlockedWeapons;
+        public void AddWeapon(Weapon weapon)
+        {
+            unlockedWeapons.Add(weapon);
+            SaveManager.instance.SaveAllData();
+        }
 
         public List<Spell> majorArcana;
+        public void AddMajorArcana(Spell spell)
+        {
+            majorArcana.Add(spell);
+            SaveManager.instance.SaveAllData();
+        }
+
         public List<Spell> playerDeck;
 
         public List<Spell> playedCards;
@@ -169,6 +191,7 @@ namespace Necropanda
                 collection.Add(spell);
             }
 
+            SaveManager.instance.SaveAllData();
             //SetupDecks();
         }
 
@@ -181,6 +204,7 @@ namespace Necropanda
                 majorArcana.Add(spell);
             }
 
+            SaveManager.instance.SaveAllData();
             //SetupDecks();
         }
 

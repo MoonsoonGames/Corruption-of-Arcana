@@ -51,6 +51,7 @@ namespace Necropanda
         public void ChangePotion(E_PotionType type, int addition)
         {
             potions[type] += addition;
+            SaveManager.instance.SaveAllData();
         }
 
         public bool PotionAvailable(E_PotionType type, int cost)

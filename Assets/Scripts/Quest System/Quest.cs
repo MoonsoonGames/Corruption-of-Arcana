@@ -95,6 +95,8 @@ namespace Necropanda
             EnableNextObjective();
             EnableAllObjectives();
 
+            if (QuestInfo.instance != null)
+                QuestInfo.instance.SetTrackingQuest(this.GetParent());
             UpdateQuestInfo(true);
         }
 

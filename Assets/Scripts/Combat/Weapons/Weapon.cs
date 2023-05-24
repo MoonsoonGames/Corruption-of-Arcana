@@ -25,7 +25,7 @@ namespace Necropanda
         {
             if (DeckManager.instance == null) { return; }
 
-            DeckManager.instance.weapon = this;
+            DeckManager.instance.EquipWeapon(this);
         }
 
         [ContextMenu("Upgrade1Tier")]
