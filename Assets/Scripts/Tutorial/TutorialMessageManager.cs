@@ -93,6 +93,16 @@ namespace Necropanda
             boxTransform.localScale = defaultScale;
         }
 
+        private void OnDisable()
+        {
+            TooltipManager.instance.ShowTutorialTooltip(false, "", "");
+        }
+
+        private void OnDestroy()
+        {
+            TooltipManager.instance.ShowTutorialTooltip(false, "", "");
+        }
+
         #endregion
 
         #region Dragging Cards

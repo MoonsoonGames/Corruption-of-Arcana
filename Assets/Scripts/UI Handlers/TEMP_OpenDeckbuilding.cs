@@ -80,12 +80,12 @@ namespace Necropanda
                 if (menu == deckbuildingMenu)
                 {
                     getAvailableCards.LoadCards();
-                    StartCoroutine(buildDeck.OpenMenu(0.25f));
+                    StartCoroutine(buildDeck.OpenMenu(0.25f, 0.3f));
                 }
                 else if (menu == upgradeDeckMenu)
                 {
                     upgradeAvailableCards.LoadCards();
-                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f));
+                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f, 0.3f));
                 }
                 else if (menu == weaponsMenu)
                 {

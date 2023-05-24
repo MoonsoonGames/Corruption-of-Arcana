@@ -19,7 +19,7 @@ namespace Necropanda
         public GameObject errorMenu;
 
         // Start is called before the first frame update
-        public virtual IEnumerator OpenMenu(float delay)
+        public virtual IEnumerator OpenMenu(float delay, float delay2)
         {
             yield return new WaitForSeconds(delay);
 
@@ -46,6 +46,8 @@ namespace Necropanda
                     equippedSpells = new List<Spell>();
                 }
             }
+
+            equippedDeck.Invoke("UpdateText", delay2);
         }
 
         public virtual bool SaveCards()

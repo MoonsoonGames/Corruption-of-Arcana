@@ -11,7 +11,7 @@ namespace Necropanda
 {
     public class UpgradeDeck : BuildDeck
     {
-        public override IEnumerator OpenMenu(float delay)
+        public override IEnumerator OpenMenu(float delay, float delay2)
         {
             yield return new WaitForSeconds(delay);
 
