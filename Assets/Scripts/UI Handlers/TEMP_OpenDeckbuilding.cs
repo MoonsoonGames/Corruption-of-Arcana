@@ -51,6 +51,7 @@ namespace Necropanda
         // Update is called once per frame
         void Update()
         {
+            if (GeneralDialogueLogic.instance.inDialogue) return;
             if (deckbuildingMenu == null) return;
 
             if (Input.GetKeyDown(KeyCode.K) && cooldown)

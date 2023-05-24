@@ -83,7 +83,7 @@ namespace Necropanda
 
             foreach (CardDrag2D card in cards)
             {
-                Debug.Log("Updating text to " + cost + " with card " + card.name);
+                //Debug.Log("Updating text to " + cost + " with card " + card.name);
                 Spell spell = card.GetComponent<Card>().spell;
 
                 if (spell != null)
@@ -92,7 +92,7 @@ namespace Necropanda
 
             currentLoadout = cost;
 
-            Debug.Log("Updating text to " + currentLoadout);
+            //Debug.Log("Updating text to " + currentLoadout);
 
             costText.text = "Available Space: " + currentLoadout + " / " + maxLoadoutCost;
         }

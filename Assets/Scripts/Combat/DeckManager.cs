@@ -41,6 +41,7 @@ namespace Necropanda
         public List<Spell> collection;
         public void AddCollection(Spell spell)
         {
+            Debug.Log("Add spell: " + spell.spellName + " to collection");
             collection.Add(spell);
             SaveManager.instance.SaveAllData();
         }

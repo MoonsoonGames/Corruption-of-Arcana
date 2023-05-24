@@ -36,6 +36,8 @@ namespace Necropanda.Interfaces
         // Update is called once per frame
         void Update()
         {
+            if (GeneralDialogueLogic.instance.inDialogue) return;
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (Inventory.activeSelf == true)
