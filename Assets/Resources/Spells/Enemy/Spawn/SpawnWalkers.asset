@@ -17,8 +17,11 @@ MonoBehaviour:
   flavourText: 
   spellDescription: Spawns 2 walkers on the enemy team
   cardImage: {fileID: 0}
+  cardImageLowOpacity: {fileID: 0}
   background: {fileID: 21300000, guid: f19634bd17ddbfe40b603fece6bb6f44, type: 3}
   cardType: 1
+  previousTier: {fileID: 0}
+  nextTier: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.4433962, g: 0.22974181, b: 0.12758097, a: 1}
   timelineIcon: {fileID: 1873486079, guid: 9bea2b9472fbb12409c79a0ec3e75ae9, type: 3}
@@ -28,6 +31,7 @@ MonoBehaviour:
   potionCost: 0
   shieldCost: 0
   potionType: 0
+  burnOnDiscard: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
@@ -37,7 +41,7 @@ MonoBehaviour:
   multihitDelay: 0.1
   moduleDelay: 0
   spellModules:
-  - target: 0
+  - target: 1
     effectType: 10
     value: 2
     hitCount: 1

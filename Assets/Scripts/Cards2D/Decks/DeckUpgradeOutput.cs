@@ -13,8 +13,8 @@ namespace Necropanda
     public class DeckUpgradeOutput : Deck2D, IPointerEnterHandler
     {
         BuildDeck buildDeck;
-        public DeckUpgradeInput inputDeck
-            ;
+        public DeckUpgradeInput inputDeck;
+
         protected override void Start()
         {
             base.Start();
@@ -50,7 +50,7 @@ namespace Necropanda
         public override void OnPointerEnter(PointerEventData eventData)
         {
             //Override function so player cannot drag a card into the deck
-            base.OnPointerEnter(eventData);
+            //base.OnPointerEnter(eventData);
         }
 
         public override void RemoveCard(CardDrag2D card)

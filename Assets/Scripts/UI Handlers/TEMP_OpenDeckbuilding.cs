@@ -13,6 +13,8 @@ namespace Necropanda
     {
         public static TEMP_OpenDeckbuilding instance;
 
+        public bool allowOpenUpgrading = false;
+
         public GameObject deckbuildingMenu;
         public GameObject upgradeDeckMenu;
         public GameObject weaponsMenu;
@@ -58,6 +60,12 @@ namespace Necropanda
             {
                 if (!weaponsMenu.activeSelf && !upgradeDeckMenu.activeSelf)
                     OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+            }
+
+            if (Input.GetKeyDown(KeyCode.V) && cooldown && allowOpenUpgrading)
+            {
+                if (!weaponsMenu.activeSelf && !deckbuildingMenu.activeSelf)
+                    OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
             }
 
             if (Input.GetKeyDown(KeyCode.E) && cooldown)
