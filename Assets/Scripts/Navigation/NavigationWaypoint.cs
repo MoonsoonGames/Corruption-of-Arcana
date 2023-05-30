@@ -14,6 +14,8 @@ namespace Necropanda
     {
         PlayerMapMovement player; public void SetPlayer(PlayerMapMovement player) { this.player = player; }
 
+        public bool enterLevelOnArrive = false;
+
         public WaypointNodes[] paths;
         //public RandomEvent[] events;
         public E_Scenes loadScene;
@@ -48,6 +50,13 @@ namespace Necropanda
                 player.SetLevel(loadScene, entrance);
                 //load tooltip instead
                 TooltipManager.instance.ShowTooltip(true, "Enter " + loadScene.ToString(), "Press 'F' to enter level");
+
+                if (enterLevelOnArrive)
+                {
+                    Debug.Log("Navigation: Load the scene");
+                    if (LoadingScene.instance != null)
+                        LoadingScene.instance.LoadScene(loadScene, E_Scenes.Null, entrance);
+                }
             }
             else
             {
