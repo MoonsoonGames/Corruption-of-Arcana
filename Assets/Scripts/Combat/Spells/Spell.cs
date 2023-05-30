@@ -345,7 +345,7 @@ namespace Necropanda
                 int value = spell.value + (spell.valueScalingPerDiscard * cardsDiscarded) + (spell.valueScalingPerStatus * removedStatusCount) + (int)(spell.valueScalingShieldCost * shieldRemoved) + (int)(spell.valueScalingDamageTaken * caster.GetDamageTakenThisTurn());
                 value = EmpowerWeakenValue(caster.stats, value, target.empowerDeck, target.weakenDeck);
 
-                if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
+                if (spell.effectType == E_DamageTypes.Summon && spell.summon != null && target == caster)
                 {
                     if (spell.value > 0)
                     {
