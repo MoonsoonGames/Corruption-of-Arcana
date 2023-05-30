@@ -74,6 +74,13 @@ namespace Necropanda
 
         public void SetLevel(E_Scenes scene, int entrance) { enterLevel = scene; this.entrance = entrance; }
 
+        public void OpenLevel()
+        {
+            Debug.Log("Navigation: Load the scene");
+            if (LoadingScene.instance != null)
+                LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, entrance);
+        }
+
         void FixedUpdate()
         {
             if (!setup) return;
@@ -81,9 +88,7 @@ namespace Necropanda
             {
                 if (Input.GetButton("Interact"))
                 {
-                    Debug.Log("Navigation: Load the scene");
-                    if (LoadingScene.instance != null)
-                        LoadingScene.instance.LoadScene(enterLevel, E_Scenes.Null, entrance);
+                    OpenLevel();
                 }
             }
 
