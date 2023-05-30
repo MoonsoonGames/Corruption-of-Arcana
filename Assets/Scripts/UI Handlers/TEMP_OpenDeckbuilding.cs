@@ -53,7 +53,9 @@ namespace Necropanda
         // Update is called once per frame
         void Update()
         {
-            if (GeneralDialogueLogic.instance.inDialogue) return;
+            if (GeneralDialogueLogic.instance != null)
+                if (GeneralDialogueLogic.instance.inDialogue) return;
+
             if (deckbuildingMenu == null) return;
 
             if (Input.GetKeyDown(KeyCode.K) && cooldown)
@@ -125,6 +127,21 @@ namespace Necropanda
         {
             yield return new WaitForSecondsRealtime(delay);
             cooldown = true;
+        }
+
+        public void OpenDeckbuilding()
+        {
+            OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+        }
+
+        public void OpenUpgrading()
+        {
+            OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
+        }
+
+        public void OpenWeapons()
+        {
+            OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
         }
     }
 }
