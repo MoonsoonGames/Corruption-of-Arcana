@@ -68,9 +68,9 @@ MonoBehaviour:
   posZ: 0
   health: 0
   sceneName: 
-  giveCommand: {fileID: 0}
   splitCollection: []
   splitMajorArcana: []
+  giveCommand: {fileID: 0}
   progressQuestUponCombatVictory: []
 --- !u!114 &7335189887903770136
 MonoBehaviour:
@@ -143,7 +143,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2824c6c73646137439e625ff70d01ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCollection: []
+  defaultWeapon: {fileID: 11400000, guid: 6f637ba1ec9613744afbbde0e259e161, type: 2}
+  defaultSpells:
+  - {fileID: 11400000, guid: 9c2e46a6d831d0c4a8da9dec328d3d28, type: 2}
+  - {fileID: 11400000, guid: 9775538e2e9c70847bc3c8953c512c6a, type: 2}
+  - {fileID: 11400000, guid: acf1ab6b8746e1c44b145aee80697cb0, type: 2}
+  - {fileID: 11400000, guid: 1386fa2313e6efb42ab365b788977fd3, type: 2}
+  - {fileID: 11400000, guid: 2ce0a9abf6931094181a2d0d9677645b, type: 2}
+  - {fileID: 11400000, guid: 85934e10a8deabf4aa20735460fdbd94, type: 2}
 --- !u!114 &747937194218677508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healing: 0
   haste: 0
-  fortitude: 0
+  recall: 0
   poison: 0
 --- !u!114 &4904587321842262530
 MonoBehaviour:

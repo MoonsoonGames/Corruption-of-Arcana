@@ -152,7 +152,7 @@ namespace Necropanda
             bool z = AlmostEqualFloat(a.z, b.z, threshold) || ignoreAxis.z == 1;
             return x && y && z;
         }
-        
+
         public static Vector3 ConvertSerializable(SerializableVector3 serializableVector3)
         {
             return new Vector3(serializableVector3.x, serializableVector3.y, serializableVector3.z);
@@ -164,6 +164,29 @@ namespace Necropanda
             float y = Mathf.Lerp(a.y, b.y, p);
             float z = Mathf.Lerp(a.z, b.z, p);
             return new Vector3(x, y, z);
+        }
+
+        public static Dictionary<T, S> CombineDictionaries<T, S>(Dictionary<T, S> a, Dictionary<T, S> b, bool removeDuplicates = false)
+        {
+            Dictionary<T, S> dictionary = new Dictionary<T, S>();
+
+            foreach (var item in a)
+            {
+                if (!dictionary.ContainsKey(item.Key) && !removeDuplicates)
+                {
+                    dictionary.Add(item.Key, item.Value);
+                }
+            }
+
+            foreach (var item in b)
+            {
+                if (!dictionary.ContainsKey(item.Key) && !removeDuplicates)
+                {
+                    dictionary.Add(item.Key, item.Value);
+                }
+            }
+
+            return dictionary;
         }
     }
 

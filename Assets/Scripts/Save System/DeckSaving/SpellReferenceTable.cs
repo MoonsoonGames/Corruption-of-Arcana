@@ -38,6 +38,7 @@ namespace Necropanda
                 }
             }
 
+            Debug.Log("Spell is " + spell + " and ref is " + reference);
             return reference;
         }
 

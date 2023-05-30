@@ -12,91 +12,160 @@ namespace Necropanda
 {
     public class SaveLoadCollection : MonoBehaviour, ISaveable
     {
-        SpellReferenceTable spellRefTable;
+        public Weapon defaultWeapon;
 
-        public List<Spell> baseCollection;
+        public List<Spell> defaultSpells;
 
         // Start is called before the first frame update
         void Start()
         {
-            spellRefTable = GetComponent<SpellReferenceTable>();
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();
-
+            collectedWeaponsSaved = new List<string>();
             //LoadBaseCollection();
-        }
-
-        public void LoadBaseCollection()
-        {
-            SaveCards(baseCollection, new List<Spell>());
         }
 
         public void SaveCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
-            return;
-
-            if (spellRefTable == null) { return; }
-            Debug.Log("Saving Cards");
-
             collectedSpellsSaved.Clear();
             equippedSpellsSaved.Clear();
 
-            foreach (var item in collectedSpells)
+            var spells = Resources.LoadAll("Spells", typeof(Spell));
+
+            Spell[] allSpells = Resources.FindObjectsOfTypeAll<Spell>();
+            
+            foreach(var item in collectedSpells)
             {
-                string reference = spellRefTable.GetReferenceDataFromSpell(item);
-                Debug.Log(reference + " is being saved");
-                collectedSpellsSaved.Add(reference);
+                foreach (var resource in allSpells)
+                {
+                    if (item == resource)
+                        collectedSpellsSaved.Add(item.name);
+                }
             }
 
             foreach (var item in equippedSpells)
             {
-                string reference = spellRefTable.GetReferenceDataFromSpell(item);
-                Debug.Log(reference + " is being saved");
-                equippedSpellsSaved.Add(reference);
+                foreach (var resource in allSpells)
+                {
+                    if (item == resource)
+                        equippedSpellsSaved.Add(item.name);
+                }
             }
 
-            //GetComponentInChildren<SavingLoading>().Save();
+            collectedWeaponsSaved.Clear();
+
+            var weapons = Resources.LoadAll("Weapons", typeof(Weapon));
+
+            Weapon[] allWeapons = Resources.FindObjectsOfTypeAll<Weapon>();
+
+            foreach (var item in DeckManager.instance.unlockedWeapons)
+            {
+                foreach (var resource in allWeapons)
+                {
+                    if (item == resource)
+                        collectedWeaponsSaved.Add(item.name);
+                }
+            }
+
+            foreach (var resource in allSpells)
+            {
+                if (DeckManager.instance.weapon == resource)
+                    equippedWeaponSaved = resource.name;
+            }
         }
 
         public void LoadCards(List<Spell> collectedSpells, List<Spell> equippedSpells)
         {
-            return;
+            #region Spells
 
             List<Spell> newCollection = new List<Spell>();
             List<Spell> newEquipped = new List<Spell>();
 
-            //GetComponentInChildren<SavingLoading>().Load();
+            var spells = Resources.LoadAll("Spells", typeof(Spell));
 
-            if (spellRefTable == null) { return; }
-            Debug.Log("Loading Cards");
+            Spell[] allSpells = Resources.FindObjectsOfTypeAll<Spell>();
 
             foreach (var item in collectedSpellsSaved)
             {
-                Spell reference = spellRefTable.GetSpellFromReferenceData(item);
-                Debug.Log(reference.spellName + " has been loaded");
-                newCollection.Add(reference);
+                foreach (var resource in allSpells)
+                {
+                    if (item == resource.name)
+                        newCollection.Add(resource);
+                }
             }
 
             foreach (var item in equippedSpellsSaved)
             {
-                Spell reference = spellRefTable.GetSpellFromReferenceData(item);
-                Debug.Log(reference.spellName + " has been loaded");
-                newEquipped.Add(reference);
+                foreach (var resource in allSpells)
+                {
+                    if (item == resource.name)
+                        newEquipped.Add(resource);
+                }
             }
 
-            collectedSpells = newCollection;
-            equippedSpells = newEquipped;
+            DeckManager.instance.collection = new List<Spell>();
+            DeckManager.instance.majorArcana = new List<Spell>();
+
+            foreach(var item in newCollection)
+            {
+                DeckManager.instance.collection.Add(item);
+            }
+
+            foreach(var item in newEquipped)
+            {
+                DeckManager.instance.majorArcana.Add(item);
+            }
+
+            #endregion
+
+            #region Weapons
+
+            List<Weapon> newWeapons = new List<Weapon>();
+
+            var weapons = Resources.LoadAll("Weapons", typeof(Weapon));
+
+            Weapon[] allWeapons = Resources.FindObjectsOfTypeAll<Weapon>();
+            
+            foreach (var item in allWeapons)
+            {
+                if (collectedWeaponsSaved.Contains(item.name))
+                {
+                    Debug.Log(item.weaponName + " should be loaded in collection");
+                    newWeapons.Add(item);
+                }
+
+                if (equippedWeaponSaved == item.name)
+                {
+                    DeckManager.instance.weapon = item;
+                }
+            }
+
+            DeckManager.instance.unlockedWeapons = new List<Weapon>();
+
+            foreach(var item in newWeapons)
+            {
+                Debug.Log("Trying to load: " + item.weaponName);
+                DeckManager.instance.unlockedWeapons.Add(item);
+            }
+
+            #endregion
         }
 
         List<string> collectedSpellsSaved;
         List<string> equippedSpellsSaved;
+        List<string> collectedWeaponsSaved;
+        string equippedWeaponSaved;
 
         public object CaptureState()
         {
+            SaveCards(DeckManager.instance.collection, DeckManager.instance.majorArcana);
+
             return new SaveData 
             { 
                 collectedSpells = this.collectedSpellsSaved,
-                equippedSpells = this.equippedSpellsSaved
+                equippedSpells = this.equippedSpellsSaved,
+                collectedWeapons = this.collectedWeaponsSaved,
+                equippedWeapon = this.equippedWeaponSaved
             };
         }
 
@@ -106,9 +175,11 @@ namespace Necropanda
 
             collectedSpellsSaved = saveData.collectedSpells;
             equippedSpellsSaved = saveData.equippedSpells;
-        }
+            collectedWeaponsSaved = saveData.collectedWeapons;
+            equippedWeaponSaved = saveData.equippedWeapon;
 
-        public List<Spell> defaultSpells;
+            LoadCards(DeckManager.instance.collection, DeckManager.instance.majorArcana);
+        }
 
         public void ResetState()
         {
@@ -116,12 +187,15 @@ namespace Necropanda
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();
 
+            DeckManager.instance.collection.Clear();
+            DeckManager.instance.majorArcana.Clear();
+            DeckManager.instance.unlockedWeapons.Clear();
+            DeckManager.instance.weapon = defaultWeapon;
+
             foreach (var item in defaultSpells)
             {
-                equippedSpellsSaved.Add(spellRefTable.GetReferenceDataFromSpell(item));
+                DeckManager.instance.majorArcana.Add(item);
             }
-
-            CaptureState();
         }
 
         [System.Serializable]
@@ -129,6 +203,34 @@ namespace Necropanda
         {
             public List<string> collectedSpells;
             public List<string> equippedSpells;
+
+            public List<string> collectedWeapons;
+            public string equippedWeapon;
+        }
+
+        public List<string> ListifyString(string stringToProcess)
+        {
+            string thingToReplace = " (Necropanda.Spell)";
+            string processedString = stringToProcess.Replace(thingToReplace, "");
+            processedString = processedString.Replace(" ", string.Empty);
+            string[] splitStrings = processedString.Split(',');
+
+            List<string> cleanedList = new List<string>();
+
+            foreach (string str in splitStrings)
+            {
+                if (!string.IsNullOrEmpty(str))
+                {
+                    cleanedList.Add(str);
+                }
+                else
+                {
+                    // Log the empty string to the console
+                    Debug.Log("Empty string found.");
+                }
+            }
+
+            return cleanedList;
         }
     }
 }

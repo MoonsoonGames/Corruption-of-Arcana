@@ -13,6 +13,8 @@ namespace Necropanda.Interactable
 {
     public class Interactable : MonoBehaviour
     {
+        static bool interacting = false;
+
         public string interactID;
         public bool multipleInteractions = true;
 
@@ -63,12 +65,19 @@ namespace Necropanda.Interactable
             if (interactingCharacter != null && forceInteract == false)
             {
                 //Debug.Log("Can interact");
-                if (Input.GetButtonDown("Interact"))
+                if (Input.GetButtonDown("Interact") && interacting == false)
                 {
+                    interacting = true;
                     //Debug.Log("Button pressed");
                     Interact(interactingCharacter);
+                    Invoke("ResetInteraction", 0.5f);
                 }
             }
+        }
+
+        void ResetInteraction()
+        {
+            interacting = false;
         }
 
         public void UnlockInteraction()

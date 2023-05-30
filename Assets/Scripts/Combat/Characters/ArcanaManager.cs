@@ -88,7 +88,7 @@ namespace Necropanda
                 }
                 else
                 {
-                    Debug.Log("Invalid");
+                    //Debug.Log("Invalid");
                 }
             }
         }

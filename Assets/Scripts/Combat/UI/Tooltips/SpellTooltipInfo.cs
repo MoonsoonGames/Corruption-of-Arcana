@@ -55,5 +55,17 @@ namespace Necropanda
             else
                 TooltipManager.instance.ShowTooltip(false, title, description);
         }
+
+        private void OnDisable()
+        {
+            TooltipManager.instance.ShowTooltip(false, "", "");
+            TooltipManager.instance.ShowSpellTooltip(false, "", null);
+        }
+
+        private void OnDestroy()
+        {
+            TooltipManager.instance.ShowTooltip(false, "", "");
+            TooltipManager.instance.ShowSpellTooltip(false, "", null);
+        }
     }
 }

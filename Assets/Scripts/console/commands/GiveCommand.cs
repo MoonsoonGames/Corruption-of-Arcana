@@ -134,11 +134,11 @@ namespace Necropanda.Utils.Console.Commands
 
         public void GiveToPlayer(string objectName)
         {
-            //Debug.Log(objectName);
+            Debug.Log("Giving " + objectName + " to the player trhoguh give command");
             if (objects[objectName].GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
-                DeckManager.instance.unlockedWeapons.Add((Weapon)objects[objectName]);
+                DeckManager.instance.AddWeapon((Weapon)objects[objectName]);
             }
             else if (objects[objectName].GetType() == typeof(Spell))
             {
@@ -148,7 +148,7 @@ namespace Necropanda.Utils.Console.Commands
                 {
                     case E_CardTypes.Cards:
                         // Add to deck manager list
-                        DeckManager.instance.collection.Add((Spell)objects[objectName]);
+                        DeckManager.instance.AddCollection((Spell)objects[objectName]);
                         break;
                     case E_CardTypes.Potions:
                         PotionManager.instance.ChangePotion(currentSpell.potionType, 1);
@@ -194,7 +194,7 @@ namespace Necropanda.Utils.Console.Commands
             if (objects[objectName].GetType() == typeof(Weapon))
             {
                 // Add to deck manager list
-                DeckManager.instance.weapon = (Weapon)objects[objectName];
+                DeckManager.instance.EquipWeapon((Weapon)objects[objectName]);
             }
             else if (objects[objectName].GetType() == typeof(Spell))
             {
@@ -203,7 +203,7 @@ namespace Necropanda.Utils.Console.Commands
                 {
                     case E_CardTypes.Cards:
                         // Add to deck manager list
-                        DeckManager.instance.majorArcana.Add((Spell)objects[objectName]);
+                        DeckManager.instance.AddMajorArcana((Spell)objects[objectName]);
                         break;
                     case E_CardTypes.Potions:
                         PotionManager.instance.ChangePotion(currentSpell.potionType, 1);

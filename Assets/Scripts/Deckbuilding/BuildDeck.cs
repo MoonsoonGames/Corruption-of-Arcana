@@ -16,8 +16,10 @@ namespace Necropanda
         public DeckCollection collectedDeck;
         public DeckLoadout equippedDeck;
 
+        public GameObject errorMenu;
+
         // Start is called before the first frame update
-        public virtual IEnumerator OpenMenu(float delay)
+        public virtual IEnumerator OpenMenu(float delay, float delay2)
         {
             yield return new WaitForSeconds(delay);
 
@@ -44,24 +46,37 @@ namespace Necropanda
                     equippedSpells = new List<Spell>();
                 }
             }
+
+            equippedDeck.Invoke("UpdateText", delay2);
         }
 
-        public virtual void SaveCards()
+        public virtual bool SaveCards()
         {
-            Debug.Log("Deck menu saves cards");
+            //Debug.Log("Deck menu saves cards");
 
             if (equippedDeck.AvailableSpaces())
             {
                 DeckManager.instance.collection = collectedSpells;
                 DeckManager.instance.majorArcana = equippedSpells;
 
-                DeckManager.instance.SaveDeck();
+                SaveManager.instance.SaveAllData();
             }
+            else
+            {
+                ErrorMenu(true);
+            }
+
+            return equippedDeck.AvailableSpaces();
         }
 
-        public void CloseMenu()
+        public virtual void CloseMenu()
         {
             TEMP_OpenDeckbuilding.instance.OpenCloseMenu(false, this.gameObject);
+        }
+
+        public void ErrorMenu(bool open)
+        {
+            errorMenu.SetActive(open);
         }
     }
 }

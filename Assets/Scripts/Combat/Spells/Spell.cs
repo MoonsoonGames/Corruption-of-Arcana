@@ -347,12 +347,15 @@ namespace Necropanda
 
                 if (spell.effectType == E_DamageTypes.Summon && spell.summon != null)
                 {
-                    if (spell.value > 0)
+                    if (target == caster)
                     {
-                        //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
-                        Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
-                        for (int i = 0; i < spell.value; i++)
-                            LoadCombatManager.instance.AddEnemy(spell.summon, caster, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                        if (spell.value > 0)
+                        {
+                            //bool playerTeam = caster.GetManager() == CombatManager.instance.playerTeamManager;
+                            Vector2[] points = VFXManager.instance.GetProjectilePoints(projectilePoints, caster, caster);
+                            for (int i = 0; i < spell.value; i++)
+                                LoadCombatManager.instance.AddEnemy(spell.summon, caster, points, projectileObject, projectileSpeed, impactObject, projectileFXObject, trailColor);
+                        }
                     }
                 }
                 else

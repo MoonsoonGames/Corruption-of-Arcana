@@ -17,11 +17,6 @@ namespace Necropanda
         public Quest arenaQuest;
         public Quest firstObjective;
 
-        private void Start()
-        {
-            SaveManager.instance.SaveAllBaseData();
-        }
-
         public void Play()
         {
             SaveManager.instance.SaveAllData();

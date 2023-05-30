@@ -36,10 +36,10 @@ namespace Necropanda
 
         IEnumerator SetupDeck(GameObject content, List<Spell> collection, List<Spell> buildDeckSpells, float delay)
         {
-            Debug.Log("Open menu");
+            //Debug.Log("Open menu");
             if (content == null)
             {
-                Debug.Log("Null content");
+                //Debug.Log("Null content");
                 yield break;
             }
             Deck2D collectionDeck = content.GetComponentInParent<Deck2D>();
@@ -53,14 +53,15 @@ namespace Necropanda
 
             for (int i = 0; i < content.transform.childCount; i++)
             {
-                Destroy(content.transform.GetChild(i).gameObject);
+                if (content.transform.GetChild(i).GetComponent<CardDrag2D>() != null)
+                    Destroy(content.transform.GetChild(i).gameObject);
             }
 
             yield return new WaitForSecondsRealtime(delay);
 
             foreach (Spell spell in collectionCopy)
             {
-                Debug.Log(spell.spellName + " should be in collection");
+                //Debug.Log(spell.spellName + " should be in collection");
                 GameObject card = Instantiate(cardPrefab, content.transform) as GameObject;
                 CardDrag2D cardDrag = card.GetComponent<CardDrag2D>();
                 DrawCard drawCard = card.GetComponent<DrawCard>();

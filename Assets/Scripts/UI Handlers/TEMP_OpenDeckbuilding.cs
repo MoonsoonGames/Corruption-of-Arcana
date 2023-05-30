@@ -13,6 +13,8 @@ namespace Necropanda
     {
         public static TEMP_OpenDeckbuilding instance;
 
+        public bool allowOpenUpgrading = false;
+
         public GameObject deckbuildingMenu;
         public GameObject upgradeDeckMenu;
         public GameObject weaponsMenu;
@@ -51,12 +53,21 @@ namespace Necropanda
         // Update is called once per frame
         void Update()
         {
+            if (GeneralDialogueLogic.instance != null)
+                if (GeneralDialogueLogic.instance.inDialogue) return;
+
             if (deckbuildingMenu == null) return;
 
             if (Input.GetKeyDown(KeyCode.K) && cooldown)
             {
                 if (!weaponsMenu.activeSelf && !upgradeDeckMenu.activeSelf)
                     OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+            }
+
+            if (Input.GetKeyDown(KeyCode.V) && cooldown && allowOpenUpgrading)
+            {
+                if (!weaponsMenu.activeSelf && !deckbuildingMenu.activeSelf)
+                    OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
             }
 
             if (Input.GetKeyDown(KeyCode.E) && cooldown)
@@ -80,12 +91,12 @@ namespace Necropanda
                 if (menu == deckbuildingMenu)
                 {
                     getAvailableCards.LoadCards();
-                    StartCoroutine(buildDeck.OpenMenu(0.25f));
+                    StartCoroutine(buildDeck.OpenMenu(0.25f, 0.3f));
                 }
                 else if (menu == upgradeDeckMenu)
                 {
                     upgradeAvailableCards.LoadCards();
-                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f));
+                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f, 0.3f));
                 }
                 else if (menu == weaponsMenu)
                 {
@@ -95,14 +106,20 @@ namespace Necropanda
             }
             else
             {
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = false;
+                bool closeSuccess = true;
+
                 if (menu == deckbuildingMenu)
-                    buildDeck.SaveCards();
+                    closeSuccess = buildDeck.SaveCards();
                 if (menu == upgradeDeckMenu)
-                    upgradeBuildDeck.SaveCards();
-                menu.SetActive(false);
+                    closeSuccess = upgradeBuildDeck.SaveCards();
+
+                if (closeSuccess)
+                {
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = false;
+                    menu.SetActive(false);
+                }
             }
         }
 
@@ -110,6 +127,21 @@ namespace Necropanda
         {
             yield return new WaitForSecondsRealtime(delay);
             cooldown = true;
+        }
+
+        public void OpenDeckbuilding()
+        {
+            OpenCloseMenu(!deckbuildingMenu.activeSelf, deckbuildingMenu);
+        }
+
+        public void OpenUpgrading()
+        {
+            OpenCloseMenu(!upgradeDeckMenu.activeSelf, upgradeDeckMenu);
+        }
+
+        public void OpenWeapons()
+        {
+            OpenCloseMenu(!weaponsMenu.activeSelf, weaponsMenu);
         }
     }
 }
