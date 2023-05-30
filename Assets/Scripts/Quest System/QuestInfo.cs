@@ -18,7 +18,9 @@ namespace Necropanda
         {
             instance = this;
 
-            SetTrackingQuest(baseQuest);
+            if (trackingQuest == null)
+                SetTrackingQuest(baseQuest);
+
             UpdateQuestInfo();
         }
 
@@ -43,6 +45,12 @@ namespace Necropanda
                     title.text = sub.questName;
                     number.text = sub.currentProgress.ToString();
                     description.text = sub.questDescription;
+                }
+                else
+                {
+                    title.text = "No Quest";
+                    number.text = "0";
+                    description.text = "You are not tracking a quest, open the inventory with i and then open the journal to see your quests";
                 }
             }
         }

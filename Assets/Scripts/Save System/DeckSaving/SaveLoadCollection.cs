@@ -34,18 +34,21 @@ namespace Necropanda
 
             Spell[] allSpells = Resources.FindObjectsOfTypeAll<Spell>();
             
-            foreach (var item in allSpells)
+            foreach(var item in collectedSpells)
             {
-                if (collectedSpells.Contains(item))
+                foreach (var resource in allSpells)
                 {
-                    Debug.Log(item.spellName + " should be saving in collection");
-                    collectedSpellsSaved.Add(item.name);
+                    if (item == resource)
+                        collectedSpellsSaved.Add(item.name);
                 }
+            }
 
-                if (equippedSpells.Contains(item))
+            foreach (var item in equippedSpells)
+            {
+                foreach (var resource in allSpells)
                 {
-                    Debug.Log(item.spellName + " should be saving in equiped");
-                    equippedSpellsSaved.Add(item.name);
+                    if (item == resource)
+                        equippedSpellsSaved.Add(item.name);
                 }
             }
 
@@ -54,19 +57,20 @@ namespace Necropanda
             var weapons = Resources.LoadAll("Weapons", typeof(Weapon));
 
             Weapon[] allWeapons = Resources.FindObjectsOfTypeAll<Weapon>();
-            
-            foreach (var item in allWeapons)
-            {
-                if (DeckManager.instance.unlockedWeapons.Contains(item))
-                {
-                    Debug.Log(item.weaponName + " should be loaded in collection");
-                    collectedWeaponsSaved.Add(item.name);
-                }
 
-                if (DeckManager.instance.weapon == item)
+            foreach (var item in DeckManager.instance.unlockedWeapons)
+            {
+                foreach (var resource in allWeapons)
                 {
-                    equippedWeaponSaved = item.name;
+                    if (item == resource)
+                        collectedWeaponsSaved.Add(item.name);
                 }
+            }
+
+            foreach (var resource in allSpells)
+            {
+                if (DeckManager.instance.weapon == resource)
+                    equippedWeaponSaved = resource.name;
             }
         }
 
@@ -80,19 +84,22 @@ namespace Necropanda
             var spells = Resources.LoadAll("Spells", typeof(Spell));
 
             Spell[] allSpells = Resources.FindObjectsOfTypeAll<Spell>();
-            
-            foreach (var item in allSpells)
-            {
-                if (collectedSpellsSaved.Contains(item.name))
-                {
-                    Debug.Log(item.spellName + " should be loaded in collection");
-                    newCollection.Add(item);
-                }
 
-                if (equippedSpellsSaved.Contains(item.name))
+            foreach (var item in collectedSpellsSaved)
+            {
+                foreach (var resource in allSpells)
                 {
-                    Debug.Log(item.spellName + " should be loaded in equiped");
-                    newEquipped.Add(item);
+                    if (item == resource.name)
+                        newCollection.Add(resource);
+                }
+            }
+
+            foreach (var item in equippedSpellsSaved)
+            {
+                foreach (var resource in allSpells)
+                {
+                    if (item == resource.name)
+                        newEquipped.Add(resource);
                 }
             }
 
@@ -101,13 +108,11 @@ namespace Necropanda
 
             foreach(var item in newCollection)
             {
-                Debug.Log("Trying to load: " + item.spellName);
                 DeckManager.instance.collection.Add(item);
             }
 
             foreach(var item in newEquipped)
             {
-                Debug.Log("Trying to load: " + item.spellName);
                 DeckManager.instance.majorArcana.Add(item);
             }
 
@@ -166,7 +171,6 @@ namespace Necropanda
 
         public void RestoreState(object state)
         {
-            Debug.Log("Loading Cards");
             var saveData = (SaveData)state;
 
             collectedSpellsSaved = saveData.collectedSpells;
@@ -179,7 +183,6 @@ namespace Necropanda
 
         public void ResetState()
         {
-            Debug.Log("Resetting Cards");
             //TODO: Reset all values to default and then save them
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();

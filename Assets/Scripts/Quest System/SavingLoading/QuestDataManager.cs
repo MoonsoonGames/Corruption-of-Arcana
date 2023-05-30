@@ -48,15 +48,18 @@ namespace Necropanda
         private Dictionary<string, int> SaveQuestData()
         {
             //Debug.Log("Saving quest data");
+            Dictionary<string, int> questDict = new Dictionary<string, int>();
 
-            Dictionary<string, int> allStates = new Dictionary<string, int>();
+            var quests = Resources.LoadAll("Quests", typeof(Quest));
 
-            foreach (var quest in questsToSave)
+            Quest[] allQuests = Resources.FindObjectsOfTypeAll<Quest>();
+
+            foreach (var item in allQuests)
             {
-                HelperFunctions.CombineDictionaries(allStates, quest.SaveQuestData());
+                questDict.Add(item.name, item.currentProgress);
             }
 
-            return allStates;
+            return questDict;
         }
 
         private void LoadQuestData(Dictionary<string, int> allStates)

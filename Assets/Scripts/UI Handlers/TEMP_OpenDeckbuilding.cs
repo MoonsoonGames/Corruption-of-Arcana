@@ -51,6 +51,7 @@ namespace Necropanda
         // Update is called once per frame
         void Update()
         {
+            if (GeneralDialogueLogic.instance.inDialogue) return;
             if (deckbuildingMenu == null) return;
 
             if (Input.GetKeyDown(KeyCode.K) && cooldown)
@@ -80,12 +81,12 @@ namespace Necropanda
                 if (menu == deckbuildingMenu)
                 {
                     getAvailableCards.LoadCards();
-                    StartCoroutine(buildDeck.OpenMenu(0.25f));
+                    StartCoroutine(buildDeck.OpenMenu(0.25f, 0.3f));
                 }
                 else if (menu == upgradeDeckMenu)
                 {
                     upgradeAvailableCards.LoadCards();
-                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f));
+                    StartCoroutine(upgradeBuildDeck.OpenMenu(0.25f, 0.3f));
                 }
                 else if (menu == weaponsMenu)
                 {
@@ -95,14 +96,20 @@ namespace Necropanda
             }
             else
             {
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = false;
+                bool closeSuccess = true;
+
                 if (menu == deckbuildingMenu)
-                    buildDeck.SaveCards();
+                    closeSuccess = buildDeck.SaveCards();
                 if (menu == upgradeDeckMenu)
-                    upgradeBuildDeck.SaveCards();
-                menu.SetActive(false);
+                    closeSuccess = upgradeBuildDeck.SaveCards();
+
+                if (closeSuccess)
+                {
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = false;
+                    menu.SetActive(false);
+                }
             }
         }
 

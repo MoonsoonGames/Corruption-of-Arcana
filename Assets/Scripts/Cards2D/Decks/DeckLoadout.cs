@@ -20,7 +20,7 @@ namespace Necropanda
 
             buildDeck = GetComponentInParent<BuildDeck>();
 
-            Invoke("ResetArrays", 0.5f);
+            ResetArrays();
         }
 
         public override void RemoveCard(CardDrag2D card)
@@ -68,17 +68,7 @@ namespace Necropanda
         protected override void ResetArrays()
         {
             base.ResetArrays();
-            int cost = 0;
-
-            foreach (CardDrag2D card in cards)
-            {
-                Spell spell = card.GetComponent<Card>().spell;
-
-                if (spell != null)
-                    cost += spell.loadoutCost;
-            }
-
-            currentLoadout = cost;
+            
             UpdateText();
         }
 
@@ -87,8 +77,23 @@ namespace Necropanda
 
         public TextMeshProUGUI costText;
 
-        private void UpdateText()
+        public void UpdateText()
         {
+            int cost = 0;
+
+            foreach (CardDrag2D card in cards)
+            {
+                //Debug.Log("Updating text to " + cost + " with card " + card.name);
+                Spell spell = card.GetComponent<Card>().spell;
+
+                if (spell != null)
+                    cost += spell.loadoutCost;
+            }
+
+            currentLoadout = cost;
+
+            //Debug.Log("Updating text to " + currentLoadout);
+
             costText.text = "Available Space: " + currentLoadout + " / " + maxLoadoutCost;
         }
 

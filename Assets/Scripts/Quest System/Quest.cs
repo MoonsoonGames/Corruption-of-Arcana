@@ -95,6 +95,8 @@ namespace Necropanda
             EnableNextObjective();
             EnableAllObjectives();
 
+            if (QuestInfo.instance != null)
+                QuestInfo.instance.SetTrackingQuest(this.GetParent());
             UpdateQuestInfo(true);
         }
 
@@ -217,32 +219,6 @@ namespace Necropanda
         #endregion
 
         #region Saving and Loading
-
-        [ContextMenu("Save Data")]
-        public Dictionary<string, int> SaveQuestData()
-        {
-            return RSaveQuestData();
-        }
-
-        /// <summary>
-        /// Loads quest data recursively
-        /// </summary>
-        /// <returns>loaded quests & states</returns>
-        Dictionary<string, int> RSaveQuestData()
-        {
-            Dictionary<string, int> state = new Dictionary<string, int>();
-
-            state.Add(this.name, currentProgress);
-
-            foreach (var item in subQuests)
-            {
-                Dictionary<string, int> substates = item.RSaveQuestData();
-
-                state = HelperFunctions.CombineDictionaries(state, substates, true);
-            }
-
-            return state;
-        }
 
         public void LoadQuestData(int progress)
         {
