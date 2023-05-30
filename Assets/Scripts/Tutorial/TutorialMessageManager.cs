@@ -60,6 +60,9 @@ namespace Necropanda
             {
                 //Set tooltip box to
                 string message = turnMessages[turn].stepMessages[step].message.ToString();
+
+                //Debug.Log("Show tooltip: " + message);
+
                 TooltipManager.instance.ShowTutorialTooltip(true, "Tutorial", message);
 
                 boxTransform.position = turnMessages[turn].stepMessages[step].position;
@@ -81,12 +84,13 @@ namespace Necropanda
                 //Remove box/ keep last one
                 boxTransform.position = defaultPosition;
                 boxTransform.localScale = defaultScale;
+                Debug.Log("Remove box?");
             }
         }
 
         public void EndTurn()
         {
-            TooltipManager.instance.ShowTutorialTooltip(false, "Tutorial", "");
+            //TooltipManager.instance.ShowTutorialTooltip(false, "Tutorial", "");
 
             //Remove box/ keep last one
             boxTransform.position = defaultPosition;
@@ -124,12 +128,12 @@ namespace Necropanda
 
             if (card.spell == advanceOnPickup)
             {
-                Debug.Log("Tutorial checks true for " + cardDrag.name);
+                //Debug.Log("Tutorial checks true for " + cardDrag.name);
                 ProgressStep(true);
             }
             else
             {
-                Debug.Log("Tutorial checks false for " + cardDrag.name);
+                //Debug.Log("Tutorial checks false for " + cardDrag.name);
             }
         }
 

@@ -56,7 +56,7 @@ namespace Necropanda
             {
                 cardObjects.Add(item.gameObject);
             }
-            Debug.Log(cards.Length + " cards in hand || " + cardObjects.Count + " objects in list");
+            //Debug.Log(cards.Length + " cards in hand || " + cardObjects.Count + " objects in list");
             return cardObjects;
         }
 

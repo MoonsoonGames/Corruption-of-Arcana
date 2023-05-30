@@ -56,7 +56,7 @@ namespace Necropanda
 
         public bool PotionAvailable(E_PotionType type, int cost)
         {
-            Debug.Log("Potion of " + type.ToString() + " requires " + cost + " we have " + potions[type]);
+            //Debug.Log("Potion of " + type.ToString() + " requires " + cost + " we have " + potions[type]);
             return (potions[type] >= cost);
         }
 
