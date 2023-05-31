@@ -13,7 +13,7 @@ namespace Necropanda.Interactable
 {
     public class Interactable : MonoBehaviour
     {
-        static bool interacting = false;
+        public static bool interacting = false;
 
         public string interactID;
         public bool multipleInteractions = true;
@@ -119,6 +119,8 @@ namespace Necropanda.Interactable
 
         private void OnTriggerEnter(Collider other)
         {
+            ResetInteraction();
+
             if (!setup)
             {
                 Debug.Log("Not setup");
@@ -137,6 +139,8 @@ namespace Necropanda.Interactable
 
         private void OnTriggerExit(Collider other)
         {
+            ResetInteraction();
+
             if (!setup)
             {
                 return;

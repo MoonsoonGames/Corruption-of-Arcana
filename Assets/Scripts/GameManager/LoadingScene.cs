@@ -101,6 +101,7 @@ namespace Necropanda
         public void SceneLoaded()
         {
             SaveManager.instance.LoadAllData();
+            Interactable.Interactable.interacting = false;
         }
     }
 }
