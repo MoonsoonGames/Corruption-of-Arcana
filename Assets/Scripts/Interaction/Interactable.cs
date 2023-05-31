@@ -119,6 +119,8 @@ namespace Necropanda.Interactable
 
         private void OnTriggerEnter(Collider other)
         {
+            ResetInteraction();
+
             if (!setup)
             {
                 Debug.Log("Not setup");
@@ -137,6 +139,8 @@ namespace Necropanda.Interactable
 
         private void OnTriggerExit(Collider other)
         {
+            ResetInteraction();
+
             if (!setup)
             {
                 return;
