@@ -13,7 +13,7 @@ namespace Necropanda.Interactable
 {
     public class Interactable : MonoBehaviour
     {
-        static bool interacting = false;
+        public static bool interacting = false;
 
         public string interactID;
         public bool multipleInteractions = true;
