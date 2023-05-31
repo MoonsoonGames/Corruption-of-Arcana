@@ -35,7 +35,8 @@ namespace Necropanda.Utils.Console
         [SerializeField] private MapSelector mapSelector;
 
 
-        private float pausedTimeScale;  // Float for holding the paused time scale.
+        private float pausedTimeScale = 0f;  // Float for holding the paused time scale.
+        private float unpausedTimeScale;  // Float for holding the unpaused time scale.
 
         private static DeveloperConsoleBehaviour instance;  // The instance of the console. There can only be one.
 
@@ -142,7 +143,8 @@ namespace Necropanda.Utils.Console
                     TEMP_OpenDeckbuilding.instance.enabled = false;
                 }
 
-                Time.timeScale = pausedTimeScale;
+                unpausedTimeScale = Time.timeScale; // store the unpaused timescale before changing it
+                Time.timeScale = 0;
             }
             else
             {
@@ -168,8 +170,7 @@ namespace Necropanda.Utils.Console
                     TEMP_OpenDeckbuilding.instance.enabled = true;
                 }
 
-                pausedTimeScale = Time.timeScale;
-                Time.timeScale = 0;
+                Time.timeScale = 1;
                 inputField.ActivateInputField();
             }
         }
