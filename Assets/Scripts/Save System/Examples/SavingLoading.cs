@@ -81,6 +81,7 @@ namespace Necropanda.SaveSystem
             RestoreState(state);
         }
 
+        [ContextMenu("Reset Save Data")]
         public void ResetData()
         {
             Debug.Log("Reset data called");

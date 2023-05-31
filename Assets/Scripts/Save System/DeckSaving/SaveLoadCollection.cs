@@ -183,6 +183,8 @@ namespace Necropanda
 
         public void ResetState()
         {
+            if (DeckManager.instance == null) return;
+
             //TODO: Reset all values to default and then save them
             collectedSpellsSaved = new List<string>();
             equippedSpellsSaved = new List<string>();
