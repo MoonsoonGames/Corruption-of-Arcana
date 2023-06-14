@@ -77,13 +77,15 @@ namespace Necropanda
         {
             if (active)
             {
-                Debug.Log(titleText + " || " + descText);
+                //Debug.Log("Tutorial Popup: Set active");
+                //Debug.Log(titleText + " || " + descText);
                 tutorialToolTip.SetText(titleText, descText);
 
                 StartCoroutine(IDelayTooltip(tutorialToolTipObject, delay));
             }
             else
             {
+                //Debug.Log("Tutorial Popup: Set inactive");
                 tutorialToolTipObject.SetActive(false);
                 currentTooltip = null;
                 StopAllCoroutines();

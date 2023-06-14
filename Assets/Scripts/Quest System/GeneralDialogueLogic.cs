@@ -14,6 +14,8 @@ namespace Necropanda
     {
         public static GeneralDialogueLogic instance { get; private set; }
 
+        public bool inDialogue = false;
+
         private void Start()
         {
             instance = this;
@@ -27,6 +29,8 @@ namespace Necropanda
         public void EndDialogue()
         {
             Debug.Log("EndDialogue");
+            inDialogue = false;
+
             PlayerController controller = GameObject.FindObjectOfType<PlayerController>();
 
             controller.canMove = true;

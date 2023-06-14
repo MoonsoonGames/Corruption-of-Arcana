@@ -63,7 +63,7 @@ namespace Necropanda
                     if (i == CombatManager.instance.currentTurn)
                     {
                         spellUtility.spell = spellList[i];
-                        spellUtility.target = allTargets[Random.Range(0, allTargets.Count)];
+                        spellUtility.target = self;
                         spellUtility.utility = 0f;
                     }
                 }

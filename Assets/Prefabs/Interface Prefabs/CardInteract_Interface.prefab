@@ -122,10 +122,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1598240729365299355}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7703700402120764437}
+        m_TargetAssemblyTypeName: Necropanda.GetInteractCards, Assembly-CSharp
+        m_MethodName: CloseMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 180, y: 200}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: 55}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!222 &2229393825380021657
@@ -379,6 +379,7 @@ MonoBehaviour:
   group: {fileID: 618598011463027693}
   cardSpace: {fileID: 8893594556894244930, guid: 4c212961c6e0b4a4ba6634a1c7657465,
     type: 3}
+  minCardCount: 12
   showArt: 0
   useSibIndex: 1
   availableCards: 01000000
@@ -1782,6 +1783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: {fileID: 7668789556213886289}
   cardSpace: {fileID: 0}
+  minCardCount: 3
   showArt: 0
   useSibIndex: 1
   availableCards: 01000000

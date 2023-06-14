@@ -25,7 +25,9 @@ namespace Necropanda
         {
             if (flowChart != null)
             {
-                Debug.Log("EndDialogue");
+                Debug.Log("Start Dialogue");
+                GeneralDialogueLogic.instance.inDialogue = true;
+
                 PlayerController controller = player.GetComponent<PlayerController>();
 
                 flowChart.SetActive(true);

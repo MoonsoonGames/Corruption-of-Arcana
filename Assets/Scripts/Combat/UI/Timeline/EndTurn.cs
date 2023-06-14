@@ -175,7 +175,7 @@ namespace Necropanda
                     {
                         if (item.GetComponentInChildren<Deck2D>() == deck)
                         {
-                            Debug.Log("Found copy");
+                            //Debug.Log("Found copy");
                             duplicate = true;
                         }
                     }

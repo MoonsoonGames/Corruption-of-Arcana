@@ -54,7 +54,8 @@ public class EquipmentFunctionality : MonoBehaviour
 
     public void Close()
     {
-        inventoryManager.InventoryScreen.SetActive(true);
+        if (inventoryManager != null)
+            inventoryManager.InventoryScreen.SetActive(true);
         openDeckbuilding.OpenCloseMenu(false, openDeckbuilding.weaponsMenu);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;

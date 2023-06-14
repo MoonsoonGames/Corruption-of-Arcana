@@ -51,11 +51,12 @@ namespace Necropanda
         public void ChangePotion(E_PotionType type, int addition)
         {
             potions[type] += addition;
+            SaveManager.instance.SaveAllData();
         }
 
         public bool PotionAvailable(E_PotionType type, int cost)
         {
-            Debug.Log("Potion of " + type.ToString() + " requires " + cost + " we have " + potions[type]);
+            //Debug.Log("Potion of " + type.ToString() + " requires " + cost + " we have " + potions[type]);
             return (potions[type] >= cost);
         }
 

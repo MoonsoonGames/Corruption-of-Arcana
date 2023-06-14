@@ -212,5 +212,15 @@ namespace Necropanda
                 }
             }
         }
+
+        private void OnDisable()
+        {
+            TooltipManager.instance.ShowTooltip(false, "", "");
+        }
+
+        private void OnDestroy()
+        {
+            TooltipManager.instance.ShowTooltip(false, "", "");
+        }
     }
 }

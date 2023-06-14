@@ -53,5 +53,15 @@ namespace Necropanda
             if (icon != null)
                 icon.raycastTarget = active;
         }
+
+        private void OnDisable()
+        {
+            TooltipManager.instance.ShowTooltip(false, "", "");
+        }
+
+        private void OnDestroy()
+        {
+            TooltipManager.instance.ShowTooltip(false, "", "");
+        }
     }
 }
