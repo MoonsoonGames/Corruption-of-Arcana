@@ -482,7 +482,6 @@ namespace Necropanda
                     if (command.CommandWord == "tgm")
                     {
                         tgm = (ToggleGodMode)command;
-                        Debug.Log(tgm);
                     }
                 }
 
