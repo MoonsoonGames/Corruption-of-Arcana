@@ -23,7 +23,7 @@ namespace Necropanda
         public GameObject victoryScreen;
         public Object rewardItem;
         public GameObject defeatScreen;
-        public GameObject playerDeck, playerUI, playerToolTips, playerTarget, playerTimeline;
+        public GameObject playerDeck, playerUI, playerToolTips, playerWhole, playerTimeline;
 
         public static CombatManager instance;
 
@@ -125,7 +125,7 @@ namespace Necropanda
             defeatScreen.SetActive(!victory);
             ToggleUI(playerDeck);
             ToggleUI(playerUI);
-            ToggleUI(playerTarget);
+            ToggleUI(playerWhole);
             ToggleUI(playerToolTips);
             ToggleUI(playerTimeline);
         }
