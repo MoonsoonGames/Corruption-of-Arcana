@@ -23,6 +23,7 @@ namespace Necropanda
         public GameObject victoryScreen;
         public Object rewardItem;
         public GameObject defeatScreen;
+        public GameObject playerDeck, playerUI, playerToolTips, playerTarget, playerTimeline;
 
         public static CombatManager instance;
 
@@ -122,6 +123,24 @@ namespace Necropanda
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
+            ToggleUI(playerDeck);
+            ToggleUI(playerUI);
+            ToggleUI(playerTarget);
+            ToggleUI(playerToolTips);
+            ToggleUI(playerTimeline);
+        }
+
+        public void ToggleUI(GameObject uiElement)
+        {
+            if (uiElement.activeInHierarchy == true)
+            {
+                uiElement.SetActive(false);
+            }
+            else
+            {
+                uiElement.SetActive(true);
+            }
+                
         }
 
         List<CharacterStats> killedEnemies = new List<CharacterStats>();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Authored & Written by Andrew Scott andrewscott@icloud.com
@@ -14,6 +15,8 @@ namespace Necropanda
         //public E_Scenes victoryScene;
         //public E_Scenes defeatScene;
 
+        public GameObject playerUI, playerToolTips, playerCards, playerDeck;
+
         public void LoadRewards()
         {
             CombatManager.instance.GiveRewards();
@@ -23,7 +26,7 @@ namespace Necropanda
         {
             DeckManager.instance.ResetDecks();
             LoadCombatManager.instance.EnemiesDefeated();
-            LoadingScene.instance.LoadLastScene(E_Scenes.Null, -1);
+            LoadingScene.instance.LoadLastScene(E_Scenes.Null, 1);
         }
 
         public void LoadDefeatScene()
@@ -32,6 +35,14 @@ namespace Necropanda
             LoadCombatManager.instance.enemyIDs.Clear();
             LoadCombatManager.instance.progressQuestUponCombatVictory = null;
             LoadingScene.instance.LoadLastScene(E_Scenes.Null, 0);
+        }
+
+        public void ToggleUI()
+        {
+            playerUI.SetActive(false);
+            playerCards.SetActive(false);
+            playerDeck.SetActive(false);
+            playerToolTips.SetActive(false);
         }
     }
 }
