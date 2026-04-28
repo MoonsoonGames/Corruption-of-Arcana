@@ -23,7 +23,7 @@ namespace Necropanda
         public GameObject victoryScreen;
         public Object rewardItem;
         public GameObject defeatScreen;
-        public GameObject playerDeck, playerUI, playerToolTips, playerTarget;
+        public GameObject playerDeck, playerUI, playerToolTips, playerTarget, playerTimeline;
 
         public static CombatManager instance;
 
@@ -82,10 +82,6 @@ namespace Necropanda
                 if (playerTeamManager.team.Count == 0)
                 {
                     ShowEndScreen(false);
-                    ToggleUI(playerDeck);
-                    ToggleUI(playerUI);
-                    ToggleUI(playerTarget);
-                    ToggleUI(playerToolTips);
                 }
             }
             else
@@ -119,10 +115,6 @@ namespace Necropanda
                 if (enemyTeamManager.team.Count + LoadCombatManager.instance.enemies.Count == 0)
                 {
                     ShowEndScreen(true);
-                    ToggleUI(playerDeck);
-                    ToggleUI(playerUI);
-                    ToggleUI(playerTarget);
-                    ToggleUI(playerToolTips);
                 }
             }
         }
@@ -131,6 +123,11 @@ namespace Necropanda
         {
             victoryScreen.SetActive(victory);
             defeatScreen.SetActive(!victory);
+            ToggleUI(playerDeck);
+            ToggleUI(playerUI);
+            ToggleUI(playerTarget);
+            ToggleUI(playerToolTips);
+            ToggleUI(playerTimeline);
         }
 
         public void ToggleUI(GameObject uiElement)
