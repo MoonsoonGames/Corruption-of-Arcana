@@ -2,49 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Necropanda.Player;
+using Fungus;
 
 namespace Necropanda.Interfaces
 {
     public class PauseInterface : MonoBehaviour
     {
         //public GameObject ConfirmationScreen;
-        public GameObject SettingsScreen;
-        public GameObject MainHUD;
-        public GameObject Pausemenu;
-        public PlayerController player;
+        public GameObject settingsScreen;
+        public GameObject mainHUD;
+        public GameObject pauseMenu;
         public GameObject savedText;
-        public GameObject CreditsScreen;
+        public GameObject creditsScreen;
         //public GameObject AchievementScreen;
+
+        public static PauseInterface instance;
 
 
         private void Start()
         {
-            if (player == null)
-            {
-                player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            }
-        }
 
-        public void Resume()
-        {
-            Debug.Log("resuming");
-            Pausemenu.SetActive(false);
-            MainHUD.SetActive(true);
-            Time.timeScale = 1;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            player.paused = false;
         }
 
         public void Settings()
         {
-            SettingsScreen.SetActive(true);
-            Pausemenu.SetActive(false);
+            pauseMenu.SetActive(false);
+            settingsScreen.SetActive(true);
         }
 
         public void Credits()
         {
-            CreditsScreen.SetActive(true);
+            pauseMenu.SetActive(false);
+            creditsScreen.SetActive(true);
         }
 
         public void SaveGame()
@@ -65,11 +54,11 @@ namespace Necropanda.Interfaces
             savedText.SetActive(true);
             yield return new WaitForSecondsRealtime(delay);
             savedText.SetActive(false);
-        } 
-
+        }
         public void CloseCredits()
         {
-            CreditsScreen.SetActive(false);
+            creditsScreen.SetActive(false);
+            pauseMenu.SetActive(true);
         }
     }
 }
