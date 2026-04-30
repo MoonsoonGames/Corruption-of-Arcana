@@ -8,18 +8,60 @@ using Necropanda.Player;
 public class InventoryManager : MonoBehaviour
 {
     public Necropanda.Interfaces.HUDInterface HUDScript;
-    public GameObject MainHUD;
-    public GameObject InventoryScreen;
-    public GameObject Journal;
-    public GameObject PotionsMenu;
-    public GameObject MapScreen;
+    public GameObject inventoryScreen;
+    public GameObject Journal; //needs to be reworked
+    public GameObject potionsMenu; //missing icons
+    public GameObject mapScreen;
     public MapSelector mapSelector;
     TEMP_OpenDeckbuilding openDeckbuilding;
 
+    public static InventoryManager Instance;
+
+    void OpenMenu(GameObject Menu)
+    {
+        Menu.SetActive(true);
+    }
+
+    void CloseMenu(GameObject currentMenu)
+    {
+        currentMenu.SetActive(false);
+    }
     public void Start()
     {
         openDeckbuilding = GameObject.FindObjectOfType<TEMP_OpenDeckbuilding>(true);
     }
+
+    #region Map 
+    public void MapBTN()
+    {
+        if (mapSelector == null)
+        {
+            mapSelector = FindObjectOfType<MapSelector>();
+        }
+
+        CloseMenu(inventoryScreen);
+        openDeckbuilding.OpenCloseMenu(true, mapScreen);
+        mapSelector.UpdateMapImage();
+    }
+    #endregion
+
+    #region Potion
+    public void PotionBTN()
+    {
+        CloseMenu(inventoryScreen);
+        OpenMenu(potionsMenu);
+    }
+    #endregion
+
+    #region Weapons
+    public void WeaponsBTN()
+    {
+
+    }
+    #endregion
+
+
+    /*
     public void JournalBTN()
     {
         InventoryScreen.SetActive(false);
@@ -68,4 +110,5 @@ public class InventoryManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    */
 }

@@ -20,7 +20,7 @@ namespace Necropanda
         }
         public void Close()
         {
-            inventoryManager.InventoryScreen.SetActive(true);
+            inventoryManager.inventoryScreen.SetActive(true);
             openDeckbuilding.OpenCloseMenu(false, this.gameObject);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;

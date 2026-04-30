@@ -18,10 +18,7 @@ namespace Necropanda.Interfaces
         {
             Debug.Log("Close Settings");
             SettingsScreen.SetActive(false);
-            if (Pausemenu != null)
-            {
-                Pausemenu.SetActive(true);
-            }
+            HUDInterface.instance.PauseGame();
         }
 
         public void SplashClose()

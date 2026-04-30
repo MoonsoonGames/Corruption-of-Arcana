@@ -55,10 +55,5 @@ namespace Necropanda.Interfaces
             yield return new WaitForSecondsRealtime(delay);
             savedText.SetActive(false);
         }
-        public void CloseCredits()
-        {
-            creditsScreen.SetActive(false);
-            pauseMenu.SetActive(true);
-        }
     }
 }

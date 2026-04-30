@@ -203,6 +203,7 @@ MonoBehaviour:
   Journal: {fileID: 5458095898159836453}
   Settings: {fileID: 1342593146236058858}
   Credits: {fileID: 7977046891704487619}
+  currentMenu: {fileID: 0}
   gameIsPaused: 0
 --- !u!1 &1649825658656148682
 GameObject:
@@ -1228,13 +1229,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4831819874778591579}
-        m_TargetAssemblyTypeName: Necropanda.Interfaces.PauseInterface, Assembly-CSharp
-        m_MethodName: CloseCredits
-        m_Mode: 1
+      - m_Target: {fileID: 1120004407048295552}
+        m_TargetAssemblyTypeName: Necropanda.Interfaces.HUDInterface, Assembly-CSharp
+        m_MethodName: CloseMenu
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7977046891704487619}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1574,8 +1575,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1120004407048295552}
+    - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SaveSliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Necropanda.Interfaces.HUDInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1342593146236058858}
+    - target: {fileID: 1812840231725409220, guid: 350408ea77c25ee46b435800852f475f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2101728884190857015, guid: 350408ea77c25ee46b435800852f475f,
         type: 3}
@@ -2106,11 +2137,21 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 7571546922430129244}
+    - target: {fileID: 643807790914069123, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1155951836485672830, guid: beee5426fcff2494cbfc5a418d548e44,
         type: 3}
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 7130706639435744150}
+    - target: {fileID: 1155951836485672830, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1483394897476297159, guid: beee5426fcff2494cbfc5a418d548e44,
         type: 3}
       propertyPath: Player
@@ -2138,14 +2179,44 @@ PrefabInstance:
       objectReference: {fileID: 2896202414104375163}
     - target: {fileID: 1483394897476297159, guid: beee5426fcff2494cbfc5a418d548e44,
         type: 3}
+      propertyPath: mapScreen
+      value: 
+      objectReference: {fileID: 2896202414104375163}
+    - target: {fileID: 1483394897476297159, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
       propertyPath: PotionsMenu
       value: 
       objectReference: {fileID: 7793057821677955131}
+    - target: {fileID: 1483394897476297159, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: potionsMenu
+      value: 
+      objectReference: {fileID: 7793057821677955131}
+    - target: {fileID: 1483394897476297159, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: inventoryScreen
+      value: 
+      objectReference: {fileID: 9017290210106935911}
     - target: {fileID: 2299556317399326364, guid: beee5426fcff2494cbfc5a418d548e44,
         type: 3}
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 1330880375474195125}
+    - target: {fileID: 2810915390263677017, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1120004407048295552}
+    - target: {fileID: 2810915390263677017, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810915390263677017, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Necropanda.Interfaces.HUDInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8262090706101482849, guid: beee5426fcff2494cbfc5a418d548e44,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2281,6 +2352,11 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 9017290210023616288}
+    - target: {fileID: 8262090706922016806, guid: beee5426fcff2494cbfc5a418d548e44,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PotionBTN
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beee5426fcff2494cbfc5a418d548e44, type: 3}
 --- !u!114 &1330880375474195125 stripped
@@ -2580,18 +2656,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1120004406248741417}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4831819874778591579 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5513844662308023154, guid: 505ad0dff3d6ccc4090fe928b68ecf03,
-    type: 3}
-  m_PrefabInstance: {fileID: 1120004406248741417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5961662031290608050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57f1ee792ef716409c4841ad75a7a09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5961662031290608050 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6716866047604339611, guid: 505ad0dff3d6ccc4090fe928b68ecf03,
@@ -3380,6 +3444,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1120004407048295559}
     m_Modifications:
+    - target: {fileID: 2852508909243427981, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852508909243427981, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1120004407048295552}
+    - target: {fileID: 2852508909243427981, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSubMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852508909243427981, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Necropanda.Interfaces.HUDInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852508909243427981, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 7793057821677955131}
+    - target: {fileID: 2852508909243427981, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2883993321213230921, guid: 290e9d4e8ec4cc24a9d84e022cf2f6f3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3856,6 +3950,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1120004407048295559}
     m_Modifications:
+    - target: {fileID: 1361812583508986464, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361812583508986464, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1120004407048295552}
+    - target: {fileID: 1361812583508986464, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSubMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361812583508986464, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Necropanda.Interfaces.HUDInterface, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361812583508986464, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 892022937643498524}
+    - target: {fileID: 1361812583508986464, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7555372319004085890, guid: 06831e4131aa96147968a1f4d8a68240,
         type: 3}
       propertyPath: m_RootOrder
@@ -3916,8 +4040,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map Screen
       objectReference: {fileID: 0}
+    - target: {fileID: 9030177929346658891, guid: 06831e4131aa96147968a1f4d8a68240,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06831e4131aa96147968a1f4d8a68240, type: 3}
+--- !u!1 &892022937643498524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9030177929346658891, guid: 06831e4131aa96147968a1f4d8a68240,
+    type: 3}
+  m_PrefabInstance: {fileID: 8156222167868640855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1867493841803985109 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7555372319004085890, guid: 06831e4131aa96147968a1f4d8a68240,
