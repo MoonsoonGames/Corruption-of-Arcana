@@ -15,21 +15,26 @@ MonoBehaviour:
   spellName: Potion of Healing
   nameImage: {fileID: 21300000, guid: a2cc09014cd5075409cbb750d7a37b1a, type: 3}
   flavourText: 
-  spellDescription: Restore 12 $health$
+  spellDescription: Restore 12 <sprite=0>
   cardImage: {fileID: 0}
+  cardImageLowOpacity: {fileID: 0}
   background: {fileID: 0}
   cardType: 2
+  previousTier: {fileID: 0}
+  nextTier: {fileID: 0}
   overrideColor: 1
   timelineColor: {r: 0.764151, g: 0.23335567, b: 0.13336597, a: 255}
   timelineIcon: {fileID: 21300000, guid: a2cc09014cd5075409cbb750d7a37b1a, type: 3}
   speed: 0
+  loadoutCost: 0
   arcanaCost: 0
   potionCost: 1
+  shieldCost: 0
   potionType: 0
+  burnOnDiscard: 0
   discardAfterCasting: 0
   discardAfterTurn: 0
   drawCard: {fileID: 0}
-  spawnEnemies: []
   discardCards: 0
   returnDiscardPile: 0
   removeStatuses: 0
@@ -42,8 +47,10 @@ MonoBehaviour:
     hitCount: 1
     executeThreshold: 0
     valueScalingDamageTaken: 0
+    valueScalingShieldCost: 0
     valueScalingPerDiscard: 0
     valueScalingPerStatus: 0
+    summon: {fileID: 0}
     statuses: []
   castObject: {fileID: 0}
   projectileObject: {fileID: 429054123779600279, guid: 6d562640a40dcef45a1117fd6bd02d70,
@@ -52,6 +59,7 @@ MonoBehaviour:
   projectilePoints: 0000000001000000
   impactObject: {fileID: 6441297445223667176, guid: 3a675a191c219ee4ca59c084d80673a8,
     type: 3}
+  projectileFXObject: {fileID: 0}
   trailColor: {r: 1, g: 0, b: 0, a: 0}
   screenShake: 0
   idealTarget: 0
